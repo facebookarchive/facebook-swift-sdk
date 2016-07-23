@@ -5,7 +5,7 @@
 
 [![Build Status](https://img.shields.io/travis/facebook/facebook-sdk-swift/master.svg?style=flat)](https://travis-ci.org/facebook/facebook-sdk-swift)
 
-Swift-taylored experience to integrate your app with Facebook. Including:
+Swift-tailored experience to integrate your app with Facebook. Including:
 
 - [Facebook Login](https://developers.facebook.com/docs/swift/login) - Authenticate people with their Facebook credentials.
 - [Share and Send Dialogs](https://developers.facebook.com/docs/swift/sharing) - Enable sharing content from your app to Facebook.
