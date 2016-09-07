@@ -45,7 +45,7 @@ public struct GraphRequest: GraphRequestProtocol {
   /// The `HTTPMethod` to use for the request, e.g. `.GET`/`.POST`/`.DELETE`.
   public let httpMethod: GraphRequestHTTPMethod
 
-  /// Graph API Version to use, e.g. `"2.7"`. Default: `GraphRequestDefaultAPIVersion`.
+  /// Graph API Version to use, e.g. `"v2.7"`. Default: `GraphRequestDefaultAPIVersion`.
   public let apiVersion: GraphAPIVersion
 
   /**
@@ -66,6 +66,6 @@ public struct GraphRequest: GraphRequestProtocol {
     self.parameters = parameters
     self.accessToken = accessToken
     self.httpMethod = httpMethod
-    self.apiVersion = apiVersion
+    self.apiVersion = apiVersion.hasPrefix("v") ? apiVersion : "v\(apiVersion)"
   }
 }
