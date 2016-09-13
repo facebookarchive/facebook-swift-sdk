@@ -165,6 +165,7 @@ extension GraphSharer {
    - returns: Whether or not the operation was successfully started.
    - throws: If the share fails.
    */
+  @discardableResult
   public static func share(_ content: Content, completion: ((ContentSharerResult<Content>) -> Void)? = nil) throws -> GraphSharer {
     let sharer = self.init(content: content)
     sharer.completion = completion

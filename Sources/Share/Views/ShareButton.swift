@@ -48,14 +48,19 @@ open class ShareButton<C: ContentProtocol>: UIView {
     super.init(frame: frame)
     addSubview(sdkShareButton)
   }
-
+  
   /**
    Create a new SendButton initialized from data in a given unarchiver.
-
+   
    - parameter coder: An unarchiver object.
    */
   required public init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    let sdkShareButton = FBSDKShareButton()
+    
+    self.sdkShareButton = sdkShareButton
+    
+    super.init(coder: aDecoder)
+    addSubview(sdkShareButton)
   }
 
   /**

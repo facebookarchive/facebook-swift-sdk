@@ -113,6 +113,7 @@ extension AppInvite.Dialog {
 
    - returns: The dialog that has been presented.
    */
+  @discardableResult
   public static func show(from viewController: UIViewController,
                                invite: AppInvite,
                                completion: ((AppInvite.Result) -> Void)? = nil) throws -> Self {

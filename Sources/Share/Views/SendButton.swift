@@ -51,11 +51,16 @@ open class SendButton<C: ContentProtocol>: UIView {
 
   /**
    Create a new SendButton initialized from data in a given unarchiver.
-
+   
    - parameter coder: An unarchiver object.
    */
   required public init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    let sdkSendButton = FBSDKSendButton()
+    
+    self.sdkSendButton = sdkSendButton
+    
+    super.init(coder: aDecoder)
+    addSubview(sdkSendButton)
   }
 
   /**
