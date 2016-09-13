@@ -1,7 +1,6 @@
 branches:
   only:
     - master
-    - swift-3.0
 language: objective-c
 os: osx
 osx_image: xcode8
