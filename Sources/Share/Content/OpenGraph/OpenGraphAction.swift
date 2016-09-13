@@ -28,7 +28,7 @@ public struct OpenGraphAction: Equatable {
   /// The action type.
   public var type: String
 
-  private var properties: [OpenGraphPropertyName : OpenGraphPropertyValue]
+  fileprivate var properties: [OpenGraphPropertyName : OpenGraphPropertyValue]
 
   /**
    Create an `OpenGraphAction` with a specific action type.
@@ -72,12 +72,12 @@ extension OpenGraphAction {
     self.type = sdkAction.actionType
     self.properties = [:]
 
-    sdkAction.enumerateKeysAndObjectsUsingBlock { (key: String?, value: AnyObject?, stop) in
+    sdkAction.enumerateKeysAndObjects { (key: String?, value: Any?, stop) in
       guard let key = key.map(OpenGraphPropertyName.init(rawValue:)),
         let value = value.map(OpenGraphPropertyValueConverter.valueFrom) else {
           return
       }
-      self.properties[key] = value
+      defer { self.properties[key] = value }
     }
   }
 }

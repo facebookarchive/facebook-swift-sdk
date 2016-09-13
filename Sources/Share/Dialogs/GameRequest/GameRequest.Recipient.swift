@@ -24,28 +24,28 @@ extension GameRequest {
     /**
      The Facebook user ID of the recipient.
      */
-    case UserId(String)
+    case userId(String)
 
     /// The username of the recipient.
-    case Username(String)
+    case username(String)
 
     /// An invite token describing the recipient.
-    case InviteToken(String)
+    case inviteToken(String)
 
     /// Calculate the hash of this `Recipient.`
     public var hashValue: Int {
       switch self {
-      case .UserId(let userId): return userId.hashValue
-      case .Username(let username): return username.hashValue
-      case .InviteToken(let inviteToken): return inviteToken.hashValue
+      case .userId(let userId): return userId.hashValue
+      case .username(let username): return username.hashValue
+      case .inviteToken(let inviteToken): return inviteToken.hashValue
       }
     }
 
     internal var rawValue: String {
       switch self {
-      case .UserId(let userId): return userId
-      case .Username(let username): return username
-      case .InviteToken(let inviteToken): return inviteToken
+      case .userId(let userId): return userId
+      case .username(let username): return username
+      case .inviteToken(let inviteToken): return inviteToken
       }
     }
   }

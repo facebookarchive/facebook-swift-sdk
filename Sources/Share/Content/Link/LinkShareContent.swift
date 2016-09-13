@@ -48,7 +48,7 @@ public struct LinkShareContent: ContentProtocol {
   public var quote: String?
 
   /// The URL of a picture to attach to this content.
-  public var imageURL: NSURL?
+  public var imageURL: URL?
 
   /**
    Create link share content.
@@ -59,11 +59,11 @@ public struct LinkShareContent: ContentProtocol {
    - parameter quote:       Optional quote text of the link.
    - parameter imageURL:    OPtional image URL of a picture to attach.
    */
-  public init(url: NSURL,
+  public init(url: URL,
               title: String? = nil,
               description: String? = nil,
               quote: String? = nil,
-              imageURL: NSURL? = nil) {
+              imageURL: URL? = nil) {
     self.url = url
     self.title = title
     self.description = description
@@ -81,7 +81,7 @@ public struct LinkShareContent: ContentProtocol {
    This URL will be checked for all link meta tags for linking in platform specific ways.
    See documentation for App Links (https://developers.facebook.com/docs/applinks/).
    */
-  public var url: NSURL?
+  public var url: URL?
 
   /// Hashtag for the content being shared.
   public var hashtag: Hashtag?

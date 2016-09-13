@@ -51,10 +51,10 @@ extension AppInvite {
 }
 
 extension AppInvite.PromoCode {
-  private static func truncateString(string: String) -> String {
-    let validCharacters = NSCharacterSet.alphanumericCharacterSet()
+  fileprivate static func truncateString(_ string: String) -> String {
+    let validCharacters = CharacterSet.alphanumerics
     let cleaned = string.unicodeScalars.filter {
-      validCharacters.characterIsMember(UInt16($0.value))
+      validCharacters.contains(UnicodeScalar(UInt16($0.value))!)
     }
 
     let range = 0 ..< min(10, cleaned.count)
@@ -64,7 +64,7 @@ extension AppInvite.PromoCode {
   }
 }
 
-extension AppInvite.PromoCode: StringLiteralConvertible {
+extension AppInvite.PromoCode: ExpressibleByStringLiteral {
   /**
    Create a PromoCode from a string literal.
 

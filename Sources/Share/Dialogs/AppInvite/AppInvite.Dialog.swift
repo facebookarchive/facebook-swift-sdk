@@ -23,8 +23,8 @@ import FBSDKShareKit
 extension AppInvite {
   /// A dialog to send app invites.
   public final class Dialog {
-    private let sdkDialog: FBSDKAppInviteDialog
-    private let sdkDelegate: SDKDelegate
+    fileprivate let sdkDialog: FBSDKAppInviteDialog
+    fileprivate let sdkDelegate: SDKDelegate
 
     /// The invite to send.
     public let invite: AppInvite
@@ -44,7 +44,7 @@ extension AppInvite {
     }
 
     /// The completion handler to be invoked upon showing the dialog.
-    public var completion: (Result -> Void)? {
+    public var completion: ((Result) -> Void)? {
       get {
         return sdkDelegate.completion
       }
@@ -74,10 +74,10 @@ extension AppInvite {
      - throws: If the dialog fails to present.
      */
     public func show() throws {
-      var error: ErrorType?
+      var error: Error?
       let completionHandler = sdkDelegate.completion
       sdkDelegate.completion = {
-        if case .Failed(let resultError) = $0 {
+        if case .failed(let resultError) = $0 {
           error = resultError
         }
       }
@@ -115,7 +115,7 @@ extension AppInvite.Dialog {
    */
   public static func show(from viewController: UIViewController,
                                invite: AppInvite,
-                               completion: (AppInvite.Result -> Void)? = nil) throws -> Self {
+                               completion: ((AppInvite.Result) -> Void)? = nil) throws -> Self {
     let dialog = self.init(invite: invite)
     dialog.presentingViewController = viewController
     dialog.completion = completion

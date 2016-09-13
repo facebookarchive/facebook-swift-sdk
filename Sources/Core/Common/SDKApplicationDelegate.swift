@@ -28,12 +28,12 @@ import FBSDKCoreKit
  should call them in the respective methods in your AppDelegate implementation.
  */
 public final class SDKApplicationDelegate {
-  private let delegate: FBSDKApplicationDelegate = FBSDKApplicationDelegate.sharedInstance()
+  fileprivate let delegate: FBSDKApplicationDelegate = FBSDKApplicationDelegate.sharedInstance()
 
   /// Returns the singleton instance of an application delegate.
   public static let shared = SDKApplicationDelegate()
 
-  private init() { }
+  fileprivate init() { }
 }
 
 extension SDKApplicationDelegate {
@@ -46,7 +46,7 @@ extension SDKApplicationDelegate {
 
    - returns: `true` if the url contained in the `launchOptions` was intended for the Facebook SDK, otherwise - `false`.
    */
-  public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+  public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable: Any]?) -> Bool {
     return delegate.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
@@ -62,9 +62,9 @@ extension SDKApplicationDelegate {
 
    - returns: `true` if the url was intended for the Facebook SDK, otherwise - `false`.
    */
-  @available(iOS, deprecated=9.0, message="Please use application:openURL:options:")
-  public func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-    return delegate.application(application, openURL:url, sourceApplication:sourceApplication, annotation:annotation)
+  @available(iOS, deprecated: 9.0, message: "Please use application:openURL:options:")
+  public func application(_ application: UIApplication, openURL url: URL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    return delegate.application(application, open:url, sourceApplication:sourceApplication, annotation:annotation)
   }
 
   /**
@@ -79,10 +79,7 @@ extension SDKApplicationDelegate {
    - returns: `true` if the url was intended for the Facebook SDK, otherwise - `false`.
    */
   @available(iOS 9.0, *)
-  public func application(application: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-    return delegate.application(application,
-                                openURL: url,
-                                sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String,
-                                annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+  public func application(_ app: UIApplication, openURL url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        return delegate.application(app, open: url, sourceApplication: options[.sourceApplication] as? String, annotation: options[.annotation])
   }
 }

@@ -109,6 +109,6 @@ extension FloatLiteralType: AppEventParameterValueType {
 extension String: AppEventParameterValueType {
   /// An object representation of `self`, suitable for parameter value of `AppEventLoggable`.
   public var appEventParameterValue: AnyObject {
-    return self
+    return self as AnyObject
   }
 }

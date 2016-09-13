@@ -52,7 +52,7 @@ public struct VideoShareContent: ContentProtocol {
    This URL will be checked for all link meta tags for linking in platform specific ways.
    See documentation for [App Links](https://developers.facebook.com/docs/applinks/)
    */
-  public var url: NSURL?
+  public var url: URL?
 
   /// Hashtag for the content being shared.
   public var hashtag: Hashtag?

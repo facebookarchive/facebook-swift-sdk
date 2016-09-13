@@ -25,9 +25,9 @@ final class AppInviteViewController: UITableViewController {
         do {
             try AppInvite.Dialog.show(from: self, invite: appInvite) { result in
                 switch result {
-                case .Success(let result):
+                case .success(let result):
                     print("App Invite Sent with result \(result)")
-                case .Failed(let error):
+                case .failed(let error):
                     print("Failed to send app invite with error \(error)")
                 }
             }
@@ -40,15 +40,15 @@ final class AppInviteViewController: UITableViewController {
 extension AppInviteViewController {
     @IBAction func appInviteWithDefaultImage() {
         // Facebook hosted App Link is used here. See https://developers.facebook.com/docs/applinks for details.
-        let appInvite = AppInvite(appLink: NSURL(string: "https://fb.me/1539184863038815")!, deliveryMethod: .Facebook)
+        let appInvite = AppInvite(appLink: URL(string: "https://fb.me/1539184863038815")!, deliveryMethod: .facebook)
         showAppInviteDialog(for: appInvite)
     }
 
     @IBAction func appInviteWithCustomImage() {
         // Facebook hosted App Link is used here. See https://developers.facebook.com/docs/applinks for details.
-        let appInvite = AppInvite(appLink: NSURL(string: "https://fb.me/1539184863038815")!,
-                                  deliveryMethod: .Facebook,
-                                  previewImageURL: NSURL(string: "http://catalogapp.parseapp.com/FacebookDeveloper.jpg"))
+        let appInvite = AppInvite(appLink: URL(string: "https://fb.me/1539184863038815")!,
+                                  deliveryMethod: .facebook,
+                                  previewImageURL: URL(string: "http://catalogapp.parseapp.com/FacebookDeveloper.jpg"))
         showAppInviteDialog(for: appInvite)
     }
 }

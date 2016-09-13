@@ -22,11 +22,11 @@ import FBSDKShareKit
 /**
  A button for sharing content.
  */
-public class ShareButton<C: ContentProtocol>: UIView {
-  private var sdkShareButton: FBSDKShareButton
+open class ShareButton<C: ContentProtocol>: UIView {
+  fileprivate var sdkShareButton: FBSDKShareButton
 
   /// The content to share.
-  public var content: C? = nil {
+  open var content: C? = nil {
     didSet {
       sdkShareButton.shareContent = content.flatMap(ContentBridger.bridgeToObjC)
     }
@@ -50,9 +50,18 @@ public class ShareButton<C: ContentProtocol>: UIView {
   }
 
   /**
+   Create a new SendButton initialized from data in a given unarchiver.
+
+   - parameter coder: An unarchiver object.
+   */
+  required public init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  /**
    Performs logic for laying out subviews.
    */
-  public override func layoutSubviews() {
+  open override func layoutSubviews() {
     super.layoutSubviews()
 
     sdkShareButton.frame = CGRect(origin: .zero, size: bounds.size)
@@ -61,8 +70,8 @@ public class ShareButton<C: ContentProtocol>: UIView {
   /**
    Resizes and moves the receiver view so it just encloses its subviews.
    */
-  public override func sizeToFit() {
-    bounds.size = sizeThatFits(CGSize(width: CGFloat.max, height: CGFloat.max))
+  open override func sizeToFit() {
+    bounds.size = sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
   }
 
   /**
@@ -72,7 +81,7 @@ public class ShareButton<C: ContentProtocol>: UIView {
 
    - returns: A new size that fits the receiver’s subviews.
    */
-  public override func sizeThatFits(size: CGSize) -> CGSize {
+  open override func sizeThatFits(_ size: CGSize) -> CGSize {
     return sdkShareButton.sizeThatFits(size)
   }
 
@@ -81,7 +90,7 @@ public class ShareButton<C: ContentProtocol>: UIView {
 
    - returns: A size indicating the natural size for the receiving view based on its intrinsic properties.
    */
-  public override func intrinsicContentSize() -> CGSize {
-    return sdkShareButton.intrinsicContentSize()
+  open override var intrinsicContentSize: CGSize {
+    return sdkShareButton.intrinsicContentSize
   }
 }

@@ -24,9 +24,9 @@ extension UserProfile {
    */
   public enum FetchResult {
     /// Profile was succesfully fetched.
-    case Success(UserProfile)
+    case success(UserProfile)
     /// Profile fetch failed.
-    case Failed(ErrorType)
+    case failed(Error)
   }
 }
 
@@ -34,14 +34,14 @@ extension UserProfile.FetchResult {
 
   internal init(sdkProfile: FBSDKProfile?, error: NSError?) {
     if let error = error {
-      self = .Failed(error)
+      self = .failed(error)
     } else if let sdkProfile = sdkProfile {
       let profile = UserProfile(sdkProfile: sdkProfile)
-      self = .Success(profile)
+      self = .success(profile)
     } else {
       //FIXME: (nlutsenko) Use a good error type here.
       let error = NSError(domain: "", code: 42, userInfo: nil)
-      self = .Failed(error)
+      self = .failed(error)
     }
   }
 }

@@ -34,14 +34,17 @@ public struct OpenGraphPropertyName {
    - parameter string: The string to create from.
    */
   public init?(_ string: String) {
-    guard let components: [String.CharacterView] = string.characters.split(":") where components.count >= 2 else {
+
+    let components: [String.CharacterView] = string.characters.split(separator: ":")
+
+    guard components.count >= 2 else {
       return nil
     }
 
     self.namespace = String(components[0])
 
     let subcharacters = components[1 ... components.count]
-    self.name = subcharacters.reduce("", combine: { $0 + ":" + String($1) })
+    self.name = subcharacters.reduce("", { $0 + ":" + String($1) })
   }
 
   /**
@@ -76,7 +79,7 @@ extension OpenGraphPropertyName: RawRepresentable {
   }
 }
 
-extension OpenGraphPropertyName: StringLiteralConvertible {
+extension OpenGraphPropertyName: ExpressibleByStringLiteral {
   /**
    Create an `OpenGraphPropertyName` from a string literal.
 

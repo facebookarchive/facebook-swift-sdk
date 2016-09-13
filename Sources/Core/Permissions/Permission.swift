@@ -36,7 +36,7 @@ public struct Permission {
   }
 }
 
-extension Permission: StringLiteralConvertible {
+extension Permission: ExpressibleByStringLiteral {
   /**
    Create a permission with a string value.
 

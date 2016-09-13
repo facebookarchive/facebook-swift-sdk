@@ -46,7 +46,7 @@ extension GraphAPIVersion {
   }()
 }
 
-extension GraphAPIVersion: StringLiteralConvertible {
+extension GraphAPIVersion: ExpressibleByStringLiteral {
 
   /**
    Create a `GraphAPIVersion` from a string literal.
@@ -76,7 +76,7 @@ extension GraphAPIVersion: StringLiteralConvertible {
   }
 }
 
-extension GraphAPIVersion: FloatLiteralConvertible {
+extension GraphAPIVersion: ExpressibleByFloatLiteral {
 
   /**
    Create a `GraphAPIVersion` from a float literal.

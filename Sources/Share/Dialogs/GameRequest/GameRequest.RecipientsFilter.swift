@@ -22,7 +22,7 @@ extension GameRequest {
   /**
    Filter for who can be displayed in the multi-friend selector.
    */
-  public struct RecipientsFilter: OptionSetType {
+  public struct RecipientsFilter: OptionSet {
     /// The raw value of the filter.
     public let rawValue: Int
 
@@ -46,12 +46,12 @@ extension GameRequest {
 
     internal var sdkFilterRepresentation: FBSDKGameRequestFilter {
       if contains(.HideUsers) {
-        return .AppNonUsers
+        return .appNonUsers
       }
       if contains(.HideNonUsers) {
-        return .AppUsers
+        return .appUsers
       }
-      return .None
+      return .none
     }
   }
 }

@@ -26,8 +26,8 @@ import FBSDKShareKit
  Taps on the like button within this control will invoke an API call to the Facebook app through a fast-app-switch
  that allows the user to like the object. Upon return to the calling app, the view will update with the new state.
  */
-public class LikeControl: UIView {
-  private let sdkLikeControl: FBSDKLikeControl
+open class LikeControl: UIView {
+  fileprivate let sdkLikeControl: FBSDKLikeControl
 
   /**
    Create a new LikeControl with an optional frame and object.
@@ -60,7 +60,7 @@ public class LikeControl: UIView {
   }
 
   /// The foreground color to use for the content of the control.
-  public var foregroundColor: UIColor {
+  open var foregroundColor: UIColor {
     get {
       return sdkLikeControl.foregroundColor
     }
@@ -70,7 +70,7 @@ public class LikeControl: UIView {
   }
 
   /// The object to like.
-  public var object: LikableObject {
+  open var object: LikableObject {
     get {
       return LikableObject(sdkObjectType: sdkLikeControl.objectType, sdkObjectId: sdkLikeControl.objectID)
     }
@@ -82,7 +82,7 @@ public class LikeControl: UIView {
   }
 
   /// The style to use for this control.
-  public var auxilaryStyle: AuxilaryStyle {
+  open var auxilaryStyle: AuxilaryStyle {
     get {
       return AuxilaryStyle(
         sdkStyle: sdkLikeControl.likeControlStyle,
@@ -106,7 +106,7 @@ public class LikeControl: UIView {
    if the text extends beyond the width specified by this property, the additional text is flowed to one or more new
    lines, thereby increasing the height of the receiver.
    */
-  public var preferredMaxLayoutWidth: CGFloat {
+  open var preferredMaxLayoutWidth: CGFloat {
     get {
       return sdkLikeControl.preferredMaxLayoutWidth
     }
@@ -116,12 +116,12 @@ public class LikeControl: UIView {
   }
 
   /// If `true`, a sound is played when the control is toggled.
-  public var isSoundEnabled: Bool {
+  open var isSoundEnabled: Bool {
     get {
-      return sdkLikeControl.soundEnabled
+      return sdkLikeControl.isSoundEnabled
     }
     set {
-      sdkLikeControl.soundEnabled = newValue
+      sdkLikeControl.isSoundEnabled = newValue
     }
   }
 }
@@ -130,7 +130,7 @@ extension LikeControl {
   /**
    Performs logic for laying out subviews.
    */
-  public override func layoutSubviews() {
+  open override func layoutSubviews() {
     super.layoutSubviews()
 
     sdkLikeControl.frame = CGRect(origin: .zero, size: bounds.size)
@@ -139,8 +139,8 @@ extension LikeControl {
   /**
    Resizes and moves the receiver view so it just encloses its subviews.
    */
-  public override func sizeToFit() {
-    bounds.size = sizeThatFits(CGSize(width: CGFloat.max, height: CGFloat.max))
+  open override func sizeToFit() {
+    bounds.size = sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
   }
 
   /**
@@ -150,7 +150,7 @@ extension LikeControl {
 
    - returns: A new size that fits the receiver’s subviews.
    */
-  public override func sizeThatFits(size: CGSize) -> CGSize {
+  open override func sizeThatFits(_ size: CGSize) -> CGSize {
     return sdkLikeControl.sizeThatFits(size)
   }
 
@@ -159,7 +159,7 @@ extension LikeControl {
 
    - returns: A size indicating the natural size for the receiving view based on its intrinsic properties.
    */
-  public override func intrinsicContentSize() -> CGSize {
-    return sdkLikeControl.intrinsicContentSize()
+  open override var intrinsicContentSize: CGSize {
+    return sdkLikeControl.intrinsicContentSize
   }
 }
