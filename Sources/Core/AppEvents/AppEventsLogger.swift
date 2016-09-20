@@ -62,7 +62,7 @@ import FBSDKCoreKit.FBSDKAppEvents
  and must consist of alphanumeric characters, _, -, or spaces.
  + The length of each parameter value can be no more than on the order of 100 characters.
  */
-public class AppEventsLogger {
+open class AppEventsLogger {
 
   //--------------------------------------
   // MARK: - Activate
@@ -83,7 +83,7 @@ public class AppEventsLogger {
 
    - parameter application: Optional instance of UIApplication. Default: `UIApplication.sharedApplication()`.
    */
-  public static func activate(application: UIApplication = UIApplication.sharedApplication()) {
+  open static func activate(_ application: UIApplication = UIApplication.shared) {
     FBSDKAppEvents.activateApp()
   }
 
@@ -97,8 +97,8 @@ public class AppEventsLogger {
    - parameter event:       The application event to log.
    - parameter accessToken: Optional access token to use to log the event. Default: `AccessToken.current`.
    */
-  public static func log(event: AppEventLoggable, accessToken: AccessToken? = AccessToken.current) {
-    let valueToSum = event.valueToSum.map({ NSNumber(double:$0 ) })
+  open static func log(_ event: AppEventLoggable, accessToken: AccessToken? = AccessToken.current) {
+    let valueToSum = event.valueToSum.map({ NSNumber(value: $0 as Double) })
     let parameters = event.parameters.keyValueMap {
       ($0.0.rawValue as NSString, $0.1.appEventParameterValue)
     }
@@ -119,7 +119,7 @@ public class AppEventsLogger {
    - parameter event:       The application event to log.
    - parameter accessToken: Optional access token to use to log the event. Default: `AccessToken.current`.
    */
-  public static func log(event: AppEvent, accessToken: AccessToken? = AccessToken.current) {
+  open static func log(_ event: AppEvent, accessToken: AccessToken? = AccessToken.current) {
     log(event as AppEventLoggable, accessToken: accessToken)
   }
 
@@ -132,7 +132,7 @@ public class AppEventsLogger {
    the cumulative and average value of this amount.
    - parameter accessToken: The optional access token to log the event as. Default: `AccessToken.current`.
    */
-  public static func log(eventName: String,
+  open static func log(_ eventName: String,
                          parameters: AppEvent.ParametersDictionary = [:],
                          valueToSum: Double? = nil,
                          accessToken: AccessToken? = AccessToken.current) {
@@ -147,7 +147,7 @@ public class AppEventsLogger {
   /**
    The current event flushing behavior specifying when events are sent to Facebook.
    */
-  public static var flushBehavior: FlushBehavior {
+  open static var flushBehavior: FlushBehavior {
     get {
       return FlushBehavior(sdkFlushBehavior: FBSDKAppEvents.flushBehavior())
     }
@@ -161,7 +161,7 @@ public class AppEventsLogger {
    This is an asynchronous method, but it does initiate an immediate kick off.
    Server failures will be reported through the NotificationCenter with notification ID `FBSDKAppEventsLoggingResultNotification`.
    */
-  public static func flush() {
+  open static func flush() {
     FBSDKAppEvents.flush()
   }
 
@@ -177,7 +177,7 @@ public class AppEventsLogger {
    By default, this value defers to the `FBSDKAppEventsOverrideAppIDBundleKey` plist value.
    If that's not set, it defaults to `FBSDKSettings.appId`.
    */
-  public static var loggingAppId: String? {
+  open static var loggingAppId: String? {
     get {
       if let appId = FBSDKAppEvents.loggingOverrideAppID() {
         return appId

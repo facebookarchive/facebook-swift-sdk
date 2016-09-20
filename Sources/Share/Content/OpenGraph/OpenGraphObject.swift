@@ -39,7 +39,7 @@ import FBSDKShareKit
  ```
  */
 public struct OpenGraphObject: Equatable {
-  private var properties: [OpenGraphPropertyName : OpenGraphPropertyValue]
+  fileprivate var properties: [OpenGraphPropertyName : OpenGraphPropertyValue]
 
   /**
    Create a new `OpenGraphObject`.
@@ -64,7 +64,7 @@ extension OpenGraphObject: OpenGraphPropertyContaining {
   }
 }
 
-extension OpenGraphObject: DictionaryLiteralConvertible {
+extension OpenGraphObject: ExpressibleByDictionaryLiteral {
   /**
    Convenience method to build a new object from a dictinary literal.
 
@@ -98,13 +98,12 @@ extension OpenGraphObject {
 
   internal init(sdkGraphObject: FBSDKShareOpenGraphObject) {
     self.properties = [:]
-
-    sdkGraphObject.enumerateKeysAndObjectsUsingBlock { (key: String?, value: AnyObject?, stop) in
+    sdkGraphObject.enumerateKeysAndObjects {(key: String?, value: Any?, stop) in
       guard let key = key.map(OpenGraphPropertyName.init(rawValue:)),
         let value = value.map(OpenGraphPropertyValueConverter.valueFrom) else {
         return
       }
-      self.properties[key] = value
+      defer { self.properties[key] = value }
     }
   }
 }

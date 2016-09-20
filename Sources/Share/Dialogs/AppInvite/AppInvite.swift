@@ -25,13 +25,13 @@ import FBSDKShareKit
 public struct AppInvite: Equatable {
 
   /// An app link target that will be used as a target when the user accepts the invite.
-  public var appLink: NSURL
+  public var appLink: URL
 
   /// The delivery method for this app invite.
   public var deliveryMethod: DeliveryMethod
 
   /// The URL to a preview image that will be displayed with the app invite.
-  public var previewImageURL: NSURL?
+  public var previewImageURL: URL?
 
   /// The promotional code and text to be displayed while sending and recieving the invite.
   public var promotion: (code: PromoCode, text: String)?
@@ -44,9 +44,9 @@ public struct AppInvite: Equatable {
    - parameter previewImageURL: Optional preview image to use. Default: `nil`.
    - parameter promotion:       Optional promotion to be displayed. Default: `nil`.
    */
-  public init(appLink: NSURL,
-              deliveryMethod: DeliveryMethod = .Facebook,
-              previewImageURL: NSURL? = nil,
+  public init(appLink: URL,
+              deliveryMethod: DeliveryMethod = .facebook,
+              previewImageURL: URL? = nil,
               promotion: (code: PromoCode, text: String)? = nil) {
     self.appLink = appLink
     self.deliveryMethod = deliveryMethod

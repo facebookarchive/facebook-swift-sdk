@@ -24,14 +24,14 @@ class GraphAPIPostViewController: UITableViewController {
   func presentAlertControllerFor(result: GraphRequestResult<GraphRequest>) {
     let alertController: UIAlertController
     switch result {
-    case .Success(let response):
+    case .success(let response):
       alertController = UIAlertController(title: "Graph Request Success",
                                           message: "Graph Request Succeeded with response: \(response)")
-    case .Failed(let error):
+    case .failed(let error):
       alertController = UIAlertController(title: "Graph Request Failed",
                                           message: "Graph Request Failed with error: \(error)")
     }
-    presentViewController(alertController, animated: true, completion: nil)
+    present(alertController, animated: true, completion: nil)
   }
 }
 
@@ -52,13 +52,13 @@ extension GraphAPIPostViewController {
                                httpMethod: .POST)
     request.start { httpResponse, result in
       switch result {
-      case .Success(let response):
+      case .success(let response):
         print("Graph Request Succeeded: \(response)")
-      case .Failed(let error):
+      case .failed(let error):
         print("Graph Request Failed: \(error)")
       }
 
-      self.presentAlertControllerFor(result)
+      self.presentAlertControllerFor(result: result)
     }
   }
 }

@@ -32,18 +32,18 @@ import FBSDKLoginKit
  If you are managing your own token instances outside of `AccessToken.current`, you will need to set
  `current` before calling `logIn()` to authorize further permissions on your tokens.
  */
-public class LoginManager {
-  private let sdkManager = FBSDKLoginManager()
+open class LoginManager {
+  fileprivate let sdkManager = FBSDKLoginManager()
 
   /// The login behavior that is going to be used. Default: `.Native`.
-  public var loginBehavior: LoginBehavior {
+  open var loginBehavior: LoginBehavior {
     didSet {
       sdkManager.loginBehavior = loginBehavior.sdkBehavior
     }
   }
 
   /// The default audience. Default: `.Friends`.
-  public var defaultAudience: LoginDefaultAudience {
+  open var defaultAudience: LoginDefaultAudience {
     didSet {
       sdkManager.defaultAudience = defaultAudience.sdkAudience
     }
@@ -55,8 +55,8 @@ public class LoginManager {
    - parameter loginBehavior:   Optional login behavior to use. Default: `.Native`.
    - parameter defaultAudience: Optional default audience to use. Default: `.Friends`.
    */
-  public init(loginBehavior: LoginBehavior = .Native,
-              defaultAudience: LoginDefaultAudience = .Friends) {
+  public init(loginBehavior: LoginBehavior = .native,
+              defaultAudience: LoginDefaultAudience = .friends) {
     self.loginBehavior = loginBehavior
     self.defaultAudience = defaultAudience
   }
@@ -75,12 +75,12 @@ public class LoginManager {
    - parameter viewController: Optional view controller to present from. Default: topmost view controller.
    - parameter completion:     Optional callback.
    */
-  public func logIn(permissions: [ReadPermission] = [.PublicProfile],
+  open func logIn(_ permissions: [ReadPermission] = [.publicProfile],
                     viewController: UIViewController? = nil,
                     completion: ((LoginResult) -> Void)? = nil) {
     let sdkPermissions = permissions.map({ $0.permissionValue.name })
-    sdkManager.logInWithReadPermissions(sdkPermissions,
-                                        fromViewController: viewController,
+    sdkManager.logIn(withReadPermissions: sdkPermissions,
+                     from: viewController,
                                         handler: LoginManager.sdkCompletionFor(completion))
   }
 
@@ -98,12 +98,12 @@ public class LoginManager {
    - parameter viewController: Optional view controller to present from. Default: topmost view controller.
    - parameter completion:     Optional callback.
    */
-  public func logIn(permissions: [PublishPermission] = [.PublishActions],
+  open func logIn(_ permissions: [PublishPermission] = [.publishActions],
                     viewController: UIViewController? = nil,
                     completion: ((LoginResult) -> Void)? = nil) {
     let sdkPermissions = permissions.map({ $0.permissionValue.name })
-    sdkManager.logInWithPublishPermissions(sdkPermissions,
-                                           fromViewController: viewController,
+    sdkManager.logIn(withPublishPermissions: sdkPermissions,
+                     from: viewController,
                                            handler: LoginManager.sdkCompletionFor(completion))
   }
 
@@ -111,19 +111,19 @@ public class LoginManager {
    Logs the user out.
    This calls `AccessToken.current = nil` and `Profile.current = nil`.
    */
-  public func logOut() {
+  open func logOut() {
     AccessToken.current = nil
     UserProfile.current = nil
   }
 }
 
 private extension LoginManager {
-  private class func sdkCompletionFor(completion: ((LoginResult) -> Void)?) -> FBSDKLoginManagerRequestTokenHandler? {
+  class func sdkCompletionFor(_ completion: ((LoginResult) -> Void)?) -> FBSDKLoginManagerRequestTokenHandler? {
     guard let completion = completion else {
       return nil
     }
-    return { (sdkResult: FBSDKLoginManagerLoginResult?, error: NSError?) -> Void in
-      let result = LoginResult(sdkResult: sdkResult, error: error)
+    return { (sdkResult: FBSDKLoginManagerLoginResult?, error: Error?) -> Void in
+      let result = LoginResult(sdkResult: sdkResult, error: error as NSError?)
       completion(result)
     }
   }

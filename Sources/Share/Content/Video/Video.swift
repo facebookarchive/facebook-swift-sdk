@@ -25,14 +25,14 @@ import FBSDKShareKit
 public struct Video: Equatable {
 
   /// The file URL to the video.
-  public var url: NSURL
+  public var url: URL
 
   /**
    Build a new video with a video URL and preivew photo.
 
    - parameter url: The file URL to the video.
    */
-  public init(url: NSURL) {
+  public init(url: URL) {
     self.url = url
   }
 }

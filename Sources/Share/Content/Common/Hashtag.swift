@@ -33,13 +33,13 @@ public struct Hashtag {
    */
   public init?(_ string: String) {
     let sdkHashtag = FBSDKHashtag(string: string)
-    self.init(sdkHashtag: sdkHashtag)
+    self.init(sdkHashtag: sdkHashtag!)
   }
 }
 
 extension Hashtag {
   internal init?(sdkHashtag: FBSDKHashtag) {
-    if !sdkHashtag.valid {
+    if !sdkHashtag.isValid {
       return nil
     }
     self.stringValue = sdkHashtag.stringRepresentation

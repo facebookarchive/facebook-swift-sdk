@@ -36,12 +36,12 @@ extension ManualAppEventViewController {
       let priceString = purchasePriceField?.text,
       let price = Double(priceString) else {
         let alertController = UIAlertController(title: "Invalid Purchase Price", message: "Purchase price must be a valid number.")
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
         return
     }
     guard let currency = purchaseCurrencyField?.text else {
       let alertController = UIAlertController(title: "Invalid currency", message: "Currency cannot be empty.")
-      presentViewController(alertController, animated: true, completion: nil)
+      present(alertController, animated: true, completion: nil)
       return
     }
 
@@ -51,7 +51,7 @@ extension ManualAppEventViewController {
     // See https://developers.facebook.com/docs/analytics for details.
 
     let alertController = UIAlertController(title: "Log Event", message: "Log Event Success")
-    presentViewController(alertController, animated: true, completion: nil)
+    present(alertController, animated: true, completion: nil)
   }
 }
 
@@ -65,12 +65,12 @@ extension ManualAppEventViewController {
       let priceString = itemPriceField?.text,
       let price = Double(priceString) else {
         let alertController = UIAlertController(title: "Invalid Item Price", message: "Item price must be a valid number.")
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
         return
     }
     guard let currency = itemCurrencyField?.text else {
       let alertController = UIAlertController(title: "Invalid currency", message: "Currency cannot be empty.")
-      presentViewController(alertController, animated: true, completion: nil)
+      present(alertController, animated: true, completion: nil)
       return
     }
 
@@ -78,6 +78,6 @@ extension ManualAppEventViewController {
     AppEventsLogger.log(event)
 
     let alertController = UIAlertController(title: "Log Event", message: "Log Event Success")
-    presentViewController(alertController, animated: true, completion: nil)
+    present(alertController, animated: true, completion: nil)
   }
 }
