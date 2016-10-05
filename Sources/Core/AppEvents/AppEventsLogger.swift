@@ -141,6 +141,18 @@ public class AppEventsLogger {
   }
 
   //--------------------------------------
+  // MARK: - Push Notification
+  //--------------------------------------
+
+  /**
+   Sets a device token to register the current application installation for push notifications.
+   - parameter deviceToken: Device token data.
+  */
+  public static func setPushNotifications(deviceToken: Data!) {
+    FBSDKAppEvents.setPushNotificationsDeviceToken(deviceToken)
+  }
+
+  //--------------------------------------
   // MARK: - Flush
   //--------------------------------------
 
