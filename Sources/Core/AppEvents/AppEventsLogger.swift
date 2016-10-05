@@ -149,7 +149,7 @@ public class AppEventsLogger {
    */
   public static var pushNotificationsDeviceToken: Data? {
     didSet{
-      FBSDKAppEvents.setPushNotificationsDeviceToken(deviceToken)
+      FBSDKAppEvents.setPushNotificationsDeviceToken(pushNotificationsDeviceToken)
     }
   }
 
