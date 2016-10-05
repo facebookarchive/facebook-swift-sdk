@@ -141,7 +141,7 @@ public class AppEventsLogger {
   }
 
   //--------------------------------------
-  // MARK: - Push Notification
+  // MARK: - Push Notifications
   //--------------------------------------
 
   /**
