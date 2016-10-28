@@ -98,7 +98,7 @@ extension UIAlertController {
    self.present(alert, animated: true, completion: nil)
    
    */
-  convenience init(title: String, message: String ,actions:UIAlertAction.actionType...,style: UIAlertControllerStyle = .alert,handler:((String) -> Swift.Void)? = nil) {
+  convenience init(title: String, message: String ,actions:[UIAlertAction.actionType] = [.ok],style: UIAlertControllerStyle = .alert,handler:((String) -> Swift.Void)? = nil) {
     
     //initialize the contoller (self) instance
     self.init(title: title, message: message, preferredStyle:style)
