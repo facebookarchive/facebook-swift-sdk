@@ -20,19 +20,14 @@ import Foundation
 import UIKit
 
 extension UIAlertAction {
-  
   /// Action types most commonly used
-  public enum actionType {
-    
+  public enum ActionType {
     ///Ok Option
     case ok
-    
     /// Default Cancel Option
     case cancel
-    
     /// Destructive action with custom title
     case destructive(String)
-    
     /// Custom action with title and style
     case custom(String, UIAlertActionStyle)
     
@@ -43,11 +38,9 @@ extension UIAlertAction {
      - returns UIAlertAction Instance
      */
     public func action(handler: ((String) -> Void)? = nil) -> UIAlertAction {
-      
-      //Default values for style and title
+      //Default value
       var actionStyle = UIAlertActionStyle.default
       var title = ""
-      
       // Action configuration based on the action type
       switch self {
         
@@ -66,7 +59,6 @@ extension UIAlertAction {
       default:
         title = "OK"
       }
-      
       //Creating UIAlertAction instance
       return UIAlertAction(title:title, style:actionStyle) { nativeAction in
         if let handler = handler {
@@ -79,7 +71,6 @@ extension UIAlertAction {
 }
 
 extension UIAlertController {
-  
   /**
    Creates the alert view controller using the actions specified
    
@@ -92,15 +83,15 @@ extension UIAlertController {
    */
   convenience init(title: String,
                    message: String,
-                   actions: UIAlertAction.actionType?...,
-                   style: UIAlertControllerStyle = .alert,
-                   handler: ((String) -> Swift.Void)? = nil) {
+                   actions: UIAlertAction.ActionType?...,
+    style: UIAlertControllerStyle = .alert,
+    handler: ((String) -> Swift.Void)? = nil) {
     
     //initialize the contoller (self) instance
     self.init(title: title, message: message, preferredStyle: style)
     
     if actions.isEmpty {
-      addAction(UIAlertAction.actionType.ok.action(handler: handler))
+      addAction(UIAlertAction.ActionType.ok.action(handler: handler))
     } else {
       //Fetching actions specidied by the user and adding actions accordingly
       for actionType in actions {
