@@ -44,7 +44,7 @@ extension UIAlertAction {
      */
     public func action(handler: ((String) -> Void)? = nil) -> UIAlertAction {
       
-      //Default value
+      //Default values for style and title
       var actionStyle = UIAlertActionStyle.default
       var title = ""
       
@@ -70,7 +70,7 @@ extension UIAlertAction {
       //Creating UIAlertAction instance
       return UIAlertAction(title:title, style:actionStyle) { nativeAction in
         if let handler = handler {
-          handler!(title)
+          handler(title)
         }
       }
       
