@@ -79,12 +79,12 @@ public final class SDKApplicationDelegate {
 
    - returns: `true` if the url was intended for the Facebook SDK, otherwise - `false`.
    */
+  
   @available(iOS 9.0, *)
-  @discardableResult
-  public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    return delegate.application(app,
-                                open: url,
-                                sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+  public func application(application: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    return delegate.application(application,
+                                openURL: url,
+                                sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String,
+                                annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
   }
 }
