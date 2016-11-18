@@ -88,6 +88,30 @@ public class AppEventsLogger {
   }
 
   //--------------------------------------
+  // MARK: - User Properties
+  //--------------------------------------
+  
+  /**
+   Sets a userId
+   
+   - parameter userId:       A meaningful userId. If nil, the userId be cleared.
+   */
+  public static func setUserID(_ userID: String?){
+    FBSDKAppEvents.setUserID(userID)
+  }
+  
+  /**
+   Sets user properties
+   
+   - parameter properties:    A dictionary key-value pairs representing user properties and their values. Values should be strings or numbers only. Each key must be less than 40 character in length, and the key can contain only letters, number, whitespace, hyphens (-), or underscores (_). Each value must be less than 100 characters.
+   The total number of properties associated with your users cannot exceed 100.
+   - parameter handler:       A callback for the success or failure of updating the user properties. This is optional.
+   */
+  public static func updateUserProperties(_ properties: [AnyHashable: Any]?, handler: FBSDKGraphRequestHandler?){
+    FBSDKAppEvents.updateUserProperties(properties, handler: handler)
+  }
+  
+  //--------------------------------------
   // MARK: - Log Events
   //--------------------------------------
 
