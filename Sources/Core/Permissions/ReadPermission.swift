@@ -132,6 +132,7 @@ extension ReadPermission: PermissionRepresentable {
     case .readInsights: return "read_insights"
     case .readAudienceNetworkInsights: return "read_audience_network_insights"
     case .readPageMailboxes: return "read_page_mailboxes"
+    case .pagesShowList: return "pages_show_list"
     case .pagesManageCta: return "pages_manage_cta"
     case .pagesManageInstantArticles: return "pages_manage_instant_articles"
     case .adsRead: return "ads_read"      
