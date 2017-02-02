@@ -136,6 +136,7 @@ extension ReadPermission: PermissionRepresentable {
     case .pagesManageInstantArticles: return "pages_manage_instant_articles"
     case .adsRead: return "ads_read"      
     case .custom(let string): return Permission(name: string)
+    default: return "public_profile"
     }
   }
 }

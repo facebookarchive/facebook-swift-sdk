@@ -38,8 +38,6 @@ public enum PublishPermission {
   case publishPages
   /// Provides the ability to set a person's attendee status on Facebook Events (e.g. attending, maybe, or declined).
   case rsvpEvent
-  
-
   /**
    Permission with a custom string value.
    See https://developers.facebook.com/docs/facebook-login/permissions for full list of available permissions.
@@ -55,6 +53,7 @@ extension PublishPermission: PermissionRepresentable {
     case .publishPages: return "publish_pages"
     case .rsvpEvent: return "rsvp_event"
     case .custom(let string): return Permission(name: string)
+    default: return "publish_actions"
     }
   }
 }
