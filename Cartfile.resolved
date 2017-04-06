@@ -1,2 +1,2 @@
 github "BoltsFramework/Bolts-ObjC" "1.8.4"
-github "adomanico/facebook-ios-sdk" "830cc8eff7c3d4615bd4d6a8cad238bf9f17bdb5"
+github "facebook/facebook-ios-sdk" "sdk-version-4.21.0"
