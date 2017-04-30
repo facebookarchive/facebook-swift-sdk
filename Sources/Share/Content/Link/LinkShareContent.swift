@@ -26,49 +26,22 @@ public struct LinkShareContent: ContentProtocol {
   public typealias Result = PostSharingResult
 
   /**
-   The title to display for this link.
-
-   This value may be discarded for specially handled links (ex: iTunes URLs).
-   */
-  public var title: String?
-
-  /**
-   The description of the link.
-
-   If not specified, this field is automatically populated by information scraped from the contentURL,
-   typically the title of the page. This value may be discarded for specially handled links (ex: iTunes URLs).
-   */
-  public var description: String?
-
-  /**
    Some quote text of the link.
 
    If specified, the quote text will render with custom styling on top of the link.
    */
   public var quote: String?
 
-  /// The URL of a picture to attach to this content.
-  public var imageURL: URL?
-
   /**
    Create link share content.
 
    - parameter url:         The URL being shared.
-   - parameter title:       Optional title to display for this link.
-   - parameter description: Optional description of the link.
    - parameter quote:       Optional quote text of the link.
-   - parameter imageURL:    OPtional image URL of a picture to attach.
    */
   public init(url: URL,
-              title: String? = nil,
-              description: String? = nil,
-              quote: String? = nil,
-              imageURL: URL? = nil) {
+              quote: String? = nil) {
     self.url = url
-    self.title = title
-    self.description = description
     self.quote = quote
-    self.imageURL = imageURL
   }
 
   //--------------------------------------
@@ -118,9 +91,6 @@ extension LinkShareContent: Equatable {
 extension LinkShareContent: SDKBridgedContent {
   internal var sdkSharingContentRepresentation: FBSDKSharingContent {
     let content = FBSDKShareLinkContent()
-    content.contentDescription = self.description
-    content.contentTitle = self.title
-    content.imageURL = self.imageURL
     content.quote = self.quote
     content.contentURL = self.url
     content.hashtag = self.hashtag?.sdkHashtagRepresentation
