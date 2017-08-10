@@ -86,9 +86,9 @@ extension GraphRequestConnection {
    As described in [Graph API Batch Requests](https://developers.facebook.com/docs/reference/api/batch/).
    - parameter completion:     Optional completion closure that is going to be called when the connection finishes or fails.
    */
-  public func add<T: GraphRequestProtocol>(_ request: T,
-                  batchEntryName: String? = nil,
-                  completion: Completion<T>? = nil) {
+  public func add<T>(_ request: T,
+                     batchEntryName: String? = nil,
+                     completion: Completion<T>? = nil) {
     let batchParameters = batchEntryName.map({ ["name" : $0] })
     add(request, batchParameters: batchParameters as [String : Any]?, completion: completion)
   }
@@ -102,9 +102,9 @@ extension GraphRequestConnection {
    Examples include "depends_on", "name", or "omit_response_on_success".
    - parameter completion:      Optional completion closure that is going to be called when the connection finishes or fails.
    */
-  public func add<T: GraphRequestProtocol>(_ request: T,
-                  batchParameters: [String : Any]?,
-                  completion: Completion<T>? = nil) {
+  public func add<T>(_ request: T,
+                     batchParameters: [String : Any]?,
+                     completion: Completion<T>? = nil) {
     sdkConnection.add(request.sdkRequest,
                       completionHandler: completion.map(type(of: self).sdkRequestCompletion),
                       batchParameters: batchParameters)
@@ -139,7 +139,7 @@ extension GraphRequestConnection {
   /// Custom typealias that is the same as FBSDKGraphRequestHandler, but without implicitly unwrapped optionals.
   internal typealias SDKRequestCompletion = (_ connection: FBSDKGraphRequestConnection?, _ rawResponse: Any?, _ error: Error?) -> Void
 
-  internal static func sdkRequestCompletion<T: GraphRequestProtocol>(from completion: @escaping Completion<T>) -> SDKRequestCompletion {
+  internal static func sdkRequestCompletion<T>(from completion: @escaping Completion<T>) -> SDKRequestCompletion {
     return { connection, rawResponse, error in
       let result: GraphRequestResult<T> = {
         switch error {
