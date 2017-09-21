@@ -3,7 +3,7 @@
 	url = https://github.com/BoltsFramework/Bolts-ObjC.git
 [submodule "Carthage/Checkouts/facebook-ios-sdk"]
 	path = Carthage/Checkouts/facebook-ios-sdk
-	url = https://github.com/adomanico/facebook-ios-sdk.git
+	url = https://github.com/kurostyle5/facebook-ios-sdk.git
 [submodule "Vendor/xctoolchain"]
 	path = Vendor/xctoolchain
 	url = https://github.com/ParsePlatform/xctoolchain.git
