@@ -68,3 +68,14 @@ extension LoginBehavior {
     }
   }
 }
+
+extension FBSDKLoginBehavior {
+  internal var appBehavior: LoginBehavior {
+    switch self {
+    case .native: return .native
+    case .browser: return .browser
+    case .systemAccount: return .systemAccount
+    case .web: return .web
+    }
+  }
+}

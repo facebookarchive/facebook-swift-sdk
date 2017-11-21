@@ -46,3 +46,13 @@ extension LoginDefaultAudience {
     }
   }
 }
+
+extension FBSDKDefaultAudience {
+  internal var appAudience: LoginDefaultAudience {
+    switch self {
+    case .friends: return .friends
+    case .onlyMe: return .onlyMe
+    case .everyone: return .everyone
+    }
+  }
+}

@@ -23,6 +23,11 @@ import FBSDKCoreKit
 // MARK: - Access Token
 //--------------------------------------
 
+public let AccessTokenDidChangeNotification = Notification.Name("com.facebook.sdk.FBSDKAccessTokenData.FBSDKAccessTokenDidChangeNotification")
+public let AccessTokenDidChangeUserIDKey = "FBSDKAccessTokenDidChangeUserID"
+public let AccessTokenChangeNewKey = "FBSDKAccessToken"
+public let AccessTokenChangeOldKey = "FBSDKAccessTokenOld"
+
 /**
  Represents an immutable access token used to authenticate with Facebook services.
  */
