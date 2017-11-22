@@ -31,7 +31,7 @@ public class LikeButton: UIView {
 
   fileprivate var sdkLikeButton: FBSDKLikeButton
 
-  /// If `true`, a sound is played when the reciever is toggled.
+  /// If `true`, a sound is played when the receiver is toggled.
   public var isSoundEnabled: Bool {
     get {
       return sdkLikeButton.isSoundEnabled

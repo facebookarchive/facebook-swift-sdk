@@ -31,7 +31,7 @@ final class ShareAPIViewController: UITableViewController {
         switch result {
         case .success(let contentResult):
           title = "Share Success"
-          message = "Succesfully shared: \(contentResult)"
+          message = "Successfully shared: \(contentResult)"
         case .cancelled:
           title = "Share Cancelled"
           message = "Sharing was cancelled by user."

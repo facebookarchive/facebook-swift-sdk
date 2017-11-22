@@ -91,7 +91,7 @@ extension AppInvite {
     }
 
     /**
-     Validates the contents of the reciever as valid.
+     Validates the contents of the receiver as valid.
 
      - throws: If the content is invalid.
      */

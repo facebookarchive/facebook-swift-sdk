@@ -24,7 +24,7 @@ import FBSDKLoginKit
  Describes the result of a login attempt.
  */
 public enum LoginResult {
-  /// User succesfully logged in. Contains granted, declined permissions and access token.
+  /// User successfully logged in. Contains granted, declined permissions and access token.
   case success(grantedPermissions: Set<Permission>, declinedPermissions: Set<Permission>, token: AccessToken)
   /// Login attempt was cancelled by the user.
   case cancelled

@@ -42,7 +42,7 @@ public enum AppEventParameterName {
   case registrationMethod
   /// String provided by the user for a search operation.
   case searchedString
-  /// Boolean value indicating wehtehr an activity being logged was succesful.
+  /// Boolean value indicating wehtehr an activity being logged was successful.
   case successful
   /// Custom name of the parameter that is represented by a string.
   case custom(String)

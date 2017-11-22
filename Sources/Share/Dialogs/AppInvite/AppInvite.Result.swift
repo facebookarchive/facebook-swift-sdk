@@ -24,7 +24,7 @@ extension AppInvite {
    */
   public enum Result {
     // TODO: Better concrete type for results here.
-    /// The App Invite was sent succesfully.
+    /// The App Invite was sent successfully.
     case success([String:String])
 
     /// The App Invite failed.
