@@ -22,7 +22,7 @@ extension GameRequest {
    */
   public enum Result {
     // TODO: Better concrete type for results here.
-    /// The Game Request was succesfully sent.
+    /// The Game Request was successfully sent.
     case success([String:String])
 
     /// The Game Request failed.

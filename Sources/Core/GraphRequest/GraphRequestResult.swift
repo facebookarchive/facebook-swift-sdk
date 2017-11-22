@@ -22,7 +22,7 @@
  */
 public enum GraphRequestResult<T: GraphRequestProtocol> {
   /**
-   Represents succesful result of a `GraphRequestProtocol`.
+   Represents successful result of a `GraphRequestProtocol`.
    Encapsulates response from the server.
    */
   case success(response: T.Response)

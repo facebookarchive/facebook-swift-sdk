@@ -43,7 +43,7 @@ extension AppEvent {
   /**
    Create an event that indicates that the user has completed tutorial.
 
-   - parameter successful:      Optional boolean value that indicates whether operation was succesful.
+   - parameter successful:      Optional boolean value that indicates whether operation was successful.
    - parameter valueToSum:      Optional value to sum.
    - parameter extraParameters: Optional dictionary of extra parameters.
 
@@ -85,7 +85,7 @@ extension AppEvent {
 
    - parameter contentId:       Optional content identifer.
    - parameter searchedString:  Optional searched string.
-   - parameter successful:      Optional boolean value that indicatest whether the operation was succesful.
+   - parameter successful:      Optional boolean value that indicatest whether the operation was successful.
    - parameter valueToSum:      Optional value to sum.
    - parameter extraParameters: Optional dictionary of extra parameters.
 
@@ -199,7 +199,7 @@ extension AppEvent {
   /**
    Create an event that indicatest that a user added payment information.
 
-   - parameter successful:      Optional boolean value that indicates whether operation was succesful.
+   - parameter successful:      Optional boolean value that indicates whether operation was successful.
    - parameter valueToSum:      Optional value to sum.
    - parameter extraParameters: Optional dictionary of extra parameters.
 

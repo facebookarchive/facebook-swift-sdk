@@ -23,7 +23,7 @@ extension UserProfile {
    Describes the result of a fetch of `UserProfile`.
    */
   public enum FetchResult {
-    /// Profile was succesfully fetched.
+    /// Profile was successfully fetched.
     case success(UserProfile)
     /// Profile fetch failed.
     case failed(Error)
