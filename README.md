@@ -38,7 +38,7 @@ Swift-taylored experience to integrate your app with Facebook. Including:
       pod 'FacebookShare'
       ```
     - Run `pod install`
-    - You are all set!
+    - You are all set! (make sure to restart Xcode)
 
  You may also exclude any of these dependencies, if you do not need the features of those parts of the SDK.
   
