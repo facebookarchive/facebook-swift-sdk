@@ -37,15 +37,21 @@ public final class LoginManager {
 
   /// The login behavior that is going to be used. Default: `.Native`.
   public var loginBehavior: LoginBehavior {
-    didSet {
+    set {
       sdkManager.loginBehavior = loginBehavior.sdkBehavior
+    }
+    get {
+      return sdkManager.loginBehavior.appBehavior
     }
   }
 
   /// The default audience. Default: `.Friends`.
   public var defaultAudience: LoginDefaultAudience {
-    didSet {
-      sdkManager.defaultAudience = defaultAudience.sdkAudience
+    set {
+      sdkManager.defaultAudience = newValue.sdkAudience
+    }
+    get {
+      return sdkManager.defaultAudience.appAudience
     }
   }
 
@@ -57,8 +63,6 @@ public final class LoginManager {
    */
   public init(loginBehavior: LoginBehavior = .native,
               defaultAudience: LoginDefaultAudience = .friends) {
-    self.loginBehavior = loginBehavior
-    self.defaultAudience = defaultAudience
     sdkManager.loginBehavior = loginBehavior.sdkBehavior
     sdkManager.defaultAudience = defaultAudience.sdkAudience
   }
