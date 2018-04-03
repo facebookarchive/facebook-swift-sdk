@@ -15,6 +15,10 @@ Swift-taylored experience to integrate your app with Facebook. Including:
 
 ## Getting Started
 
+### Installation
+
+Add the Facebook-sdk-swift to your Xcode project with the following methods:
+
 - **[CocoaPods](https://cocoapods.org)**
     - Make sure you are running the latest version of CocoaPods by running:
       ```bash
@@ -209,6 +213,22 @@ Facebook SDK in Swift is still in beta, and we would love to hear your thoughts 
 All of Facebook SDK for Swift development happens on GitHub. 
 Contributions make for good karma and we welcome new contributors with tremendous joy.
 We encourage you also to read our [contributing guidelines](https://github.com/facebook/facebook-sdk-swift/blob/master/CONTRIBUTING.md) before submitting a Pull Request.
+
+### Building the Facebook Swift SDK
+
+Build the SDK to make changes and contribute. Follow these steps to get started.
+
+1. First clone the sdk into an empty directory for the Facebook Swift SDK.
+2. initialize all submodules
+3. open FacebookSwift.xcworkspace within Xcode
+
+```bash
+$ cd /path/to/directoy
+$ git clone https://github.com/facebook/facebook-sdk-swift.git
+$ cd facebook-sdk-swift
+$ git submodule update --init --recursive
+$ open FacebookSwift.xcworkspace
+```
 
 ## LICENSE
 
