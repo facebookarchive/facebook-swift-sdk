@@ -1,6 +1,11 @@
 ---
 author: Facebook
 author_url: https://github.com/facebook/facebook-sdk-swift
+hide_documentation_coverage: true
+module: Facebook Swift SDK
+readme: README.md
+skip_undocumented: true
+theme: fullwidth
 custom_categories:
 - children:
   - AccessToken
@@ -89,9 +94,3 @@ custom_categories:
 - children:
   - "==(_:_:)"
   name: Equality Helpers
-hide_documentation_coverage: true
-module: Facebook Swift SDK
-readme: README.md
-skip_undocumented: true
-theme: fullwidth
-

@@ -3,7 +3,7 @@
 [![Swift Version](https://img.shields.io/badge/Swift-4.0.x-orange.svg)](https://swift.org)
 [![Platforms](https://img.shields.io/cocoapods/p/FacebookCore.svg)](https://cocoapods.org/pods/FacebookCore)
 
-[![Build Status](https://img.shields.io/travis/facebook/facebook-sdk-swift/master.svg?style=flat)](https://travis-ci.org/facebook/facebook-sdk-swift)
+[![Build Status](https://travis-ci.org/facebook/facebook-sdk-swift.svg?branch=master)](https://travis-ci.org/facebook/facebook-sdk-swift)
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/FacebookCore.svg)](https://cocoapods.org/pods/FacebookCore)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
