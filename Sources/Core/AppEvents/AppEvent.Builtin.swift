@@ -311,6 +311,7 @@ public extension AppEvent {
 
    - parameter contentType: Optional content type.
    - parameter contentId: Optional content identifier.
+   - parameter contentData: Optional content data.
    - parameter valueToSum: Optional value to sum.
    - parameter extraParameters: Optional dictionary of extra parameters.
 
@@ -318,11 +319,13 @@ public extension AppEvent {
    */
   static func spentCredits(contentType: String? = nil,
                            contentId: String? = nil,
+                           contentData: String? = nil,
                            valueToSum: Double? = nil,
                            extraParameters: ParametersDictionary = [:]) -> AppEvent {
     var parameters = extraParameters
     contentType.onSome { parameters[.contentType] = $0 }
     contentId.onSome { parameters[.contentId] = $0 }
+    contentData.onSome { parameters[.content] = $0 }
     return AppEvent(name: .spentCredits, parameters: parameters, valueToSum: valueToSum)
   }
 }
