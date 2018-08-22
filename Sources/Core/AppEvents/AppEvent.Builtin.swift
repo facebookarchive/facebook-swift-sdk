@@ -193,6 +193,7 @@ public extension AppEvent {
 
    - parameter contentType: Optional content type.
    - parameter contentId: Optional content identifier.
+   - parameter contentData: Optional content data.
    - parameter currency: Optional string representation of currency.
    - parameter valueToSum: Optional value to sum.
    - parameter extraParameters: Optional dictionary of extra parameters.
@@ -201,12 +202,14 @@ public extension AppEvent {
    */
   static func addedToWishlist(contentType: String? = nil,
                               contentId: String? = nil,
+                              contentData: String? = nil,
                               currency: String? = nil,
                               valueToSum: Double? = nil,
                               extraParameters: ParametersDictionary = [:]) -> AppEvent {
     var parameters = extraParameters
     contentType.onSome { parameters[.contentType] = $0 }
     contentId.onSome { parameters[.contentId] = $0 }
+    contentData.onSome { parameters[.content] = $0 }
     currency.onSome { parameters[.currency] = $0 }
     return AppEvent(name: .addedToWishlist, parameters: parameters, valueToSum: valueToSum)
   }
