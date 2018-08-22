@@ -117,6 +117,7 @@ public extension AppEvent {
 
    - parameter contentType: Optional type of the content.
    - parameter contentId: Optional content identifier.
+   - parameter contentData: Optional content data.
    - parameter maxRatingValue: Optional max rating value.
    - parameter valueToSum: Optional value to sum.
    - parameter extraParameters: Optional dictionary of extra parameters.
@@ -125,12 +126,14 @@ public extension AppEvent {
    */
   static func rated<T: UnsignedInteger>(contentType: String? = nil,
                                         contentId: String? = nil,
+                                        contentData: String? = nil,
                                         maxRatingValue: T? = nil,
                                         valueToSum: Double? = nil,
                                         extraParameters: ParametersDictionary = [:]) -> AppEvent {
     var parameters = extraParameters
     contentType.onSome { parameters[.contentType] = $0 }
     contentId.onSome { parameters[.contentId] = $0 }
+    contentData.onSome { parameters[.content] = $0 }
     maxRatingValue.onSome { parameters[.maxRatingValue] = NSNumber(value: UInt64($0)) }
     return AppEvent(name: .rated, parameters: parameters, valueToSum: valueToSum)
   }
