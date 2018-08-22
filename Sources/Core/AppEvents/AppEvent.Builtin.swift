@@ -236,6 +236,7 @@ public extension AppEvent {
 
    - parameter contentType: Optional content type.
    - parameter contentId: Optional content identifier.
+   - parameter contentData: Optional content data.
    - parameter itemCount: Optional count of items.
    - parameter paymentInfoAvailable: Optional boolean value that indicatest whether payment info is available.
    - parameter currency: Optional string representation of currency.
@@ -246,6 +247,7 @@ public extension AppEvent {
    */
   static func initiatedCheckout<T: UnsignedInteger>(contentType: String? = nil,
                                                     contentId: String? = nil,
+                                                    contentData: String? = nil,
                                                     itemCount: T? = nil,
                                                     paymentInfoAvailable: Bool? = nil,
                                                     currency: String? = nil,
@@ -254,6 +256,7 @@ public extension AppEvent {
     var parameters = extraParameters
     contentType.onSome { parameters[.contentType] = $0 }
     contentId.onSome { parameters[.contentId] = $0 }
+    contentData.onSome { parameters[.content] = $0 }
     itemCount.onSome { parameters[.itemCount] = NSNumber(value: UInt64($0)) }
     paymentInfoAvailable.onSome {
       parameters[.paymentInfoAvailable] = $0 ? FBSDKAppEventParameterValueYes : FBSDKAppEventParameterValueNo
