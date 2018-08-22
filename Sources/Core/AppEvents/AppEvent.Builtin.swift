@@ -87,6 +87,8 @@ public extension AppEvent {
    Create an event that indicatest that the user has performed a search within the app.
 
    - parameter contentId: Optional content identifer.
+   - parameter contentData: Optional content data.
+   - parameter contentType: Optional type of the content.
    - parameter searchedString: Optional searched string.
    - parameter successful: Optional boolean value that indicatest whether the operation was succesful.
    - parameter valueToSum: Optional value to sum.
@@ -95,12 +97,16 @@ public extension AppEvent {
    - returns: An app event that can be logged via `AppEventsLogger`.
    */
   static func searched(contentId: String? = nil,
+                       contentData: String? = nil,
+                       contentType: String? = nil,
                        searchedString: String? = nil,
                        successful: Bool? = nil,
                        valueToSum: Double? = nil,
                        extraParameters: ParametersDictionary = [:]) -> AppEvent {
     var parameters = extraParameters
     contentId.onSome { parameters[.contentId] = $0 }
+    contentData.onSome { parameters[.content] = $0 }
+    contentType.onSome { parameters[.contentType] = $0 }
     searchedString.onSome { parameters[.searchedString] = $0 }
     successful.onSome { parameters[.successful] = $0 ? FBSDKAppEventParameterValueYes : FBSDKAppEventParameterValueNo }
     return AppEvent(name: .searched, parameters: parameters, valueToSum: valueToSum)
