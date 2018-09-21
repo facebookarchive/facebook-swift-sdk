@@ -102,20 +102,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		63288140214A2A8300456FF2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 81AB8A0C1D36D41700066F63 /* FBSDKLoginKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0B9DBF2C207C05CD00662776;
-			remoteInfo = FBSDKLoginKit_TV;
-		};
-		63288142214A2A8300456FF2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 81AB8A0C1D36D41700066F63 /* FBSDKLoginKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0B9DBF52207C07C600662776;
-			remoteInfo = "FBSDKLoginKit_TV-Dynamic";
-		};
 		811C5E471CFFD4C800E4A925 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8115C0CF1CFE540D001FF33B /* Project object */;
@@ -723,8 +709,6 @@
 				81AB8A491D36D41700066F63 /* FBSDKLoginKit.framework */,
 				81AB8A4B1D36D41700066F63 /* FBSDKLoginKit.framework */,
 				81AB8A4D1D36D41700066F63 /* FBSDKLoginKitTests.xctest */,
-				63288141214A2A8300456FF2 /* FBSDKLoginKit.framework */,
-				63288143214A2A8300456FF2 /* FBSDKLoginKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1058,10 +1042,10 @@
 						LastSwiftMigration = 0800;
 					};
 					811C5DF21CFFD36600E4A925 = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 					811C5DFF1CFFD36D00E4A925 = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -1103,20 +1087,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		63288141214A2A8300456FF2 /* FBSDKLoginKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FBSDKLoginKit.framework;
-			remoteRef = 63288140214A2A8300456FF2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		63288143214A2A8300456FF2 /* FBSDKLoginKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FBSDKLoginKit.framework;
-			remoteRef = 63288142214A2A8300456FF2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		81AB8A3B1D36D41700066F63 /* FBSDKCoreKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1560,6 +1530,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1567,6 +1538,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1574,6 +1546,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1581,6 +1554,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
