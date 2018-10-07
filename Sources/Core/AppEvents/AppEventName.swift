@@ -37,8 +37,10 @@ public enum AppEventName: Hashable, RawRepresentable, CustomStringConvertible, E
   case viewedContent
   /// Name of the event that indicates that the user has performed search within the application.
   case searched
-  /// Name of the event that indicates that the user has has rated an item in the app.
+  /// Name of the event that indicates that the user has rated an item in the app.
   case rated
+  /// Name of the event that indicates that the user has generated a lead in the app.
+  case lead
 
   // MARK: Commerce
 
@@ -95,6 +97,7 @@ public enum AppEventName: Hashable, RawRepresentable, CustomStringConvertible, E
     case .viewedContent: return FBSDKAppEventNameViewedContent
     case .searched: return FBSDKAppEventNameSearched
     case .rated: return FBSDKAppEventNameRated
+    case .lead: return FBSDKAppEventNameLead
 
     case .purchased: return "fb_mobile_purchase" // Hard-coded as a string, since it's internal API of FBSDKCoreKit.
     case .addedToCart: return FBSDKAppEventNameAddedToCart

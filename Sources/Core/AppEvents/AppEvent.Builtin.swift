@@ -137,6 +137,24 @@ public extension AppEvent {
     maxRatingValue.onSome { parameters[.maxRatingValue] = NSNumber(value: UInt64($0)) }
     return AppEvent(name: .rated, parameters: parameters, valueToSum: valueToSum)
   }
+
+  /**
+   Create an event that indicates that the user has generated a lead.
+
+   - parameter currency: Optional string representation of currency.
+   - parameter valueToSum: Optional value to sum.
+   - parameter extraParameters: Optional dictionary of extra parameters.
+
+   - returns: An app event that can be logged via `AppEventsLogger`.
+   */
+  static func lead(currency: String? = nil,
+                   valueToSum: Double? = nil,
+                   extraParameters: ParametersDictionary = [:]) -> AppEvent {
+    var parameters = extraParameters
+    currency.onSome { parameters[.currency] = $0 }
+    return AppEvent(name: .lead, parameters: parameters, valueToSum: valueToSum)
+  }
+
 }
 
 //--------------------------------------
