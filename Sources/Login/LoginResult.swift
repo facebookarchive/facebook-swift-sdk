@@ -42,7 +42,7 @@ public enum LoginResult {
       self = .failed(error)
       return
     }
-    if sdkResult.isCancelled {
+    if sdkResult.isCancelled || sdkResult.token == nil {
       self = .cancelled
     } else {
       let grantedPermissions = (sdkResult.grantedPermissions?.compactMap { $0 as? String }
