@@ -56,7 +56,5 @@ public enum LoginResult {
     self = .success(grantedPermissions: grantedPermissions ?? [],
                     declinedPermissions: declinedPermissions ?? [],
                     token: AccessToken(sdkAccessToken: token))
-
-    }
   }
 }
