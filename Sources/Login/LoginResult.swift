@@ -42,6 +42,7 @@ public enum LoginResult {
       self = .failed(error)
       return
     }
+
     guard !sdkResult.isCancelled, let token = sdkResult.token else {
       self = .cancelled
       return
