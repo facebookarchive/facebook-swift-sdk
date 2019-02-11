@@ -65,7 +65,7 @@ public struct Photo: Equatable {
   internal var sdkPhotoRepresentation: FBSDKSharePhoto {
     let photo = FBSDKSharePhoto()
     if let image = image {
-      photo.image = image
+        photo.image = image
     } else if let imageURL = url {
       photo.imageURL = imageURL
     }
