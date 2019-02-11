@@ -67,7 +67,7 @@ public struct Photo: Equatable {
     if let image = image {
         photo.image = image
     } else if let imageURL = url {
-      photo.imageURL = imageURL
+        photo.imageURL = imageURL
     }
     photo.isUserGenerated = isUserGenerated
     photo.caption = caption
