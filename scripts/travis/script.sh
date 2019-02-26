@@ -21,14 +21,16 @@
 # Main Script
 # --------------
 
+#shellcheck disable=SC1090
+
 if [ "$TEST_TYPE" = iOS ]; then
-  sh build_ios.sh
+  . "$PWD/scripts/travis/build_ios.sh"
 elif [ "$TEST_TYPE" = Lint ]; then
-  sh lint.sh
+  . "$PWD/scripts/travis/lint.sh"
 elif [ "$TEST_TYPE" = Samples ]; then
-  sh build_samples.sh
+  . "$PWD/scripts/travis/build_samples.sh"
 elif [ "$TEST_TYPE" = CocoaPods ]; then
-  sh cocoapods.sh
+  . "$PWD/scripts/travis/cocoapods.sh"
 elif [ "$TEST_TYPE" = Carthage ]; then
-  sh carthage.sh
+  . "$PWD/scripts/travis/carthage.sh"
 fi
