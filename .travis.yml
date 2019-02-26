@@ -13,6 +13,6 @@ env:
     - TEST_TYPE=Samples
     - TEST_TYPE=CocoaPods
     - TEST_TYPE=Carthage
-before_install: sh Scripts/travis/before_install.sh
-install: sh Scripts/travis/install_dependencies.sh
-script: sh Scripts/travis/script.sh
+before_install: sh scripts/travis/before_install.sh
+install: sh scripts/travis/install.sh
+script: sh scripts/travis/script.sh
