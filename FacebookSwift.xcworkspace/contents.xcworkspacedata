@@ -11,20 +11,4 @@
          location = "group:Samples/Catalog/SwiftCatalog.xcodeproj">
       </FileRef>
    </Group>
-   <Group
-      location = "container:"
-      name = "ObjC">
-      <FileRef
-         location = "group:Carthage/Checkouts/facebook-objc-sdk/Bolts-ObjC/Bolts.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Carthage/Checkouts/facebook-objc-sdk/FBSDKCoreKit/FBSDKCoreKit.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Carthage/Checkouts/facebook-objc-sdk/FBSDKLoginKit/FBSDKLoginKit.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Carthage/Checkouts/facebook-objc-sdk/FBSDKShareKit/FBSDKShareKit.xcodeproj">
-      </FileRef>
-   </Group>
 </Workspace>
