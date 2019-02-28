@@ -52,6 +52,7 @@
 		81654DD41D356E9A006401F1 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		81654DD51D356E9A006401F1 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		81654DD61D356E9A006401F1 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
+		F409967022289BE400F23464 /* FBSDKAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSDKAccessToken.swift; sourceTree = "<group>"; };
 		F4A9494D22285B1C00228788 /* LinterRequired.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinterRequired.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +127,7 @@
 		811C5E5E1CFFD52B00E4A925 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F409967022289BE400F23464 /* FBSDKAccessToken.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
