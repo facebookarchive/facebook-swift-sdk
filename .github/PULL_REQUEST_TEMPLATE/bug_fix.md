@@ -1,4 +1,8 @@
-# Facebook Swift SDK Pull Request
+---
+name: Bug Fix
+about: Resolve an issue that you're running into
+labels: bug
+---
 
 ## Checklist
 
@@ -7,8 +11,12 @@
 - [ ] I've ensured that all existing tests pass and added tests (when/where necessary)
 - [ ] I've ensured that my code lints properly: (`swiftlint && swiftlint autocorrect --format`)
 - [ ] I've updated the documentation (when/where necessary) and [Changelog](CHANGELOG.md) (when/where necessary)
-- [ ] I've added the proper label to this pull request (e.g. `bug` for bug fixes)
+- [ ] This issue is not security related and can safely be disclosed publicly on GitHub
 
 ## Pull Request Details
 
 Describe what you accomplished in this pull request
+
+## Test Plan
+
+Test Plan: **Insert Your Test Plan**
