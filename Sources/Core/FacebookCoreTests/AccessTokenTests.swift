@@ -149,4 +149,18 @@ class AccessTokenTests: XCTestCase {
     XCTAssertTrue(token.isDataAccessExpired,
                   "A token's data access should be considered expired if its data access expiration date is earlier than now")
   }
+
+  func testHasGrantedPermission() {
+    let token = FBSDKAccessToken(
+      tokenString: "abc123",
+      permissions: ["access", "more_access"],
+      appID: "Foo",
+      userID: "User"
+    )
+
+    XCTAssertTrue(token.hasGranted(permission: "access"),
+                  "A token should know about its granted permissions")
+    XCTAssertFalse(token.hasGranted(permission: "all_the_access"),
+                   "A token should not claim to have a permission it has not been given")
+  }
 }
