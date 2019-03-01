@@ -82,7 +82,7 @@ struct FBSDKAccessToken: Codable {
      `FBSDKAccessTokenChangeOldKey` and
      `FBSDKAccessTokenChangeNewKey`.
      */
-    static let foo = "com.facebook.sdk.FBSDKAccessTokenData.FBSDKAccessTokenDidChangeNotification"
+    static let FBSDKAccessTokenDidChangeNotification = "com.facebook.sdk.FBSDKAccessTokenData.FBSDKAccessTokenDidChangeNotification"
   }
 
   // TODO: This is impossible if we keep the access token a struct we probably want something that holds an access token... wallet?
