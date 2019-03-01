@@ -23,7 +23,7 @@ import Foundation
 /**
  Represents an immutable access token for using Facebook services.
  */
-struct AccessToken: Codable {
+struct AccessToken: Codable, Equatable {
 
   /**
    Returns the opaque token string.
