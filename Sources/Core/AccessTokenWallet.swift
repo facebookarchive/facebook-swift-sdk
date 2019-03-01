@@ -94,7 +94,7 @@ class AccessTokenWallet {
 
         settings.accessTokenCache?.accessToken = token
 
-//        notificationCenter.post(name: .FBSDKAccessTokenDidChangeNotification, object: AccessToken.self, userInfo: [:])
+        notificationCenter.post(name: .FBSDKAccessTokenDidChangeNotification, object: AccessToken.self, userInfo: [:])
   //      NotificationCenter.default.post(name: NSNotification.Name(FBSDKAccessTokenDidChangeNotification), object: FBSDKAccessToken, userInfo: userInfo)
       }
   }
