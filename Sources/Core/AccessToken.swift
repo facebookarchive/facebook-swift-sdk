@@ -202,8 +202,17 @@ struct FBSDKAccessToken { // NSSecureCoding {
   var isDataAccessExpired: Bool {
     return dataAccessExpirationDate.compare(Date()) == .orderedAscending
   }
-//  }
-//
+
+  /**
+   Convenience getter to determine if a permission has been granted
+
+   - Parameters
+    - permission: The permission to check.
+   */
+  func hasGranted(permission: String) -> Bool {
+    return permissions.contains(permission)
+  }
+
 //  class func setCurrent(_ token: FBSDKAccessToken?) {
 //    if token != g_currentAccessToken {
 //      var userInfo: [AnyHashable : Any] = [:]
