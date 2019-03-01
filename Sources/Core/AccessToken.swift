@@ -93,6 +93,11 @@ struct FBSDKAccessToken { // NSSecureCoding {
 //   */
 //  let currentAccessToken: FBSDKAccessToken?
 
+  //  class func current() -> FBSDKAccessToken? {
+  //    return g_currentAccessToken
+  //  }
+  //
+
   // TODO: Seems to be deprecated, delete later
 //  /**
 //   Returns YES if currentAccessToken is not nil AND currentAccessToken is not expired
@@ -140,20 +145,6 @@ struct FBSDKAccessToken { // NSSecureCoding {
    */
   let refreshDate: Date
 
-  /**
-   Returns whether the access token is expired by checking its expirationDate property
-   */
-  var isExpired: Bool {
-    return expirationDate.compare(Date()) == .orderedAscending
-  }
-
-  /**
-   Returns whether user data access is still active for the given access token
-   */
-  var isDataAccessExpired: Bool {
-    return dataAccessExpirationDate.compare(Date()) == .orderedAscending
-  }
-
     /**
    Initializes a new instance.
 
@@ -198,9 +189,19 @@ struct FBSDKAccessToken { // NSSecureCoding {
 //    return permissions.contains(permission ?? "")
 //
 //  }
-//
-//  class func current() -> FBSDKAccessToken? {
-//    return g_currentAccessToken
+  /**
+   Returns whether the access token is expired by checking its expirationDate property
+   */
+  var isExpired: Bool {
+    return expirationDate.compare(Date()) == .orderedAscending
+  }
+
+  /**
+   Returns whether user data access is still active for the given access token
+   */
+  var isDataAccessExpired: Bool {
+    return dataAccessExpirationDate.compare(Date()) == .orderedAscending
+  }
 //  }
 //
 //  class func setCurrent(_ token: FBSDKAccessToken?) {
