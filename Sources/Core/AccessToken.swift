@@ -140,19 +140,19 @@ struct FBSDKAccessToken { // NSSecureCoding {
    */
   let refreshDate: Date
 
-//  /**
-//   Returns whether the access token is expired by checking its expirationDate property
-//   */
-//  var expired: Bool {
-//    return expirationDate?.compare(Date()) == .orderedAscending
-//  }
-//
-//  /**
-//   Returns whether user data access is still active for the given access token
-//   */
-//  var dataAccessExpired: Bool {
-//    return dataAccessExpirationDate?.compare(Date()) == .orderedAscending
-//  }
+  /**
+   Returns whether the access token is expired by checking its expirationDate property
+   */
+  var isExpired: Bool {
+    return expirationDate.compare(Date()) == .orderedAscending
+  }
+
+  /**
+   Returns whether user data access is still active for the given access token
+   */
+  var isDataAccessExpired: Bool {
+    return dataAccessExpirationDate.compare(Date()) == .orderedAscending
+  }
 
     /**
    Initializes a new instance.
