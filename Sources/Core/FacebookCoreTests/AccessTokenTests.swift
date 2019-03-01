@@ -23,7 +23,7 @@ import XCTest
 
 class AccessTokenTests: XCTestCase {
 
-  let validToken = FBSDKAccessToken(tokenString: "abc123", appID: "Foo", userID: "user")
+  let validToken = AccessToken(tokenString: "abc123", appID: "Foo", userID: "user")
 
   func testTokenString() {
     XCTAssertEqual(validToken.tokenString, "abc123",
@@ -38,7 +38,7 @@ class AccessTokenTests: XCTestCase {
   func testGrantedPermissions() {
     XCTAssertTrue(validToken.permissions.isEmpty, "Granted permissions should be empty by default")
 
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc123",
       permissions: ["access", "more_access"],
       appID: "Foo",
@@ -52,7 +52,7 @@ class AccessTokenTests: XCTestCase {
   func testDeclinedPermissions() {
     XCTAssertTrue(validToken.declinedPermissions.isEmpty, "Granted permissions should be empty by default")
 
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc123",
       declinedPermissions: ["access", "more_access"],
       appID: "Foo",
@@ -72,7 +72,7 @@ class AccessTokenTests: XCTestCase {
     XCTAssertEqual(validToken.expirationDate, .distantFuture,
                    "An access token should have an expiration date that defaults to the distant future")
 
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc123",
       appID: "Foo",
       userID: "user",
@@ -88,7 +88,7 @@ class AccessTokenTests: XCTestCase {
     XCTAssertEqual(validToken.refreshDate.timeIntervalSince1970, Date().timeIntervalSince1970, accuracy: 10,
                    "An access token should have a refresh date that defaults to right about now")
 
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc123",
       appID: "Foo",
       userID: "user",
@@ -102,7 +102,7 @@ class AccessTokenTests: XCTestCase {
     XCTAssertEqual(validToken.dataAccessExpirationDate, .distantFuture,
                    "An access token should have an expiration date that defaults to the distant future")
 
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc123",
       appID: "Foo",
       userID: "user",
@@ -122,7 +122,7 @@ class AccessTokenTests: XCTestCase {
   func testExpiredToken() {
     let expirationDate = Date(timeIntervalSinceNow: -1)
 
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc124",
       appID: "Foo",
       userID: "user",
@@ -140,7 +140,7 @@ class AccessTokenTests: XCTestCase {
   func testDataAccessExpiredToken() {
     let expirationDate = Date(timeIntervalSinceNow: -1)
 
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc124",
       appID: "Foo",
       userID: "user",
@@ -151,7 +151,7 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testHasGrantedPermission() {
-    let token = FBSDKAccessToken(
+    let token = AccessToken(
       tokenString: "abc123",
       permissions: ["access", "more_access"],
       appID: "Foo",
