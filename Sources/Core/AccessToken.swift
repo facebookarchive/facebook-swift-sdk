@@ -25,18 +25,19 @@ private var globalCurrentAccessToken: FBSDKAccessToken?
 /**
  Represents an immutable access token for using Facebook services.
  */
-struct FBSDKAccessToken { // NSSecureCoding {
+struct FBSDKAccessToken: Codable {
 
-  enum CodingKeys {
-    static let tokenString = "tokenString"
-    static let permissions = "permissions"
-    static let declinedPermissions = "declinedPermissions"
-    static let appID = "appID"
-    static let userID = "userID"
-    static let refreshDate = "refreshDate"
-    static let expirationDate = "expirationDate"
-    static let dataAccessExpirationDate = "dataAccessExpirationDate"
-  }
+  // TODO: Delete, do not need when using codable.
+//  enum Keys {
+//    static let tokenString = "tokenString"
+//    static let permissions = "permissions"
+//    static let declinedPermissions = "declinedPermissions"
+//    static let appID = "appID"
+//    static let userID = "userID"
+//    static let refreshDate = "refreshDate"
+//    static let expirationDate = "expirationDate"
+//    static let dataAccessExpirationDate = "dataAccessExpirationDate"
+//  }
 
   enum NotificationKeys {
     /**
@@ -84,7 +85,7 @@ struct FBSDKAccessToken { // NSSecureCoding {
     static let foo = "com.facebook.sdk.FBSDKAccessTokenData.FBSDKAccessTokenDidChangeNotification"
   }
 
-  // TODO: This is impossible if we keep the access token a struct
+  // TODO: This is impossible if we keep the access token a struct we probably want something that holds an access token... wallet?
 //  /**
 //   The "global" access token that represents the currently logged in user.
 //
@@ -181,14 +182,6 @@ struct FBSDKAccessToken { // NSSecureCoding {
     self.dataAccessExpirationDate = dataAccessExpirationDate
   }
 
-//  /**
-//   Convenience getter to determine if a permission has been granted
-//   @param permission  The permission to check.
-//   */
-//  func hasGranted(_ permission: String?) -> Bool {
-//    return permissions.contains(permission ?? "")
-//
-//  }
   /**
    Returns whether the access token is expired by checking its expirationDate property
    */
@@ -203,6 +196,7 @@ struct FBSDKAccessToken { // NSSecureCoding {
     return dataAccessExpirationDate.compare(Date()) == .orderedAscending
   }
 
+  // TODO: Either make granted and declined mutually exclusive or have a check here that the permission is not present in declined.
   /**
    Convenience getter to determine if a permission has been granted
 
@@ -271,39 +265,10 @@ struct FBSDKAccessToken { // NSSecureCoding {
 //    return token != nil && FBSDKInternalUtility.object(tokenString, isEqualToObject: token?.tokenString) && FBSDKInternalUtility.object(permissions, isEqualToObject: token?.permissions) && FBSDKInternalUtility.object(declinedPermissions, isEqualToObject: token?.declinedPermissions) && FBSDKInternalUtility.object(appID, isEqualToObject: token?.appID) && FBSDKInternalUtility.object(userID, isEqualToObject: token?.userID) && FBSDKInternalUtility.object(refreshDate, isEqualToObject: token?.refreshDate) && FBSDKInternalUtility.object(expirationDate, isEqualToObject: token?.expirationDate) && FBSDKInternalUtility.object(dataAccessExpirationDate, isEqualToObject: token?.dataAccessExpirationDate)
 //  }
 //
-//  // MARK: - NSCopying
-//  func copy(with zone: NSZone?) -> Any? {
-//    // we're immutable.
-//    return self
-//  }
-//
 //  // MARK: NSCoding
 //  class var supportsSecureCoding: Bool {
 //    return true
 //  }
 //
-//  required init?(coder decoder: NSCoder) {
-//    let appID = decoder.decodeObjectOfClass(String.self, forKey: FBSDK_ACCESSTOKEN_APPID_KEY) as? String
-//    let declinedPermissions = decoder.decodeObjectOfClass(Set<AnyHashable>.self, forKey: FBSDK_ACCESSTOKEN_DECLINEDPERMISSIONS_KEY) as? Set<AnyHashable>
-//    let permissions = decoder.decodeObjectOfClass(Set<AnyHashable>.self, forKey: FBSDK_ACCESSTOKEN_PERMISSIONS_KEY) as? Set<AnyHashable>
-//    let tokenString = decoder.decodeObjectOfClass(String.self, forKey: FBSDK_ACCESSTOKEN_TOKENSTRING_KEY) as? String
-//    let userID = decoder.decodeObjectOfClass(String.self, forKey: FBSDK_ACCESSTOKEN_USERID_KEY) as? String
-//    let refreshDate = decoder.decodeObjectOfClass(Date.self, forKey: FBSDK_ACCESSTOKEN_REFRESHDATE_KEY) as? Date
-//    let expirationDate = decoder.decodeObjectOfClass(Date.self, forKey: FBSDK_ACCESSTOKEN_EXPIRATIONDATE_KEY) as? Date
-//    let dataAccessExpirationDate = decoder.decodeObjectOfClass(Date.self, forKey: FBSDK_ACCESSTOKEN_DATA_EXPIRATIONDATE_KEY) as? Date
-//
-//    self.init(tokenString: tokenString, permissions: Array(permissions), declinedPermissions: Array(declinedPermissions), appID: appID, userID: userID, expirationDate: expirationDate, refreshDate: refreshDate, dataAccessExpirationDate: dataAccessExpirationDate)
-//  }
-//
-//  func encode(with encoder: NSCoder) {
-//    encoder.encode(appID, forKey: FBSDK_ACCESSTOKEN_APPID_KEY)
-//    encoder.encode(declinedPermissions, forKey: FBSDK_ACCESSTOKEN_DECLINEDPERMISSIONS_KEY)
-//    encoder.encode(permissions, forKey: FBSDK_ACCESSTOKEN_PERMISSIONS_KEY)
-//    encoder.encode(tokenString, forKey: FBSDK_ACCESSTOKEN_TOKENSTRING_KEY)
-//    encoder.encode(userID, forKey: FBSDK_ACCESSTOKEN_USERID_KEY)
-//    encoder.encode(expirationDate, forKey: FBSDK_ACCESSTOKEN_EXPIRATIONDATE_KEY)
-//    encoder.encode(refreshDate, forKey: FBSDK_ACCESSTOKEN_REFRESHDATE_KEY)
-//    encoder.encode(dataAccessExpirationDate, forKey: FBSDK_ACCESSTOKEN_DATA_EXPIRATIONDATE_KEY)
-//  }
 }
 
