@@ -25,7 +25,7 @@ private var globalCurrentAccessToken: FBSDKAccessToken?
 /**
  Represents an immutable access token for using Facebook services.
  */
-struct FBSDKAccessToken: Codable {
+struct AccessToken: Codable {
 
   // TODO: Delete, do not need when using codable.
 //  enum Keys {
