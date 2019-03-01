@@ -50,6 +50,7 @@ class AccessTokenWalletTests: XCTestCase {
 
     AccessTokenWallet.cookieUtility = fakeCookieUtility
     AccessTokenWallet.settings = fakeSetttings
+    AccessTokenWallet.notificationCenter = fakeNotificationCenter
   }
 
   func testEmptyWallet() {
@@ -104,6 +105,9 @@ class AccessTokenWalletTests: XCTestCase {
 
   func testSettingExistingTokenToNilModifiesCache() {
     AccessTokenWallet.setCurrent(token)
+
+    fakeAccessTokenCache.accessTokenWasSet = false
+
     AccessTokenWallet.setCurrent(nil)
 
     XCTAssertTrue(fakeAccessTokenCache.accessTokenWasSet,
@@ -127,7 +131,6 @@ class AccessTokenWalletTests: XCTestCase {
 
     AccessTokenWallet.setCurrent(token)
 
-    // toggle the token set flag
     fakeAccessTokenCache.accessTokenWasSet = false
 
     AccessTokenWallet.setCurrent(tokenWithSameValues)
@@ -145,15 +148,48 @@ class AccessTokenWalletTests: XCTestCase {
   }
 
   func testSettingNonExistingTokenToNewTokenPostsNotification() {
+    AccessTokenWallet.setCurrent(token)
+
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
+                   "Setting a new token should post a notification with the expected name")
+
+    // TODO: add user info tests
   }
 
   func testSettingExistingTokenToNilPostsNotification() {
+    AccessTokenWallet.setCurrent(token)
+
+    fakeNotificationCenter.capturedPostedNotificationName = nil
+
+    AccessTokenWallet.setCurrent(nil)
+
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
+                   "Setting an existing token to nil should post a notification with the expected name")
+    // TODO: add user info tests
   }
 
   func testSettingExistingTokenToNewTokenPostsNotification() {
+    let newToken = AccessToken(tokenString: "abc123", appID: "Bar", userID: "user")
+
+    AccessTokenWallet.setCurrent(token)
+    AccessTokenWallet.setCurrent(newToken)
+
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
+                   "Setting an existing token to a new token should post a notification with the expected name")
+    // TODO: add user info tests
   }
 
   func testSettingExistingTokenToDuplicateTokenDoesNotPostNotification() {
+    let tokenWithSameValues = token.copy()
+
+    AccessTokenWallet.setCurrent(token)
+
+    fakeNotificationCenter.capturedPostedNotificationName = nil
+
+    AccessTokenWallet.setCurrent(tokenWithSameValues)
+
+    XCTAssertNil(fakeNotificationCenter.capturedPostedNotificationName,
+                 "Setting a token with the same values should not post a notification")
   }
 
 }
