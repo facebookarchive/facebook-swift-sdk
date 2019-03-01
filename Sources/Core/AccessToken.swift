@@ -101,45 +101,45 @@ struct FBSDKAccessToken { // NSSecureCoding {
 //  private(set) var currentAccessTokenIsActive = false
 
   /**
+   Returns the opaque token string.
+   */
+  let tokenString: String
+
+  /**
+   Returns the known granted permissions.
+   */
+  let permissions: Set<String>
+
+  /**
+   Returns the known declined permissions.
+   */
+  let declinedPermissions: Set<String>
+
+  /**
    Returns the app ID.
    */
   let appID: String
 
   /**
+   Returns the user ID.
+   */
+  let userID: String
+
+  /**
+   Returns the expiration date.
+   */
+  let expirationDate: Date
+
+  /**
    Returns the expiration date for data access
    */
-  private(set) var dataAccessExpirationDate: Date?
+  let dataAccessExpirationDate: Date
 
-//  /**
-//   Returns the known declined permissions.
-//   */
-//  private(set) var declinedPermissions: Set<String> = []
-//
-//  /**
-//   Returns the expiration date.
-//   */
-//  private(set) var expirationDate: Date?
-//
-//  /**
-//   Returns the known granted permissions.
-//   */
-//  private(set) var permissions: Set<String> = []
-//
-//  /**
-//   Returns the date the token was last refreshed.
-//   */
-//  private(set) var refreshDate: Date?
-//
-//  /**
-//   Returns the opaque token string.
-//   */
-//  private(set) var tokenString = ""
-//
-//  /**
-//   Returns the user ID.
-//   */
-//  private(set) var userID = ""
-//
+  /**
+   Returns the date the token was last refreshed.
+   */
+  let refreshDate: Date
+
 //  /**
 //   Returns whether the access token is expired by checking its expirationDate property
 //   */
@@ -154,39 +154,42 @@ struct FBSDKAccessToken { // NSSecureCoding {
 //    return dataAccessExpirationDate?.compare(Date()) == .orderedAscending
 //  }
 
-//  /**
-//   Initializes a new instance.
-//   @param tokenString the opaque token string.
-//   @param permissions the granted permissions. Note this is converted to NSSet and is only
-//   an NSArray for the convenience of literal syntax.
-//   @param declinedPermissions the declined permissions. Note this is converted to NSSet and is only
-//   an NSArray for the convenience of literal syntax.
-//   @param appID the app ID.
-//   @param userID the user ID.
-//   @param expirationDate the optional expiration date (defaults to distantFuture).
-//   @param refreshDate the optional date the token was last refreshed (defaults to today).
-//
-//   This initializer should only be used for advanced apps that
-//   manage tokens explicitly. Typical login flows only need to use `FBSDKLoginManager`
-//   along with `+currentAccessToken`.
-//   */
-
     /**
-      Initializes a new instance.
+   Initializes a new instance.
 
-      - Parameters:
-        - appID
-        - dataAccessExpirationDate
+    - Parameters:
+      - tokenString: the opaque token string
+      - appID: the app ID
+      - userID: the user ID
+      - permissions: the granted permissions
+      - declinedPermissions: the declined permissions
+      - expirationDate: the optional expiration date (defaults to distantFuture).
+      - refreshDate the optional date the token was last refreshed (defaults to now).
+      - dataAccessExpirationDate: the optional date which data access will expire for the given user
+(defaults to distantFuture)
+
+   This initializer should only be used for advanced apps that
+   manage tokens explicitly. Typical login flows only need to use `FBSDKLoginManager`
+   along with `+currentAccessToken`.
     */
-  init(appID: String, dataAccessExpirationDate: Date? = nil) {
+  init(tokenString: String,
+       permissions: Set<String> = [],
+       declinedPermissions: Set<String> = [],
+       appID: String,
+       userID: String,
+       expirationDate: Date = .distantFuture,
+       refreshDate: Date = Date(),
+       dataAccessExpirationDate: Date = .distantFuture) {
+    self.tokenString = tokenString
+    self.permissions = permissions
+    self.declinedPermissions = declinedPermissions
     self.appID = appID
+    self.userID = userID
+    self.expirationDate = expirationDate
+    self.refreshDate = refreshDate
     self.dataAccessExpirationDate = dataAccessExpirationDate
   }
 
-//  convenience init(tokenString: String?, permissions: [Any]?, declinedPermissions: [Any]?, appID: String?, userID: String?, expirationDate: Date?, refreshDate: Date?) {
-//    self.init(tokenString: tokenString, permissions: permissions, declinedPermissions: declinedPermissions, appID: appID, userID: userID, expirationDate: expirationDate, refreshDate: refreshDate, dataAccessExpirationDate: Date.distantFuture)
-//  }
-//
 //  /**
 //   Initializes a new instance.
 //   @param tokenString the opaque token string.
