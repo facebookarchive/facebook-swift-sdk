@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,7 +16,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F40E3A40225424920066A569"
+               BlueprintIdentifier = "F49FA478222880FE0008CAD6"
                BuildableName = "FacebookCoreTests.xctest"
                BlueprintName = "FacebookCoreTests"
                ReferencedContainer = "container:FacebookSwift.xcodeproj">

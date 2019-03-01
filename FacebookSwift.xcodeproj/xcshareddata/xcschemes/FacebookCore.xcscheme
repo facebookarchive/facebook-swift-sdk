@@ -41,7 +41,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F40E3A40225424920066A569"
+               BlueprintIdentifier = "F49FA478222880FE0008CAD6"
                BuildableName = "FacebookCoreTests.xctest"
                BlueprintName = "FacebookCoreTests"
                ReferencedContainer = "container:FacebookSwift.xcodeproj">
