@@ -25,7 +25,8 @@ class FakeNotificationCenter: NotificationPosting {
   var capturedPostedUserInfo: [AnyHashable: Any]?
 
   func post(name aName: Notification.Name, object anObject: Any?, userInfo aUserInfo: [AnyHashable: Any]?) {
-    
+    capturedPostedNotificationName = aName
+    capturedPostedUserInfo = aUserInfo
   }
 
 }
