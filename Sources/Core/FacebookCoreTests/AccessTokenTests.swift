@@ -16,32 +16,102 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable multiline_arguments
+// swiftlint:disable multiline_arguments explicit_type_interface line_length
 
 @testable import FacebookCore
 import XCTest
 
 class AccessTokenTests: XCTestCase {
 
-  func testCreatingWithAppID() {
-    let token = FBSDKAccessToken(appID: "Foo")
+  let validToken = FBSDKAccessToken(tokenString: "abc123", appID: "Foo", userID: "user")
 
-    XCTAssertEqual(token.appID, "Foo",
+  func testTokenString() {
+    XCTAssertEqual(validToken.tokenString, "abc123",
+                   "An access token should store the exact token string it was created with")
+  }
+
+  func testCreatingWithAppID() {
+    XCTAssertEqual(validToken.appID, "Foo",
                    "An access token should store the exact app identifier it was created with")
   }
 
-  func testDataExpirationDate() {
-    var token = FBSDKAccessToken(appID: "Foo")
+  func testGrantedPermissions() {
+    XCTAssertTrue(validToken.permissions.isEmpty, "Granted permissions should be empty by default")
 
-    XCTAssertNil(token.dataAccessExpirationDate,
-                 "An access token should not have an expiration date by default")
-
-    token = FBSDKAccessToken(
+    let token = FBSDKAccessToken(
+      tokenString: "abc123",
+      permissions: ["access", "more_access"],
       appID: "Foo",
+      userID: "user"
+    )
+
+    XCTAssertEqual(token.permissions, ["access", "more_access"],
+                   "An access token should store the exact permissions it was created with")
+  }
+
+  func testDeclinedPermissions() {
+    XCTAssertTrue(validToken.declinedPermissions.isEmpty, "Granted permissions should be empty by default")
+
+    let token = FBSDKAccessToken(
+      tokenString: "abc123",
+      declinedPermissions: ["access", "more_access"],
+      appID: "Foo",
+      userID: "user"
+    )
+
+    XCTAssertEqual(token.declinedPermissions, ["access", "more_access"],
+                   "An access token should store the exact permissions it was created with")
+  }
+
+  func testUserID() {
+    XCTAssertEqual(validToken.userID, "user",
+                   "An access token should store the exact user identifier it was created with")
+  }
+
+  func testExpirationDate() {
+    XCTAssertEqual(validToken.expirationDate, .distantFuture,
+                   "An access token should have an expiration date that defaults to the distant future")
+
+    let token = FBSDKAccessToken(
+      tokenString: "abc123",
+      appID: "Foo",
+      userID: "user",
+      expirationDate: Date()
+    )
+    XCTAssertNotNil(token.expirationDate,
+                    "An access token should be instantiable with a data access expiration date")
+    XCTAssertNotEqual(token.expirationDate, .distantFuture,
+                      "An access token provided with an expiration date should not set its expiration date to the distant future")
+  }
+
+  func testRefreshDate() {
+    XCTAssertEqual(validToken.refreshDate.timeIntervalSince1970, Date().timeIntervalSince1970, accuracy: 10,
+                   "An access token should have a refresh date that defaults to right about now")
+
+    let token = FBSDKAccessToken(
+      tokenString: "abc123",
+      appID: "Foo",
+      userID: "user",
+      refreshDate: .distantFuture
+    )
+    XCTAssertEqual(token.refreshDate, .distantFuture,
+                      "An access token should store the refresh date it was created with")
+  }
+
+  func testDataExpirationDate() {
+    XCTAssertEqual(validToken.dataAccessExpirationDate, .distantFuture,
+                   "An access token should have an expiration date that defaults to the distant future")
+
+    let token = FBSDKAccessToken(
+      tokenString: "abc123",
+      appID: "Foo",
+      userID: "user",
       dataAccessExpirationDate: Date()
     )
     XCTAssertNotNil(token.dataAccessExpirationDate,
                     "An access token should be instantiable with a data access expiration date")
+    XCTAssertNotEqual(token.dataAccessExpirationDate, .distantFuture,
+                      "An access token provided with a data access expiration date should not set its data access expiration date to the distant future")
   }
 
 }
