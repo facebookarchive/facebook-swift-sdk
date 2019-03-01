@@ -191,36 +191,6 @@ struct FBSDKAccessToken { // NSSecureCoding {
   }
 
 //  /**
-//   Initializes a new instance.
-//   @param tokenString the opaque token string.
-//   @param permissions the granted permissions. Note this is converted to NSSet and is only
-//   an NSArray for the convenience of literal syntax.
-//   @param declinedPermissions the declined permissions. Note this is converted to NSSet and is only
-//   an NSArray for the convenience of literal syntax.
-//   @param appID the app ID.
-//   @param userID the user ID.
-//   @param expirationDate the optional expiration date (defaults to distantFuture).
-//   @param refreshDate the optional date the token was last refreshed (defaults to today).
-//   @param dataAccessExpirationDate the date which data access will expire for the given user
-//   (defaults to distantFuture).
-//
-//   This initializer should only be used for advanced apps that
-//   manage tokens explicitly. Typical login flows only need to use `FBSDKLoginManager`
-//   along with `+currentAccessToken`.
-//   */
-//  required init(tokenString: String?, permissions: [Any]?, declinedPermissions: [Any]?, appID: String?, userID: String?, expirationDate: Date?, refreshDate: Date?, dataAccessExpirationDate: Date?) {
-//    //if super.init()
-//    self.tokenString = tokenString
-//    self.permissions = Set<AnyHashable>(permissions)
-//    self.declinedPermissions = Set<AnyHashable>(declinedPermissions)
-//    self.appID = appID
-//    self.userID = userID
-//    self.expirationDate = expirationDate?.copy() ?? Date.distantFuture
-//    self.refreshDate = refreshDate?.copy() ?? Date()
-//    self.dataAccessExpirationDate = dataAccessExpirationDate?.copy() ?? Date.distantFuture
-//  }
-//
-//  /**
 //   Convenience getter to determine if a permission has been granted
 //   @param permission  The permission to check.
 //   */
