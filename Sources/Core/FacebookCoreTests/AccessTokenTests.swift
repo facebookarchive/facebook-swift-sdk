@@ -95,7 +95,7 @@ class AccessTokenTests: XCTestCase {
       refreshDate: .distantFuture
     )
     XCTAssertEqual(token.refreshDate, .distantFuture,
-                      "An access token should store the refresh date it was created with")
+                   "An access token should store the refresh date it was created with")
   }
 
   func testDataExpirationDate() {
@@ -114,4 +114,39 @@ class AccessTokenTests: XCTestCase {
                       "An access token provided with a data access expiration date should not set its data access expiration date to the distant future")
   }
 
+  func testNonExpiredToken() {
+      XCTAssertFalse(validToken.isExpired,
+                     "A token should not be considered expired if its expiration date (distant future by default) is later than now")
+  }
+
+  func testExpiredToken() {
+    let expirationDate = Date(timeIntervalSinceNow: -1)
+
+    let token = FBSDKAccessToken(
+      tokenString: "abc124",
+      appID: "Foo",
+      userID: "user",
+      expirationDate: expirationDate
+    )
+    XCTAssertTrue(token.isExpired,
+                  "A token should be considered expired if its expiration date is earlier than now")
+  }
+
+  func testNonDataAccessExpiredToken() {
+    XCTAssertFalse(validToken.isDataAccessExpired,
+                   "A token's data access should not be considered expired if its data access expiration date (distant future by default) is later than now")
+  }
+
+  func testDataAccessExpiredToken() {
+    let expirationDate = Date(timeIntervalSinceNow: -1)
+
+    let token = FBSDKAccessToken(
+      tokenString: "abc124",
+      appID: "Foo",
+      userID: "user",
+      dataAccessExpirationDate: expirationDate
+    )
+    XCTAssertTrue(token.isDataAccessExpired,
+                  "A token's data access should be considered expired if its data access expiration date is earlier than now")
+  }
 }
