@@ -163,4 +163,11 @@ class AccessTokenTests: XCTestCase {
     XCTAssertFalse(token.hasGranted(permission: "all_the_access"),
                    "A token should not claim to have a permission it has not been given")
   }
+
+  func testNilEquatability() {
+    let nonExistentToken: AccessToken? = nil
+
+    XCTAssertNotEqual(nonExistentToken, validToken,
+                      "An access token should compare to nil values as expected")
+  }
 }
