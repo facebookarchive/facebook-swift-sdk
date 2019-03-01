@@ -12,6 +12,15 @@
 		F409967322289D3000F23464 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409967222289D3000F23464 /* AccessToken.swift */; };
 		F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409967422299BE200F23464 /* AccessTokenWalletTests.swift */; };
 		F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69122299FA10083506E /* AccessTokenWallet.swift */; };
+		F44DB6942229AB460083506E /* InternalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6932229AB460083506E /* InternalUtility.swift */; };
+		F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */; };
+		F44DB69B2229B37F0083506E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69A2229B37F0083506E /* Settings.swift */; };
+		F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69C2229B4420083506E /* AccessTokenCaching.swift */; };
+		F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69E2229B4C50083506E /* AccessTokenCache.swift */; };
+		F44DB6A12229C50E0083506E /* FakeAccessTokenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A02229C50E0083506E /* FakeAccessTokenCache.swift */; };
+		F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A22229C6B60083506E /* FakeSettings.swift */; };
+		F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */; };
+		F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
 		F49FA4A1222896310008CAD6 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */; };
@@ -65,10 +74,18 @@
 		81654DD41D356E9A006401F1 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		81654DD51D356E9A006401F1 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		81654DD61D356E9A006401F1 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
-		F409967022289BE400F23464 /* FBSDKAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSDKAccessToken.swift; sourceTree = "<group>"; };
 		F409967222289D3000F23464 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		F409967422299BE200F23464 /* AccessTokenWalletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWalletTests.swift; sourceTree = "<group>"; };
 		F44DB69122299FA10083506E /* AccessTokenWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWallet.swift; sourceTree = "<group>"; };
+		F44DB6932229AB460083506E /* InternalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtility.swift; sourceTree = "<group>"; };
+		F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCookieUtility.swift; sourceTree = "<group>"; };
+		F44DB69A2229B37F0083506E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		F44DB69C2229B4420083506E /* AccessTokenCaching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenCaching.swift; sourceTree = "<group>"; };
+		F44DB69E2229B4C50083506E /* AccessTokenCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenCache.swift; sourceTree = "<group>"; };
+		F44DB6A02229C50E0083506E /* FakeAccessTokenCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAccessTokenCache.swift; sourceTree = "<group>"; };
+		F44DB6A22229C6B60083506E /* FakeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSettings.swift; sourceTree = "<group>"; };
+		F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNotificationCenter.swift; sourceTree = "<group>"; };
+		F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWalletConfigurationTests.swift; sourceTree = "<group>"; };
 		F49FA479222880FE0008CAD6 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
@@ -158,9 +175,9 @@
 			children = (
 				F49FA49F222896310008CAD6 /* Configurations */,
 				F49FA47A222880FE0008CAD6 /* FacebookCoreTests */,
-				F409967022289BE400F23464 /* FBSDKAccessToken.swift */,
 				F409967222289D3000F23464 /* AccessToken.swift */,
 				F44DB69122299FA10083506E /* AccessTokenWallet.swift */,
+				F44DB6992229B36D0083506E /* Needs Conversion */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -234,12 +251,36 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
+		F44DB6972229AE040083506E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */,
+				F44DB6A02229C50E0083506E /* FakeAccessTokenCache.swift */,
+				F44DB6A22229C6B60083506E /* FakeSettings.swift */,
+				F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F44DB6992229B36D0083506E /* Needs Conversion */ = {
+			isa = PBXGroup;
+			children = (
+				F44DB6932229AB460083506E /* InternalUtility.swift */,
+				F44DB69A2229B37F0083506E /* Settings.swift */,
+				F44DB69C2229B4420083506E /* AccessTokenCaching.swift */,
+				F44DB69E2229B4C50083506E /* AccessTokenCache.swift */,
+			);
+			path = "Needs Conversion";
+			sourceTree = "<group>";
+		};
 		F49FA47A222880FE0008CAD6 /* FacebookCoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */,
 				F409967422299BE200F23464 /* AccessTokenWalletTests.swift */,
+				F44DB6972229AE040083506E /* Helpers */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
@@ -486,8 +527,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4A9494E22285B1C00228788 /* LinterRequired.swift in Sources */,
+				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
+				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
+				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
+				F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,8 +556,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
+				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
+				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
+				F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */,
+				F44DB6A12229C50E0083506E /* FakeAccessTokenCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
