@@ -16,19 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable explicit_type_interface
+
 import Foundation
 
-protocol CookieHandling {
-  static func deleteFacebookCookies()
-}
+extension Notification.Name {
 
-// This will eventually be replaced by the rewrite of FBSDKInternalUtility
-// for now it is needed as a dependency of AccessTokenWallet
+  /**
+   Notification indicating that the `currentAccessToken` has changed.
 
-class InternalUtility: CookieHandling {
-
-  static func deleteFacebookCookies() {
-    // TODO: Implement deletion of cookies
-  }
-
+   The userInfo dictionary of the notification will contain keys
+   `FBSDKAccessTokenChangeOldKey` and
+   `FBSDKAccessTokenChangeNewKey`.
+   */
+  static let FBSDKAccessTokenDidChangeNotification = Notification.Name("FBSDKAccessTokenDidChangeNotification")
 }
