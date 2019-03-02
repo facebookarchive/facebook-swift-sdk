@@ -198,6 +198,32 @@ class AccessTokenWalletTests: XCTestCase {
                  "Setting a token with the same values should not post a notification")
   }
 
+  // MARK: Inspecting Token
+  func testNilTokenIsActive() {
+    XCTAssertFalse(AccessTokenWallet.isCurrentAccessTokenActive,
+                   "A wallet should not consider a nil token to be active")
+  }
+
+  func testExpiredTokenIsActive() {
+    let expiredToken = AccessToken(
+      tokenString: "abc123",
+      appID: "Foo",
+      userID: "User",
+      expirationDate: Date().addingTimeInterval(-1)
+    )
+
+    AccessTokenWallet.setCurrent(expiredToken)
+
+    XCTAssertFalse(AccessTokenWallet.isCurrentAccessTokenActive,
+                   "A wallet should not consider an expired token to be active")
+  }
+
+  func testIsNonNilNonExpiredTokenActive() {
+    AccessTokenWallet.setCurrent(token)
+    XCTAssertTrue(AccessTokenWallet.isCurrentAccessTokenActive,
+                  "A wallet should consider a non-nil non-expired token to be active")
+  }
+
 }
 
 private extension AccessToken {
