@@ -23,7 +23,7 @@ import XCTest
 
 class AccessTokenWalletTests: XCTestCase {
 
-  private let token = AccessToken(tokenString: "abc123", appID: "Foo", userID: "user")
+  private let token = AccessTokenFixtures.validToken
   private var fakeCookieUtility: FakeCookieUtility.Type!
   private var fakeAccessTokenCache: FakeAccessTokenCache!
   private var fakeSetttings = FakeSettings()
@@ -117,7 +117,7 @@ class AccessTokenWalletTests: XCTestCase {
   }
 
   func testSettingExistingTokenToNewTokenModifiesCache() {
-    let newToken = AccessToken(tokenString: "abc123", appID: "Bar", userID: "user")
+    let newToken = AccessTokenFixtures.validTokenDifferentUser
 
     AccessTokenWallet.setCurrent(token)
     AccessTokenWallet.setCurrent(newToken)
@@ -140,6 +140,8 @@ class AccessTokenWalletTests: XCTestCase {
   }
 
   // MARK: Notifying of Token Changes
+
+  // Non-existing token to nil
   func testSettingNonExistingTokenToNilDoesNotPostNotification() {
     AccessTokenWallet.setCurrent(nil)
 
@@ -147,16 +149,21 @@ class AccessTokenWalletTests: XCTestCase {
                  "Setting a non-existing token to nil should not post a notification")
   }
 
+  // Non-existing token to new
   func testSettingNonExistingTokenToNewTokenPostsNotification() {
     AccessTokenWallet.setCurrent(token)
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting a new token should post a notification with the expected name")
     XCTAssertEqual(fakeNotificationCenter.capturedPostedAccessToken, token,
-                   "Setting a new token should post a notification that has user info that includes the new token")
-    // TODO: add user info tests
+                   "User info from a notification for setting a nil token to a new token should include the new token")
+    XCTAssertNil(fakeNotificationCenter.capturedPostedPreviousToken,
+                 "User info from a notification for setting a nil token to a new token should not include the old token")
+    XCTAssertTrue(fakeNotificationCenter.capturedDidChangeUserId == true,
+                  "User info from a notification for setting a nil token to a new token should include whether the user id changed")
   }
 
+  // Existing token to nil
   func testSettingExistingTokenToNilPostsNotification() {
     AccessTokenWallet.setCurrent(token)
 
@@ -167,12 +174,32 @@ class AccessTokenWalletTests: XCTestCase {
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to nil should post a notification with the expected name")
     XCTAssertNil(fakeNotificationCenter.capturedPostedAccessToken,
-                 "Setting an existing token to nil should post a notification that does not includes the new token in its user info")
-    // TODO: add user info tests
+                 "User info from a notification for setting an existing token to nil should not include the new token")
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedPreviousToken, token,
+                   "User info from a notification for setting an existing token to nil should include the old token")
+    XCTAssertTrue(fakeNotificationCenter.capturedDidChangeUserId == true,
+                  "User info from a notification for setting an existing token to nil should include whether the user id changed")
   }
 
-  func testSettingExistingTokenToNewTokenPostsNotification() {
-    let newToken = AccessToken(tokenString: "abc123", appID: "Bar", userID: "user")
+  // Existing token to new
+  func testSettingExpiredExistingTokenToNewTokenPostsNotification() {
+    let expiredToken = AccessTokenFixtures.expiredToken
+
+    AccessTokenWallet.setCurrent(expiredToken)
+    AccessTokenWallet.setCurrent(token)
+
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
+                   "Setting an existing token to a new token should post a notification with the expected name")
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedAccessToken, token,
+                   "User info from a notification for setting an existing token to a new token should include the new token")
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedPreviousToken, expiredToken,
+                   "User info from a notification for setting an existing token to a new token should include the old token")
+    XCTAssertTrue(fakeNotificationCenter.capturedDidChangeUserId == true,
+                  "User info from a notification for setting an expired existing token to a new token should include whether the user id changed")
+  }
+
+  func testSettingExistingTokenToNewTokenWithSameUserPostsNotification() {
+    let newToken = AccessTokenFixtures.validTokenDifferentApp
 
     AccessTokenWallet.setCurrent(token)
     AccessTokenWallet.setCurrent(newToken)
@@ -180,10 +207,33 @@ class AccessTokenWalletTests: XCTestCase {
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to a new token should post a notification with the expected name")
     XCTAssertEqual(fakeNotificationCenter.capturedPostedAccessToken, newToken,
-                   "Setting an existing token to a new token should post a notification that has user info that includes the new token")
-    // TODO: add user info tests
+                   "User info from a notification for setting an existing token to a new token should include the new token")
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedPreviousToken, token,
+                   "User info from a notification for setting an existing token to a new token should include the old token")
+
+    // TODO: look into whether changing the functionality to return false in these cases will break things
+    XCTAssertNil(fakeNotificationCenter.capturedDidChangeUserId,
+                 "User info from a notification for setting an existing token to a new token with the same user should not include whether the user id changed")
   }
 
+  func testSettingExistingTokenToNewTokenWithDifferentUserPostsNotification() {
+    let newToken = AccessTokenFixtures.validTokenDifferentUser
+
+    AccessTokenWallet.setCurrent(token)
+    AccessTokenWallet.setCurrent(newToken)
+
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
+                   "Setting an existing token to a new token should post a notification with the expected name")
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedAccessToken, newToken,
+                   "User info from a notification for setting an existing token to a new token should include the new token")
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedPreviousToken, token,
+                   "User info from a notification for setting an existing token to a new token should include the old token")
+
+    XCTAssertTrue(fakeNotificationCenter.capturedDidChangeUserId == true,
+                  "User info from a notification for setting an existing token to a new token with a different user should include whether the user id changed")
+  }
+
+  // Existing token to duplicate
   func testSettingExistingTokenToDuplicateTokenDoesNotPostNotification() {
     let tokenWithSameValues = token.copy()
 
@@ -205,14 +255,7 @@ class AccessTokenWalletTests: XCTestCase {
   }
 
   func testExpiredTokenIsActive() {
-    let expiredToken = AccessToken(
-      tokenString: "abc123",
-      appID: "Foo",
-      userID: "User",
-      expirationDate: Date().addingTimeInterval(-1)
-    )
-
-    AccessTokenWallet.setCurrent(expiredToken)
+    AccessTokenWallet.setCurrent(AccessTokenFixtures.expiredToken)
 
     XCTAssertFalse(AccessTokenWallet.isCurrentAccessTokenActive,
                    "A wallet should not consider an expired token to be active")
