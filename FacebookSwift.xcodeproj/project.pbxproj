@@ -21,6 +21,7 @@
 		F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A22229C6B60083506E /* FakeSettings.swift */; };
 		F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */; };
 		F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */; };
+		F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6AC222AF53B0083506E /* AccessTokenFixtures.swift */; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
 		F49FA4A1222896310008CAD6 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */; };
@@ -86,6 +87,7 @@
 		F44DB6A22229C6B60083506E /* FakeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSettings.swift; sourceTree = "<group>"; };
 		F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNotificationCenter.swift; sourceTree = "<group>"; };
 		F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWalletConfigurationTests.swift; sourceTree = "<group>"; };
+		F44DB6AC222AF53B0083506E /* AccessTokenFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenFixtures.swift; sourceTree = "<group>"; };
 		F49FA479222880FE0008CAD6 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
@@ -273,6 +275,14 @@
 			path = "Needs Conversion";
 			sourceTree = "<group>";
 		};
+		F44DB6AE222AF5420083506E /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				F44DB6AC222AF53B0083506E /* AccessTokenFixtures.swift */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
 		F49FA47A222880FE0008CAD6 /* FacebookCoreTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +291,7 @@
 				F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */,
 				F409967422299BE200F23464 /* AccessTokenWalletTests.swift */,
 				F44DB6972229AE040083506E /* Helpers */,
+				F44DB6AE222AF5420083506E /* Fixtures */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
@@ -557,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
+				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
