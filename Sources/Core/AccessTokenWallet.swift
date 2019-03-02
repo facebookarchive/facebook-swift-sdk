@@ -76,8 +76,11 @@ class AccessTokenWallet {
   */
   static func setCurrent(_ token: AccessToken?) {
       if token != accessToken {
-  //      var userInfo: [AnyHashable : Any] = [:]
-  //      FBSDKInternalUtility.dictionary(userInfo, setObject: token, forKey: FBSDKAccessTokenChangeNewKey)
+        var userInfo: [AnyHashable: Any] = [:]
+
+        if let token = token {
+          userInfo.updateValue(token, forKey: NotificationKeys.FBSDKAccessTokenChangeNewKey)
+        }
   //      FBSDKInternalUtility.dictionary(userInfo, setObject: g_currentAccessToken, forKey: FBSDKAccessTokenChangeOldKey)
   //      // We set this flag also when the current Access Token was not valid, since there might be legacy code relying on it
   //      if !(g_currentAccessToken?.userID == token?.userID) || !self.isCurrentAccessTokenActive() {
@@ -94,7 +97,8 @@ class AccessTokenWallet {
 
         settings.accessTokenCache?.accessToken = token
 
-        notificationCenter.post(name: .FBSDKAccessTokenDidChangeNotification, object: AccessToken.self, userInfo: [:])
+
+        notificationCenter.post(name: .FBSDKAccessTokenDidChangeNotification, object: AccessToken.self, userInfo: userInfo)
   //      NotificationCenter.default.post(name: NSNotification.Name(FBSDKAccessTokenDidChangeNotification), object: FBSDKAccessToken, userInfo: userInfo)
       }
   }
@@ -115,7 +119,7 @@ class AccessTokenWallet {
   //  }
   //
 
-//  enum NotificationKeys {
+  enum NotificationKeys {
 //    /**
 //     A key in the notification's userInfo that will be set
 //     if and only if the user ID changed between the old and new tokens.
@@ -131,13 +135,13 @@ class AccessTokenWallet {
 //     */
 //    static let FBSDKAccessTokenDidChangeUserIDKey = "FBSDKAccessTokenDidChangeUserIDKey"
 //
-//    /**
-//     key in notification's userInfo object for getting the new token.
-//
-//     If there is no new token, the key will not be present.
-//     */
-//    static let FBSDKAccessTokenChangeNewKey = "FBSDKAccessToken"
-//
+    /**
+     key in notification's userInfo object for getting the new token.
+
+     If there is no new token, the key will not be present.
+     */
+    static let FBSDKAccessTokenChangeNewKey = "FBSDKAccessToken"
+
 //    /**
 //     key in notification's userInfo object for getting the old token.
 //
@@ -159,7 +163,7 @@ class AccessTokenWallet {
 //     `FBSDKAccessTokenChangeNewKey`.
 //     */
 //    static let FBSDKAccessTokenDidChangeNotification = "com.facebook.sdk.FBSDKAccessTokenData.FBSDKAccessTokenDidChangeNotification"
-//  }
+  }
 
 
 }
