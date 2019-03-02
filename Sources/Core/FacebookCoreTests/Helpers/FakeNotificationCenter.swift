@@ -35,4 +35,14 @@ class FakeNotificationCenter: NotificationPosting {
     return userInfo[AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeNewKey] as? AccessToken
   }
 
+  var capturedPostedPreviousToken: AccessToken? {
+    let userInfo = capturedPostedUserInfo ?? [:]
+    return userInfo[AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeOldKey] as? AccessToken
+  }
+
+  var capturedDidChangeUserId: Bool? {
+    let userInfo = capturedPostedUserInfo ?? [:]
+    return userInfo[AccessTokenWallet.NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey] as? Bool
+  }
+
 }
