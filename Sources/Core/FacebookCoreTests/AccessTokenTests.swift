@@ -23,26 +23,24 @@ import XCTest
 
 class AccessTokenTests: XCTestCase {
 
-  let validToken = AccessToken(tokenString: "abc123", appID: "Foo", userID: "user")
-
   func testTokenString() {
-    XCTAssertEqual(validToken.tokenString, "abc123",
+    XCTAssertEqual(AccessTokenFixtures.validToken.tokenString, "abc123",
                    "An access token should store the exact token string it was created with")
   }
 
   func testCreatingWithAppID() {
-    XCTAssertEqual(validToken.appID, "Foo",
+    XCTAssertEqual(AccessTokenFixtures.validToken.appID, "Foo",
                    "An access token should store the exact app identifier it was created with")
   }
 
   func testGrantedPermissions() {
-    XCTAssertTrue(validToken.permissions.isEmpty, "Granted permissions should be empty by default")
+    XCTAssertTrue(AccessTokenFixtures.validToken.permissions.isEmpty, "Granted permissions should be empty by default")
 
     let token = AccessToken(
-      tokenString: "abc123",
+      tokenString: AccessTokenFixtures.validToken.tokenString,
       permissions: ["access", "more_access"],
-      appID: "Foo",
-      userID: "user"
+      appID: AccessTokenFixtures.validToken.appID,
+      userID: AccessTokenFixtures.validToken.userID
     )
 
     XCTAssertEqual(token.permissions, ["access", "more_access"],
@@ -50,13 +48,13 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testDeclinedPermissions() {
-    XCTAssertTrue(validToken.declinedPermissions.isEmpty, "Granted permissions should be empty by default")
+    XCTAssertTrue(AccessTokenFixtures.validToken.declinedPermissions.isEmpty, "Granted permissions should be empty by default")
 
     let token = AccessToken(
-      tokenString: "abc123",
+      tokenString: AccessTokenFixtures.validToken.tokenString,
       declinedPermissions: ["access", "more_access"],
-      appID: "Foo",
-      userID: "user"
+      appID: AccessTokenFixtures.validToken.appID,
+      userID: AccessTokenFixtures.validToken.userID
     )
 
     XCTAssertEqual(token.declinedPermissions, ["access", "more_access"],
@@ -64,18 +62,18 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testUserID() {
-    XCTAssertEqual(validToken.userID, "user",
+    XCTAssertEqual(AccessTokenFixtures.validToken.userID, "user",
                    "An access token should store the exact user identifier it was created with")
   }
 
   func testExpirationDate() {
-    XCTAssertEqual(validToken.expirationDate, .distantFuture,
+    XCTAssertEqual(AccessTokenFixtures.validToken.expirationDate, .distantFuture,
                    "An access token should have an expiration date that defaults to the distant future")
 
     let token = AccessToken(
-      tokenString: "abc123",
-      appID: "Foo",
-      userID: "user",
+      tokenString: AccessTokenFixtures.validToken.tokenString,
+      appID: AccessTokenFixtures.validToken.appID,
+      userID: AccessTokenFixtures.validToken.userID,
       expirationDate: Date()
     )
     XCTAssertNotNil(token.expirationDate,
@@ -85,13 +83,13 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testRefreshDate() {
-    XCTAssertEqual(validToken.refreshDate.timeIntervalSince1970, Date().timeIntervalSince1970, accuracy: 10,
+    XCTAssertEqual(AccessTokenFixtures.validToken.refreshDate.timeIntervalSince1970, Date().timeIntervalSince1970, accuracy: 10,
                    "An access token should have a refresh date that defaults to right about now")
 
     let token = AccessToken(
-      tokenString: "abc123",
-      appID: "Foo",
-      userID: "user",
+      tokenString: AccessTokenFixtures.validToken.tokenString,
+      appID: AccessTokenFixtures.validToken.appID,
+      userID: AccessTokenFixtures.validToken.userID,
       refreshDate: .distantFuture
     )
     XCTAssertEqual(token.refreshDate, .distantFuture,
@@ -99,13 +97,13 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testDataExpirationDate() {
-    XCTAssertEqual(validToken.dataAccessExpirationDate, .distantFuture,
+    XCTAssertEqual(AccessTokenFixtures.validToken.dataAccessExpirationDate, .distantFuture,
                    "An access token should have an expiration date that defaults to the distant future")
 
     let token = AccessToken(
-      tokenString: "abc123",
-      appID: "Foo",
-      userID: "user",
+      tokenString: AccessTokenFixtures.validToken.tokenString,
+      appID: AccessTokenFixtures.validToken.appID,
+      userID: AccessTokenFixtures.validToken.userID,
       dataAccessExpirationDate: Date()
     )
     XCTAssertNotNil(token.dataAccessExpirationDate,
@@ -115,48 +113,27 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testNonExpiredToken() {
-      XCTAssertFalse(validToken.isExpired,
+      XCTAssertFalse(AccessTokenFixtures.validToken.isExpired,
                      "A token should not be considered expired if its expiration date (distant future by default) is later than now")
   }
 
   func testExpiredToken() {
-    let expirationDate = Date(timeIntervalSinceNow: -1)
-
-    let token = AccessToken(
-      tokenString: "abc124",
-      appID: "Foo",
-      userID: "user",
-      expirationDate: expirationDate
-    )
-    XCTAssertTrue(token.isExpired,
+    XCTAssertTrue(AccessTokenFixtures.expiredToken.isExpired,
                   "A token should be considered expired if its expiration date is earlier than now")
   }
 
   func testNonDataAccessExpiredToken() {
-    XCTAssertFalse(validToken.isDataAccessExpired,
+    XCTAssertFalse(AccessTokenFixtures.validToken.isDataAccessExpired,
                    "A token's data access should not be considered expired if its data access expiration date (distant future by default) is later than now")
   }
 
   func testDataAccessExpiredToken() {
-    let expirationDate = Date(timeIntervalSinceNow: -1)
-
-    let token = AccessToken(
-      tokenString: "abc124",
-      appID: "Foo",
-      userID: "user",
-      dataAccessExpirationDate: expirationDate
-    )
-    XCTAssertTrue(token.isDataAccessExpired,
+    XCTAssertTrue(AccessTokenFixtures.dataAccessExpiredToken.isDataAccessExpired,
                   "A token's data access should be considered expired if its data access expiration date is earlier than now")
   }
 
   func testHasGrantedPermission() {
-    let token = AccessToken(
-      tokenString: "abc123",
-      permissions: ["access", "more_access"],
-      appID: "Foo",
-      userID: "User"
-    )
+    let token = AccessTokenFixtures.tokenWithPermissions
 
     XCTAssertTrue(token.hasGranted(permission: "access"),
                   "A token should know about its granted permissions")
@@ -167,7 +144,7 @@ class AccessTokenTests: XCTestCase {
   func testNilEquatability() {
     let nonExistentToken: AccessToken? = nil
 
-    XCTAssertNotEqual(nonExistentToken, validToken,
+    XCTAssertNotEqual(nonExistentToken, AccessTokenFixtures.validToken,
                       "An access token should compare to nil values as expected")
   }
 }
