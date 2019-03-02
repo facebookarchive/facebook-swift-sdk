@@ -18,17 +18,9 @@
 
 import Foundation
 
-protocol CookieHandling {
-  static func deleteFacebookCookies()
+protocol NotificationPosting {
+  func post(name aName: Notification.Name, object anObject: Any?, userInfo aUserInfo: [AnyHashable: Any]?)
 }
 
-// This will eventually be replaced by the rewrite of FBSDKInternalUtility
-// for now it is needed as a dependency of AccessTokenWallet
-
-class InternalUtility: CookieHandling {
-
-  static func deleteFacebookCookies() {
-    // TODO: Implement deletion of cookies
-  }
-
-}
+// Default conformance to be able to inject and test a type we don't own
+extension NotificationCenter: NotificationPosting {}

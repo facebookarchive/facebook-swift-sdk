@@ -20,30 +20,6 @@
 
 import Foundation
 
-// TODO: Move to own files
-extension Notification.Name {
-
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
-
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
-  static let FBSDKAccessTokenDidChangeNotification = Notification.Name("FBSDKAccessTokenDidChangeNotification")
-}
-
-protocol CookieHandling {
-  static func deleteFacebookCookies()
-}
-
-protocol NotificationPosting {
-  func post(name aName: Notification.Name, object anObject: Any?, userInfo aUserInfo: [AnyHashable: Any]?)
-}
-
-// Default conformance to be able to inject and test a type we don't own
-extension NotificationCenter: NotificationPosting {}
-
 enum AccessTokenWallet {
 
   private static var accessToken: AccessToken?
