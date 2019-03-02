@@ -29,4 +29,10 @@ class FakeNotificationCenter: NotificationPosting {
     capturedPostedUserInfo = aUserInfo
   }
 
+  // Helpers for extracting data from user info
+  var capturedPostedAccessToken: AccessToken? {
+    let userInfo = capturedPostedUserInfo ?? [:]
+    return userInfo[AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeNewKey] as? AccessToken
+  }
+
 }
