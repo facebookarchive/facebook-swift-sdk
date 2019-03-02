@@ -103,11 +103,13 @@ class AccessTokenWallet {
       }
   }
 
-  //  class func isCurrentAccessTokenActive() -> Bool {
-  //    let currentAccessToken: FBSDKAccessToken? = self.current()
-  //    return currentAccessToken != nil && !(currentAccessToken?.expired ?? false)
-  //  }
-  //
+  static var isCurrentAccessTokenActive: Bool {
+    guard let token = currentAccessToken else {
+      return false
+    }
+    return !token.isExpired
+  }
+
   //  class func refreshCurrentAccessToken(_ completionHandler: FBSDKGraphRequestBlock) {
   //    if FBSDKAccessToken.current() != nil {
   //      let connection = FBSDKGraphRequestConnection()
