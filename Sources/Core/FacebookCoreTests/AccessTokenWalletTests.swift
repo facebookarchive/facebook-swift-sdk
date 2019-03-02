@@ -152,7 +152,8 @@ class AccessTokenWalletTests: XCTestCase {
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting a new token should post a notification with the expected name")
-
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedAccessToken, token,
+                   "Setting a new token should post a notification that has user info that includes the new token")
     // TODO: add user info tests
   }
 
@@ -165,6 +166,8 @@ class AccessTokenWalletTests: XCTestCase {
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to nil should post a notification with the expected name")
+    XCTAssertNil(fakeNotificationCenter.capturedPostedAccessToken,
+                 "Setting an existing token to nil should post a notification that does not includes the new token in its user info")
     // TODO: add user info tests
   }
 
@@ -176,6 +179,8 @@ class AccessTokenWalletTests: XCTestCase {
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to a new token should post a notification with the expected name")
+    XCTAssertEqual(fakeNotificationCenter.capturedPostedAccessToken, newToken,
+                   "Setting an existing token to a new token should post a notification that has user info that includes the new token")
     // TODO: add user info tests
   }
 
@@ -185,6 +190,7 @@ class AccessTokenWalletTests: XCTestCase {
     AccessTokenWallet.setCurrent(token)
 
     fakeNotificationCenter.capturedPostedNotificationName = nil
+    fakeNotificationCenter.capturedPostedUserInfo = nil
 
     AccessTokenWallet.setCurrent(tokenWithSameValues)
 
