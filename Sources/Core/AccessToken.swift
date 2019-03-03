@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable explicit_type_interface file_name
-
 import Foundation
 
 /**
@@ -115,7 +113,8 @@ struct AccessToken: Codable, Equatable {
     return dataAccessExpirationDate.compare(Date()) == .orderedAscending
   }
 
-  // TODO: Either make granted and declined mutually exclusive or have a check here that the permission is not present in declined.
+  // TODO: Make permissions an enum and have granted and declined be mutually exclusive
+  // in the meantime make the strings mutually exclusive
   /**
    Convenience getter to determine if a permission has been granted
 
