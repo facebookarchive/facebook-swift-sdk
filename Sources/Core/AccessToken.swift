@@ -18,10 +18,13 @@
 
 import Foundation
 
+// TODO: Make this an actual type once we have better knowledge of permissions requirements
+typealias Permission = String
+
 /**
  Represents an immutable access token for using Facebook services.
  */
-struct AccessToken: Codable, Equatable {
+struct AccessToken: Equatable {
 
   /**
    Returns the opaque token string.
@@ -31,12 +34,12 @@ struct AccessToken: Codable, Equatable {
   /**
    Returns the known granted permissions.
    */
-  let permissions: Set<String>
+  let permissions: Set<Permission>
 
   /**
    Returns the known declined permissions.
    */
-  let declinedPermissions: Set<String>
+  let declinedPermissions: Set<Permission>
 
   /**
    Returns the app ID.
@@ -82,8 +85,8 @@ struct AccessToken: Codable, Equatable {
    along with `+currentAccessToken`.
     */
   init(tokenString: String,
-       permissions: Set<String> = [],
-       declinedPermissions: Set<String> = [],
+       permissions: Set<Permission> = [],
+       declinedPermissions: Set<Permission> = [],
        appID: String,
        userID: String,
        expirationDate: Date = .distantFuture,
@@ -121,7 +124,7 @@ struct AccessToken: Codable, Equatable {
    - Parameters
     - permission: The permission to check.
    */
-  func hasGranted(permission: String) -> Bool {
+  func hasGranted(permission: Permission) -> Bool {
     return permissions.contains(permission)
   }
 }
