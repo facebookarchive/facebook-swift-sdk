@@ -22,12 +22,12 @@ import Foundation
 
 extension Notification.Name {
 
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
-
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
+  ///
+  /// Notification indicating that the `currentAccessToken` has changed.
+  ///
+  /// The userInfo dictionary of the notification will contain keys
+  /// `FBSDKAccessTokenChangeOldKey` and
+  /// `FBSDKAccessTokenChangeNewKey`.
+  ///
   static let FBSDKAccessTokenDidChangeNotification = Notification.Name("FBSDKAccessTokenDidChangeNotification")
 }
