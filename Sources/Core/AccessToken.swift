@@ -21,69 +21,69 @@ import Foundation
 // TODO: Make this an actual type once we have better knowledge of permissions requirements
 typealias Permission = String
 
-/**
- Represents an immutable access token for using Facebook services.
- */
+///
+/// Represents an immutable access token for using Facebook services.
+///
 struct AccessToken: Equatable {
 
-  /**
-   Returns the opaque token string.
-   */
+  ///
+  /// Returns the opaque token string.
+  ///
   let tokenString: String
 
-  /**
-   Returns the known granted permissions.
-   */
+  ///
+  /// Returns the known granted permissions.
+  ///
   let permissions: Set<Permission>
 
-  /**
-   Returns the known declined permissions.
-   */
+  ///
+  /// Returns the known declined permissions.
+  ///
   let declinedPermissions: Set<Permission>
 
-  /**
-   Returns the app ID.
-   */
+  ///
+  /// Returns the app ID.
+  ///
   let appID: String
 
-  /**
-   Returns the user ID.
-   */
+  ///
+  /// Returns the user ID.
+  ///
   let userID: String
 
-  /**
-   Returns the expiration date.
-   */
+  ///
+  /// Returns the expiration date.
+  ///
   let expirationDate: Date
 
-  /**
-   Returns the expiration date for data access
-   */
+  ///
+  /// Returns the expiration date for data access
+  ///
   let dataAccessExpirationDate: Date
 
-  /**
-   Returns the date the token was last refreshed.
-   */
+  ///
+  /// Returns the date the token was last refreshed.
+  ///
   let refreshDate: Date
 
-    /**
-   Initializes a new instance.
-
-    - Parameters:
-      - tokenString: the opaque token string
-      - appID: the app ID
-      - userID: the user ID
-      - permissions: the granted permissions
-      - declinedPermissions: the declined permissions
-      - expirationDate: the optional expiration date (defaults to distantFuture).
-      - refreshDate the optional date the token was last refreshed (defaults to now).
-      - dataAccessExpirationDate: the optional date which data access will expire for the given user
-  (defaults to distantFuture)
-
-   This initializer should only be used for advanced apps that
-   manage tokens explicitly. Typical login flows only need to use `FBSDKLoginManager`
-   along with `+currentAccessToken`.
-    */
+  ///
+  /// Initializes a new instance.
+  ///
+  /// - Parameters:
+  ///   - tokenString: the opaque token string
+  ///   - appID: the app ID
+  ///   - userID: the user ID
+  ///   - permissions: the granted permissions
+  ///   - declinedPermissions: the declined permissions
+  ///   - expirationDate: the optional expiration date (defaults to distantFuture).
+  ///   - refreshDate the optional date the token was last refreshed (defaults to now).
+  ///   - dataAccessExpirationDate: the optional date which data access will expire for the given user
+  ///   (defaults to distantFuture)
+  ///
+  /// This initializer should only be used for advanced apps that
+  /// manage tokens explicitly. Typical login flows only need to use `FBSDKLoginManager`
+  /// along with `+currentAccessToken`.
+  ///
   init(tokenString: String,
        permissions: Set<Permission> = [],
        declinedPermissions: Set<Permission> = [],
@@ -102,28 +102,29 @@ struct AccessToken: Equatable {
     self.dataAccessExpirationDate = dataAccessExpirationDate
   }
 
-  /**
-   Returns whether the access token is expired by checking its expirationDate property
-   */
+  ///
+  /// Returns whether the access token is expired by checking its expirationDate property
+  ///
   var isExpired: Bool {
     return expirationDate.compare(Date()) == .orderedAscending
   }
 
-  /**
-   Returns whether user data access is still active for the given access token
-   */
+  ///
+  /// Returns whether user data access is still active for the given access token
+  ///
   var isDataAccessExpired: Bool {
     return dataAccessExpirationDate.compare(Date()) == .orderedAscending
   }
 
   // TODO: Make permissions an enum and have granted and declined be mutually exclusive
   // in the meantime make the strings mutually exclusive
-  /**
-   Convenience getter to determine if a permission has been granted
 
-   - Parameters
-    - permission: The permission to check.
-   */
+  ///
+  /// Convenience getter to determine if a permission has been granted
+  ///
+  /// - Parameters:
+  ///   - permission: The permission to check.
+  ///
   func hasGranted(permission: Permission) -> Bool {
     return permissions.contains(permission)
   }
