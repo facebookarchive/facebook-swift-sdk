@@ -23,20 +23,32 @@ import XCTest
 
 class AccessTokenWalletConfigurationTests: XCTestCase {
 
+  let wallet = AccessTokenWallet()
+
   // MARK: Concrete Dependencies
   func testCookieUtilityDependency() {
-    XCTAssertTrue(AccessTokenWallet.cookieUtility is InternalUtility.Type,
+    XCTAssertTrue(wallet.cookieUtility is InternalUtility.Type,
                   "A token wallet should have the expected concrete implementation for its cookie utility dependency")
   }
 
   func testSettingsDependency() {
-    XCTAssertTrue(AccessTokenWallet.settings is Settings,
+    XCTAssertTrue(wallet.settings is Settings,
                   "A token wallet should have the expected concrete implementation for its settings dependency")
   }
 
   func testNotificationCenterDependency() {
-    XCTAssertTrue(AccessTokenWallet.notificationCenter is NotificationCenter,
+    XCTAssertTrue(wallet.notificationCenter is NotificationCenter,
                   "A token wallet should have the expected concrete implementation for its notification center dependency")
+  }
+
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(wallet.graphConnectionProvider is GraphConnectionProvider,
+                  "A token wallet should have the expected concrete implementation for its graph connection provider")
+  }
+
+  func testPiggybackManagerDependency() {
+    XCTAssertTrue(wallet.graphRequestPiggybackManager is GraphRequestPiggybackManager.Type,
+                  "A token wallet should have the expected concrete implementation for its graph request piggyback manager")
   }
 
 }

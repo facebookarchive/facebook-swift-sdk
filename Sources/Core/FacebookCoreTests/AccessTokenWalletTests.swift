@@ -23,11 +23,15 @@ import XCTest
 
 class AccessTokenWalletTests: XCTestCase {
 
+  private var wallet: AccessTokenWallet!
   private let token = AccessTokenFixtures.validToken
   private var fakeCookieUtility: FakeCookieUtility.Type!
   private var fakeAccessTokenCache: FakeAccessTokenCache!
   private var fakeSetttings = FakeSettings()
   private var fakeNotificationCenter: FakeNotificationCenter!
+  private var fakeConnection: FakeGraphRequestConnection!
+  private var fakeGraphConnectionProvider: FakeGraphConnectionProvider!
+  private var fakeGraphRequestPiggybackManager: FakeGraphRequestPiggybackManager.Type!
 
   override func setUp() {
     super.setUp()
@@ -36,7 +40,7 @@ class AccessTokenWalletTests: XCTestCase {
   }
 
   override func tearDown() {
-    AccessTokenWallet.setCurrent(nil)
+    wallet = nil
     FakeCookieUtility.reset()
 
     super.tearDown()
@@ -44,45 +48,52 @@ class AccessTokenWalletTests: XCTestCase {
 
   func setupDependencies() {
     fakeCookieUtility = FakeCookieUtility.self
+    fakeGraphRequestPiggybackManager = FakeGraphRequestPiggybackManager.self
     fakeAccessTokenCache = FakeAccessTokenCache()
     fakeSetttings.accessTokenCache = fakeAccessTokenCache
     fakeNotificationCenter = FakeNotificationCenter()
+    fakeConnection = FakeGraphRequestConnection()
+    fakeGraphConnectionProvider = FakeGraphConnectionProvider(connection: fakeConnection)
 
-    AccessTokenWallet.cookieUtility = fakeCookieUtility
-    AccessTokenWallet.settings = fakeSetttings
-    AccessTokenWallet.notificationCenter = fakeNotificationCenter
+    wallet = AccessTokenWallet(
+      cookieUtility: fakeCookieUtility,
+      settings: fakeSetttings,
+      notificationCenter: fakeNotificationCenter,
+      graphConnectionProvider: fakeGraphConnectionProvider,
+      graphRequestPiggybackManager: fakeGraphRequestPiggybackManager
+    )
   }
 
   func testEmptyWallet() {
-    XCTAssertNil(AccessTokenWallet.currentAccessToken,
+    XCTAssertNil(wallet.currentAccessToken,
                  "A token wallet should not have an access token by default")
   }
 
   func testSettingInitialToken() {
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(token)
 
-    XCTAssertEqual(AccessTokenWallet.currentAccessToken, token,
+    XCTAssertEqual(wallet.currentAccessToken, token,
                    "A token wallet should allow a token to be set when there is not currently stored token")
   }
 
   func testSettingNonExistingTokenToNil() {
-    AccessTokenWallet.setCurrent(nil)
+    wallet.setCurrent(nil)
 
     XCTAssertFalse(fakeCookieUtility.deleteFacebookCookiesCalled,
                    "Setting a non-existing token to nil should not ask the cookie utility to delete the facebook cookies")
   }
 
   func testSettingExistingTokenToNilClearsCurrentToken() {
-    AccessTokenWallet.setCurrent(token)
-    AccessTokenWallet.setCurrent(nil)
+    wallet.setCurrent(token)
+    wallet.setCurrent(nil)
 
-    XCTAssertNil(AccessTokenWallet.currentAccessToken,
+    XCTAssertNil(wallet.currentAccessToken,
                  "Setting a nil token on the token wallet should nil out the currently held token")
   }
 
   func testSettingExistingTokenToNilClearsCookies() {
-    AccessTokenWallet.setCurrent(token)
-    AccessTokenWallet.setCurrent(nil)
+    wallet.setCurrent(token)
+    wallet.setCurrent(nil)
 
     XCTAssertTrue(fakeCookieUtility.deleteFacebookCookiesCalled,
                   "Setting an existing token to nil should ask the cookie utility to delete the facebook cookies")
@@ -90,25 +101,25 @@ class AccessTokenWalletTests: XCTestCase {
 
   // MARK: Token Caching
   func testSettingNonExistingTokenToNilDoesNotModifiesCache() {
-    AccessTokenWallet.setCurrent(nil)
+    wallet.setCurrent(nil)
 
     XCTAssertFalse(fakeAccessTokenCache.accessTokenWasSet,
                    "Setting a nil access token to nil should not invoke the token cache")
   }
 
   func testSettingNonExistingTokenToNewTokenModifiesCache() {
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(token)
 
     XCTAssertEqual(fakeAccessTokenCache.capturedAccessToken, token,
                    "Setting a new access token should update the cached value")
   }
 
   func testSettingExistingTokenToNilModifiesCache() {
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(token)
 
     fakeAccessTokenCache.accessTokenWasSet = false
 
-    AccessTokenWallet.setCurrent(nil)
+    wallet.setCurrent(nil)
 
     XCTAssertTrue(fakeAccessTokenCache.accessTokenWasSet,
                   "Setting an existing access token to nil should invoke the token cache")
@@ -119,8 +130,8 @@ class AccessTokenWalletTests: XCTestCase {
   func testSettingExistingTokenToNewTokenModifiesCache() {
     let newToken = AccessTokenFixtures.validTokenDifferentUser
 
-    AccessTokenWallet.setCurrent(token)
-    AccessTokenWallet.setCurrent(newToken)
+    wallet.setCurrent(token)
+    wallet.setCurrent(newToken)
 
     XCTAssertEqual(fakeAccessTokenCache.capturedAccessToken, newToken,
                    "Setting a new access token should update the cached value")
@@ -129,11 +140,11 @@ class AccessTokenWalletTests: XCTestCase {
   func testSettingExistingTokenToDuplicateTokenDoesNotModifyCache() {
     let tokenWithSameValues = token.copy()
 
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(token)
 
     fakeAccessTokenCache.accessTokenWasSet = false
 
-    AccessTokenWallet.setCurrent(tokenWithSameValues)
+    wallet.setCurrent(tokenWithSameValues)
 
     XCTAssertFalse(fakeAccessTokenCache.accessTokenWasSet,
                    "Setting a token with the same values should not invoke the cache")
@@ -143,7 +154,7 @@ class AccessTokenWalletTests: XCTestCase {
 
   // Non-existing token to nil
   func testSettingNonExistingTokenToNilDoesNotPostNotification() {
-    AccessTokenWallet.setCurrent(nil)
+    wallet.setCurrent(nil)
 
     XCTAssertNil(fakeNotificationCenter.capturedPostedNotificationName,
                  "Setting a non-existing token to nil should not post a notification")
@@ -151,7 +162,7 @@ class AccessTokenWalletTests: XCTestCase {
 
   // Non-existing token to new
   func testSettingNonExistingTokenToNewTokenPostsNotification() {
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(token)
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting a new token should post a notification with the expected name")
@@ -165,11 +176,11 @@ class AccessTokenWalletTests: XCTestCase {
 
   // Existing token to nil
   func testSettingExistingTokenToNilPostsNotification() {
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(token)
 
     fakeNotificationCenter.capturedPostedNotificationName = nil
 
-    AccessTokenWallet.setCurrent(nil)
+    wallet.setCurrent(nil)
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to nil should post a notification with the expected name")
@@ -185,8 +196,8 @@ class AccessTokenWalletTests: XCTestCase {
   func testSettingExpiredExistingTokenToNewTokenPostsNotification() {
     let expiredToken = AccessTokenFixtures.expiredToken
 
-    AccessTokenWallet.setCurrent(expiredToken)
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(expiredToken)
+    wallet.setCurrent(token)
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to a new token should post a notification with the expected name")
@@ -201,8 +212,8 @@ class AccessTokenWalletTests: XCTestCase {
   func testSettingExistingTokenToNewTokenWithSameUserPostsNotification() {
     let newToken = AccessTokenFixtures.validTokenDifferentApp
 
-    AccessTokenWallet.setCurrent(token)
-    AccessTokenWallet.setCurrent(newToken)
+    wallet.setCurrent(token)
+    wallet.setCurrent(newToken)
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to a new token should post a notification with the expected name")
@@ -219,8 +230,8 @@ class AccessTokenWalletTests: XCTestCase {
   func testSettingExistingTokenToNewTokenWithDifferentUserPostsNotification() {
     let newToken = AccessTokenFixtures.validTokenDifferentUser
 
-    AccessTokenWallet.setCurrent(token)
-    AccessTokenWallet.setCurrent(newToken)
+    wallet.setCurrent(token)
+    wallet.setCurrent(newToken)
 
     XCTAssertEqual(fakeNotificationCenter.capturedPostedNotificationName, Notification.Name.FBSDKAccessTokenDidChangeNotification,
                    "Setting an existing token to a new token should post a notification with the expected name")
@@ -237,12 +248,12 @@ class AccessTokenWalletTests: XCTestCase {
   func testSettingExistingTokenToDuplicateTokenDoesNotPostNotification() {
     let tokenWithSameValues = token.copy()
 
-    AccessTokenWallet.setCurrent(token)
+    wallet.setCurrent(token)
 
     fakeNotificationCenter.capturedPostedNotificationName = nil
     fakeNotificationCenter.capturedPostedUserInfo = nil
 
-    AccessTokenWallet.setCurrent(tokenWithSameValues)
+    wallet.setCurrent(tokenWithSameValues)
 
     XCTAssertNil(fakeNotificationCenter.capturedPostedNotificationName,
                  "Setting a token with the same values should not post a notification")
@@ -250,21 +261,56 @@ class AccessTokenWalletTests: XCTestCase {
 
   // MARK: Inspecting Token
   func testNilTokenIsActive() {
-    XCTAssertFalse(AccessTokenWallet.isCurrentAccessTokenActive,
+    XCTAssertFalse(wallet.isCurrentAccessTokenActive,
                    "A wallet should not consider a nil token to be active")
   }
 
   func testExpiredTokenIsActive() {
-    AccessTokenWallet.setCurrent(AccessTokenFixtures.expiredToken)
+    wallet.setCurrent(AccessTokenFixtures.expiredToken)
 
-    XCTAssertFalse(AccessTokenWallet.isCurrentAccessTokenActive,
+    XCTAssertFalse(wallet.isCurrentAccessTokenActive,
                    "A wallet should not consider an expired token to be active")
   }
 
   func testIsNonNilNonExpiredTokenActive() {
-    AccessTokenWallet.setCurrent(token)
-    XCTAssertTrue(AccessTokenWallet.isCurrentAccessTokenActive,
+    wallet.setCurrent(token)
+    XCTAssertTrue(wallet.isCurrentAccessTokenActive,
                   "A wallet should consider a non-nil non-expired token to be active")
+  }
+
+  // MARK: Refreshing Token
+  func testRefreshingNilToken() {
+    wallet.refreshCurrentAccessToken { connection, result, error in
+      XCTAssertNil(connection, "A connection should not be passed to the completion handler when the token is nil")
+      XCTAssertNil(result, "A result should not be passed to the completion handler when the token is nil")
+      guard let error = error as? GraphConnectionError else {
+        return XCTFail("Attempting to refresh a nil token should result in an error of the expected type")
+      }
+      XCTAssertEqual(error, .accessTokenRequired,
+                     "Attempting to refresh a nil token should result in the expected error")
+    }
+  }
+
+  func testRefreshingTokenStartsConnection() {
+    wallet.setCurrent(token)
+
+    wallet.refreshCurrentAccessToken { _, _, _ in }
+
+    XCTAssertTrue(fakeConnection.startCalled,
+                  "Refreshing a token should call start on the graph request connection")
+  }
+
+  func testRefreshingTokenInvokesRequestPiggybackManager() {
+    let expectation = self.expectation(description: "testRefreshingTokenInvokesRequestPiggybackManager")
+    wallet.setCurrent(token)
+
+    wallet.refreshCurrentAccessToken { _, _, _ in
+      expectation.fulfill()
+    }
+
+    FakeGraphRequestPiggybackManager.capturedCompletionHandler?(nil, nil, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
   }
 
 }
