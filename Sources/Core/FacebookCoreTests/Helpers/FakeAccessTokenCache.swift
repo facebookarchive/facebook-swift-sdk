@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable explicit_type_interface
+
 @testable import FacebookCore
 
 class FakeAccessTokenCache: AccessTokenCaching {
@@ -31,7 +33,7 @@ class FakeAccessTokenCache: AccessTokenCaching {
   var capturedAccessToken: AccessToken?
 
   func clearCache() {
-    fatalError("Clear cache called from a test but not implemented")
+    assertionFailure("Clear cache called from a test but not implemented")
   }
 
 }
