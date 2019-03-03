@@ -20,12 +20,28 @@
 
 import Foundation
 
-enum AccessTokenWallet {
+class AccessTokenWallet {
 
-  private static var accessToken: AccessToken?
-  static var cookieUtility: CookieHandling.Type = InternalUtility.self
-  static var settings: SettingsManaging = Settings()
-  static var notificationCenter: NotificationPosting = NotificationCenter.default
+  private var accessToken: AccessToken?
+  let cookieUtility: CookieHandling.Type
+  let settings: SettingsManaging
+  let notificationCenter: NotificationPosting
+  let graphConnectionProvider: GraphConnectionProviding
+  let graphRequestPiggybackManager: GraphRequestPiggybackManaging.Type
+
+  init(
+    cookieUtility: CookieHandling.Type = InternalUtility.self,
+    settings: SettingsManaging = Settings(),
+    notificationCenter: NotificationPosting = NotificationCenter.default,
+    graphConnectionProvider: GraphConnectionProviding = GraphConnectionProvider(),
+    graphRequestPiggybackManager: GraphRequestPiggybackManaging.Type = GraphRequestPiggybackManager.self
+    ) {
+    self.cookieUtility = cookieUtility
+    self.settings = settings
+    self.notificationCenter = notificationCenter
+    self.graphConnectionProvider = graphConnectionProvider
+    self.graphRequestPiggybackManager = graphRequestPiggybackManager
+  }
 
   /**
    The "global" access token that represents the currently logged in user.
@@ -33,14 +49,14 @@ enum AccessTokenWallet {
    The `currentAccessToken` is a convenient representation of the token of the
    current user and is used by other SDK components (like `FBSDKLoginManager`).
    */
-  static var currentAccessToken: AccessToken? {
+  var currentAccessToken: AccessToken? {
     return accessToken
   }
 
   /**
   Sets the stored access token. Passing a nil value will clear the `currentAccessToken` and delete web view cookies
   */
-  static func setCurrent(_ token: AccessToken?) {
+  func setCurrent(_ token: AccessToken?) {
       if token != currentAccessToken {
         var userInfo: [AnyHashable: Any] = [:]
 
@@ -79,13 +95,29 @@ enum AccessTokenWallet {
    Returns true if the currentAccessToken is not nil AND currentAccessToken is not expired
 
    */
-  static var isCurrentAccessTokenActive: Bool {
+  var isCurrentAccessTokenActive: Bool {
     guard let token = currentAccessToken else {
       return false
     }
     return !token.isExpired
   }
 
+  func refreshCurrentAccessToken(_ completionHandler: @escaping GraphRequestBlock) {
+    if currentAccessToken != nil {
+      let connection = graphConnectionProvider.graphRequestConnection()
+      graphRequestPiggybackManager.addRefreshPiggyback(connection, permissionHandler: completionHandler)
+      connection.start()
+    } else {
+
+      // TODO: This must be fixed to use proper error handling that includes a relevant message
+      completionHandler(nil, nil, GraphConnectionError.accessTokenRequired)
+      //      completionHandler(nil, nil, Error.fbError(withCode: Int(FBSDKErrorAccessTokenRequired),
+      //      message: "No current access token to refresh"))
+    }
+  }
+
+
+  // Original
   //  class func refreshCurrentAccessToken(_ completionHandler: FBSDKGraphRequestBlock) {
   //    if FBSDKAccessToken.current() != nil {
   //      let connection = FBSDKGraphRequestConnection()
