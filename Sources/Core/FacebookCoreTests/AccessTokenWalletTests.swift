@@ -40,7 +40,6 @@ class AccessTokenWalletTests: XCTestCase {
   }
 
   override func tearDown() {
-    wallet = nil
     FakeCookieUtility.reset()
 
     super.tearDown()
