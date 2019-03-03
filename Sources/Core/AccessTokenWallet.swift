@@ -116,20 +116,6 @@ class AccessTokenWallet {
     }
   }
 
-
-  // Original
-  //  class func refreshCurrentAccessToken(_ completionHandler: FBSDKGraphRequestBlock) {
-  //    if FBSDKAccessToken.current() != nil {
-  //      let connection = FBSDKGraphRequestConnection()
-  //      FBSDKGraphRequestPiggybackManager.addRefreshPiggyback(connection, permissionHandler: completionHandler)
-  //      connection.start()
-  //    } else if completionHandler != nil {
-  //      completionHandler(nil, nil, Error.fbError(withCode: Int(FBSDKErrorAccessTokenRequired),
-  //      message: "No current access token to refresh"))
-  //    }
-  //  }
-  //
-
   enum NotificationKeys {
     /**
      A key in the notification's userInfo that will be set
