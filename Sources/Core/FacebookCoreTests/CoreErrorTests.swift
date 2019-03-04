@@ -21,7 +21,7 @@
 @testable import FacebookCore
 import XCTest
 
-class FBCoreErrorTests: XCTestCase {
+class CoreErrorTests: XCTestCase {
 
   func testKnownCoreErrors() {
     [
@@ -39,6 +39,12 @@ class FBCoreErrorTests: XCTestCase {
       .appVersionUnsupported,
       .browserUnavailable
       ].forEach { error in
+        XCTAssertNil(error.localizedTitle,
+                     "A core error should not have a default localized title")
+        XCTAssertNil(error.localizedDescription,
+                     "A core error should not have a default localized description")
+        XCTAssertNil(error.underlyingError,
+                     "A core error should not have a default underlying error")
         XCTAssertNotNil(error.developerMessage,
                         "A core error should be able to provide a message describing the error")
     }
