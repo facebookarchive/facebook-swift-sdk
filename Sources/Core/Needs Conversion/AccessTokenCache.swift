@@ -28,8 +28,6 @@ import Foundation
 // serializable medium. This will help separate the AccessToken type from any specific
 // encoding formats.
 //
-// Example of this concept: https://github.com/joesus/CodabilityBestPractices
-//
 class AccessTokenCache: AccessTokenCaching {
   var accessToken: AccessToken?
 
