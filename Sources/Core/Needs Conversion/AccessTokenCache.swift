@@ -21,6 +21,15 @@ import Foundation
 // This will eventually be replaced by the rewrite of FBSDKAccessTokenCache
 // for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
 
+// TODO:
+// This public, canonical type makes this usable from anywhere that knows about access tokens.
+// Internally, it should have a bi-directional codable "mirror type", something like
+// `CacheableAccessToken` that is used for converting a canonical AccessToken to/from a
+// serializable medium. This will help separate the AccessToken type from any specific
+// encoding formats.
+//
+// Example of this concept: https://github.com/joesus/CodabilityBestPractices
+//
 class AccessTokenCache: AccessTokenCaching {
   var accessToken: AccessToken?
 
