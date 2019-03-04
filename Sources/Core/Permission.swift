@@ -22,16 +22,6 @@ import Foundation
 
 enum Permission: Hashable {
   case `default`
-  // swiftlint:disable identifier_name
-  case id
-  // swiftlint:enable identifier_name
-  case firstName
-  case lastName
-  case middleName
-  case name
-  case nameFormat
-  case picture
-  case shortName
   case email
   case groupsAccessMemberInfo
   case publishToGroups

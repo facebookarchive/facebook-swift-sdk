@@ -44,7 +44,7 @@ enum AccessTokenFixtures {
   static let tokenWithPermissions: AccessToken = {
     AccessToken(
       tokenString: tokenString,
-      permissions: [Permission.email, .firstName],
+      permissions: [Permission.email, .userPosts],
       appID: appID,
       userID: userID
     )

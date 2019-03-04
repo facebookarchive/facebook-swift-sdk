@@ -38,12 +38,12 @@ class AccessTokenTests: XCTestCase {
 
     let token = AccessToken(
       tokenString: AccessTokenFixtures.validToken.tokenString,
-      permissions: [Permission.email, .firstName],
+      permissions: [Permission.email, .userPosts],
       appID: AccessTokenFixtures.validToken.appID,
       userID: AccessTokenFixtures.validToken.userID
     )
 
-    XCTAssertEqual(token.permissions, [Permission.email, .firstName],
+    XCTAssertEqual(token.permissions, [Permission.email, .userPosts],
                    "An access token should store the exact permissions it was created with")
   }
 
@@ -52,12 +52,12 @@ class AccessTokenTests: XCTestCase {
 
     let token = AccessToken(
       tokenString: AccessTokenFixtures.validToken.tokenString,
-      declinedPermissions: [Permission.email, .firstName],
+      declinedPermissions: [Permission.email, .userPosts],
       appID: AccessTokenFixtures.validToken.appID,
       userID: AccessTokenFixtures.validToken.userID
     )
 
-    XCTAssertEqual(token.declinedPermissions, [Permission.email, .firstName],
+    XCTAssertEqual(token.declinedPermissions, [Permission.email, .userPosts],
                    "An access token should store the exact permissions it was created with")
   }
 
