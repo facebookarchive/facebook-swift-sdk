@@ -29,6 +29,13 @@ class AccessTokenWallet {
   let graphConnectionProvider: GraphConnectionProviding
   let graphRequestPiggybackManager: GraphRequestPiggybackManaging.Type
 
+  ///
+  /// The global shared instance of AccessTokenWallet
+  ///
+  /// Overriding this value may result in unexpected and unwanted behavior
+  ///
+  static var shared: AccessTokenWallet = AccessTokenWallet()
+
   init(
     cookieUtility: CookieHandling.Type = InternalUtility.self,
     settings: SettingsManaging = Settings(),
