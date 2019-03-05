@@ -20,6 +20,8 @@
 
 class FakeSettings: SettingsManaging {
 
+  static var isGraphErrorRecoveryEnabled: Bool = false
+
   static var graphAPIVersion: String = "0.0.1"
 
   var accessTokenCache: AccessTokenCaching?

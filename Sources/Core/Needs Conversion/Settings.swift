@@ -26,12 +26,16 @@ protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
 
   static var graphAPIVersion: String { get set }
+  static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
 
 class Settings: SettingsManaging {
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var graphAPIVersion: String = ""
+
+  // TODO: probably should not be settable from everywhere but should come from some sort of config
+  static var isGraphErrorRecoveryEnabled: Bool = false
 
   // TODO: Probably needs to be private and weak. Revisit this during rewrite
   weak var accessTokenCache: AccessTokenCaching?

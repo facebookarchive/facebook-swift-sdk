@@ -98,13 +98,19 @@ struct GraphRequest {
     accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
     version: String = Settings.graphAPIVersion,
     httpMethod: GraphRequest.HTTPMethod = .get,
-    flags: GraphRequest.Flags = .none
+    flags: GraphRequest.Flags = .none,
+    enableGraphRecovery: Bool = Settings.isGraphErrorRecoveryEnabled
     ) {
     self.graphPath = graphPath
     self.parameters = parameters
     self.accessToken = accessToken
     self.version = version
     self.httpMethod = httpMethod
+
+    var flags = flags
+    if !enableGraphRecovery {
+      flags = .disableErrorRecovery
+    }
     self.flags = flags
   }
 }
