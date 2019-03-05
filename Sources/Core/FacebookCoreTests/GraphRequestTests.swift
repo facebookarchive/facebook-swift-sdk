@@ -45,8 +45,6 @@ class GraphRequestTests: XCTestCase {
                    "A graph request should store the exact path it was created with")
     XCTAssertEqual(request.parameters, [:],
                    "A graph request should have default parameters of an empty dictionary")
-    XCTAssertNil(request.accessToken,
-                 "A graph request should have no access token by default")
     XCTAssertEqual(request.httpMethod, .get,
                    "A graph request should have a default http method of GET")
     XCTAssertEqual(request.flags.rawValue, GraphRequest.Flags.none.rawValue,
@@ -80,6 +78,28 @@ class GraphRequestTests: XCTestCase {
 
     XCTAssertEqual(request.httpMethod, .post,
                    "A graph request should store the exact http method it was created with")
+  }
+
+  func testCreatingWithMissingToken() {
+    let wallet = AccessTokenWallet.shared
+    wallet.setCurrent(token)
+
+    let request = GraphRequest(graphPath: path)
+
+    XCTAssertEqual(request.accessToken, token,
+                   "A graph request should default its access token to the token held by the globally available access token wallet")
+
+    wallet.setCurrent(nil)
+  }
+
+  func testCreatingWithNilToken() {
+    let request = GraphRequest(
+      graphPath: path,
+      accessToken: nil
+    )
+
+    XCTAssertNil(request.accessToken,
+                 "A graph request should be able to store a nil access token if needed")
   }
 
   func testCreatingWithToken() {

@@ -95,7 +95,7 @@ struct GraphRequest {
   init(
     graphPath: GraphPath,
     parameters: [String: String] = [:],
-    accessToken: AccessToken? = nil,
+    accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
     version: String = Settings.graphAPIVersion,
     httpMethod: GraphRequest.HTTPMethod = .get,
     flags: GraphRequest.Flags = .none
