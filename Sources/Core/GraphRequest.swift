@@ -18,9 +18,10 @@
 
 // swiftlint:disable explicit_type_interface
 
-import Foundation
+import UIKit
 
 typealias GraphPath = String
+typealias GraphRequestDataAttachment = Data
 
 struct GraphRequest {
 
@@ -154,6 +155,24 @@ struct GraphRequest {
     connection.add(request: self, completionHandler: handler)
     connection.start()
     return connection
+  }
+
+  ///
+  /// Returns true if any of the parameters are of type `UIImage`, `Data` or `GraphRequestDataAttachment`
+  ///
+  var hasAttachments: Bool {
+    for (_, item) in parameters {
+      if GraphRequest.isAttachment(item) {
+        return true
+      }
+    }
+    return false
+  }
+
+  private static func isAttachment(_ item: Any) -> Bool {
+    return item is UIImage ||
+      item is Data ||
+      item is GraphRequestDataAttachment
   }
 
 }

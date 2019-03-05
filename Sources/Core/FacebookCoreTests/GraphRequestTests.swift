@@ -223,4 +223,49 @@ class GraphRequestTests: XCTestCase {
     }
   }
 
+  func testHasAttachmentsWithImageParameter() {
+    let parameters: [String: Any] = [
+      "Foo": UIImage()
+    ]
+    let request = GraphRequest(
+      graphPath: path,
+      parameters: parameters
+    )
+
+    XCTAssertTrue(request.hasAttachments,
+                  "A request with parameters that include an image should be considered as having attachments")
+  }
+
+  func testHasAttachmentsWithDataParameter() {
+    guard let data = "Bar".data(using: .utf8) else {
+      return XCTFail("Should be able to convert a string to a utf8 encoded data")
+    }
+    let parameters: [String: Any] = [
+      "Foo": data
+    ]
+    let request = GraphRequest(
+      graphPath: path,
+      parameters: parameters
+    )
+
+    XCTAssertTrue(request.hasAttachments,
+                  "A request with parameters that include a data should be considered as having attachments")
+  }
+
+  func testHasAttachmentsWithDataAttachmentParameter() {
+    guard let data = "Bar".data(using: .utf8) else {
+      return XCTFail("Should be able to convert a string to a utf8 encoded data")
+    }
+    let parameters: [String: Any] = [
+      "Foo": data as GraphRequestDataAttachment
+    ]
+    let request = GraphRequest(
+      graphPath: path,
+      parameters: parameters
+    )
+
+    XCTAssertTrue(request.hasAttachments,
+                  "A request with parameters that include a graph request data attachment should be considered as having attachments")
+  }
+
 }
