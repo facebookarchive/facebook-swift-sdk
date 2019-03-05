@@ -33,6 +33,9 @@ file_header:
     \/\/ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
     \/\/ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
     \/\/ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\.
+file_name:
+  excluded:
+    - \+Extensions
 identifier_name:
   excluded:
     - ok
@@ -50,7 +53,6 @@ disabled_rules:
   - explicit_acl
   - explicit_enum_raw_value
   - explicit_top_level_acl
-  - file_name
   - no_extension_access_modifier
   - number_separator
   - prefixed_toplevel_constant
