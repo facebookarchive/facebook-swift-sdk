@@ -38,12 +38,12 @@ class AccessTokenTests: XCTestCase {
 
     let token = AccessToken(
       tokenString: AccessTokenFixtures.validToken.tokenString,
-      permissions: ["access", "more_access"],
+      permissions: [Permission.email, .userPosts],
       appID: AccessTokenFixtures.validToken.appID,
       userID: AccessTokenFixtures.validToken.userID
     )
 
-    XCTAssertEqual(token.permissions, ["access", "more_access"],
+    XCTAssertEqual(token.permissions, [Permission.email, .userPosts],
                    "An access token should store the exact permissions it was created with")
   }
 
@@ -52,12 +52,12 @@ class AccessTokenTests: XCTestCase {
 
     let token = AccessToken(
       tokenString: AccessTokenFixtures.validToken.tokenString,
-      declinedPermissions: ["access", "more_access"],
+      declinedPermissions: [Permission.email, .userPosts],
       appID: AccessTokenFixtures.validToken.appID,
       userID: AccessTokenFixtures.validToken.userID
     )
 
-    XCTAssertEqual(token.declinedPermissions, ["access", "more_access"],
+    XCTAssertEqual(token.declinedPermissions, [Permission.email, .userPosts],
                    "An access token should store the exact permissions it was created with")
   }
 
@@ -135,9 +135,9 @@ class AccessTokenTests: XCTestCase {
   func testHasGrantedPermission() {
     let token = AccessTokenFixtures.tokenWithPermissions
 
-    XCTAssertTrue(token.hasGranted(permission: "access"),
+    XCTAssertTrue(token.hasGranted(permission: .email),
                   "A token should know about its granted permissions")
-    XCTAssertFalse(token.hasGranted(permission: "all_the_access"),
+    XCTAssertFalse(token.hasGranted(permission: .publishToGroups),
                    "A token should not claim to have a permission it has not been given")
   }
 
