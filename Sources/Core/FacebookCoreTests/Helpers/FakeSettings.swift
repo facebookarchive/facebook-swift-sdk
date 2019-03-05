@@ -19,5 +19,8 @@
 @testable import FacebookCore
 
 class FakeSettings: SettingsManaging {
+
+  static var graphAPIVersion: String = "0.0.1"
+
   var accessTokenCache: AccessTokenCaching?
 }
