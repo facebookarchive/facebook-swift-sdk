@@ -61,7 +61,7 @@ struct GraphRequest {
   ///
   /// The request parameters.
   ///
-  let parameters: [String: String]
+  let parameters: [String: Any]
 
   ///
   /// The HTTPMethod to use for the request, access rawValues for encoding purposes
@@ -80,7 +80,7 @@ struct GraphRequest {
   ///
   let version: String
 
-  let flags: Flags
+  var flags: Flags
 
   ///
   /// Initializes a new instance of a graph request.
@@ -94,7 +94,7 @@ struct GraphRequest {
   ///
   init(
     graphPath: GraphPath,
-    parameters: [String: String] = [:],
+    parameters: [String: Any] = [:],
     accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
     version: String = Settings.graphAPIVersion,
     httpMethod: GraphRequest.HTTPMethod = .get,
@@ -113,4 +113,30 @@ struct GraphRequest {
     }
     self.flags = flags
   }
+
+  var isGraphRecoveryDisabled: Bool {
+    return flags.contains(.disableErrorRecovery)
+  }
+
+  ///
+  /// Enable or disable the automatic error recovery mechanism.
+  ///
+  /// - Parameters:
+  ///   - enabled: whether to enable the automatic error recovery mechanism
+  ///
+  /// By default, non-batched GraphRequest instances will automatically try to recover
+  /// from errors by constructing a `GraphErrorRecoveryProcessor` instance that
+  /// re-issues the request on successful recoveries. The re-issued request will call the same
+  /// handler as the receiver but may occur with a different `GraphRequestConnection` instance.
+  ///
+  /// This will override `Settings.setGraphErrorRecoveryDisabled`
+  ///
+  mutating func setGraphErrorRecoverability(enabled: Bool) {
+    if enabled {
+      flags.remove(.disableErrorRecovery)
+    } else {
+      flags.insert(.disableErrorRecovery)
+    }
+  }
+
 }

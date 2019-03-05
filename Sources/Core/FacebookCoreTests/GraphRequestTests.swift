@@ -43,21 +43,12 @@ class GraphRequestTests: XCTestCase {
 
     XCTAssertEqual(request.graphPath, path,
                    "A graph request should store the exact path it was created with")
-    XCTAssertEqual(request.parameters, [:],
-                   "A graph request should have default parameters of an empty dictionary")
+    XCTAssertTrue(request.parameters.isEmpty,
+                  "A graph request should have default parameters of an empty dictionary")
     XCTAssertEqual(request.httpMethod, .get,
                    "A graph request should have a default http method of GET")
     XCTAssertEqual(request.flags.rawValue, GraphRequest.Flags.none.rawValue,
                    "A graph request should have a default flag of none")
-  }
-
-  func testDefaultVersionComesFromSettings() {
-    let version = "newVersion.0"
-    Settings.graphAPIVersion = version
-    let request = GraphRequest(graphPath: path)
-
-    XCTAssertEqual(request.version, version,
-                   "A graph request should use the global settings to determine an api version when one is not explicitly provided")
   }
 
   func testCreatingWithParameters() {
@@ -66,7 +57,11 @@ class GraphRequestTests: XCTestCase {
       parameters: parameters
     )
 
-    XCTAssertEqual(request.parameters, parameters,
+    guard let requestParameters = request.parameters as? [String: String] else {
+      return XCTFail("Test parameters should be castable to a dictionary of strings keyed by strings")
+    }
+
+    XCTAssertEqual(requestParameters, parameters,
                    "A graph request should store the exact parameters it was given")
   }
 
@@ -112,14 +107,83 @@ class GraphRequestTests: XCTestCase {
                    "A graph request should store the exact token it was created with")
   }
 
+  func testDefaultVersionComesFromSettings() {
+    let version = "newVersion.0"
+    Settings.graphAPIVersion = version
+    let request = GraphRequest(graphPath: path)
+    XCTAssertEqual(request.version, version,
+                   "A graph request should use the global settings to determine an api version when one is not explicitly provided")
+  }
+
   func testCreatingWithVersion() {
     let request = GraphRequest(
       graphPath: path,
       version: version
     )
-
     XCTAssertEqual(request.version, version,
                    "A graph request should store the exact version it was created with")
   }
+  func testCreatingWithGraphErrorRecoveryMissing() {
+    Settings.isGraphErrorRecoveryEnabled = true
+    let request = GraphRequest(graphPath: path)
+
+    XCTAssertFalse(request.flags.contains(.disableErrorRecovery),
+                   "A graph request should use the global settings to determine whether or not error recovery is enabled when one is not provided")
+  }
+
+  func testCreatingWithGraphErrorRecoveryDisabled() {
+    let request = GraphRequest(
+      graphPath: path,
+      enableGraphRecovery: false
+    )
+
+    XCTAssertTrue(request.flags.contains(.disableErrorRecovery),
+                  "A graph request disable graph error recovery if specifically asked to")
+  }
+
+  func testCreatingWithGraphErrorRecoveryEnabled () {
+    let request = GraphRequest(
+      graphPath: path,
+      enableGraphRecovery: true
+    )
+
+    XCTAssertFalse(request.flags.contains(.disableErrorRecovery),
+                   "A graph request disable graph error recovery if specifically asked to")
+  }
+
+  func testIsGraphRecoveryDisabled() {
+    var request = GraphRequest(
+      graphPath: path,
+      enableGraphRecovery: false
+    )
+
+    XCTAssertTrue(request.isGraphRecoveryDisabled,
+                  "A graph request should know whether or not graph recovery is enabled")
+
+    request = GraphRequest(
+      graphPath: path,
+      enableGraphRecovery: true
+    )
+
+    XCTAssertFalse(request.isGraphRecoveryDisabled,
+                   "A graph request should know whether or not graph recovery is enabled")
+  }
+
+  func testTogglingGraphRecovery() {
+    var request = GraphRequest(
+      graphPath: path,
+      enableGraphRecovery: true
+    )
+    request.setGraphErrorRecoverability(enabled: false)
+
+    XCTAssertTrue(request.isGraphRecoveryDisabled,
+                  "Graph recovery ability should be settable on a graph request")
+
+    request.setGraphErrorRecoverability(enabled: true)
+
+    XCTAssertFalse(request.isGraphRecoveryDisabled,
+                   "Graph recovery ability should be settable on a graph request")
+  }
+
 
 }
