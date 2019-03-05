@@ -111,6 +111,7 @@ class GraphRequestTests: XCTestCase {
     let version = "newVersion.0"
     Settings.graphAPIVersion = version
     let request = GraphRequest(graphPath: path)
+
     XCTAssertEqual(request.version, version,
                    "A graph request should use the global settings to determine an api version when one is not explicitly provided")
   }
@@ -120,9 +121,11 @@ class GraphRequestTests: XCTestCase {
       graphPath: path,
       version: version
     )
+
     XCTAssertEqual(request.version, version,
                    "A graph request should store the exact version it was created with")
   }
+
   func testCreatingWithGraphErrorRecoveryMissing() {
     Settings.isGraphErrorRecoveryEnabled = true
     let request = GraphRequest(graphPath: path)
@@ -185,5 +188,39 @@ class GraphRequestTests: XCTestCase {
                    "Graph recovery ability should be settable on a graph request")
   }
 
+  func testStartingRequestWithoutSpecifiedConnection() {
+    let request = GraphRequest(graphPath: path)
+
+    let connection = request.start { _, _, _ in }
+
+    XCTAssertNotNil(connection,
+                    "Starting a request should return the connection that is executing the request")
+  }
+
+  func testStartingRequestOnSpecifiedConnection() {
+    let expectation = self.expectation(description: name)
+    let request = GraphRequest(graphPath: path)
+    let fakeConnection = FakeGraphRequestConnection()
+
+    let connection = request.start(withConnection: fakeConnection) { _, _, _ in
+      expectation.fulfill()
+    }
+
+    guard let executingConnection = connection as? FakeGraphRequestConnection else {
+      return XCTFail("Starting a request should return the connection that was provided")
+    }
+
+    XCTAssertNotNil(executingConnection.capturedAddRequest,
+                    "Starting a graph request should pass the request to a connection for execution")
+    XCTAssertTrue(executingConnection.startCalled,
+                  "Starting a request should also start its associated connection")
+
+    executingConnection.capturedAddRequestHandler?(nil, nil, nil)
+
+    waitForExpectations(timeout: 1) { potentialError in
+      XCTAssertNil(potentialError,
+                   "Starting a request with a fake connection should pass a completion handler to that connection. Calling the completion handler should fulfill the wait expectation")
+    }
+  }
 
 }

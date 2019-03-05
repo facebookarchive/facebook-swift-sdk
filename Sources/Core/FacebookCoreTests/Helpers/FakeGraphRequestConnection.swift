@@ -22,9 +22,21 @@
 import Foundation
 
 class FakeGraphRequestConnection: GraphRequestConnecting {
+
   var startCalled = false
+  var capturedAddRequest: GraphRequest?
+  var capturedAddRequestHandler: GraphRequestBlock?
 
   func start() {
     startCalled = true
   }
+
+  func add(
+    request: GraphRequest,
+    completionHandler handler: @escaping (GraphRequestConnection?, Any?, Error?
+    ) -> Void) {
+    capturedAddRequest = request
+    capturedAddRequestHandler = handler
+  }
+
 }

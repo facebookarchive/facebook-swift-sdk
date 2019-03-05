@@ -139,4 +139,21 @@ struct GraphRequest {
     }
   }
 
+  ///
+  /// Start the graph request on a `GraphRequestConnection`
+  ///
+  /// - Parameters:
+  ///   - withConnection: a connection to begin the request on. Generally a best practice to omit this parameter
+  ///                     and allow the request to provide a new instance of a connection
+  ///   - completionHandler: A handler for when the `GraphRequestConnection` completes the `GraphRequest`
+  ///
+  /// - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
+  ///
+  func start(withConnection connection: GraphRequestConnecting = GraphRequestConnection(),
+             completionHandler handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
+    connection.add(request: self, completionHandler: handler)
+    connection.start()
+    return connection
+  }
+
 }
