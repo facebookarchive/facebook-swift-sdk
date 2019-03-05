@@ -18,9 +18,6 @@
 
 import Foundation
 
-// TODO: Make this an actual type once we have better knowledge of permissions requirements
-typealias Permission = String
-
 ///
 /// Represents an immutable access token for using Facebook services.
 ///
