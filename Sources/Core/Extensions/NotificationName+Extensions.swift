@@ -16,18 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable explicit_type_interface
-
 import Foundation
 
 extension Notification.Name {
 
-  ///
-  /// Notification indicating that the `currentAccessToken` has changed.
-  ///
-  /// The userInfo dictionary of the notification will contain keys
-  /// `FBSDKAccessTokenChangeOldKey` and
-  /// `FBSDKAccessTokenChangeNewKey`.
-  ///
-  static let FBSDKAccessTokenDidChangeNotification = Notification.Name("FBSDKAccessTokenDidChangeNotification")
+  /**
+   Notification indicating that the `currentAccessToken` has changed.
+
+   The userInfo dictionary of the notification will contain keys
+   `FBSDKAccessTokenChangeOldKey` and
+   `FBSDKAccessTokenChangeNewKey`.
+  */
+  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
+    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
 }
