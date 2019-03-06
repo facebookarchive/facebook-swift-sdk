@@ -223,6 +223,13 @@ class GraphRequestTests: XCTestCase {
     }
   }
 
+  func testHasNoAttachments() {
+    let request = GraphRequest(graphPath: path)
+
+    XCTAssertFalse(request.hasAttachments,
+                   "A request should have no attachments by default")
+  }
+
   func testHasAttachmentsWithImageParameter() {
     let parameters: [String: Any] = [
       "Foo": UIImage()
