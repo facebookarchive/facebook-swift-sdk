@@ -30,4 +30,14 @@ class GraphApiDebugParameterTests: XCTestCase {
     }
   }
 
+  func testRawValues() {
+    let values = [GraphApiDebugParameter.info, .warning]
+    let rawValues = ["info", "warnings"]
+    zip(values, rawValues).forEach { pair in
+      XCTAssertEqual(pair.0.rawValue, pair.1,
+                     "Graph api debug parameter: \(pair.0) should have the expected raw value: \(pair.1)")
+    }
+
+  }
+
 }
