@@ -6,12 +6,26 @@ cache:
   - bundler
   - cocoapods
 env:
-  matrix:
-    - TEST_TYPE=iOS
-    - TEST_TYPE=Lint
-    - TEST_TYPE=Samples
-    - TEST_TYPE=CocoaPods
-    - TEST_TYPE=Carthage
+  global:
+    - XCODE_WORKSPACE=FacebookSwift.xcworkspace
+
+# Branch Builds
+branches:
+  only:
+    - master
+    - release-1.0
+
+# Build Stages
+stages:
+  - name: analysis
+
+# Build Jobs
+jobs:
+  include:
+    - stage: analysis
+      name: Analysis
+
+# Scripts
 before_install: sh scripts/travis/before_install.sh
 install: sh scripts/travis/install.sh
 script: sh scripts/travis/script.sh
