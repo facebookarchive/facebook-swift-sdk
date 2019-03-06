@@ -37,6 +37,8 @@
 		F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */; };
 		F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */; };
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
+		F47AB33F222F4394004A854F /* GraphApiDebugParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */; };
+		F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
 		F49FA4A1222896310008CAD6 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */; };
@@ -117,6 +119,8 @@
 		F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionTests.swift; sourceTree = "<group>"; };
 		F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestPiggybackManagerTests.swift; sourceTree = "<group>"; };
 		F45734D6222D9535001F806A /* InternalUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtilityTests.swift; sourceTree = "<group>"; };
+		F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
+		F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameter.swift; sourceTree = "<group>"; };
 		F49FA479222880FE0008CAD6 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
+				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
 				F4FC87AE222ED44D003A8F29 /* GraphRequestTests.swift */,
+				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
@@ -591,6 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44DB6BD222B0DD20083506E /* GraphRequestPiggybackManager.swift in Sources */,
+				F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
@@ -637,6 +644,7 @@
 				F4FC87AF222ED44D003A8F29 /* GraphRequestTests.swift in Sources */,
 				F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */,
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
+				F47AB33F222F4394004A854F /* GraphApiDebugParameterTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
 				F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */,
