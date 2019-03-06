@@ -199,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				811C5E5E1CFFD52B00E4A925 /* Core */,
+				F49FA47A222880FE0008CAD6 /* FacebookCoreTests */,
 				811C5E601CFFD52B00E4A925 /* Login */,
 				811C5E621CFFD52B00E4A925 /* Share */,
 			);
@@ -212,7 +213,6 @@
 				F44DB69122299FA10083506E /* AccessTokenWallet.swift */,
 				F49FA49F222896310008CAD6 /* Configurations */,
 				F44DB6B2222B01B60083506E /* Extensions */,
-				F49FA47A222880FE0008CAD6 /* FacebookCoreTests */,
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
@@ -802,7 +802,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/Core/FacebookCoreTests/Info.plist;
+				INFOPLIST_FILE = Sources/FacebookCoreTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -860,7 +860,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/Core/FacebookCoreTests/Info.plist;
+				INFOPLIST_FILE = Sources/FacebookCoreTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
