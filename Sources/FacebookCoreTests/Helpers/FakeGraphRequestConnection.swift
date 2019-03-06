@@ -16,13 +16,11 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable explicit_type_interface
-
 @testable import FacebookCore
 import Foundation
 
 class FakeGraphRequestConnection: GraphRequestConnecting {
-  var startCalled = false
+  var startCalled: Bool = false
 
   func start() {
     startCalled = true
