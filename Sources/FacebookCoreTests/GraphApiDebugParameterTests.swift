@@ -33,7 +33,7 @@ class GraphApiDebugParameterTests: XCTestCase {
   }
 
   func testRawValues() {
-    let values = [GraphApiDebugParameter.info, .warning]
+    let values = GraphApiDebugParameter.allCases
     let rawValues = ["info", "warning"]
     zip(values, rawValues).forEach { pair in
       XCTAssertEqual(pair.0.rawValue, pair.1,
