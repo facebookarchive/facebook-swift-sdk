@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable multiline_arguments
+
 @testable import FacebookCore
 import XCTest
 
@@ -32,7 +34,7 @@ class GraphApiDebugParameterTests: XCTestCase {
 
   func testRawValues() {
     let values = [GraphApiDebugParameter.info, .warning]
-    let rawValues = ["info", "warnings"]
+    let rawValues = ["info", "warning"]
     zip(values, rawValues).forEach { pair in
       XCTAssertEqual(pair.0.rawValue, pair.1,
                      "Graph api debug parameter: \(pair.0) should have the expected raw value: \(pair.1)")
