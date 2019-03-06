@@ -19,10 +19,13 @@
 @testable import FacebookCore
 
 class FakeSettings: SettingsManaging {
+  var accessTokenCache: AccessTokenCaching?
+  let graphApiDebugParameter: GraphApiDebugParameter
 
   static var isGraphErrorRecoveryEnabled: Bool = false
-
   static var graphAPIVersion: String = "0.0.1"
 
-  var accessTokenCache: AccessTokenCaching?
+  init(graphApiDebugParameter: GraphApiDebugParameter) {
+    self.graphApiDebugParameter = graphApiDebugParameter
+  }
 }

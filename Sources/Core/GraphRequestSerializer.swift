@@ -18,6 +18,25 @@
 
 import Foundation
 
-enum GraphApiDebugParameter: String {
-  case none, info, warning
+struct GraphRequestSerializer {
+  let settings: SettingsManaging
+
+  func preProcess(_ parameters: [String: Any]) -> [String: Any] {
+    switch settings.graphApiDebugParameter {
+    case .none:
+      return parameters
+    case .info, .warning:
+      var temp = parameters
+      temp.updateValue(
+        settings.graphApiDebugParameter.rawValue,
+        forKey: Keys.debug.rawValue
+      )
+      return temp
+    }
+  }
+
+  enum Keys: String {
+    case debug
+  }
+
 }

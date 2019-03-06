@@ -19,11 +19,12 @@
 import Foundation
 
 // This will eventually be replaced by the rewrite of FBSDKSettings
-// for now it is needed as a dependency of AccessTokenWallet
+// for now it is needed as a dependency of AccessTokenWallet and GraphRequest
 
 // TODO: Make sure this protocol makes sense in terms of the reworked class
 protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
+  var graphApiDebugParameter: GraphApiDebugParameter { get }
 
   static var graphAPIVersion: String { get set }
   static var isGraphErrorRecoveryEnabled: Bool { get set }
@@ -31,13 +32,15 @@ protocol SettingsManaging {
 
 class Settings: SettingsManaging {
 
+  // TODO: Probably needs to be private and weak. Revisit this during rewrite
+  weak var accessTokenCache: AccessTokenCaching?
+
+  // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
+  let graphApiDebugParameter: GraphApiDebugParameter = .none
+
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var graphAPIVersion: String = ""
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var isGraphErrorRecoveryEnabled: Bool = false
-
-  // TODO: Probably needs to be private and weak. Revisit this during rewrite
-  weak var accessTokenCache: AccessTokenCaching?
-
 }
