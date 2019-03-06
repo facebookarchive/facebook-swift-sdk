@@ -18,7 +18,9 @@
 
 import Foundation
 
-// TODO: Introduce a type to JSON encode permissions This object will be responsible for translating between JSON with snake_case keys and our canonical camelCased cases
+// TODO: Introduce a type to JSON encode permissions
+// This object will be responsible for translating between JSON
+// with snake_case keys and our canonical camelCased cases
 
 enum Permission: Hashable {
   case `default`

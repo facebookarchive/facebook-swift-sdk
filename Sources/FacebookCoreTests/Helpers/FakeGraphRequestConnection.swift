@@ -16,18 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable explicit_type_interface
-
 @testable import FacebookCore
+import Foundation
 
-class FakeCookieUtility: CookieHandling {
-  static var deleteFacebookCookiesCalled = false
+class FakeGraphRequestConnection: GraphRequestConnecting {
 
-  static func deleteFacebookCookies() {
-    deleteFacebookCookiesCalled = true
+  var startCalled: Bool = false
+  var capturedAddRequest: GraphRequest?
+  var capturedAddRequestHandler: GraphRequestBlock?
+
+  func start() {
+    startCalled = true
   }
 
-  static func reset() {
-    deleteFacebookCookiesCalled = false
+  func add(
+    request: GraphRequest,
+    completionHandler handler: @escaping (GraphRequestConnection?, Any?, Error?
+    ) -> Void) {
+    capturedAddRequest = request
+    capturedAddRequestHandler = handler
   }
+
 }

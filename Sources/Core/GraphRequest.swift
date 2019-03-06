@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable explicit_type_interface
-
 import UIKit
 
 typealias GraphPath = String
@@ -25,9 +23,7 @@ typealias GraphRequestDataAttachment = Data
 
 struct GraphRequest {
 
-  ///
   /// The HTTPMethod to use for a graph request
-  ///
   enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
@@ -37,62 +33,51 @@ struct GraphRequest {
   struct Flags: OptionSet {
     let rawValue: Int
 
-    static let none = Flags(rawValue: 0)
-    ///
+    static let none: Flags = Flags(rawValue: 0)
+
     /// indicates this request should not use a client token as its token parameter
-    ///
-    static let skipClientToken = Flags(rawValue: 1 << 1)
+    static let skipClientToken: Flags = Flags(rawValue: 1 << 1)
 
-    ///
     /// indicates this request should not close the session if its response is an oauth error
-    ///
-    static let doNotInvalidateTokenOnError = Flags(rawValue: 1 << 2)
+    static let doNotInvalidateTokenOnError: Flags = Flags(rawValue: 1 << 2)
 
-    ///
     /// indicates this request should not perform error recovery
-    ///
-    static let disableErrorRecovery = Flags(rawValue: 1 << 3)
+    static let disableErrorRecovery: Flags = Flags(rawValue: 1 << 3)
   }
 
-  ///
   /// The Graph API endpoint to use for the request, for example "me".
-  ///
   let graphPath: GraphPath
 
-  ///
   /// The request parameters.
-  ///
   let parameters: [String: Any]
 
-  ///
-  /// The HTTPMethod to use for the request, access rawValues for encoding purposes
-  /// ex: HTTPMethod.get.rawValue is "GET".
-  ///
+  /**
+   The HTTPMethod to use for the request, access rawValues for encoding purposes
+   ex: HTTPMethod.get.rawValue is "GET".
+  */
   let httpMethod: HTTPMethod
 
-  ///
   /// An optional access token used by the request.
-  ///
   let accessToken: AccessToken?
 
-  ///
-  /// The Graph API version to use (e.g., "v2.0")
-  /// Defaults to `Settings.graphAPIVersion` if not specified during initialization
-  ///
+  /**
+   The Graph API version to use (e.g., "v2.0")
+   Defaults to `Settings.graphAPIVersion` if not specified during initialization
+  */
   let version: String
 
   var flags: Flags
 
-  ///
-  /// Initializes a new instance of a graph request.
-  ///
-  /// - Parameters:
-  ///   - graphPath: the graph path (e.g., @"me")
-  ///   - parameters: the optional parameters dictionary
-  ///   - tokenString: an optional access token to use, must provide a token for paths that require a token
-  ///   - version: the optional Graph API version (e.g., "v2.0"). nil defaults to `Settings.graphAPIVersion`.
-  ///   - method: the HTTP method. Empty String defaults to `HTTPMethod.get`
-  ///
+  /**
+   Initializes a new instance of a graph request.
+
+   - Parameters:
+     - graphPath: the graph path (e.g., @"me")
+     - parameters: the optional parameters dictionary
+     - tokenString: an optional access token to use, must provide a token for paths that require a token
+     - version: the optional Graph API version (e.g., "v2.0"). nil defaults to `Settings.graphAPIVersion`.
+     - method: the HTTP method. Empty String defaults to `HTTPMethod.get`
+  */
   init(
     graphPath: GraphPath,
     parameters: [String: Any] = [:],
@@ -119,19 +104,19 @@ struct GraphRequest {
     return flags.contains(.disableErrorRecovery)
   }
 
-  ///
-  /// Enable or disable the automatic error recovery mechanism.
-  ///
-  /// - Parameters:
-  ///   - enabled: whether to enable the automatic error recovery mechanism
-  ///
-  /// By default, non-batched GraphRequest instances will automatically try to recover
-  /// from errors by constructing a `GraphErrorRecoveryProcessor` instance that
-  /// re-issues the request on successful recoveries. The re-issued request will call the same
-  /// handler as the receiver but may occur with a different `GraphRequestConnection` instance.
-  ///
-  /// This will override `Settings.setGraphErrorRecoveryDisabled`
-  ///
+  /**
+   Enable or disable the automatic error recovery mechanism.
+
+   - Parameters:
+     - enabled: whether to enable the automatic error recovery mechanism
+
+   By default, non-batched GraphRequest instances will automatically try to recover
+   from errors by constructing a `GraphErrorRecoveryProcessor` instance that
+   re-issues the request on successful recoveries. The re-issued request will call the same
+   handler as the receiver but may occur with a different `GraphRequestConnection` instance.
+
+   This will override `Settings.setGraphErrorRecoveryDisabled`
+  */
   mutating func setGraphErrorRecoverability(enabled: Bool) {
     if enabled {
       flags.remove(.disableErrorRecovery)
@@ -140,16 +125,16 @@ struct GraphRequest {
     }
   }
 
-  ///
-  /// Start the graph request on a `GraphRequestConnection`
-  ///
-  /// - Parameters:
-  ///   - withConnection: a connection to begin the request on. Generally a best practice to omit this parameter
-  ///                     and allow the request to provide a new instance of a connection
-  ///   - completionHandler: A handler for when the `GraphRequestConnection` completes the `GraphRequest`
-  ///
-  /// - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
-  ///
+  /**
+   Start the graph request on a `GraphRequestConnection`
+
+   - Parameters:
+     - withConnection: a connection to begin the request on. Generally a best practice to omit this parameter
+                       and allow the request to provide a new instance of a connection
+     - completionHandler: A handler for when the `GraphRequestConnection` completes the `GraphRequest`
+
+   - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
+  */
   func start(withConnection connection: GraphRequestConnecting = GraphRequestConnection(),
              completionHandler handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
     connection.add(request: self, completionHandler: handler)
@@ -157,9 +142,7 @@ struct GraphRequest {
     return connection
   }
 
-  ///
   /// Returns true if any of the parameters are of type `UIImage`, `Data` or `GraphRequestDataAttachment`
-  ///
   var hasAttachments: Bool {
     for (_, item) in parameters {
       if GraphRequest.isAttachment(item) {
