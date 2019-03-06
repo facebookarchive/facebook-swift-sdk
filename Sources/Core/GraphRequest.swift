@@ -25,9 +25,7 @@ typealias GraphRequestDataAttachment = Data
 
 struct GraphRequest {
 
-  ///
   /// The HTTPMethod to use for a graph request
-  ///
   enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
@@ -38,30 +36,21 @@ struct GraphRequest {
     let rawValue: Int
 
     static let none = Flags(rawValue: 0)
-    ///
+
     /// indicates this request should not use a client token as its token parameter
-    ///
     static let skipClientToken = Flags(rawValue: 1 << 1)
 
-    ///
     /// indicates this request should not close the session if its response is an oauth error
-    ///
     static let doNotInvalidateTokenOnError = Flags(rawValue: 1 << 2)
 
-    ///
     /// indicates this request should not perform error recovery
-    ///
     static let disableErrorRecovery = Flags(rawValue: 1 << 3)
   }
 
-  ///
   /// The Graph API endpoint to use for the request, for example "me".
-  ///
   let graphPath: GraphPath
 
-  ///
   /// The request parameters.
-  ///
   let parameters: [String: Any]
 
   ///
@@ -70,9 +59,7 @@ struct GraphRequest {
   ///
   let httpMethod: HTTPMethod
 
-  ///
   /// An optional access token used by the request.
-  ///
   let accessToken: AccessToken?
 
   ///
@@ -157,9 +144,7 @@ struct GraphRequest {
     return connection
   }
 
-  ///
   /// Returns true if any of the parameters are of type `UIImage`, `Data` or `GraphRequestDataAttachment`
-  ///
   var hasAttachments: Bool {
     for (_, item) in parameters {
       if GraphRequest.isAttachment(item) {
