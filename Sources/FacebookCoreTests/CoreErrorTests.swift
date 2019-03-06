@@ -16,16 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable literal_expression_end_indentation closure_end_indentation
-
 @testable import FacebookCore
 import XCTest
 
 class CoreErrorTests: XCTestCase {
 
   func testKnownCoreErrors() {
-    [
-      CoreError.reserved,
+    let allCases: [CoreError] = [
+      .reserved,
       .encryption,
       .invalidArgument,
       .unknown,
@@ -38,15 +36,17 @@ class CoreErrorTests: XCTestCase {
       .accessTokenRequired,
       .appVersionUnsupported,
       .browserUnavailable
-      ].forEach { error in
-        XCTAssertNil(error.localizedTitle,
-                     "A core error should not have a default localized title")
-        XCTAssertNil(error.localizedDescription,
-                     "A core error should not have a default localized description")
-        XCTAssertNil(error.underlyingError,
-                     "A core error should not have a default underlying error")
-        XCTAssertNotNil(error.developerMessage,
-                        "A core error should be able to provide a message describing the error")
+    ]
+
+    allCases.forEach { error in
+      XCTAssertNil(error.localizedTitle,
+                   "A core error should not have a default localized title")
+      XCTAssertNil(error.localizedDescription,
+                   "A core error should not have a default localized description")
+      XCTAssertNil(error.underlyingError,
+                   "A core error should not have a default underlying error")
+      XCTAssertNotNil(error.developerMessage,
+                      "A core error should be able to provide a message describing the error")
     }
   }
 

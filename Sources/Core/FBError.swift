@@ -20,23 +20,33 @@ import Foundation
 
 protocol FBError: Error {
 
-  ///
   /// A recommended standard way to embed Errors from underlying calls.
-  ///
   var underlyingError: Error? { get }
 
-  ///
   /// An error message for the developer
-  ///
   var developerMessage: String { get }
 
-  ///
   /// A localized user facing message, if available
-  ///
   var  localizedDescription: String? { get }
 
-  ///
   /// A localized user facing title, if available
-  ///
   var localizedTitle: String? { get }
+}
+
+extension FBError {
+  var underlyingError: Error? {
+    return nil
+  }
+
+  var developerMessage: String {
+    return ""
+  }
+
+  var localizedDescription: String? {
+    return nil
+  }
+
+  var localizedTitle: String? {
+    return nil
+  }
 }
