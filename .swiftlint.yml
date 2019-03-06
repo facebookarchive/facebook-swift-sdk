@@ -39,8 +39,15 @@ identifier_name:
 private_outlet:
   allow_private_set: true
 
+custom_rules:
+  swiftlint_escaping:
+    name: "Escaping Swiftlint Rules"
+    regex: "(swiftlint:disable)"
+    match_kinds: comment
+    message: "Don't escape the Swiftlint Rules"
+    severity: error
+
 disabled_rules:
-  - custom_rules
   - discouraged_object_literal
   - explicit_acl
   - explicit_enum_raw_value
@@ -69,6 +76,7 @@ opt_in_rules:
   - contains_over_first_not_nil
   - control_statement
   - convenience_type
+  - custom_rules
   - cyclomatic_complexity
   - deployment_target
   - discarded_notification_center_observer
