@@ -21,7 +21,7 @@ import Foundation
 struct GraphRequestSerializer {
   let settings: SettingsManaging
 
-  func preProcess(_ parameters: [String: Any]) -> [String: Any] {
+  func preProcess(_ parameters: [String: AnyHashable]) -> [String: AnyHashable] {
     switch settings.graphApiDebugParameter {
     case .none:
       return parameters

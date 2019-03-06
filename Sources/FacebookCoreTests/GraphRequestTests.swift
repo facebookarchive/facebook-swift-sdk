@@ -231,7 +231,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testHasAttachmentsWithImageParameter() {
-    let parameters: [String: Any] = [
+    let parameters: [String: AnyHashable] = [
       "Foo": UIImage()
     ]
     let request = GraphRequest(
@@ -247,7 +247,7 @@ class GraphRequestTests: XCTestCase {
     guard let data = "Bar".data(using: .utf8) else {
       return XCTFail("Should be able to convert a string to a utf8 encoded data")
     }
-    let parameters: [String: Any] = [
+    let parameters: [String: AnyHashable] = [
       "Foo": data
     ]
     let request = GraphRequest(
@@ -263,7 +263,7 @@ class GraphRequestTests: XCTestCase {
     guard let data = "Bar".data(using: .utf8) else {
       return XCTFail("Should be able to convert a string to a utf8 encoded data")
     }
-    let parameters: [String: Any] = [
+    let parameters: [String: AnyHashable] = [
       "Foo": data as GraphRequestDataAttachment
     ]
     let request = GraphRequest(

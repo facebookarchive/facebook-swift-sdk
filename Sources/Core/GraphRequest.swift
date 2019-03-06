@@ -49,7 +49,7 @@ struct GraphRequest {
   let graphPath: GraphPath
 
   /// The request parameters.
-  let parameters: [String: Any]
+  let parameters: [String: AnyHashable]
 
   /**
    The HTTPMethod to use for the request, access rawValues for encoding purposes
@@ -80,7 +80,7 @@ struct GraphRequest {
   */
   init(
     graphPath: GraphPath,
-    parameters: [String: Any] = [:],
+    parameters: [String: AnyHashable] = [:],
     accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
     version: String = Settings.graphAPIVersion,
     httpMethod: GraphRequest.HTTPMethod = .get,

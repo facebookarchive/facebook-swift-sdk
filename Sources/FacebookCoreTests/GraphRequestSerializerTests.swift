@@ -21,7 +21,7 @@ import XCTest
 
 class GraphRequestSerializerTests: XCTestCase {
 
-  private var startingParameters: [String: Any] = ["Foo": "Bar"]
+  private var startingParameters: [String: AnyHashable] = ["Foo": "Bar"]
 
   func testPreprocessingParametersWithDebugParameterNone() {
     let fakeSettings = FakeSettings(graphApiDebugParameter: .none)
@@ -30,8 +30,8 @@ class GraphRequestSerializerTests: XCTestCase {
     let processedParameters = serializer.preProcess(startingParameters)
 
     XCTAssertEqual(
-      equatableParameters(startingParameters),
-      equatableParameters(processedParameters),
+      startingParameters,
+      processedParameters,
       "Preprocessing parameters should not add additional parameters unless settings have a non-none debug parameter"
     )
   }
@@ -48,8 +48,8 @@ class GraphRequestSerializerTests: XCTestCase {
     )
 
     XCTAssertEqual(
-      equatableParameters(expectedParameters),
-      equatableParameters(processedParameters),
+      expectedParameters,
+      processedParameters,
       "Preprocessing parameters should add additional parameters when settings has a debug parameter of info"
     )
   }
@@ -66,28 +66,10 @@ class GraphRequestSerializerTests: XCTestCase {
     )
 
     XCTAssertEqual(
-      equatableParameters(expectedParameters),
-      equatableParameters(processedParameters),
+      expectedParameters,
+      processedParameters,
       "Preprocessing parameters should add additional parameters when settings has a debug parameter of warning"
     )
-  }
-
-  private func equatableParameters(
-    _ nonEquatableParameters: [String: Any],
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> [String: String] {
-
-    guard let equatableParameters = nonEquatableParameters as? [String: String]
-      else {
-        XCTFail(
-          "Could not downcast: \(nonEquatableParameters) into Equatable parameters",
-          file: file,
-          line: line
-        )
-        return [:]
-    }
-    return equatableParameters
   }
 
 }
