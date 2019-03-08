@@ -18,6 +18,7 @@
 
 import UIKit
 
+// TODO: Resolve this
 typealias GraphPath = String
 typealias GraphRequestDataAttachment = Data
 
