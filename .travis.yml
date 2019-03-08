@@ -14,16 +14,21 @@ branches:
   only:
     - master
     - release-1.0
+    - core-conversion
 
 # Build Stages
 stages:
   - name: analysis
+  - name: test
 
 # Build Jobs
 jobs:
   include:
     - stage: analysis
       name: Analysis
+    - stage: test
+      name: Test
+      script: sh scripts/travis/test.sh
 
 # Scripts
 before_install: sh scripts/travis/before_install.sh
