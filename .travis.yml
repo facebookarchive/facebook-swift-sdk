@@ -28,7 +28,7 @@ jobs:
       name: Analysis
     - stage: test
       name: Test
-      script: sh scripts/travis/test.sh
+      script: sh scripts/travis/unit_tests.sh
 
 # Scripts
 before_install: sh scripts/travis/before_install.sh
