@@ -135,9 +135,9 @@ struct GraphRequest {
 
    - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
   */
-  func start(withConnection connection: GraphRequestConnecting = GraphRequestConnection(),
-             completionHandler handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
-    connection.add(request: self, completionHandler: handler)
+  func start(with connection: GraphRequestConnecting = GraphRequestConnection(),
+             completion handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
+    connection.add(request: self, completion: handler)
     connection.start()
     return connection
   }
