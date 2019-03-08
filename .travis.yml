@@ -1,18 +1,23 @@
 branches:
   only:
     - master
+    - core-conversion
 language: objective-c
 os: osx
 osx_image: xcode10
 cache:
   - cocoapods
-env:
-  matrix:
-    - TEST_TYPE=iOS
-    - TEST_TYPE=Lint
-    - TEST_TYPE=Samples
-    - TEST_TYPE=CocoaPods
-    - TEST_TYPE=Carthage
+jobs:
+  include:
+    - stage: "Build"
+      script: sh scripts/travis/build_ios.sh
+    - stage: "Lint"
+      script: sh scripts/travis/lint.sh
+    - stage: "Build Samples"
+      script: sh scripts/travis/build_samples.sh
+    - stage: "Cocoapods"
+      script: sh scripts/travis/cocoapods.sh
+    - stage: "Carthage"
+      script: sh scripts/travis/carthage.sh
 before_install: sh scripts/travis/before_install.sh
 install: sh scripts/travis/install.sh
-script: sh scripts/travis/script.sh
