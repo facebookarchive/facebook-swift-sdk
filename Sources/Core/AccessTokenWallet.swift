@@ -32,7 +32,7 @@ class AccessTokenWallet {
 
    Overriding this value may result in unexpected and unwanted behavior
   */
-  static var shared: AccessTokenWallet = AccessTokenWallet()
+  static let shared: AccessTokenWallet = AccessTokenWallet()
 
   init(
     cookieUtility: CookieHandling.Type = InternalUtility.self,

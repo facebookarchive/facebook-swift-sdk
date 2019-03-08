@@ -28,7 +28,7 @@ enum GraphConnectionError: Error {
 
 protocol GraphRequestConnecting {
   func start()
-  func add(request: GraphRequest, completionHandler handler: @escaping GraphRequestBlock)
+  func add(request: GraphRequest, completion handler: @escaping GraphRequestBlock)
 }
 
 class GraphRequestConnection: GraphRequestConnecting {
@@ -39,7 +39,7 @@ class GraphRequestConnection: GraphRequestConnecting {
 
   func add(
     request: GraphRequest,
-    completionHandler handler: @escaping (GraphRequestConnection?, Any?, Error?
+    completion handler: @escaping (GraphRequestConnection?, Any?, Error?
     ) -> Void) {
     // TODO: Implement
   }

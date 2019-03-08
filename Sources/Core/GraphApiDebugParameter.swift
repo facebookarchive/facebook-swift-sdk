@@ -18,6 +18,8 @@
 
 import Foundation
 
-enum GraphApiDebugParameter: String {
-  case none, info, warning
+enum GraphApiDebugParameter: String, CaseIterable {
+  case none
+  case info
+  case warning
 }

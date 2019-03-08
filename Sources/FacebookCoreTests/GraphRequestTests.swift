@@ -202,7 +202,7 @@ class GraphRequestTests: XCTestCase {
     let request = GraphRequest(graphPath: path)
     let fakeConnection = FakeGraphRequestConnection()
 
-    let connection = request.start(withConnection: fakeConnection) { _, _, _ in
+    let connection = request.start(with: fakeConnection) { _, _, _ in
       expectation.fulfill()
     }
 

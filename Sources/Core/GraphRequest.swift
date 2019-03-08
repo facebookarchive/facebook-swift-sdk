@@ -18,7 +18,9 @@
 
 import UIKit
 
+// TODO: Resolve this
 typealias GraphPath = String
+// TODO: Resolve this
 typealias GraphRequestDataAttachment = Data
 
 struct GraphRequest {
@@ -33,7 +35,7 @@ struct GraphRequest {
   struct Flags: OptionSet {
     let rawValue: Int
 
-    static let none: Flags = Flags(rawValue: 0)
+    static let none: Flags = Flags(rawValue: 1 << 0)
 
     /// indicates this request should not use a client token as its token parameter
     static let skipClientToken: Flags = Flags(rawValue: 1 << 1)
@@ -135,9 +137,9 @@ struct GraphRequest {
 
    - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
   */
-  func start(withConnection connection: GraphRequestConnecting = GraphRequestConnection(),
-             completionHandler handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
-    connection.add(request: self, completionHandler: handler)
+  func start(with connection: GraphRequestConnecting = GraphRequestConnection(),
+             completion handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
+    connection.add(request: self, completion: handler)
     connection.start()
     return connection
   }
