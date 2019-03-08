@@ -35,7 +35,7 @@ struct GraphRequest {
   struct Flags: OptionSet {
     let rawValue: Int
 
-    static let none: Flags = Flags(rawValue: 0)
+    static let none: Flags = Flags(rawValue: 1 << 0)
 
     /// indicates this request should not use a client token as its token parameter
     static let skipClientToken: Flags = Flags(rawValue: 1 << 1)
