@@ -1,6 +1,7 @@
 branches:
   only:
     - master
+    - release-1.0
     - core-conversion
 language: objective-c
 os: osx
