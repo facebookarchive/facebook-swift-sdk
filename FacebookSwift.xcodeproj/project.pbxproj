@@ -222,7 +222,6 @@
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
-				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
 				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
 				F40739402231E4EB0018505A /* GraphRequestQueryItemBuilder.swift */,
 			);
