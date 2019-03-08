@@ -43,4 +43,8 @@ class Settings: SettingsManaging {
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var isGraphErrorRecoveryEnabled: Bool = false
+
+  // TODO: There is a very good chance this will be needed when we start injecting settings various places
+  static let shared: Settings = Settings()
+
 }

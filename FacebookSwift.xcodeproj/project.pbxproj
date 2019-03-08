@@ -16,6 +16,7 @@
 		F4144A10222DAFCD00CB83E0 /* PermissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */; };
 		F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4144A11222DB16C00CB83E0 /* Permission.swift */; };
 		F41DE51B2230363700D42A7B /* GraphRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DE51A2230363700D42A7B /* GraphRequestSerializer.swift */; };
+		F41DE51D223043A300D42A7B /* GraphRequestSerializerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DE51C223043A300D42A7B /* GraphRequestSerializerConfigurationTests.swift */; };
 		F42687C22230770100A62C2E /* GraphApiDebugParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687BF223076F400A62C2E /* GraphApiDebugParameterTests.swift */; };
 		F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */; };
 		F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687C42230772600A62C2E /* GraphRequestTests.swift */; };
@@ -43,6 +44,10 @@
 		F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */; };
 		F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */; };
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
+		F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056D82232CEEF00BE526B /* FakeLogger.swift */; };
+		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
+		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
+		F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */; };
 		F47852A2222DC6C200A4269C /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47852A1222DC6C200A4269C /* FBError.swift */; };
 		F47853C1222DCF8600A4269C /* CoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47853C0222DCF8600A4269C /* CoreError.swift */; };
 		F47AB33F222F4394004A854F /* GraphApiDebugParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */; };
@@ -107,6 +112,7 @@
 		F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionTests.swift; sourceTree = "<group>"; };
 		F4144A11222DB16C00CB83E0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		F41DE51A2230363700D42A7B /* GraphRequestSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializer.swift; sourceTree = "<group>"; };
+		F41DE51C223043A300D42A7B /* GraphRequestSerializerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerConfigurationTests.swift; sourceTree = "<group>"; };
 		F42687B222306DC800A62C2E /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
 		F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerTests.swift; sourceTree = "<group>"; };
 		F42687BF223076F400A62C2E /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
@@ -135,6 +141,10 @@
 		F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionTests.swift; sourceTree = "<group>"; };
 		F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestPiggybackManagerTests.swift; sourceTree = "<group>"; };
 		F45734D6222D9535001F806A /* InternalUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtilityTests.swift; sourceTree = "<group>"; };
+		F47056D82232CEEF00BE526B /* FakeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLogger.swift; sourceTree = "<group>"; };
+		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializationError.swift; sourceTree = "<group>"; };
 		F47852A1222DC6C200A4269C /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
 		F47853C0222DCF8600A4269C /* CoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreError.swift; sourceTree = "<group>"; };
 		F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
@@ -235,13 +245,14 @@
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F44DB6B2222B01B60083506E /* Extensions */,
 				F47852A1222DC6C200A4269C /* FBError.swift */,
-				F44DB6992229B36D0083506E /* Needs Conversion */,
-				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
-				F4144A11222DB16C00CB83E0 /* Permission.swift */,
-				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
 				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
-				F41DE51A2230363700D42A7B /* GraphRequestSerializer.swift */,
+				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
+				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
 				F40739402231E4EB0018505A /* GraphRequestQueryItemBuilder.swift */,
+				F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */,
+				F41DE51A2230363700D42A7B /* GraphRequestSerializer.swift */,
+				F44DB6992229B36D0083506E /* Needs Conversion */,
+				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -333,6 +344,7 @@
 				F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */,
 				F44DB6A22229C6B60083506E /* FakeSettings.swift */,
 				F44DB6C2222B136F0083506E /* FakeGraphRequestPiggybackManager.swift */,
+				F47056D82232CEEF00BE526B /* FakeLogger.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -342,10 +354,12 @@
 			children = (
 				F44DB69E2229B4C50083506E /* AccessTokenCache.swift */,
 				F44DB69C2229B4420083506E /* AccessTokenCaching.swift */,
-				F44DB6932229AB460083506E /* InternalUtility.swift */,
-				F44DB69A2229B37F0083506E /* Settings.swift */,
 				F44DB6B6222B07050083506E /* GraphRequestConnection.swift */,
 				F44DB6BC222B0DD20083506E /* GraphRequestPiggybackManager.swift */,
+				F44DB6932229AB460083506E /* InternalUtility.swift */,
+				F47056DC2232DF4500BE526B /* Logger.swift */,
+				F47056DA2232DF1D00BE526B /* Logging.swift */,
+				F44DB69A2229B37F0083506E /* Settings.swift */,
 			);
 			path = "Needs Conversion";
 			sourceTree = "<group>";
@@ -371,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				F407393C2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift */,
+				F41DE51C223043A300D42A7B /* GraphRequestSerializerConfigurationTests.swift */,
 				F45734D0222D9343001F806A /* AccessTokenCacheTests.swift */,
 				F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */,
 				F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */,
@@ -635,6 +650,7 @@
 			files = (
 				F44DB6BD222B0DD20083506E /* GraphRequestPiggybackManager.swift in Sources */,
 				F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */,
+				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
@@ -646,7 +662,9 @@
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
 				F44DB6B1222B01A30083506E /* NotificationName+Extensions.swift in Sources */,
 				F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */,
+				F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */,
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
+				F47056DD2232DF4500BE526B /* Logger.swift in Sources */,
 				F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */,
 				F44DB6B7222B07050083506E /* GraphRequestConnection.swift in Sources */,
 				F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */,
@@ -679,6 +697,7 @@
 				F42687C22230770100A62C2E /* GraphApiDebugParameterTests.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,
+				F41DE51D223043A300D42A7B /* GraphRequestSerializerConfigurationTests.swift in Sources */,
 				F44DB6BF222B10040083506E /* FakeGraphConnectionProvider.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */,
@@ -691,10 +710,10 @@
 				F47AB33F222F4394004A854F /* GraphApiDebugParameterTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
+				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
 				F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */,
-				F4C4840F222F376100D3002C /* (null) in Sources */,
 				F44DB6A12229C50E0083506E /* FakeAccessTokenCache.swift in Sources */,
 				F4144A10222DAFCD00CB83E0 /* PermissionTests.swift in Sources */,
 			);

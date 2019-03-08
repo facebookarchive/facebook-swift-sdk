@@ -20,18 +20,67 @@ import Foundation
 
 struct GraphRequestSerializer {
   let settings: SettingsManaging
+  let logger: Logging
 
-  func preProcess(_ parameters: [String: AnyHashable]) -> [String: AnyHashable] {
+  init(settings: SettingsManaging = Settings.shared,
+       logger: Logging = Logger()) {
+    self.settings = settings
+    self.logger = logger
+  }
+
+  /**
+   Serializes a graph request and a url
+
+   - Parameters:
+     - url: The url to modify based on the graph request
+     - graphRequest: The request used to provide information to a url
+     - forBatch: Whether or not a graph request is intended to be batched with other requests
+   */
+  func serialize(with url: URL, graphRequest: GraphRequest, forBatch: Bool = false) throws -> URL {
+    if graphRequest.httpMethod == .post, !forBatch {
+      return url
+    }
+
+    if graphRequest.hasAttachments,
+      graphRequest.httpMethod == .get {
+
+      logger.log(message: "Can not use GET to upload a file")
+      throw GraphRequestSerializationError.getWithAttachments
+    }
+
+    let requestQueryItems = GraphRequestQueryItemBuilder.build(from: graphRequest.parameters)
+    let processedQueryItems = preProcess(requestQueryItems)
+
+    guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+      throw GraphRequestSerializationError.malformedURL
+    }
+    if !processedQueryItems.isEmpty {
+      components.queryItems = processedQueryItems
+    }
+
+    // Getting a url from the components can fail if we modify the components path parameter
+    // Could not find other examples where this can fail. Since we are not modifying the path
+    // as part of this helper it is safe to assume this will always succeed.
+    return components.url ?? url
+  }
+
+  /**
+   Returns an updated list of parameters that includes information about debug levels
+
+    - Parameters:
+      - parameters: a list of `URLQueryItem`s to use in constructing a new list of `URLQueryItem`
+                    that includes information about debug levels
+   */
+  func preProcess(_ parameters: [URLQueryItem]) -> [URLQueryItem] {
     switch settings.graphApiDebugParameter {
     case .none:
       return parameters
     case .info, .warning:
-      var temp = parameters
-      temp.updateValue(
-        settings.graphApiDebugParameter.rawValue,
-        forKey: Keys.debug.rawValue
+      let queryItem = URLQueryItem(
+        name: Keys.debug.rawValue,
+        value: settings.graphApiDebugParameter.rawValue
       )
-      return temp
+      return parameters + [queryItem]
     }
   }
 
