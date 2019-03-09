@@ -74,7 +74,7 @@ struct GraphRequest {
    Initializes a new instance of a graph request.
 
    - Parameters:
-     - graphPath: the graph path (e.g., @"me")
+   - Parameter graphPath: the graph path (e.g., @"me")
      - parameters: the optional parameters dictionary
      - tokenString: an optional access token to use, must provide a token for paths that require a token
      - version: the optional Graph API version (e.g., "v2.0"). nil defaults to `Settings.graphAPIVersion`.
