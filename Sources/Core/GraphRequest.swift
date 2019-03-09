@@ -73,12 +73,11 @@ struct GraphRequest {
   /**
    Initializes a new instance of a graph request.
 
-   - Parameters:
-     - graphPath: the graph path (e.g., @"me")
-     - parameters: the optional parameters dictionary
-     - tokenString: an optional access token to use, must provide a token for paths that require a token
-     - version: the optional Graph API version (e.g., "v2.0"). nil defaults to `Settings.graphAPIVersion`.
-     - method: the HTTP method. Empty String defaults to `HTTPMethod.get`
+     - Parameter graphPath: the graph path (e.g., @"me")
+     - Parameter parameters: the optional parameters dictionary
+     - Parameter tokenString: an optional access token to use, must provide a token for paths that require a token
+     - Parameter version: the optional Graph API version (e.g., "v2.0"). nil defaults to `Settings.graphAPIVersion`.
+     - Parameter httpMethod: the HTTP method. Empty String defaults to `HTTPMethod.get`
   */
   init(
     graphPath: GraphPath,
@@ -109,8 +108,7 @@ struct GraphRequest {
   /**
    Enable or disable the automatic error recovery mechanism.
 
-   - Parameters:
-     - enabled: whether to enable the automatic error recovery mechanism
+   - Parameter enabled: whether to enable the automatic error recovery mechanism
 
    By default, non-batched GraphRequest instances will automatically try to recover
    from errors by constructing a `GraphErrorRecoveryProcessor` instance that
@@ -130,10 +128,9 @@ struct GraphRequest {
   /**
    Start the graph request on a `GraphRequestConnection`
 
-   - Parameters:
-     - withConnection: a connection to begin the request on. Generally a best practice to omit this parameter
-                       and allow the request to provide a new instance of a connection
-     - completionHandler: A handler for when the `GraphRequestConnection` completes the `GraphRequest`
+   - Parameter with: a connection to begin the request on. Generally a best practice to omit this parameter
+   and allow the request to provide a new instance of a connection
+   - Parameter completion: A handler for when the `GraphRequestConnection` completes the `GraphRequest`
 
    - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
   */
