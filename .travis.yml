@@ -19,18 +19,16 @@ branches:
 # Build Stages
 stages:
   - name: analysis
-  - name: test
 
 # Build Jobs
 jobs:
   include:
     - stage: analysis
-      name: Analysis
-    - stage: test
-      name: Test
-      script: sh scripts/travis/unit_tests.sh
+      name: Linting
+      script: sh scripts/travis/swiftlint.sh
+    - script: sh scripts/travis/unit_tests.sh
+      name: Unit Tests
 
 # Scripts
 before_install: sh scripts/travis/before_install.sh
 install: sh scripts/travis/install.sh
-script: sh scripts/travis/script.sh
