@@ -22,5 +22,8 @@
 # --------------
 
 if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
-  brew bundle check || brew bundle
+  brew bundle check || brew bundle install
+
+  # Install missing ruby gems
+  bundle install
 fi
