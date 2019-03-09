@@ -21,6 +21,6 @@
 # Main Script
 # --------------
 
-if [ "$TRAVIS_JOB_NAME" = Analysis ]; then
+if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
   brew bundle check || brew bundle
 fi
