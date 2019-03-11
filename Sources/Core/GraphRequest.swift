@@ -136,7 +136,9 @@ struct GraphRequest {
   */
   func start(with connection: GraphRequestConnecting = GraphRequestConnection(),
              completion handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
-    connection.add(request: self, completion: handler)
+
+    // This is marked as try? but should never fail with a new graph request connection
+    try? connection.add(request: self, completion: handler)
     connection.start()
     return connection
   }
