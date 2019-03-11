@@ -31,11 +31,25 @@ protocol GraphRequestConnecting {
 
 class GraphRequestConnection: GraphRequestConnecting {
 
+  /// Gets or sets the timeout interval to wait for a response before giving up.
+  var timeout: TimeInterval = 0.0
+
   /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
-  let defaultTimeout: Double = 60
+  let defaultConnectionTimeout: Double = 60
 
   /// The delegate object that receives updates.
   weak var delegate: GraphRequestConnectionDelegate?
+
+  /**
+   The raw response that was returned from the server.
+
+   This property can be used to inspect HTTP headers that were returned from
+   the server.
+
+   The property is nil until the request completes. If there was a response
+   then this property will be non-nil during the GraphRequestBlock callback.
+   */
+  private(set) var urlResponse: HTTPURLResponse?
 
   func start() {
     // TODO: Implement

@@ -23,11 +23,18 @@ import XCTest
 
 class GraphRequestConnectionTests: XCTestCase {
 
-  func testDefaultTimeout() {
+  func testDefaultConnectionTimeout() {
     let connection = GraphRequestConnection()
 
-    XCTAssertEqual(connection.defaultTimeout, 60.0,
+    XCTAssertEqual(connection.defaultConnectionTimeout, 60.0,
                    "A connection should have a default timeout of sixty seconds")
+  }
+
+  func testTimeoutInterval() {
+    let connection = GraphRequestConnection()
+
+    XCTAssertEqual(connection.timeout, 0,
+                   "A connection should have a timeout of zero seconds.")
   }
 
   func testDelegate() {
@@ -39,6 +46,13 @@ class GraphRequestConnectionTests: XCTestCase {
 
     XCTAssertNil(connection.delegate,
                  "A connection's delegate should be weakly held")
+  }
+
+  func testUrlResponse() {
+    let connection = GraphRequestConnection()
+
+    XCTAssertNil(connection.urlResponse,
+                 "A connection should not have a default url response")
   }
 
   func testStart() {
