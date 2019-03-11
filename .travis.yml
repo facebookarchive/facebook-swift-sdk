@@ -29,7 +29,6 @@ jobs:
     - stage: analysis
       name: Unit Tests
       script: sh scripts/travis/unit_tests.sh
-      name: Unit Tests
 
 # Scripts
 before_install: sh scripts/travis/before_install.sh
