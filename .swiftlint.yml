@@ -1,3 +1,5 @@
+swiftlint_version: 0.31.0
+
 included:
   - Sources
   - Samples
@@ -5,12 +7,10 @@ included:
 
 excluded:
   - Pods
-  - Carthage
-  - Carthage/facebook-objc-sdk/samples
-  - Carthage/facebook-objc-sdk/vendor
-  - Vendor
 
-cyclomatic_complexity: 11
+indentation: 2
+line_length: 120
+
 explicit_type_interface:
   excluded:
     - local
@@ -33,60 +33,63 @@ file_header:
     \/\/ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
     \/\/ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
     \/\/ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\.
-file_name:
-  excluded:
-    - \+Extensions
 identifier_name:
   excluded:
     - ok
-indentation: 2
-large_tuple: 3
-line_length: 120
-nesting:
-  type_level: 2
 private_outlet:
   allow_private_set: true
 
+custom_rules:
+  swiftlint_escaping:
+    name: "Escaping Swiftlint Rules"
+    regex: "(swiftlint:disable)"
+    match_kinds: comment
+    message: "Don't escape the Swiftlint Rules"
+    severity: error
+
 disabled_rules:
-  - conditional_returns_on_newline
   - discouraged_object_literal
   - explicit_acl
   - explicit_enum_raw_value
+  - explicit_self
   - explicit_top_level_acl
   - no_extension_access_modifier
   - number_separator
   - prefixed_toplevel_constant
-  - switch_case_on_newline
-  # TODO: All below to move to Opt In
-  - discouraged_optional_boolean
-  - discouraged_optional_collection
-  - function_default_parameter_at_end
-  - todo
 
 opt_in_rules:
+  - anyobject_protocol
   - array_init
   - attributes
   - block_based_kvo
   - class_delegate_protocol
   - closing_brace
+  - closure_body_length
   - closure_end_indentation
   - closure_parameter_position
   - closure_spacing
+  - collection_alignment
   - colon
   - comma
   - compiler_protocol_init
+  - conditional_returns_on_newline
   - contains_over_first_not_nil
   - control_statement
   - convenience_type
+  - custom_rules
   - cyclomatic_complexity
+  - deployment_target
   - discarded_notification_center_observer
   - discouraged_direct_init
+  - discouraged_optional_boolean
+  - discouraged_optional_collection
+  - duplicate_imports
   - dynamic_inline
   - empty_count
-  - empty_string
   - empty_enum_arguments
   - empty_parameters
   - empty_parentheses_with_trailing_closure
+  - empty_string
   - empty_xctest_method
   - explicit_init
   - explicit_type_interface
@@ -102,35 +105,46 @@ opt_in_rules:
   - force_try
   - force_unwrapping
   - function_body_length
+  - function_default_parameter_at_end
   - function_parameter_count
   - generic_type_name
+  - identical_operands
   - identifier_name
   - implicit_getter
   - implicit_return
   - implicitly_unwrapped_optional
+  - inert_defer
   - is_disjoint
   - joined_default_parameter
   - large_tuple
+  - last_where
   - leading_whitespace
   - legacy_cggeometry_functions
   - legacy_constant
   - legacy_constructor
+  - legacy_hashing
   - legacy_nsgeometry_functions
+  - legacy_random
   - let_var_whitespace
   - line_length
   - literal_expression_end_indentation
   - lower_acl_than_parent
   - mark
+  - missing_docs
   - modifier_order
   - multiline_arguments
+  - multiline_arguments_brackets
   - multiline_function_chains
+  - multiline_literal_brackets
   - multiline_parameters
+  - multiline_parameters_brackets
   - multiple_closures_with_trailing_closure
   - nesting
   - nimble_operator
   - no_fallthrough_only
   - no_grouping_extension
   - notification_center_detachment
+  - nslocalizedstring_key
   - object_literal
   - opening_brace
   - operator_usage_whitespace
@@ -142,6 +156,7 @@ opt_in_rules:
   - private_outlet
   - private_over_fileprivate
   - private_unit_test
+  - prohibited_interface_builder
   - prohibited_super_call
   - protocol_property_accessors_order
   - quick_discouraged_call
@@ -149,9 +164,11 @@ opt_in_rules:
   - quick_discouraged_pending_test
   - redundant_discardable_let
   - redundant_nil_coalescing
+  - redundant_objc_attribute
   - redundant_optional_initialization
   - redundant_set_access_control
   - redundant_string_enum_value
+  - redundant_type_annotation
   - redundant_void_return
   - required_enum_case
   - return_arrow_whitespace
@@ -160,10 +177,15 @@ opt_in_rules:
   - sorted_first_last
   - sorted_imports
   - statement_position
+  - static_operator
   - strict_fileprivate
+  - strong_iboutlet
   - superfluous_disable_command
   - switch_case_alignment
+  - switch_case_on_newline
   - syntactic_sugar
+  - todo
+  - toggle_bool
   - trailing_closure
   - trailing_comma
   - trailing_newline
@@ -176,13 +198,22 @@ opt_in_rules:
   - unneeded_parentheses_in_closure_argument
   - untyped_error_in_catch
   - unused_closure_parameter
+  - unused_control_flow_label
   - unused_enumerated
+  - unused_import
   - unused_optional_binding
+  - unused_private_declaration
+  - unused_setter_value
   - valid_ibinspectable
   - vertical_parameter_alignment
   - vertical_parameter_alignment_on_call
   - vertical_whitespace
+  - vertical_whitespace_between_cases
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
   - void_return
+  - weak_computed_property
   - weak_delegate
+  - xct_specific_matcher
   - xctfail_message
   - yoda_condition

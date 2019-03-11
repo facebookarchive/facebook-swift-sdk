@@ -25,7 +25,7 @@
 
 set -e
 
-if [ "$TRAVIS_JOB_NAME" = Analysis ]; then
+if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
   swiftlint autocorrect --format
 
   if output=$(git status --porcelain) && [ -n "$output" ]; then
