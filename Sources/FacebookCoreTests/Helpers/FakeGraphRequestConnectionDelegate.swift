@@ -16,36 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable multiline_arguments
-
 @testable import FacebookCore
-import XCTest
 
-class GraphRequestConnectionTests: XCTestCase {
-
-  func testDefaultTimeout() {
-    let connection = GraphRequestConnection()
-
-    XCTAssertEqual(connection.defaultTimeout, 60.0,
-                   "A connection should have a default timeout of sixty seconds")
-  }
-
-  func testDelegate() {
-    let connection = GraphRequestConnection()
-    var delegate: GraphRequestConnectionDelegate = FakeGraphRequestConnectionDelegate()
-    connection.delegate = delegate
-
-    delegate = FakeGraphRequestConnectionDelegate()
-
-    XCTAssertNil(connection.delegate,
-                 "A connection's delegate should be weakly held")
-  }
-
-  func testStart() {
-    let connection = GraphRequestConnection()
-
-    connection.start()
-
-    // TODO: Observe and assert about side effects when connection logic is added
-  }
-}
+class FakeGraphRequestConnectionDelegate: GraphRequestConnectionDelegate {}

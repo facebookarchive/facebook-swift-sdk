@@ -34,6 +34,9 @@ class GraphRequestConnection: GraphRequestConnecting {
   /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
   let defaultTimeout: Double = 60
 
+  /// The delegate object that receives updates.
+  weak var delegate: GraphRequestConnectionDelegate?
+
   func start() {
     // TODO: Implement
   }
