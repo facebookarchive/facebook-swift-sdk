@@ -24,6 +24,22 @@ import XCTest
 
 class GraphRequestConnectionTests: XCTestCase {
 
+  let fakeSession: FakeSession = FakeSession()
+  var fakeSessionProvider: FakeSessionProvider!
+
+  override func setUp() {
+    super.setUp()
+
+    fakeSessionProvider = FakeSessionProvider(fakeSession: fakeSession)
+  }
+
+  func testCreatingConnection() {
+    let connection = GraphRequestConnection()
+
+    XCTAssertEqual(connection.state, .created,
+                   "A connection should be in the created state immediately after creation")
+  }
+
   func testDefaultConnectionTimeout() {
     let connection = GraphRequestConnection()
 
@@ -56,6 +72,13 @@ class GraphRequestConnectionTests: XCTestCase {
                  "A connection should not have a default url response")
   }
 
+  func testRequests() {
+    let connection = GraphRequestConnection()
+
+    XCTAssertTrue(connection.requests.isEmpty,
+                  "A connection should have no requests by default")
+  }
+
   // MARK: Adding Request
   func testAddingRequest() {
     let request = GraphRequest(graphPath: "Foo")
@@ -77,6 +100,58 @@ class GraphRequestConnectionTests: XCTestCase {
           XCTFail("Caught unexpected error: \(error)")
         }
     }
+  }
+
+  func testAddingRequestStoresRequest() {
+    let request = GraphRequest(graphPath: "Foo")
+
+    let connection = GraphRequestConnection()
+    try? connection.add(request: request) { _, _, _ in }
+
+    guard let metadata = connection.requests.first else {
+      return XCTFail("A connection should store an added request as graph request metadata")
+    }
+
+    XCTAssertTrue(metadata.batchParameters.isEmpty,
+                  "A connection should not add batch parameters to request metadata by default")
+  }
+
+  func testAddingRequestStoresBatchParameters() {
+    let request = GraphRequest(graphPath: "Foo")
+    let parameters = ["Foo": "Bar"]
+
+    let connection = GraphRequestConnection()
+    try? connection.add(request: request, batchParameters: parameters) { _, _, _ in }
+
+    guard let metadata = connection.requests.first,
+      let batchParameters = metadata.batchParameters as? [String: String]
+      else {
+        return XCTFail("A connection should store an added request as graph request metadata along with any additional batch parameters")
+    }
+
+    XCTAssertEqual(batchParameters, parameters,
+                   "A connection should not alter batch parameters when adding them to request metadata")
+  }
+
+  // MARK: Starting Connection
+
+  func testStartingWithoutSession() {
+    let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)
+
+    connection.start()
+
+    XCTAssertEqual(fakeSessionProvider.sessionCallCount, 1,
+                   "A connection should request a new session from its session provider if starting a request without an existing session")
+  }
+
+  func testStartingWithSession() {
+    let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)
+
+    connection.start()
+    connection.start()
+
+    XCTAssertEqual(fakeSessionProvider.sessionCallCount, 1,
+                   "A connection should not request a new session from its session provider if starting a request with an existing session")
   }
 
   func testStart() {

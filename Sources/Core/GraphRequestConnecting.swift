@@ -16,28 +16,20 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
-import Foundation
+import UIKit
 
-class FakeGraphRequestConnection: GraphRequestConnecting {
-
-  var startCalled: Bool = false
-  var capturedAddRequest: GraphRequest?
-  var capturedBatchParameters: [String: AnyHashable]?
-  var capturedAddRequestHandler: GraphRequestBlock?
-
-  func start() {
-    startCalled = true
-  }
-
+protocol GraphRequestConnecting {
+  func start()
   func add(
     request: GraphRequest,
     batchParameters: [String: AnyHashable],
-    completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
-    ) -> Void) {
-    capturedAddRequest = request
-    capturedBatchParameters = batchParameters
-    capturedAddRequestHandler = handler
-  }
+    completion handler: @escaping GraphRequestBlock
+    ) throws
+}
 
+extension GraphRequestConnecting {
+  func add(request: GraphRequest, completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
+    ) -> Void) throws {
+    try add(request: request, batchParameters: [:], completion: handler)
+  }
 }

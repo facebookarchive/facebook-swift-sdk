@@ -17,27 +17,14 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
-import Foundation
+import XCTest
 
-class FakeGraphRequestConnection: GraphRequestConnecting {
+class GraphRequestConnectionConfigurationTests: XCTestCase {
 
-  var startCalled: Bool = false
-  var capturedAddRequest: GraphRequest?
-  var capturedBatchParameters: [String: AnyHashable]?
-  var capturedAddRequestHandler: GraphRequestBlock?
+  func testSessionDependency() {
+    let connection = GraphRequestConnection()
 
-  func start() {
-    startCalled = true
+    XCTAssertTrue(connection.sessionProvider is SessionProvider,
+                  "Connection should have the correct concrete implementation of a session provider")
   }
-
-  func add(
-    request: GraphRequest,
-    batchParameters: [String: AnyHashable],
-    completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
-    ) -> Void) {
-    capturedAddRequest = request
-    capturedBatchParameters = batchParameters
-    capturedAddRequestHandler = handler
-  }
-
 }

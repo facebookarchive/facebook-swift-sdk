@@ -19,6 +19,7 @@
 		F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */; };
 		F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */; };
 		F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F52236FFA6007D3A34 /* FakeError.swift */; };
+		F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F722370B32007D3A34 /* GraphRequestConnecting.swift */; };
 		F432E9FA22370C07007D3A34 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */; };
 		F432E9FC22370C9C007D3A34 /* SessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9FB22370C9C007D3A34 /* SessionProvider.swift */; };
 		F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69122299FA10083506E /* AccessTokenWallet.swift */; };
@@ -53,6 +54,7 @@
 		F480D9092235CF83001AB8D3 /* GraphRequestConnectionStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D9082235CF83001AB8D3 /* GraphRequestConnectionStateTests.swift */; };
 		F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D90A2235CFC2001AB8D3 /* GraphRequestConnectionState.swift */; };
 		F480D90D2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D90C2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift */; };
+		F480D90F2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D90E2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift */; };
 		F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D9102236E1F7001AB8D3 /* FakeSessionProvider.swift */; };
 		F480D9132236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D9122236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift */; };
 		F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D9142236EE4F001AB8D3 /* GraphRequestConnectionError.swift */; };
@@ -118,6 +120,7 @@
 		F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadataTests.swift; sourceTree = "<group>"; };
 		F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadata.swift; sourceTree = "<group>"; };
 		F432E9F52236FFA6007D3A34 /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
+		F432E9F722370B32007D3A34 /* GraphRequestConnecting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnecting.swift; sourceTree = "<group>"; };
 		F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		F432E9FB22370C9C007D3A34 /* SessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProvider.swift; sourceTree = "<group>"; };
 		F44DB69122299FA10083506E /* AccessTokenWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWallet.swift; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 		F480D9082235CF83001AB8D3 /* GraphRequestConnectionStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionStateTests.swift; sourceTree = "<group>"; };
 		F480D90A2235CFC2001AB8D3 /* GraphRequestConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionState.swift; sourceTree = "<group>"; };
 		F480D90C2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeGraphRequestConnectionDelegate.swift; sourceTree = "<group>"; };
+		F480D90E2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionConfigurationTests.swift; sourceTree = "<group>"; };
 		F480D9102236E1F7001AB8D3 /* FakeSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSessionProvider.swift; sourceTree = "<group>"; };
 		F480D9122236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionErrorTests.swift; sourceTree = "<group>"; };
 		F480D9142236EE4F001AB8D3 /* GraphRequestConnectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionError.swift; sourceTree = "<group>"; };
@@ -255,13 +259,14 @@
 				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
 				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
+				F432E9F722370B32007D3A34 /* GraphRequestConnecting.swift */,
 				F44DB6B6222B07050083506E /* GraphRequestConnection.swift */,
 				F480D904223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift */,
-				F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */,
+				F480D9142236EE4F001AB8D3 /* GraphRequestConnectionError.swift */,
 				F480D90A2235CFC2001AB8D3 /* GraphRequestConnectionState.swift */,
+				F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */,
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
-				F480D9142236EE4F001AB8D3 /* GraphRequestConnectionError.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
 			);
 			path = Core;
@@ -403,6 +408,7 @@
 				F44DB6AE222AF5420083506E /* Fixtures */,
 				F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
+				F480D90E2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift */,
 				F480D90622347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift */,
 				F480D9122236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift */,
 				F480D9082235CF83001AB8D3 /* GraphRequestConnectionStateTests.swift */,
@@ -672,6 +678,7 @@
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
 				F47852A2222DC6C200A4269C /* FBError.swift in Sources */,
 				F432E9FA22370C07007D3A34 /* URLSession+Extensions.swift in Sources */,
+				F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */,
 				F47853C1222DCF8600A4269C /* CoreError.swift in Sources */,
 				F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */,
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
@@ -708,6 +715,7 @@
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
 				F480D90722347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift in Sources */,
 				F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */,
+				F480D90F2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift in Sources */,
 				F42DADBD2230597F00E1DFBA /* GraphApiDebugParameterTests.swift in Sources */,
 				F42687B92230704500A62C2E /* GraphRequestTests.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,

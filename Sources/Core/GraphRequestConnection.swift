@@ -18,14 +18,9 @@
 
 import Foundation
 
-// TODO: move to its own file
-protocol GraphRequestConnecting {
-  func start()
-  func add(request: GraphRequest, completion handler: @escaping GraphRequestBlock) throws
-}
-
 class GraphRequestConnection: GraphRequestConnecting {
 
+  // TODO: - figure out how this is used differently from default connection timeout
   /// Gets or sets the timeout interval to wait for a response before giving up.
   var timeout: TimeInterval = 0.0
 
@@ -38,6 +33,8 @@ class GraphRequestConnection: GraphRequestConnecting {
   /// The delegate object that receives updates.
   weak var delegate: GraphRequestConnectionDelegate?
 
+  private(set) var requests: [GraphRequestMetadata] = []
+
   /**
    The raw response that was returned from the server.
 
@@ -49,31 +46,49 @@ class GraphRequestConnection: GraphRequestConnecting {
    */
   private(set) var urlResponse: HTTPURLResponse?
 
-  init() {
+  private var session: Session?
+  let sessionProvider: SessionProviding
+
+  init(sessionProvider: SessionProviding = SessionProvider()) {
+    self.sessionProvider = sessionProvider
     state = .created
   }
 
   func start() {
-    // TODO: Implement
+
+    if session == nil {
+      session = sessionProvider.session()
+    }
   }
 
   /**
    Adds a GraphRequest object to the connection.
 
    - Parameter request: A request to be included in the round-trip when start is called.
+   - Parameter batchParameters: The dictionary of parameters to include for this request
+   as described in [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
+   Examples include "depends_on", "name", or "omit_response_on_success".
    - Parameter completion: A handler to call back when the round-trip completes or times out.
-
-   The completion handler is retained until the block is called upon the
-   completion or cancellation of the connection.
+   The completion handler is retained until the block is called upon the completion or cancellation
+   of the connection.
    */
   func add(
     request: GraphRequest,
-    completion handler: @escaping (GraphRequestConnection?, Any?, Error?
+    batchParameters: [String: AnyHashable] = [:],
+    completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
     ) -> Void) throws {
 
     if state != .created {
       throw GraphRequestConnectionError.requestAddition
     }
+
+    let metadata = GraphRequestMetadata(
+      request: request,
+      batchParameters: batchParameters,
+      completion: handler
+    )
+    requests.append(metadata)
   }
 
 }
+
