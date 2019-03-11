@@ -33,7 +33,7 @@ import Foundation
  is nil if there was an error.
  - Parameter error: The `Error` representing any error that occurred.
  */
-typealias GraphRequestBlock = (_ connection: GraphRequestConnection?, _ result: Any?, _ error: Error?) -> Void
+typealias GraphRequestBlock = (_ connection: GraphRequestConnecting?, _ result: Any?, _ error: Error?) -> Void
 
 protocol GraphConnectionProviding {
   func graphRequestConnection() -> GraphRequestConnecting

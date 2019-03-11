@@ -23,7 +23,7 @@ class FakeGraphRequestPiggybackManager: GraphRequestPiggybackManaging {
 
   static func addRefreshPiggyback(
     _ connection: GraphRequestConnecting,
-    permissionHandler: @escaping (GraphRequestConnection?, Any?, Error?) -> Void
+    permissionHandler: @escaping (GraphRequestConnecting?, Any?, Error?) -> Void
     ) {
     capturedCompletionHandler = permissionHandler
   }
