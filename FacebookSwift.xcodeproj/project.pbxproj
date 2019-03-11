@@ -236,6 +236,7 @@
 				F47852A1222DC6C200A4269C /* FBError.swift */,
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
+				F44DB6B6222B07050083506E /* GraphRequestConnection.swift */,
 				F480D90A2235CFC2001AB8D3 /* GraphRequestConnectionState.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
@@ -343,7 +344,6 @@
 				F44DB69C2229B4420083506E /* AccessTokenCaching.swift */,
 				F44DB6932229AB460083506E /* InternalUtility.swift */,
 				F44DB69A2229B37F0083506E /* Settings.swift */,
-				F44DB6B6222B07050083506E /* GraphRequestConnection.swift */,
 				F44DB6BC222B0DD20083506E /* GraphRequestPiggybackManager.swift */,
 			);
 			path = "Needs Conversion";

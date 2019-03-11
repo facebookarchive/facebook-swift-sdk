@@ -23,15 +23,16 @@ enum GraphConnectionError: Error {
   case accessTokenRequired
 }
 
-// This will eventually be replaced by the rewrite of FBSDKGraphRequestConnection
-// for now it is needed as a dependency of AccessTokenWallet
-
+// TODO: move to its own file
 protocol GraphRequestConnecting {
   func start()
   func add(request: GraphRequest, completion handler: @escaping GraphRequestBlock)
 }
 
 class GraphRequestConnection: GraphRequestConnecting {
+
+  /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
+  let defaultTimeout: Double = 60
 
   func start() {
     // TODO: Implement

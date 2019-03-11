@@ -21,6 +21,13 @@ import XCTest
 
 class GraphRequestConnectionTests: XCTestCase {
 
+  func testDefaultTimeout() {
+    let connection = GraphRequestConnection()
+
+    XCTAssertEqual(connection.defaultTimeout, 60.0,
+                   "A connection should have a default timeout of sixty seconds")
+  }
+
   func testStart() {
     let connection = GraphRequestConnection()
 
