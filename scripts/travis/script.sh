@@ -23,14 +23,15 @@
 
 #shellcheck disable=SC1090
 
-if [ "$TEST_TYPE" = iOS ]; then
-  . "$PWD/scripts/travis/build_ios.sh"
-elif [ "$TEST_TYPE" = Lint ]; then
-  . "$PWD/scripts/travis/lint.sh"
-elif [ "$TEST_TYPE" = Samples ]; then
-  . "$PWD/scripts/travis/build_samples.sh"
-elif [ "$TEST_TYPE" = CocoaPods ]; then
-  . "$PWD/scripts/travis/cocoapods.sh"
-elif [ "$TEST_TYPE" = Carthage ]; then
-  . "$PWD/scripts/travis/carthage.sh"
+set -e
+
+if [ "$TRAVIS_JOB_NAME" = Analysis ]; then
+  swiftlint autocorrect --format
+
+  if output=$(git status --porcelain) && [ -n "$output" ]; then
+    echo "Working directory isn't clean"
+    exit
+  fi
+
+  swiftlint
 fi
