@@ -18,11 +18,6 @@
 
 import Foundation
 
-// TODO: Error handling - this is wrong but must be fixed when we introduce error handling
-enum GraphConnectionError: Error {
-  case accessTokenRequired
-}
-
 // TODO: move to its own file
 protocol GraphRequestConnecting {
   func start()

@@ -19,5 +19,12 @@
 import Foundation
 
 enum GraphRequestConnectionError: FBError, CaseIterable {
+
+  case accessTokenRequired
+
+  /**
+   Indicates that a request was added to a connection that was in a state
+   that is incompatible with adding requests
+   */
   case requestAddition
 }
