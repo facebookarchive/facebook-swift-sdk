@@ -39,7 +39,7 @@ class GraphRequestConnection: GraphRequestConnecting {
 
   func add(
     request: GraphRequest,
-    completion handler: @escaping (GraphRequestConnection?, Any?, Error?
+    completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
     ) -> Void) {
     // TODO: Implement
   }
