@@ -16,7 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable multiline_arguments
+// swiftlint:disable multiline_arguments implicitly_unwrapped_optional line_length
+// swiftlint:disable closure_end_indentation untyped_error_in_catch
 
 @testable import FacebookCore
 import XCTest
@@ -53,6 +54,29 @@ class GraphRequestConnectionTests: XCTestCase {
 
     XCTAssertNil(connection.urlResponse,
                  "A connection should not have a default url response")
+  }
+
+  // MARK: Adding Request
+  func testAddingRequest() {
+    let request = GraphRequest(graphPath: "Foo")
+    let connection = GraphRequestConnection()
+
+    GraphRequestConnectionState
+      .allCases
+      .filter { $0 != .created }
+      .forEach { state in
+        connection.state = state
+        do {
+          try connection.add(request: request) { _, _, _ in }
+          XCTFail("Attempting to add a request while the connection is in the state: \(state) should throw a request addition error")
+        } catch let error as GraphRequestConnectionError {
+          // make sure error is right
+          XCTAssertEqual(error, .requestAddition,
+                         "Attempting to add a request while the connection is in the state: \(state) should throw a request addition error")
+        } catch let error {
+          XCTFail("Caught unexpected error: \(error)")
+        }
+    }
   }
 
   func testStart() {

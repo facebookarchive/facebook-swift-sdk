@@ -34,6 +34,9 @@ class GraphRequestConnection: GraphRequestConnecting {
   /// Gets or sets the timeout interval to wait for a response before giving up.
   var timeout: TimeInterval = 0.0
 
+  /// The state of the connection
+  var state: GraphRequestConnectionState
+
   /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
   let defaultConnectionTimeout: Double = 60
 
@@ -50,6 +53,10 @@ class GraphRequestConnection: GraphRequestConnecting {
    then this property will be non-nil during the GraphRequestBlock callback.
    */
   private(set) var urlResponse: HTTPURLResponse?
+
+  init() {
+    state = .created
+  }
 
   func start() {
     // TODO: Implement
@@ -68,7 +75,10 @@ class GraphRequestConnection: GraphRequestConnecting {
     request: GraphRequest,
     completion handler: @escaping (GraphRequestConnection?, Any?, Error?
     ) -> Void) throws {
-    // TODO: Implement
+
+    if state != .created {
+      throw GraphRequestConnectionError.requestAddition
+    }
   }
 
 }
