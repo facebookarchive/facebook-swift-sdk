@@ -41,6 +41,15 @@ class GraphRequestConnection: GraphRequestConnecting {
     // TODO: Implement
   }
 
+  /**
+   Adds a GraphRequest object to the connection.
+
+   - Parameter request: A request to be included in the round-trip when start is called.
+   - Parameter completion: A handler to call back when the round-trip completes or times out.
+
+   The completion handler is retained until the block is called upon the
+   completion or cancellation of the connection.
+   */
   func add(
     request: GraphRequest,
     completion handler: @escaping (GraphRequestConnection?, Any?, Error?
