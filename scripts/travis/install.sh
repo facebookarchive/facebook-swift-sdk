@@ -21,12 +21,6 @@
 # Main Script
 # --------------
 
-gem update --system --no-document
-bundle install
-if [ "$TEST_TYPE" = Lint ]; then
-  brew install swiftlint || brew upgrade swiftlint
-elif [ "$TEST_TYPE" = CocoaPods ]; then
-  pod repo update --silent
-elif [ "$TEST_TYPE" = Carthage ]; then
-  brew install carthage || brew upgrade carthage
+if [ "$TRAVIS_JOB_NAME" = Analysis ]; then
+  brew bundle check || brew bundle
 fi
