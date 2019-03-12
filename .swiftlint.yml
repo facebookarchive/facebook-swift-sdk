@@ -56,6 +56,11 @@ disabled_rules:
   - no_extension_access_modifier
   - number_separator
   - prefixed_toplevel_constant
+  # Re-enable after Release 1.0
+  - discouraged_optional_collection
+  - file_name
+  - function_default_parameter_at_end
+  - todo
 
 opt_in_rules:
   - anyobject_protocol

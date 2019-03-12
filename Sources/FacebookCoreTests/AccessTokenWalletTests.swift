@@ -16,13 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable multiline_arguments explicit_type_interface line_length implicitly_unwrapped_optional
-
 @testable import FacebookCore
 import XCTest
 
 class AccessTokenWalletTests: XCTestCase {
-
   private var wallet: AccessTokenWallet!
   private let token = AccessTokenFixtures.validToken
   private var fakeCookieUtility: FakeCookieUtility.Type!
@@ -311,11 +308,9 @@ class AccessTokenWalletTests: XCTestCase {
 
     waitForExpectations(timeout: 1, handler: nil)
   }
-
 }
 
 private extension AccessToken {
-
   func copy() -> AccessToken {
     return AccessToken(
       tokenString: tokenString,

@@ -20,7 +20,6 @@
 import XCTest
 
 class PermissionTests: XCTestCase {
-
   func testKnownCases() {
     [
       Permission.`default`,
@@ -64,8 +63,6 @@ class PermissionTests: XCTestCase {
              .unknown:
           break
       }
-    // swiftlint:disable closure_end_indentation
     }
-    // swiftlint:enable closure_end_indentation
   }
 }

@@ -22,7 +22,6 @@ import Foundation
 typealias GraphRequestError = String
 
 enum CoreError: FBError {
-
   /// Reserved.
   case reserved
 
