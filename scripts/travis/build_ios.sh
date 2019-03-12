@@ -22,6 +22,6 @@
 # --------------
 
 set -o pipefail
-xcodebuild build -workspace FacebookSwift.xcworkspace -sdk iphonesimulator -scheme FacebookCore -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
-xcodebuild build -workspace FacebookSwift.xcworkspace -sdk iphonesimulator -scheme FacebookLogin -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
-xcodebuild build -workspace FacebookSwift.xcworkspace -sdk iphonesimulator -scheme FacebookShare -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
+xcodebuild build -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookCore -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
+xcodebuild build -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookLogin -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
+xcodebuild build -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookShare -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c

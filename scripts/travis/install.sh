@@ -21,6 +21,9 @@
 # Main Script
 # --------------
 
-if [ "$TRAVIS_JOB_NAME" = Analysis ]; then
-  brew bundle check || brew bundle
+if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
+  brew bundle check || brew bundle install
+
+  # Install missing ruby gems
+  bundle install
 fi

@@ -20,7 +20,6 @@
 import XCTest
 
 class GraphRequestConnectionTests: XCTestCase {
-
   func testStart() {
     let connection = GraphRequestConnection()
 
