@@ -31,8 +31,7 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
 
   func add(
     request: GraphRequest,
-    completion handler: @escaping (GraphRequestConnection?, Any?, Error?
-    ) -> Void) {
+    completion handler: @escaping GraphRequestBlock) {
     capturedAddRequest = request
     capturedAddRequestHandler = handler
   }
