@@ -160,7 +160,7 @@ class GraphRequestTests: XCTestCase {
       enableGraphRecovery: false
     )
 
-    XCTAssertFalse(request.isGraphRecoveryEnabled,
+    XCTAssertFalse(request.isGraphErrorRecoveryEnabled,
                   "A graph request should know whether or not graph recovery is enabled")
 
     request = GraphRequest(
@@ -168,7 +168,7 @@ class GraphRequestTests: XCTestCase {
       enableGraphRecovery: true
     )
 
-    XCTAssertTrue(request.isGraphRecoveryEnabled,
+    XCTAssertTrue(request.isGraphErrorRecoveryEnabled,
                    "A graph request should know whether or not graph recovery is enabled")
   }
 
@@ -177,14 +177,14 @@ class GraphRequestTests: XCTestCase {
       graphPath: path,
       enableGraphRecovery: true
     )
-    request.isGraphRecoveryEnabled = false
+    request.isGraphErrorRecoveryEnabled = false
     
-    XCTAssertFalse(request.isGraphRecoveryEnabled,
+    XCTAssertFalse(request.isGraphErrorRecoveryEnabled,
                    "Graph recovery ability should be settable on a graph request")
     
-    request.isGraphRecoveryEnabled = true
+    request.isGraphErrorRecoveryEnabled = true
     
-    XCTAssertTrue(request.isGraphRecoveryEnabled,
+    XCTAssertTrue(request.isGraphErrorRecoveryEnabled,
                   "Graph recovery ability should be settable on a graph request")
   }
 

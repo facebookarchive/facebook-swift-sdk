@@ -109,7 +109,7 @@ struct GraphRequest {
    re-issues the request on successful recoveries. The re-issued request will call the same
    handler as the receiver but may occur with a different `GraphRequestConnection` instance.
    */
-  var isGraphRecoveryEnabled: Bool {
+  var isGraphErrorRecoveryEnabled: Bool {
     get {
       return !flags.contains(.disableErrorRecovery)
     }
