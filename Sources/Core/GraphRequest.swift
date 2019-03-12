@@ -84,8 +84,8 @@ struct GraphRequest {
     parameters: [String: Any] = [:],
     accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
     version: String = Settings.graphAPIVersion,
-    httpMethod: GraphRequest.HTTPMethod = .get,
-    flags: GraphRequest.Flags = .none,
+    httpMethod: HTTPMethod = .get,
+    flags: Flags = .none,
     enableGraphRecovery: Bool = Settings.isGraphErrorRecoveryEnabled
     ) {
     self.graphPath = graphPath
@@ -132,8 +132,8 @@ struct GraphRequest {
    - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
   */
   func start(with connection: GraphRequestConnecting = GraphRequestConnection(),
-             completion handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
-    connection.add(request: self, completion: handler)
+             completion: @escaping GraphRequestBlock) -> GraphRequestConnecting {
+    connection.add(request: self, completion: completion)
     connection.start()
     return connection
   }
@@ -150,8 +150,8 @@ struct GraphRequest {
 
   private static func isAttachment(_ item: Any) -> Bool {
     return item is UIImage ||
-      item is Data ||
-      item is GraphRequestDataAttachment
+      || item is Data
+      || item is GraphRequestDataAttachment
   }
 
 }
