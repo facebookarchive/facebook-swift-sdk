@@ -19,7 +19,7 @@
 @testable import FacebookCore
 
 class FakeGraphRequestPiggybackManager: GraphRequestPiggybackManaging {
-  static var capturedCompletionHandler: ((GraphRequestConnection?, Any?, Error?) -> Void)?
+  static var capturedCompletionHandler: GraphRequestBlock?
 
   static func addRefreshPiggyback(
     _ connection: GraphRequestConnecting,

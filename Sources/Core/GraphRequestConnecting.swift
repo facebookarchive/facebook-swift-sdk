@@ -20,6 +20,15 @@ import UIKit
 
 protocol GraphRequestConnecting {
   func start()
+  func add(request: GraphRequest, completion: @escaping GraphRequestBlock)
+}
+
+class GraphRequestConnection: GraphRequestConnecting {
+
+  func start() {
+    // TODO: Implement
+  }
+
   func add(
     request: GraphRequest,
     batchParameters: [String: AnyHashable],

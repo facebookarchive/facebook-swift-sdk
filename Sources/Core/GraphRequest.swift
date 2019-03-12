@@ -84,8 +84,8 @@ struct GraphRequest {
     parameters: [String: Any] = [:],
     accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
     version: String = Settings.graphAPIVersion,
-    httpMethod: GraphRequest.HTTPMethod = .get,
-    flags: GraphRequest.Flags = .none,
+    httpMethod: HTTPMethod = .get,
+    flags: Flags = .none,
     enableGraphRecovery: Bool = Settings.isGraphErrorRecoveryEnabled
     ) {
     self.graphPath = graphPath
@@ -101,27 +101,25 @@ struct GraphRequest {
     self.flags = flags
   }
 
-  var isGraphRecoveryDisabled: Bool {
-    return flags.contains(.disableErrorRecovery)
-  }
-
   /**
-   Enable or disable the automatic error recovery mechanism.
-
-   - Parameter enabled: whether to enable the automatic error recovery mechanism
+   Use to enable or disable the automatic error recovery mechanism.
 
    By default, non-batched GraphRequest instances will automatically try to recover
    from errors by constructing a `GraphErrorRecoveryProcessor` instance that
    re-issues the request on successful recoveries. The re-issued request will call the same
    handler as the receiver but may occur with a different `GraphRequestConnection` instance.
-
-   This will override `Settings.setGraphErrorRecoveryDisabled`
-  */
-  mutating func setGraphErrorRecoverability(enabled: Bool) {
-    if enabled {
-      flags.remove(.disableErrorRecovery)
-    } else {
-      flags.insert(.disableErrorRecovery)
+   */
+  var isGraphErrorRecoveryEnabled: Bool {
+    get {
+      return !flags.contains(.disableErrorRecovery)
+    }
+    set(isEnabled) {
+      switch isEnabled {
+      case true:
+        flags.remove(.disableErrorRecovery)
+      case false:
+        flags.insert(.disableErrorRecovery)
+      }
     }
   }
 
@@ -135,10 +133,10 @@ struct GraphRequest {
    - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
   */
   func start(with connection: GraphRequestConnecting = GraphRequestConnection(),
-             completion handler: @escaping GraphRequestBlock) -> GraphRequestConnecting {
+             completion: @escaping GraphRequestBlock) -> GraphRequestConnecting {
 
     // This is marked as try? but should never fail with a new graph request connection
-    try? connection.add(request: self, completion: handler)
+    try? connection.add(request: self, completion: completion)
     connection.start()
     return connection
   }
@@ -154,9 +152,9 @@ struct GraphRequest {
   }
 
   private static func isAttachment(_ item: Any) -> Bool {
-    return item is UIImage ||
-      item is Data ||
-      item is GraphRequestDataAttachment
+    return item is UIImage
+      || item is Data
+      || item is GraphRequestDataAttachment
   }
 
 }
