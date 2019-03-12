@@ -16,13 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable line_length
-
 @testable import FacebookCore
 import XCTest
 
 class GraphConnectionProviderTests: XCTestCase {
-
     func testProvidingMultipleConnections() {
       let provider = GraphConnectionProvider()
 
@@ -34,5 +31,4 @@ class GraphConnectionProviderTests: XCTestCase {
       XCTAssertFalse(connection1 === connection2,
                      "A graph connection provider should return a unique connection instance per request")
     }
-
 }

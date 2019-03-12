@@ -20,7 +20,6 @@
 import XCTest
 
 class GraphRequestPiggybackManagerTests: XCTestCase {
-
   func testAddingRequest() {
     let connection = FakeGraphRequestConnection()
 
@@ -28,5 +27,4 @@ class GraphRequestPiggybackManagerTests: XCTestCase {
       // TODO: Assert on side effects
     }
   }
-
 }

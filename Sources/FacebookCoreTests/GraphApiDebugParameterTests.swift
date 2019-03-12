@@ -22,12 +22,10 @@
 import XCTest
 
 class GraphApiDebugParameterTests: XCTestCase {
-
   func testKnownValues() {
     let expectedCases: [GraphApiDebugParameter] = [.info, .warning]
     XCTAssertEqual(GraphApiDebugParameter.allCases, expectedCases,
                    "There should be easy access to all the cases of a graph api debug parameter")
-
   }
 
   func testRawValues() {
@@ -37,7 +35,5 @@ class GraphApiDebugParameterTests: XCTestCase {
       XCTAssertEqual(pair.0.rawValue, pair.1,
                      "Graph api debug parameter: \(pair.0) should have the expected raw value: \(pair.1)")
     }
-
   }
-
 }

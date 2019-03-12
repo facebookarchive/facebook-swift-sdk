@@ -24,7 +24,6 @@ typealias GraphPath = String
 typealias GraphRequestDataAttachment = Data
 
 struct GraphRequest {
-
   /// The HTTPMethod to use for a graph request
   enum HTTPMethod: String {
     case get = "GET"
@@ -35,16 +34,21 @@ struct GraphRequest {
   struct Flags: OptionSet {
     let rawValue: Int
 
-    static let none: Flags = Flags(rawValue: 1 << 0)
+    // If we do not disable explicit_type_interface and also add the type we get a
+    // redundant_type_annotation warning. We cannot have both of these rules enabled
+    // in this use case.
+    // swiftlint:disable explicit_type_interface
+    static let none = Flags(rawValue: 1 << 0)
 
     /// indicates this request should not use a client token as its token parameter
-    static let skipClientToken: Flags = Flags(rawValue: 1 << 1)
+    static let skipClientToken = Flags(rawValue: 1 << 1)
 
     /// indicates this request should not close the session if its response is an oauth error
-    static let doNotInvalidateTokenOnError: Flags = Flags(rawValue: 1 << 2)
+    static let doNotInvalidateTokenOnError = Flags(rawValue: 1 << 2)
 
     /// indicates this request should not perform error recovery
-    static let disableErrorRecovery: Flags = Flags(rawValue: 1 << 3)
+    static let disableErrorRecovery = Flags(rawValue: 1 << 3)
+    // swiftlint:enable explicit_type_interface
   }
 
   /// The Graph API endpoint to use for the request, for example "me".
@@ -117,6 +121,7 @@ struct GraphRequest {
       switch isEnabled {
       case true:
         flags.remove(.disableErrorRecovery)
+
       case false:
         flags.insert(.disableErrorRecovery)
       }
@@ -134,7 +139,6 @@ struct GraphRequest {
   */
   func start(with connection: GraphRequestConnecting = GraphRequestConnection(),
              completion: @escaping GraphRequestBlock) -> GraphRequestConnecting {
-
     // This is marked as try? but should never fail with a new graph request connection
     try? connection.add(request: self, completion: completion)
     connection.start()
@@ -156,5 +160,4 @@ struct GraphRequest {
       || item is Data
       || item is GraphRequestDataAttachment
   }
-
 }

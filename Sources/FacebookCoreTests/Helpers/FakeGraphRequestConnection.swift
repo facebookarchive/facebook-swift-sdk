@@ -20,7 +20,6 @@
 import Foundation
 
 class FakeGraphRequestConnection: GraphRequestConnecting {
-
   var startCalled: Bool = false
   var capturedAddRequest: GraphRequest?
   var capturedBatchParameters: [String: AnyHashable]?
@@ -33,10 +32,10 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
   func add(
     request: GraphRequest,
     batchParameters: [String: AnyHashable],
-    completion handler: @escaping GraphRequestBlock) {
+    completion: @escaping GraphRequestBlock
+  ) {
     capturedAddRequest = request
     capturedBatchParameters = batchParameters
-    capturedAddRequestHandler = handler
+    capturedAddRequestHandler = completion
   }
-
 }

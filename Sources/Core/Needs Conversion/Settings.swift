@@ -30,7 +30,6 @@ protocol SettingsManaging {
 }
 
 class Settings: SettingsManaging {
-
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var graphAPIVersion: String = ""
 
@@ -39,5 +38,4 @@ class Settings: SettingsManaging {
 
   // TODO: Probably needs to be private and weak. Revisit this during rewrite
   weak var accessTokenCache: AccessTokenCaching?
-
 }

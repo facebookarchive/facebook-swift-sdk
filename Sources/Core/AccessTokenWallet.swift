@@ -19,7 +19,6 @@
 import Foundation
 
 class AccessTokenWallet {
-
   private var accessToken: AccessToken?
   let cookieUtility: CookieHandling.Type
   let settings: SettingsManaging
@@ -27,12 +26,17 @@ class AccessTokenWallet {
   let graphConnectionProvider: GraphConnectionProviding
   let graphRequestPiggybackManager: GraphRequestPiggybackManaging.Type
 
+  // If we do not disable explicit_type_interface and also add the type we get a
+  // redundant_type_annotation warning. We cannot have both of these rules enabled
+  // in this use case.
+  // swiftlint:disable explicit_type_interface
   /**
    The global shared instance of AccessTokenWallet
 
    Overriding this value may result in unexpected and unwanted behavior
   */
-  static let shared: AccessTokenWallet = AccessTokenWallet()
+  static let shared = AccessTokenWallet()
+  // swiftlint:enable explicit_type_interface
 
   init(
     cookieUtility: CookieHandling.Type = InternalUtility.self,
@@ -108,7 +112,6 @@ class AccessTokenWallet {
       graphRequestPiggybackManager.addRefreshPiggyback(connection, permissionHandler: completionHandler)
       connection.start()
     } else {
-
       // TODO: This must be fixed to use proper error handling that includes a relevant message
       completionHandler(nil, nil, GraphRequestConnectionError.accessTokenRequired)
       //      completionHandler(nil, nil, Error.fbError(withCode: Int(FBSDKErrorAccessTokenRequired),
@@ -153,5 +156,4 @@ class AccessTokenWallet {
 //    ///
 //    static let FBSDKAccessTokenDidExpireKey = "FBSDKAccessTokenDidExpireKey"
   }
-
 }
