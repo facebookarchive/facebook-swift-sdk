@@ -73,8 +73,8 @@ class GraphRequestConnection: GraphRequestConnecting {
   func add(
     request: GraphRequest,
     batchParameters: [String: AnyHashable] = [:],
-    completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
-    ) -> Void) throws {
+    completion handler: @escaping GraphRequestBlock
+    ) throws {
     if state != .created {
       throw GraphRequestConnectionError.requestAddition
     }

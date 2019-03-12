@@ -28,8 +28,10 @@ protocol GraphRequestConnecting {
 }
 
 extension GraphRequestConnecting {
-  func add(request: GraphRequest, completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
-    ) -> Void) throws {
-    try add(request: request, batchParameters: [:], completion: handler)
+  func add(
+    request: GraphRequest,
+    completion: @escaping GraphRequestBlock
+    ) throws {
+    try add(request: request, batchParameters: [:], completion: completion)
   }
 }

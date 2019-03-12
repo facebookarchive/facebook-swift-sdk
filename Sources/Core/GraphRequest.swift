@@ -137,8 +137,10 @@ struct GraphRequest {
 
    - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
   */
-  func start(with connection: GraphRequestConnecting = GraphRequestConnection(),
-             completion: @escaping GraphRequestBlock) -> GraphRequestConnecting {
+  func start(
+    with connection: GraphRequestConnecting = GraphRequestConnection(),
+    completion: @escaping GraphRequestBlock
+    ) -> GraphRequestConnecting {
     // This is marked as try? but should never fail with a new graph request connection
     try? connection.add(request: self, completion: completion)
     connection.start()
