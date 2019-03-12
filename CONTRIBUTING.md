@@ -34,6 +34,7 @@ cases, please go through the process outlined on that page and do not file a pub
 
 ## Coding Style
 
+- Where possible, strive to adhere to the Swift.org [API Design Guidelines](https://swift.org/documentation/api-design-guidelines).
 - Most importantly, match the existing code style as much as possible.
 - Try to keep lines under 120 characters, if possible.
 
