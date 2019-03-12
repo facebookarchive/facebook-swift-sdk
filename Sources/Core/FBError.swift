@@ -19,7 +19,6 @@
 import Foundation
 
 protocol FBError: Error {
-
   /// A recommended standard way to embed Errors from underlying calls.
   var underlyingError: Error? { get }
 
