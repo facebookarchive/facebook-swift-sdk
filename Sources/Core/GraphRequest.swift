@@ -120,10 +120,6 @@ struct GraphRequest {
       case false:
         flags.insert(.disableErrorRecovery)
       }
-        flags.remove(.disableErrorRecovery)
-      } else {
-        flags.insert(.disableErrorRecovery)
-      }
     }
   }
 
