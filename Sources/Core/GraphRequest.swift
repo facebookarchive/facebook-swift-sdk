@@ -149,7 +149,7 @@ struct GraphRequest {
   }
 
   private static func isAttachment(_ item: Any) -> Bool {
-    return item is UIImage ||
+    return item is UIImage
       || item is Data
       || item is GraphRequestDataAttachment
   }
