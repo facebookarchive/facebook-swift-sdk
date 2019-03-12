@@ -20,7 +20,6 @@
 import XCTest
 
 class AccessTokenCacheTests: XCTestCase {
-
   func testHasClearCacheMethod() {
     let cache = AccessTokenCache()
     cache.accessToken = AccessTokenFixtures.validToken
@@ -29,5 +28,4 @@ class AccessTokenCacheTests: XCTestCase {
 
     // TODO: add assertion for clearing token when caching logic is implemented
   }
-
 }

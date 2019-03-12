@@ -14,6 +14,7 @@ branches:
   only:
     - master
     - release-1.0
+    - core-conversion
 
 # Build Stages
 stages:
@@ -23,9 +24,12 @@ stages:
 jobs:
   include:
     - stage: analysis
-      name: Analysis
+      name: Linting
+      script: sh scripts/travis/swiftlint.sh
+    - stage: analysis
+      name: Unit Tests
+      script: sh scripts/travis/unit_tests.sh
 
 # Scripts
 before_install: sh scripts/travis/before_install.sh
 install: sh scripts/travis/install.sh
-script: sh scripts/travis/script.sh

@@ -16,13 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable explicit_type_interface
-
 @testable import FacebookCore
 import Foundation
 
 enum AccessTokenFixtures {
-
   private static let tokenString = "abc123"
   private static let userID = "user"
   private static let userID2 = "user2"
@@ -71,5 +68,4 @@ enum AccessTokenFixtures {
       dataAccessExpirationDate: expirationDate
     )
   }()
-
 }

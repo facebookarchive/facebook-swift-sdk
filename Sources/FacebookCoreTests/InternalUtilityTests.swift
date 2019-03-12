@@ -20,11 +20,9 @@
 import XCTest
 
 class InternalUtilityTests: XCTestCase {
-
   func testClearingCookies() {
     InternalUtility.deleteFacebookCookies()
 
     // TODO: observe and assert on side effects when utility is implemented
   }
-
 }

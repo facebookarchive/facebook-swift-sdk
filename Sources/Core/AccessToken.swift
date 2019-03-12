@@ -20,7 +20,6 @@ import Foundation
 
 /// Represents an immutable access token for using Facebook services.
 struct AccessToken: Equatable {
-
   /// Returns the opaque token string.
   let tokenString: String
 
@@ -62,14 +61,16 @@ struct AccessToken: Equatable {
    manage tokens explicitly. Typical login flows only need to use `FBSDKLoginManager`
    along with `+currentAccessToken`.
    */
-  init(tokenString: String,
-       permissions: Set<Permission> = [],
-       declinedPermissions: Set<Permission> = [],
-       appID: String,
-       userID: String,
-       expirationDate: Date = .distantFuture,
-       refreshDate: Date = Date(),
-       dataAccessExpirationDate: Date = .distantFuture) {
+  init(
+    tokenString: String,
+    permissions: Set<Permission> = [],
+    declinedPermissions: Set<Permission> = [],
+    appID: String,
+    userID: String,
+    expirationDate: Date = .distantFuture,
+    refreshDate: Date = Date(),
+    dataAccessExpirationDate: Date = .distantFuture
+    ) {
     self.tokenString = tokenString
     self.permissions = permissions
     self.declinedPermissions = declinedPermissions
