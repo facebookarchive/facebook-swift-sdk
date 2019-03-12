@@ -48,21 +48,20 @@ struct AccessToken: Equatable {
   /**
    Initializes a new instance.
 
-   - Parameters:
-     - tokenString: the opaque token string
-     - appID: the app ID
-     - userID: the user ID
-     - permissions: the granted permissions
-     - declinedPermissions: the declined permissions
-     - expirationDate: the optional expiration date (defaults to distantFuture).
-     - refreshDate the optional date the token was last refreshed (defaults to now).
-     - dataAccessExpirationDate: the optional date which data access will expire for the given user
-     (defaults to distantFuture)
+   - Parameter tokenString: the opaque token string
+   - Parameter appID: the app ID
+   - Parameter userID: the user ID
+   - Parameter permissions: the granted permissions
+   - Parameter declinedPermissions: the declined permissions
+   - Parameter expirationDate: the optional expiration date (defaults to distantFuture).
+   - Parameter refreshDate the optional date the token was last refreshed (defaults to now).
+   - Parameter dataAccessExpirationDate: the optional date which data access will expire for the given user
+   (defaults to distantFuture)
 
    This initializer should only be used for advanced apps that
    manage tokens explicitly. Typical login flows only need to use `FBSDKLoginManager`
    along with `+currentAccessToken`.
-  */
+   */
   init(tokenString: String,
        permissions: Set<Permission> = [],
        declinedPermissions: Set<Permission> = [],
@@ -97,9 +96,8 @@ struct AccessToken: Equatable {
   /**
    Convenience getter to determine if a permission has been granted
 
-   - Parameters:
-     - permission: The permission to check.
-  */
+   - Parameter permission: The permission to check.
+   */
   func hasGranted(permission: Permission) -> Bool {
     return permissions.contains(permission)
   }
