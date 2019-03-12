@@ -19,7 +19,6 @@
 import Foundation
 
 class AccessTokenWallet {
-
   private var accessToken: AccessToken?
   let cookieUtility: CookieHandling.Type
   let settings: SettingsManaging
@@ -101,7 +100,6 @@ class AccessTokenWallet {
       graphRequestPiggybackManager.addRefreshPiggyback(connection, permissionHandler: completionHandler)
       connection.start()
     } else {
-
       // TODO: This must be fixed to use proper error handling that includes a relevant message
       completionHandler(nil, nil, GraphConnectionError.accessTokenRequired)
       //      completionHandler(nil, nil, Error.fbError(withCode: Int(FBSDKErrorAccessTokenRequired),
@@ -146,5 +144,4 @@ class AccessTokenWallet {
 //    ///
 //    static let FBSDKAccessTokenDidExpireKey = "FBSDKAccessTokenDidExpireKey"
   }
-
 }

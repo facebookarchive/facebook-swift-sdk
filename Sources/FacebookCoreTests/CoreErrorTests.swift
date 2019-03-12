@@ -20,7 +20,6 @@
 import XCTest
 
 class CoreErrorTests: XCTestCase {
-
   func testKnownCoreErrors() {
     let allCases: [CoreError] = [
       .reserved,
@@ -49,5 +48,4 @@ class CoreErrorTests: XCTestCase {
                       "A core error should be able to provide a message describing the error")
     }
   }
-
 }
