@@ -16,13 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable multiline_arguments line_length
-
 @testable import FacebookCore
 import XCTest
 
 class AccessTokenTests: XCTestCase {
-
   func testTokenString() {
     XCTAssertEqual(AccessTokenFixtures.validToken.tokenString, "abc123",
                    "An access token should store the exact token string it was created with")
@@ -48,7 +45,8 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testDeclinedPermissions() {
-    XCTAssertTrue(AccessTokenFixtures.validToken.declinedPermissions.isEmpty, "Granted permissions should be empty by default")
+    XCTAssertTrue(AccessTokenFixtures.validToken.declinedPermissions.isEmpty,
+                  "Granted permissions should be empty by default")
 
     let token = AccessToken(
       tokenString: AccessTokenFixtures.validToken.tokenString,

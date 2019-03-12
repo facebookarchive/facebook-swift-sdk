@@ -41,13 +41,14 @@ identifier_name:
 private_outlet:
   allow_private_set: true
 
-custom_rules:
-  swiftlint_escaping:
-    name: "Escaping Swiftlint Rules"
-    regex: "(swiftlint:disable)"
-    match_kinds: comment
-    message: "Don't escape the Swiftlint Rules"
-    severity: error
+# Use for Analysis
+# custom_rules:
+#   swiftlint_escaping:
+#     name: "Escaping Swiftlint Rules"
+#     regex: "(swiftlint:disable)"
+#     match_kinds: comment
+#     message: "Don't escape the Swiftlint Rules"
+#     severity: warning
 
 disabled_rules:
   - discouraged_object_literal
