@@ -114,7 +114,12 @@ struct GraphRequest {
       return !flags.contains(.disableErrorRecovery)
     }
     set(isEnabled) {
-      if newValue {
+      switch isEnabled {
+      case true:
+        flags.remove(.disableErrorRecovery)
+      case false:
+        flags.insert(.disableErrorRecovery)
+      }
         flags.remove(.disableErrorRecovery)
       } else {
         flags.insert(.disableErrorRecovery)
