@@ -26,12 +26,17 @@ class AccessTokenWallet {
   let graphConnectionProvider: GraphConnectionProviding
   let graphRequestPiggybackManager: GraphRequestPiggybackManaging.Type
 
+  // If we do not disable explicit_type_interface and also add the type we get a
+  // redundant_type_annotation warning. We cannot have both of these rules enabled
+  // in this use case.
+  // swiftlint:disable explicit_type_interface
   /**
    The global shared instance of AccessTokenWallet
 
    Overriding this value may result in unexpected and unwanted behavior
   */
-  static let shared: AccessTokenWallet = AccessTokenWallet()
+  static let shared = AccessTokenWallet()
+  // swiftlint:enable explicit_type_interface
 
   init(
     cookieUtility: CookieHandling.Type = InternalUtility.self,

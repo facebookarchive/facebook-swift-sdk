@@ -32,15 +32,14 @@ protocol GraphRequestConnecting {
 }
 
 class GraphRequestConnection: GraphRequestConnecting {
-
   func start() {
     // TODO: Implement
   }
 
   func add(
     request: GraphRequest,
-    completion handler: @escaping GraphRequestBlock) {
+    completion handler: @escaping GraphRequestBlock
+    ) {
     // TODO: Implement
   }
-
 }
