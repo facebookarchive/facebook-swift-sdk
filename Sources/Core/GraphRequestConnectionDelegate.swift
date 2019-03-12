@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol GraphRequestConnectionDelegate: class {
+protocol GraphRequestConnectionDelegate: AnyObject {
   /**
    Tells the delegate the request connection will begin loading
 

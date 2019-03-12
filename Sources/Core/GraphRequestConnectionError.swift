@@ -19,7 +19,6 @@
 import Foundation
 
 enum GraphRequestConnectionError: FBError, CaseIterable {
-
   case accessTokenRequired
 
   /**

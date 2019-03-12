@@ -29,7 +29,6 @@ import XCTest
 private class EmptyGraphRequestConnectionDelegate: GraphRequestConnectionDelegate {}
 
 class GraphRequestConnectionDelegateTests: XCTestCase {
-
   private let delegate = EmptyGraphRequestConnectionDelegate()
   private let connection = GraphRequestConnection()
 
@@ -53,5 +52,4 @@ class GraphRequestConnectionDelegateTests: XCTestCase {
       totalBytesExpectedToWrite: 100
     )
   }
-
 }

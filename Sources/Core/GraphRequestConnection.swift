@@ -19,7 +19,6 @@
 import Foundation
 
 class GraphRequestConnection: GraphRequestConnecting {
-
   // TODO: - figure out how this is used differently from default connection timeout
   /// Gets or sets the timeout interval to wait for a response before giving up.
   var timeout: TimeInterval = 0.0
@@ -55,7 +54,6 @@ class GraphRequestConnection: GraphRequestConnecting {
   }
 
   func start() {
-
     if session == nil {
       session = sessionProvider.session()
     }
@@ -77,7 +75,6 @@ class GraphRequestConnection: GraphRequestConnecting {
     batchParameters: [String: AnyHashable] = [:],
     completion handler: @escaping (GraphRequestConnecting?, Any?, Error?
     ) -> Void) throws {
-
     if state != .created {
       throw GraphRequestConnectionError.requestAddition
     }
@@ -89,6 +86,4 @@ class GraphRequestConnection: GraphRequestConnecting {
     )
     requests.append(metadata)
   }
-
 }
-

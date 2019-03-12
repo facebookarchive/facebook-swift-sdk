@@ -22,7 +22,6 @@
 import XCTest
 
 class GraphRequestConnectionStateTests: XCTestCase {
-
   func testAllCases() {
     let expectedCases: [GraphRequestConnectionState] = [
       .cancelled,
@@ -34,5 +33,4 @@ class GraphRequestConnectionStateTests: XCTestCase {
     XCTAssertEqual(GraphRequestConnectionState.allCases, expectedCases,
                    "There should be easy access to all the cases of a graph request connection state")
   }
-
 }

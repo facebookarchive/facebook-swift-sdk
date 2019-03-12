@@ -22,7 +22,6 @@
 import XCTest
 
 class GraphRequestMetadataTests: XCTestCase {
-
   func testCreatingRequestMetadata() {
     let request = GraphRequest(graphPath: name)
     let metadata = GraphRequestMetadata(
@@ -61,5 +60,4 @@ class GraphRequestMetadataTests: XCTestCase {
 
     waitForExpectations(timeout: 1, handler: nil)
   }
-
 }

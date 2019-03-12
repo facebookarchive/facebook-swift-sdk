@@ -22,7 +22,6 @@
 class FakeSession: Session {}
 
 class FakeSessionProvider: SessionProviding {
-
   private let fakeSession: Session
   var sessionCallCount: Int = 0
 
@@ -34,5 +33,4 @@ class FakeSessionProvider: SessionProviding {
     sessionCallCount += 1
     return fakeSession
   }
-
 }

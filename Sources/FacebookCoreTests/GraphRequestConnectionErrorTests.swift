@@ -22,7 +22,6 @@
 import XCTest
 
 class GraphRequestConnectionErrorTests: XCTestCase {
-
   func testAllCases() {
     let expectedCases: [GraphRequestConnectionError] = [
       .accessTokenRequired,

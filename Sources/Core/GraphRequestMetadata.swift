@@ -22,7 +22,6 @@ import Foundation
 // associating GraphRequest and GraphRequestBlock instances and necessary
 // data for batching and retry processing.
 struct GraphRequestMetadata {
-
   let request: GraphRequest
   let batchParameters: [String: AnyHashable]
   let completion: GraphRequestBlock
@@ -34,5 +33,4 @@ struct GraphRequestMetadata {
     ) {
     completion(connection, results, error)
   }
-
 }

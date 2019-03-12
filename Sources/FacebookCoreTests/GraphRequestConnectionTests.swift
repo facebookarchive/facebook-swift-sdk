@@ -20,8 +20,7 @@
 import XCTest
 
 class GraphRequestConnectionTests: XCTestCase {
-
-  let fakeSession: FakeSession = FakeSession()
+  let fakeSession = FakeSession()
   var fakeSessionProvider: FakeSessionProvider!
 
   override func setUp() {
@@ -93,7 +92,7 @@ class GraphRequestConnectionTests: XCTestCase {
           // make sure error is right
           XCTAssertEqual(error, .requestAddition,
                          "Attempting to add a request while the connection is in the state: \(state) should throw a request addition error")
-        } catch let error {
+        } catch {
           XCTFail("Caught unexpected error: \(error)")
         }
     }
