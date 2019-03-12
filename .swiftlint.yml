@@ -39,13 +39,14 @@ identifier_name:
 private_outlet:
   allow_private_set: true
 
-custom_rules:
-  swiftlint_escaping:
-    name: "Escaping Swiftlint Rules"
-    regex: "(swiftlint:disable)"
-    match_kinds: comment
-    message: "Don't escape the Swiftlint Rules"
-    severity: error
+# Use for Analysis
+# custom_rules:
+#   swiftlint_escaping:
+#     name: "Escaping Swiftlint Rules"
+#     regex: "(swiftlint:disable)"
+#     match_kinds: comment
+#     message: "Don't escape the Swiftlint Rules"
+#     severity: warning
 
 disabled_rules:
   - discouraged_object_literal
@@ -56,6 +57,10 @@ disabled_rules:
   - no_extension_access_modifier
   - number_separator
   - prefixed_toplevel_constant
+  # Re-enable after Release 1.0
+  - file_name
+  - function_default_parameter_at_end
+  - todo
 
 opt_in_rules:
   - anyobject_protocol

@@ -16,13 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable line_length
-
 @testable import FacebookCore
 import XCTest
 
 class FBErrorTests: XCTestCase {
-
   func testFBErrorWithoutUnderlyingError() {
     let underlyingError = SampleFBError(
       localizedTitle: nil,
@@ -47,7 +44,6 @@ class FBErrorTests: XCTestCase {
     XCTAssertNotNil(error.underlyingError,
                     "An instance of a type that conforms to FBError should be able to provide an underlying error")
   }
-
 }
 
 private struct SampleFBError: FBError {

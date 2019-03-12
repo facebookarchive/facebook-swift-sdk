@@ -19,7 +19,6 @@
 import Foundation
 
 extension Notification.Name {
-
   /**
    Notification indicating that the `currentAccessToken` has changed.
 
