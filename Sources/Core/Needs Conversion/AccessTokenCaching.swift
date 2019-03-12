@@ -21,8 +21,7 @@ import Foundation
 // This will eventually be replaced by the rewrite of FBSDKAccessTokenCaching
 // for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
 
-protocol AccessTokenCaching: class {
-
+protocol AccessTokenCaching: AnyObject {
   var accessToken: AccessToken? { get set }
 
   func clearCache()

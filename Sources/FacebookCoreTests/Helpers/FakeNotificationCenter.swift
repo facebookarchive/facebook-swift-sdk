@@ -20,7 +20,6 @@
 import Foundation
 
 class FakeNotificationCenter: NotificationPosting {
-
   var capturedPostedNotificationName: Notification.Name?
   var capturedPostedUserInfo: [AnyHashable: Any]?
 
@@ -44,5 +43,4 @@ class FakeNotificationCenter: NotificationPosting {
     let userInfo = capturedPostedUserInfo ?? [:]
     return userInfo[AccessTokenWallet.NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey] as? Bool
   }
-
 }

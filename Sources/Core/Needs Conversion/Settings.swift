@@ -27,7 +27,6 @@ protocol SettingsManaging {
 }
 
 class Settings: SettingsManaging {
-
   // TODO: Probably needs to be private and weak. Revisit this during rewrite
   weak var accessTokenCache: AccessTokenCaching?
 }

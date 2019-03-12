@@ -1,0 +1,14 @@
+swiftlint_version: 0.31.0
+
+disabled_rules:
+  - closure_body_length
+  - closure_end_indentation
+  - discouraged_optional_boolean
+  - discouraged_optional_collection
+  - explicit_type_interface
+  - implicitly_unwrapped_optional
+  - line_length
+  - todo
+  - swiftlint_escaping
+  - multiline_arguments
+  - multiline_arguments_brackets

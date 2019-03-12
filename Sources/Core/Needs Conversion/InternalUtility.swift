@@ -26,9 +26,7 @@ protocol CookieHandling {
 // for now it is needed as a dependency of AccessTokenWallet
 
 class InternalUtility: CookieHandling {
-
   static func deleteFacebookCookies() {
     // TODO: Implement deletion of cookies
   }
-
 }
