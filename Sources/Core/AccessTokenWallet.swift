@@ -19,7 +19,6 @@
 import Foundation
 
 class AccessTokenWallet {
-
   private var accessToken: AccessToken?
   let cookieUtility: CookieHandling.Type
   let settings: SettingsManaging
@@ -32,7 +31,8 @@ class AccessTokenWallet {
 
    Overriding this value may result in unexpected and unwanted behavior
   */
-  static let shared: AccessTokenWallet = AccessTokenWallet()
+  static let shared = AccessTokenWallet()
+  // swiftlint:enable explicit_type_interface
 
   init(
     cookieUtility: CookieHandling.Type = InternalUtility.self,
@@ -108,7 +108,6 @@ class AccessTokenWallet {
       graphRequestPiggybackManager.addRefreshPiggyback(connection, completion: completionHandler)
       connection.start()
     } else {
-
       // TODO: This must be fixed to use proper error handling that includes a relevant message
       completionHandler(nil, nil, GraphConnectionError.accessTokenRequired)
       //      completionHandler(nil, nil, Error.fbError(withCode: Int(FBSDKErrorAccessTokenRequired),
@@ -153,5 +152,4 @@ class AccessTokenWallet {
 //    ///
 //    static let FBSDKAccessTokenDidExpireKey = "FBSDKAccessTokenDidExpireKey"
   }
-
 }

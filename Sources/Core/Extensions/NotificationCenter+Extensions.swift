@@ -19,6 +19,7 @@
 import Foundation
 
 protocol NotificationPosting {
+  // swiftlint:disable:next discouraged_optional_collection
   func post(name aName: Notification.Name, object anObject: Any?, userInfo aUserInfo: [AnyHashable: Any]?)
 }
 

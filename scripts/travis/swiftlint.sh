@@ -21,6 +21,17 @@
 # Main Script
 # --------------
 
+#shellcheck disable=SC1090
+
+set -e
+
 if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
-  brew update
+  swiftlint autocorrect --format
+
+  if output=$(git status --porcelain) && [ -n "$output" ]; then
+    echo "Working directory isn't clean"
+    exit
+  fi
+
+  swiftlint
 fi

@@ -32,7 +32,6 @@ protocol GraphRequestConnecting {
 }
 
 class GraphRequestConnection: GraphRequestConnecting {
-
   func start() {
     // TODO: Implement
   }
@@ -40,7 +39,7 @@ class GraphRequestConnection: GraphRequestConnecting {
   func add(
     request: GraphRequest,
     completion: @escaping GraphRequestBlock) {
+    ) {
     // TODO: Implement
   }
-
 }

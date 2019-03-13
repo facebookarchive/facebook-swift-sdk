@@ -20,7 +20,6 @@
 import Foundation
 
 class FakeGraphRequestConnection: GraphRequestConnecting {
-
   var startCalled: Bool = false
   var capturedAddRequest: GraphRequest?
   var capturedAddRequestHandler: GraphRequestBlock?
@@ -31,9 +30,9 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
 
   func add(
     request: GraphRequest,
-    completion handler: @escaping GraphRequestBlock) {
+    completion handler: @escaping GraphRequestBlock
+    ) {
     capturedAddRequest = request
     capturedAddRequestHandler = handler
   }
-
 }

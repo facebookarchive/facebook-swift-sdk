@@ -16,13 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable explicit_type_interface line_length
-
 @testable import FacebookCore
 import XCTest
 
 class AccessTokenWalletConfigurationTests: XCTestCase {
-
   let wallet = AccessTokenWallet()
 
   // MARK: Concrete Dependencies
@@ -50,5 +47,4 @@ class AccessTokenWalletConfigurationTests: XCTestCase {
     XCTAssertTrue(wallet.graphRequestPiggybackManager is GraphRequestPiggybackManager.Type,
                   "A token wallet should have the expected concrete implementation for its graph request piggyback manager")
   }
-
 }
