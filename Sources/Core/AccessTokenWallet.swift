@@ -105,7 +105,7 @@ class AccessTokenWallet {
   func refreshCurrentAccessToken(_ completionHandler: @escaping GraphRequestBlock) {
     if currentAccessToken != nil {
       let connection = graphConnectionProvider.graphRequestConnection()
-      graphRequestPiggybackManager.addRefreshPiggyback(connection, permissionHandler: completionHandler)
+      graphRequestPiggybackManager.addRefreshPiggyback(connection, completion: completionHandler)
       connection.start()
     } else {
       // TODO: This must be fixed to use proper error handling that includes a relevant message
