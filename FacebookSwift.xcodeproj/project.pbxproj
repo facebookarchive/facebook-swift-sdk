@@ -13,6 +13,7 @@
 		F40739412231E4EB0018505A /* GraphRequestQueryItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40739402231E4EB0018505A /* GraphRequestQueryItemBuilder.swift */; };
 		F409967322289D3000F23464 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409967222289D3000F23464 /* AccessToken.swift */; };
 		F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409967422299BE200F23464 /* AccessTokenWalletTests.swift */; };
+		F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */; };
 		F4144A10222DAFCD00CB83E0 /* PermissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */; };
 		F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4144A11222DB16C00CB83E0 /* Permission.swift */; };
 		F41DE51B2230363700D42A7B /* GraphRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DE51A2230363700D42A7B /* GraphRequestSerializer.swift */; };
@@ -48,7 +49,6 @@
 		F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */; };
 		F47852A2222DC6C200A4269C /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47852A1222DC6C200A4269C /* FBError.swift */; };
 		F47853C1222DCF8600A4269C /* CoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47853C0222DCF8600A4269C /* CoreError.swift */; };
-		F47AB33F222F4394004A854F /* GraphApiDebugParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */; };
 		F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
@@ -111,11 +111,11 @@
 		F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionTests.swift; sourceTree = "<group>"; };
 		F4144A11222DB16C00CB83E0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		F41DE51A2230363700D42A7B /* GraphRequestSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializer.swift; sourceTree = "<group>"; };
-		F41DE51C223043A300D42A7B /* GraphRequestSerializerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerConfigurationTests.swift; sourceTree = "<group>"; };
 		F42687B72230703C00A62C2E /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
 		F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerTests.swift; sourceTree = "<group>"; };
-		F42687BF223076F400A62C2E /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
 		F42687C42230772600A62C2E /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
+		F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
+		F42DADB92230597700E1DFBA /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
 		F44DB69122299FA10083506E /* AccessTokenWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWallet.swift; sourceTree = "<group>"; };
 		F44DB6932229AB460083506E /* InternalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtility.swift; sourceTree = "<group>"; };
 		F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCookieUtility.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				811C5E5D1CFFD52B00E4A925 /* Sources */,
 				8115C0E31CFE543A001FF33B /* Resources */,
 				8115C0D91CFE540D001FF33B /* Products */,
-				F4FB30782232EEAD004A6361 /* Recovered References */,
+				F428E230223059AF008E3004 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -326,6 +326,15 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
+		F428E230223059AF008E3004 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				F42DADB92230597700E1DFBA /* GraphRequestTests.swift */,
+				F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		F44DB6972229AE040083506E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,7 +392,6 @@
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F4B8832C22305791000971C9 /* FBErrorTests.swift */,
 				F44DB6AE222AF5420083506E /* Fixtures */,
-				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
 				F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */,
 				F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */,
@@ -396,6 +404,7 @@
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
+				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
@@ -406,15 +415,6 @@
 				F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */,
 			);
 			path = Configurations;
-			sourceTree = "<group>";
-		};
-		F4FB30782232EEAD004A6361 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				F42687BF223076F400A62C2E /* GraphApiDebugParameterTests.swift */,
-				F41DE51C223043A300D42A7B /* GraphRequestSerializerConfigurationTests.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -707,10 +707,10 @@
 				F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */,
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
-				F47AB33F222F4394004A854F /* GraphApiDebugParameterTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
 				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
+				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
 				F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */,
