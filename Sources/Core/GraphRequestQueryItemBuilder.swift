@@ -19,7 +19,6 @@
 import Foundation
 
 enum GraphRequestQueryItemBuilder {
-
   static func build(from values: [String: AnyHashable]) -> [URLQueryItem] {
     return values.compactMap {
       URLQueryItem(
@@ -28,5 +27,4 @@ enum GraphRequestQueryItemBuilder {
       )
     }
   }
-
 }
