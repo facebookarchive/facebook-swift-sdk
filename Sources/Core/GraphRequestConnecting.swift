@@ -23,7 +23,7 @@ protocol GraphRequestConnecting {
   func add(
     request: GraphRequest,
     batchParameters: [String: AnyHashable],
-    completion handler: @escaping GraphRequestBlock
+    completion: @escaping GraphRequestBlock
     ) throws
 }
 

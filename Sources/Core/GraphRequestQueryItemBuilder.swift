@@ -16,15 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeGraphRequestPiggybackManager: GraphRequestPiggybackManaging {
-  static var capturedCompletionHandler: GraphRequestBlock?
-
-  static func addRefreshPiggyback(
-    _ connection: GraphRequestConnecting,
-    permissionHandler: @escaping GraphRequestBlock
-    ) {
-    capturedCompletionHandler = permissionHandler
+enum GraphRequestQueryItemBuilder {
+  static func build(from values: [String: AnyHashable]) -> [URLQueryItem] {
+    return values.compactMap {
+      URLQueryItem(
+        name: $0.key,
+        value: $0.value.description
+      )
+    }
   }
 }

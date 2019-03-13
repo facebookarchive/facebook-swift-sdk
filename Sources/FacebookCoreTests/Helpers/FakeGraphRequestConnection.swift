@@ -33,7 +33,7 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
     request: GraphRequest,
     batchParameters: [String: AnyHashable],
     completion: @escaping GraphRequestBlock
-  ) {
+    ) {
     capturedAddRequest = request
     capturedBatchParameters = batchParameters
     capturedAddRequestHandler = completion
