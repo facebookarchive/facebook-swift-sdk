@@ -18,28 +18,19 @@
 
 import Foundation
 
-// TODO: Error handling - this is wrong but must be fixed when we introduce error handling
-enum GraphConnectionError: Error {
-  case accessTokenRequired
-}
+// Helper to facilitate GraphRequest processing, specifically
+// associating GraphRequest and GraphRequestBlock instances and necessary
+// data for batching and retry processing.
+struct GraphRequestMetadata {
+  let request: GraphRequest
+  let batchParameters: [String: AnyHashable]
+  let completion: GraphRequestBlock
 
-// This will eventually be replaced by the rewrite of FBSDKGraphRequestConnection
-// for now it is needed as a dependency of AccessTokenWallet
-
-protocol GraphRequestConnecting {
-  func start()
-  func add(request: GraphRequest, completion: @escaping GraphRequestBlock)
-}
-
-class GraphRequestConnection: GraphRequestConnecting {
-  func start() {
-    // TODO: Implement
-  }
-
-  func add(
-    request: GraphRequest,
-    completion: @escaping GraphRequestBlock
+  func invokeCompletionHandler(
+    for connection: GraphRequestConnecting?,
+    withResults results: Any?,
+    error: Error?
     ) {
-    // TODO: Implement
+    completion(connection, results, error)
   }
 }
