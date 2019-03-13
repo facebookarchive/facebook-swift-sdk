@@ -12,6 +12,7 @@ indentation: 2
 line_length: 120
 
 explicit_type_interface:
+  allow_redundancy: true
   excluded:
     - local
 file_header:

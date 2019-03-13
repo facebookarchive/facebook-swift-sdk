@@ -34,10 +34,6 @@ struct GraphRequest {
   struct Flags: OptionSet {
     let rawValue: Int
 
-    // If we do not disable explicit_type_interface and also add the type we get a
-    // redundant_type_annotation warning. We cannot have both of these rules enabled
-    // in this use case.
-    // swiftlint:disable explicit_type_interface
     static let none = Flags(rawValue: 1 << 0)
 
     /// indicates this request should not use a client token as its token parameter
@@ -48,7 +44,6 @@ struct GraphRequest {
 
     /// indicates this request should not perform error recovery
     static let disableErrorRecovery = Flags(rawValue: 1 << 3)
-    // swiftlint:enable explicit_type_interface
   }
 
   /// The Graph API endpoint to use for the request, for example "me".
