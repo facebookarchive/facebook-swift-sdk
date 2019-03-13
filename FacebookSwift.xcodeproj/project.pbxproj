@@ -53,7 +53,6 @@
 		F49FA4A1222896310008CAD6 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */; };
 		F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8832B22305791000971C9 /* CoreErrorTests.swift */; };
 		F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8832C22305791000971C9 /* FBErrorTests.swift */; };
-		F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC87B0222ED532003A8F29 /* GraphRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,10 +188,10 @@
 			isa = PBXGroup;
 			children = (
 				81654DC31D356E9A006401F1 /* Configurations */,
-				811C5E5D1CFFD52B00E4A925 /* Sources */,
-				8115C0E31CFE543A001FF33B /* Resources */,
 				8115C0D91CFE540D001FF33B /* Products */,
 				F428E230223059AF008E3004 /* Recovered References */,
+				8115C0E31CFE543A001FF33B /* Resources */,
+				811C5E5D1CFFD52B00E4A925 /* Sources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -231,18 +230,18 @@
 		811C5E5E1CFFD52B00E4A925 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F49FA49F222896310008CAD6 /* Configurations */,
+				F44DB6B2222B01B60083506E /* Extensions */,
+				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F409967222289D3000F23464 /* AccessToken.swift */,
 				F44DB69122299FA10083506E /* AccessTokenWallet.swift */,
-				F49FA49F222896310008CAD6 /* Configurations */,
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
-				F44DB6B2222B01B60083506E /* Extensions */,
 				F47852A1222DC6C200A4269C /* FBError.swift */,
+				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
 				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
-				F40739402231E4EB0018505A /* GraphRequestQueryItemBuilder.swift */,
 				F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */,
-				F44DB6992229B36D0083506E /* Needs Conversion */,
-				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
+				F40739402231E4EB0018505A /* GraphRequestQueryItemBuilder.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 			);
 			path = Core;
@@ -265,11 +264,11 @@
 		81654DC31D356E9A006401F1 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				81654DC71D356E9A006401F1 /* Shared */,
 				81654DC41D356E9A006401F1 /* FacebookCore.xcconfig */,
 				81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */,
 				81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */,
 				811AD1B51D35D9C8007689DC /* Version.xcconfig */,
-				81654DC71D356E9A006401F1 /* Shared */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -277,10 +276,10 @@
 		81654DC71D356E9A006401F1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				81654DC81D356E9A006401F1 /* Common.xcconfig */,
 				81654DC91D356E9A006401F1 /* Platform */,
 				81654DCE1D356E9A006401F1 /* Product */,
 				81654DD31D356E9A006401F1 /* Project */,
+				81654DC81D356E9A006401F1 /* Common.xcconfig */,
 				81654DD61D356E9A006401F1 /* Warnings.xcconfig */,
 			);
 			path = Shared;
@@ -323,6 +322,7 @@
 				F42DADB92230597700E1DFBA /* GraphRequestTests.swift */,
 			);
 			name = "Recovered References";
+			path = "Recovered References";
 			sourceTree = "<group>";
 		};
 		F44DB6972229AE040083506E /* Helpers */ = {
@@ -345,10 +345,10 @@
 			children = (
 				F44DB69E2229B4C50083506E /* AccessTokenCache.swift */,
 				F44DB69C2229B4420083506E /* AccessTokenCaching.swift */,
-				F44DB6932229AB460083506E /* InternalUtility.swift */,
-				F44DB69A2229B37F0083506E /* Settings.swift */,
 				F44DB6B6222B07050083506E /* GraphRequestConnection.swift */,
 				F44DB6BC222B0DD20083506E /* GraphRequestPiggybackManager.swift */,
+				F44DB6932229AB460083506E /* InternalUtility.swift */,
+				F44DB69A2229B37F0083506E /* Settings.swift */,
 			);
 			path = "Needs Conversion";
 			sourceTree = "<group>";
@@ -373,26 +373,25 @@
 		F49FA47A222880FE0008CAD6 /* FacebookCoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				F407393C2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift */,
-				F42687B72230703C00A62C2E /* GraphRequestTests.swift */,
+				F44DB6AE222AF5420083506E /* Fixtures */,
+				F44DB6972229AE040083506E /* Helpers */,
 				F45734D0222D9343001F806A /* AccessTokenCacheTests.swift */,
 				F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */,
 				F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */,
 				F409967422299BE200F23464 /* AccessTokenWalletTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F4B8832C22305791000971C9 /* FBErrorTests.swift */,
-				F44DB6AE222AF5420083506E /* Fixtures */,
 				F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */,
+				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
 				F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */,
 				F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */,
 				F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */,
+				F407393C2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift */,
 				F42687B72230703C00A62C2E /* GraphRequestTests.swift */,
-				F44DB6972229AE040083506E /* Helpers */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
-				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
