@@ -28,7 +28,7 @@ protocol GraphRequestPiggybackManaging {
 class GraphRequestPiggybackManager: GraphRequestPiggybackManaging {
   static func addRefreshPiggyback(
     _ connection: GraphRequestConnecting,
-    permissionHandler: @escaping (GraphRequestConnection?, Any?, Error?) -> Void
+    permissionHandler: @escaping GraphRequestBlock
     ) {
     // TODO: Implementation
   }
