@@ -18,7 +18,7 @@
 
 import Foundation
 
-enum ErrorRecoveryStrings: String, Localizable {
+enum ErrorRecoveryStrings: String, CaseIterable, Localizable {
   case ok = "ErrorRecovery.OK"
   case cancel = "ErrorRecovery.Cancel"
   case transientSuggestion = "ErrorRecovery.Transient.Suggestion"

@@ -16,31 +16,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+/*
+ STOP!
 
-private let mainStringTable = "LocalizableStrings"
+ DO NOT PUT USER FACING STRINGS IN THIS FILE
 
-protocol Localizable {
-  /// Provides a localized string that draws from the LocalizableStrings file in the main bundle
-  var localized: String { get }
+ THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
 
-  /// Provides a localized string from a specified bundle
-  func localized(bundle: Bundle) -> String
-}
+ */
 
-extension Localizable where Self: CaseIterable, Self: RawRepresentable, Self.RawValue == String {
-  var localized: String {
-    return localized()
-  }
-
-  func localized(bundle: Bundle = .main) -> String {
-    return rawValue.localized(bundle: bundle)
-  }
-}
-
-extension String {
-  func localized(bundle: Bundle = .main) -> String {
-    // swiftlint:disable:next nslocalizedstring_key
-    return NSLocalizedString(self, tableName: mainStringTable, bundle: bundle, value: self, comment: "")
-  }
-}
+"foo" = "LocalizedFoo";

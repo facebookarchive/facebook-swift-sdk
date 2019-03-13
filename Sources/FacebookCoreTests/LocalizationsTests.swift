@@ -22,11 +22,19 @@ import XCTest
 class LocalizationsTests: XCTestCase {
   // Uses an arbitrary class that is located in the SDK's bundle
   let bundle = Bundle(for: AccessTokenWallet.self)
+  let testBundle = Bundle(for: LocalizationsTests.self)
 
   func testLocalizationFileExistsInCorrectBundle() {
     XCTAssertNil(Bundle.main.localizations.first,
                  "The main bundle should not have default localizations")
     XCTAssertEqual(bundle.localizations.first, "en",
                    "The SDK bundle should include localizations for english")
+  }
+
+  func testLocalizationShorthand() {
+    XCTAssertEqual(SampleLocalizableStrings.foo.localized, "foo",
+                   "The shorthand for localization should default to the sdk bundle")
+    XCTAssertEqual(SampleLocalizableStrings.foo.localized(bundle: testBundle), "LocalizedFoo",
+                   "It should be possible to specify a bundle for localizations")
   }
 }
