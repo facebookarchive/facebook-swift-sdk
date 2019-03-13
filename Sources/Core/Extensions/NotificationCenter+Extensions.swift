@@ -25,4 +25,3 @@ protocol NotificationPosting {
 
 // Default conformance to be able to inject and test a type we don't own
 extension NotificationCenter: NotificationPosting {}
-

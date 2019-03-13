@@ -38,7 +38,7 @@ class GraphRequestConnection: GraphRequestConnecting {
 
   func add(
     request: GraphRequest,
-    completion: @escaping GraphRequestBlock) {
+    completion: @escaping GraphRequestBlock
     ) {
     // TODO: Implement
   }

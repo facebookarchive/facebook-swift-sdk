@@ -18,19 +18,13 @@
 
 import Foundation
 
-// Helper to facilitate GraphRequest processing, specifically
-// associating GraphRequest and GraphRequestBlock instances and necessary
-// data for batching and retry processing.
-struct GraphRequestMetadata {
-  let request: GraphRequest
-  let batchParameters: [String: AnyHashable]
-  let completion: GraphRequestBlock
-
-  func invokeCompletionHandler(
-    for connection: GraphRequestConnecting?,
-    withResults results: Any?,
-    error: Error?
-    ) {
-    completion(connection, results, error)
+enum GraphRequestQueryItemBuilder {
+  static func build(from values: [String: AnyHashable]) -> [URLQueryItem] {
+    return values.compactMap {
+      URLQueryItem(
+        name: $0.key,
+        value: $0.value.description
+      )
+    }
   }
 }
