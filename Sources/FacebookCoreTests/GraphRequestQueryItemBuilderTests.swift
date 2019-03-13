@@ -22,7 +22,6 @@
 import XCTest
 
 class GraphRequestQueryItemBuilderTests: XCTestCase {
-
   var dictionary = [String: AnyHashable]()
 
   func testBuildingWithEmptyDictionary() {
@@ -94,5 +93,4 @@ class GraphRequestQueryItemBuilderTests: XCTestCase {
     XCTAssertEqual(items, expectedItems,
                    "Should be able to build query items from data values")
   }
-
 }
