@@ -17,7 +17,7 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /// Used for throwing Errors related to serialization
-enum GraphRequestSerializationError: Error {
+enum GraphRequestSerializationError: FBError {
   /**
    Indicates that a malformed url was passed to the serializer
 

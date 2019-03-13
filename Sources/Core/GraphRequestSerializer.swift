@@ -33,20 +33,22 @@ struct GraphRequestSerializer {
   /**
    Serializes a graph request and a url
 
-   - Parameters:
-     - url: The url to modify based on the graph request
-     - graphRequest: The request used to provide information to a url
-     - forBatch: Whether or not a graph request is intended to be batched with other requests
+   - Parameter url: The url to modify based on the graph request
+   - Parameter graphRequest: The request used to provide information to a url
+   - Parameter forBatch: Whether or not a graph request is intended to be batched with other requests
    */
   func serialize(with url: URL, graphRequest: GraphRequest, forBatch: Bool = false) throws -> URL {
-    if graphRequest.httpMethod == .post, !forBatch {
-      return url
+    guard graphRequest.httpMethod != .post
+      || forBatch
+      else {
+        return url
     }
 
-    if graphRequest.hasAttachments,
-      graphRequest.httpMethod == .get {
-      logger.log(message: "Can not use GET to upload a file")
-      throw GraphRequestSerializationError.getWithAttachments
+    guard !graphRequest.hasAttachments
+      || graphRequest.httpMethod != .get
+      else {
+        logger.log(message: "Can not use GET to upload a file")
+        throw GraphRequestSerializationError.getWithAttachments
     }
 
     let requestQueryItems = GraphRequestQueryItemBuilder.build(from: graphRequest.parameters)
@@ -55,6 +57,7 @@ struct GraphRequestSerializer {
     guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
       throw GraphRequestSerializationError.malformedURL
     }
+
     if !processedQueryItems.isEmpty {
       components.queryItems = processedQueryItems
     }
@@ -68,8 +71,7 @@ struct GraphRequestSerializer {
   /**
    Returns an updated list of parameters that includes information about debug levels
 
-    - Parameters:
-      - parameters: a list of `URLQueryItem`s to use in constructing a new list of `URLQueryItem`
+    - Parameter parameters: a list of `URLQueryItem`s to use in constructing a new list of `URLQueryItem`
                     that includes information about debug levels
    */
   func preProcess(_ parameters: [URLQueryItem]) -> [URLQueryItem] {
@@ -78,11 +80,12 @@ struct GraphRequestSerializer {
       return parameters
 
     case .info, .warning:
-      let queryItem = URLQueryItem(
-        name: Keys.debug.rawValue,
-        value: settings.graphApiDebugParameter.rawValue
-      )
-      return parameters + [queryItem]
+      return parameters + [
+        URLQueryItem(
+          name: Keys.debug.rawValue,
+          value: settings.graphApiDebugParameter.rawValue
+        )
+      ]
     }
   }
 
