@@ -22,13 +22,13 @@ import Foundation
 // for now it is needed as a dependency of AccessTokenWallet
 
 protocol GraphRequestPiggybackManaging {
-  static func addRefreshPiggyback(_ connection: GraphRequestConnecting, permissionHandler: @escaping GraphRequestBlock)
+  static func addRefreshPiggyback(_ connection: GraphRequestConnecting, completion: @escaping GraphRequestBlock)
 }
 
 class GraphRequestPiggybackManager: GraphRequestPiggybackManaging {
   static func addRefreshPiggyback(
     _ connection: GraphRequestConnecting,
-    permissionHandler: @escaping GraphRequestBlock
+    completion: @escaping GraphRequestBlock
     ) {
     // TODO: Implementation
   }
