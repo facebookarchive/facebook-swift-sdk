@@ -22,7 +22,6 @@
 import XCTest
 
 class GraphRequestTests: XCTestCase {
-
   private let path: String = "Foo"
   private let parameters: [String: String] = ["Bar": "Baz"]
   private let token: AccessToken = AccessTokenFixtures.validToken
@@ -30,11 +29,13 @@ class GraphRequestTests: XCTestCase {
   private let method: GraphRequest.HTTPMethod = .post
 
   func testHTTPMethods() {
-    [GraphRequest.HTTPMethod.get: "GET",
-     .post: "POST",
-     .delete: "DELETE"].forEach { pair in
-      XCTAssertEqual(pair.0.rawValue, pair.1,
-                     "Http methods should have the expected raw string representation")
+    [
+      GraphRequest.HTTPMethod.get: "GET",
+      .post: "POST",
+      .delete: "DELETE"
+    ].forEach { pair in
+        XCTAssertEqual(pair.0.rawValue, pair.1,
+                       "Http methods should have the expected raw string representation")
     }
   }
 
@@ -160,16 +161,16 @@ class GraphRequestTests: XCTestCase {
       enableGraphRecovery: false
     )
 
-    XCTAssertTrue(request.isGraphRecoveryDisabled,
-                  "A graph request should know whether or not graph recovery is enabled")
+    XCTAssertFalse(request.isGraphErrorRecoveryEnabled,
+                   "A graph request should know whether or not graph recovery is enabled")
 
     request = GraphRequest(
       graphPath: path,
       enableGraphRecovery: true
     )
 
-    XCTAssertFalse(request.isGraphRecoveryDisabled,
-                   "A graph request should know whether or not graph recovery is enabled")
+    XCTAssertTrue(request.isGraphErrorRecoveryEnabled,
+                  "A graph request should know whether or not graph recovery is enabled")
   }
 
   func testTogglingGraphRecovery() {
@@ -177,15 +178,15 @@ class GraphRequestTests: XCTestCase {
       graphPath: path,
       enableGraphRecovery: true
     )
-    request.setGraphErrorRecoverability(enabled: false)
+    request.isGraphErrorRecoveryEnabled = false
 
-    XCTAssertTrue(request.isGraphRecoveryDisabled,
-                  "Graph recovery ability should be settable on a graph request")
-
-    request.setGraphErrorRecoverability(enabled: true)
-
-    XCTAssertFalse(request.isGraphRecoveryDisabled,
+    XCTAssertFalse(request.isGraphErrorRecoveryEnabled,
                    "Graph recovery ability should be settable on a graph request")
+
+    request.isGraphErrorRecoveryEnabled = true
+
+    XCTAssertTrue(request.isGraphErrorRecoveryEnabled,
+                  "Graph recovery ability should be settable on a graph request")
   }
 
   func testStartingRequestWithoutSpecifiedConnection() {
@@ -274,5 +275,4 @@ class GraphRequestTests: XCTestCase {
     XCTAssertTrue(request.hasAttachments,
                   "A request with parameters that include a graph request data attachment should be considered as having attachments")
   }
-
 }

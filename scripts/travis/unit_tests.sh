@@ -21,16 +21,8 @@
 # Main Script
 # --------------
 
-#shellcheck disable=SC1090
-
-if [ "$TEST_TYPE" = iOS ]; then
-  . "$PWD/scripts/travis/build_ios.sh"
-elif [ "$TEST_TYPE" = Lint ]; then
-  . "$PWD/scripts/travis/lint.sh"
-elif [ "$TEST_TYPE" = Samples ]; then
-  . "$PWD/scripts/travis/build_samples.sh"
-elif [ "$TEST_TYPE" = CocoaPods ]; then
-  . "$PWD/scripts/travis/cocoapods.sh"
-elif [ "$TEST_TYPE" = Carthage ]; then
-  . "$PWD/scripts/travis/carthage.sh"
-fi
+set -o pipefail
+xcodebuild test -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookCore -configuration Debug -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
+# TODO: Uncomment when test targets are set up for Login and Share
+# xcodebuild test -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookLogin -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
+# xcodebuild test -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookShare -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c

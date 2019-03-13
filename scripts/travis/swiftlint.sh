@@ -21,5 +21,17 @@
 # Main Script
 # --------------
 
-swiftlint lint --path Sources --quiet
-swiftlint lint --path Samples --quiet
+#shellcheck disable=SC1090
+
+set -e
+
+if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
+  swiftlint autocorrect --format
+
+  if output=$(git status --porcelain) && [ -n "$output" ]; then
+    echo "Working directory isn't clean"
+    exit
+  fi
+
+  swiftlint
+fi

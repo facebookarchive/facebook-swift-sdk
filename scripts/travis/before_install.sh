@@ -21,6 +21,6 @@
 # Main Script
 # --------------
 
-if [ "$TEST_TYPE" = Lint ] || [ "$TEST_TYPE" = Carthage ]; then
-    brew update
+if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
+  brew update
 fi

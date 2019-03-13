@@ -46,5 +46,4 @@ class Settings: SettingsManaging {
 
   // TODO: There is a very good chance this will be needed when we start injecting settings various places
   static let shared: Settings = Settings()
-
 }
