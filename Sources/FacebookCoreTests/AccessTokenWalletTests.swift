@@ -60,6 +60,13 @@ class AccessTokenWalletTests: XCTestCase {
     )
   }
 
+  func testSharedWallet() {
+    let sharedWallet = AccessTokenWallet.shared
+
+    XCTAssertTrue(sharedWallet === AccessTokenWallet.shared,
+                  "A token wallet should only use a single instance for it's shared property")
+  }
+
   func testEmptyWallet() {
     XCTAssertNil(wallet.currentAccessToken,
                  "A token wallet should not have an access token by default")
