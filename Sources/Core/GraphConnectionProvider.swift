@@ -18,7 +18,7 @@
 
 import Foundation
 
-typealias GraphRequestBlock = (GraphRequestConnection?, Any?, Error?) -> Void
+typealias GraphRequestBlock = (GraphRequestConnecting?, Any?, Error?) -> Void
 
 protocol GraphConnectionProviding {
   func graphRequestConnection() -> GraphRequestConnecting
