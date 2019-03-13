@@ -63,6 +63,11 @@ class GraphRequestConnection: GraphRequestConnecting {
    Adds a GraphRequest object to the connection.
 
    - Parameter request: A request to be included in the round-trip when start is called.
+   - Parameter batchEntryName: A name for this request. This can be used to feed
+   the results of one request to the input of another GraphRequest in the same
+   `GraphRequestConnection` as described in
+   [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
+
    - Parameter batchParameters: The dictionary of parameters to include for this request
    as described in [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
    Examples include "depends_on", "name", or "omit_response_on_success".
@@ -72,18 +77,33 @@ class GraphRequestConnection: GraphRequestConnecting {
    */
   func add(
     request: GraphRequest,
+    batchEntryName: String = "",
     batchParameters: [String: AnyHashable] = [:],
-    completion handler: @escaping GraphRequestBlock
+    completion: @escaping GraphRequestBlock
     ) throws {
     if state != .created {
       throw GraphRequestConnectionError.requestAddition
     }
 
+    var parameters = batchParameters
+
+    switch batchEntryName.isEmpty {
+    case true:
+      break
+
+    case false:
+      parameters.updateValue(batchEntryName, forKey: BatchEntryKeys.name.rawValue)
+    }
+
     let metadata = GraphRequestMetadata(
       request: request,
-      batchParameters: batchParameters,
-      completion: handler
+      batchParameters: parameters,
+      completion: completion
     )
     requests.append(metadata)
+  }
+
+  enum BatchEntryKeys: String {
+    case name
   }
 }

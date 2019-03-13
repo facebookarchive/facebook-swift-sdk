@@ -129,6 +129,38 @@ class GraphRequestConnectionTests: XCTestCase {
                    "A connection should not alter batch parameters when adding them to request metadata")
   }
 
+  func testAddingRequestWithEmptyBatchName() {
+    let request = GraphRequest(graphPath: "Foo")
+    let connection = GraphRequestConnection()
+    let batchName = ""
+
+    try? connection.add(request: request, batchEntryName: batchName) { _, _, _ in }
+    guard let metadata = connection.requests.first else {
+      return XCTFail("A connection should store an added request as graph request metadata")
+    }
+
+    XCTAssertTrue(metadata.batchParameters.isEmpty,
+                  "A connection should not add a batch entry parameter for the batch entry name when the name is an empty string")
+  }
+
+  func testAddingRequestWithBatchName() {
+    let request = GraphRequest(graphPath: "Foo")
+    let connection = GraphRequestConnection()
+    let batchName = name
+    let expectedParameters = ["name": name]
+
+    try? connection.add(request: request, batchEntryName: batchName) { _, _, _ in }
+
+    guard let metadata = connection.requests.first,
+      let batchParameters = metadata.batchParameters as? [String: String]
+      else {
+        return XCTFail("A connection should store an added request as graph request metadata along with an additional batch parameter for name of the entry")
+    }
+
+    XCTAssertEqual(batchParameters, expectedParameters,
+                   "A connection should create a batch parameter for the added request when a batch entry name is provided")
+  }
+
   // MARK: Starting Connection
 
   func testStartingWithoutSession() {

@@ -31,6 +31,7 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
 
   func add(
     request: GraphRequest,
+    batchEntryName: String,
     batchParameters: [String: AnyHashable],
     completion: @escaping GraphRequestBlock
     ) {
