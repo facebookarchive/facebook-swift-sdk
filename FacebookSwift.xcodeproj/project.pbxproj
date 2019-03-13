@@ -18,6 +18,9 @@
 		F42687B62230702200A62C2E /* GraphRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC87B0222ED532003A8F29 /* GraphRequest.swift */; };
 		F42687B92230704500A62C2E /* GraphRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687B72230703C00A62C2E /* GraphRequestTests.swift */; };
 		F42DADBD2230597F00E1DFBA /* GraphApiDebugParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */; };
+		F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */; };
+		F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */; };
+		F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F52236FFA6007D3A34 /* FakeError.swift */; };
 		F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69122299FA10083506E /* AccessTokenWallet.swift */; };
 		F44DB6942229AB460083506E /* InternalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6932229AB460083506E /* InternalUtility.swift */; };
 		F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */; };
@@ -107,6 +110,9 @@
 		F42687B72230703C00A62C2E /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
 		F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
 		F42DADB92230597700E1DFBA /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
+		F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadataTests.swift; sourceTree = "<group>"; };
+		F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadata.swift; sourceTree = "<group>"; };
+		F432E9F52236FFA6007D3A34 /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
 		F44DB69122299FA10083506E /* AccessTokenWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWallet.swift; sourceTree = "<group>"; };
 		F44DB6932229AB460083506E /* InternalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtility.swift; sourceTree = "<group>"; };
 		F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCookieUtility.swift; sourceTree = "<group>"; };
@@ -231,12 +237,13 @@
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F44DB6B2222B01B60083506E /* Extensions */,
 				F47852A1222DC6C200A4269C /* FBError.swift */,
-				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
-				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
 				F40739402231E4EB0018505A /* GraphRequestQueryItemBuilder.swift */,
+				F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */,
+				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
+				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -323,11 +330,12 @@
 			children = (
 				F44DB6A02229C50E0083506E /* FakeAccessTokenCache.swift */,
 				F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */,
+				F432E9F52236FFA6007D3A34 /* FakeError.swift */,
 				F44DB6BE222B10040083506E /* FakeGraphConnectionProvider.swift */,
 				F44DB6C0222B11620083506E /* FakeGraphRequestConnection.swift */,
+				F44DB6C2222B136F0083506E /* FakeGraphRequestPiggybackManager.swift */,
 				F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */,
 				F44DB6A22229C6B60083506E /* FakeSettings.swift */,
-				F44DB6C2222B136F0083506E /* FakeGraphRequestPiggybackManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -377,7 +385,9 @@
 				F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
 				F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */,
+				F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */,
 				F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */,
+				F42687B72230703C00A62C2E /* GraphRequestTests.swift */,
 				F44DB6972229AE040083506E /* Helpers */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
@@ -638,6 +648,7 @@
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
 				F47852A2222DC6C200A4269C /* FBError.swift in Sources */,
 				F47853C1222DCF8600A4269C /* CoreError.swift in Sources */,
+				F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */,
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
 				F44DB6B1222B01A30083506E /* NotificationName+Extensions.swift in Sources */,
 				F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */,
@@ -667,6 +678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F45734D1222D9343001F806A /* AccessTokenCacheTests.swift in Sources */,
+				F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */,
 				F44DB6C1222B11620083506E /* FakeGraphRequestConnection.swift in Sources */,
 				F407393D2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift in Sources */,
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
@@ -680,6 +692,7 @@
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
 				F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */,
 				F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */,
+				F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */,
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
