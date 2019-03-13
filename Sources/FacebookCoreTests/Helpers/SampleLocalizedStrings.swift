@@ -21,4 +21,6 @@ import Foundation
 
 enum SampleLocalizableStrings: String, CaseIterable, Localizable {
   case foo
+  case bar
+  case baz
 }
