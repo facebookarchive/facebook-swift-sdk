@@ -402,8 +402,8 @@
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F48A74B02239B81B007192F6 /* ErrorRecoveryStringTests.swift */,
 				F4B8832C22305791000971C9 /* FBErrorTests.swift */,
-				F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */,
 				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
+				F42DADB82230597700E1DFBA /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
 				F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */,
 				F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */,
@@ -412,9 +412,9 @@
 				F42687B72230703C00A62C2E /* GraphRequestTests.swift */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
+				F48A74B42239BE66007192F6 /* LocalizableStrings.strings */,
 				F48A749722399C97007192F6 /* LocalizationsTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
-				F48A74B42239BE66007192F6 /* LocalizableStrings.strings */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
