@@ -16,12 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable multiline_arguments
+
 @testable import FacebookCore
+import XCTest
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class GraphApiDebugParameterTests: XCTestCase {
+  func testKnownValues() {
+    let expectedCases: [GraphApiDebugParameter] = [.info, .warning]
+    XCTAssertEqual(GraphApiDebugParameter.allCases, expectedCases,
+                   "There should be easy access to all the cases of a graph api debug parameter")
+  }
 
-  static var graphAPIVersion: String = "0.0.1"
-
-  var accessTokenCache: AccessTokenCaching?
+  func testRawValues() {
+    let values = GraphApiDebugParameter.allCases
+    let rawValues = ["info", "warning"]
+    zip(values, rawValues).forEach { pair in
+      XCTAssertEqual(pair.0.rawValue, pair.1,
+                     "Graph api debug parameter: \(pair.0) should have the expected raw value: \(pair.1)")
+    }
+  }
 }

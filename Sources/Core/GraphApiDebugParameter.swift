@@ -16,12 +16,9 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
-
-  static var graphAPIVersion: String = "0.0.1"
-
-  var accessTokenCache: AccessTokenCaching?
+enum GraphApiDebugParameter: String, CaseIterable {
+  case info
+  case warning
 }
