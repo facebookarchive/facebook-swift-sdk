@@ -22,7 +22,6 @@
 import XCTest
 
 class GraphRequestSerializerConfigurationTests: XCTestCase {
-
   let serializer = GraphRequestSerializer()
 
   // MARK: Concrete Dependencies
@@ -35,5 +34,4 @@ class GraphRequestSerializerConfigurationTests: XCTestCase {
     XCTAssertTrue(serializer.logger is Logger,
                   "A serializer should have the expected concrete implementation for its logging dependency")
   }
-
 }

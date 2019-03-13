@@ -31,7 +31,6 @@ protocol SettingsManaging {
 }
 
 class Settings: SettingsManaging {
-
   // TODO: Probably needs to be private and weak. Revisit this during rewrite
   weak var accessTokenCache: AccessTokenCaching?
 
@@ -45,5 +44,5 @@ class Settings: SettingsManaging {
   static var isGraphErrorRecoveryEnabled: Bool = false
 
   // TODO: There is a very good chance this will be needed when we start injecting settings various places
-  static let shared: Settings = Settings()
+  static let shared = Settings()
 }

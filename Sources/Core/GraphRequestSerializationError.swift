@@ -18,7 +18,6 @@
 
 /// Used for throwing Errors related to serialization
 enum GraphRequestSerializationError: Error {
-
   /**
    Indicates that a malformed url was passed to the serializer
 

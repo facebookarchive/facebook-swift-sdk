@@ -22,8 +22,10 @@ struct GraphRequestSerializer {
   let settings: SettingsManaging
   let logger: Logging
 
-  init(settings: SettingsManaging = Settings.shared,
-       logger: Logging = Logger()) {
+  init(
+    settings: SettingsManaging = Settings.shared,
+    logger: Logging = Logger()
+    ) {
     self.settings = settings
     self.logger = logger
   }
@@ -43,7 +45,6 @@ struct GraphRequestSerializer {
 
     if graphRequest.hasAttachments,
       graphRequest.httpMethod == .get {
-
       logger.log(message: "Can not use GET to upload a file")
       throw GraphRequestSerializationError.getWithAttachments
     }
@@ -75,6 +76,7 @@ struct GraphRequestSerializer {
     switch settings.graphApiDebugParameter {
     case .none:
       return parameters
+
     case .info, .warning:
       let queryItem = URLQueryItem(
         name: Keys.debug.rawValue,
@@ -87,5 +89,4 @@ struct GraphRequestSerializer {
   enum Keys: String {
     case debug
   }
-
 }

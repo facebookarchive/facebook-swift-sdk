@@ -22,7 +22,6 @@
 import XCTest
 
 class GraphRequestSerializerTests: XCTestCase {
-
   private var parameters: [URLQueryItem] = [
     URLQueryItem(name: "Foo", value: "Bar")
   ]
@@ -117,7 +116,6 @@ class GraphRequestSerializerTests: XCTestCase {
     } catch {
       XCTFail("Trying to serialize a request with a malformed url should throw only expected errors")
     }
-
   }
 
   func testSerializingWithNoPreProcessedParameters() {
@@ -245,5 +243,4 @@ class GraphRequestSerializerTests: XCTestCase {
     XCTAssertEqual(serializedURL.absoluteString, expectedURLString,
                    "An batched get request should honor parameters")
   }
-
 }
