@@ -81,17 +81,13 @@ class GraphRequestConnection: GraphRequestConnecting {
     batchParameters: [String: AnyHashable] = [:],
     completion: @escaping GraphRequestBlock
     ) throws {
-    if state != .created {
+    guard state == .created else {
       throw GraphRequestConnectionError.requestAddition
     }
 
     var parameters = batchParameters
 
-    switch batchEntryName.isEmpty {
-    case true:
-      break
-
-    case false:
+    if !batchEntryName.isEmpty {
       parameters.updateValue(batchEntryName, forKey: BatchEntryKeys.name.rawValue)
     }
 
