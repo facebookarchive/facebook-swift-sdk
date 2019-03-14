@@ -16,31 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-/**
- GraphRequestBlock
+class LocalizationsTests: XCTestCase {
+  // Uses an arbitrary class that is located in the SDK's bundle
+  let bundle = Bundle(for: AccessTokenWallet.self)
+  let testBundle = Bundle(for: LocalizationsTests.self)
 
- A block that is passed to addRequest to register for a callback with the results of that
- request once the connection completes.
+  func testLocalizationFileExistsInCorrectBundle() {
+    XCTAssertNil(Bundle.main.localizations.first,
+                 "The main bundle should not have default localizations")
+    XCTAssertEqual(bundle.localizations.first, "en",
+                   "The SDK bundle should include localizations for english")
+  }
 
- Pass a block of this type when calling addRequest.  This will be called once
- the request completes.  The call occurs on the UI thread.
-
- - Parameter connection: The `FBSDKGraphRequestConnection` that sent the request.
- - Parameter result: The result of the request. This is a translation of
- JSON data to `Dictionary` and `Array` objects. This
- is nil if there was an error.
- - Parameter error: The `Error` representing any error that occurred.
- */
-typealias GraphRequestBlock = (_ connection: GraphRequestConnecting?, _ result: Any?, _ error: Error?) -> Void
-
-protocol GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting
-}
-
-struct GraphConnectionProvider: GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting {
-    return GraphRequestConnection()
+  func testLocalizationShorthand() {
+    XCTAssertEqual(SampleLocalizableStrings.foo.localized, "foo",
+                   "The shorthand for localization should default to the sdk bundle")
+    XCTAssertEqual(SampleLocalizableStrings.foo.localized(bundle: testBundle), "LocalizedFoo",
+                   "It should be possible to specify a bundle for localizations")
   }
 }

@@ -16,31 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import UIKit
 
-/**
- GraphRequestBlock
-
- A block that is passed to addRequest to register for a callback with the results of that
- request once the connection completes.
-
- Pass a block of this type when calling addRequest.  This will be called once
- the request completes.  The call occurs on the UI thread.
-
- - Parameter connection: The `FBSDKGraphRequestConnection` that sent the request.
- - Parameter result: The result of the request. This is a translation of
- JSON data to `Dictionary` and `Array` objects. This
- is nil if there was an error.
- - Parameter error: The `Error` representing any error that occurred.
- */
-typealias GraphRequestBlock = (_ connection: GraphRequestConnecting?, _ result: Any?, _ error: Error?) -> Void
-
-protocol GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting
+protocol GraphRequestConnecting {
+  func start()
+  func add(
+    request: GraphRequest,
+    batchEntryName: String,
+    batchParameters: [String: AnyHashable],
+    completion: @escaping GraphRequestBlock
+    ) throws
 }
 
-struct GraphConnectionProvider: GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting {
-    return GraphRequestConnection()
+extension GraphRequestConnecting {
+  func add(
+    request: GraphRequest,
+    completion: @escaping GraphRequestBlock
+    ) throws {
+    // TODO: this feels a little hacky, would like to introduce a NonEmptyString type and use
+    // an existence check over an emptiness check on a String.
+    try add(request: request, batchEntryName: "", batchParameters: [:], completion: completion)
   }
 }

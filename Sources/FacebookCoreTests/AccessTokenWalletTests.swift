@@ -286,7 +286,7 @@ class AccessTokenWalletTests: XCTestCase {
     wallet.refreshCurrentAccessToken { connection, result, error in
       XCTAssertNil(connection, "A connection should not be passed to the completion handler when the token is nil")
       XCTAssertNil(result, "A result should not be passed to the completion handler when the token is nil")
-      guard let error = error as? GraphConnectionError else {
+      guard let error = error as? GraphRequestConnectionError else {
         return XCTFail("Attempting to refresh a nil token should result in an error of the expected type")
       }
       XCTAssertEqual(error, .accessTokenRequired,

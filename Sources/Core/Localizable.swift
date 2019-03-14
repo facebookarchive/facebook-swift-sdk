@@ -18,29 +18,29 @@
 
 import Foundation
 
-/**
- GraphRequestBlock
+private let mainStringTable = "LocalizableStrings"
 
- A block that is passed to addRequest to register for a callback with the results of that
- request once the connection completes.
+protocol Localizable {
+  /// Provides a localized string that draws from the LocalizableStrings file in the main bundle
+  var localized: String { get }
 
- Pass a block of this type when calling addRequest.  This will be called once
- the request completes.  The call occurs on the UI thread.
-
- - Parameter connection: The `FBSDKGraphRequestConnection` that sent the request.
- - Parameter result: The result of the request. This is a translation of
- JSON data to `Dictionary` and `Array` objects. This
- is nil if there was an error.
- - Parameter error: The `Error` representing any error that occurred.
- */
-typealias GraphRequestBlock = (_ connection: GraphRequestConnecting?, _ result: Any?, _ error: Error?) -> Void
-
-protocol GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting
+  /// Provides a localized string from a specified bundle
+  func localized(bundle: Bundle) -> String
 }
 
-struct GraphConnectionProvider: GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting {
-    return GraphRequestConnection()
+extension Localizable where Self: CaseIterable, Self: RawRepresentable, Self.RawValue == String {
+  var localized: String {
+    return localized()
+  }
+
+  func localized(bundle: Bundle = .main) -> String {
+    return rawValue.localized(bundle: bundle)
+  }
+}
+
+extension String {
+  func localized(bundle: Bundle = .main) -> String {
+    // swiftlint:disable:next nslocalizedstring_key
+    return NSLocalizedString(self, tableName: mainStringTable, bundle: bundle, value: self, comment: "")
   }
 }
