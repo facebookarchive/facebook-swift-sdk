@@ -40,7 +40,6 @@ struct GraphRequestSerializer {
   func serialize(with url: URL, graphRequest: GraphRequest, forBatch: Bool = false) throws -> URL {
     guard graphRequest.httpMethod != .post
       || forBatch
-      else {
         return url
     }
 
