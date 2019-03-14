@@ -18,29 +18,12 @@
 
 import Foundation
 
-/**
- GraphRequestBlock
+enum GraphRequestConnectionError: FBError, CaseIterable {
+  case accessTokenRequired
 
- A block that is passed to addRequest to register for a callback with the results of that
- request once the connection completes.
-
- Pass a block of this type when calling addRequest.  This will be called once
- the request completes.  The call occurs on the UI thread.
-
- - Parameter connection: The `FBSDKGraphRequestConnection` that sent the request.
- - Parameter result: The result of the request. This is a translation of
- JSON data to `Dictionary` and `Array` objects. This
- is nil if there was an error.
- - Parameter error: The `Error` representing any error that occurred.
- */
-typealias GraphRequestBlock = (_ connection: GraphRequestConnecting?, _ result: Any?, _ error: Error?) -> Void
-
-protocol GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting
-}
-
-struct GraphConnectionProvider: GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting {
-    return GraphRequestConnection()
-  }
+  /**
+   Indicates that a request was added to a connection that was in a state
+   that is incompatible with adding requests
+   */
+  case requestAddition
 }
