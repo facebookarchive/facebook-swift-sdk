@@ -16,17 +16,20 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+/// Used for throwing Errors related to serialization
+enum GraphRequestSerializationError: FBError {
+  /**
+   Indicates that a malformed url was passed to the serializer
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+   This is incredibly rare. The only case I could find where this could happen
+   is if the URL was created from a string with a negative port number
+   ex: URL(string: "www.example.com:-80/") will succeed but is malformed
+   */
+  case malformedURL
 
-  static var graphAPIVersion: String = "0.0.1"
-
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-
-  init(graphApiDebugParameter: GraphApiDebugParameter) {
-    self.graphApiDebugParameter = graphApiDebugParameter
-  }
+  /**
+   Indicates that serialization of a url cannot be performed with a `GraphRequest`
+   that has attachments **and** an HTTPMethod of GET
+   */
+  case getWithAttachments
 }
