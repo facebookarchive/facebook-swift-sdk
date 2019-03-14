@@ -16,17 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable explicit_type_interface
+
 @testable import FacebookCore
+import XCTest
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class GraphRequestSerializerConfigurationTests: XCTestCase {
+  let serializer = GraphRequestSerializer()
 
-  static var graphAPIVersion: String = "0.0.1"
+  // MARK: Concrete Dependencies
+  func testSettingsDependency() {
+    XCTAssertTrue(serializer.settings is Settings,
+                  "A serializer should have the expected concrete implementation for its settings dependency")
+  }
 
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-
-  init(graphApiDebugParameter: GraphApiDebugParameter) {
-    self.graphApiDebugParameter = graphApiDebugParameter
+  func testLoggerDependency() {
+    XCTAssertTrue(serializer.logger is Logger,
+                  "A serializer should have the expected concrete implementation for its logging dependency")
   }
 }
