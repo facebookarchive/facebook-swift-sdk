@@ -19,6 +19,7 @@
 import Foundation
 
 enum GraphApiDebugParameter: String, CaseIterable {
+  case none
   case info
   case warning
 }
