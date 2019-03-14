@@ -136,7 +136,8 @@ struct GraphRequest {
     with connection: GraphRequestConnecting = GraphRequestConnection(),
     completion: @escaping GraphRequestBlock
     ) -> GraphRequestConnecting {
-    connection.add(request: self, completion: completion)
+    // This is marked as try? but should never fail with a new graph request connection
+    try? connection.add(request: self, completion: completion)
     connection.start()
     return connection
   }

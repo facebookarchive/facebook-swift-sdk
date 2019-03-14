@@ -109,7 +109,7 @@ class AccessTokenWallet {
       connection.start()
     } else {
       // TODO: This must be fixed to use proper error handling that includes a relevant message
-      completionHandler(nil, nil, GraphConnectionError.accessTokenRequired)
+      completionHandler(nil, nil, GraphRequestConnectionError.accessTokenRequired)
       //      completionHandler(nil, nil, Error.fbError(withCode: Int(FBSDKErrorAccessTokenRequired),
       //      message: "No current access token to refresh"))
     }
