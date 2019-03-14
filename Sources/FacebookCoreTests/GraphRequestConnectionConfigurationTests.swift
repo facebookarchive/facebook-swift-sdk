@@ -16,31 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-/**
- GraphRequestBlock
+class GraphRequestConnectionConfigurationTests: XCTestCase {
+  func testSessionDependency() {
+    let connection = GraphRequestConnection()
 
- A block that is passed to addRequest to register for a callback with the results of that
- request once the connection completes.
-
- Pass a block of this type when calling addRequest.  This will be called once
- the request completes.  The call occurs on the UI thread.
-
- - Parameter connection: The `FBSDKGraphRequestConnection` that sent the request.
- - Parameter result: The result of the request. This is a translation of
- JSON data to `Dictionary` and `Array` objects. This
- is nil if there was an error.
- - Parameter error: The `Error` representing any error that occurred.
- */
-typealias GraphRequestBlock = (_ connection: GraphRequestConnecting?, _ result: Any?, _ error: Error?) -> Void
-
-protocol GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting
-}
-
-struct GraphConnectionProvider: GraphConnectionProviding {
-  func graphRequestConnection() -> GraphRequestConnecting {
-    return GraphRequestConnection()
+    XCTAssertTrue(connection.sessionProvider is SessionProvider,
+                  "Connection should have the correct concrete implementation of a session provider")
   }
 }

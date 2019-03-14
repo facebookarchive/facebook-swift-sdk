@@ -18,28 +18,7 @@
 
 import Foundation
 
-// TODO: Error handling - this is wrong but must be fixed when we introduce error handling
-enum GraphConnectionError: Error {
-  case accessTokenRequired
-}
+// TODO: Move canonical Session to its own file once it has more definition
+protocol Session {}
 
-// This will eventually be replaced by the rewrite of FBSDKGraphRequestConnection
-// for now it is needed as a dependency of AccessTokenWallet
-
-protocol GraphRequestConnecting {
-  func start()
-  func add(request: GraphRequest, completion: @escaping GraphRequestBlock)
-}
-
-class GraphRequestConnection: GraphRequestConnecting {
-  func start() {
-    // TODO: Implement
-  }
-
-  func add(
-    request: GraphRequest,
-    completion: @escaping GraphRequestBlock
-    ) {
-    // TODO: Implement
-  }
-}
+extension URLSession: Session {}
