@@ -24,7 +24,7 @@ class AccessTokenWalletTests: XCTestCase {
   private let token = AccessTokenFixtures.validToken
   private var fakeCookieUtility: FakeCookieUtility.Type!
   private var fakeAccessTokenCache: FakeAccessTokenCache!
-  private var fakeSetttings = FakeSettings()
+  private var fakeSetttings = FakeSettings(graphApiDebugParameter: .none)
   private var fakeNotificationCenter: FakeNotificationCenter!
   private var fakeConnection: FakeGraphRequestConnection!
   private var fakeGraphConnectionProvider: FakeGraphConnectionProvider!

@@ -21,14 +21,14 @@ import XCTest
 
 class GraphApiDebugParameterTests: XCTestCase {
   func testKnownValues() {
-    let expectedCases: [GraphApiDebugParameter] = [.info, .warning]
+    let expectedCases: [GraphApiDebugParameter] = [.none, .info, .warning]
     XCTAssertEqual(GraphApiDebugParameter.allCases, expectedCases,
                    "There should be easy access to all the cases of a graph api debug parameter")
   }
 
   func testRawValues() {
-    let values = GraphApiDebugParameter.allCases
-    let rawValues = ["info", "warning"]
+    let values = [GraphApiDebugParameter.none, .info, .warning]
+    let rawValues = ["none", "info", "warning"]
     zip(values, rawValues).forEach { pair in
       XCTAssertEqual(pair.0.rawValue, pair.1,
                      "Graph api debug parameter: \(pair.0) should have the expected raw value: \(pair.1)")
