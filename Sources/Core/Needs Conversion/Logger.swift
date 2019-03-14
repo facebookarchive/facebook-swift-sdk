@@ -16,17 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
-
-  static var graphAPIVersion: String = "0.0.1"
-
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-
-  init(graphApiDebugParameter: GraphApiDebugParameter) {
-    self.graphApiDebugParameter = graphApiDebugParameter
+// This will ultimately be a wrapper around os_log. For more info on the decision to
+// rewrite this to wrap os_log over NSLog see: https://developer.apple.com/videos/play/wwdc2016/721/
+// more info here: https://stackoverflow.com/questions/25951195/swift-print-vs-println-vs-nslog
+//
+struct Logger: Logging {
+  func log(message: StaticString) {
+    // TODO: Implementation
   }
 }

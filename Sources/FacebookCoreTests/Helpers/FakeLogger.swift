@@ -18,15 +18,10 @@
 
 @testable import FacebookCore
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class FakeLogger: Logging {
+  var capturedMessage: StaticString?
 
-  static var graphAPIVersion: String = "0.0.1"
-
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-
-  init(graphApiDebugParameter: GraphApiDebugParameter) {
-    self.graphApiDebugParameter = graphApiDebugParameter
+  func log(message: StaticString) {
+    capturedMessage = message
   }
 }
