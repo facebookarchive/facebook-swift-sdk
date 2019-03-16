@@ -38,7 +38,11 @@ extension Localizable where Self: CaseIterable, Self: RawRepresentable, Self.Raw
   }
 }
 
-extension String {
+extension String: Localizable {
+  var localized: String {
+    return localized()
+  }
+
   func localized(bundle: Bundle = .main) -> String {
     // swiftlint:disable:next nslocalizedstring_key
     return NSLocalizedString(self, tableName: mainStringTable, bundle: bundle, value: self, comment: "")

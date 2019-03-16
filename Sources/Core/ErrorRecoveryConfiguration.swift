@@ -33,4 +33,17 @@ struct ErrorRecoveryConfiguration: Codable {
     localizedRecoveryOptionDescriptions = optionDescriptions.map { $0.localized(bundle: bundle) }
     errorCategory = category
   }
+
+  init(remoteConfiguration: RemoteErrorRecoveryConfiguration) {
+    var category: GraphRequestErrorCategory
+    if let errorCategory = GraphRequestErrorCategory(rawValue: remoteConfiguration.name) {
+      category = errorCategory
+    } else {
+      category = .recoverable
+    }
+
+    localizedRecoveryDescription = remoteConfiguration.recoveryMessage.localized()
+    localizedRecoveryOptionDescriptions = remoteConfiguration.recoveryOptions.map { $0.localized() }
+    self.errorCategory = category
+  }
 }

@@ -16,25 +16,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
 
-enum GraphRequestErrorCategory: String, CaseIterable, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
-
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
-
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+// TODO: Consider adding initializer to internal. Really do not want to do this but may
+// be the only way to silence this error.
+// See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
+extension RemoteErrorRecoveryConfigurationList {
+  init(configurations: [RemoteErrorRecoveryConfiguration]) {
+    self.configurations = configurations
+  }
 }

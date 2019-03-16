@@ -91,6 +91,11 @@
 		F4C32D98223D990A00FF1F86 /* SampleRawRemoteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */; };
 		F4C32D99223D990A00FF1F86 /* SampleRawRemoteErrorConfigurationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */; };
 		F4C32D9B223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */; };
+		F4C32D9D223DA0F600FF1F86 /* ErrorConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D9C223DA0F500FF1F86 /* ErrorConfiguration.swift */; };
+		F4C32D9F223DA12200FF1F86 /* ErrorConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D9E223DA12200FF1F86 /* ErrorConfigurationTests.swift */; };
+		F4C32DA4223DA13E00FF1F86 /* RemoteErrorRecoveryCodes+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DA1223DA13E00FF1F86 /* RemoteErrorRecoveryCodes+Extensions.swift */; };
+		F4C32DA5223DA13E00FF1F86 /* RemoteErrorRecoveryConfigurationList+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DA2223DA13E00FF1F86 /* RemoteErrorRecoveryConfigurationList+Extensions.swift */; };
+		F4C32DA6223DA13E00FF1F86 /* RemoteErrorRecoveryConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DA3223DA13E00FF1F86 /* RemoteErrorRecoveryConfiguration+Extensions.swift */; };
 		F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */; };
 		F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC87B0222ED532003A8F29 /* GraphRequest.swift */; };
 /* End PBXBuildFile section */
@@ -227,6 +232,11 @@
 		F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteErrorConfigurationList.swift; sourceTree = "<group>"; };
 		F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationTests.swift; sourceTree = "<group>"; };
 		F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationDecodingErrorTests.swift; sourceTree = "<group>"; };
+		F4C32D9C223DA0F500FF1F86 /* ErrorConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorConfiguration.swift; sourceTree = "<group>"; };
+		F4C32D9E223DA12200FF1F86 /* ErrorConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorConfigurationTests.swift; sourceTree = "<group>"; };
+		F4C32DA1223DA13E00FF1F86 /* RemoteErrorRecoveryCodes+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteErrorRecoveryCodes+Extensions.swift"; sourceTree = "<group>"; };
+		F4C32DA2223DA13E00FF1F86 /* RemoteErrorRecoveryConfigurationList+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteErrorRecoveryConfigurationList+Extensions.swift"; sourceTree = "<group>"; };
+		F4C32DA3223DA13E00FF1F86 /* RemoteErrorRecoveryConfiguration+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteErrorRecoveryConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerConfigurationTests.swift; sourceTree = "<group>"; };
 		F4FC87B0222ED532003A8F29 /* GraphRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -321,6 +331,7 @@
 				F44DB69122299FA10083506E /* AccessTokenWallet.swift */,
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
+				F4C32D9C223DA0F500FF1F86 /* ErrorConfiguration.swift */,
 				F48A74B62239BED9007192F6 /* ErrorRecoveryConfiguration.swift */,
 				F48A74AD2239B794007192F6 /* ErrorRecoveryStrings.swift */,
 				F47852A1222DC6C200A4269C /* FBError.swift */,
@@ -481,6 +492,7 @@
 		F49FA47A222880FE0008CAD6 /* FacebookCoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				F4C32DA0223DA13E00FF1F86 /* Extensions */,
 				F44DB6AE222AF5420083506E /* Fixtures */,
 				F44DB6972229AE040083506E /* Helpers */,
 				F4C32D8E223D98F100FF1F86 /* Sample Data */,
@@ -490,6 +502,7 @@
 				F409967422299BE200F23464 /* AccessTokenWalletTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F408BEB3223988BD0068D24A /* ErrorCategoryTests.swift */,
+				F4C32D9E223DA12200FF1F86 /* ErrorConfigurationTests.swift */,
 				F408BEAD223986040068D24A /* ErrorRecoveryConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* ErrorRecoveryStringTests.swift */,
 				F4B8832C22305791000971C9 /* FBErrorTests.swift */,
@@ -541,6 +554,16 @@
 				F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */,
 			);
 			path = "Sample Data";
+			sourceTree = "<group>";
+		};
+		F4C32DA0223DA13E00FF1F86 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F4C32DA1223DA13E00FF1F86 /* RemoteErrorRecoveryCodes+Extensions.swift */,
+				F4C32DA3223DA13E00FF1F86 /* RemoteErrorRecoveryConfiguration+Extensions.swift */,
+				F4C32DA2223DA13E00FF1F86 /* RemoteErrorRecoveryConfigurationList+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -784,6 +807,7 @@
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */,
 				F4C32D8A223D98D400FF1F86 /* RemoteErrorRecoveryCodes.swift in Sources */,
+				F4C32D9D223DA0F600FF1F86 /* ErrorConfiguration.swift in Sources */,
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
@@ -840,8 +864,11 @@
 				F45734D1222D9343001F806A /* AccessTokenCacheTests.swift in Sources */,
 				F4C32D98223D990A00FF1F86 /* SampleRawRemoteConfiguration.swift in Sources */,
 				F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */,
+				F4C32D9F223DA12200FF1F86 /* ErrorConfigurationTests.swift in Sources */,
 				F44DB6C1222B11620083506E /* FakeGraphRequestConnection.swift in Sources */,
 				F4C32D99223D990A00FF1F86 /* SampleRawRemoteErrorConfigurationList.swift in Sources */,
+				F4C32DA4223DA13E00FF1F86 /* RemoteErrorRecoveryCodes+Extensions.swift in Sources */,
+				F4C32DA5223DA13E00FF1F86 /* RemoteErrorRecoveryConfigurationList+Extensions.swift in Sources */,
 				F407393D2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift in Sources */,
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
 				F4C32D9B223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift in Sources */,
@@ -853,6 +880,7 @@
 				F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,
+				F4C32DA6223DA13E00FF1F86 /* RemoteErrorRecoveryConfiguration+Extensions.swift in Sources */,
 				F44DB6BF222B10040083506E /* FakeGraphConnectionProvider.swift in Sources */,
 				F480D9132236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,

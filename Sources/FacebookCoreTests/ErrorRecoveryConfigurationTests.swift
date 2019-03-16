@@ -26,7 +26,7 @@ class ErrorRecoveryConfigurationTests: XCTestCase {
     let configuration = ErrorRecoveryConfiguration(
       recoveryDescription: SampleLocalizableStrings.foo,
       optionDescriptions: [],
-      category: .login,
+      category: .recoverable,
       bundle: testBundle
     )
 
@@ -41,7 +41,7 @@ class ErrorRecoveryConfigurationTests: XCTestCase {
         SampleLocalizableStrings.bar,
         SampleLocalizableStrings.baz
       ],
-      category: .login,
+      category: .recoverable,
       bundle: testBundle
     )
 
@@ -55,11 +55,40 @@ class ErrorRecoveryConfigurationTests: XCTestCase {
     let configuration = ErrorRecoveryConfiguration(
       recoveryDescription: SampleLocalizableStrings.foo,
       optionDescriptions: [SampleLocalizableStrings.bar],
-      category: GraphRequestErrorCategory.login,
+      category: .recoverable,
       bundle: testBundle
     )
 
-    XCTAssertEqual(configuration.errorCategory, .login,
+    XCTAssertEqual(configuration.errorCategory, .recoverable,
                    "A recovery configuration should store the error category it was created with")
+  }
+
+  func testBuildingFromRemoteConfiguration() {
+    let remoteRecoverable = RemoteErrorRecoveryConfiguration(
+      name: GraphRequestErrorCategory.recoverable.rawValue
+    )
+    let remoteTransient = RemoteErrorRecoveryConfiguration(
+      name: GraphRequestErrorCategory.transient.rawValue
+    )
+    let remoteOther = RemoteErrorRecoveryConfiguration(
+      name: GraphRequestErrorCategory.other.rawValue
+    )
+    let remoteUnknown = RemoteErrorRecoveryConfiguration(
+      name: "Foo"
+    )
+
+    let recoverable = ErrorRecoveryConfiguration(remoteConfiguration: remoteRecoverable)
+    let transient = ErrorRecoveryConfiguration(remoteConfiguration: remoteTransient)
+    let other = ErrorRecoveryConfiguration(remoteConfiguration: remoteOther)
+    let unknown = ErrorRecoveryConfiguration(remoteConfiguration: remoteUnknown)
+
+        XCTAssertEqual(recoverable.errorCategory, .recoverable,
+                       "An error recovery configuration should use the name of the remote configuration to determine the error category")
+    XCTAssertEqual(transient.errorCategory, .transient,
+                   "An error recovery configuration should use the name of the remote configuration to determine the error category")
+    XCTAssertEqual(other.errorCategory, .other,
+                   "An error recovery configuration should use the name of the remote configuration to determine the error category")
+    XCTAssertEqual(unknown.errorCategory, .recoverable,
+                   "An error recovery configuration should use the name of the remote configuration to determine the error category, defaulting to unknown for unrecognized names")
   }
 }
