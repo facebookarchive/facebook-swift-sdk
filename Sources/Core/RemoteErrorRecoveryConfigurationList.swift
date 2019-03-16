@@ -20,15 +20,15 @@ import Foundation
 
 /// A representation of a server side list of errors
 /// Used for creating an `ErrorConfiguration`
-struct RemoteErrorConfigurationList: Codable {
-  let configurations: [RemoteErrorConfiguration]
+struct RemoteErrorRecoveryConfigurationList: Codable {
+  let configurations: [RemoteErrorRecoveryConfiguration]
 
   init(from decoder: Decoder) throws {
     var container = try decoder.unkeyedContainer()
-    var configurations: [RemoteErrorConfiguration] = []
+    var configurations: [RemoteErrorRecoveryConfiguration] = []
 
     while !container.isAtEnd {
-      if let item = try? container.decode(RemoteErrorConfiguration.self) {
+      if let item = try? container.decode(RemoteErrorRecoveryConfiguration.self) {
         configurations.append(item)
       } else {
         _ = try? container.decode(EmptyDecodable.self)

@@ -18,14 +18,11 @@
 
 import Foundation
 
-typealias RawRemoteConfiguration = [String: AnyHashable]
-typealias RawRemoteConfigurationList = [RawRemoteConfiguration]
-
 /// A representation of a server side error
-/// Used for creating a `RemoteErrorConfigurationList`
-struct RemoteErrorConfiguration: Codable {
+/// Used for creating a `RemoteErrorRecoveryConfigurationList`
+struct RemoteErrorRecoveryConfiguration: Codable {
   let name: String
-  let items: [RemoteErrorConfigurationItem]
+  let items: [RemoteErrorRecoveryCodes]
   let recoveryMessage: String
   let recoveryOptions: [String]
 
@@ -33,7 +30,7 @@ struct RemoteErrorConfiguration: Codable {
     let container = try decoder.container(keyedBy: Keys.self)
     var itemsContainer = try container.nestedUnkeyedContainer(forKey: .items)
 
-    var items = [RemoteErrorConfigurationItem]()
+    var items = [RemoteErrorRecoveryCodes]()
 
     let name = try container.decode(String.self, forKey: .name)
     guard !name.isEmpty else {
@@ -43,7 +40,7 @@ struct RemoteErrorConfiguration: Codable {
     self.name = name
 
     while !itemsContainer.isAtEnd {
-      if let item = try? itemsContainer.decode(RemoteErrorConfigurationItem.self) {
+      if let item = try? itemsContainer.decode(RemoteErrorRecoveryCodes.self) {
         items.append(item)
       } else {
         _ = try? itemsContainer.decode(EmptyDecodable.self)

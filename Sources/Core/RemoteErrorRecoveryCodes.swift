@@ -19,14 +19,14 @@
 import Foundation
 
 /// A representation of the server side codes associated with an error
-/// Used for creating a `RemoteErrorConfiguration`
-struct RemoteErrorConfigurationItem: Codable, Equatable {
-  let code: Int
+/// Used for creating a `RemoteErrorRecoveryConfiguration`
+struct RemoteErrorRecoveryCodes: Codable, Equatable {
+  let primaryCode: Int
   let subcodes: [Int]
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Keys.self)
-    code = try container.decode(Int.self, forKey: .code)
+    primaryCode = try container.decode(Int.self, forKey: .code)
 
     if var subcodesContainer = try? container.nestedUnkeyedContainer(forKey: .subcodes) {
       var subcodes: [Int] = []
