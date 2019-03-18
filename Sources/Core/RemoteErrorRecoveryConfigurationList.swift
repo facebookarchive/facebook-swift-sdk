@@ -28,9 +28,11 @@ struct RemoteErrorRecoveryConfigurationList: Codable {
     var configurations: [RemoteErrorRecoveryConfiguration] = []
 
     while !container.isAtEnd {
-      if let item = try? container.decode(RemoteErrorRecoveryConfiguration.self) {
+      switch try? container.decode(RemoteErrorRecoveryConfiguration.self) {
+      case let item?:
         configurations.append(item)
-      } else {
+
+      case nil:
         _ = try? container.decode(EmptyDecodable.self)
       }
     }

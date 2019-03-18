@@ -28,18 +28,22 @@ struct RemoteErrorRecoveryCodes: Codable, Equatable {
     let container = try decoder.container(keyedBy: Keys.self)
     primaryCode = try container.decode(Int.self, forKey: .code)
 
-    if var subcodesContainer = try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+    switch try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+    case nil:
+      self.subcodes = []
+
+    case var subcodesContainer?:
       var subcodes: [Int] = []
       while !subcodesContainer.isAtEnd {
-        if let code = try? subcodesContainer.decode(Int.self) {
+        switch try? subcodesContainer.decode(Int.self) {
+        case let code?:
           subcodes.append(code)
-        } else {
+
+        case nil:
           _ = try? subcodesContainer.decode(EmptyDecodable.self)
         }
       }
       self.subcodes = subcodes
-    } else {
-      self.subcodes = []
     }
   }
 
