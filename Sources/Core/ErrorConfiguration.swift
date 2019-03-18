@@ -18,20 +18,13 @@
 
 import Foundation
 
-// maybe can be private
-typealias ErrorCode = Int
-typealias SubErrorCode = Int
-typealias ErrorRecoveryConfigurationMap = [SubErrorCode: ErrorConfigurationEntry]
-
-//mapping: [(int, int?): values]
-//values = (string, string, [string])
-
-// input: major = 1 mapping[(1, nil)]
-// input: major = 1, minor = 1 mapping[(1, 1)] is nil? mapping[(1, nil)]
-
 /// A way of storing errors received from the server so that they are retrievable by
 /// error codes
 struct ErrorConfiguration {
+  /**
+   A way to retrieve configurations that are keyed under a major code representing the error
+   domain, and a minor code that (if present) represents specificity within that domain.
+   */
   struct Key: Hashable {
     let majorCode: Int
     let minorCode: Int?
@@ -43,6 +36,11 @@ struct ErrorConfiguration {
     self.configurationDictionary = configurationDictionary
   }
 
+  /**
+   Attempts to retrieve an error configuration entry based on a key of major and minor codes
+
+   - Parameter key: A major and possible minor code to look up an error configuration entry
+   */
   func configuration(for key: Key) -> ErrorConfigurationEntry? {
     return configurationDictionary[key]
   }
