@@ -18,36 +18,31 @@
 
 import Foundation
 
-enum ErrorConfigurationEntryBuilder {
-  static func build(
-    from remoteConfiguration: RemoteErrorConfigurationEntry
-    ) -> ErrorConfigurationEntry? {
-    let category = convertCategory(from: remoteConfiguration.name)
-    guard let errorStrings = ErrorStrings(
-      message: remoteConfiguration.recoveryMessage,
-      options: remoteConfiguration.recoveryOptions
-      ) else {
-        return nil
+/// A representation of a server side list of errors
+/// Used for creating an `ErrorConfiguration`
+struct RemoteErrorConfigurationEntryList: Decodable {
+  let configurations: [RemoteErrorConfigurationEntry]
+
+  init(from decoder: Decoder) throws {
+    var container = try decoder.unkeyedContainer()
+    var configurations: [RemoteErrorConfigurationEntry] = []
+
+    while !container.isAtEnd {
+      if let item = try? container.decode(RemoteErrorConfigurationEntry.self) {
+        configurations.append(item)
+      } else {
+        _ = try? container.decode(EmptyDecodable.self)
+      }
     }
 
-    return ErrorConfigurationEntry(
-      strings: errorStrings,
-      category: category
-    )
+    guard !configurations.isEmpty else {
+      throw DecodingError.emptyItems
+    }
+
+    self.configurations = configurations
   }
 
-  private static func convertCategory(
-    from name: RemoteErrorConfigurationEntry.Name?
-    ) -> GraphRequestErrorCategory {
-    switch name {
-    case .transient?:
-      return .transient
-
-    case .other?:
-      return .other
-
-    default:
-      return .recoverable
-    }
+  enum DecodingError: FBError {
+    case emptyItems
   }
 }

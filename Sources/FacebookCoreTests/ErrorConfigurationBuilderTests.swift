@@ -25,7 +25,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     XCTAssertNil(ErrorConfigurationBuilder.build(from: emptyList),
                  "Should not build an error configuration from an empty list of remote entries")
   }
-  
+
   func testBuildingWithRemoteList() {
     let remoteConfig = RemoteErrorConfigurationEntry()
     let remoteList = RemoteErrorConfigurationEntryList(configurations: [remoteConfig])

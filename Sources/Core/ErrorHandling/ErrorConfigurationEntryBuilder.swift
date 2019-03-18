@@ -18,31 +18,42 @@
 
 import Foundation
 
-/// A representation of a server side list of errors
-/// Used for creating an `ErrorConfigurationEntry`
-struct RemoteErrorConfigurationEntryList: Decodable {
-  let configurations: [RemoteErrorConfigurationEntry]
+enum ErrorConfigurationEntryBuilder {
+  /**
+   Attempts to build a `RemoteErrorConfigurationEntry` from a remote configuration entry
 
-  init(from decoder: Decoder) throws {
-    var container = try decoder.unkeyedContainer()
-    var configurations: [RemoteErrorConfigurationEntry] = []
-
-    while !container.isAtEnd {
-      if let item = try? container.decode(RemoteErrorConfigurationEntry.self) {
-        configurations.append(item)
-      } else {
-        _ = try? container.decode(EmptyDecodable.self)
-      }
+   - Parameter remoteConfiguration: A representation of the configuration entry retrieved
+   from the server
+   */
+  static func build(
+    from remoteConfiguration: RemoteErrorConfigurationEntry
+    ) -> ErrorConfigurationEntry? {
+    let category = convertCategory(from: remoteConfiguration.name)
+    guard let errorStrings = ErrorStrings(
+      message: remoteConfiguration.recoveryMessage,
+      options: remoteConfiguration.recoveryOptions
+      ) else {
+        return nil
     }
 
-    guard !configurations.isEmpty else {
-      throw DecodingError.emptyItems
-    }
-
-    self.configurations = configurations
+    return ErrorConfigurationEntry(
+      strings: errorStrings,
+      category: category
+    )
   }
 
-  enum DecodingError: FBError {
-    case emptyItems
+  private static func convertCategory(
+    from name: RemoteErrorConfigurationEntry.Name?
+    ) -> GraphRequestErrorCategory {
+    switch name {
+    case .transient?:
+      return .transient
+
+    case .other?:
+      return .other
+
+    default:
+      return .recoverable
+    }
   }
 }

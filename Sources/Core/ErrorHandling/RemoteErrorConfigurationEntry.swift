@@ -18,8 +18,10 @@
 
 import Foundation
 
-/// A representation of a server side error
-/// Used for creating a `RemoteErrorConfigurationEntryList`
+/**
+ A representation of a server side error
+ Used for creating a `RemoteErrorConfigurationEntryList`
+ */
 struct RemoteErrorConfigurationEntry: Decodable {
   typealias ErrorCode = Int
 
@@ -64,6 +66,7 @@ struct RemoteErrorConfigurationEntry: Decodable {
     case recoveryOptions = "recovery_options"
   }
 
+  /// Used for mapping to known `GraphRequestErrorCategory`s
   enum Name: String, Decodable {
     case recoverable
     case transient

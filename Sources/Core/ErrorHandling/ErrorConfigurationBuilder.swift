@@ -26,6 +26,8 @@ enum ErrorConfigurationBuilder {
    As it iterates through the list of remote entries from the server it sets defaults and handles
    collisions.
 
+   - Parameter remoteList: A list of remote configuration entries to use in building an error configuration
+
    ## Setting defaults
    If an entry has a major code and a minor code it will set two entries in the configuration's
    dictionary. One entry for (major code, nil) and one entry for (major code, minor code)
