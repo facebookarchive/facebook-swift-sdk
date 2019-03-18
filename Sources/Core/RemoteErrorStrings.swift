@@ -18,3 +18,12 @@
 
 import Foundation
 
+struct RemoteErrorStrings: Codable {
+  let recoveryMessage: String
+  let recoveryOptions: [String]
+
+  private enum CodingKeys: String, CodingKey {
+    case recoveryMessage = "recovery_message"
+    case recoveryOptions = "recovery_options"
+  }
+}

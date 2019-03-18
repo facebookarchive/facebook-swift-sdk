@@ -52,8 +52,8 @@ class ErrorConfigurationBuilderTests: XCTestCase {
   }
 
   func testCreatingWithDifferentRemoteConfigurations() {
-    let remoteConfig1 = RemoteErrorConfigurationEntry(items: [RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1)])
-    let remoteConfig2 = RemoteErrorConfigurationEntry(items: [RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 2)])
+    let remoteConfig1 = RemoteErrorConfigurationEntry(items: [RemoteErrorCodeGroup(code: 1)])
+    let remoteConfig2 = RemoteErrorConfigurationEntry(items: [RemoteErrorCodeGroup(code: 2)])
     let remoteList = RemoteErrorConfigurationEntryList(
       configurations: [
         remoteConfig1,
@@ -79,7 +79,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
 
   func testCreatingFromConfigurationiWithIdenticalCodeAndSubcode() {
     let remoteConfig = RemoteErrorConfigurationEntry(
-      items: [RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [1, 2])]
+      items: [RemoteErrorCodeGroup(code: 1, subcodes: [1, 2])]
     )
     let remoteList = RemoteErrorConfigurationEntryList(configurations: [remoteConfig])
     guard let config = ErrorConfigurationBuilder.build(from: remoteList) else {
@@ -96,7 +96,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
 
   func testCreatingWithDuplicateSubcodesInSingleEntry() {
     let remoteConfig = RemoteErrorConfigurationEntry(
-      items: [RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [2, 2])]
+      items: [RemoteErrorCodeGroup(code: 1, subcodes: [2, 2])]
     )
     let remoteList = RemoteErrorConfigurationEntryList(configurations: [remoteConfig])
 
@@ -113,8 +113,8 @@ class ErrorConfigurationBuilderTests: XCTestCase {
   func testCreatingWithDuplicateSubcodesAcrossItems() {
     let remoteConfig = RemoteErrorConfigurationEntry(
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [1, 2]),
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 2, subcodes: [1, 2])
+        RemoteErrorCodeGroup(code: 1, subcodes: [1, 2]),
+        RemoteErrorCodeGroup(code: 2, subcodes: [1, 2])
       ]
     )
     let remoteList = RemoteErrorConfigurationEntryList(configurations: [remoteConfig])
@@ -143,13 +143,13 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1)
+        RemoteErrorCodeGroup(code: 1)
       ]
     )
     let remoteConfig2 = RemoteErrorConfigurationEntry(
       name: .transient,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1)
+        RemoteErrorCodeGroup(code: 1)
       ]
     )
     let remoteList = RemoteErrorConfigurationEntryList(
@@ -175,13 +175,13 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1)
+        RemoteErrorCodeGroup(code: 1)
       ]
     )
     let remoteConfig2 = RemoteErrorConfigurationEntry(
       name: .transient,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [1])
+        RemoteErrorCodeGroup(code: 1, subcodes: [1])
       ]
     )
     let remoteList = RemoteErrorConfigurationEntryList(
@@ -212,13 +212,13 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [1])
+        RemoteErrorCodeGroup(code: 1, subcodes: [1])
       ]
     )
     let remoteConfig2 = RemoteErrorConfigurationEntry(
       name: .transient,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [1])
+        RemoteErrorCodeGroup(code: 1, subcodes: [1])
       ]
     )
     let remoteList = RemoteErrorConfigurationEntryList(
@@ -249,13 +249,13 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [1])
+        RemoteErrorCodeGroup(code: 1, subcodes: [1])
       ]
     )
     let remoteConfig2 = RemoteErrorConfigurationEntry(
       name: .transient,
       items: [
-        RemoteErrorConfigurationEntry.ErrorCodeGroup(code: 1, subcodes: [])
+        RemoteErrorCodeGroup(code: 1, subcodes: [])
       ]
     )
     let remoteList = RemoteErrorConfigurationEntryList(

@@ -141,7 +141,7 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
 
   func testCreatingWithValidInputs() {
     guard let expectedItemData = try? JSONSerialization.data(withJSONObject: SampleRawRemoteConfiguration.items, options: []),
-      let items = try? decoder.decode(Array<RemoteErrorConfigurationEntry.ErrorCodeGroup>.self, from: expectedItemData),
+      let items = try? decoder.decode(Array<RemoteErrorCodeGroup>.self, from: expectedItemData),
       let config = try? decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.valid)
       else {
         return XCTFail("Should create a valid remote error configuration")

@@ -24,8 +24,8 @@
 extension RemoteErrorConfigurationEntry {
   init(
     name: Name? = Name(rawValue: "Foo"),
-    items: [ErrorCodeGroup] = [
-      ErrorCodeGroup(code: 1, subcodes: [2, 3])
+    items: [RemoteErrorCodeGroup] = [
+      RemoteErrorCodeGroup(code: 1, subcodes: [2, 3])
     ],
     recoveryMessage: String = "Bar",
     recoveryOptions: [String] = ["Baz"]

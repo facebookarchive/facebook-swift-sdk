@@ -29,10 +29,10 @@ class RemoteErrorStringsTests: XCTestCase {
 
   var sampleValues = [String: Any]()
 
-  private func makeStrings() -> RemoteErrorConfigurationEntry.ErrorStrings? {
+  private func makeStrings() -> RemoteErrorStrings? {
     let data = try! JSONSerialization.data(withJSONObject: sampleValues, options: [])
     let decoder = JSONDecoder()
-    return try? decoder.decode(RemoteErrorConfigurationEntry.ErrorStrings.self, from: data)
+    return try? decoder.decode(RemoteErrorStrings.self, from: data)
   }
 
   func testTestMissingRecoveryMessage() {

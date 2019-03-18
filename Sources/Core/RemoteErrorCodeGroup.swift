@@ -18,3 +18,28 @@
 
 import Foundation
 
+/// A representation of the server side codes associated with an error
+/// Used for creating a `RemoteErrorConfigurationEntry`
+struct RemoteErrorCodeGroup: Codable, Equatable {
+  let code: ErrorCode
+  let subcodes: [ErrorCode]
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    code = try container.decode(ErrorCode.self, forKey: .code)
+
+    if var subcodesContainer = try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+      var subcodes: [ErrorCode] = []
+      while !subcodesContainer.isAtEnd {
+        if let code = try? subcodesContainer.decode(ErrorCode.self) {
+          subcodes.append(code)
+        } else {
+          _ = try? subcodesContainer.decode(EmptyDecodable.self)
+        }
+      }
+      self.subcodes = subcodes
+    } else {
+      self.subcodes = []
+    }
+  }
+}

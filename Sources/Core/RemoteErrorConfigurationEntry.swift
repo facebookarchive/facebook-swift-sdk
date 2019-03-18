@@ -24,7 +24,7 @@ struct RemoteErrorConfigurationEntry: Decodable {
   typealias ErrorCode = Int
 
   let name: Name?
-  let items: [ErrorCodeGroup]
+  let items: [RemoteErrorCodeGroup]
   let recoveryMessage: String
   let recoveryOptions: [String]
 
@@ -36,9 +36,9 @@ struct RemoteErrorConfigurationEntry: Decodable {
     }
     name = try? container.decode(Name.self, forKey: .name)
 
-    var items = [ErrorCodeGroup]()
+    var items = [RemoteErrorCodeGroup]()
     while !itemsContainer.isAtEnd {
-      if let item = try? itemsContainer.decode(ErrorCodeGroup.self) {
+      if let item = try? itemsContainer.decode(RemoteErrorCodeGroup.self) {
         items.append(item)
       } else {
         _ = try? itemsContainer.decode(EmptyDecodable.self)
@@ -68,42 +68,6 @@ struct RemoteErrorConfigurationEntry: Decodable {
     case recoverable
     case transient
     case other
-  }
-
-  struct ErrorStrings: Codable {
-    let recoveryMessage: String
-    let recoveryOptions: [String]
-
-    private enum CodingKeys: String, CodingKey {
-      case recoveryMessage = "recovery_message"
-      case recoveryOptions = "recovery_options"
-    }
-  }
-
-  /// A representation of the server side codes associated with an error
-  /// Used for creating a `RemoteErrorConfigurationEntry`
-  struct ErrorCodeGroup: Codable, Equatable {
-    let code: ErrorCode
-    let subcodes: [ErrorCode]
-
-    init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: CodingKeys.self)
-      code = try container.decode(ErrorCode.self, forKey: .code)
-
-      if var subcodesContainer = try? container.nestedUnkeyedContainer(forKey: .subcodes) {
-        var subcodes: [ErrorCode] = []
-        while !subcodesContainer.isAtEnd {
-          if let code = try? subcodesContainer.decode(ErrorCode.self) {
-            subcodes.append(code)
-          } else {
-            _ = try? subcodesContainer.decode(EmptyDecodable.self)
-          }
-        }
-        self.subcodes = subcodes
-      } else {
-        self.subcodes = []
-      }
-    }
   }
 
   enum DecodingError: FBError, CaseIterable {
