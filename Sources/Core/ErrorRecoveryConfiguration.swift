@@ -18,32 +18,15 @@
 
 import Foundation
 
-struct ErrorRecoveryConfiguration: Codable {
-  let localizedRecoveryDescription: String
-  let localizedRecoveryOptionDescriptions: [String]
-  let errorCategory: GraphRequestErrorCategory
+struct ErrorConfigurationEntry {
+  let strings: ErrorStrings
+  let category: GraphRequestErrorCategory
 
   init(
-    recoveryDescription: Localizable,
-    optionDescriptions: [Localizable],
-    category: GraphRequestErrorCategory,
-    bundle: Bundle = .main
+    strings: ErrorStrings,
+    category: GraphRequestErrorCategory
     ) {
-    localizedRecoveryDescription = recoveryDescription.localized(bundle: bundle)
-    localizedRecoveryOptionDescriptions = optionDescriptions.map { $0.localized(bundle: bundle) }
-    errorCategory = category
-  }
-
-  init(remoteConfiguration: RemoteErrorRecoveryConfiguration) {
-    var category: GraphRequestErrorCategory
-    if let errorCategory = GraphRequestErrorCategory(rawValue: remoteConfiguration.name) {
-      category = errorCategory
-    } else {
-      category = .recoverable
-    }
-
-    localizedRecoveryDescription = remoteConfiguration.recoveryMessage.localized()
-    localizedRecoveryOptionDescriptions = remoteConfiguration.recoveryOptions.map { $0.localized() }
-    self.errorCategory = category
+    self.strings = strings
+    self.category = category
   }
 }

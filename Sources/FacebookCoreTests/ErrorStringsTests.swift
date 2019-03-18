@@ -16,35 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-/// A representation of the server side codes associated with an error
-/// Used for creating a `RemoteErrorRecoveryConfiguration`
-struct RemoteErrorRecoveryCodes: Codable, Equatable {
-  let primaryCode: Int
-  let subcodes: [Int]
-
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: Keys.self)
-    primaryCode = try container.decode(Int.self, forKey: .code)
-
-    if var subcodesContainer = try? container.nestedUnkeyedContainer(forKey: .subcodes) {
-      var subcodes: [Int] = []
-      while !subcodesContainer.isAtEnd {
-        if let code = try? subcodesContainer.decode(Int.self) {
-          subcodes.append(code)
-        } else {
-          _ = try? subcodesContainer.decode(EmptyDecodable.self)
-        }
-      }
-      self.subcodes = subcodes
-    } else {
-      self.subcodes = []
-    }
+class ErrorStringsTests: XCTestCase {
+  func testCreatingErrorStringsWithEmptyMessage() {
+    XCTAssertNil(ErrorStrings(message: "", options: ["foo", "bar"]),
+                 "Should not create error strings with an empty message")
   }
 
-  enum Keys: String, CodingKey {
-    case code
-    case subcodes
+  func testCreatingErrorStringsWithEmptyOptions() {
+    XCTAssertNil(ErrorStrings(message: "Foo", options: []),
+                 "Should not create error strings with empty options")
   }
 }

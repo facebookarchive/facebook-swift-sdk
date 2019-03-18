@@ -21,8 +21,18 @@
 // TODO: Consider adding initializer to internal. Really do not want to do this but may
 // be the only way to silence this error.
 // See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
-extension RemoteErrorConfigurationEntryList {
-  init(configurations: [RemoteErrorConfigurationEntry]) {
-    self.configurations = configurations
+extension RemoteErrorConfigurationEntry {
+  init(
+    name: Name? = Name(rawValue: "Foo"),
+    items: [ErrorCodeGroup] = [
+      ErrorCodeGroup(code: 1, subcodes: [2, 3])
+    ],
+    recoveryMessage: String = "Bar",
+    recoveryOptions: [String] = ["Baz"]
+    ) {
+    self.name = name
+    self.items = items
+    self.recoveryMessage = recoveryMessage
+    self.recoveryOptions = recoveryOptions
   }
 }

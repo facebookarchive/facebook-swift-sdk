@@ -16,11 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
-import XCTest
+import Foundation
 
-class ErrorRecoveryStringTests: XCTestCase {
-  func testLocalization() {
-    validateLocalizedStrings(stringsEnum: ErrorRecoveryStrings.self)
+struct ErrorStrings {
+  let message: String
+  let options: [String]
+
+  init?(message: String, options: [String], bundle: Bundle = .main) {
+    guard !message.isEmpty,
+      !options.isEmpty
+      else {
+        return nil
+    }
+    self.message = message.localized(bundle: bundle)
+    self.options = options.compactMap { $0.localized(bundle: bundle) }
   }
 }

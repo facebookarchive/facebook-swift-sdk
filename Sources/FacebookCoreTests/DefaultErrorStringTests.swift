@@ -17,22 +17,10 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import XCTest
 
-// TODO: Consider adding initializer to internal. Really do not want to do this but may
-// be the only way to silence this error.
-// See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
-extension RemoteErrorRecoveryConfiguration {
-  init(
-    name: String = "Foo",
-    items: [RemoteErrorRecoveryCodes] = [
-      RemoteErrorRecoveryCodes(code: 1, subcodes: [2, 3])
-    ],
-    recoveryMessage: String = "Bar",
-    recoveryOptions: [String] = ["Baz"]
-    ) {
-    self.name = name
-    self.items = items
-    self.recoveryMessage = recoveryMessage
-    self.recoveryOptions = recoveryOptions
+class DefaultErrorStringTests: XCTestCase {
+  func testLocalization() {
+    validateLocalizedStrings(stringsEnum: DefaultErrorStrings.self)
   }
 }

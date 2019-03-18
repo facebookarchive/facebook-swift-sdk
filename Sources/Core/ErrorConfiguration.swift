@@ -19,62 +19,31 @@
 import Foundation
 
 // maybe can be private
-typealias ErrorRecoveryConfigurationMap = [Int: ErrorRecoveryConfiguration]
+typealias ErrorCode = Int
+typealias SubErrorCode = Int
+typealias ErrorRecoveryConfigurationMap = [SubErrorCode: ErrorConfigurationEntry]
 
-struct ErrorMap {
-  let errorRecoveryConfiguration: ErrorRecoveryConfiguration
-  let errorRecoveryConfigurationMap: ErrorRecoveryConfigurationMap
-}
+//mapping: [(int, int?): values]
+//values = (string, string, [string])
+
+// input: major = 1 mapping[(1, nil)]
+// input: major = 1, minor = 1 mapping[(1, 1)] is nil? mapping[(1, nil)]
 
 /// A way of storing errors received from the server so that they are retrievable by
 /// error codes
 struct ErrorConfiguration {
-  private(set) var configurationDictionary = [Int: ErrorMap]()
+  struct Key: Hashable {
+    let majorCode: Int
+    let minorCode: Int?
+  }
 
-  init(from list: RemoteErrorRecoveryConfigurationList) {
-    var dictionary = [Int: ErrorMap]()
+  private var configurationDictionary = [Key: ErrorConfigurationEntry]()
 
-    list.configurations.forEach { remoteConfiguration in
-      guard !remoteConfiguration.items.isEmpty else {
-        return
-      }
+  init(configurationDictionary: [Key: ErrorConfigurationEntry]) {
+    self.configurationDictionary = configurationDictionary
+  }
 
-      let recoveryConfiguration = ErrorRecoveryConfiguration(remoteConfiguration: remoteConfiguration)
-
-      remoteConfiguration.items.forEach { item in
-        var errorMap: ErrorMap
-        var secondaryMap: ErrorRecoveryConfigurationMap
-
-        let topLevelCode = item.primaryCode
-
-        let potentialErrorRecoveryConfiguration = dictionary[topLevelCode]?.errorRecoveryConfiguration
-        let potentialErrorRecoveryMap = dictionary[topLevelCode]?.errorRecoveryConfigurationMap
-
-        if let currentErrorRecoveryMap = potentialErrorRecoveryMap,
-          !currentErrorRecoveryMap.isEmpty {
-          secondaryMap = currentErrorRecoveryMap
-        } else {
-          secondaryMap = ErrorRecoveryConfigurationMap()
-        }
-
-        if !item.subcodes.isEmpty {
-          item.subcodes.forEach { remoteSubcode in
-            secondaryMap[remoteSubcode] = recoveryConfiguration
-          }
-
-          errorMap = ErrorMap(
-            errorRecoveryConfiguration: potentialErrorRecoveryConfiguration ?? recoveryConfiguration,
-            errorRecoveryConfigurationMap: secondaryMap
-          )
-        } else {
-          errorMap = ErrorMap(
-            errorRecoveryConfiguration: recoveryConfiguration,
-            errorRecoveryConfigurationMap: [:]
-          )
-        }
-        dictionary.updateValue(errorMap, forKey: item.primaryCode)
-      }
-    }
-    configurationDictionary = dictionary
+  func configuration(for key: Key) -> ErrorConfigurationEntry? {
+    return configurationDictionary[key]
   }
 }

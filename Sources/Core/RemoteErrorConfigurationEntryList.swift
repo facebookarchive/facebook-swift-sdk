@@ -18,9 +18,31 @@
 
 import Foundation
 
-enum ErrorRecoveryStrings: String, CaseIterable, Localizable {
-  case ok = "ErrorRecovery.OK"
-  case cancel = "ErrorRecovery.Cancel"
-  case transientSuggestion = "ErrorRecovery.Transient.Suggestion"
-  case loginRecoverySuggestion = "ErrorRecovery.Login.Suggestion"
+/// A representation of a server side list of errors
+/// Used for creating an `ErrorConfigurationEntry`
+struct RemoteErrorConfigurationEntryList: Decodable {
+  let configurations: [RemoteErrorConfigurationEntry]
+
+  init(from decoder: Decoder) throws {
+    var container = try decoder.unkeyedContainer()
+    var configurations: [RemoteErrorConfigurationEntry] = []
+
+    while !container.isAtEnd {
+      if let item = try? container.decode(RemoteErrorConfigurationEntry.self) {
+        configurations.append(item)
+      } else {
+        _ = try? container.decode(EmptyDecodable.self)
+      }
+    }
+
+    guard !configurations.isEmpty else {
+      throw DecodingError.emptyItems
+    }
+
+    self.configurations = configurations
+  }
+
+  enum DecodingError: FBError {
+    case emptyItems
+  }
 }

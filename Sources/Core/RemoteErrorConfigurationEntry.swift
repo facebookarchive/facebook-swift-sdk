@@ -19,7 +19,7 @@
 import Foundation
 
 /// A representation of a server side error
-/// Used for creating a `RemoteErrorRecoveryConfigurationList`
+/// Used for creating a `RemoteErrorConfigurationEntryList`
 struct RemoteErrorConfigurationEntry: Decodable {
   typealias ErrorCode = Int
 
@@ -29,15 +29,14 @@ struct RemoteErrorConfigurationEntry: Decodable {
   let recoveryOptions: [String]
 
   init(from decoder: Decoder) throws {
-    // TODO: add your own decoding error here
-    let container = try decoder.container(keyedBy: Keys.self)
-    // TODO: add your own decoding error here
-    var itemsContainer = try container.nestedUnkeyedContainer(forKey: .items)
-
-    var items = [ErrorCodeGroup]()
-
+    guard let container = try? decoder.container(keyedBy: CodingKeys.self),
+      var itemsContainer = try? container.nestedUnkeyedContainer(forKey: .items)
+      else {
+        throw DecodingError.invalidContainer
+    }
     name = try? container.decode(Name.self, forKey: .name)
 
+    var items = [ErrorCodeGroup]()
     while !itemsContainer.isAtEnd {
       if let item = try? itemsContainer.decode(ErrorCodeGroup.self) {
         items.append(item)
@@ -45,29 +44,20 @@ struct RemoteErrorConfigurationEntry: Decodable {
         _ = try? itemsContainer.decode(EmptyDecodable.self)
       }
     }
-
-    guard !items.isEmpty else {
-      throw DecodingError.emptyItems
-    }
-
     self.items = items
 
-    let message = try container.decode(String.self, forKey: Keys.recoveryMessage)
-    guard !message.isEmpty else {
-      throw DecodingError.emptyRecoveryMessage
+    guard let message = try? container.decode(String.self, forKey: CodingKeys.recoveryMessage) else {
+      throw DecodingError.missingRecoveryMessage
     }
-
     self.recoveryMessage = message
 
-    let options = try container.decode([String].self, forKey: Keys.recoveryOptions)
-    guard !options.isEmpty else {
-      throw DecodingError.emptyRecoveryOptions
+    guard let options = try? container.decode([String].self, forKey: CodingKeys.recoveryOptions) else {
+      throw DecodingError.missingRecoveryOptions
     }
-
     self.recoveryOptions = options
   }
 
-  private enum Keys: String, CodingKey {
+  private enum CodingKeys: String, CodingKey {
     case name
     case items
     case recoveryMessage = "recovery_message"
@@ -84,11 +74,9 @@ struct RemoteErrorConfigurationEntry: Decodable {
     let recoveryMessage: String
     let recoveryOptions: [String]
 
-    init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: CodingKeys.self)
-
-      recoveryMessage = try container.decode(String.self, forKey: .recoveryMessage)
-      recoveryOptions = try container.decode([String].self, forKey: .recoveryOptions)
+    private enum CodingKeys: String, CodingKey {
+      case recoveryMessage = "recovery_message"
+      case recoveryOptions = "recovery_options"
     }
   }
 
@@ -119,17 +107,13 @@ struct RemoteErrorConfigurationEntry: Decodable {
   }
 
   enum DecodingError: FBError, CaseIterable {
-    /// Indicates an empty string was received for the name key
-    case emptyName
+    // Indicates an invalid container
+    case invalidContainer
 
-    /// Indicates that either an empty array was received for the items key
-    /// or the entries under the items key were not decodable
-    case emptyItems
+    // Indicates a missing recovery message key
+    case missingRecoveryMessage
 
-    /// Indicates an empty string was received for the recovery message key
-    case emptyRecoveryMessage
-
-    /// Indicates an empty list was received for the recovery options key
-    case emptyRecoveryOptions
+    // Indicates a missing recovery options key
+    case missingRecoveryOptions
   }
 }

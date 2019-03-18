@@ -22,73 +22,47 @@ import XCTest
 class ErrorRecoveryConfigurationTests: XCTestCase {
   let testBundle = Bundle(for: ErrorRecoveryConfigurationTests.self)
 
-  func testLocalizedRecoveryDescription() {
-    let configuration = ErrorRecoveryConfiguration(
-      recoveryDescription: SampleLocalizableStrings.foo,
-      optionDescriptions: [],
-      category: .recoverable,
-      bundle: testBundle
+  func testLocalizedMessage() {
+    guard let strings = ErrorStrings(message: "foo", options: ["Bar"], bundle: testBundle) else {
+      return XCTFail("Should be able to create error strings with valid message and option strings")
+    }
+    let configuration = ErrorConfigurationEntry(
+      strings: strings,
+      category: .recoverable
     )
-
-    XCTAssertEqual(configuration.localizedRecoveryDescription, "LocalizedFoo",
-                   "A recovery configuration should use the localized value of the recovery description it was created with")
+    XCTAssertEqual(configuration.strings.message, "LocalizedFoo",
+                   "A recovery configuration should use the localized value of the message it was created with")
   }
 
   func testLocalizedOptionDescriptions() {
-    let configuration = ErrorRecoveryConfiguration(
-      recoveryDescription: SampleLocalizableStrings.foo,
-      optionDescriptions: [
-        SampleLocalizableStrings.bar,
-        SampleLocalizableStrings.baz
-      ],
-      category: .recoverable,
+    guard let strings = ErrorStrings(
+      message: SampleLocalizableStrings.foo.rawValue,
+      options: [SampleLocalizableStrings.bar.rawValue, SampleLocalizableStrings.baz.rawValue],
       bundle: testBundle
+      ) else {
+      return XCTFail("Should be able to create error strings with valid message and option strings")
+    }
+    let configuration = ErrorConfigurationEntry(
+      strings: strings,
+      category: .recoverable
     )
 
     let expectedOptionDescriptions = ["LocalizedBar", "LocalizedBaz"]
 
-    XCTAssertEqual(configuration.localizedRecoveryOptionDescriptions, expectedOptionDescriptions,
-                   "A recovery configuration should use the localized value of the recovery description it was created with")
+    XCTAssertEqual(configuration.strings.options, expectedOptionDescriptions,
+                   "A recovery configuration should use the localized values of the recovery options it was created with")
   }
 
   func testCategory() {
-    let configuration = ErrorRecoveryConfiguration(
-      recoveryDescription: SampleLocalizableStrings.foo,
-      optionDescriptions: [SampleLocalizableStrings.bar],
-      category: .recoverable,
-      bundle: testBundle
+    guard let strings = ErrorStrings(message: "Foo", options: ["Bar"]) else {
+      return XCTFail("Should be able to create error strings with valid message and option strings")
+    }
+    let configuration = ErrorConfigurationEntry(
+      strings: strings,
+      category: .recoverable
     )
 
-    XCTAssertEqual(configuration.errorCategory, .recoverable,
+    XCTAssertEqual(configuration.category, .recoverable,
                    "A recovery configuration should store the error category it was created with")
-  }
-
-  func testBuildingFromRemoteConfiguration() {
-    let remoteRecoverable = RemoteErrorRecoveryConfiguration(
-      name: GraphRequestErrorCategory.recoverable.rawValue
-    )
-    let remoteTransient = RemoteErrorRecoveryConfiguration(
-      name: GraphRequestErrorCategory.transient.rawValue
-    )
-    let remoteOther = RemoteErrorRecoveryConfiguration(
-      name: GraphRequestErrorCategory.other.rawValue
-    )
-    let remoteUnknown = RemoteErrorRecoveryConfiguration(
-      name: "Foo"
-    )
-
-    let recoverable = ErrorRecoveryConfiguration(remoteConfiguration: remoteRecoverable)
-    let transient = ErrorRecoveryConfiguration(remoteConfiguration: remoteTransient)
-    let other = ErrorRecoveryConfiguration(remoteConfiguration: remoteOther)
-    let unknown = ErrorRecoveryConfiguration(remoteConfiguration: remoteUnknown)
-
-        XCTAssertEqual(recoverable.errorCategory, .recoverable,
-                       "An error recovery configuration should use the name of the remote configuration to determine the error category")
-    XCTAssertEqual(transient.errorCategory, .transient,
-                   "An error recovery configuration should use the name of the remote configuration to determine the error category")
-    XCTAssertEqual(other.errorCategory, .other,
-                   "An error recovery configuration should use the name of the remote configuration to determine the error category")
-    XCTAssertEqual(unknown.errorCategory, .recoverable,
-                   "An error recovery configuration should use the name of the remote configuration to determine the error category, defaulting to unknown for unrecognized names")
   }
 }

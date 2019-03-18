@@ -16,13 +16,38 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-// TODO: Consider adding initializer to internal. Really do not want to do this but may
-// be the only way to silence this error.
-// See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
-extension RemoteErrorConfigurationEntryList {
-  init(configurations: [RemoteErrorConfigurationEntry]) {
-    self.configurations = configurations
+enum ErrorConfigurationEntryBuilder {
+  static func build(
+    from remoteConfiguration: RemoteErrorConfigurationEntry
+    ) -> ErrorConfigurationEntry? {
+    let category = convertCategory(from: remoteConfiguration.name)
+    guard let errorStrings = ErrorStrings(
+      message: remoteConfiguration.recoveryMessage,
+      options: remoteConfiguration.recoveryOptions
+      ) else {
+        return nil
+    }
+
+    return ErrorConfigurationEntry(
+      strings: errorStrings,
+      category: category
+    )
+  }
+
+  private static func convertCategory(
+    from name: RemoteErrorConfigurationEntry.Name?
+    ) -> GraphRequestErrorCategory {
+    switch name {
+    case .transient?:
+      return .transient
+
+    case .other?:
+      return .other
+
+    default:
+      return .recoverable
+    }
   }
 }
