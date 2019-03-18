@@ -33,10 +33,3 @@ class ErrorCategoryTests: XCTestCase {
     }
   }
 }
-
-// domain - all possible input values
-//
-
-///     |- code pair / loginerror - loginerror1 + strings
-///     |- code pair / loginerror - loginerror2 + strings
-///     |- code pair / strings

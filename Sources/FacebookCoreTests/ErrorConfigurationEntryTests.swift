@@ -19,8 +19,8 @@
 @testable import FacebookCore
 import XCTest
 
-class ErrorRecoveryConfigurationTests: XCTestCase {
-  let testBundle = Bundle(for: ErrorRecoveryConfigurationTests.self)
+class ErrorConfigurationEntryTests: XCTestCase {
+  let testBundle = Bundle(for: ErrorConfigurationEntryTests.self)
 
   func testLocalizedMessage() {
     guard let strings = ErrorStrings(message: "foo", options: ["Bar"], bundle: testBundle) else {

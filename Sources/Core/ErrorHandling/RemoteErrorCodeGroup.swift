@@ -18,8 +18,10 @@
 
 import Foundation
 
-/// A representation of the server side codes associated with an error
-/// Used for creating a `RemoteErrorConfigurationEntry`
+/**
+ A representation of the server side codes associated with an error
+ Used for creating a `RemoteErrorConfigurationEntry`
+ */
 struct RemoteErrorCodeGroup: Codable, Equatable {
   typealias ErrorCode = Int
 

@@ -169,7 +169,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     XCTAssertEqual(
       config.configuration(for: ErrorConfiguration.Key(majorCode: 1, minorCode: nil))?.category,
       .transient,
-      "An entry with no subcodes should override the configuration for its primary code"
+      "An entry with no subcodes should override the configuration for its major code"
     )
   }
 
@@ -177,7 +177,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
-        RemoteErrorCodeGroup(code: 1)
+        RemoteErrorCodeGroup(code: 1, subcodes: [])
       ]
     )
     let remoteConfig2 = RemoteErrorConfigurationEntry(
@@ -199,7 +199,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     XCTAssertEqual(
       config.configuration(for: ErrorConfiguration.Key(majorCode: 1, minorCode: nil))?.category,
       .other,
-      "A more specific config should not override a previously created less specific config with the same primary code"
+      "A more specific config should not override a previously created less specific config with the same major code"
     )
     XCTAssertEqual(
       config.configuration(for: ErrorConfiguration.Key(majorCode: 1, minorCode: 1))?.category,
@@ -234,7 +234,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     XCTAssertEqual(
       config.configuration(for: ErrorConfiguration.Key(majorCode: 1, minorCode: nil))?.category,
       .other,
-      "A more specific config should not override the top level error"
+      "A more specific config should not override the previously created configuration with the same major code"
     )
     XCTAssertEqual(
       config.configuration(for: ErrorConfiguration.Key(majorCode: 1, minorCode: 1))?.category,
