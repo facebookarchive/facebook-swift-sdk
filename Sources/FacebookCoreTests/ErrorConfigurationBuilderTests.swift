@@ -20,6 +20,12 @@
 import XCTest
 
 class ErrorConfigurationBuilderTests: XCTestCase {
+  func testBuildingWithEmptyList() {
+    let emptyList = RemoteErrorConfigurationEntryList(configurations: [])
+    XCTAssertNil(ErrorConfigurationBuilder.build(from: emptyList),
+                 "Should not build an error configuration from an empty list of remote entries")
+  }
+  
   func testBuildingWithRemoteList() {
     let remoteConfig = RemoteErrorConfigurationEntry()
     let remoteList = RemoteErrorConfigurationEntryList(configurations: [remoteConfig])
@@ -35,7 +41,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
                     "A config should contain an entry for the major/minor code pair it was created with")
   }
 
-  func testCreatingWithIdenticalRemoteConfigurations() {
+  func testBuildingWithIdenticalRemoteConfigurations() {
     let remoteList = RemoteErrorConfigurationEntryList(
       configurations: Array(repeating: RemoteErrorConfigurationEntry(), count: 3)
     )
@@ -51,7 +57,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
                     "A config should contain an entry for the major/minor code pair it was created with")
   }
 
-  func testCreatingWithDifferentRemoteConfigurations() {
+  func testBuildingWithDifferentRemoteConfigurations() {
     let remoteConfig1 = RemoteErrorConfigurationEntry(items: [RemoteErrorCodeGroup(code: 1)])
     let remoteConfig2 = RemoteErrorConfigurationEntry(items: [RemoteErrorCodeGroup(code: 2)])
     let remoteList = RemoteErrorConfigurationEntryList(
@@ -70,14 +76,14 @@ class ErrorConfigurationBuilderTests: XCTestCase {
                     "A config should contain an entry for the major/minor code pair it was created with")
   }
 
-  func testCreatingWithItemlessConfiguration() {
+  func testBuildingWithItemlessConfiguration() {
     let remoteConfig = RemoteErrorConfigurationEntry(items: [])
     let remoteList = RemoteErrorConfigurationEntryList(configurations: [remoteConfig])
     XCTAssertNil(ErrorConfigurationBuilder.build(from: remoteList),
                  "Should not be able to build an error configuration from an entry with empty items")
   }
 
-  func testCreatingFromConfigurationiWithIdenticalCodeAndSubcode() {
+  func testBuildingFromConfigurationiWithIdenticalCodeAndSubcode() {
     let remoteConfig = RemoteErrorConfigurationEntry(
       items: [RemoteErrorCodeGroup(code: 1, subcodes: [1, 2])]
     )
@@ -94,7 +100,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
                     "A config should contain an entry for the major/minor code pair it was created with")
   }
 
-  func testCreatingWithDuplicateSubcodesInSingleEntry() {
+  func testBuildingWithDuplicateSubcodesInSingleEntry() {
     let remoteConfig = RemoteErrorConfigurationEntry(
       items: [RemoteErrorCodeGroup(code: 1, subcodes: [2, 2])]
     )
@@ -110,7 +116,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
                     "A config should contain an entry for the major/minor code pair it was created with")
   }
 
-  func testCreatingWithDuplicateSubcodesAcrossItems() {
+  func testBuildingWithDuplicateSubcodesAcrossItems() {
     let remoteConfig = RemoteErrorConfigurationEntry(
       items: [
         RemoteErrorCodeGroup(code: 1, subcodes: [1, 2]),
@@ -137,9 +143,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
                     "A config should contain an entry for the major/minor code pair it was created with")
   }
 
-  //  // | old code | old subcodes | new code | new subcodes | override topLevel | override second level |
-  //  //    1           [ ]           1           [ ]                yes                  n/a
-  func testCreatingFromDuplicateEntriesWithIdenticalCodes() {
+  func testBuildingFromDuplicateEntriesWithIdenticalCodes() {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
@@ -169,9 +173,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     )
   }
 
-  //  // | old code | old subcodes | new code | new subcodes | override topLevel | override second level |
-  //  //    1           [ ]           1           [ 2 ]              no                   yes
-  func testCreatingWithSameMajorCodeDifferentMinorCodes() {
+  func testBuildingWithSameMajorCodeDifferentMinorCodes() {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
@@ -206,9 +208,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     )
   }
 
-  //  // | old code | old subcodes | new code | new subcodes | override topLevel | override second level |
-  //  //    1           [ 2 ]         1           [ 2 ]              no                   yes
-  func testCreatingWithMultitpleEntriesIdenticalCodeAndSubcode() {
+  func testBuildingWithMultitpleEntriesIdenticalCodeAndSubcode() {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
@@ -243,9 +243,7 @@ class ErrorConfigurationBuilderTests: XCTestCase {
     )
   }
 
-  //  // | old code | old subcodes | new code | new subcodes | override topLevel | override second level |
-  //  //    1           [ 2 ]         1           [ ]                yes                  no
-  func testCreatingWitMultipleEntriesWithIdenticalCodeDifferentSubcodes() {
+  func testBuildingWitMultipleEntriesWithIdenticalCodeDifferentSubcodes() {
     let remoteConfig1 = RemoteErrorConfigurationEntry(
       name: .other,
       items: [
