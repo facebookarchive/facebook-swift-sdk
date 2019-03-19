@@ -16,15 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/*
- STOP!
+@testable import FacebookCore
+import XCTest
 
- DO NOT PUT USER FACING STRINGS IN THIS FILE
+class ErrorCategoryTests: XCTestCase {
+  func testAllCases() {
+    let expectedCases: [GraphRequestErrorCategory] = [.login, .transient, .other]
 
- THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
-
- */
-
-"foo" = "LocalizedFoo";
-"bar" = "LocalizedBar";
-"baz" = "LocalizedBaz";
+    XCTAssertEqual(GraphRequestErrorCategory.allCases, expectedCases,
+                   "There should be easy access to all the cases of an error category")
+  }
+}
