@@ -28,9 +28,11 @@ struct RemoteErrorConfigurationEntryList: Decodable {
     var configurations: [RemoteErrorConfigurationEntry] = []
 
     while !container.isAtEnd {
-      if let item = try? container.decode(RemoteErrorConfigurationEntry.self) {
+      switch try? container.decode(RemoteErrorConfigurationEntry.self) {
+      case let item?:
         configurations.append(item)
-      } else {
+
+      case nil:
         _ = try? container.decode(EmptyDecodable.self)
       }
     }

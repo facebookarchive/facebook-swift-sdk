@@ -32,18 +32,22 @@ struct RemoteErrorCodeGroup: Codable, Equatable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     code = try container.decode(ErrorCode.self, forKey: .code)
 
-    if var subcodesContainer = try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+    switch try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+    case nil:
+      subcodes = []
+
+    case var subcodesContainer?:
       var subcodes: [ErrorCode] = []
       while !subcodesContainer.isAtEnd {
-        if let code = try? subcodesContainer.decode(ErrorCode.self) {
+        switch try? subcodesContainer.decode(ErrorCode.self) {
+        case let code?:
           subcodes.append(code)
-        } else {
+
+        case nil:
           _ = try? subcodesContainer.decode(EmptyDecodable.self)
         }
       }
       self.subcodes = subcodes
-    } else {
-      self.subcodes = []
     }
   }
 }

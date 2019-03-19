@@ -39,10 +39,12 @@ struct RemoteErrorConfigurationEntry: Decodable {
     name = try? container.decode(Name.self, forKey: .name)
 
     while !itemsContainer.isAtEnd {
-      if let item = try? itemsContainer.decode(ErrorCodeGroup.self) {
-        items.append(item)
-      } else {
+      switch try? itemsContainer.decode(RemoteErrorRecoveryCodes.self) {
+      case nil:
         _ = try? itemsContainer.decode(EmptyDecodable.self)
+
+      case let item?:
+        items.append(item)
       }
     }
 
