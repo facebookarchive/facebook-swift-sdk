@@ -29,9 +29,7 @@ struct RemoteErrorConfigurationEntry: Decodable {
   let recoveryOptions: [String]
 
   init(from decoder: Decoder) throws {
-    // TODO: add your own decoding error here
     let container = try decoder.container(keyedBy: Keys.self)
-    // TODO: add your own decoding error here
     var itemsContainer = try container.nestedUnkeyedContainer(forKey: .items)
 
     var items = [ErrorCodeGroup]()
