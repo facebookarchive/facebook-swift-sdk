@@ -16,15 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/*
- STOP!
+import Foundation
 
- DO NOT PUT USER FACING STRINGS IN THIS FILE
+// This is a little weird but necessary in order to filter invalid codable items from a list
+// related to an open swift bug https://bugs.swift.org/browse/SR-5953
+// essentially allows for a failable init(from decoder: Decoder)
+/** Used for custom decoding schemes that require failing certain items if they
+ do not meet given criteria or are of the wrong type or in the wrong format
 
- THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
+ example: You want to decode a list of users in the format [String: String]
+ but only if the value of their name is a non-empty string.
 
+ Decoding
+ ```
+ [
+  ["name": "joe"],
+  ["name": ""]
+ ]
+ ```
+ Should result in a list with a single User entry with the name "joe" as opposed to failing to
+ decode the entire list
  */
-
-"foo" = "LocalizedFoo";
-"bar" = "LocalizedBar";
-"baz" = "LocalizedBaz";
+struct EmptyDecodable: Decodable {}
