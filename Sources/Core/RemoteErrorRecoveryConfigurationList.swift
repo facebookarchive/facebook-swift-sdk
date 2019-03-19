@@ -16,15 +16,31 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/*
- STOP!
+import Foundation
 
- DO NOT PUT USER FACING STRINGS IN THIS FILE
+/// A representation of a server side list of errors
+/// Used for creating an `ErrorConfiguration`
+struct RemoteErrorRecoveryConfigurationList: Codable {
+  let configurations: [RemoteErrorRecoveryConfiguration]
 
- THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
+  init(from decoder: Decoder) throws {
+    var container = try decoder.unkeyedContainer()
+    var configurations: [RemoteErrorRecoveryConfiguration] = []
 
- */
+    while !container.isAtEnd {
+      switch try? container.decode(RemoteErrorRecoveryConfiguration.self) {
+      case let item?:
+        configurations.append(item)
 
-"foo" = "LocalizedFoo";
-"bar" = "LocalizedBar";
-"baz" = "LocalizedBaz";
+      case nil:
+        _ = try? container.decode(EmptyDecodable.self)
+      }
+    }
+
+    guard !configurations.isEmpty else {
+      throw RemoteErrorConfigurationDecodingError.emptyItems
+    }
+
+    self.configurations = configurations
+  }
+}
