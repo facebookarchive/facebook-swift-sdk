@@ -16,9 +16,39 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
 import Foundation
 
-enum SampleLocalizableStrings: String, CaseIterable, Localizable {
-  case foo
+/// A representation of the server side codes associated with an error
+/// Used for creating a `RemoteErrorRecoveryConfiguration`
+struct RemoteErrorRecoveryCodes: Codable, Equatable {
+  let primaryCode: Int
+  let subcodes: [Int]
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: Keys.self)
+    primaryCode = try container.decode(Int.self, forKey: .code)
+
+    switch try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+    case nil:
+      self.subcodes = []
+
+    case var subcodesContainer?:
+      var subcodes: [Int] = []
+      while !subcodesContainer.isAtEnd {
+        switch try? subcodesContainer.decode(Int.self) {
+        case let code?:
+          subcodes.append(code)
+
+        case nil:
+          _ = try? subcodesContainer.decode(EmptyDecodable.self)
+        }
+      }
+      self.subcodes = subcodes
+    }
+  }
+
+  enum Keys: String, CodingKey {
+    case code
+    case subcodes
+  }
 }

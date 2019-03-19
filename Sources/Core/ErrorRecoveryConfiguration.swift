@@ -16,15 +16,21 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/*
- STOP!
+import Foundation
 
- DO NOT PUT USER FACING STRINGS IN THIS FILE
+struct ErrorRecoveryConfiguration: Codable {
+  let localizedRecoveryDescription: String
+  let localizedRecoveryOptionDescriptions: [String]
+  let errorCategory: GraphRequestErrorCategory
 
- THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
-
- */
-
-"foo" = "LocalizedFoo";
-"bar" = "LocalizedBar";
-"baz" = "LocalizedBaz";
+  init(
+    recoveryDescription: Localizable,
+    optionDescriptions: [Localizable],
+    category: GraphRequestErrorCategory,
+    bundle: Bundle = .main
+    ) {
+    localizedRecoveryDescription = recoveryDescription.localized(bundle: bundle)
+    localizedRecoveryOptionDescriptions = optionDescriptions.map { $0.localized(bundle: bundle) }
+    errorCategory = category
+  }
+}
