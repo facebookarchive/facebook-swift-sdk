@@ -86,6 +86,7 @@
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
 		F4B33FFF224074F200912F0F /* validRemoteErrorConfigurationList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4B33FFD224074EB00912F0F /* validRemoteErrorConfigurationList.json */; };
 		F4B340012240779D00912F0F /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B340002240779D00912F0F /* JSONLoader.swift */; };
+		F4B340092240A4D400912F0F /* validRemoteErrorConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F4B340082240A4D400912F0F /* validRemoteErrorConfiguration.json */; };
 		F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8832B22305791000971C9 /* CoreErrorTests.swift */; };
 		F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8832C22305791000971C9 /* FBErrorTests.swift */; };
 		F4C32D88223D98D400FF1F86 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */; };
@@ -232,8 +233,9 @@
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
 		F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = FacebookCoreTests.xcconfig; sourceTree = "<group>"; };
-		F4B33FFD224074EB00912F0F /* validRemoteErrorConfigurationList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = validRemoteErrorConfigurationList.json; sourceTree = "<group>"; };
+		F4B33FFD224074EB00912F0F /* validRemoteErrorConfigurationList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = validRemoteErrorConfigurationList.json; path = Sources/FacebookCoreTests/RemoteErrorConfigurationListJSON/validRemoteErrorConfigurationList.json; sourceTree = SOURCE_ROOT; };
 		F4B340002240779D00912F0F /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
+		F4B340082240A4D400912F0F /* validRemoteErrorConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteErrorConfiguration.json; sourceTree = "<group>"; };
 		F4B8832B22305791000971C9 /* CoreErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreErrorTests.swift; sourceTree = "<group>"; };
 		F4B8832C22305791000971C9 /* FBErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBErrorTests.swift; sourceTree = "<group>"; };
 		F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = FacebookCoreTests.xcconfig; sourceTree = "<group>"; };
@@ -553,10 +555,12 @@
 		F4B3400222407CC100912F0F /* RemoteErrorConfigurationListJSON */ = {
 			isa = PBXGroup;
 			children = (
+				F4B340082240A4D400912F0F /* validRemoteErrorConfiguration.json */,
 				F4B33FFD224074EB00912F0F /* validRemoteErrorConfigurationList.json */,
 			);
-			path = RemoteErrorConfigurationListJSON;
-			sourceTree = "<group>";
+			name = RemoteErrorConfigurationListJSON;
+			path = Sources/FacebookCoreTests/RemoteErrorConfigurationListJSON;
+			sourceTree = SOURCE_ROOT;
 		};
 		F4C32D81223D98D300FF1F86 /* Configurations */ = {
 			isa = PBXGroup;
@@ -781,6 +785,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B340092240A4D400912F0F /* validRemoteErrorConfiguration.json in Resources */,
 				F4B33FFF224074F200912F0F /* validRemoteErrorConfigurationList.json in Resources */,
 				F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */,
 			);

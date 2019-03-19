@@ -74,6 +74,6 @@ class RemoteErrorConfigurationEntryListTests: XCTestCase {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntryList.self, from: data),
-                    "Should be able to decode a remote error configuration entry list from valid data")
+                    "Should be able to decode a remote error configuration entry list from valid json")
   }
 }

@@ -156,4 +156,12 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
     XCTAssertEqual(config.recoveryOptions, SampleRawRemoteConfiguration.recoveryOptions,
                    "A remote error configuration should store the exact recovery options it was created with")
   }
+
+  func testCreatingFromJSON() {
+    guard let data = JSONLoader.loadData(for: .validRemoteErrorConfiguration) else {
+      return XCTFail("Failed to load json")
+    }
+    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: data),
+                    "Should be able to decode a remote error configuration entry from valid json")
+  }
 }
