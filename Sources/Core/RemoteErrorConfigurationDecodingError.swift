@@ -16,15 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/*
- STOP!
+import Foundation
 
- DO NOT PUT USER FACING STRINGS IN THIS FILE
+enum RemoteErrorConfigurationDecodingError: FBError, CaseIterable {
+  /// Indicates an empty string was received for the name key
+  case emptyName
 
- THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
+  /// Indicates that either an empty array was received for the items key
+  /// or the entries under the items key were not decodable
+  case emptyItems
 
- */
+  /// Indicates an empty string was received for the recovery message key
+  case emptyRecoveryMessage
 
-"foo" = "LocalizedFoo";
-"bar" = "LocalizedBar";
-"baz" = "LocalizedBaz";
+  /// Indicates an empty list was received for the recovery options key
+  case emptyRecoveryOptions
+}

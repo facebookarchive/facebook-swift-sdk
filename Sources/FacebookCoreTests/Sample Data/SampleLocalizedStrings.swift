@@ -16,15 +16,11 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/*
- STOP!
+@testable import FacebookCore
+import Foundation
 
- DO NOT PUT USER FACING STRINGS IN THIS FILE
-
- THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
-
- */
-
-"foo" = "LocalizedFoo";
-"bar" = "LocalizedBar";
-"baz" = "LocalizedBaz";
+enum SampleLocalizableStrings: String, CaseIterable, Localizable {
+  case foo
+  case bar
+  case baz
+}
