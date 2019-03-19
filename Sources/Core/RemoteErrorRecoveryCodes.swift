@@ -18,33 +18,37 @@
 
 import Foundation
 
-/// A representation of a server side list of errors
-/// Used for creating an `ErrorConfiguration`
-struct RemoteErrorConfigurationEntryList: Decodable {
-  let configurations: [RemoteErrorConfigurationEntry]
+/// A representation of the server side codes associated with an error
+/// Used for creating a `RemoteErrorRecoveryConfiguration`
+struct RemoteErrorRecoveryCodes: Codable, Equatable {
+  let primaryCode: Int
+  let subcodes: [Int]
 
   init(from decoder: Decoder) throws {
-    var container = try decoder.unkeyedContainer()
-    var configurations: [RemoteErrorConfigurationEntry] = []
+    let container = try decoder.container(keyedBy: Keys.self)
+    primaryCode = try container.decode(Int.self, forKey: .code)
 
-    while !container.isAtEnd {
-      switch try? container.decode(RemoteErrorConfigurationEntry.self) {
-      case let item?:
-        configurations.append(item)
+    switch try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+    case nil:
+      self.subcodes = []
 
-      case nil:
-        _ = try? container.decode(EmptyDecodable.self)
+    case var subcodesContainer?:
+      var subcodes: [Int] = []
+      while !subcodesContainer.isAtEnd {
+        switch try? subcodesContainer.decode(Int.self) {
+        case let code?:
+          subcodes.append(code)
+
+        case nil:
+          _ = try? subcodesContainer.decode(EmptyDecodable.self)
+        }
       }
+      self.subcodes = subcodes
     }
-
-    guard !configurations.isEmpty else {
-      throw DecodingError.emptyItems
-    }
-
-    self.configurations = configurations
   }
 
-  enum DecodingError: FBError {
-    case emptyItems
+  enum Keys: String, CodingKey {
+    case code
+    case subcodes
   }
 }

@@ -18,33 +18,17 @@
 
 import Foundation
 
-/// A representation of a server side list of errors
-/// Used for creating an `ErrorConfiguration`
-struct RemoteErrorConfigurationEntryList: Decodable {
-  let configurations: [RemoteErrorConfigurationEntry]
+enum RemoteErrorConfigurationDecodingError: FBError, CaseIterable {
+  /// Indicates an empty string was received for the name key
+  case emptyName
 
-  init(from decoder: Decoder) throws {
-    var container = try decoder.unkeyedContainer()
-    var configurations: [RemoteErrorConfigurationEntry] = []
+  /// Indicates that either an empty array was received for the items key
+  /// or the entries under the items key were not decodable
+  case emptyItems
 
-    while !container.isAtEnd {
-      switch try? container.decode(RemoteErrorConfigurationEntry.self) {
-      case let item?:
-        configurations.append(item)
+  /// Indicates an empty string was received for the recovery message key
+  case emptyRecoveryMessage
 
-      case nil:
-        _ = try? container.decode(EmptyDecodable.self)
-      }
-    }
-
-    guard !configurations.isEmpty else {
-      throw DecodingError.emptyItems
-    }
-
-    self.configurations = configurations
-  }
-
-  enum DecodingError: FBError {
-    case emptyItems
-  }
+  /// Indicates an empty list was received for the recovery options key
+  case emptyRecoveryOptions
 }

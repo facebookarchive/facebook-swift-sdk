@@ -139,10 +139,3 @@ enum SampleRawRemoteConfiguration {
     }
   }
 }
-
-// TODO:
-// SampleList
-//
-//static let validList: RawRemoteConfigurationList = {
-//  Array(repeating: SampleRawRemoteConfiguration.valid, count: 3)
-//}()

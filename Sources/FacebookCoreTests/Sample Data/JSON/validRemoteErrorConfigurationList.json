@@ -1,0 +1,12 @@
+[
+  {
+    "name": "foo",
+    "items": [
+      {
+        "code": 1, "subcodes": [2, 3, 4]
+      }
+    ],
+    "recovery_message": "bar",
+    "recovery_options": ["baz"]
+  }
+]

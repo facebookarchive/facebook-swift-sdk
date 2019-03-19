@@ -20,15 +20,15 @@ import Foundation
 
 /// A representation of a server side list of errors
 /// Used for creating an `ErrorConfiguration`
-struct RemoteErrorConfigurationEntryList: Decodable {
-  let configurations: [RemoteErrorConfigurationEntry]
+struct RemoteErrorRecoveryConfigurationList: Codable {
+  let configurations: [RemoteErrorRecoveryConfiguration]
 
   init(from decoder: Decoder) throws {
     var container = try decoder.unkeyedContainer()
-    var configurations: [RemoteErrorConfigurationEntry] = []
+    var configurations: [RemoteErrorRecoveryConfiguration] = []
 
     while !container.isAtEnd {
-      switch try? container.decode(RemoteErrorConfigurationEntry.self) {
+      switch try? container.decode(RemoteErrorRecoveryConfiguration.self) {
       case let item?:
         configurations.append(item)
 
@@ -38,13 +38,9 @@ struct RemoteErrorConfigurationEntryList: Decodable {
     }
 
     guard !configurations.isEmpty else {
-      throw DecodingError.emptyItems
+      throw RemoteErrorConfigurationDecodingError.emptyItems
     }
 
     self.configurations = configurations
-  }
-
-  enum DecodingError: FBError {
-    case emptyItems
   }
 }
