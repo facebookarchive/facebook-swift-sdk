@@ -40,10 +40,12 @@ struct RemoteErrorRecoveryConfiguration: Codable {
     self.name = name
 
     while !itemsContainer.isAtEnd {
-      if let item = try? itemsContainer.decode(RemoteErrorRecoveryCodes.self) {
-        items.append(item)
-      } else {
+      switch try? itemsContainer.decode(RemoteErrorRecoveryCodes.self) {
+      case nil:
         _ = try? itemsContainer.decode(EmptyDecodable.self)
+
+      case let item?:
+        items.append(item)
       }
     }
 
