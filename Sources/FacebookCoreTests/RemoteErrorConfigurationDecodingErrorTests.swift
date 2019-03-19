@@ -16,15 +16,20 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/*
- STOP!
+// swiftlint:disable type_name
 
- DO NOT PUT USER FACING STRINGS IN THIS FILE
+@testable import FacebookCore
+import XCTest
 
- THIS IS FOR TESTING COMPONENTS THAT RELY ON LOCALIZABLE VALUES
-
- */
-
-"foo" = "LocalizedFoo";
-"bar" = "LocalizedBar";
-"baz" = "LocalizedBaz";
+class RemoteErrorConfigurationDecodingErrorTests: XCTestCase {
+  func testKnownValues() {
+    let expectedCases: [RemoteErrorConfigurationDecodingError] = [
+      .emptyName,
+      .emptyItems,
+      .emptyRecoveryMessage,
+      .emptyRecoveryOptions
+    ]
+    XCTAssertEqual(RemoteErrorConfigurationDecodingError.allCases, expectedCases,
+                   "There should be easy access to all the cases of a remote error configuration decoding error")
+  }
+}
