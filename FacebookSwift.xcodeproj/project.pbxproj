@@ -109,6 +109,7 @@
 		F4E1A9EE22416F2200503354 /* RemoteErrorConfigurationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E822416F2200503354 /* RemoteErrorConfigurationEntry.swift */; };
 		F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */; };
 		F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC87B0222ED532003A8F29 /* GraphRequest.swift */; };
+		F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,6 +257,7 @@
 		F4E1A9E822416F2200503354 /* RemoteErrorConfigurationEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationEntry.swift; sourceTree = "<group>"; };
 		F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerConfigurationTests.swift; sourceTree = "<group>"; };
 		F4FC87B0222ED532003A8F29 /* GraphRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequest.swift; sourceTree = "<group>"; };
+		F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -364,6 +366,7 @@
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
+				F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
+				F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */,
 				F432E9FA22370C07007D3A34 /* URLSession+Extensions.swift in Sources */,
 				F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */,
 				F408BEB62239893F0068D24A /* GraphRequestErrorCategory.swift in Sources */,
