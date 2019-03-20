@@ -22,6 +22,7 @@ import XCTest
 class GraphRequestConnectionTests: XCTestCase {
   let fakeSession = FakeSession()
   var fakeSessionProvider: FakeSessionProvider!
+  let fakeLogger = FakeLogger()
 
   override func setUp() {
     super.setUp()
@@ -182,8 +183,38 @@ class GraphRequestConnectionTests: XCTestCase {
                    "A connection should not request a new session from its session provider if starting a request with an existing session")
   }
 
-  func testStart() {
-    let connection = GraphRequestConnection()
+  func testStartingUpdatesState() {
+    let connection = GraphRequestConnection(logger: fakeLogger)
+
+    GraphRequestConnectionState.allCases.forEach { state in
+      defer { fakeLogger.capturedMessage = nil }
+
+      connection.state = state
+      connection.start()
+
+      switch state {
+      case .cancelled,
+           .completed:
+        XCTAssertNotNil(fakeLogger.capturedMessage,
+                        "Starting a connection in the invalid state: \(state) should log an error message")
+        XCTAssertNotEqual(connection.state, .started,
+                          "A connection with an invalid start state should not be placed into a started state")
+
+      case .started:
+        XCTAssertNotNil(fakeLogger.capturedMessage,
+                        "Starting an already started connection should log an error message")
+        XCTAssertEqual(connection.state, .started,
+                       "Starting an already started connection should not change its state")
+
+      case .created,
+           .serialized:
+        XCTAssertNil(fakeLogger.capturedMessage,
+                     "Starting a connection in the valid state: \(state) should not log an error message")
+        XCTAssertEqual(connection.state, .started,
+                       "Starting a connection in the valid state: \(state) should update the state to be started")
+      }
+    }
+  }
 
   func testStartingInvokesPiggybackManager() {
     let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
@@ -209,8 +240,11 @@ class GraphRequestConnectionTests: XCTestCase {
     }
   }
 
+  func testStartingWithValidStateLogsRequests() {
+    let connection = GraphRequestConnection(logger: fakeLogger)
     connection.start()
 
-    // TODO: Observe and assert about side effects when connection logic is added
+    XCTAssertEqual(fakeLogger.logRequestCallCount, 1,
+                   "Successfully starting a connection should log the request")
   }
 }
