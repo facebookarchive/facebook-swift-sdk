@@ -16,11 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-protocol Logging {
-  mutating func generateSerialNumber() -> UInt
-
-  func log(message: String)
-  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?)
+class LoggerTests: XCTestCase {
+  func testGeneratingSerialNumbers() {
+    var logger = Logger()
+    XCTAssertEqual(logger.generateSerialNumber(), 1112,
+                   "Logger should generate predictable values for it's serial numbers")
+    XCTAssertEqual(logger.generateSerialNumber(), 1113,
+                   "Logger should generate predictable values for it's serial numbers")
+    XCTAssertEqual(logger.generateSerialNumber(), 1114,
+                   "Logger should generate predictable values for it's serial numbers")
+  }
 }

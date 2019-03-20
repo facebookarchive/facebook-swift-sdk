@@ -20,11 +20,18 @@
 import Foundation
 
 class FakeLogger: Logging {
-  var capturedMessage: StaticString?
+  var capturedMessages: [String] = []
   var logRequestCallCount = 0
+  var generateSerialNumberWasCalled = false
+  var serialNumber: UInt = 0
 
-  func log(message: StaticString) {
-    capturedMessage = message
+  func generateSerialNumber() -> UInt {
+    generateSerialNumberWasCalled = true
+    return serialNumber
+  }
+
+  func log(message: String) {
+    capturedMessages.append(message)
   }
 
   func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
