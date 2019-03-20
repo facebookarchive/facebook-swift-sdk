@@ -152,7 +152,7 @@ class GraphRequestSerializerTests: XCTestCase {
       XCTFail("Trying to serialize a get request without attachments should not fail")
     }
 
-    XCTAssertNil(fakeLogger.capturedMessage,
+    XCTAssertNil(fakeLogger.capturedMessages.first,
                  "Should not log a message when serializing a get request without attachments")
   }
 
@@ -177,7 +177,7 @@ class GraphRequestSerializerTests: XCTestCase {
       _ = try serializer.serialize(with: validURL, graphRequest: requestWithAttachments)
       XCTFail("Trying to serialize a get request with attachments should not succeed")
     } catch {
-      XCTAssertNotNil(fakeLogger.capturedMessage,
+      XCTAssertNotNil(fakeLogger.capturedMessages.first,
                       "Trying to serializing a get request with attachments should log a message")
     }
   }
