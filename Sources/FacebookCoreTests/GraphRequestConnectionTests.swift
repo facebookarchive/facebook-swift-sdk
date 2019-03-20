@@ -187,7 +187,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let connection = GraphRequestConnection(logger: fakeLogger)
 
     GraphRequestConnectionState.allCases.forEach { state in
-      defer { fakeLogger.capturedMessage = nil }
+      defer { fakeLogger.capturedMessages = [] }
 
       connection.state = state
       connection.start()
@@ -195,20 +195,20 @@ class GraphRequestConnectionTests: XCTestCase {
       switch state {
       case .cancelled,
            .completed:
-        XCTAssertNotNil(fakeLogger.capturedMessage,
+        XCTAssertNotNil(fakeLogger.capturedMessages.first,
                         "Starting a connection in the invalid state: \(state) should log an error message")
         XCTAssertNotEqual(connection.state, .started,
                           "A connection with an invalid start state should not be placed into a started state")
 
       case .started:
-        XCTAssertNotNil(fakeLogger.capturedMessage,
+        XCTAssertNotNil(fakeLogger.capturedMessages.first,
                         "Starting an already started connection should log an error message")
         XCTAssertEqual(connection.state, .started,
                        "Starting an already started connection should not change its state")
 
       case .created,
            .serialized:
-        XCTAssertNil(fakeLogger.capturedMessage,
+        XCTAssertNil(fakeLogger.capturedMessages.first,
                      "Starting a connection in the valid state: \(state) should not log an error message")
         XCTAssertEqual(connection.state, .started,
                        "Starting a connection in the valid state: \(state) should update the state to be started")

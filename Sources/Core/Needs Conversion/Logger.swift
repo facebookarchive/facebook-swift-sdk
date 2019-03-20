@@ -23,7 +23,14 @@ import Foundation
 // more info here: https://stackoverflow.com/questions/25951195/swift-print-vs-println-vs-nslog
 //
 struct Logger: Logging {
-  func log(message: StaticString) {
+  private var startingSerialNumber: UInt = 1111
+
+  mutating func generateSerialNumber() -> UInt {
+    startingSerialNumber += 1
+    return startingSerialNumber
+  }
+
+  func log(message: String) {
     // TODO: Implementation
   }
 
