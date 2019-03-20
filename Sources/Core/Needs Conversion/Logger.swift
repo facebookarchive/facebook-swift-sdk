@@ -37,8 +37,4 @@ struct Logger: Logging {
   func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
     // TODO: Implementation
   }
-
-  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
-    // TODO: Implementation
-  }
 }
