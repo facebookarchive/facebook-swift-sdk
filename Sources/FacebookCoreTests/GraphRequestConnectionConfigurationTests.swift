@@ -20,9 +20,9 @@
 import XCTest
 
 class GraphRequestConnectionConfigurationTests: XCTestCase {
-  func testSessionDependency() {
-    let connection = GraphRequestConnection()
+  let connection = GraphRequestConnection()
 
+  func testSessionDependency() {
     XCTAssertTrue(connection.sessionProvider is SessionProvider,
                   "Connection should have the correct concrete implementation of a session provider")
   }
