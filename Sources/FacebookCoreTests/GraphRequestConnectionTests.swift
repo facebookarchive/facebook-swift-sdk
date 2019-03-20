@@ -185,6 +185,30 @@ class GraphRequestConnectionTests: XCTestCase {
   func testStart() {
     let connection = GraphRequestConnection()
 
+  func testStartingInvokesPiggybackManager() {
+    let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
+
+    GraphRequestConnectionState.allCases.forEach { state in
+      defer { FakeGraphRequestPiggybackManager.reset() }
+
+      switch state {
+      case .cancelled,
+           .completed,
+           .started:
+        connection.state = state
+        connection.start()
+        XCTAssertTrue(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
+                      "Starting a request in the invalid state: \(state) should not invoke the piggyback manager")
+      case .created,
+           .serialized:
+        connection.state = state
+        connection.start()
+        XCTAssertFalse(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
+                       "Starting a request in the valid state: \(state) should invoke the piggyback manager")
+      }
+    }
+  }
+
     connection.start()
 
     // TODO: Observe and assert about side effects when connection logic is added

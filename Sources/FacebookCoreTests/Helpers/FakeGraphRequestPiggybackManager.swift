@@ -20,11 +20,25 @@
 
 class FakeGraphRequestPiggybackManager: GraphRequestPiggybackManaging {
   static var capturedCompletionHandler: GraphRequestBlock?
+  static var addedConnections = [GraphRequestConnection]()
 
   static func addRefreshPiggyback(
     _ connection: GraphRequestConnecting,
     completion: @escaping GraphRequestBlock
     ) {
     capturedCompletionHandler = completion
+  }
+
+  static func addPiggybackRequests(for connection: GraphRequestConnection) {
+    addedConnections.append(connection)
+  }
+
+  /**
+   Resets test state. This singleton will persist between tests, make
+   sure you add any new properties here so they can be cleared manually
+   */
+  static func reset() {
+    capturedCompletionHandler = nil
+    addedConnections = []
   }
 }

@@ -47,8 +47,12 @@ class GraphRequestConnection: GraphRequestConnecting {
 
   private var session: Session?
   let sessionProvider: SessionProviding
+  let piggybackManager: GraphRequestPiggybackManaging.Type
 
-  init(sessionProvider: SessionProviding = SessionProvider()) {
+  init(
+    sessionProvider: SessionProviding = SessionProvider(),
+    piggybackManager: GraphRequestPiggybackManaging.Type = GraphRequestPiggybackManager.self
+    ) {
     self.sessionProvider = sessionProvider
     state = .created
   }
@@ -57,6 +61,7 @@ class GraphRequestConnection: GraphRequestConnecting {
     if session == nil {
       session = sessionProvider.session()
     }
+      piggybackManager.addPiggybackRequests(for: self)
   }
 
   /**
