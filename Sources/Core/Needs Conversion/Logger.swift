@@ -26,4 +26,8 @@ struct Logger: Logging {
   func log(message: StaticString) {
     // TODO: Implementation
   }
+
+  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
+    // TODO: Implementation
+  }
 }
