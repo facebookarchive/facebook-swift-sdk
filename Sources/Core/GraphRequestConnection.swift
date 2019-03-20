@@ -46,22 +46,46 @@ class GraphRequestConnection: GraphRequestConnecting {
   private(set) var urlResponse: HTTPURLResponse?
 
   private var session: Session?
+  private var requestStartTime: Double = 0
+
   let sessionProvider: SessionProviding
+  let logger: Logging
   let piggybackManager: GraphRequestPiggybackManaging.Type
 
   init(
     sessionProvider: SessionProviding = SessionProvider(),
+    logger: Logging = Logger(),
     piggybackManager: GraphRequestPiggybackManaging.Type = GraphRequestPiggybackManager.self
     ) {
     self.sessionProvider = sessionProvider
+    self.logger = logger
+    self.piggybackManager = piggybackManager
     state = .created
   }
 
   func start() {
+    // TODO: make sure you test for error configuration checks here. Pending Error Configuration code being merged
+
     if session == nil {
       session = sessionProvider.session()
     }
+
+    switch state {
+    case .started, .cancelled, .completed:
+      return logger.log(message: "Request connection cannot be started again.")
+
+    case .created, .serialized:
       piggybackManager.addPiggybackRequests(for: self)
+    }
+
+    state = .started
+
+    var urlRequest: URLRequest = self.urlRequest(withBatch: requests, timeout: timeout)
+
+    logger.log(request: urlRequest, bodyLength: 0, bodyLogger: nil, attachmentLogger: nil)
+
+    requestStartTime = TimeUtility.currentTimeInMilliseconds
+
   }
 
   /**
@@ -106,5 +130,17 @@ class GraphRequestConnection: GraphRequestConnecting {
 
   enum BatchEntryKeys: String {
     case name
+  }
+
+  // Generates a NSURLRequest based on the contents of self.requests, and sets
+  // options on the request.  Chooses between URL-based request for a single
+  // request and JSON-based request for batches.
+  //
+  func urlRequest(withBatch: [GraphRequestMetadata], timeout: TimeInterval) -> URLRequest {
+    // TODO: Implement
+    guard let url = URL(string: "https://www.example.com") else {
+      fatalError("Implement this method to return the actual url we need")
+    }
+    return URLRequest(url: url)
   }
 }
