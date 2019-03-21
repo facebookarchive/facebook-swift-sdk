@@ -16,29 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-// TODO: Move canonical Session to its own file once it has more definition
+class FakeProcessInfo: ProcessInfoProviding {
+  let stubbedOperatingSystemCheckResult: Bool
 
-protocol Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask
-}
+  init(stubbedOperatingSystemCheckResult: Bool = true) {
+    self.stubbedOperatingSystemCheckResult = stubbedOperatingSystemCheckResult
+  }
 
-extension URLSession: Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask {
-    return (dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask) as SessionDataTask
+  func isOperatingSystemAtLeast(_ version: OperatingSystemVersion) -> Bool {
+    return stubbedOperatingSystemCheckResult
   }
 }
-
-protocol SessionDataTask {
-  func resume()
-  func cancel()
-}
-
-extension URLSessionDataTask: SessionDataTask {}

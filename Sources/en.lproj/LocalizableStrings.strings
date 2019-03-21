@@ -27,3 +27,6 @@
 
 /* The fallback message to display to recover invalidated tokens */
 "ErrorRecovery.Login.Suggestion" = "Please log into this app again to reconnect your Facebook account.";
+
+/* The message to log for developer when they have not configured their app to use transport security */
+"ErrorStrings.DeveloperError.appTransportSecurity" = "WARNING: FBSDK secure network request failed. Please verify you have configured your app for Application Transport Security compatibility described at https://developers.facebook.com/docs/ios/ios9";

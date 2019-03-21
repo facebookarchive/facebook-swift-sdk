@@ -80,12 +80,14 @@ class GraphRequestConnection: GraphRequestConnecting {
 
     state = .started
 
-    var urlRequest: URLRequest = self.urlRequest(withBatch: requests, timeout: timeout)
+    let urlRequest: URLRequest = self.urlRequest(withBatch: requests, timeout: timeout)
 
     logger.log(request: urlRequest, bodyLength: 0, bodyLogger: nil, attachmentLogger: nil)
 
     requestStartTime = TimeUtility.currentTimeInMilliseconds
 
+    // TODO: Create and start URLSessionTaskProxy, handle response from there
+    // add in DelegateQueue
   }
 
   /**
@@ -137,7 +139,7 @@ class GraphRequestConnection: GraphRequestConnecting {
   // request and JSON-based request for batches.
   //
   func urlRequest(withBatch: [GraphRequestMetadata], timeout: TimeInterval) -> URLRequest {
-    // TODO: Implement
+    // TODO: Implement a URL builder and make this throwing if you cannot create a valid URL
     guard let url = URL(string: "https://www.example.com") else {
       fatalError("Implement this method to return the actual url we need")
     }
