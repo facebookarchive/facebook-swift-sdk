@@ -21,6 +21,6 @@ import Foundation
 protocol Logging {
   mutating func generateSerialNumber() -> UInt
 
-  func log(_ message: String)
+  func log(_ behavior: LoggingBehavior, _ message: String)
   func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?)
 }

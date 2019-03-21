@@ -25,6 +25,7 @@ import Foundation
 protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
+  var loggingBehaviors: Set<LoggingBehavior> { get set }
 
   static var graphAPIVersion: String { get set }
   static var isGraphErrorRecoveryEnabled: Bool { get set }
@@ -36,6 +37,8 @@ class Settings: SettingsManaging {
 
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
   let graphApiDebugParameter: GraphApiDebugParameter = .none
+
+  var loggingBehaviors = Set<LoggingBehavior>()
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var graphAPIVersion: String = ""

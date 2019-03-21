@@ -16,38 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+// swiftlint:disable unused_closure_parameter
 
-// This will ultimately be a wrapper around os_log. For more info on the decision to
-// rewrite this to wrap os_log over NSLog see: https://developer.apple.com/videos/play/wwdc2016/721/
-// more info here: https://stackoverflow.com/questions/25951195/swift-print-vs-println-vs-nslog
-//
-struct Logger: Logging {
-  private var startingSerialNumber: UInt = 1111
-  let settings: SettingsManaging
+@testable import FacebookCore
+import XCTest
 
-  init(settings: SettingsManaging = Settings.shared) {
-    self.settings = settings
-  }
-
-  func log(_ behavior: LoggingBehavior, _ message: String) {
-    guard shouldLog(behavior) else {
-      return
+class LoggingBehaviorTests: XCTestCase {
+  func testAllCases() {
+    LoggingBehavior.allCases.forEach { `case` in
+      switch `case` {
+      case .accessTokens, .appEvents, .cacheErrors, .developerErrors, .graphAPIDebugInfo, .graphAPIDebugWarning, .informational, .networkRequests, .performanceCharacteristics, .UIControlErrors:
+        break
+      }
     }
-
-    NSLog(message)
-  }
-
-  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
-    // TODO: Implementation
-  }
-
-  func shouldLog(_ behavior: LoggingBehavior) -> Bool {
-    return settings.loggingBehaviors.contains(behavior)
-  }
-
-  mutating func generateSerialNumber() -> UInt {
-    startingSerialNumber += 1
-    return startingSerialNumber
   }
 }
