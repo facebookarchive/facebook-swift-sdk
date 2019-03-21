@@ -18,27 +18,9 @@
 
 import Foundation
 
-// TODO: Move canonical Session to its own file once it has more definition
-
-protocol Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask
+enum ErrorRecoveryStrings: String, CaseIterable, Localizable {
+  case ok = "ErrorRecovery.OK"
+  case cancel = "ErrorRecovery.Cancel"
+  case transientSuggestion = "ErrorRecovery.Transient.Suggestion"
+  case loginRecoverySuggestion = "ErrorRecovery.Login.Suggestion"
 }
-
-extension URLSession: Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask {
-    return (dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask) as SessionDataTask
-  }
-}
-
-protocol SessionDataTask {
-  func resume()
-  func cancel()
-}
-
-extension URLSessionDataTask: SessionDataTask {}

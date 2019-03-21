@@ -18,9 +18,6 @@
 
 @testable import FacebookCore
 
-// TODO: move to own file
-class FakeSession: Session {}
-
 class FakeSessionProvider: SessionProviding {
   private let fakeSession: Session
   var sessionCallCount: Int = 0
