@@ -30,9 +30,10 @@ struct ErrorConfiguration {
     let majorCode: Int
     let minorCode: Int?
   }
-let majorRecoverableCodes: [Int] = [102, 190]
-let majorTransientCodes: [Int] = [1, 2, 4, 9, 17, 341]
-  private var configurationDictionary: ConfigurationDictionary = []
+
+  let majorRecoverableCodes: [Int] = [102, 190]
+  let majorTransientCodes: [Int] = [1, 2, 4, 9, 17, 341]
+  private var configurationDictionary: ConfigurationDictionary = [:]
 
   init(configurationDictionary: [Key: ErrorConfigurationEntry]) {
     self.configurationDictionary = defaultConfigurationDictionary
