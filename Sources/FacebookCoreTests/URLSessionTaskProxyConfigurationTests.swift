@@ -16,29 +16,26 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-// TODO: Move canonical Session to its own file once it has more definition
+class URLSessionTaskProxyConfigurationTests: XCTestCase {
+  let proxy = URLSessionTaskProxy(
+    for: SampleURLRequest.valid
+  ) { _, _, _ in }
 
-protocol Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask
-}
+  func testSessionDependency() {
+    XCTAssertTrue(proxy.session is URLSession,
+                  "Proxy should have the correct concrete implementation for its session dependency")
+  }
 
-extension URLSession: Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask {
-    return (dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask) as SessionDataTask
+  func testLoggingDependency() {
+    XCTAssertTrue(proxy.logger is Logger,
+                  "Proxy should have the correct concrete implementation for its logging dependency")
+  }
+
+  func testSettingsDependency() {
+    XCTAssertTrue(proxy.processInfo is ProcessInfo,
+                  "Proxy should have the correct concrete implementation for its process info dependency")
   }
 }
-
-protocol SessionDataTask {
-  func resume()
-  func cancel()
-}
-
-extension URLSessionDataTask: SessionDataTask {}

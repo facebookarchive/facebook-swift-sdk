@@ -16,29 +16,28 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-// TODO: Move canonical Session to its own file once it has more definition
+class FakeSessionDataTask: SessionDataTask {
+  var resumeWasCalled = false
+  var cancelWasCalled = false
+  var capturedUrlRequest: URLRequest?
+  let completionHandler: SessionTaskCompletion
 
-protocol Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask
-}
+  init(
+    request: URLRequest? = nil,
+    completionHandler: @escaping SessionTaskCompletion = { _, _, _ in }
+    ) {
+    capturedUrlRequest = request
+    self.completionHandler = completionHandler
+  }
 
-extension URLSession: Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask {
-    return (dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask) as SessionDataTask
+  func resume() {
+    resumeWasCalled = true
+  }
+
+  func cancel() {
+    cancelWasCalled = true
   }
 }
-
-protocol SessionDataTask {
-  func resume()
-  func cancel()
-}
-
-extension URLSessionDataTask: SessionDataTask {}

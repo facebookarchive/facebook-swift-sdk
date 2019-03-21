@@ -18,27 +18,10 @@
 
 import Foundation
 
-// TODO: Move canonical Session to its own file once it has more definition
-
-protocol Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask
+enum SampleURL {
+  static let valid = URL(string: "https://www.example.com")!
 }
 
-extension URLSession: Session {
-  func dataTask(
-    with request: URLRequest,
-    completionHandler: @escaping SessionTaskCompletion
-    ) -> SessionDataTask {
-    return (dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTask) as SessionDataTask
-  }
+enum SampleURLRequest {
+  static let valid = URLRequest(url: SampleURL.valid)
 }
-
-protocol SessionDataTask {
-  func resume()
-  func cancel()
-}
-
-extension URLSessionDataTask: SessionDataTask {}
