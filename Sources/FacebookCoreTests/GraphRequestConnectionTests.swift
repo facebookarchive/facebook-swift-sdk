@@ -163,6 +163,31 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   // MARK: Starting Connection
+  func testStartingCheckForUpdatedErrorConfigurationWithoutCache() {
+    let fakeServerConfigurationManager = FakeServerConfigurationManager()
+    fakeServerConfigurationManager.clearCache()
+
+    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
+
+    connection.start()
+
+    XCTAssertTrue(fakeServerConfigurationManager.cachedConfigurationWasRequested,
+                  "A connection should check for a cached configuration when starting a request")
+  }
+
+  func testStartingCheckForUpdatedErrorConfigurationWithCache() {
+    let fakeServerConfigurationProvider = FakeServerConfigurationProvider()
+    let fakeServerConfigurationManager = FakeServerConfigurationManager(cachedServerConfiguration: fakeServerConfigurationProvider)
+    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
+
+    connection.start()
+
+    guard let cache = fakeServerConfigurationManager.cachedServerConfiguration as? FakeServerConfigurationProvider else {
+      return XCTFail("A connection should check for an updated configuration when starting a request")
+    }
+    XCTAssertTrue(cache.errorConfigurationWasRequested,
+                  "A connection should check for an updated error configuration when starting a request")
+  }
 
   func testStartingWithoutSession() {
     let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)

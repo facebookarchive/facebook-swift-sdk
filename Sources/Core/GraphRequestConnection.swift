@@ -34,6 +34,10 @@ class GraphRequestConnection: GraphRequestConnecting {
 
   private(set) var requests: [GraphRequestMetadata] = []
 
+  private lazy var errorConfiguration: ErrorConfiguration = {
+    ErrorConfiguration()
+  }()
+
   /**
    The raw response that was returned from the server.
 
@@ -51,20 +55,23 @@ class GraphRequestConnection: GraphRequestConnecting {
   let sessionProvider: SessionProviding
   let logger: Logging
   let piggybackManager: GraphRequestPiggybackManaging.Type
+  let serverConfigurationManager: ServerConfigurationManaging
 
   init(
     sessionProvider: SessionProviding = SessionProvider(),
     logger: Logging = Logger(),
-    piggybackManager: GraphRequestPiggybackManaging.Type = GraphRequestPiggybackManager.self
+    piggybackManager: GraphRequestPiggybackManaging.Type = GraphRequestPiggybackManager.self,
+    serverConfigurationManager: ServerConfigurationManaging = ServerConfigurationManager.shared
     ) {
     self.sessionProvider = sessionProvider
     self.logger = logger
     self.piggybackManager = piggybackManager
+    self.serverConfigurationManager = serverConfigurationManager
     state = .created
   }
 
   func start() {
-    // TODO: make sure you test for error configuration checks here. Pending Error Configuration code being merged
+    errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
 
     if session == nil {
       session = sessionProvider.session()
