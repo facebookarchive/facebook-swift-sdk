@@ -23,6 +23,20 @@ import Foundation
 // more info here: https://stackoverflow.com/questions/25951195/swift-print-vs-println-vs-nslog
 //
 struct Logger: Logging {
+  let settings: SettingsManaging
+  let loggingBehavior: LoggingBehavior
+  let isActive: Bool
+
+  init(
+    settings: SettingsManaging = Settings.shared,
+    loggingBehavior: LoggingBehavior = .networkRequests
+    ) {
+    self.settings = settings
+    self.loggingBehavior = loggingBehavior
+
+    isActive = settings.loggingBehaviors.contains(loggingBehavior)
+  }
+
   func log(message: StaticString) {
     // TODO: Implementation
   }
