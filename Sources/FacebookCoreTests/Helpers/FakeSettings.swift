@@ -22,11 +22,15 @@ class FakeSettings: SettingsManaging {
   static var isGraphErrorRecoveryEnabled: Bool = false
 
   static var graphAPIVersion: String = "0.0.1"
-
   var accessTokenCache: AccessTokenCaching?
   let graphApiDebugParameter: GraphApiDebugParameter
+  var loggingBehaviors: Set<LoggingBehavior> = []
 
-  init(graphApiDebugParameter: GraphApiDebugParameter) {
+  init(
+    graphApiDebugParameter: GraphApiDebugParameter = .none,
+    loggingBehaviors: Set<LoggingBehavior> = []
+    ) {
     self.graphApiDebugParameter = graphApiDebugParameter
+    self.loggingBehaviors = loggingBehaviors
   }
 }

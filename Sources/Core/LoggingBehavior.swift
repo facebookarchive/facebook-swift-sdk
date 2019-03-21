@@ -18,36 +18,43 @@
 
 import Foundation
 
-// This will ultimately be a wrapper around os_log. For more info on the decision to
-// rewrite this to wrap os_log over NSLog see: https://developer.apple.com/videos/play/wwdc2016/721/
-// more info here: https://stackoverflow.com/questions/25951195/swift-print-vs-println-vs-nslog
-//
-struct Logger: Logging {
-  private var startingSerialNumber: UInt = 1111
-  let settings: SettingsManaging
+enum LoggingBehavior: CaseIterable {
+  /// Include access token in logging
+  case accessTokens
 
-  init(settings: SettingsManaging = Settings.shared) {
-    self.settings = settings
-  }
+  /// Log performance characteristics
+  case performanceCharacteristics
 
-  func log(_ behavior: LoggingBehavior, _ message: String) {
-    guard shouldLog(behavior) else {
-      return
-    }
+  /// Log FBSDKAppEvents interactions
+  case appEvents
 
-    NSLog(message)
-  }
+  /// Log Informational occurrences
+  case informational
 
-  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
-    // TODO: Implementation
-  }
+  /// Log cache errors.
+  case cacheErrors
 
-  func shouldLog(_ behavior: LoggingBehavior) -> Bool {
-    return settings.loggingBehaviors.contains(behavior)
-  }
+  /// Log errors from SDK UI controls
+  case UIControlErrors
 
-  mutating func generateSerialNumber() -> UInt {
-    startingSerialNumber += 1
-    return startingSerialNumber
-  }
+  /**
+   Log debug warnings from API response,
+   i.e. when friends fields requested, but user_friends permission isn't granted.
+   */
+  case graphAPIDebugWarning
+
+  /**
+   Log warnings from API response, i.e. when requested feature will be deprecated in next version of API.
+   Info is the lowest level of severity, using it will result in logging all previously mentioned levels.
+   */
+  case graphAPIDebugInfo
+
+  /// Log errors from SDK network requests
+  case networkRequests
+
+  /**
+   Log errors likely to be preventable by the developer.
+   This is in the default set of enabled logging behaviors.
+   */
+  case developerErrors
 }
