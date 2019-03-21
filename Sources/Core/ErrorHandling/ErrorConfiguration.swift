@@ -31,7 +31,7 @@ struct ErrorConfiguration {
     let minorCode: Int?
   }
 
-  private var configurationDictionary = ConfigurationDictionary()
+  private var configurationDictionary: ConfigurationDictionary = []
 
   init(configurationDictionary: [Key: ErrorConfigurationEntry]) {
     self.configurationDictionary = defaultConfigurationDictionary
