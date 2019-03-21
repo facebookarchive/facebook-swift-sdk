@@ -76,7 +76,7 @@ let majorTransientCodes: [Int] = [1, 2, 4, 9, 17, 341]
     [102, 190].forEach { key in
       dictionary.updateValue(recoverableEntry, forKey: Key(majorCode: key, minorCode: nil))
     }
-    [1, 2, 4, 9, 17, 341].forEach { key in
+    majorTransientCodes.forEach { key in
       dictionary.updateValue(transientEntry, forKey: Key(majorCode: key, minorCode: nil))
     }
     return dictionary
