@@ -40,9 +40,11 @@ struct RemoteErrorConfigurationEntry: Decodable {
 
     var items = [RemoteErrorCodeGroup]()
     while !itemsContainer.isAtEnd {
-      if let item = try? itemsContainer.decode(RemoteErrorCodeGroup.self) {
+      switch try? itemsContainer.decode(RemoteErrorCodeGroup.self) {
+      case let item?:
         items.append(item)
-      } else {
+
+      case nil:
         _ = try? itemsContainer.decode(EmptyDecodable.self)
       }
     }

@@ -72,12 +72,15 @@ enum ErrorConfigurationBuilder {
       remoteConfiguration.items.forEach { item in
         var key = Key(majorCode: item.code, minorCode: nil)
 
-        if dictionary[key] == nil {
+        switch dictionary[key] {
+        case nil:
           dictionary.updateValue(recoveryConfiguration, forKey: key)
-        } else {
-          if item.subcodes.isEmpty {
-            dictionary.updateValue(recoveryConfiguration, forKey: key)
-          }
+
+        case .some where item.subcodes.isEmpty:
+          dictionary.updateValue(recoveryConfiguration, forKey: key)
+
+        case .some:
+          break
         }
 
         item.subcodes.forEach { minorCode in
