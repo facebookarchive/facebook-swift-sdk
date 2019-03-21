@@ -417,6 +417,7 @@
 				F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */,
 				F408BE9E223981950068D24A /* GraphRequestSerializer.swift */,
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
+				F4B3401822430FC100912F0F /* LoggingBehavior.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
 				F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */,
@@ -517,7 +518,6 @@
 			children = (
 				F47056DC2232DF4500BE526B /* Logger.swift */,
 				F47056DA2232DF1D00BE526B /* Logging.swift */,
-				F4B3401822430FC100912F0F /* LoggingBehavior.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
