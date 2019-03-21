@@ -17,28 +17,13 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
-import XCTest
+import Foundation
 
-class GraphRequestConnectionConfigurationTests: XCTestCase {
-  let connection = GraphRequestConnection()
+class FakeServerConfigurationProvider: ServerConfigurationProviding {
+  var errorConfigurationWasRequested = false
 
-  func testSessionDependency() {
-    XCTAssertTrue(connection.sessionProvider is SessionProvider,
-                  "Connection should have the correct concrete implementation of a session provider")
-  }
-
-  func testLoggingDependency() {
-    XCTAssertTrue(connection.logger is Logger,
-                  "Connection should have the correct concrete implementation for its logging dependency")
-  }
-
-  func testPiggybackManagerDependency() {
-    XCTAssertTrue(connection.piggybackManager is GraphRequestPiggybackManager.Type,
-                  "Connection should have the expected concrete implementation for its graph request piggyback manager")
-  }
-
-  func testServerConfigurationManagerDependency() {
-    XCTAssertTrue(connection.serverConfigurationManager is ServerConfigurationManager,
-                  "Connection should have the expected concrete implementation for its server configuration manager")
+  var errorConfiguration: ErrorConfiguration {
+    errorConfigurationWasRequested = true
+    return ErrorConfiguration(configurationDictionary: [:])
   }
 }
