@@ -52,7 +52,7 @@ enum ErrorConfigurationEntryBuilder {
     case .other?:
       return .other
 
-    default:
+    case .recoverable?, nil:
       return .recoverable
     }
   }
