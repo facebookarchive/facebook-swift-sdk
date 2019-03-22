@@ -20,7 +20,7 @@
 import XCTest
 
 class GraphRequestTests: XCTestCase {
-  private let path: String = "Foo"
+  private let path: GraphPath = .other("Foo")
   private let parameters: [String: String] = ["Bar": "Baz"]
   private let token: AccessToken = AccessTokenFixtures.validToken
   private let version: String = "0.0.1"
@@ -40,7 +40,7 @@ class GraphRequestTests: XCTestCase {
   func testCreatingWithOnlyGraphPath() {
     let request = GraphRequest(graphPath: path)
 
-    XCTAssertEqual(request.graphPath, path,
+    XCTAssertEqual(request.graphPath.description, path.description,
                    "A graph request should store the exact path it was created with")
     XCTAssertTrue(request.parameters.isEmpty,
                   "A graph request should have default parameters of an empty dictionary")
