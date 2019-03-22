@@ -16,34 +16,38 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable convenience_type
-
-import XCTest
-
-class JSONLoader {
-  static func loadData(
-    for filename: JSONFileName,
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> Data? {
-    let testBundle = Bundle(for: JSONLoader.self)
-    guard let path = testBundle.path(forResource: filename.rawValue, ofType: "json") else {
-      XCTFail("Invalid path for json file: \(filename.rawValue).json not found", file: file, line: line)
-      return nil
-    }
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: []) else {
-      XCTFail("Invalid or malformed json in: \(filename.rawValue).json")
-      return nil
-    }
-    return data
-  }
-}
+import Foundation
 
 /**
- Used for loading specific json files into your test.
- Assumes that the raw value will match the name of a .json file in the test target
+ A representation of the server side codes associated with an error
+ Used for creating a `RemoteErrorConfigurationEntry`
  */
-enum JSONFileName: String {
-  case validRemoteErrorConfiguration
-  case validRemoteErrorConfigurationList
+struct RemoteErrorCodeGroup: Codable, Equatable {
+  typealias ErrorCode = Int
+
+  let code: ErrorCode
+  let subcodes: [ErrorCode]
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    code = try container.decode(ErrorCode.self, forKey: .code)
+
+    switch try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+    case nil:
+      subcodes = []
+
+    case var subcodesContainer?:
+      var subcodes: [ErrorCode] = []
+      while !subcodesContainer.isAtEnd {
+        switch try? subcodesContainer.decode(ErrorCode.self) {
+        case let code?:
+          subcodes.append(code)
+
+        case nil:
+          _ = try? subcodesContainer.decode(EmptyDecodable.self)
+        }
+      }
+      self.subcodes = subcodes
+    }
+  }
 }

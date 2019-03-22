@@ -19,8 +19,14 @@
 @testable import FacebookCore
 import XCTest
 
-class ErrorRecoveryStringTests: XCTestCase {
-  func testLocalization() {
-    validateLocalizedStrings(stringsEnum: ErrorRecoveryStrings.self)
+class ErrorStringsTests: XCTestCase {
+  func testCreatingErrorStringsWithEmptyMessage() {
+    XCTAssertNil(ErrorStrings(message: "", options: ["foo", "bar"]),
+                 "Should not create error strings with an empty message")
+  }
+
+  func testCreatingErrorStringsWithEmptyOptions() {
+    XCTAssertNil(ErrorStrings(message: "Foo", options: []),
+                 "Should not create error strings with empty options")
   }
 }
