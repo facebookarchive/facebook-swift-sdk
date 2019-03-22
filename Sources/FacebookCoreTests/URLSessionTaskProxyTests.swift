@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable function_parameter_count
+// swiftlint:disable type_body_length force_unwrapping
 
 @testable import FacebookCore
 import XCTest
@@ -48,36 +48,23 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testCreatingCreatesDataTask() {
-    let expectation = self.expectation(description: name)
-    let handler: SessionTaskCompletion = { _, _, _ in
-      expectation.fulfill()
-    }
-
-    let proxy = URLSessionTaskProxy(
-      for: request,
-      fromSession: fakeSession,
-      completionHandler: handler
+    let proxy = completedProxyTask(
+      expectation: expectation(description: name),
+      logger: fakeLogger,
+      session: fakeSession,
+      processInfo: fakeProcessInfo
     )
 
     XCTAssertNotNil(proxy.task,
                     "Proxy should create a data task from a session and request")
-    proxy.handler?(nil, nil, nil)
-
-    waitForExpectations(timeout: 1) { error in
-      guard error == nil else {
-        return XCTFail("Proxy should keep a reference to the handler it was created with")
-      }
-    }
   }
 
   func testCreatingGeneratesSerialNumber() {
-    let handler: SessionTaskCompletion = { _, _, _ in }
-
-    _ = URLSessionTaskProxy(
-      for: request,
-      fromSession: fakeSession,
+    completedProxyTask(
+      expectation: expectation(description: name),
       logger: fakeLogger,
-      completionHandler: handler
+      session: fakeSession,
+      processInfo: fakeProcessInfo
     )
 
     XCTAssertTrue(fakeLogger.generateSerialNumberWasCalled,
@@ -85,35 +72,18 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingErrorInvokesCompletion() {
-    let expectation = self.expectation(description: name)
-    let handler: SessionTaskCompletion = { _, _, _ in
-      expectation.fulfill()
-    }
-
-    let proxy = URLSessionTaskProxy(
-      for: request,
-      fromSession: fakeSession,
-      completionHandler: handler
+    completedProxyTask(
+      expectation: expectation(description: name),
+      error: FakeError(),
+      logger: fakeLogger,
+      session: fakeSession,
+      processInfo: fakeProcessInfo
     )
-
-    guard let task = proxy.task as? FakeSessionDataTask else {
-      return XCTFail("Proxy seeded with a fake session should store a fake session data task")
-    }
-
-    task.completionHandler(nil, nil, FakeError())
-
-    waitForExpectations(timeout: 1) { error in
-      guard error == nil else {
-        return XCTFail("Calling the handler with an error should invoke the error handling from the proxy")
-      }
-    }
   }
 
   func testHandlingErrorInvokesLogger() {
-    let expectation = self.expectation(description: name)
-
     assertLogging(
-      expectation: expectation,
+      expectation: expectation(description: name),
       error: FakeError(),
       logger: fakeLogger,
       session: fakeSession,
@@ -125,11 +95,10 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingUnspecifiedErrorWithVersionBelow9() {
-    let expectation = self.expectation(description: name)
     fakeProcessInfo = FakeProcessInfo(stubbedOperatingSystemCheckResult: false)
 
     assertLogging(
-      expectation: expectation,
+      expectation: expectation(description: name),
       error: FakeError(),
       logger: fakeLogger,
       session: fakeSession,
@@ -141,11 +110,10 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingErrorForFailedConnectionsWithVersionBelow9() {
-    let expectation = self.expectation(description: name)
     fakeProcessInfo = FakeProcessInfo(stubbedOperatingSystemCheckResult: false)
 
     assertLogging(
-      expectation: expectation,
+      expectation: expectation(description: name),
       error: SampleNSError.urlDomainSecureConnectionFailed,
       logger: fakeLogger,
       session: fakeSession,
@@ -157,10 +125,8 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingErrorForFailedConnectionsWithVersionAtLeast9() {
-    let expectation = self.expectation(description: name)
-
     assertLogging(
-      expectation: expectation,
+      expectation: expectation(description: name),
       error: SampleNSError.urlDomainSecureConnectionFailed,
       logger: fakeLogger,
       session: fakeSession,
@@ -216,6 +182,139 @@ class URLSessionTaskProxyTests: XCTestCase {
                  "Proxy should delete its handle when it cancels the actual task")
   }
 
+  func testHandlingSuccessForMimetypeJavascriptWithData() {
+    let response = URLResponse(
+      url: SampleURL.valid,
+      mimeType: MimeType.textJavascript.rawValue,
+      expectedContentLength: 0,
+      textEncodingName: nil
+    )
+    let data = "Data".data(using: .utf8)!
+
+    completedProxyTask(
+      expectation: expectation(description: name),
+      data: data,
+      response: response,
+      error: nil,
+      logger: fakeLogger,
+      session: fakeSession,
+      processInfo: fakeProcessInfo
+    )
+    let expectedMessageSubstrings = [
+      "URLSessionTaskProxy \(fakeLogger.serialNumber)",
+      "Response Size: \(data.count / 1024) kB",
+      "MIME type: \(MimeType.textJavascript.rawValue)",
+      "Response:\n"
+    ]
+    guard let message = fakeLogger.capturedMessages.first else {
+      return XCTFail("There should be a log entry for a handled response")
+    }
+
+    expectedMessageSubstrings.forEach { substring in
+      XCTAssertTrue(message.contains(substring),
+                    "A log message: \"\(message)\" for a response with a mimetype of text/javascript and data should include the info: \(substring)")
+    }
+  }
+
+  func testHandlingSuccessForMimetypeJavascriptWithoutData() {
+    let response = URLResponse(
+      url: SampleURL.valid,
+      mimeType: MimeType.textJavascript.rawValue,
+      expectedContentLength: 0,
+      textEncodingName: nil
+    )
+
+    completedProxyTask(
+      expectation: expectation(description: name),
+      response: response,
+      error: nil,
+      logger: fakeLogger,
+      session: fakeSession,
+      processInfo: fakeProcessInfo
+    )
+    let expectedMessageSubstrings = [
+      "URLSessionTaskProxy \(fakeLogger.serialNumber)",
+      "Response Size: 0 kB",
+      "MIME type: \(MimeType.textJavascript.rawValue)"
+    ]
+    guard let message = fakeLogger.capturedMessages.first else {
+      return XCTFail("There should be a log entry for a handled response")
+    }
+
+    expectedMessageSubstrings.forEach { substring in
+      XCTAssertTrue(message.contains(substring),
+                    "A log message: \"\(message)\" for a response with a mimetype of text/javascript and data should include the info: \(substring)")
+    }
+    XCTAssertFalse(message.contains("Response:\n"),
+                   "A log message: \"\(message)\" for a response with a mimetype of text/javascript and no data should not try and log the response data")
+  }
+
+  func testHandlingSuccessForMimetypeUndefinedWithData() {
+    let response = URLResponse(
+      url: SampleURL.valid,
+      mimeType: nil,
+      expectedContentLength: 0,
+      textEncodingName: nil
+    )
+    let data = "Data".data(using: .utf8)!
+
+    completedProxyTask(
+      expectation: expectation(description: name),
+      data: data,
+      response: response,
+      error: nil,
+      logger: fakeLogger,
+      session: fakeSession,
+      processInfo: fakeProcessInfo
+    )
+    let expectedMessageSubstrings = [
+      "URLSessionTaskProxy \(fakeLogger.serialNumber)",
+      "Response Size: 0 kB"
+    ]
+    guard let message = fakeLogger.capturedMessages.first else {
+      return XCTFail("There should be a log entry for a handled response")
+    }
+
+    expectedMessageSubstrings.forEach { substring in
+      XCTAssertTrue(message.contains(substring),
+                    "A log message: \"\(message)\" for a response with a mimetype of text/javascript and data should include the info: \(substring)")
+    }
+    XCTAssertFalse(message.contains("Response:\n"),
+                   "A log message: \"\(message)\" for a response with a mimetype of text/javascript and no data should not try and log the response data")
+  }
+
+  func testHandlingSuccessForMimetypeUndefinedWithoutData() {
+    let response = URLResponse(
+      url: SampleURL.valid,
+      mimeType: nil,
+      expectedContentLength: 0,
+      textEncodingName: nil
+    )
+
+    completedProxyTask(
+      expectation: expectation(description: name),
+      response: response,
+      error: nil,
+      logger: fakeLogger,
+      session: fakeSession,
+      processInfo: fakeProcessInfo
+    )
+    let expectedMessageSubstrings = [
+      "URLSessionTaskProxy \(fakeLogger.serialNumber)",
+      "Response Size: 0 kB"
+    ]
+    guard let message = fakeLogger.capturedMessages.first else {
+      return XCTFail("There should be a log entry for a handled response")
+    }
+
+    expectedMessageSubstrings.forEach { substring in
+      XCTAssertTrue(message.contains(substring),
+                    "A log message: \"\(message)\" for a response with a mimetype of text/javascript and data should include the info: \(substring)")
+    }
+    XCTAssertFalse(message.contains("Response:\n"),
+                   "A log message: \"\(message)\" for a response with a mimetype of text/javascript and no data should not try and log the response data")
+  }
+
   func testSmokeNonStubbedRequest() {
     // Not sure about the wisdom of this type of test here but it seems like a good idea
     // to make sure that the production code running against dependencies does not crash
@@ -231,42 +330,35 @@ class URLSessionTaskProxyTests: XCTestCase {
     proxy.cancel()
   }
 
+  @discardableResult
   func assertLogging(
     expectation: XCTestExpectation,
-    error: Error,
+    data: Data? = nil,
+    response: URLResponse? = nil,
+    error: Error? = nil,
     logger: FakeLogger,
     session: FakeSession,
     processInfo: FakeProcessInfo,
     expectedMessages: [String],
     file: StaticString = #file,
     line: UInt = #line
-    ) {
-    let handler: SessionTaskCompletion = { _, _, _ in
-      expectation.fulfill()
-    }
-    let proxy = URLSessionTaskProxy(
-      for: request,
-      fromSession: session,
+    ) -> URLSessionTaskProxy {
+    // Complete the proxy task with the expected values
+    let proxy = completedProxyTask(
+      expectation: expectation,
+      data: data,
+      response: response,
+      error: error,
       logger: logger,
-      processInfo: fakeProcessInfo,
-      completionHandler: handler
+      session: session,
+      processInfo: processInfo,
+      file: file,
+      line: line
     )
 
-    guard let task = proxy.task as? FakeSessionDataTask else {
-      return XCTFail("Proxy seeded with a fake session should store a fake session data task",
-                     file: file, line: line)
-    }
-
-    task.completionHandler(nil, nil, error)
-
-    waitForExpectations(timeout: 1) { error in
-      guard error == nil else {
-        return XCTFail("Calling the handler with an error should invoke the error handling from the proxy", file: file, line: line)
-      }
-    }
-
     guard fakeLogger.capturedMessages.count == expectedMessages.count else {
-        return XCTFail("Should log the expected number of messages", file: file, line: line)
+      XCTFail("Should log the expected number of messages", file: file, line: line)
+      return proxy
     }
 
     expectedMessages.enumerated().forEach { pair in
@@ -283,5 +375,46 @@ class URLSessionTaskProxyTests: XCTestCase {
       "A proxy task should not store a reference to a completion handler after calling it",
       file: file, line: line
     )
+
+    return proxy
+  }
+
+  @discardableResult
+  func completedProxyTask(
+    expectation: XCTestExpectation,
+    data: Data? = nil,
+    response: URLResponse? = nil,
+    error: Error? = nil,
+    logger: FakeLogger,
+    session: FakeSession,
+    processInfo: FakeProcessInfo,
+    file: StaticString = #file,
+    line: UInt = #line
+    ) -> URLSessionTaskProxy {
+    let handler: SessionTaskCompletion = { _, _, _ in
+      expectation.fulfill()
+    }
+    let proxy = URLSessionTaskProxy(
+      for: request,
+      fromSession: session,
+      logger: logger,
+      processInfo: fakeProcessInfo,
+      completionHandler: handler
+    )
+
+    guard let task = proxy.task as? FakeSessionDataTask else {
+      XCTFail("Proxy seeded with a fake session should store a fake session data task",
+              file: file, line: line)
+      return proxy
+    }
+
+    task.completionHandler(data, response, error)
+
+    waitForExpectations(timeout: 1) { error in
+      guard error == nil else {
+        return XCTFail("Calling the handler with an error should invoke the error handling from the proxy", file: file, line: line)
+      }
+    }
+    return proxy
   }
 }

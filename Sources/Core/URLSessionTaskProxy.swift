@@ -29,13 +29,18 @@ class URLSessionTaskProxy {
   private let request: URLRequest
   var handler: SessionTaskCompletion?
   private(set) lazy var task: SessionDataTask = {
-    session.dataTask(with: request) { [weak self] _, _, potentialError in
-      switch potentialError {
-      case let error?:
+    session.dataTask(with: request) { [weak self] potentialData, potentialResponse, potentialError in
+      switch (potentialError, potentialResponse) {
+      case let (error?, _):
         self?.taskDidComplete(with: error)
 
-      case nil:
-        break
+      case let (_, response?):
+        self?.taskDidComplete(with: potentialData, response: response)
+
+      case (nil, nil):
+        // This seems off but it's better to keep the proxy as just a proxy and not use it for
+        // validating data integrity
+        self?.invokeHandler(potentialData, potentialResponse, potentialError)
       }
     }
   }()
@@ -56,14 +61,39 @@ class URLSessionTaskProxy {
     self.processInfo = processInfo
   }
 
+  func invokeHandler(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+    DispatchQueue.main.async { [weak self] in
+      self?.handler?(data, response, error)
+      self?.handler = nil
+    }
+  }
+
+  func taskDidComplete(with data: Data?, response: URLResponse) {
+    var substrings: [String] = [
+      "URLSessionTaskProxy \(loggingSerialNumber):",
+      "Duration: \(TimeUtility.currentTimeInMilliseconds - requestStartTime) msec",
+      "Response Size: \((data?.count ?? 0) / 1024) kB"
+    ]
+
+    if let rawMimetype = response.mimeType,
+      let mimeType = MimeType(rawValue: rawMimetype) {
+      substrings.append("MIME type: \(mimeType.rawValue)")
+
+      if let responseData = data,
+        let displayableData = String(data: responseData, encoding: .utf8) {
+        substrings.append("Response:\n\(displayableData)\n\n")
+      }
+    }
+    let logEntry = substrings.joined(separator: "\n  ")
+
+    logger.log(message: logEntry)
+    invokeHandler(data, response, nil)
+  }
+
   func taskDidComplete(with error: Error) {
     logTransportSecurityErrorIfNeeded(for: error)
     log(error: error)
-
-    DispatchQueue.main.async { [weak self] in
-      self?.handler?(nil, nil, error)
-      self?.handler = nil
-    }
+    invokeHandler(nil, nil, error)
   }
 
   func start() {
@@ -95,4 +125,9 @@ class URLSessionTaskProxy {
         logger.log(message: DeveloperErrorStrings.appTransportSecurity.localized)
     }
   }
+}
+
+// TODO: move
+enum MimeType: String {
+  case textJavascript = "text/javascript"
 }
