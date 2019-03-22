@@ -16,34 +16,32 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable convenience_type
+import Foundation
 
-import XCTest
-
-class JSONLoader {
-  static func loadData(
-    for filename: JSONFileName,
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> Data? {
-    let testBundle = Bundle(for: JSONLoader.self)
-    guard let path = testBundle.path(forResource: filename.rawValue, ofType: "json") else {
-      XCTFail("Invalid path for json file: \(filename.rawValue).json not found", file: file, line: line)
-      return nil
-    }
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: []) else {
-      XCTFail("Invalid or malformed json in: \(filename.rawValue).json")
-      return nil
-    }
-    return data
+/// A way of storing errors received from the server so that they are retrievable by
+/// error codes
+struct ErrorConfiguration {
+  /**
+   A way to retrieve configurations that are keyed under a major code representing the error
+   domain, and a minor code that (if present) represents specificity within that domain.
+   */
+  struct Key: Hashable {
+    let majorCode: Int
+    let minorCode: Int?
   }
-}
 
-/**
- Used for loading specific json files into your test.
- Assumes that the raw value will match the name of a .json file in the test target
- */
-enum JSONFileName: String {
-  case validRemoteErrorConfiguration
-  case validRemoteErrorConfigurationList
+  private var configurationDictionary = [Key: ErrorConfigurationEntry]()
+
+  init(configurationDictionary: [Key: ErrorConfigurationEntry]) {
+    self.configurationDictionary = configurationDictionary
+  }
+
+  /**
+   Attempts to retrieve an error configuration entry based on a key of major and minor codes
+
+   - Parameter key: A major and possible minor code to look up an error configuration entry
+   */
+  func configuration(for key: Key) -> ErrorConfigurationEntry? {
+    return configurationDictionary[key]
+  }
 }

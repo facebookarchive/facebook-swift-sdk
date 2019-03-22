@@ -16,14 +16,20 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable unused_closure_parameter
+
 @testable import FacebookCore
 import XCTest
 
 class ErrorCategoryTests: XCTestCase {
   func testAllCases() {
-    let expectedCases: [GraphRequestErrorCategory] = [.login, .transient, .other]
+    let expectedCases: [GraphRequestErrorCategory] = [.recoverable, .transient, .other]
 
-    XCTAssertEqual(GraphRequestErrorCategory.allCases, expectedCases,
-                   "There should be easy access to all the cases of an error category")
+    expectedCases.forEach { `case` in
+      switch `case` {
+      case .recoverable, .transient, .other:
+        break
+      }
+    }
   }
 }

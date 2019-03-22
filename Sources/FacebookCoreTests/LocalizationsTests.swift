@@ -37,4 +37,9 @@ class LocalizationsTests: XCTestCase {
     XCTAssertEqual(SampleLocalizableStrings.foo.localized(bundle: testBundle), "LocalizedFoo",
                    "It should be possible to specify a bundle for localizations")
   }
+
+  func testLocalizedStringNoMatch() {
+    XCTAssertEqual("foo".localized, "foo",
+                   "Every string should have the ability to try and provide a localized version of itself")
+  }
 }
