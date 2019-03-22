@@ -87,11 +87,11 @@ class URLSessionTaskProxy {
 
   private func logTransportSecurityErrorIfNeeded(for error: Error) {
     let nsError = error as NSError
-    let iOS9Version = OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)
+    let version = OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)
 
     if nsError.domain == NSURLErrorDomain,
       nsError.code == NSURLErrorSecureConnectionFailed,
-      processInfo.isOperatingSystemAtLeast(iOS9Version) {
+      processInfo.isOperatingSystemAtLeast(version) {
         logger.log(message: DeveloperErrorStrings.appTransportSecurity.localized)
     }
   }
