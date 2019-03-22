@@ -16,34 +16,35 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable convenience_type
+import Foundation
 
-import XCTest
+/// A representation of a server side list of errors
+/// Used for creating an `ErrorConfiguration`
+struct RemoteErrorConfigurationEntryList: Decodable {
+  let configurations: [RemoteErrorConfigurationEntry]
 
-class JSONLoader {
-  static func loadData(
-    for filename: JSONFileName,
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> Data? {
-    let testBundle = Bundle(for: JSONLoader.self)
-    guard let path = testBundle.path(forResource: filename.rawValue, ofType: "json") else {
-      XCTFail("Invalid path for json file: \(filename.rawValue).json not found", file: file, line: line)
-      return nil
+  init(from decoder: Decoder) throws {
+    var container = try decoder.unkeyedContainer()
+    var configurations: [RemoteErrorConfigurationEntry] = []
+
+    while !container.isAtEnd {
+      switch try? container.decode(RemoteErrorConfigurationEntry.self) {
+      case let item?:
+        configurations.append(item)
+
+      case nil:
+        _ = try? container.decode(EmptyDecodable.self)
+      }
     }
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: []) else {
-      XCTFail("Invalid or malformed json in: \(filename.rawValue).json")
-      return nil
+
+    guard !configurations.isEmpty else {
+      throw DecodingError.emptyItems
     }
-    return data
+
+    self.configurations = configurations
   }
-}
 
-/**
- Used for loading specific json files into your test.
- Assumes that the raw value will match the name of a .json file in the test target
- */
-enum JSONFileName: String {
-  case validRemoteErrorConfiguration
-  case validRemoteErrorConfigurationList
+  enum DecodingError: FBError {
+    case emptyItems
+  }
 }

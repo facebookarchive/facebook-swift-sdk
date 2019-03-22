@@ -18,8 +18,23 @@
 
 import Foundation
 
-enum GraphRequestErrorCategory: Int, CaseIterable, Codable {
-  case login
+enum GraphRequestErrorCategory {
+  /**
+   Indicates the error can be recovered (such as requiring a login).
+   A recoveryAttempter will be provided with the error instance that can take UI action.
+   */
+  case recoverable
+
+  /**
+   Indicates the error is temporary (such as server throttling).
+   While a recoveryAttempter will be provided with the error instance,
+   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
+   */
   case transient
+
+  /**
+   The default error category that is not known to be recoverable.
+   Check `LocalizedErrorDescription` for a user facing message.
+   */
   case other
 }
