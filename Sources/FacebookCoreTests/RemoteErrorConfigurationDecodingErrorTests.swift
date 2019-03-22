@@ -23,13 +23,12 @@ import XCTest
 
 class RemoteErrorConfigurationDecodingErrorTests: XCTestCase {
   func testKnownValues() {
-    let expectedCases: [RemoteErrorConfigurationDecodingError] = [
-      .emptyName,
-      .emptyItems,
-      .emptyRecoveryMessage,
-      .emptyRecoveryOptions
+    let expectedCases: [RemoteErrorConfigurationEntry.DecodingError] = [
+      .invalidContainer,
+      .missingRecoveryMessage,
+      .missingRecoveryOptions
     ]
-    XCTAssertEqual(RemoteErrorConfigurationDecodingError.allCases, expectedCases,
+    XCTAssertEqual(RemoteErrorConfigurationEntry.DecodingError.allCases, expectedCases,
                    "There should be easy access to all the cases of a remote error configuration decoding error")
   }
 }

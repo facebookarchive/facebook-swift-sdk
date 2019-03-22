@@ -20,9 +20,11 @@ import Foundation
 
 /// A representation of a server side error
 /// Used for creating a `RemoteErrorRecoveryConfigurationList`
-struct RemoteErrorRecoveryConfiguration: Codable {
-  let name: String
-  let items: [RemoteErrorRecoveryCodes]
+struct RemoteErrorConfigurationEntry: Decodable {
+  typealias ErrorCode = Int
+
+  let name: Name?
+  let items: [ErrorCodeGroup]
   let recoveryMessage: String
   let recoveryOptions: [String]
 
@@ -30,14 +32,9 @@ struct RemoteErrorRecoveryConfiguration: Codable {
     let container = try decoder.container(keyedBy: Keys.self)
     var itemsContainer = try container.nestedUnkeyedContainer(forKey: .items)
 
-    var items = [RemoteErrorRecoveryCodes]()
+    var items = [ErrorCodeGroup]()
 
-    let name = try container.decode(String.self, forKey: .name)
-    guard !name.isEmpty else {
-      throw RemoteErrorConfigurationDecodingError.emptyName
-    }
-
-    self.name = name
+    name = try? container.decode(Name.self, forKey: .name)
 
     while !itemsContainer.isAtEnd {
       switch try? itemsContainer.decode(RemoteErrorRecoveryCodes.self) {
@@ -50,21 +47,21 @@ struct RemoteErrorRecoveryConfiguration: Codable {
     }
 
     guard !items.isEmpty else {
-      throw RemoteErrorConfigurationDecodingError.emptyItems
+      throw DecodingError.emptyItems
     }
 
     self.items = items
 
     let message = try container.decode(String.self, forKey: Keys.recoveryMessage)
     guard !message.isEmpty else {
-      throw RemoteErrorConfigurationDecodingError.emptyRecoveryMessage
+      throw DecodingError.emptyRecoveryMessage
     }
 
     self.recoveryMessage = message
 
     let options = try container.decode([String].self, forKey: Keys.recoveryOptions)
     guard !options.isEmpty else {
-      throw RemoteErrorConfigurationDecodingError.emptyRecoveryOptions
+      throw DecodingError.emptyRecoveryOptions
     }
 
     self.recoveryOptions = options
@@ -75,5 +72,64 @@ struct RemoteErrorRecoveryConfiguration: Codable {
     case items
     case recoveryMessage = "recovery_message"
     case recoveryOptions = "recovery_options"
+  }
+
+  enum Name: String, Decodable {
+    case recoverable
+    case transient
+    case other
+  }
+
+  struct ErrorStrings: Codable {
+    let recoveryMessage: String
+    let recoveryOptions: [String]
+
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+
+      recoveryMessage = try container.decode(String.self, forKey: .recoveryMessage)
+      recoveryOptions = try container.decode([String].self, forKey: .recoveryOptions)
+    }
+  }
+
+  /// A representation of the server side codes associated with an error
+  /// Used for creating a `RemoteErrorConfigurationEntry`
+  struct ErrorCodeGroup: Codable, Equatable {
+    let code: ErrorCode
+    let subcodes: [ErrorCode]
+
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      code = try container.decode(ErrorCode.self, forKey: .code)
+
+      if var subcodesContainer = try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+        var subcodes: [ErrorCode] = []
+        while !subcodesContainer.isAtEnd {
+          if let code = try? subcodesContainer.decode(ErrorCode.self) {
+            subcodes.append(code)
+          } else {
+            _ = try? subcodesContainer.decode(EmptyDecodable.self)
+          }
+        }
+        self.subcodes = subcodes
+      } else {
+        self.subcodes = []
+      }
+    }
+  }
+
+  enum DecodingError: FBError, CaseIterable {
+    /// Indicates an empty string was received for the name key
+    case emptyName
+
+    /// Indicates that either an empty array was received for the items key
+    /// or the entries under the items key were not decodable
+    case emptyItems
+
+    /// Indicates an empty string was received for the recovery message key
+    case emptyRecoveryMessage
+
+    /// Indicates an empty list was received for the recovery options key
+    case emptyRecoveryOptions
   }
 }
