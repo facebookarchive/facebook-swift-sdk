@@ -18,8 +18,6 @@
 
 import Foundation
 
-// TODO: Move canonical Session to its own file once it has more definition
-
 protocol Session {
   func dataTask(
     with request: URLRequest,
