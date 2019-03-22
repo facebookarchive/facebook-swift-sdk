@@ -21,7 +21,7 @@ import XCTest
 
 class GraphRequestMetadataTests: XCTestCase {
   func testCreatingRequestMetadata() {
-    let request = GraphRequest(graphPath: name)
+    let request = GraphRequest(graphPath: GraphPath(stringLiteral: name))
     let metadata = GraphRequestMetadata(
       request: request,
       batchParameters: [String: AnyHashable]()
@@ -29,7 +29,7 @@ class GraphRequestMetadataTests: XCTestCase {
 
     // Using a unique value for graph path here to be reasonably sure that it stored the correct
     // request
-    XCTAssertEqual(metadata.request.graphPath, name,
+    XCTAssertEqual(metadata.request.graphPath.description, name,
                    "A request metadata object should store the exact request it was created with")
     XCTAssertEqual(metadata.batchParameters, [:],
                    "A request metadata object should store the exact batch parameters it was created with")
@@ -38,7 +38,7 @@ class GraphRequestMetadataTests: XCTestCase {
   func testInvokingCompletionHandler() {
     let expectation = self.expectation(description: name)
     let expectedResults = ["Foo": "Bar"]
-    let request = GraphRequest(graphPath: name)
+    let request = GraphRequest(graphPath: .other(name))
     let connection = FakeGraphRequestConnection()
 
     let metadata = GraphRequestMetadata(
