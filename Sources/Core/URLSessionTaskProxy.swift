@@ -78,7 +78,9 @@ class URLSessionTaskProxy {
   private func log(error: Error) {
     let nsError = error as NSError
     let errorString = """
-    URLSessionTaskProxy \(loggingSerialNumber):\nError: \(nsError.localizedDescription)\n\(nsError.userInfo)
+    URLSessionTaskProxy \(loggingSerialNumber):
+    Error: \(nsError.localizedDescription)
+    \(nsError.userInfo)
     """
     logger.log(message: errorString)
   }
