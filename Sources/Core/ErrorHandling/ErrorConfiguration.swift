@@ -21,6 +21,7 @@ import Foundation
 /// A way of storing errors received from the server so that they are retrievable by
 /// error codes
 struct ErrorConfiguration {
+  typealias ConfigurationDictionary = [Key: ErrorConfigurationEntry]
   /**
    A way to retrieve configurations that are keyed under a major code representing the error
    domain, and a minor code that (if present) represents specificity within that domain.
@@ -30,10 +31,16 @@ struct ErrorConfiguration {
     let minorCode: Int?
   }
 
-  private var configurationDictionary = [Key: ErrorConfigurationEntry]()
+  let majorRecoverableCodes: [Int] = [102, 190]
+  let majorTransientCodes: [Int] = [1, 2, 4, 9, 17, 341]
+  private var configurationDictionary: ConfigurationDictionary = [:]
 
   init(configurationDictionary: [Key: ErrorConfigurationEntry]) {
-    self.configurationDictionary = configurationDictionary
+    self.configurationDictionary = defaultConfigurationDictionary
+
+    configurationDictionary.forEach { entry in
+      self.configurationDictionary.updateValue(entry.value, forKey: entry.key)
+    }
   }
 
   /**
@@ -44,4 +51,35 @@ struct ErrorConfiguration {
   func configuration(for key: Key) -> ErrorConfigurationEntry? {
     return configurationDictionary[key]
   }
+
+  private lazy var defaultConfigurationDictionary: ConfigurationDictionary = {
+    guard let recoverableStrings = ErrorStrings(
+      message: DefaultErrorStrings.loginRecoverySuggestion.localized,
+      options: [DefaultErrorStrings.ok.localized, DefaultErrorStrings.cancel.localized]
+      ),
+      let transientStrings = ErrorStrings(
+        message: DefaultErrorStrings.transientSuggestion.localized,
+        options: [DefaultErrorStrings.ok.localized]
+      )
+      else {
+        return [:]
+    }
+    var dictionary = ConfigurationDictionary()
+    let recoverableEntry = ErrorConfigurationEntry(
+      strings: recoverableStrings,
+      category: .recoverable
+    )
+    let transientEntry = ErrorConfigurationEntry(
+      strings: transientStrings,
+      category: .transient
+    )
+
+    majorRecoverableCodes.forEach { key in
+      dictionary.updateValue(recoverableEntry, forKey: Key(majorCode: key, minorCode: nil))
+    }
+    majorTransientCodes.forEach { key in
+      dictionary.updateValue(transientEntry, forKey: Key(majorCode: key, minorCode: nil))
+    }
+    return dictionary
+  }()
 }
