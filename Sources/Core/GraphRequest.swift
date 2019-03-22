@@ -19,8 +19,6 @@
 import UIKit
 
 // TODO: Resolve this
-typealias GraphPath = String
-// TODO: Resolve this
 typealias GraphRequestDataAttachment = Data
 
 struct GraphRequest {

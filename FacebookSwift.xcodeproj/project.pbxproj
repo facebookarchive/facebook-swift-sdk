@@ -82,6 +82,8 @@
 		F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
+		F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE42712245846A00E3B99C /* GraphPathTests.swift */; };
+		F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE4273224584F200E3B99C /* GraphPath.swift */; };
 		F4B340012240779D00912F0F /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B340002240779D00912F0F /* JSONLoader.swift */; };
 		F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8832B22305791000971C9 /* CoreErrorTests.swift */; };
 		F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8832C22305791000971C9 /* FBErrorTests.swift */; };
@@ -230,6 +232,8 @@
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
 		F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = FacebookCoreTests.xcconfig; sourceTree = "<group>"; };
+		F4AE42712245846A00E3B99C /* GraphPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathTests.swift; sourceTree = "<group>"; };
+		F4AE4273224584F200E3B99C /* GraphPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPath.swift; sourceTree = "<group>"; };
 		F4B340002240779D00912F0F /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		F4B8832B22305791000971C9 /* CoreErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreErrorTests.swift; sourceTree = "<group>"; };
 		F4B8832C22305791000971C9 /* FBErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBErrorTests.swift; sourceTree = "<group>"; };
@@ -364,6 +368,7 @@
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
+				F4AE4273224584F200E3B99C /* GraphPath.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 				F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */,
 				F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */,
 				F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */,
+				F4AE42712245846A00E3B99C /* GraphPathTests.swift */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
@@ -863,6 +869,7 @@
 				F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */,
 				F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */,
 				F4225DE5223F4F5100F4DCFE /* ErrorStrings.swift in Sources */,
+				F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */,
 				F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */,
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
@@ -906,6 +913,7 @@
 				F44DB6C1222B11620083506E /* FakeGraphRequestConnection.swift in Sources */,
 				F4C32D99223D990A00FF1F86 /* SampleRawRemoteErrorConfigurationList.swift in Sources */,
 				F4C32DA4223DA13E00FF1F86 /* RemoteErrorCodeGroup+Extensions.swift in Sources */,
+				F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */,
 				F4C32DA5223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift in Sources */,
 				F407393D2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift in Sources */,
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
