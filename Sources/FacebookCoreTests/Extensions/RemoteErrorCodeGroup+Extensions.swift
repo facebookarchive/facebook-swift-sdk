@@ -16,11 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
 
-enum ErrorRecoveryStrings: String, CaseIterable, Localizable {
-  case ok = "ErrorRecovery.OK"
-  case cancel = "ErrorRecovery.Cancel"
-  case transientSuggestion = "ErrorRecovery.Transient.Suggestion"
-  case loginRecoverySuggestion = "ErrorRecovery.Login.Suggestion"
+// TODO: Consider adding initializer to internal. Really do not want to do this but may
+// be the only way to silence this error.
+// See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
+extension RemoteErrorCodeGroup {
+  init(code: Int, subcodes: [Int] = []) {
+    self.code = code
+    self.subcodes = subcodes
+  }
 }
