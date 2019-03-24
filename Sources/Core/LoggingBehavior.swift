@@ -18,7 +18,7 @@
 
 import Foundation
 
-enum LoggingBehavior: CaseIterable {
+enum LoggingBehavior: String, CaseIterable {
   /// Include access token in logging
   case accessTokens
 
@@ -35,7 +35,7 @@ enum LoggingBehavior: CaseIterable {
   case cacheErrors
 
   /// Log errors from SDK UI controls
-  case UIControlErrors
+  case uiControlErrors
 
   /**
    Log debug warnings from API response,

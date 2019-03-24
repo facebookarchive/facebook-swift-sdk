@@ -17,13 +17,26 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import XCTest
 
-class FakeLogger: Logging {
-  var capturedBehavior: LoggingBehavior?
-  var capturedMessage: String?
+class SettingsTests: XCTestCase {
+  func testBundleDependency() {
+    XCTAssertEqual(Settings().bundle, Bundle.main,
+                   "Settings' bundle should default to the main bundle")
+  }
 
-  func log(for behavior: LoggingBehavior, message: String) {
-    capturedBehavior = behavior
-    capturedMessage = message
+  func testDefaultLoggingBehavior() {
+    XCTAssertEqual(Settings().loggingBehaviors, [.developerErrors],
+                   "Settings should have the default logging of developer errors")
+  }
+
+  func testUsingValuesFromPlist() {
+    let testBundle = Bundle(for: SettingsTests.self)
+
+    XCTAssertEqual(Settings(bundle: testBundle).loggingBehaviors, [.informational])
+  }
+
+  func testEmptyArrayForPlist() {
+    // TODO: Inject a fake bundle to be able to test the default for an empty list of behaviors
   }
 }

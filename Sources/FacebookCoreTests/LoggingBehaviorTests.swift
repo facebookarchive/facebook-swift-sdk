@@ -25,7 +25,7 @@ class LoggingBehaviorTests: XCTestCase {
   func testAllCases() {
     LoggingBehavior.allCases.forEach { `case` in
       switch `case` {
-      case .accessTokens, .appEvents, .cacheErrors, .developerErrors, .graphAPIDebugInfo, .graphAPIDebugWarning, .informational, .networkRequests, .performanceCharacteristics, .UIControlErrors:
+      case .accessTokens, .appEvents, .cacheErrors, .developerErrors, .graphAPIDebugInfo, .graphAPIDebugWarning, .informational, .networkRequests, .performanceCharacteristics, .uiControlErrors:
         break
       }
     }
