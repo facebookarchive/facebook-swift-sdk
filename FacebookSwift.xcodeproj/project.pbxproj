@@ -354,6 +354,7 @@
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
 				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
+				F4AE4273224584F200E3B99C /* GraphPath.swift */,
 				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
 				F432E9F722370B32007D3A34 /* GraphRequestConnecting.swift */,
 				F44DB6B6222B07050083506E /* GraphRequestConnection.swift */,
@@ -368,7 +369,6 @@
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
-				F4AE4273224584F200E3B99C /* GraphPath.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -516,6 +516,7 @@
 				F4B8832C22305791000971C9 /* FBErrorTests.swift */,
 				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
+				F4AE42712245846A00E3B99C /* GraphPathTests.swift */,
 				F480D90E2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift */,
 				F480D90622347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift */,
 				F480D9122236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift */,
@@ -535,7 +536,6 @@
 				F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */,
 				F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */,
 				F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */,
-				F4AE42712245846A00E3B99C /* GraphPathTests.swift */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
