@@ -16,25 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-struct GraphRequestConnectionDelegateMethodSpy {
-  let callCount: Int
-  let capturedConnection: GraphRequestConnection?
-}
-
-class FakeGraphRequestConnectionDelegate: GraphRequestConnectionDelegate {
-  var requestConnectionWillBeginLoading = GraphRequestConnectionDelegateMethodSpy(
-    callCount: 0,
-    capturedConnection: nil
-  )
-
-  func requestConnectionWillBeginLoading(_ connection: GraphRequestConnection) {
-    var callCount = requestConnectionWillBeginLoading.callCount
-    callCount += 1
-    requestConnectionWillBeginLoading = GraphRequestConnectionDelegateMethodSpy(
-      callCount: callCount,
-      capturedConnection: connection
-    )
-  }
-}
+// TODO: Implement the delegate callbacks
+extension GraphRequestConnection: URLSessionDelegate {}

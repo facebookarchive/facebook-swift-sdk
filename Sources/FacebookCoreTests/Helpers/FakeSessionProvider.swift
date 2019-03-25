@@ -17,16 +17,24 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import Foundation
 
 class FakeSessionProvider: SessionProviding {
   private let fakeSession: Session
   var sessionCallCount: Int = 0
+  var capturedOperationQueue: OperationQueue?
+  weak var capturedDelegate: URLSessionDelegate?
 
   init(fakeSession: FakeSession) {
     self.fakeSession = fakeSession
   }
 
-  func session() -> Session {
+  func session(
+    delegate: URLSessionDelegate? = nil,
+    operationQueue: OperationQueue
+    ) -> Session {
+    capturedDelegate = delegate
+    capturedOperationQueue = operationQueue
     sessionCallCount += 1
     return fakeSession
   }
