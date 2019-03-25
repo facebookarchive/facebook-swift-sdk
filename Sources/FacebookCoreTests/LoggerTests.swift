@@ -26,32 +26,23 @@ class LoggerTests: XCTestCase {
                   "A logger should have the correct concrete implementation to check settings")
   }
 
-  func testDefaultLoggingBehavior() {
-    XCTAssertEqual(Logger().loggingBehavior, .networkRequests,
-                   "A logger should have the correct default behavior")
-  }
-
-  func testCreatingWithValidLoggingBehavior() {
+  func testLoggingValidBehavior() {
     let fakeSettings = FakeSettings(loggingBehaviors: [.accessTokens])
 
-    let logger = Logger(
-      settings: fakeSettings,
-      loggingBehavior: .accessTokens
-    )
+    let logger = Logger(settings: fakeSettings)
 
-    XCTAssertTrue(logger.isActive,
-                  "Logger should be considered active if it is created with a valid logging behavior")
+    XCTAssertTrue(logger.isAbleToLog(.accessTokens),
+                  "Logger should be able to log a behavior if it is present in the settings")
+    logger.log(for: .accessTokens, message: "This should log")
   }
 
   func testCreatingWithInvalidLoggingBehavior() {
     let fakeSettings = FakeSettings(loggingBehaviors: [.accessTokens])
 
-    let logger = Logger(
-      settings: fakeSettings,
-      loggingBehavior: .networkRequests
-    )
+    let logger = Logger(settings: fakeSettings)
 
-    XCTAssertFalse(logger.isActive,
-                   "Logger should not be considered active if it is created with an invalid logging behavior")
+    XCTAssertFalse(logger.isAbleToLog(.developerErrors),
+                   "Logger should be not able to log a behavior if it is not present in the settings")
+    logger.log(for: .developerErrors, message: "This should not log")
   }
 }
