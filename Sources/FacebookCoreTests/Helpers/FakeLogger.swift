@@ -30,7 +30,7 @@ class FakeLogger: Logging {
     return serialNumber
   }
 
-  func log(message: String) {
+  func log(_ message: String) {
     capturedMessages.append(message)
   }
 

@@ -30,7 +30,7 @@ struct Logger: Logging {
     return startingSerialNumber
   }
 
-  func log(message: String) {
+  func log(_ message: String) {
     // TODO: Implementation
   }
 
