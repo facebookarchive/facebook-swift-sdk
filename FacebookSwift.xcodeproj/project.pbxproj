@@ -119,6 +119,7 @@
 		F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */; };
 		F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971D22444EDD005EE2EE /* FakeServerConfigurationProvider.swift */; };
 		F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */; };
+		F4D5DAEB224951620014C14D /* SampleOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAEA224951620014C14D /* SampleOperations.swift */; };
 		F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */; };
 		F4E1A9EA22416F2200503354 /* DefaultErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E422416F2200503354 /* DefaultErrorStrings.swift */; };
 		F4E1A9EB22416F2200503354 /* ErrorConfigurationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E522416F2200503354 /* ErrorConfigurationEntry.swift */; };
@@ -285,6 +286,7 @@
 		F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteErrorConfigurationEntry+Extensions.swift"; sourceTree = "<group>"; };
 		F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorConfigurationTests.swift; sourceTree = "<group>"; };
 		F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeServerConfigurationManager.swift; sourceTree = "<group>"; };
+		F4D5DAEA224951620014C14D /* SampleOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleOperations.swift; sourceTree = "<group>"; };
 		F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationEntryList.swift; sourceTree = "<group>"; };
 		F4E1A9E422416F2200503354 /* DefaultErrorStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorStrings.swift; sourceTree = "<group>"; };
 		F4E1A9E522416F2200503354 /* ErrorConfigurationEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorConfigurationEntry.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 				F4BEDA5422414078004F2C7E /* JSON */,
 				F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */,
 				F44715242243EDB10013495F /* SampleNSError.swift */,
+				F4D5DAEA224951620014C14D /* SampleOperations.swift */,
 				F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */,
 				F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
@@ -972,6 +975,7 @@
 				F48A749822399C97007192F6 /* LocalizationsTests.swift in Sources */,
 				F4225DDD223F1FB700F4DCFE /* ErrorConfigurationEntryBuilderTests.swift in Sources */,
 				F45734D1222D9343001F806A /* AccessTokenCacheTests.swift in Sources */,
+				F4D5DAEB224951620014C14D /* SampleOperations.swift in Sources */,
 				F4C32D98223D990A00FF1F86 /* SampleRawRemoteConfiguration.swift in Sources */,
 				F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */,
 				F4C32D9F223DA12200FF1F86 /* ErrorConfigurationBuilderTests.swift in Sources */,

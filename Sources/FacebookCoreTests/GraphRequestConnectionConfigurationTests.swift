@@ -22,6 +22,11 @@ import XCTest
 class GraphRequestConnectionConfigurationTests: XCTestCase {
   let connection = GraphRequestConnection()
 
+  func testOperationQueueDependency() {
+    XCTAssertEqual(connection.operationQueue, OperationQueue.main,
+                   "A connection should use the main operation queue by default")
+  }
+
   func testSessionDependency() {
     XCTAssertTrue(connection.sessionProvider is SessionProvider,
                   "Connection should have the correct concrete implementation of a session provider")

@@ -272,4 +272,56 @@ class GraphRequestConnectionTests: XCTestCase {
     XCTAssertEqual(fakeLogger.logRequestCallCount, 1,
                    "Successfully starting a connection should log the request")
   }
+
+  func testStartingWithEmptyOperationQueue() {
+    let delegate = FakeGraphRequestConnectionDelegate()
+    let connection = GraphRequestConnection()
+    connection.delegate = delegate
+
+    connection.start()
+
+    XCTAssertTrue(delegate.requestConnectionWillBeginLoadingWasCalled,
+                  "Starting a connection with an operation queue that has no pending operations should immediately inform its delegate that it began")
+    XCTAssertTrue(delegate.capturedRequestConnectionWillBeginLoadingConnection === connection,
+                  "A connection delegate should pass back an instance of the connection that invoked it")
+  }
+
+  func testStartingWitNonEmptyOperationQueue() {
+    let operationQueue = OperationQueue.main
+    operationQueue.addOperation(SampleOperation())
+
+    let delegate = FakeGraphRequestConnectionDelegate()
+    let connection = GraphRequestConnection()
+    connection.delegate = delegate
+    connection.operationQueue = operationQueue
+
+    connection.start()
+
+    XCTAssertFalse(delegate.requestConnectionWillBeginLoadingWasCalled,
+                   "Starting a connection with an operation queue that has pending operations should not immediately inform its delegate that it began")
+  }
+
+  func testInformingWhenQueueIsAvailable() {
+    let operationQueue = OperationQueue.main
+    operationQueue.addOperation(SampleOperation())
+
+    let delegate = FakeGraphRequestConnectionDelegate()
+    let connection = GraphRequestConnection()
+    connection.delegate = delegate
+    connection.operationQueue = operationQueue
+
+    connection.start()
+
+    let predicate = NSPredicate { _, _ in
+      delegate.requestConnectionWillBeginLoadingWasCalled
+    }
+    expectation(for: predicate, evaluatedWith: self, handler: nil)
+    waitForExpectations(timeout: 1) { potentialError in
+      guard potentialError == nil else {
+        return XCTFail(
+          "Starting a connection with an operation queue that has pending operations should add informing its delegate that it began to the queue"
+        )
+      }
+    }
+  }
 }

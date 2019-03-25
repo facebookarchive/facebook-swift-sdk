@@ -16,14 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeGraphRequestConnectionDelegate: GraphRequestConnectionDelegate {
-  var requestConnectionWillBeginLoadingWasCalled = false
-  var capturedRequestConnectionWillBeginLoadingConnection: GraphRequestConnection?
-
-  func requestConnectionWillBeginLoading(_ connection: GraphRequestConnection) {
-    capturedRequestConnectionWillBeginLoadingConnection = connection
-    requestConnectionWillBeginLoadingWasCalled = true
-  }
-}
+class SampleOperation: Operation {}
