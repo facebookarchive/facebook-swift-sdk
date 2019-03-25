@@ -17,5 +17,5 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 protocol Logging {
-  func log(message: StaticString)
+  func log(for behavior: LoggingBehavior, message: String)
 }

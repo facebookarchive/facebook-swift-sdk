@@ -18,12 +18,12 @@
 
 @testable import FacebookCore
 
-class FakeLogger: Logging {
-  var capturedBehavior: LoggingBehavior?
-  var capturedMessage: String?
+import Foundation
 
-  func log(for behavior: LoggingBehavior, message: String) {
-    capturedBehavior = behavior
-    capturedMessage = message
+struct FakeBundle: InfoDictionaryProviding {
+  let infoDictionary: [String: Any?]
+
+  func object(forInfoDictionaryKey key: String) -> Any? {
+    return infoDictionary[key] as Any?
   }
 }

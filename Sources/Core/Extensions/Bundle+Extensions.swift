@@ -16,14 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeLogger: Logging {
-  var capturedBehavior: LoggingBehavior?
-  var capturedMessage: String?
-
-  func log(for behavior: LoggingBehavior, message: String) {
-    capturedBehavior = behavior
-    capturedMessage = message
-  }
+protocol InfoDictionaryProviding {
+  func object(forInfoDictionaryKey key: String) -> Any?
 }
+
+extension Bundle: InfoDictionaryProviding {}
