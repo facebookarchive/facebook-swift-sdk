@@ -22,7 +22,7 @@ class FakeLogger: Logging {
   var capturedBehavior: LoggingBehavior?
   var capturedMessage: String?
 
-  func log(for behavior: LoggingBehavior, message: String) {
+  func log(message: String, for behavior: LoggingBehavior) {
     capturedBehavior = behavior
     capturedMessage = message
   }

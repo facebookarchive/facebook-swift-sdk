@@ -25,7 +25,7 @@ struct Logger: Logging {
     self.settings = settings
   }
 
-  func log(for behavior: LoggingBehavior, message: String) {
+  func log(message: String, for behavior: LoggingBehavior) {
     guard isAbleToLog(behavior) else {
       return
     }

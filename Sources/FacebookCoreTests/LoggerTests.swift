@@ -32,8 +32,8 @@ class LoggerTests: XCTestCase {
     let logger = Logger(settings: fakeSettings)
 
     XCTAssertTrue(logger.isAbleToLog(.accessTokens),
-                  "Logger should be able to log a behavior if it is present in the settings")
-    logger.log(for: .accessTokens, message: "This should log")
+                  "Logger should be able to log a behavior if it is present in its settings")
+    logger.log(message: "This should log", for: .accessTokens)
   }
 
   func testCreatingWithInvalidLoggingBehavior() {
@@ -42,7 +42,7 @@ class LoggerTests: XCTestCase {
     let logger = Logger(settings: fakeSettings)
 
     XCTAssertFalse(logger.isAbleToLog(.developerErrors),
-                   "Logger should be not able to log a behavior if it is not present in the settings")
-    logger.log(for: .developerErrors, message: "This should not log")
+                   "Logger should be not able to log a behavior if it is not present in its settings")
+    logger.log(message: "This should not log", for: .developerErrors)
   }
 }

@@ -46,7 +46,7 @@ struct GraphRequestSerializer {
     guard !graphRequest.hasAttachments
       || graphRequest.httpMethod != .get
       else {
-        logger.log(for: .developerErrors, message: "Can not use GET to upload a file")
+        logger.log(message: "Can not use GET to upload a file", for: .developerErrors)
         throw GraphRequestSerializationError.getWithAttachments
     }
 
