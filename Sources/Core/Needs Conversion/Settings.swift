@@ -32,6 +32,10 @@ protocol SettingsManaging {
 }
 
 class Settings: SettingsManaging {
+  private enum PListKeys {
+    static let loggingBehaviors: String = "FacebookLoggingBehavior"
+  }
+
   // TODO: Probably needs to be private and weak. Revisit this during rewrite
   weak var accessTokenCache: AccessTokenCaching?
 
@@ -55,10 +59,10 @@ class Settings: SettingsManaging {
    
    Set to an empty set in order to disable all logging.
    
-   You can also define this via an array in your app plist with key "FacebookLoggingBehavior"
+   You can also define this via a `String` array in your app plist with key "FacebookLoggingBehavior"
    
-   **IMPORTANT:** behaviors defined in your plist must match the rawValue of the `LoggingBehavior`
-   you want to enable.
+   **IMPORTANT:** any single behavior in your plist must match the rawValue of the corresponding
+   `LoggingBehavior` you want to enable.
    
    You may also add and remove individual values via standard `Set` value convenience setters
    
@@ -73,7 +77,7 @@ class Settings: SettingsManaging {
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
-    guard let rawValues = bundle.object(forInfoDictionaryKey: "FacebookLoggingBehavior")
+    guard let rawValues = bundle.object(forInfoDictionaryKey: PListKeys.loggingBehaviors)
       as? [String] else {
         return
     }
