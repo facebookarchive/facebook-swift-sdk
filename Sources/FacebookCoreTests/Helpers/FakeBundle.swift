@@ -16,18 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable unused_closure_parameter
-
 @testable import FacebookCore
-import XCTest
 
-class LoggingBehaviorTests: XCTestCase {
-  func testAllCases() {
-    LoggingBehavior.allCases.forEach { `case` in
-      switch `case` {
-      case .accessTokens, .appEvents, .cacheErrors, .developerErrors, .graphAPIDebugInfo, .graphAPIDebugWarning, .informational, .networkRequests, .performanceCharacteristics, .uiControlErrors:
-        break
-      }
-    }
+import Foundation
+
+struct FakeBundle: InfoDictionaryProviding {
+  let infoDictionary: [String: Any?]
+
+  func object(forInfoDictionaryKey key: String) -> Any? {
+    return infoDictionary[key] as Any?
   }
 }
