@@ -25,11 +25,6 @@ class URLBuilderTests: XCTestCase {
                    "There should be a known hostname for building facebook urls")
   }
 
-  func testKnownPaths() {
-//    let knownPaths: [GraphPath] = [.me]
-
-  }
-
   private func validateBaseUrl(
     _ url: URL,
     withPath path: String?,
