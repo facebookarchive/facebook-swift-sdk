@@ -92,7 +92,10 @@ class GraphRequestConnection: GraphRequestConnecting {
     errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
 
     if session == nil {
-      session = sessionProvider.session()
+      session = sessionProvider.session(
+        delegate: self,
+        operationQueue: operationQueue
+      )
     }
 
     switch state {

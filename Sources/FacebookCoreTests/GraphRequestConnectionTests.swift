@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable type_body_length
+
 @testable import FacebookCore
 import XCTest
 
@@ -196,6 +198,10 @@ class GraphRequestConnectionTests: XCTestCase {
 
     XCTAssertEqual(fakeSessionProvider.sessionCallCount, 1,
                    "A connection should request a new session from its session provider if starting a request without an existing session")
+    XCTAssertEqual(fakeSessionProvider.capturedOperationQueue, OperationQueue.main,
+                   "A connection should provide an operation for its session provider to use in the new session")
+    XCTAssertTrue(fakeSessionProvider.capturedDelegate === connection,
+                  "A connection should provide itself as a delegate for its session provider to use in the new session")
   }
 
   func testStartingWithSession() {
@@ -280,9 +286,9 @@ class GraphRequestConnectionTests: XCTestCase {
 
     connection.start()
 
-    XCTAssertTrue(delegate.requestConnectionWillBeginLoadingWasCalled,
+    XCTAssertTrue(delegate.requestConnectionWillBeginLoading.callCount > 0,
                   "Starting a connection with an operation queue that has no pending operations should immediately inform its delegate that it began")
-    XCTAssertTrue(delegate.capturedRequestConnectionWillBeginLoadingConnection === connection,
+    XCTAssertTrue(delegate.requestConnectionWillBeginLoading.capturedConnection === connection,
                   "A connection delegate should pass back an instance of the connection that invoked it")
   }
 
@@ -297,7 +303,7 @@ class GraphRequestConnectionTests: XCTestCase {
 
     connection.start()
 
-    XCTAssertFalse(delegate.requestConnectionWillBeginLoadingWasCalled,
+    XCTAssertFalse(delegate.requestConnectionWillBeginLoading.callCount > 0,
                    "Starting a connection with an operation queue that has pending operations should not immediately inform its delegate that it began")
   }
 
@@ -313,7 +319,7 @@ class GraphRequestConnectionTests: XCTestCase {
     connection.start()
 
     let predicate = NSPredicate { _, _ in
-      delegate.requestConnectionWillBeginLoadingWasCalled
+      delegate.requestConnectionWillBeginLoading.callCount > 0
     }
     expectation(for: predicate, evaluatedWith: self, handler: nil)
     waitForExpectations(timeout: 1) { potentialError in

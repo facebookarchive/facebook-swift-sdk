@@ -19,11 +19,21 @@
 import Foundation
 
 protocol SessionProviding {
-  func session() -> Session
+  func session(
+  delegate: URLSessionDelegate?,
+  operationQueue: OperationQueue
+  ) -> Session
 }
 
 struct SessionProvider: SessionProviding {
-  func session() -> Session {
-    return URLSession(configuration: .default)
+  func session(
+    delegate: URLSessionDelegate? = nil,
+    operationQueue: OperationQueue
+    ) -> Session {
+    return URLSession(
+      configuration: .default,
+      delegate: delegate,
+      delegateQueue: operationQueue
+    )
   }
 }
