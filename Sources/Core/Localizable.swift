@@ -19,7 +19,7 @@
 import Foundation
 
 private let mainStringTable = "LocalizableStrings"
-private let bundleIdentifier = "com.facebook.swift.core"
+private let bundleIdentifier = "com.facebook.sdk.core"
 private let bundle = Bundle(identifier: bundleIdentifier) ?? .main
 
 protocol Localizable {
