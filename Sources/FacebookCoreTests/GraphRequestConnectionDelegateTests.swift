@@ -26,15 +26,13 @@ import XCTest
 // whether or not it should be possible to call the default implementation without consequence.
 // These tests are essentially asserting that there are no show-stopping consequences
 // of exercising the default implementation such as an assertion failure.
-private class EmptyGraphRequestConnectionDelegate: GraphRequestConnectionDelegate {}
+private class DefaultsReliantDelegate: GraphRequestConnectionDelegate {
+  func requestConnectionWillBeginLoading(_ connection: GraphRequestConnection) {}
+}
 
 class GraphRequestConnectionDelegateTests: XCTestCase {
-  private let delegate = EmptyGraphRequestConnectionDelegate()
+  private let delegate = DefaultsReliantDelegate()
   private let connection = GraphRequestConnection()
-
-  func testWillBeginLoading() {
-    delegate.requestConnectionWillBeginLoading(connection)
-  }
 
   func testDidFinishLoading() {
     delegate.requestConnectionDidFinishLoading(connection)

@@ -49,6 +49,14 @@ class GraphRequestConnection: GraphRequestConnecting {
    */
   private(set) var urlResponse: HTTPURLResponse?
 
+  /**
+   Determines the operation queue that is used to call methods on the connection's delegate.
+
+   By default, a connection is scheduled on the current thread in the default mode when it is created.
+   You cannot reschedule a connection after it has started.
+   */
+  var operationQueue: OperationQueue
+
   private var session: Session?
   private var requestStartTime: Double = 0
 
@@ -67,9 +75,19 @@ class GraphRequestConnection: GraphRequestConnecting {
     self.logger = logger
     self.piggybackManager = piggybackManager
     self.serverConfigurationManager = serverConfigurationManager
+    self.operationQueue = OperationQueue.main
     state = .created
   }
 
+  /**
+   This method starts a connection with the server and is capable of handling all of the
+   requests that were added to the connection.
+
+   By default, a connection is scheduled on the current thread in the default mode when it is created.
+   Set a custom operationQueue for other options.
+
+   This method should not be called twice for a `GraphRequestConnection` instance.
+   */
   func start() {
     errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
 
@@ -93,8 +111,25 @@ class GraphRequestConnection: GraphRequestConnecting {
 
     requestStartTime = TimeUtility.currentTimeInMilliseconds
 
-    // TODO: Create and start URLSessionTaskProxy, handle response from there
-    // add in DelegateQueue
+    let task = URLSessionTaskProxy(for: urlRequest) { [weak self] potentialData, potentialResponse, potentialError in
+      self?.taskCompletion(potentialData, potentialResponse, potentialError)
+    }
+
+    task.start()
+
+    switch operationQueue.operations.isEmpty {
+    case true:
+      delegate?.requestConnectionWillBeginLoading(self)
+
+    case false:
+      operationQueue.addOperation { [weak self] in
+        guard let self = self else {
+          return
+        }
+
+        self.delegate?.requestConnectionWillBeginLoading(self)
+      }
+    }
   }
 
   /**
@@ -151,5 +186,9 @@ class GraphRequestConnection: GraphRequestConnecting {
       fatalError("Implement this method to return the actual url we need")
     }
     return URLRequest(url: url)
+  }
+
+  func taskCompletion(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+    // TODO: Handle a task completion
   }
 }

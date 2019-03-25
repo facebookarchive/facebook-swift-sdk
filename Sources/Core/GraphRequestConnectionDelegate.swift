@@ -81,9 +81,6 @@ protocol GraphRequestConnectionDelegate: AnyObject {
 // TODO: The conversion had the passed back connections as optional GraphRequestConnections.
 // Not sure if this is what we want so going to keep them non-optional for as long as possible
 extension GraphRequestConnectionDelegate {
-  func requestConnectionWillBeginLoading(_ connection: GraphRequestConnection) {
-    // TODO: possibly warn about usage or have an assertion failure
-  }
   func requestConnectionDidFinishLoading(_ connection: GraphRequestConnection) {
     // TODO: possibly warn about usage or have an assertion failure
   }

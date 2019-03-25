@@ -66,87 +66,85 @@ private let kSDK = "ios"
 private let kUserAgentBase = "FBiOSSDK"
 #endif
 private let kBatchRestMethodBaseURL = "method/"
-private var g_defaultTimeout: TimeInterval = 60.0
+//private var g_defaultTimeout: TimeInterval = 60.0
 private var g_errorConfiguration: FBSDKErrorConfiguration?
 #endif
 
 // ----------------------------------------------------------------------------
 // FBSDKGraphRequestConnectionState
-enum FBSDKGraphRequestConnectionState : Int {
-    case kStateCreated
-    case kStateSerialized
-    case kStateStarted
-    case kStateCompleted
-    case kStateCancelled
-}
+//enum FBSDKGraphRequestConnectionState : Int {
+//    case kStateCreated
+//    case kStateSerialized
+//    case kStateStarted
+//    case kStateCompleted
+//    case kStateCancelled
+//}
 
-@objc protocol FBSDKGraphRequestConnectionDelegate: NSObjectProtocol {
-    /**
-     @method
-    
-      Tells the delegate the request connection will begin loading
-    
-    
-    
-     If the <FBSDKGraphRequestConnection> is created using one of the convenience factory methods prefixed with
-     start, the object returned from the convenience method has already begun loading and this method
-     will not be called when the delegate is set.
-    
-     @param connection    The request connection that is starting a network request
-     */
-    @objc optional func requestConnectionWillBeginLoading(_ connection: FBSDKGraphRequestConnection?)
-    /**
-     @method
-    
-      Tells the delegate the request connection finished loading
-    
-    
-    
-     If the request connection completes without a network error occurring then this method is called.
-     Invocation of this method does not indicate success of every <FBSDKGraphRequest> made, only that the
-     request connection has no further activity. Use the error argument passed to the FBSDKGraphRequestBlock
-     block to determine success or failure of each <FBSDKGraphRequest>.
-    
-     This method is invoked after the completion handler for each <FBSDKGraphRequest>.
-    
-     @param connection    The request connection that successfully completed a network request
-     */
-    @objc optional func requestConnectionDidFinishLoading(_ connection: FBSDKGraphRequestConnection?)
-    /**
-     @method
-    
-      Tells the delegate the request connection failed with an error
-    
-    
-    
-     If the request connection fails with a network error then this method is called. The `error`
-     argument specifies why the network connection failed. The `NSError` object passed to the
-     FBSDKGraphRequestBlock block may contain additional information.
-    
-     @param connection    The request connection that successfully completed a network request
-     @param error         The `NSError` representing the network error that occurred, if any. May be nil
-     in some circumstances. Consult the `NSError` for the <FBSDKGraphRequest> for reliable
-     failure information.
-     */
-    @objc optional func requestConnection(_ connection: FBSDKGraphRequestConnection?) throws
-    /**
-     @method
-    
-      Tells the delegate how much data has been sent and is planned to send to the remote host
-    
-    
-    
-     The byte count arguments refer to the aggregated <FBSDKGraphRequest> objects, not a particular <FBSDKGraphRequest>.
-    
-     Like `NSURLSession`, the values may change in unexpected ways if data needs to be resent.
-    
-     @param connection                The request connection transmitting data to a remote host
-     @param bytesWritten              The number of bytes sent in the last transmission
-     @param totalBytesWritten         The total number of bytes sent to the remote host
-     @param totalBytesExpectedToWrite The total number of bytes expected to send to the remote host
-     */
-    @objc optional func requestConnection(_ connection: FBSDKGraphRequestConnection?, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int)
-}
+//@objc protocol FBSDKGraphRequestConnectionDelegate: NSObjectProtocol {
+//    /**
+//     @method
+//
+//      Tells the delegate the request connection will begin loading
+//
+//
+//
+//     If the <FBSDKGraphRequestConnection> is created using one of the convenience factory methods prefixed with
+//     start, the object returned from the convenience method has already begun loading and this method
+//     will not be called when the delegate is set.
+//
+//     @param connection    The request connection that is starting a network request
+//     */
+//    @objc optional func requestConnectionWillBeginLoading(_ connection: FBSDKGraphRequestConnection?)
+//    /**
+//     @method
+//
+//      Tells the delegate the request connection finished loading
+//
+//
+//
+//     If the request connection completes without a network error occurring then this method is called.
+//     Invocation of this method does not indicate success of every <FBSDKGraphRequest> made, only that the
+//     request connection has no further activity. Use the error argument passed to the FBSDKGraphRequestBlock
+//     block to determine success or failure of each <FBSDKGraphRequest>.
+//
+//     This method is invoked after the completion handler for each <FBSDKGraphRequest>.
+//
+//     @param connection    The request connection that successfully completed a network request
+//     */
+//    @objc optional func requestConnectionDidFinishLoading(_ connection: FBSDKGraphRequestConnection?)
+//    /**
+//     @method
+//
+//      Tells the delegate the request connection failed with an error
+//
+//     If the request connection fails with a network error then this method is called. The `error`
+//     argument specifies why the network connection failed. The `NSError` object passed to the
+//     FBSDKGraphRequestBlock block may contain additional information.
+//
+//     @param connection    The request connection that successfully completed a network request
+//     @param error         The `NSError` representing the network error that occurred, if any. May be nil
+//     in some circumstances. Consult the `NSError` for the <FBSDKGraphRequest> for reliable
+//     failure information.
+//     */
+//    @objc optional func requestConnection(_ connection: FBSDKGraphRequestConnection?, didFailWithError: Error) throws
+//    /**
+//     @method
+//
+//      Tells the delegate how much data has been sent and is planned to send to the remote host
+//
+//
+//
+//     The byte count arguments refer to the aggregated <FBSDKGraphRequest> objects, not a particular <FBSDKGraphRequest>.
+//
+//     Like `NSURLSession`, the values may change in unexpected ways if data needs to be resent.
+//
+//     @param connection                The request connection transmitting data to a remote host
+//     @param bytesWritten              The number of bytes sent in the last transmission
+//     @param totalBytesWritten         The total number of bytes sent to the remote host
+//     @param totalBytesExpectedToWrite The total number of bytes expected to send to the remote host
+//     */
+//    @objc optional func requestConnection(_ connection: FBSDKGraphRequestConnection?, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int)
+//}
 
 class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGraphErrorRecoveryProcessorDelegate {
     private var overrideVersionPart = ""
@@ -156,30 +154,29 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
     private var recoveringRequestMetadata: FBSDKGraphRequestMetadata?
     private var errorRecoveryProcessor: FBSDKGraphErrorRecoveryProcessor?
 
-    /**
-     The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
-     */
-    var defaultConnectionTimeout: TimeInterval = 0.0
-    /**
-      The delegate object that receives updates.
-     */
-    weak var delegate: FBSDKGraphRequestConnectionDelegate?
-    /**
-      Gets or sets the timeout interval to wait for a response before giving up.
-     */
-    var timeout: TimeInterval = 0.0
-    /**
-      The raw response that was returned from the server.  (readonly)
-    
-    
-    
-     This property can be used to inspect HTTP headers that were returned from
-     the server.
-    
-     The property is nil until the request completes.  If there was a response
-     then this property will be non-nil during the FBSDKGraphRequestBlock callback.
-     */
-    private(set) var urlResponse: HTTPURLResponse?
+//    /**
+//     The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
+//     */
+//    var defaultConnectionTimeout: TimeInterval = 0.0
+//    /**
+//      The delegate object that receives updates.
+//     */
+//    weak var delegate: FBSDKGraphRequestConnectionDelegate?
+//    /**
+//      Gets or sets the timeout interval to wait for a response before giving up.
+//     */
+//    var timeout: TimeInterval = 0.0
+//    /**
+//      The raw response that was returned from the server.  (readonly)
+//
+//     This property can be used to inspect HTTP headers that were returned from
+//     the server.
+//
+//     The property is nil until the request completes.  If there was a response
+//     then this property will be non-nil during the FBSDKGraphRequestBlock callback.
+//     */
+//    private(set) var urlResponse: HTTPURLResponse?
+
     /**
      Determines the operation queue that is used to call methods on the connection's delegate.
     
@@ -196,81 +193,81 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
             _delegateQueue = queue
         }
     }
+//
+//    /**
+//     @methodgroup Class methods
+//     */
+//
+//    /**
+//     @methodgroup Adding requests
+//     */
+//
+//    /**
+//     @method
+//    
+//      This method adds an <FBSDKGraphRequest> object to this connection.
+//    
+//     @param request       A request to be included in the round-trip when start is called.
+//     @param handler       A handler to call back when the round-trip completes or times out.
+//    
+//     The completion handler is retained until the block is called upon the
+//     completion or cancellation of the connection.
+//     */
+//    func add(_ request: FBSDKGraphRequest?, completionHandler handler: FBSDKGraphRequestBlock) {
+//        add(request, batchEntryName: "", completionHandler: handler)
+//    }
+//
+//    /**
+//     @method
+//    
+//      This method adds an <FBSDKGraphRequest> object to this connection.
+//    
+//     @param request         A request to be included in the round-trip when start is called.
+//    
+//     @param handler         A handler to call back when the round-trip completes or times out.
+//     The handler will be invoked on the main thread.
+//    
+//     @param name            A name for this request.  This can be used to feed
+//     the results of one request to the input of another <FBSDKGraphRequest> in the same
+//     `FBSDKGraphRequestConnection` as described in
+//     [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
+//    
+//     The completion handler is retained until the block is called upon the
+//     completion or cancellation of the connection. This request can be named
+//     to allow for using the request's response in a subsequent request.
+//     */
+//    func add(_ request: FBSDKGraphRequest?, batchEntryName name: String?, completionHandler handler: FBSDKGraphRequestBlock) {
+//        let batchParams = name.count > 0 ? [
+//            kBatchEntryName: name
+//        ] : nil
+//        add(request, batchParameters: batchParams, completionHandler: handler)
+//    }
 
-    /**
-     @methodgroup Class methods
-     */
-
-    /**
-     @methodgroup Adding requests
-     */
-
-    /**
-     @method
-    
-      This method adds an <FBSDKGraphRequest> object to this connection.
-    
-     @param request       A request to be included in the round-trip when start is called.
-     @param handler       A handler to call back when the round-trip completes or times out.
-    
-     The completion handler is retained until the block is called upon the
-     completion or cancellation of the connection.
-     */
-    func add(_ request: FBSDKGraphRequest?, completionHandler handler: FBSDKGraphRequestBlock) {
-        add(request, batchEntryName: "", completionHandler: handler)
-    }
-
-    /**
-     @method
-    
-      This method adds an <FBSDKGraphRequest> object to this connection.
-    
-     @param request         A request to be included in the round-trip when start is called.
-    
-     @param handler         A handler to call back when the round-trip completes or times out.
-     The handler will be invoked on the main thread.
-    
-     @param name            A name for this request.  This can be used to feed
-     the results of one request to the input of another <FBSDKGraphRequest> in the same
-     `FBSDKGraphRequestConnection` as described in
-     [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
-    
-     The completion handler is retained until the block is called upon the
-     completion or cancellation of the connection. This request can be named
-     to allow for using the request's response in a subsequent request.
-     */
-    func add(_ request: FBSDKGraphRequest?, batchEntryName PlacesFieldKey.name: String?, completionHandler handler: FBSDKGraphRequestBlock) {
-        let batchParams = PlacesFieldKey.name.count > 0 ? [
-            kBatchEntryName: PlacesFieldKey.name
-        ] : nil
-        add(request, batchParameters: batchParams, completionHandler: handler)
-    }
-
-    /**
-     @method
-    
-      This method adds an <FBSDKGraphRequest> object to this connection.
-    
-     @param request         A request to be included in the round-trip when start is called.
-    
-     @param handler         A handler to call back when the round-trip completes or times out.
-    
-     @param batchParameters The dictionary of parameters to include for this request
-     as described in [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
-     Examples include "depends_on", "name", or "omit_response_on_success".
-    
-     The completion handler is retained until the block is called upon the
-     completion or cancellation of the connection. This request can be named
-     to allow for using the request's response in a subsequent request.
-     */
-    func add(_ request: FBSDKGraphRequest?, batchParameters: [String : Any?]?, completionHandler handler: FBSDKGraphRequestBlock) {
-        if placesResponseKey.state != .kStateCreated {
-            throw NSException(name: .internalInconsistencyException, reason: "Cannot add requests once started or if a URLRequest is set", userInfo: nil)
-        }
-        let metadata = FBSDKGraphRequestMetadata(request: request, completionHandler: handler, batchParameters: batchParameters)
-
-        requests.append(metadata)
-    }
+//    /**
+//     @method
+//
+//      This method adds an <FBSDKGraphRequest> object to this connection.
+//
+//     @param request         A request to be included in the round-trip when start is called.
+//
+//     @param handler         A handler to call back when the round-trip completes or times out.
+//
+//     @param batchParameters The dictionary of parameters to include for this request
+//     as described in [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
+//     Examples include "depends_on", "name", or "omit_response_on_success".
+//
+//     The completion handler is retained until the block is called upon the
+//     completion or cancellation of the connection. This request can be named
+//     to allow for using the request's response in a subsequent request.
+//     */
+//    func add(_ request: FBSDKGraphRequest?, batchParameters: [String : Any?]?, completionHandler handler: FBSDKGraphRequestBlock) {
+//        if self.state != .kStateCreated {
+//            throw NSException(name: .internalInconsistencyException, reason: "Cannot add requests once started or if a URLRequest is set", userInfo: nil)
+//        }
+//        let metadata = FBSDKGraphRequestMetadata(request: request, completionHandler: handler, batchParameters: batchParameters)
+//
+//        requests.append(metadata)
+//    }
 
     /**
      @methodgroup Instance methods
@@ -289,7 +286,7 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
      with the connection.
      */
     func cancel() {
-        placesResponseKey.state = .kStateCancelled
+        self.state = .kStateCancelled
         task?.cancel()
         cleanUpSession()
     }
@@ -308,34 +305,35 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
      */
     func start() {
         // TODO: [Swiftify] ensure that the code below is executed only once (`dispatch_once()` is deprecated)
-        {
-            g_errorConfiguration = FBSDKErrorConfiguration(dictionary: nil)
-        }
+//        {
+//            g_errorConfiguration = FBSDKErrorConfiguration(dictionary: nil)
+//        }
         //optimistically check for updated server configuration;
-        g_errorConfiguration = FBSDKServerConfigurationManager.cachedServerConfiguration()?.errorConfiguration ?? g_errorConfiguration
+//        g_errorConfiguration = FBSDKServerConfigurationManager.cachedServerConfiguration()?.errorConfiguration ?? g_errorConfiguration
+//
+//        if self.state != .kStateCreated && self.state != .kStateSerialized {
+//            FBSDKLogger.singleShotLogEntry(fbsdkLoggingBehaviorDeveloperErrors, formatString: "FBSDKGraphRequestConnection cannot be started again.")
+//            return
+//        }
+//        FBSDKGraphRequestPiggybackManager.addPiggybackRequests(self)
+//        var request: NSMutableURLRequest? = self.request(withBatch: requests, timeout: timeout)
+//
+//        self.state = .kStateStarted
+//
+//        logRequest(request, bodyLength: 0, bodyLogger: nil, attachmentLogger: nil)
+//
+//        requestStartTime = FBSDKInternalUtility.currentTimeInMilliseconds()
+//
+//        let handler = { error, response, responseData in
+//                try? self.completeFBSDKURLSession(with: response, data: responseData)
+//            } as? FBSDKURLSessionTaskBlock
+//
+//        if session == nil {
+//            session = defaultSession()
+//        }
 
-        if placesResponseKey.state != .kStateCreated && placesResponseKey.state != .kStateSerialized {
-            FBSDKLogger.singleShotLogEntry(fbsdkLoggingBehaviorDeveloperErrors, formatString: "FBSDKGraphRequestConnection cannot be started again.")
-            return
-        }
-        FBSDKGraphRequestPiggybackManager.addPiggybackRequests(self)
-        var request: NSMutableURLRequest? = self.request(withBatch: requests, timeout: timeout)
-
-        placesResponseKey.state = .kStateStarted
-
-        logRequest(request, bodyLength: 0, bodyLogger: nil, attachmentLogger: nil)
-        requestStartTime = FBSDKInternalUtility.currentTimeInMilliseconds()
-
-        let handler = { error, response, responseData in
-                try? self.completeFBSDKURLSession(with: response, data: responseData)
-            } as? FBSDKURLSessionTaskBlock
-
-        if session == nil {
-            session = defaultSession()
-        }
-
-        if let handler = handler {
-            task = FBSDKURLSessionTask(request: request, from: session, completionHandler: handler)
+        task = FBSDKURLSessionTask(request: request, from: session) { error, response, responseData in
+          try? self.completeFBSDKURLSession(with: response, data: responseData)
         }
         task?.start()
 
@@ -368,12 +366,12 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
         }
     }
 
-    private var session: URLSession?
+//    private var session: URLSession?
     private var task: FBSDKURLSessionTask?
-    private var requests: [AnyHashable] = []
-    private var state: FBSDKGraphRequestConnectionState?
-    private var logger: FBSDKLogger?
-    private var requestStartTime: UInt64 = 0
+//    private var requests: [AnyHashable] = []
+//    private var state: FBSDKGraphRequestConnectionState?
+//    private var logger: FBSDKLogger?
+//    private var requestStartTime: UInt64 = 0
 
     override init() {
         //if super.init()
@@ -432,7 +430,7 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
         metadata?.request.parameters.enumerateKeysAndObjects(usingBlock: { key, value, stop in
             if FBSDKGraphRequest.isAttachment(value) {
                 let name = String(format: "%@%lu", kBatchFileNamePrefix, UInt(attachments?.count ?? 0))
-                attachmentNames.append(PlacesFieldKey.name)
+                attachmentNames.append(name)
                 if let value = value {
                     attachments?[PlacesFieldKey.name] = value
                 }
@@ -640,10 +638,10 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
     }
 
 // MARK: - Private methods (response parsing)
-    func completeFBSDKURLSession(with response: URLResponse?, data PlacesResponseKey.data: Data?) throws {
-        if placesResponseKey.state != .kStateCancelled {
-            assert(placesResponseKey.state == .kStateStarted, String(format: "Unexpected state %lu in completeWithResponse", placesResponseKey.state.rawValue))
-            placesResponseKey.state = .kStateCompleted
+    func completeFBSDKURLSession(with response: URLResponse?, data: Data?) throws {
+        if self.state != .kStateCancelled {
+            assert(self.state == .kStateStarted, String(format: "Unexpected state %lu in completeWithResponse", self.state.rawValue))
+            self.state = .kStateCompleted
         }
 
         var results: [Any]? = nil
@@ -702,7 +700,7 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
     // The NSArray looks just like the multiple request case except the body
     // value is converted from a string to parsed JSON.
     //
-    func parseJSONResponse(_ PlacesResponseKey.data: Data?, error: NSErrorPointer?, statusCode: Int) -> [Any]? {
+    func parseJSONResponse(_ data: Data?, error: NSErrorPointer?, statusCode: Int) -> [Any]? {
         // Graph API can return "true" or "false", which is not valid JSON.
         // Translate that before asking JSON parser to look at it.
         var responseUTF8: String? = nil
