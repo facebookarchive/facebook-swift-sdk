@@ -20,11 +20,6 @@
 import XCTest
 
 class SettingsTests: XCTestCase {
-  func testBundleDependency() {
-    XCTAssertEqual(Settings().bundle, Bundle.main,
-                   "Settings' bundle should default to the main bundle")
-  }
-
   func testDefaultLoggingBehavior() {
     XCTAssertEqual(Settings().loggingBehaviors, [.developerErrors],
                    "Settings should have the default logging of developer errors")
@@ -36,7 +31,27 @@ class SettingsTests: XCTestCase {
     XCTAssertEqual(Settings(bundle: testBundle).loggingBehaviors, [.informational])
   }
 
-  func testEmptyArrayForPlist() {
-    // TODO: Inject a fake bundle to be able to test the default for an empty list of behaviors
+  func testSettingBehaviorsFromMissingPlistEntry() {
+    let fakeBundle = FakeBundle(infoDictionary: [:])
+    let settings = Settings(bundle: fakeBundle)
+
+    XCTAssertEqual(settings.loggingBehaviors, [.developerErrors],
+                   "Logging behaviors should default to developer errors when settings are created with a missing plist entry")
+  }
+
+  func testSettingBehaviorsFromEmptyPlistEntry() {
+    let fakeBundle = FakeBundle(infoDictionary: ["FacebookLoggingBehavior": []])
+    let settings = Settings(bundle: fakeBundle)
+
+    XCTAssertEqual(settings.loggingBehaviors, [.developerErrors],
+                   "Logging behaviors should default to developer errors when settings are created with an empty plist entry")
+  }
+
+  func testSettingBehaviorsFromPlistWithEntries() {
+    let fakeBundle = FakeBundle(infoDictionary: ["FacebookLoggingBehavior": ["Foo"]])
+    let settings = Settings(bundle: fakeBundle)
+
+    XCTAssertEqual(settings.loggingBehaviors, [.developerErrors],
+                   "Logging behaviors should default to developer errors when settings are created with a plist that only has invalid entries")
   }
 }

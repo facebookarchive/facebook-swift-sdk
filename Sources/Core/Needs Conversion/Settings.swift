@@ -47,36 +47,37 @@ class Settings: SettingsManaging {
   // TODO: There is a very good chance this will be needed when we start injecting settings various places
   static let shared = Settings()
 
-  let bundle: Bundle
-
   /**
    The current Facebook SDK logging behaviors.
-
+   
    This should consist of a set of LoggingBehavior enum values backed by `String`s indicating
    what information should be logged.
-
+   
    Set to an empty set in order to disable all logging.
-
+   
    You can also define this via an array in your app plist with key "FacebookLoggingBehavior"
-
+   
    **IMPORTANT:** behaviors defined in your plist must match the rawValue of the `LoggingBehavior`
    you want to enable.
-
+   
    You may also add and remove individual values via standard `Set` value convenience setters
-
+   
    The default is a set consisting of one value: `LoggingBehavior.developerErrors`
    */
   var loggingBehaviors: Set<LoggingBehavior>
 
-  init(bundle: Bundle = .main) {
-    self.bundle = bundle
+  init(bundle: InfoDictionaryProviding = Bundle.main) {
+    loggingBehaviors = [.developerErrors]
 
+    setBehaviors(from: bundle)
+  }
+
+  func setBehaviors(from bundle: InfoDictionaryProviding) {
     guard let rawValues = bundle.object(forInfoDictionaryKey: "FacebookLoggingBehavior")
-      as? [String]
-      else {
-        self.loggingBehaviors = [.developerErrors]
+      as? [String] else {
         return
     }
+
     let behaviors = rawValues.compactMap { LoggingBehavior(rawValue: $0) }
 
     switch behaviors.isEmpty {
@@ -88,3 +89,10 @@ class Settings: SettingsManaging {
     }
   }
 }
+
+// TODO: move to bundle extension
+protocol InfoDictionaryProviding {
+  func object(forInfoDictionaryKey key: String) -> Any?
+}
+
+extension Bundle: InfoDictionaryProviding {}
