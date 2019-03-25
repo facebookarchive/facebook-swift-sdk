@@ -72,7 +72,7 @@ class Settings: SettingsManaging {
     setBehaviors(from: bundle)
   }
 
-  func setBehaviors(from bundle: InfoDictionaryProviding) {
+  private func setBehaviors(from bundle: InfoDictionaryProviding) {
     guard let rawValues = bundle.object(forInfoDictionaryKey: "FacebookLoggingBehavior")
       as? [String] else {
         return
