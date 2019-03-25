@@ -18,10 +18,6 @@
 
 import Foundation
 
-// This will ultimately be a wrapper around os_log. For more info on the decision to
-// rewrite this to wrap os_log over NSLog see: https://developer.apple.com/videos/play/wwdc2016/721/
-// more info here: https://stackoverflow.com/questions/25951195/swift-print-vs-println-vs-nslog
-//
 struct Logger: Logging {
   private var startingSerialNumber: UInt = 1111
   let settings: SettingsManaging
