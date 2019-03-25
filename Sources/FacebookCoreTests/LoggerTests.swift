@@ -31,7 +31,7 @@ class LoggerTests: XCTestCase {
 
     let logger = Logger(settings: fakeSettings)
 
-    XCTAssertTrue(logger.isAbleToLog(.accessTokens),
+    XCTAssertTrue(logger.shouldLog(.accessTokens),
                   "Logger should be able to log a behavior if it is present in the settings")
     logger.log(.accessTokens, "This should log")
   }
@@ -41,7 +41,7 @@ class LoggerTests: XCTestCase {
 
     let logger = Logger(settings: fakeSettings)
 
-    XCTAssertFalse(logger.isAbleToLog(.developerErrors),
+    XCTAssertFalse(logger.shouldLog(.developerErrors),
                    "Logger should be not able to log a behavior if it is not present in the settings")
     logger.log(.developerErrors, "This should not log")
   }

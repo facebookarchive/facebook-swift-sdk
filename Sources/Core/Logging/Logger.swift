@@ -26,14 +26,14 @@ struct Logger: Logging {
   }
 
   func log(_ behavior: LoggingBehavior, _ message: String) {
-    guard isAbleToLog(behavior) else {
+    guard shouldLog(behavior) else {
       return
     }
 
     NSLog(message)
   }
 
-  func isAbleToLog(_ behavior: LoggingBehavior) -> Bool {
+  func shouldLog(_ behavior: LoggingBehavior) -> Bool {
     return settings.loggingBehaviors.contains(behavior)
   }
 }

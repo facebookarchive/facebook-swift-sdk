@@ -355,11 +355,11 @@
 		811C5E5E1CFFD52B00E4A925 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F4C32D81223D98D300FF1F86 /* Configurations */,
 				F49FA49F222896310008CAD6 /* Configurations */,
 				F4C32D81223D98D300FF1F86 /* Configurations */,
 				F4C32DA9223FFA8800FF1F86 /* ErrorHandling */,
 				F44DB6B2222B01B60083506E /* Extensions */,
+				F417F9172249822D00E771F1 /* Logging */,
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F409967222289D3000F23464 /* AccessToken.swift */,
 				F44DB69122299FA10083506E /* AccessTokenWallet.swift */,
@@ -380,7 +380,6 @@
 				F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */,
 				F408BE9E223981950068D24A /* GraphRequestSerializer.swift */,
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
-				F4B3401822430FC100912F0F /* LoggingBehavior.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
 			);
@@ -456,6 +455,16 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
+		F417F9172249822D00E771F1 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				F47056DC2232DF4500BE526B /* Logger.swift */,
+				F47056DA2232DF1D00BE526B /* Logging.swift */,
+				F4B3401822430FC100912F0F /* LoggingBehavior.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 		F44DB6972229AE040083506E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,8 +493,6 @@
 				F44DB69C2229B4420083506E /* AccessTokenCaching.swift */,
 				F44DB6BC222B0DD20083506E /* GraphRequestPiggybackManager.swift */,
 				F44DB6932229AB460083506E /* InternalUtility.swift */,
-				F47056DC2232DF4500BE526B /* Logger.swift */,
-				F47056DA2232DF1D00BE526B /* Logging.swift */,
 				F44DB69A2229B37F0083506E /* Settings.swift */,
 			);
 			path = "Needs Conversion";
