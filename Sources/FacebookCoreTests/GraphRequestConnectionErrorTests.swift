@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable unused_closure_parameter
+
 @testable import FacebookCore
 import XCTest
 
@@ -23,10 +25,25 @@ class GraphRequestConnectionErrorTests: XCTestCase {
   func testAllCases() {
     let expectedCases: [GraphRequestConnectionError] = [
       .accessTokenRequired,
-      .requestAddition
+      .invalidURLResponseType,
+      .missingTask,
+      .missingURLResponse,
+      .nonTextMimeType,
+      .requestAddition,
+      .resultsMismatch
     ]
 
-    XCTAssertEqual(GraphRequestConnectionError.allCases, expectedCases,
-                   "There should be easy access to all the cases of a graph request connection error")
+    expectedCases.forEach { `case` in
+      switch `case` {
+      case .accessTokenRequired,
+           .invalidURLResponseType,
+           .missingTask,
+           .missingURLResponse,
+           .nonTextMimeType,
+           .requestAddition,
+           .resultsMismatch:
+        break
+      }
+    }
   }
 }

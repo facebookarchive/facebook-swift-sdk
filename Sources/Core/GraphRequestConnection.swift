@@ -17,8 +17,9 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+import os
 
-class GraphRequestConnection: GraphRequestConnecting {
+class GraphRequestConnection: NSObject, GraphRequestConnecting {
   // TODO: - figure out how this is used differently from default connection timeout
   /// Gets or sets the timeout interval to wait for a response before giving up.
   var timeout: TimeInterval = 0.0
@@ -57,7 +58,14 @@ class GraphRequestConnection: GraphRequestConnecting {
    */
   var operationQueue: OperationQueue
 
-  private var session: Session?
+  var task: URLSessionTaskProxy?
+
+  private lazy var session: Session = {
+    sessionProvider.session(
+      delegate: self,
+      operationQueue: operationQueue
+    )
+  }()
   private var requestStartTime: Double = 0
 
   let sessionProvider: SessionProviding
@@ -91,13 +99,6 @@ class GraphRequestConnection: GraphRequestConnecting {
   func start() {
     errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
 
-    if session == nil {
-      session = sessionProvider.session(
-        delegate: self,
-        operationQueue: operationQueue
-      )
-    }
-
     switch state {
     case .started, .cancelled, .completed:
       return logger.log("Request connection cannot be started again.")
@@ -114,11 +115,14 @@ class GraphRequestConnection: GraphRequestConnecting {
 
     requestStartTime = TimeUtility.currentTimeInMilliseconds
 
-    let task = URLSessionTaskProxy(for: urlRequest) { [weak self] potentialData, potentialResponse, potentialError in
+    task = URLSessionTaskProxy(
+      for: urlRequest,
+      fromSession: session
+    ) { [weak self] potentialData, potentialResponse, potentialError in
       self?.taskCompletion(potentialData, potentialResponse, potentialError)
     }
 
-    task.start()
+    task?.start()
 
     switch operationQueue.operations.isEmpty {
     case true:
@@ -192,6 +196,87 @@ class GraphRequestConnection: GraphRequestConnecting {
   }
 
   func taskCompletion(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
-    // TODO: Handle a task completion
+    updateState()
+    _ = try? extractResponse(from: data, response, error)
+
+    // TODO: Complete and cleanup session
+    //try? self.complete(withResults: results)
+    //cleanUpSession()
+  }
+
+  // Updates the state upon a completed request
+  private func updateState() {
+    if state != .cancelled {
+      guard state == .started else {
+        return
+      }
+      state = .completed
+    }
+  }
+
+  private func extractResponse(
+    from data: Data?,
+    _ response: URLResponse?,
+    _ error: Error?
+    ) throws -> [Any] {
+    guard let task = task else {
+      throw GraphRequestConnectionError.missingTask
+    }
+
+    var results = [Any]()
+
+    switch (response, error) {
+    case (nil, nil):
+      logExtractionError(GraphRequestConnectionError.missingURLResponse, forTask: task)
+
+    case (_, let error?):
+      logExtractionError(error, forTask: task)
+
+    case (let response?, nil):
+      guard let response = response as? HTTPURLResponse else {
+        logExtractionError(GraphRequestConnectionError.invalidURLResponseType, forTask: task)
+        return results
+      }
+
+      guard response.mimeType?.hasPrefix("image") == false else {
+        logExtractionError(GraphRequestConnectionError.nonTextMimeType, forTask: task)
+        return results
+      }
+      results = parse(response)
+
+      if results.count != requests.count {
+        logExtractionError(GraphRequestConnectionError.resultsMismatch, forTask: task)
+      }
+
+      // TODO: Log the extraction results, depends on parser functioning correctly
+    }
+
+    return results
+  }
+
+  private func logExtractionError(_ error: Error, forTask task: URLSessionTaskProxy) {
+    var logLines = [
+      "Response \(task.loggingSerialNumber)",
+      "Error:"
+    ]
+    switch error {
+    case let error as GraphRequestConnectionError:
+      logLines.append("\(error.localizedDescription)")
+      logLines.append("UserInfo:")
+      logLines.append("\((error as NSError).userInfo)")
+
+    case let error:
+      logLines.append("\(error.localizedDescription)")
+      logLines.append("UserInfo:")
+      logLines.append("\((error as NSError).userInfo)")
+    }
+    logger.log(
+      logLines.joined(separator: "\n")
+    )
+  }
+
+  private func parse(_ response: HTTPURLResponse) -> [Any] {
+    // TODO: Actually parse things
+    return [1, 2, 3]
   }
 }

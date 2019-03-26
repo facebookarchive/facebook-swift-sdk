@@ -130,4 +130,5 @@ class URLSessionTaskProxy {
 // TODO: move
 enum MimeType: String {
   case textJavascript = "text/javascript"
+  case png = "image/png"
 }

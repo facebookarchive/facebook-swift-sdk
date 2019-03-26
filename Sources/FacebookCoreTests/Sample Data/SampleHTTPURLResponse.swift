@@ -16,18 +16,37 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-enum SampleNSError {
-  static let urlDomainSecureConnectionFailed = NSError(
-    domain: NSURLErrorDomain,
-    code: NSURLErrorSecureConnectionFailed,
-    userInfo: [:]
+enum SampleURLResponse {
+  static let valid = URLResponse(
+    url: SampleURL.valid,
+    mimeType: MimeType.textJavascript.rawValue,
+    expectedContentLength: 0,
+    textEncodingName: nil
+  )
+}
+
+enum SampleHTTPURLResponse {
+  static let valid = HTTPURLResponse(
+    url: SampleURL.valid,
+    mimeType: MimeType.textJavascript.rawValue,
+    expectedContentLength: 0,
+    textEncodingName: nil
   )
 
-  static let validWithUserInfo = NSError(
-    domain: NSURLErrorDomain,
-    code: 1,
-    userInfo: ["Foo": "Bar"]
+  static let missingMimeType = HTTPURLResponse(
+    url: SampleURL.valid,
+    mimeType: nil,
+    expectedContentLength: 0,
+    textEncodingName: nil
+  )
+
+  static let pngMimeType = HTTPURLResponse(
+    url: SampleURL.valid,
+    mimeType: MimeType.png.rawValue,
+    expectedContentLength: 0,
+    textEncodingName: nil
   )
 }

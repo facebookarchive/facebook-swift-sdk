@@ -183,12 +183,7 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingSuccessForMimetypeJavascriptWithData() {
-    let response = URLResponse(
-      url: SampleURL.valid,
-      mimeType: MimeType.textJavascript.rawValue,
-      expectedContentLength: 0,
-      textEncodingName: nil
-    )
+    let response = SampleHTTPURLResponse.valid
     let data = "Data".data(using: .utf8)!
 
     completedProxyTask(
@@ -217,12 +212,7 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingSuccessForMimetypeJavascriptWithoutData() {
-    let response = URLResponse(
-      url: SampleURL.valid,
-      mimeType: MimeType.textJavascript.rawValue,
-      expectedContentLength: 0,
-      textEncodingName: nil
-    )
+    let response = SampleHTTPURLResponse.valid
 
     completedProxyTask(
       expectation: expectation(description: name),
@@ -250,12 +240,7 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingSuccessForMimetypeUndefinedWithData() {
-    let response = URLResponse(
-      url: SampleURL.valid,
-      mimeType: nil,
-      expectedContentLength: 0,
-      textEncodingName: nil
-    )
+    let response = SampleHTTPURLResponse.missingMimeType
     let data = "Data".data(using: .utf8)!
 
     completedProxyTask(
@@ -284,12 +269,7 @@ class URLSessionTaskProxyTests: XCTestCase {
   }
 
   func testHandlingSuccessForMimetypeUndefinedWithoutData() {
-    let response = URLResponse(
-      url: SampleURL.valid,
-      mimeType: nil,
-      expectedContentLength: 0,
-      textEncodingName: nil
-    )
+    let response = SampleHTTPURLResponse.missingMimeType
 
     completedProxyTask(
       expectation: expectation(description: name),

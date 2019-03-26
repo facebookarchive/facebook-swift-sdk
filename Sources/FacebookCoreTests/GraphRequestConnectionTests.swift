@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length file_length
 
 @testable import FacebookCore
 import XCTest
@@ -25,36 +25,44 @@ class GraphRequestConnectionTests: XCTestCase {
   let fakeSession = FakeSession()
   var fakeSessionProvider: FakeSessionProvider!
   let fakeLogger = FakeLogger()
+  let fakeServerConfigurationManager = FakeServerConfigurationManager()
+  let fakePiggybackManager = FakeGraphRequestPiggybackManager.self
+  var connection: GraphRequestConnection!
 
   override func setUp() {
     super.setUp()
 
     fakeSessionProvider = FakeSessionProvider(fakeSession: fakeSession)
+    connection = GraphRequestConnection(
+      sessionProvider: fakeSessionProvider,
+      logger: fakeLogger,
+      piggybackManager: fakePiggybackManager,
+      serverConfigurationManager: fakeServerConfigurationManager
+    )
+  }
+
+  override func tearDown() {
+    fakePiggybackManager.reset()
+
+    super.tearDown()
   }
 
   func testCreatingConnection() {
-    let connection = GraphRequestConnection()
-
     XCTAssertEqual(connection.state, .created,
                    "A connection should be in the created state immediately after creation")
   }
 
   func testDefaultConnectionTimeout() {
-    let connection = GraphRequestConnection()
-
     XCTAssertEqual(connection.defaultConnectionTimeout, 60.0,
                    "A connection should have a default timeout of sixty seconds")
   }
 
   func testTimeoutInterval() {
-    let connection = GraphRequestConnection()
-
     XCTAssertEqual(connection.timeout, 0,
                    "A connection should have a timeout of zero seconds.")
   }
 
   func testDelegate() {
-    let connection = GraphRequestConnection()
     var delegate: GraphRequestConnectionDelegate = FakeGraphRequestConnectionDelegate()
     connection.delegate = delegate
 
@@ -65,15 +73,11 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testUrlResponse() {
-    let connection = GraphRequestConnection()
-
     XCTAssertNil(connection.urlResponse,
                  "A connection should not have a default url response")
   }
 
   func testRequests() {
-    let connection = GraphRequestConnection()
-
     XCTAssertTrue(connection.requests.isEmpty,
                   "A connection should have no requests by default")
   }
@@ -81,7 +85,6 @@ class GraphRequestConnectionTests: XCTestCase {
   // MARK: Adding Request
   func testAddingRequest() {
     let request = GraphRequest(graphPath: "Foo")
-    let connection = GraphRequestConnection()
 
     GraphRequestConnectionState
       .allCases
@@ -104,7 +107,6 @@ class GraphRequestConnectionTests: XCTestCase {
   func testAddingRequestStoresRequest() {
     let request = GraphRequest(graphPath: "Foo")
 
-    let connection = GraphRequestConnection()
     try? connection.add(request: request) { _, _, _ in }
 
     guard let metadata = connection.requests.first else {
@@ -119,7 +121,6 @@ class GraphRequestConnectionTests: XCTestCase {
     let request = GraphRequest(graphPath: "Foo")
     let parameters = ["Foo": "Bar"]
 
-    let connection = GraphRequestConnection()
     try? connection.add(request: request, batchParameters: parameters) { _, _, _ in }
 
     guard let metadata = connection.requests.first,
@@ -134,7 +135,6 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testAddingRequestWithEmptyBatchName() {
     let request = GraphRequest(graphPath: "Foo")
-    let connection = GraphRequestConnection()
     let batchName = ""
 
     try? connection.add(request: request, batchEntryName: batchName) { _, _, _ in }
@@ -148,7 +148,6 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testAddingRequestWithBatchName() {
     let request = GraphRequest(graphPath: "Foo")
-    let connection = GraphRequestConnection()
     let batchName = name
     let expectedParameters = ["name": name]
 
@@ -169,7 +168,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let fakeServerConfigurationManager = FakeServerConfigurationManager()
     fakeServerConfigurationManager.clearCache()
 
-    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
+    connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
 
     connection.start()
 
@@ -180,7 +179,7 @@ class GraphRequestConnectionTests: XCTestCase {
   func testStartingCheckForUpdatedErrorConfigurationWithCache() {
     let fakeServerConfigurationProvider = FakeServerConfigurationProvider()
     let fakeServerConfigurationManager = FakeServerConfigurationManager(cachedServerConfiguration: fakeServerConfigurationProvider)
-    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
+    connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
 
     connection.start()
 
@@ -192,8 +191,6 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingWithoutSession() {
-    let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)
-
     connection.start()
 
     XCTAssertEqual(fakeSessionProvider.sessionCallCount, 1,
@@ -205,8 +202,6 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingWithSession() {
-    let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)
-
     connection.start()
     connection.start()
 
@@ -215,8 +210,6 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingUpdatesState() {
-    let connection = GraphRequestConnection(logger: fakeLogger)
-
     GraphRequestConnectionState.allCases.forEach { state in
       defer { fakeLogger.capturedMessages = [] }
 
@@ -248,8 +241,6 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingInvokesPiggybackManager() {
-    let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
-
     GraphRequestConnectionState.allCases.forEach { state in
       defer { FakeGraphRequestPiggybackManager.reset() }
 
@@ -272,7 +263,6 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingWithValidStateLogsRequests() {
-    let connection = GraphRequestConnection(logger: fakeLogger)
     connection.start()
 
     XCTAssertEqual(fakeLogger.logRequestCallCount, 1,
@@ -281,53 +271,199 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testStartingWithEmptyOperationQueue() {
     let delegate = FakeGraphRequestConnectionDelegate()
-    let connection = GraphRequestConnection()
     connection.delegate = delegate
+
+    // Just to ensure we're not using a shared operation queue
+    connection.operationQueue = OperationQueue()
 
     connection.start()
 
-    XCTAssertTrue(delegate.requestConnectionWillBeginLoading.callCount > 0,
-                  "Starting a connection with an operation queue that has no pending operations should immediately inform its delegate that it began")
+    XCTAssertEqual(delegate.requestConnectionWillBeginLoading.callCount, 1,
+                   "Starting a connection with an operation queue that has no pending operations should immediately inform its delegate that it began")
     XCTAssertTrue(delegate.requestConnectionWillBeginLoading.capturedConnection === connection,
                   "A connection delegate should pass back an instance of the connection that invoked it")
   }
 
-  func testStartingWitNonEmptyOperationQueue() {
-    let operationQueue = OperationQueue.main
-    operationQueue.addOperation(SampleOperation())
-
+  func testStartingWithNonEmptyOperationQueue() {
+    let operationQueue = NonExecutingOperationQueue()
     let delegate = FakeGraphRequestConnectionDelegate()
-    let connection = GraphRequestConnection()
     connection.delegate = delegate
     connection.operationQueue = operationQueue
 
+    operationQueue.addOperation {}
     connection.start()
 
-    XCTAssertFalse(delegate.requestConnectionWillBeginLoading.callCount > 0,
-                   "Starting a connection with an operation queue that has pending operations should not immediately inform its delegate that it began")
+    XCTAssertEqual(operationQueue.addOperationCallCount, 2,
+                   "Starting a connection with an operation queue that has pending operations should add a new operation to the queue for informing its delegate that it began")
   }
 
-  func testInformingWhenQueueIsAvailable() {
-    let operationQueue = OperationQueue.main
-    operationQueue.addOperation(SampleOperation())
-
-    let delegate = FakeGraphRequestConnectionDelegate()
-    let connection = GraphRequestConnection()
+  func testOperationQueueHoldsWeakReferenceToSelf() {
+    let operationQueue = NonExecutingOperationQueue()
+    let delegate: FakeGraphRequestConnectionDelegate! = FakeGraphRequestConnectionDelegate()
     connection.delegate = delegate
     connection.operationQueue = operationQueue
 
+    operationQueue.addOperation {}
     connection.start()
+    connection = nil
+    // Also need to clear the captured reference to self in the fake piggyback manager to avoid
+    // a retain cycle
+    FakeGraphRequestPiggybackManager.reset()
 
-    let predicate = NSPredicate { _, _ in
-      delegate.requestConnectionWillBeginLoading.callCount > 0
+    operationQueue.operations.forEach { operation in
+      operation.start()
     }
-    expectation(for: predicate, evaluatedWith: self, handler: nil)
-    waitForExpectations(timeout: 1) { potentialError in
-      guard potentialError == nil else {
-        return XCTFail(
-          "Starting a connection with an operation queue that has pending operations should add informing its delegate that it began to the queue"
-        )
+
+    XCTAssertEqual(delegate.requestConnectionWillBeginLoading.callCount, 0,
+                   "The delegate should not be called if the connection no longer exists")
+  }
+
+  // MARK: Task Completion
+
+  func testCompletingTaskInCancelledState() {
+    GraphRequestConnectionState.allCases.forEach { state in
+      connection.state = state
+      connection.taskCompletion(nil, nil, nil)
+
+      switch state {
+      case .cancelled, .completed, .created, .serialized:
+        XCTAssertEqual(connection.state, state,
+                       "Completing a task in the state: \(state) should not change the state")
+
+      case .started:
+        XCTAssertEqual(connection.state, .completed,
+                       "Completing a started task should set the state to completed")
       }
     }
+  }
+
+  func testCompletingTaskWithError() {
+    let task = URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
+    connection.state = .started
+    connection.task = task
+
+    connection.taskCompletion(nil, nil, SampleNSError.validWithUserInfo)
+
+    XCTAssertEqual(fakeLogger.capturedMessages.first,
+                   """
+      Response \(task.loggingSerialNumber)
+      Error:
+      \(SampleNSError.validWithUserInfo.localizedDescription)
+      UserInfo:
+      \((SampleNSError.validWithUserInfo as NSError).userInfo)
+      """
+    )
+  }
+
+  func testCompletingTaskWithMissingResponse() {
+    let task = URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
+    connection.state = .started
+    connection.task = task
+
+    connection.taskCompletion(nil, nil, nil)
+
+    XCTAssertEqual(fakeLogger.capturedMessages.first,
+                   """
+      Response \(task.loggingSerialNumber)
+      Error:
+      \(GraphRequestConnectionError.missingURLResponse.localizedDescription)
+      UserInfo:
+      [:]
+      """
+    )
+  }
+
+  func testCompletingTaskWithNonHTTPResponse() {
+    let response = SampleURLResponse.valid
+    let task = URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
+    connection.state = .started
+    connection.task = task
+
+    connection.taskCompletion(nil, response, nil)
+
+    XCTAssertEqual(fakeLogger.capturedMessages.first,
+                   """
+      Response \(task.loggingSerialNumber)
+      Error:
+      \(GraphRequestConnectionError.invalidURLResponseType.localizedDescription)
+      UserInfo:
+      [:]
+      """
+    )
+  }
+
+  func testCompletingTaskWithInvalidMimeTypes() {
+    let response = SampleHTTPURLResponse.pngMimeType
+    let task = URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
+    connection.state = .started
+    connection.task = task
+
+    connection.taskCompletion(nil, response, nil)
+
+    XCTAssertEqual(fakeLogger.capturedMessages.first,
+                   """
+      Response \(task.loggingSerialNumber)
+      Error:
+      \(GraphRequestConnectionError.nonTextMimeType.localizedDescription)
+      UserInfo:
+      [:]
+      """
+    )
+  }
+
+  func testCompletingTaskWithRequestResultMismatch() {
+    let response = SampleHTTPURLResponse.valid
+    let task = URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
+    connection.state = .started
+    try? connection.add(request: GraphRequest(graphPath: "Foo")) { _, _, _ in }
+
+    connection.task = task
+
+    connection.taskCompletion(nil, response, nil)
+
+    XCTAssertEqual(fakeLogger.capturedMessages.first,
+                   """
+      Response \(task.loggingSerialNumber)
+      Error:
+      \(GraphRequestConnectionError.resultsMismatch.localizedDescription)
+      UserInfo:
+      [:]
+      """
+    )
+  }
+
+  func testCompletingTaskWithResponseAndError() {
+    let response = SampleHTTPURLResponse.valid
+    let task = URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
+    connection.state = .started
+    connection.task = task
+
+    connection.taskCompletion(nil, response, SampleNSError.validWithUserInfo)
+
+    XCTAssertEqual(fakeLogger.capturedMessages.first,
+                   """
+      Response \(task.loggingSerialNumber)
+      Error:
+      \(SampleNSError.validWithUserInfo.localizedDescription)
+      UserInfo:
+      \((SampleNSError.validWithUserInfo as NSError).userInfo)
+      """
+    )
+  }
+}
+
+private class NonExecutingOperationQueue: OperationQueue {
+  var addOperationCallCount = 0
+  var capturedOperations: [Operation] = []
+
+  // Keeps an accurate representation of the number of operation but does not
+  // allow them to automatically execute
+  override var operations: [Operation] {
+    return capturedOperations
+  }
+
+  override func addOperation(_ operation: Operation) {
+    addOperationCallCount += 1
+    capturedOperations.append(operation)
   }
 }
