@@ -16,35 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable convenience_type
+// swiftlint:disable unused_closure_parameter
 
+@testable import FacebookCore
 import XCTest
 
-class JSONLoader {
-  static func loadData(
-    for filename: JSONFileName,
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> Data? {
-    let testBundle = Bundle(for: JSONLoader.self)
-    guard let path = testBundle.path(forResource: filename.rawValue, ofType: "json") else {
-      XCTFail("Invalid path for json file: \(filename.rawValue).json not found", file: file, line: line)
-      return nil
-    }
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: []) else {
-      XCTFail("Invalid or malformed json in: \(filename.rawValue).json")
-      return nil
-    }
-    return data
-  }
-}
+class GraphRequestJSONParserErrorTests: XCTestCase {
+  func testAllCases() {
+    let expectedCases: [GraphRequestJSONParserError] = [
+      .emptyData,
+      .invalidData
+    ]
 
-/**
- Used for loading specific json files into your test.
- Assumes that the raw value will match the name of a .json file in the test target
- */
-enum JSONFileName: String {
-  case validRemoteGraphResponseError
-  case validRemoteErrorConfiguration
-  case validRemoteErrorConfigurationList
+    expectedCases.forEach { `case` in
+      switch `case` {
+      case .emptyData,
+           .invalidData:
+        break
+      }
+    }
+  }
 }

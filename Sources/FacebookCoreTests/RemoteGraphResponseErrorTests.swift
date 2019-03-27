@@ -16,35 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable convenience_type
-
+@testable import FacebookCore
 import XCTest
 
-class JSONLoader {
-  static func loadData(
-    for filename: JSONFileName,
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> Data? {
-    let testBundle = Bundle(for: JSONLoader.self)
-    guard let path = testBundle.path(forResource: filename.rawValue, ofType: "json") else {
-      XCTFail("Invalid path for json file: \(filename.rawValue).json not found", file: file, line: line)
-      return nil
+class RemoteGraphResponseErrorTests: XCTestCase {
+  func testDecodingFromJSON() {
+    guard let data = JSONLoader.loadData(for: .validRemoteGraphResponseError),
+      let error = try? JSONDecoder().decode(RemoteGraphResponseError.self, from: data)
+      else {
+        return XCTFail("Should be able to decode a remote graph response error form valid json")
     }
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: []) else {
-      XCTFail("Invalid or malformed json in: \(filename.rawValue).json")
-      return nil
-    }
-    return data
-  }
-}
 
-/**
- Used for loading specific json files into your test.
- Assumes that the raw value will match the name of a .json file in the test target
- */
-enum JSONFileName: String {
-  case validRemoteGraphResponseError
-  case validRemoteErrorConfiguration
-  case validRemoteErrorConfigurationList
+    XCTAssertEqual(error.details.code, 1, "Should decode the error's code correctly")
+    XCTAssertEqual(error.details.message, "Invalid argument was passed", "Should decode the error's message correctly")
+    XCTAssertEqual(error.details.type, "invalidArgs", "Should decode the error's type correctly")
+  }
 }
