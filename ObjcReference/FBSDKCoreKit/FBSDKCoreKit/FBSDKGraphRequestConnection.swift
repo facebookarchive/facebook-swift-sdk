@@ -181,69 +181,69 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
      */
     private(set) var urlResponse: HTTPURLResponse?
 
-//    /**
-//     Determines the operation queue that is used to call methods on the connection's delegate.
-//
-//     By default, a connection is scheduled on the current thread in the default mode when it is created.
-//     You cannot reschedule a connection after it has started.
-//     */
-//    private var _delegateQueue: OperationQueue?
-//    var operationQueue: OperationQueue? {
-//        get {
-//            return _delegateQueue
-//        }
-//        set(queue) {
-//            _delegateQueue = queue
-//        }
-//    }
-//
-//    /**
-//     @methodgroup Class methods
-//     */
-//
-//    /**
-//     @methodgroup Adding requests
-//     */
-//
-//    /**
-//     @method
-//    
-//      This method adds an <FBSDKGraphRequest> object to this connection.
-//    
-//     @param request       A request to be included in the round-trip when start is called.
-//     @param handler       A handler to call back when the round-trip completes or times out.
-//    
-//     The completion handler is retained until the block is called upon the
-//     completion or cancellation of the connection.
-//     */
-//    func add(_ request: FBSDKGraphRequest?, completionHandler handler: FBSDKGraphRequestBlock) {
-//        add(request, batchEntryName: "", completionHandler: handler)
-//    }
-//
-//    /**
-//     @method
-//    
-//      This method adds an <FBSDKGraphRequest> object to this connection.
-//    
-//     @param request         A request to be included in the round-trip when start is called.
-//    
-//     @param handler         A handler to call back when the round-trip completes or times out.
-//     The handler will be invoked on the main thread.
-//    
-//     @param name            A name for this request.  This can be used to feed
-//     the results of one request to the input of another <FBSDKGraphRequest> in the same
-//     `FBSDKGraphRequestConnection` as described in
-//     [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
-//    
-//     The completion handler is retained until the block is called upon the
-//     completion or cancellation of the connection. This request can be named
-//     to allow for using the request's response in a subsequent request.
-//     */
-//    func add(_ request: FBSDKGraphRequest?, batchEntryName name: String?, completionHandler handler: FBSDKGraphRequestBlock) {
-//        let batchParams = name.count > 0 ? [
-//            kBatchEntryName: name
-//        ] : nil
-//        add(request, batchParameters: batchParams, completionHandler: handler)
+    /**
+     Determines the operation queue that is used to call methods on the connection's delegate.
+
+     By default, a connection is scheduled on the current thread in the default mode when it is created.
+     You cannot reschedule a connection after it has started.
+     */
+    private var _delegateQueue: OperationQueue?
+    var operationQueue: OperationQueue? {
+        get {
+            return _delegateQueue
+        }
+        set(queue) {
+            _delegateQueue = queue
+        }
+    }
+
+    /**
+     @methodgroup Class methods
+     */
+
+    /**
+     @methodgroup Adding requests
+     */
+
+    /**
+     @method
+
+      This method adds an <FBSDKGraphRequest> object to this connection.
+
+     @param request       A request to be included in the round-trip when start is called.
+     @param handler       A handler to call back when the round-trip completes or times out.
+
+     The completion handler is retained until the block is called upon the
+     completion or cancellation of the connection.
+     */
+    func add(_ request: FBSDKGraphRequest?, completionHandler handler: FBSDKGraphRequestBlock) {
+        add(request, batchEntryName: "", completionHandler: handler)
+    }
+
+    /**
+     @method
+
+      This method adds an <FBSDKGraphRequest> object to this connection.
+
+     @param request         A request to be included in the round-trip when start is called.
+
+     @param handler         A handler to call back when the round-trip completes or times out.
+     The handler will be invoked on the main thread.
+
+     @param name            A name for this request.  This can be used to feed
+     the results of one request to the input of another <FBSDKGraphRequest> in the same
+     `FBSDKGraphRequestConnection` as described in
+     [Graph API Batch Requests]( https://developers.facebook.com/docs/reference/api/batch/ ).
+
+     The completion handler is retained until the block is called upon the
+     completion or cancellation of the connection. This request can be named
+     to allow for using the request's response in a subsequent request.
+     */
+    func add(_ request: FBSDKGraphRequest?, batchEntryName name: String?, completionHandler handler: FBSDKGraphRequestBlock) {
+        let batchParams = name.count > 0 ? [
+            kBatchEntryName: name
+        ] : nil
+        add(request, batchParameters: batchParams, completionHandler: handler)
     }
 
     /**
@@ -355,7 +355,7 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
     
      This method cannot be called twice for an `FBSDKGraphRequestConnection` instance.
      */
-//    func start() {
+    func start() {
         // TODO: [Swiftify] ensure that the code below is executed only once (`dispatch_once()` is deprecated)
         {
             g_errorConfiguration = FBSDKErrorConfiguration(dictionary: nil)
@@ -381,24 +381,24 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
 
         if session == nil {
             session = defaultSession()
-//        }
-//
-//        task = FBSDKURLSessionTask(request: request, from: session) { error, response, responseData in
-//          try? self.completeFBSDKURLSession(with: response, data: responseData)
-//        }
-//        task?.start()
-//
-//        let delegate: FBSDKGraphRequestConnectionDelegate? = self.delegate
-//        if delegate?.responds(to: #selector(FBSDKGraphRequestConnectionDelegate.requestConnectionWillBeginLoading(_:))) ?? false {
-//            if delegateQueue != nil {
-//                delegateQueue?.addOperation({
-//                    delegate?.requestConnectionWillBeginLoading(self)
-//                })
-//            } else {
-//                delegate?.requestConnectionWillBeginLoading(self)
-//            }
-//        }
-//    }
+        }
+
+        task = FBSDKURLSessionTask(request: request, from: session) { error, response, responseData in
+          try? self.completeFBSDKURLSession(with: response, data: responseData)
+        }
+        task?.start()
+
+        let delegate: FBSDKGraphRequestConnectionDelegate? = self.delegate
+        if delegate?.responds(to: #selector(FBSDKGraphRequestConnectionDelegate.requestConnectionWillBeginLoading(_:))) ?? false {
+            if delegateQueue != nil {
+                delegateQueue?.addOperation({
+                    delegate?.requestConnectionWillBeginLoading(self)
+                })
+            } else {
+                delegate?.requestConnectionWillBeginLoading(self)
+            }
+        }
+    }
 
     /**
      @method
@@ -697,7 +697,6 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
 
         var results: [Any]? = nil
         urlResponse = response as? HTTPURLResponse
-        // response
         if response != nil {
             if let response = response {
                 assert((response is HTTPURLResponse), "Expected NSHTTPURLResponse, got \(response)")
@@ -714,12 +713,10 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
                 results = parseJSONResponse(PlacesResponseKey.data, error: &error, statusCode: statusCode ?? 0)
             }
         }
-        // no response
         else if error == nil {
             error = Error.fbError(withCode: Int(FBSDKErrorUnknown), message: "Missing NSURLResponse")
         }
 
-        // maybe response
         if error == nil {
             if requests.count != results?.count {
                 error = Error.fbError(withCode: Int(FBSDKErrorGraphRequestProtocolMismatch), message: "Unexpected number of results returned from server.")
@@ -730,7 +727,6 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
             }
         }
 
-        // yes error
         if error != nil {
             if let userInfo = (error as NSError?)?.userInfo {
                 logger ?? "" += String(format: "Response <#%lu> <Error>:\n%@\n%@\n", UInt(logger?.loggerSerialNumber ?? 0), error?.localizedDescription ?? "", userInfo)
@@ -738,7 +734,6 @@ class FBSDKGraphRequestConnection: NSObject, NSURLSessionDataDelegate, FBSDKGrap
         }
         logger?.emitToNSLog()
 
-        // either way
         try? self.complete(withResults: results)
 
         cleanUpSession()
