@@ -16,17 +16,29 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/* The title of the label to start attempting error recovery */
-"ErrorRecovery.OK" = "OK";
+@testable import FacebookCore
+import Foundation
 
-/* The title of the label to decline attempting error recovery */
-"ErrorRecovery.Cancel" = "Cancel";
+class FakeServerConfigurationManager: ServerConfigurationManaging {
+  private var cachedConfiguration: ServerConfigurationProviding?
 
-/* The fallback message to display to retry transient errors */
-"ErrorRecovery.Transient.Suggestion" = "The server is temporarily busy, please try again.";
+  var cachedConfigurationWasRequested: Bool = false
 
-/* The fallback message to display to recover invalidated tokens */
-"ErrorRecovery.Login.Suggestion" = "Please log into this app again to reconnect your Facebook account.";
+  var cachedServerConfiguration: ServerConfigurationProviding? {
+    get {
+      cachedConfigurationWasRequested = true
+      return cachedConfiguration
+    }
+    set {
+      cachedConfiguration = newValue
+    }
+  }
 
-/* The message to log for developer when they have not configured their app to use transport security */
-"ErrorStrings.DeveloperError.appTransportSecurity" = "WARNING: FBSDK secure network request failed. Please verify you have configured your app for Application Transport Security compatibility described at https://developers.facebook.com/docs/ios/ios9";
+  init(cachedServerConfiguration: ServerConfigurationProviding? = nil) {
+    self.cachedServerConfiguration = cachedServerConfiguration
+  }
+
+  func clearCache() {
+    cachedServerConfiguration = nil
+  }
+}

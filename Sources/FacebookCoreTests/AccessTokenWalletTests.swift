@@ -38,6 +38,7 @@ class AccessTokenWalletTests: XCTestCase {
 
   override func tearDown() {
     FakeCookieUtility.reset()
+    FakeGraphRequestPiggybackManager.reset()
 
     super.tearDown()
   }

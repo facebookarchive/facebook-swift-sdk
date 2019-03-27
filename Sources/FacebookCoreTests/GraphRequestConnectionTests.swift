@@ -22,6 +22,7 @@ import XCTest
 class GraphRequestConnectionTests: XCTestCase {
   let fakeSession = FakeSession()
   var fakeSessionProvider: FakeSessionProvider!
+  let fakeLogger = FakeLogger()
 
   override func setUp() {
     super.setUp()
@@ -162,6 +163,31 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   // MARK: Starting Connection
+  func testStartingCheckForUpdatedErrorConfigurationWithoutCache() {
+    let fakeServerConfigurationManager = FakeServerConfigurationManager()
+    fakeServerConfigurationManager.clearCache()
+
+    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
+
+    connection.start()
+
+    XCTAssertTrue(fakeServerConfigurationManager.cachedConfigurationWasRequested,
+                  "A connection should check for a cached configuration when starting a request")
+  }
+
+  func testStartingCheckForUpdatedErrorConfigurationWithCache() {
+    let fakeServerConfigurationProvider = FakeServerConfigurationProvider()
+    let fakeServerConfigurationManager = FakeServerConfigurationManager(cachedServerConfiguration: fakeServerConfigurationProvider)
+    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
+
+    connection.start()
+
+    guard let cache = fakeServerConfigurationManager.cachedServerConfiguration as? FakeServerConfigurationProvider else {
+      return XCTFail("A connection should check for an updated configuration when starting a request")
+    }
+    XCTAssertTrue(cache.errorConfigurationWasRequested,
+                  "A connection should check for an updated error configuration when starting a request")
+  }
 
   func testStartingWithoutSession() {
     let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)
@@ -182,11 +208,68 @@ class GraphRequestConnectionTests: XCTestCase {
                    "A connection should not request a new session from its session provider if starting a request with an existing session")
   }
 
-  func testStart() {
-    let connection = GraphRequestConnection()
+  func testStartingUpdatesState() {
+    let connection = GraphRequestConnection(logger: fakeLogger)
 
+    GraphRequestConnectionState.allCases.forEach { state in
+      defer { fakeLogger.capturedMessages = [] }
+
+      connection.state = state
+      connection.start()
+
+      switch state {
+      case .cancelled,
+           .completed:
+        XCTAssertNotNil(fakeLogger.capturedMessages.first,
+                        "Starting a connection in the invalid state: \(state) should log an error message")
+        XCTAssertNotEqual(connection.state, .started,
+                          "A connection with an invalid start state should not be placed into a started state")
+
+      case .started:
+        XCTAssertNotNil(fakeLogger.capturedMessages.first,
+                        "Starting an already started connection should log an error message")
+        XCTAssertEqual(connection.state, .started,
+                       "Starting an already started connection should not change its state")
+
+      case .created,
+           .serialized:
+        XCTAssertNil(fakeLogger.capturedMessages.first,
+                     "Starting a connection in the valid state: \(state) should not log an error message")
+        XCTAssertEqual(connection.state, .started,
+                       "Starting a connection in the valid state: \(state) should update the state to be started")
+      }
+    }
+  }
+
+  func testStartingInvokesPiggybackManager() {
+    let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
+
+    GraphRequestConnectionState.allCases.forEach { state in
+      defer { FakeGraphRequestPiggybackManager.reset() }
+
+      switch state {
+      case .cancelled,
+           .completed,
+           .started:
+        connection.state = state
+        connection.start()
+        XCTAssertTrue(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
+                      "Starting a request in the invalid state: \(state) should not invoke the piggyback manager")
+      case .created,
+           .serialized:
+        connection.state = state
+        connection.start()
+        XCTAssertFalse(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
+                       "Starting a request in the valid state: \(state) should invoke the piggyback manager")
+      }
+    }
+  }
+
+  func testStartingWithValidStateLogsRequests() {
+    let connection = GraphRequestConnection(logger: fakeLogger)
     connection.start()
 
-    // TODO: Observe and assert about side effects when connection logic is added
+    XCTAssertEqual(fakeLogger.logRequestCallCount, 1,
+                   "Successfully starting a connection should log the request")
   }
 }
