@@ -16,17 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/* The title of the label to start attempting error recovery */
-"ErrorRecovery.OK" = "OK";
+@testable import FacebookCore
+import XCTest
 
-/* The title of the label to decline attempting error recovery */
-"ErrorRecovery.Cancel" = "Cancel";
-
-/* The fallback message to display to retry transient errors */
-"ErrorRecovery.Transient.Suggestion" = "The server is temporarily busy, please try again.";
-
-/* The fallback message to display to recover invalidated tokens */
-"ErrorRecovery.Login.Suggestion" = "Please log into this app again to reconnect your Facebook account.";
-
-/* The message to log for developer when they have not configured their app to use transport security */
-"ErrorStrings.DeveloperError.appTransportSecurity" = "WARNING: FBSDK secure network request failed. Please verify you have configured your app for Application Transport Security compatibility described at https://developers.facebook.com/docs/ios/ios9";
+class LoggerTests: XCTestCase {
+  func testGeneratingSerialNumbers() {
+    var logger = Logger()
+    XCTAssertEqual(logger.generateSerialNumber(), 1112,
+                   "Logger should generate predictable values for it's serial numbers")
+    XCTAssertEqual(logger.generateSerialNumber(), 1113,
+                   "Logger should generate predictable values for it's serial numbers")
+    XCTAssertEqual(logger.generateSerialNumber(), 1114,
+                   "Logger should generate predictable values for it's serial numbers")
+  }
+}
