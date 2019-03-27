@@ -16,8 +16,28 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-enum URLBuilder {
-  static let hostname = "facebook.com"
+class FakeSessionDataTask: SessionDataTask {
+  var resumeWasCalled = false
+  var cancelWasCalled = false
+  var capturedUrlRequest: URLRequest?
+  let completionHandler: SessionTaskCompletion
+
+  init(
+    request: URLRequest? = nil,
+    completionHandler: @escaping SessionTaskCompletion = { _, _, _ in }
+    ) {
+    capturedUrlRequest = request
+    self.completionHandler = completionHandler
+  }
+
+  func resume() {
+    resumeWasCalled = true
+  }
+
+  func cancel() {
+    cancelWasCalled = true
+  }
 }

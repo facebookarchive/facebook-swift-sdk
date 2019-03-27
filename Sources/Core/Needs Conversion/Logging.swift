@@ -16,6 +16,11 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import Foundation
+
 protocol Logging {
-  func log(message: StaticString)
+  mutating func generateSerialNumber() -> UInt
+
+  func log(_ message: String)
+  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?)
 }
