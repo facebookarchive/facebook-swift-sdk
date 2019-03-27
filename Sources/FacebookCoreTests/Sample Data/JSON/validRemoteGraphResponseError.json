@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": 1,
+    "message": "Invalid argument was passed",
+    "type": "invalidArgs",
+    "error_subcode": 5,
+    "scope": "local"
+  }
+}
