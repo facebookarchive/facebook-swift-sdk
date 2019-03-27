@@ -19,6 +19,8 @@
 import Foundation
 
 private let mainStringTable = "LocalizableStrings"
+private let bundleIdentifier = "com.facebook.sdk.core"
+private let bundle = Bundle(identifier: bundleIdentifier) ?? .main
 
 protocol Localizable {
   /// Provides a localized string that draws from the LocalizableStrings file in the main bundle
@@ -33,7 +35,7 @@ extension Localizable where Self: CaseIterable, Self: RawRepresentable, Self.Raw
     return localized()
   }
 
-  func localized(bundle: Bundle = .main) -> String {
+  func localized(bundle: Bundle = bundle) -> String {
     return rawValue.localized(bundle: bundle)
   }
 }
@@ -43,7 +45,7 @@ extension String: Localizable {
     return localized()
   }
 
-  func localized(bundle: Bundle = .main) -> String {
+  func localized(bundle: Bundle = bundle) -> String {
     // swiftlint:disable:next nslocalizedstring_key
     return NSLocalizedString(self, tableName: mainStringTable, bundle: bundle, value: self, comment: "")
   }
