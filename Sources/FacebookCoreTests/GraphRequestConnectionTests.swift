@@ -210,6 +210,8 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingUpdatesState() {
+    let connection = GraphRequestConnection(logger: fakeLogger)
+
     GraphRequestConnectionState.allCases.forEach { state in
       defer { fakeLogger.capturedMessages = [] }
 
@@ -241,6 +243,8 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingInvokesPiggybackManager() {
+    let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
+
     GraphRequestConnectionState.allCases.forEach { state in
       defer { FakeGraphRequestPiggybackManager.reset() }
 
@@ -263,6 +267,7 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testStartingWithValidStateLogsRequests() {
+    let connection = GraphRequestConnection(logger: fakeLogger)
     connection.start()
 
     XCTAssertEqual(fakeLogger.logRequestCallCount, 1,

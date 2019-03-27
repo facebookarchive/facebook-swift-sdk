@@ -17,7 +17,6 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-import os
 
 class GraphRequestConnection: NSObject, GraphRequestConnecting {
   // TODO: - figure out how this is used differently from default connection timeout
