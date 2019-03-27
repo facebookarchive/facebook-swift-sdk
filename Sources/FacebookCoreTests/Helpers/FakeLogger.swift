@@ -17,11 +17,24 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import Foundation
 
 class FakeLogger: Logging {
-  var capturedMessage: StaticString?
+  var capturedMessages: [String] = []
+  var logRequestCallCount = 0
+  var generateSerialNumberWasCalled = false
+  var serialNumber: UInt = 0
 
-  func log(message: StaticString) {
-    capturedMessage = message
+  func generateSerialNumber() -> UInt {
+    generateSerialNumberWasCalled = true
+    return serialNumber
+  }
+
+  func log(_ message: String) {
+    capturedMessages.append(message)
+  }
+
+  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
+    logRequestCallCount += 1
   }
 }

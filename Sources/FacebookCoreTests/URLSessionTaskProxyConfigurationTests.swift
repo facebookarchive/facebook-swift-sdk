@@ -16,17 +16,26 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-/* The title of the label to start attempting error recovery */
-"ErrorRecovery.OK" = "OK";
+@testable import FacebookCore
+import XCTest
 
-/* The title of the label to decline attempting error recovery */
-"ErrorRecovery.Cancel" = "Cancel";
+class URLSessionTaskProxyConfigurationTests: XCTestCase {
+  let proxy = URLSessionTaskProxy(
+    for: SampleURLRequest.valid
+  ) { _, _, _ in }
 
-/* The fallback message to display to retry transient errors */
-"ErrorRecovery.Transient.Suggestion" = "The server is temporarily busy, please try again.";
+  func testSessionDependency() {
+    XCTAssertTrue(proxy.session is URLSession,
+                  "Proxy should have the correct concrete implementation for its session dependency")
+  }
 
-/* The fallback message to display to recover invalidated tokens */
-"ErrorRecovery.Login.Suggestion" = "Please log into this app again to reconnect your Facebook account.";
+  func testLoggingDependency() {
+    XCTAssertTrue(proxy.logger is Logger,
+                  "Proxy should have the correct concrete implementation for its logging dependency")
+  }
 
-/* The message to log for developer when they have not configured their app to use transport security */
-"ErrorStrings.DeveloperError.appTransportSecurity" = "WARNING: FBSDK secure network request failed. Please verify you have configured your app for Application Transport Security compatibility described at https://developers.facebook.com/docs/ios/ios9";
+  func testSettingsDependency() {
+    XCTAssertTrue(proxy.processInfo is ProcessInfo,
+                  "Proxy should have the correct concrete implementation for its process info dependency")
+  }
+}
