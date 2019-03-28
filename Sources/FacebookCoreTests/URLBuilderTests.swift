@@ -76,11 +76,69 @@ class URLBuilderTests: XCTestCase {
     validateBaseUrl(url, withPrefix: "m", withDomainPrefix: "beta")
   }
 
+  func testBuildingWithDefaultPath() {
+    let url = URLBuilder().buildURL()
+    let expectedPathComponents = [
+      "/",
+      Settings().graphAPIVersion.description
+    ]
+
+    XCTAssertEqual(url?.pathComponents, expectedPathComponents,
+                   "Should build a url with only the expected path components")
+  }
+
+  func testBuildingWithPath() {
+    let url = URLBuilder().buildURL(path: "me")
+    let expectedPathComponents = [
+      "/",
+      Settings().graphAPIVersion.description,
+      "me"
+    ]
+    validateBaseUrl(url, withPath: "/v3.4/me")
+
+    XCTAssertEqual(url?.pathComponents, expectedPathComponents,
+                   "Should build a url with only the expected path components")
+  }
+
+  func testBuildingWithoutQueryParameters() {
+    guard let url = URLBuilder().buildURL(),
+      let queryItems = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        )?.queryItems
+      else {
+        return XCTFail("Should be able to get query items from url")
+    }
+
+    XCTAssertTrue(queryItems.isEmpty,
+                  "Should not include default query items")
+  }
+
+  func testBuildingWithQueryParameters() {
+    let expectedQueryItems = URLQueryItemBuilder.build(from: ["limit": 5])
+
+    guard let url = URLBuilder().buildURL(queryItems: expectedQueryItems),
+      let queryItems = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        )?.queryItems
+      else {
+        return XCTFail("Should be able to get query items from url")
+    }
+
+    XCTAssertEqual(
+      queryItems,
+      expectedQueryItems,
+      "Builder should use the provided query items"
+    )
+  }
+
   private func validateBaseUrl(
     _ url: URL?,
     withPrefix prefix: String = "",
     withDomainPrefix domainPrefix: String = "",
     withPath path: String? = nil,
+    forVersion version: GraphAPIVersion = Settings.shared.graphAPIVersion,
     inFile file: StaticString = #file,
     atLine line: UInt = #line
     ) {
@@ -114,10 +172,16 @@ class URLBuilderTests: XCTestCase {
       file: file,
       line: line
     )
+    XCTAssertTrue(
+      url.pathComponents.contains(version.description),
+      "URL path should contain information about the graph api version",
+      file: file,
+      line: line
+    )
     XCTAssertEqual(
       url.path,
-      path ?? "",
-      "URL path should be root",
+      path ?? "/v3.4",
+      "URL path should contain the graph api version",
       file: file,
       line: line
     )

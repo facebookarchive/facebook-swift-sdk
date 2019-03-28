@@ -26,11 +26,25 @@ struct URLBuilder {
     self.settings = settings
   }
 
-  func buildURL(withHostPrefix prefix: String = "") -> URL? {
+  /**
+   For building a facebook url
+
+   - Parameter hostPrefix: A prefix for the qualified hostname. `Ex: hostPrefix.domainQualifier.domain`
+   - Parameter path: A path to use for the url. Should not include the "/", this will be added for you
+   - Parameter queryItems: An array of `URLQueryItem`, recommended to build these by providing a dictionary of
+   type `[String: AnyHashable]` to the `URLQueryItemBuilder`
+   */
+  func buildURL(
+    withHostPrefix hostPrefix: String = "",
+    path: String = "",
+    queryItems: [URLQueryItem] = []
+    ) -> URL? {
     var components = URLComponents()
 
     components.scheme = "https"
-    components.host = urlHost(with: prefix)
+    components.host = urlHost(with: hostPrefix)
+    components.path = build(path)
+    components.queryItems = queryItems
 
     return components.url
   }
@@ -41,5 +55,14 @@ struct URLBuilder {
     host = prefix.isEmpty ? host : "\(prefix).\(host)"
 
     return host
+  }
+
+  private func build(_ path: String) -> String {
+    let basePath = "/\(settings.graphAPIVersion.description)"
+    guard !path.isEmpty else {
+      return basePath
+    }
+
+    return "\(basePath)/\(path)"
   }
 }

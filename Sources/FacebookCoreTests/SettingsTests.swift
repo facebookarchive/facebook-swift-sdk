@@ -78,4 +78,9 @@ class SettingsTests: XCTestCase {
     XCTAssertEqual(settings.domainPrefix, "beta",
                    "A developer should be able to set any string as the facebook domain prefix to use in building urls")
   }
+
+  func testGraphAPIVersion() {
+    XCTAssertEqual(Settings().graphAPIVersion.description, "v3.4",
+                   "Settings should store a well-known default version of the graph api")
+  }
 }
