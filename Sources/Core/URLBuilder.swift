@@ -16,22 +16,30 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+struct URLBuilder {
+  static let hostname: String = "facebook.com"
+  let settings: SettingsManaging
 
-  static var graphAPIVersion: String = "0.0.1"
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
+  init(settings: SettingsManaging = Settings.shared) {
+    self.settings = settings
+  }
 
-  init(
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = []
-    ) {
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
+  func buildURL(withHostPrefix prefix: String = "") -> URL? {
+    var components = URLComponents()
+
+    components.scheme = "https"
+    components.host = urlHost(with: prefix)
+
+    return components.url
+  }
+
+  private func urlHost(with prefix: String) -> String {
+    let domainPrefix = settings.domainPrefix ?? ""
+    var host = domainPrefix.isEmpty ? URLBuilder.hostname : "\(domainPrefix).\(URLBuilder.hostname)"
+    host = prefix.isEmpty ? host : "\(prefix).\(host)"
+
+    return host
   }
 }
