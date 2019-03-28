@@ -16,22 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+/**
+ Used for expressing a GraphAPIVersion. Takes a major and minor version as UInts
 
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
+ **Be Advised** The minor version is pegged to any value less than one hundred.
+ Values greater than one hundred will be stored as zero.
+ */
+struct GraphAPIVersion: CustomStringConvertible, Equatable {
+  private let major: UInt
+  private let minor: UInt
 
-  init(
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = []
-    ) {
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
+  init(major: UInt, minor: UInt = 0) {
+    self.major = major
+    self.minor = minor < 100 ? minor : 0
+  }
+
+  var description: String {
+    return "v\(major).\(minor)"
   }
 }

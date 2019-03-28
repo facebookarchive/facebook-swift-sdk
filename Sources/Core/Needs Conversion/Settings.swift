@@ -27,8 +27,8 @@ protocol SettingsManaging {
   var graphApiDebugParameter: GraphApiDebugParameter { get }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }
+  var graphAPIVersion: GraphAPIVersion { get set }
 
-  static var graphAPIVersion: String { get set }
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
 
@@ -44,8 +44,10 @@ class Settings: SettingsManaging {
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
   let graphApiDebugParameter: GraphApiDebugParameter = .none
 
-  // TODO: probably should not be settable from everywhere but should come from some sort of config
-  static var graphAPIVersion: String = ""
+  /**
+   Overrides the default Graph API version to use with `GraphRequest`s. This overrides the provided default.
+   */
+  var graphAPIVersion = GraphAPIVersion(major: 3, minor: 4)
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var isGraphErrorRecoveryEnabled: Bool = false
