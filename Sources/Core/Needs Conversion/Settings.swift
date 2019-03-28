@@ -26,6 +26,7 @@ protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
+  var domainPrefix: String? { get set }
 
   static var graphAPIVersion: String { get set }
   static var isGraphErrorRecoveryEnabled: Bool { get set }
