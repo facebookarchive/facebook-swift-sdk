@@ -33,6 +33,7 @@ protocol SettingsManaging {
 
 class Settings: SettingsManaging {
   private enum PListKeys {
+    static let domainPrefix: String = "FacebookDomainPrefix"
     static let loggingBehaviors: String = "FacebookLoggingBehavior"
   }
 
@@ -50,6 +51,15 @@ class Settings: SettingsManaging {
 
   // TODO: There is a very good chance this will be needed when we start injecting settings various places
   static let shared = Settings()
+
+  /**
+   The Facebook domain part. This can be used to change the Facebook domain
+   (e.g. "beta") so that requests will be sent to `graph.beta.facebook.com`
+
+   This value will be read from the application's plist (FacebookDomainPart)
+   or may be explicitly set.
+   */
+  var domainPrefix: String?
 
   /**
    The current Facebook SDK logging behaviors.
@@ -74,6 +84,7 @@ class Settings: SettingsManaging {
     loggingBehaviors = [.developerErrors]
 
     setBehaviors(from: bundle)
+    setDomainPrefix(from: bundle)
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
@@ -91,5 +102,15 @@ class Settings: SettingsManaging {
     case false:
       self.loggingBehaviors = Set(behaviors)
     }
+  }
+
+  private func setDomainPrefix(from bundle: InfoDictionaryProviding) {
+    guard let prefix = bundle.object(forInfoDictionaryKey: PListKeys.domainPrefix) as? String,
+      !prefix.isEmpty
+      else {
+        return
+    }
+
+    domainPrefix = prefix
   }
 }
