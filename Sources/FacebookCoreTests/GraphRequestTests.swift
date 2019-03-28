@@ -282,4 +282,3 @@ private extension Settings {
     Settings.shared.graphAPIVersion = GraphAPIVersion(major: 3, minor: 4)
   }
 }
-
