@@ -272,7 +272,7 @@
 			};
 			buildConfigurationList = 93570B4B1BD0B71100D6BBF4 /* Build configuration list for PBXProject "SwiftCatalog" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
