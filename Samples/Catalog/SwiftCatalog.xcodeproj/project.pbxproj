@@ -256,7 +256,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Facebook, Inc";
 				TargetAttributes = {
 					81EDA31D1D025F4600E742F4 = {
@@ -272,7 +272,7 @@
 			};
 			buildConfigurationList = 93570B4B1BD0B71100D6BBF4 /* Build configuration list for PBXProject "SwiftCatalog" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -398,6 +398,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BA3CBC1D35949E00017B14 /* Debug.xcconfig */;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
@@ -410,6 +411,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BA3CBD1D35949E00017B14 /* Release.xcconfig */;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
