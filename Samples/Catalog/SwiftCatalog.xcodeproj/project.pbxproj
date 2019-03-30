@@ -18,6 +18,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		52388221224EC48700E66477 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81F43A0A1D060C6700569A1A /* FacebookSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F49FA479222880FE0008CAD6;
+			remoteInfo = FacebookCoreTests;
+		};
 		81F43A101D060C6800569A1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 81F43A0A1D060C6700569A1A /* FacebookSwift.xcodeproj */;
@@ -201,6 +208,7 @@
 				81F43A111D060C6800569A1A /* FacebookCore.framework */,
 				81F43A131D060C6800569A1A /* FacebookLogin.framework */,
 				81F43A151D060C6800569A1A /* FacebookShare.framework */,
+				52388222224EC48700E66477 /* FacebookCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,6 +303,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		52388222224EC48700E66477 /* FacebookCoreTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FacebookCoreTests.xctest;
+			remoteRef = 52388221224EC48700E66477 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		81F43A111D060C6800569A1A /* FacebookCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -382,7 +397,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BA3CBF1D35949E00017B14 /* SwiftCatalog.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -390,7 +404,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BA3CBF1D35949E00017B14 /* SwiftCatalog.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

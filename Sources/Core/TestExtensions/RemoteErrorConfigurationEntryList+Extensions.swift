@@ -16,14 +16,11 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
-
 // TODO: Consider adding initializer to internal. Really do not want to do this but may
 // be the only way to silence this error.
 // See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
-extension RemoteErrorCodeGroup {
-  init(code: Int, subcodes: [Int] = []) {
-    self.code = code
-    self.subcodes = subcodes
+internal extension RemoteErrorConfigurationEntryList {
+  init(configurations: [RemoteErrorConfigurationEntry]) {
+    self.configurations = configurations
   }
 }
