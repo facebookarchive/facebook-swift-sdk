@@ -80,7 +80,7 @@ class SettingsTests: XCTestCase {
   }
 
   func testGraphAPIVersion() {
-    XCTAssertEqual(Settings().graphAPIVersion.description, "v3.4",
+    XCTAssertEqual(Settings().graphAPIVersion.description, "v3.2",
                    "Settings should store a well-known default version of the graph api")
   }
 }

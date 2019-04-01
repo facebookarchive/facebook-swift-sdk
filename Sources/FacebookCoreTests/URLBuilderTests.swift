@@ -94,7 +94,7 @@ class URLBuilderTests: XCTestCase {
       Settings().graphAPIVersion.description,
       "me"
     ]
-    validateBaseUrl(url, withPath: "/v3.4/me")
+    validateBaseUrl(url, withPath: "/v3.2/me")
 
     XCTAssertEqual(url?.pathComponents, expectedPathComponents,
                    "Should build a url with only the expected path components")
