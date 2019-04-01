@@ -16,25 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
+
 import Foundation
 
-// This will ultimately be a wrapper around os_log. For more info on the decision to
-// rewrite this to wrap os_log over NSLog see: https://developer.apple.com/videos/play/wwdc2016/721/
-// more info here: https://stackoverflow.com/questions/25951195/swift-print-vs-println-vs-nslog
-//
-struct Logger: Logging {
-  private var startingSerialNumber: UInt = 1111
+struct FakeBundle: InfoDictionaryProviding {
+  let infoDictionary: [String: Any?]
 
-  mutating func generateSerialNumber() -> UInt {
-    startingSerialNumber += 1
-    return startingSerialNumber
-  }
-
-  func log(_ message: String) {
-    // TODO: Implementation
-  }
-
-  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
-    // TODO: Implementation
+  func object(forInfoDictionaryKey key: String) -> Any? {
+    return infoDictionary[key] as Any?
   }
 }

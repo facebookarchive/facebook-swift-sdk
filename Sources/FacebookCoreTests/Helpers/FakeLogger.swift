@@ -20,7 +20,8 @@
 import Foundation
 
 class FakeLogger: Logging {
-  var capturedMessages: [String] = []
+  var capturedBehavior: LoggingBehavior?
+  var capturedMessages = [String]()
   var logRequestCallCount = 0
   var generateSerialNumberWasCalled = false
   var serialNumber: UInt = 0
@@ -30,7 +31,8 @@ class FakeLogger: Logging {
     return serialNumber
   }
 
-  func log(_ message: String) {
+  func log(_ behavior: LoggingBehavior, _ message: String) {
+    capturedBehavior = behavior
     capturedMessages.append(message)
   }
 
