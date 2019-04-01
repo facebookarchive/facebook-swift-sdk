@@ -79,7 +79,7 @@ class GraphRequestConnection: GraphRequestConnecting {
 
     switch state {
     case .started, .cancelled, .completed:
-      return logger.log("Request connection cannot be started again.")
+      return logger.log(.developerErrors, "Request connection cannot be started again.")
 
     case .created, .serialized:
       piggybackManager.addPiggybackRequests(for: self)
