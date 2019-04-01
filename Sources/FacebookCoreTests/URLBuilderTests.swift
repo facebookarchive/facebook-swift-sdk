@@ -180,7 +180,7 @@ class URLBuilderTests: XCTestCase {
     )
     XCTAssertEqual(
       url.path,
-      path ?? "/v3.4",
+      path ?? "/v3.2",
       "URL path should contain the graph api version",
       file: file,
       line: line
