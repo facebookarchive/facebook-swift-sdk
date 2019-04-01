@@ -279,6 +279,6 @@ class GraphRequestTests: XCTestCase {
 
 private extension Settings {
   static func resetGraphAPIVersion() {
-    Settings.shared.graphAPIVersion = GraphAPIVersion(major: 3, minor: 4)
+    Settings.shared.graphAPIVersion = GraphAPIVersion(major: 3, minor: 2)
   }
 }
