@@ -75,7 +75,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid array for a single request")
     }
 
-    guard let body = results.first?.body as? [String] else {
+    guard let body = results.first as? [String] else {
       return XCTFail("Should pass back the deserialized array as the body of the first result")
     }
 
@@ -93,7 +93,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid array for a single request")
     }
 
-    let bodies = results.compactMap { $0.body as? String }
+    let bodies = results.compactMap { $0 as? String }
 
     XCTAssertEqual(bodies, array,
                    "Should pass back the exact deserialized array that was passed to the parser")
@@ -108,7 +108,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid dictionary for a single request")
     }
 
-    guard let body = results.first?.body as? [String: String] else {
+    guard let body = results.first as? [String: String] else {
       return XCTFail("Should pass back the deserialized dictionary as the body of the first result")
     }
 
@@ -125,7 +125,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid json object for a multiple requests")
     }
 
-    guard let body = results.first?.body as? [String: String] else {
+    guard let body = results.first as? [String: String] else {
       return XCTFail("Should pass back the deserialized object as the body of the first result")
     }
 
@@ -143,7 +143,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid json object for a single request")
     }
 
-    guard let body = results.first?.body as? [[String: String]] else {
+    guard let body = results.first as? [[String: String]] else {
       return XCTFail("Should pass back the deserialized dictionaries as the body of the first result")
     }
 
@@ -161,7 +161,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid json object for a multiple requests")
     }
 
-    let equatableBodies = results.compactMap { $0.body as? [String: String] }
+    let equatableBodies = results.compactMap { $0 as? [String: String] }
 
     XCTAssertEqual(equatableBodies, dictionaries,
                    "Should pass back the exact deserialized array of dictionaries that was passed to the parser")
@@ -177,7 +177,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid array for a single request")
     }
 
-    guard let body = results.first?.body as? [AnyObject] else {
+    guard let body = results.first as? [AnyObject] else {
       return XCTFail("Should pass back the deserialized array as the body of the first result")
     }
 
@@ -196,7 +196,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid array for a single request")
     }
 
-    guard let body = results.first?.body as? [AnyObject] else {
+    guard let body = results.first as? [AnyObject] else {
       return XCTFail("Should pass back the deserialized array as the body of the first result")
     }
 
@@ -216,7 +216,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid object for a single request")
     }
 
-    guard let body = results.first?.body as? [String: [String: String]] else {
+    guard let body = results.first as? [String: [String: String]] else {
       return XCTFail("Should pass back the deserialized object as the body of the first result")
     }
 
@@ -237,7 +237,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid object for a single request")
     }
 
-    guard let body = results.first?.body as? [[String: Any]] else {
+    guard let body = results.first as? [[String: Any]] else {
       return XCTFail("Should pass back the deserialized object as the body of the first result")
     }
 
@@ -256,7 +256,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid object for multiple requests")
     }
 
-    guard let body = results.first?.body as? [String: [String: String]] else {
+    guard let body = results.first as? [String: [String: String]] else {
       return XCTFail("Should pass back the deserialized object as the body of the first result")
     }
 
@@ -277,8 +277,8 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a multiple objects for multiple requests")
     }
 
-    guard let firstResultbody = results.first?.body as? [String: [String: String]],
-      let secondResultBody = results[1].body as? [String: String]
+    guard let firstResultbody = results.first as? [String: [String: String]],
+      let secondResultBody = results[1] as? [String: String]
       else {
         return XCTFail("Should parse a list of results for multiple requests")
     }
@@ -298,7 +298,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid object for a single request")
     }
 
-    guard let dictionary = results.first?.body as? [String: Any],
+    guard let dictionary = results.first as? [String: Any],
       let error = dictionary["error"] as? [String: Any]
       else {
         return XCTFail("Parsed results should include the details for any parsed errors")
@@ -325,7 +325,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse multiple results for multiple requests")
     }
 
-    guard let body = results.first?.body as? [[String: Any]],
+    guard let body = results.first as? [[String: Any]],
       let error = body.first?["error"] as? [String: Any]
       else {
         return XCTFail("Parsed results should include the details for any parsed errors")
@@ -351,7 +351,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single valid object for multiple requests")
     }
 
-    guard let dictionary = results.first?.body as? [String: Any],
+    guard let dictionary = results.first as? [String: Any],
       let error = dictionary["error"] as? [String: Any]
       else {
         return XCTFail("Parsed results should include the details for any parsed errors")
@@ -378,8 +378,8 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a multiple objects for multiple requests")
     }
 
-    guard let firstResultbody = results.first?.body as? [String: [String: Any]],
-      let secondResultBody = results[1].body as? [String: String]
+    guard let firstResultbody = results.first as? [String: [String: Any]],
+      let secondResultBody = results[1] as? [String: String]
       else {
         return XCTFail("Should parse a list of results for multiple requests")
     }
@@ -399,7 +399,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a single oauth error for a single request")
     }
 
-    guard let dictionary = results.first?.body as? [String: Any],
+    guard let dictionary = results.first as? [String: Any],
       let error = dictionary["error"] as? [String: Any]
       else {
         return XCTFail("Parsed results should include the details for any parsed errors")
@@ -426,7 +426,7 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse multiple results for multiple requests")
     }
 
-    guard let body = results.first?.body as? [[String: Any]],
+    guard let body = results.first as? [[String: Any]],
       let error = body.first?["error"] as? [String: Any]
       else {
         return XCTFail("Parsed results should include the details for any parsed errors")
@@ -453,7 +453,7 @@ class GraphRequestJSONParserTests: XCTestCase {
     }
 
     results.enumerated().forEach { enumeration in
-      guard let dictionary = results[enumeration.offset].body as? [String: Any],
+      guard let dictionary = results[enumeration.offset] as? [String: Any],
         let error = dictionary["error"] as? [String: Any]
         else {
           return XCTFail("Parsed results should present an oauth error for all results in a batch")
@@ -481,8 +481,8 @@ class GraphRequestJSONParserTests: XCTestCase {
         return XCTFail("Should parse a multiple objects for multiple requests")
     }
 
-    guard let firstResultbody = results.first?.body as? [String: [String: Any]],
-      let secondResultBody = results[1].body as? [String: String]
+    guard let firstResultbody = results.first as? [String: [String: Any]],
+      let secondResultBody = results[1] as? [String: String]
       else {
         return XCTFail("Should parse a list of results for multiple requests")
     }
