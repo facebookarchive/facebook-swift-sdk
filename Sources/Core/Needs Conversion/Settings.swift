@@ -47,7 +47,7 @@ class Settings: SettingsManaging {
   /**
    Overrides the default Graph API version to use with `GraphRequest`s. This overrides the provided default.
    */
-  var graphAPIVersion = GraphAPIVersion(major: 3, minor: 4)
+  var graphAPIVersion = GraphAPIVersion(major: 3, minor: 2)
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var isGraphErrorRecoveryEnabled: Bool = false
