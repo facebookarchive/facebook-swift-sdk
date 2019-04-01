@@ -18,20 +18,15 @@
 
 import Foundation
 
-struct GraphRequestConnectionResponse {
-  // TODO: may need to include field for error code. Omiting for now
-  let body: Any
-}
-
 enum GraphRequestJSONParser {
   private typealias ParserError = GraphRequestJSONParserError
 
-  static func parse(data: Data, requestCount: UInt) throws -> [GraphRequestConnectionResponse] {
+  static func parse(data: Data, requestCount: UInt) throws -> [Any] {
     guard !data.isEmpty else {
       throw ParserError.emptyData
     }
 
-    var parsedResponses = [GraphRequestConnectionResponse]()
+    var parsedResponses = [Any]()
 
     let json: Any
     do {
@@ -41,23 +36,23 @@ enum GraphRequestJSONParser {
     }
 
     guard requestCount > 1 else {
-      return [GraphRequestConnectionResponse(body: json)]
+      return [json]
     }
 
     if let responses = json as? [Any] {
       responses.forEach { response in
         parsedResponses.append(
-          GraphRequestConnectionResponse(body: response)
+          response
         )
       }
     } else if let error = try? JSONDecoder().decode(RemoteGraphResponseError.self, from: data),
       error.isOAuthError {
       (0 ..< requestCount).forEach { _ in
-        parsedResponses.append(GraphRequestConnectionResponse(body: json))
+        parsedResponses.append(json)
       }
     } else {
       parsedResponses.append(
-        GraphRequestConnectionResponse(body: json)
+        json
       )
     }
 
