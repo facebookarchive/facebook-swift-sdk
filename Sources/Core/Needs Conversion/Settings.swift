@@ -25,12 +25,17 @@ import Foundation
 protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
+  var loggingBehaviors: Set<LoggingBehavior> { get set }
 
   static var graphAPIVersion: String { get set }
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
 
 class Settings: SettingsManaging {
+  private enum PListKeys {
+    static let loggingBehaviors: String = "FacebookLoggingBehavior"
+  }
+
   // TODO: Probably needs to be private and weak. Revisit this during rewrite
   weak var accessTokenCache: AccessTokenCaching?
 
@@ -45,4 +50,46 @@ class Settings: SettingsManaging {
 
   // TODO: There is a very good chance this will be needed when we start injecting settings various places
   static let shared = Settings()
+
+  /**
+   The current Facebook SDK logging behaviors.
+   
+   This should consist of a set of LoggingBehavior enum values backed by `String`s indicating
+   what information should be logged.
+   
+   Set to an empty set in order to disable all logging.
+   
+   You can also define this via a `String` array in your app plist with key "FacebookLoggingBehavior"
+   
+   **IMPORTANT:** any single behavior in your plist must match the rawValue of the corresponding
+   `LoggingBehavior` you want to enable.
+   
+   You may also add and remove individual values via standard `Set` value convenience setters
+   
+   The default is a set consisting of one value: `LoggingBehavior.developerErrors`
+   */
+  var loggingBehaviors: Set<LoggingBehavior>
+
+  init(bundle: InfoDictionaryProviding = Bundle.main) {
+    loggingBehaviors = [.developerErrors]
+
+    setBehaviors(from: bundle)
+  }
+
+  private func setBehaviors(from bundle: InfoDictionaryProviding) {
+    guard let rawValues = bundle.object(forInfoDictionaryKey: PListKeys.loggingBehaviors)
+      as? [String] else {
+        return
+    }
+
+    let behaviors = rawValues.compactMap { LoggingBehavior(rawValue: $0) }
+
+    switch behaviors.isEmpty {
+    case true:
+      self.loggingBehaviors = [.developerErrors]
+
+    case false:
+      self.loggingBehaviors = Set(behaviors)
+    }
+  }
 }

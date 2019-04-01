@@ -20,13 +20,40 @@
 import XCTest
 
 class LoggerTests: XCTestCase {
+  var logger = Logger()
+
+  func testSettingsDependency() {
+    XCTAssertTrue(logger.settings is Settings,
+                  "A logger should have the correct concrete implementation to check settings")
+  }
+
   func testGeneratingSerialNumbers() {
-    var logger = Logger()
     XCTAssertEqual(logger.generateSerialNumber(), 1112,
                    "Logger should generate predictable values for it's serial numbers")
     XCTAssertEqual(logger.generateSerialNumber(), 1113,
                    "Logger should generate predictable values for it's serial numbers")
     XCTAssertEqual(logger.generateSerialNumber(), 1114,
                    "Logger should generate predictable values for it's serial numbers")
+  }
+
+  func testLoggingWithValidLoggingBehavior() {
+    let fakeSettings = FakeSettings(loggingBehaviors: [.accessTokens])
+
+    logger = Logger(settings: fakeSettings)
+
+    XCTAssertTrue(logger.shouldLog(.accessTokens),
+                  "Logger should be able to log a behavior if it is present in the settings")
+    logger.log(.accessTokens, "This should log")
+  }
+
+  func testCreatingWithInvalidLoggingBehavior() {
+    let fakeSettings = FakeSettings(loggingBehaviors: [.accessTokens])
+
+    logger = Logger(settings: fakeSettings)
+
+    XCTAssertFalse(logger.shouldLog(.developerErrors),
+                   "Logger should be not able to log a behavior if it is not present in the settings")
+
+    logger.log(.developerErrors, "This should not log")
   }
 }
