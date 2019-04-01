@@ -16,21 +16,45 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+enum LoggingBehavior: String, CaseIterable {
+  /// Include access token in logging
+  case accessTokens
 
-  static var graphAPIVersion: String = "0.0.1"
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
+  /// Log performance characteristics
+  case performanceCharacteristics
 
-  init(
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = []
-    ) {
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-  }
+  /// Log FBSDKAppEvents interactions
+  case appEvents
+
+  /// Log Informational occurrences
+  case informational
+
+  /// Log cache errors.
+  case cacheErrors
+
+  /// Log errors from SDK UI controls
+  case uiControlErrors
+
+  /**
+   Log debug warnings from API response,
+   i.e. when friends fields requested, but user_friends permission isn't granted.
+   */
+  case graphAPIDebugWarning
+
+  /**
+   Log warnings from API response, i.e. when requested feature will be deprecated in next version of API.
+   Info is the lowest level of severity, using it will result in logging all previously mentioned levels.
+   */
+  case graphAPIDebugInfo
+
+  /// Log errors from SDK network requests
+  case networkRequests
+
+  /**
+   Log errors likely to be preventable by the developer.
+   This is in the default set of enabled logging behaviors.
+   */
+  case developerErrors
 }

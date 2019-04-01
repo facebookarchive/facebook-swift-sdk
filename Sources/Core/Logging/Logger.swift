@@ -16,21 +16,34 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+struct Logger: Logging {
+  private var startingSerialNumber: UInt = 1111
+  let settings: SettingsManaging
 
-  static var graphAPIVersion: String = "0.0.1"
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
+  init(settings: SettingsManaging = Settings.shared) {
+    self.settings = settings
+  }
 
-  init(
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = []
-    ) {
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
+  func log(_ behavior: LoggingBehavior, _ message: String) {
+    guard shouldLog(behavior) else {
+      return
+    }
+
+    NSLog(message)
+  }
+
+  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?) {
+    // TODO: Implementation
+  }
+
+  func shouldLog(_ behavior: LoggingBehavior) -> Bool {
+    return settings.loggingBehaviors.contains(behavior)
+  }
+
+  mutating func generateSerialNumber() -> UInt {
+    startingSerialNumber += 1
+    return startingSerialNumber
   }
 }
