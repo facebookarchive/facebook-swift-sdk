@@ -86,7 +86,7 @@ class URLSessionTaskProxy {
     }
     let logEntry = substrings.joined(separator: "\n  ")
 
-    logger.log(logEntry)
+    logger.log(.informational, logEntry)
     invokeHandler(data, response, nil)
   }
 
@@ -112,7 +112,7 @@ class URLSessionTaskProxy {
     Error: \(nsError.localizedDescription)
     \(nsError.userInfo)
     """
-    logger.log(errorString)
+    logger.log(.developerErrors, errorString)
   }
 
   private func logTransportSecurityErrorIfNeeded(for error: Error) {
@@ -122,7 +122,7 @@ class URLSessionTaskProxy {
     if nsError.domain == NSURLErrorDomain,
       nsError.code == NSURLErrorSecureConnectionFailed,
       processInfo.isOperatingSystemAtLeast(version) {
-        logger.log(DeveloperErrorStrings.appTransportSecurity.localized)
+        logger.log(.developerErrors, DeveloperErrorStrings.appTransportSecurity.localized)
     }
   }
 }

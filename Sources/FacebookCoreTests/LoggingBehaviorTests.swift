@@ -16,11 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+// swiftlint:disable unused_closure_parameter
 
-protocol Logging {
-  mutating func generateSerialNumber() -> UInt
+@testable import FacebookCore
+import XCTest
 
-  func log(_ message: String)
-  func log(request: URLRequest, bodyLength: UInt, bodyLogger: Logging?, attachmentLogger: Logging?)
+class LoggingBehaviorTests: XCTestCase {
+  func testAllCases() {
+    LoggingBehavior.allCases.forEach { `case` in
+      switch `case` {
+      case .accessTokens, .appEvents, .cacheErrors, .developerErrors, .graphAPIDebugInfo, .graphAPIDebugWarning, .informational, .networkRequests, .performanceCharacteristics, .uiControlErrors:
+        break
+      }
+    }
+  }
 }
