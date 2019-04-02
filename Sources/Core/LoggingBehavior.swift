@@ -18,13 +18,43 @@
 
 import Foundation
 
-enum GraphRequestQueryItemBuilder {
-  static func build(from values: [String: AnyHashable]) -> [URLQueryItem] {
-    return values.compactMap {
-      URLQueryItem(
-        name: $0.key,
-        value: $0.value.description
-      )
-    }
-  }
+enum LoggingBehavior: String, CaseIterable {
+  /// Include access token in logging
+  case accessTokens
+
+  /// Log performance characteristics
+  case performanceCharacteristics
+
+  /// Log FBSDKAppEvents interactions
+  case appEvents
+
+  /// Log Informational occurrences
+  case informational
+
+  /// Log cache errors.
+  case cacheErrors
+
+  /// Log errors from SDK UI controls
+  case uiControlErrors
+
+  /**
+   Log debug warnings from API response,
+   i.e. when friends fields requested, but user_friends permission isn't granted.
+   */
+  case graphAPIDebugWarning
+
+  /**
+   Log warnings from API response, i.e. when requested feature will be deprecated in next version of API.
+   Info is the lowest level of severity, using it will result in logging all previously mentioned levels.
+   */
+  case graphAPIDebugInfo
+
+  /// Log errors from SDK network requests
+  case networkRequests
+
+  /**
+   Log errors likely to be preventable by the developer.
+   This is in the default set of enabled logging behaviors.
+   */
+  case developerErrors
 }

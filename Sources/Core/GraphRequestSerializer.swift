@@ -50,7 +50,7 @@ struct GraphRequestSerializer {
         throw GraphRequestSerializationError.getWithAttachments
     }
 
-    let requestQueryItems = GraphRequestQueryItemBuilder.build(from: graphRequest.parameters)
+    let requestQueryItems = URLQueryItemBuilder.build(from: graphRequest.parameters)
     let processedQueryItems = preProcess(requestQueryItems)
 
     guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
