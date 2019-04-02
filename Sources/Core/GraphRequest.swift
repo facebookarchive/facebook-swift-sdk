@@ -63,7 +63,7 @@ struct GraphRequest {
    The Graph API version to use (e.g., "v2.0")
    Defaults to `Settings.graphAPIVersion` if not specified during initialization
   */
-  let version: String
+  let version: GraphAPIVersion
 
   var flags: Flags
 
@@ -73,14 +73,14 @@ struct GraphRequest {
      - Parameter graphPath: the graph path (e.g., @"me")
      - Parameter parameters: the optional parameters dictionary
      - Parameter tokenString: an optional access token to use, must provide a token for paths that require a token
-     - Parameter version: the optional Graph API version (e.g., "v2.0"). nil defaults to `Settings.graphAPIVersion`.
+     - Parameter version: the optional Graph API version (e.g., "v2.0"). defaults to `Settings.shared.graphAPIVersion`
      - Parameter httpMethod: the HTTP method. Empty String defaults to `HTTPMethod.get`
   */
   init(
     graphPath: GraphPath,
     parameters: [String: AnyHashable] = [:],
     accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
-    version: String = Settings.graphAPIVersion,
+    version: GraphAPIVersion = Settings.shared.graphAPIVersion,
     httpMethod: HTTPMethod = .get,
     flags: Flags = .none,
     enableGraphRecovery: Bool = Settings.isGraphErrorRecoveryEnabled
