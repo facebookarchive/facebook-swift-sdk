@@ -1055,13 +1055,13 @@
 				TargetAttributes = {
 					8115C0D71CFE540D001FF33B = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1020;
 					};
 					811C5DF21CFFD36600E4A925 = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					811C5DFF1CFFD36D00E4A925 = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -1547,7 +1547,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC41D356E9A006401F1 /* FacebookCore.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1555,7 +1555,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC41D356E9A006401F1 /* FacebookCore.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1563,7 +1563,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1571,7 +1571,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1579,7 +1579,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1587,7 +1587,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
