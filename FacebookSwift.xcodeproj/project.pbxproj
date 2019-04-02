@@ -15,20 +15,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		52D2CB892252AA57007695E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 81AB8A0C1D36D41700066F63 /* FBSDKLoginKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0B9DBF2C207C05CD00662776;
-			remoteInfo = FBSDKLoginKit_TV;
-		};
-		52D2CB8B2252AA57007695E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 81AB8A0C1D36D41700066F63 /* FBSDKLoginKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0B9DBF52207C07C600662776;
-			remoteInfo = "FBSDKLoginKit_TV-Dynamic";
-		};
 		811C5E471CFFD4C800E4A925 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8115C0CF1CFE540D001FF33B /* Project object */;
@@ -255,7 +241,7 @@
 			dependencies = (
 			);
 			name = FacebookCore;
-			productName = FBSDKCoreKit;
+			productName = FacebookCore;
 			productReference = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -275,7 +261,7 @@
 				811C5E481CFFD4C800E4A925 /* PBXTargetDependency */,
 			);
 			name = FacebookLogin;
-			productName = FBSDKCoreKit;
+			productName = FacebookLogin;
 			productReference = 811C5DFD1CFFD36600E4A925 /* FacebookLogin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -295,7 +281,7 @@
 				811C5E551CFFD4F100E4A925 /* PBXTargetDependency */,
 			);
 			name = FacebookShare;
-			productName = FBSDKCoreKit;
+			productName = FacebookShare;
 			productReference = 811C5E0A1CFFD36D00E4A925 /* FacebookShare.framework */;
 			productType = "com.apple.product-type.framework";
 		};
