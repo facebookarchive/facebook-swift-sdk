@@ -18,12 +18,17 @@
 
 import Foundation
 
+typealias GraphRequestJSONParserResult = Result<Any, GraphRequestJSONParserError>
+
 enum GraphRequestJSONParser {
   private typealias ParserError = GraphRequestJSONParserError
 
-  static func parse(data: Data, requestCount: UInt) throws -> [Any] {
+  static func parse(
+    data: Data,
+    requestCount: UInt
+    ) -> GraphRequestJSONParserResult {
     guard !data.isEmpty else {
-      throw ParserError.emptyData
+      return .failure(.emptyData)
     }
 
     var parsedResponses = [Any]()
@@ -32,11 +37,11 @@ enum GraphRequestJSONParser {
     do {
       json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     } catch {
-      throw ParserError.invalidData
+      return .failure(.invalidData)
     }
 
     guard requestCount > 1 else {
-      return [json]
+      return .success(json)
     }
 
     if let responses = json as? [Any] {
@@ -56,6 +61,6 @@ enum GraphRequestJSONParser {
       )
     }
 
-    return parsedResponses
+    return .success(parsedResponses)
   }
 }

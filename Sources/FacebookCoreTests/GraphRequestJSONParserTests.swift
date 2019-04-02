@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping force_try type_body_length file_length
+// swiftlint:disable force_unwrapping force_try type_body_length file_length force_cast
 
 @testable import FacebookCore
 import XCTest
@@ -25,184 +25,183 @@ class GraphRequestJSONParserTests: XCTestCase {
   let nameDictionary = ["name": "bob"]
 
   func testParsingEmptyData() {
-    let data = Data()
-    do {
-      _ = try GraphRequestJSONParser.parse(data: data, requestCount: 1)
+    let data = SampleGraphResponse.empty.data
+
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success:
       XCTFail("Trying to parse empty data should not succeed")
-    } catch let error as GraphRequestJSONParserError {
+
+    case .failure(let error):
       XCTAssertEqual(error, .emptyData,
                      "Trying to parse empty data should throw an error")
-    } catch {
-      XCTFail("Trying to parse empty data should throw a known error")
     }
   }
 
   func testParsingInvalidData() {
-    let data = withUnsafeBytes(of: 100.0) { Data($0) }
-
-    do {
-      _ = try GraphRequestJSONParser.parse(data: data, requestCount: 1)
+    let data = SampleGraphResponse.nonJSON.data
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success:
       XCTFail("Trying to parse data that cannot be deserialized into a string should not succeed")
-    } catch let error as GraphRequestJSONParserError {
+
+    case .failure(let error):
       XCTAssertEqual(error, .invalidData,
                      "Trying to parse data that cannot be deserialized into a string should not succeed")
-    } catch {
-      XCTFail("Trying to parse data that cannot be deserialized into a string should not succeed")
     }
   }
 
   func testParsingInvalidTopLevelObject() {
-    let data = "top level type".data(using: .utf8)!
+    let data = SampleGraphResponse.utf8String.data
 
-    do {
-      _ = try GraphRequestJSONParser.parse(data: data, requestCount: 1)
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success:
       XCTFail("Trying to parse data that cannot be deserialized into an object should not succeed")
-    } catch let error as GraphRequestJSONParserError {
+
+    case .failure(let error):
       XCTAssertEqual(error, .invalidData,
                      "Trying to parse data that cannot be deserialized into an object should not succeed")
-    } catch {
-      XCTFail("Trying to parse data that cannot be deserialized into an object should not succeed")
     }
   }
 
   func testParsingHomogeneousArrayOfNonDictionariesForSingleRequest() {
-    let array = ["one", "two", "three"]
-    let data = try! JSONSerialization.data(withJSONObject: array, options: [])
+    let data = SampleGraphResponse.homogenousStringArray.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid array for a single request")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [String]):
+      XCTAssertEqual(
+        results,
+        SampleGraphResponse.homogenousStringArray.unserialized as! [String],
+        "Should pass back the exact deserialized array that was passed to the parser"
+      )
+
+    case .success, .failure:
+      XCTFail("Parsing data for a single request should return the exact data that was parsed")
     }
-
-    guard let body = results.first as? [String] else {
-      return XCTFail("Should pass back the deserialized array as the body of the first result")
-    }
-
-    XCTAssertEqual(body, array,
-                   "Should pass back the exact deserialized array that was passed to the parser")
   }
 
   func testParsingHomogeneousArrayOfNonDictionariesForMultipleRequests() {
-    let array = ["one", "two", "three"]
-    let data = try! JSONSerialization.data(withJSONObject: array, options: [])
+    let data = SampleGraphResponse.homogenousStringArray.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 3),
-      results.count == 3
-      else {
-        return XCTFail("Should parse a single valid array for a single request")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 3) {
+    case .success(let results as [String]):
+      XCTAssertEqual(
+        results,
+        SampleGraphResponse.homogenousStringArray.unserialized as! [String],
+        "Should pass back the exact deserialized array that was passed to the parser"
+      )
+
+    case .success, .failure:
+      XCTFail("Should not fail to parse a homogenous array of non dictionaries for a multiple requests")
     }
-
-    let bodies = results.compactMap { $0 as? String }
-
-    XCTAssertEqual(bodies, array,
-                   "Should pass back the exact deserialized array that was passed to the parser")
   }
 
   func testParsingSingleDictionaryForSingleRequest() {
-    let data = try! JSONSerialization.data(withJSONObject: nameDictionary, options: [])
+    let data = SampleGraphResponse.dictionary.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid dictionary for a single request")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let body as [String: String]):
+      XCTAssertEqual(
+        body,
+        SampleGraphResponse.dictionary.unserialized as! [String: String],
+        "Should pass back the exact deserialized dictionary that was passed to the parser"
+      )
+
+    case .success, .failure:
+      XCTFail("Parsing data for a single request should return the exact data that was parsed")
     }
-
-    guard let body = results.first as? [String: String] else {
-      return XCTFail("Should pass back the deserialized dictionary as the body of the first result")
-    }
-
-    XCTAssertEqual(body, nameDictionary,
-                   "Should pass back the exact deserialized dictionary that was passed to the parser")
   }
 
   func testParsingSingleDictionaryForMultipleRequests() {
-    let data = try! JSONSerialization.data(withJSONObject: nameDictionary, options: [])
+    let data = SampleGraphResponse.dictionary.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 3),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid json object for a multiple requests")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 3) {
+    case .success(let results as [[String: String]]):
+      guard results.count == 1,
+        let body = results.first else {
+        return XCTFail("Parsing a single dictionary for multiple requests should provide fewer results than the number of requests")
+      }
+
+      XCTAssertEqual(
+        body,
+        SampleGraphResponse.dictionary.unserialized as! [String: String],
+        "Should pass back the exact object that was passed to the parser"
+      )
+
+    case .success, .failure:
+      XCTFail("Should parse a single valid json object for a multiple requests")
     }
-
-    guard let body = results.first as? [String: String] else {
-      return XCTFail("Should pass back the deserialized object as the body of the first result")
-    }
-
-    XCTAssertEqual(body, nameDictionary,
-                   "Should pass back the exact object that was passed to the parser")
   }
 
   func testParsingHomogeneousArrayOfDictionariesForSingleRequest() {
-    let dictionaries = Array(repeating: nameDictionary, count: 3)
-    let data = try! JSONSerialization.data(withJSONObject: dictionaries, options: [])
+    let data = SampleGraphResponse.homogenousArrayOfDictionaries.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid json object for a single request")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [[String: String]]):
+      guard results.count == 3
+        else {
+          return XCTFail("Should parse a single valid json object for a single request")
+      }
+
+      XCTAssertEqual(
+        results,
+        SampleGraphResponse.homogenousArrayOfDictionaries.unserialized as! [[String: String]],
+        "Should pass back the exact deserialized array of dictionaries that was passed to the parser"
+      )
+
+    case .success, .failure:
+      XCTFail("Parsing data for a single request should return the exact data that was parsed")
     }
-
-    guard let body = results.first as? [[String: String]] else {
-      return XCTFail("Should pass back the deserialized dictionaries as the body of the first result")
-    }
-
-    XCTAssertEqual(body, dictionaries,
-                   "Should pass back the exact deserialized array of dictionaries that was passed to the parser")
   }
 
   func testParsingHomogeneousArrayOfDictionariesForMultipleRequests() {
-    let dictionaries = Array(repeating: nameDictionary, count: 3)
-    let data = try! JSONSerialization.data(withJSONObject: dictionaries, options: [])
+    let data = SampleGraphResponse.homogenousArrayOfDictionaries.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 3),
-      results.count == 3
-      else {
-        return XCTFail("Should parse a single valid json object for a multiple requests")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 3) {
+    case .success(let results as [[String: String]]):
+      guard results.count == 3 else {
+        return XCTFail("Should parse an array of valid json objects for multiple requests")
+      }
+      XCTAssertEqual(results, SampleGraphResponse.homogenousArrayOfDictionaries.unserialized as! [[String: String]],
+                     "Should pass back the exact deserialized array of dictionaries that was passed to the parser")
+
+    case .success, .failure:
+      XCTFail("Should parse an array of dictionaries for multiple requests")
     }
-
-    let equatableBodies = results.compactMap { $0 as? [String: String] }
-
-    XCTAssertEqual(equatableBodies, dictionaries,
-                   "Should pass back the exact deserialized array of dictionaries that was passed to the parser")
   }
 
   func testParsingHeterogeneousArrayForSingleRequest() {
-    let array = ["one", "two", ["three": "four"]] as [AnyObject]
-    let data = try! JSONSerialization.data(withJSONObject: array, options: [])
+    let data = SampleGraphResponse.heterogeneousArray.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [AnyObject]):
+      guard results.count == 3 else {
         return XCTFail("Should parse a single valid array for a single request")
-    }
+      }
 
-    guard let body = results.first as? [AnyObject] else {
-      return XCTFail("Should pass back the deserialized array as the body of the first result")
-    }
+      XCTAssertEqual(results.first as? String, "one")
+      XCTAssertEqual(results[1] as? String, "two")
+      XCTAssertEqual(results[2] as? [String: String], ["three": "four"])
 
-    XCTAssertEqual(body.first as? String, "one")
-    XCTAssertEqual(body[1] as? String, "two")
-    XCTAssertEqual(body[2] as? [String: String], ["three": "four"])
+    case .success, .failure:
+      XCTFail("Parsing data for a single request should return the exact data that was parsed")
+    }
   }
 
   func testParsingHeterogeneousArrayForMultipleRequests() {
-    let array = ["one", "two", ["three": "four"]] as [AnyObject]
-    let data = try! JSONSerialization.data(withJSONObject: array, options: [])
+    let data = SampleGraphResponse.heterogeneousArray.data
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid array for a single request")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 3) {
+    case .success(let results as [AnyObject]):
+      guard results.count == 3 else {
+        return XCTFail("Should parse an array of valid json objects for multiple requests")
+      }
+
+      XCTAssertEqual(results.first as? String, "one")
+      XCTAssertEqual(results[1] as? String, "two")
+      XCTAssertEqual(results[2] as? [String: String], ["three": "four"])
+
+    case .success, .failure:
+      XCTFail("Parsing data for multiple requests should return the exact data that was parsed")
     }
-
-    guard let body = results.first as? [AnyObject] else {
-      return XCTFail("Should pass back the deserialized array as the body of the first result")
-    }
-
-    XCTAssertEqual(body.first as? String, "one")
-    XCTAssertEqual(body[1] as? String, "two")
-    XCTAssertEqual(body[2] as? [String: String], ["three": "four"])
   }
 
   // MARK: Error Parsing
@@ -210,18 +209,18 @@ class GraphRequestJSONParserTests: XCTestCase {
   func testParsingInvalidTopLevelErrorForSingleRequest() {
     let data = SampleRawRemoteGraphResponseError.SerializedData.missingRequiredFields
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [String: [String: String]]):
+      guard results.count == 1 else {
         return XCTFail("Should parse a single valid object for a single request")
-    }
+      }
 
-    guard let body = results.first as? [String: [String: String]] else {
-      return XCTFail("Should pass back the deserialized object as the body of the first result")
-    }
+      XCTAssertEqual(results, SampleRawRemoteGraphResponseError.missingRequiredFields,
+                     "Should pass back the body that was received if an error cannot be parsed from the response")
 
-    XCTAssertEqual(body, SampleRawRemoteGraphResponseError.missingRequiredFields,
-                   "Should pass back the body that was received if an error cannot be parsed from the response")
+    case .success, .failure:
+      XCTFail("A top level error should be parsed as though it were an ordinary object")
+    }
   }
 
   func testParsingInvalidNestedErrorForSingleRequest() {
@@ -231,37 +230,36 @@ class GraphRequestJSONParserTests: XCTestCase {
     ]
     let data = try! JSONSerialization.data(withJSONObject: object, options: [])
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [[String: Any]]):
+      guard results.count == 2 else {
         return XCTFail("Should parse a single valid object for a single request")
-    }
+      }
 
-    guard let body = results.first as? [[String: Any]] else {
-      return XCTFail("Should pass back the deserialized object as the body of the first result")
-    }
+      XCTAssertEqual(results[0] as? [String: [String: String]], SampleRawRemoteGraphResponseError.missingRequiredFields,
+                     "The body of the response should include the parsed error object")
+      XCTAssertEqual(results[1] as? [String: String], nameDictionary,
+                     "The body of the response should include the parsed object")
 
-    XCTAssertEqual(body[0] as? [String: [String: String]], SampleRawRemoteGraphResponseError.missingRequiredFields,
-                   "The body of the response should include the parsed error object")
-    XCTAssertEqual(body[1] as? [String: String], nameDictionary,
-                   "The body of the response should include the parsed error object")
+    case .success, .failure:
+      XCTFail("An invalid error should be parsed as though it were an ordinary object")
+    }
   }
 
   func testParsingInvalidTopLevelErrorForMultipleRequests() {
     let data = SampleRawRemoteGraphResponseError.SerializedData.missingRequiredFields
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 3) {
+    case .success(let results as [[String: [String: String]]]):
+      guard results.count == 1 else {
+        return XCTFail("Should parse a single valid object as a single object for multiple requests if the error is unrecognized")
+      }
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 3),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid object for multiple requests")
+      XCTAssertEqual(results.first, SampleRawRemoteGraphResponseError.missingRequiredFields,
+                     "Should pass back the body that was received if an error cannot be parsed from the response")
+
+    case .success, .failure:
+      XCTFail("An invalid error should be parsed as though it were an ordinary object")
     }
-
-    guard let body = results.first as? [String: [String: String]] else {
-      return XCTFail("Should pass back the deserialized object as the body of the first result")
-    }
-
-    XCTAssertEqual(body, SampleRawRemoteGraphResponseError.missingRequiredFields,
-                   "Should pass back the body that was received if an error cannot be parsed from the response")
   }
 
   func testParsingInvalidNestedErrorForMultipleRequests() {
@@ -271,45 +269,46 @@ class GraphRequestJSONParserTests: XCTestCase {
     ]
     let data = try! JSONSerialization.data(withJSONObject: objects, options: [])
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 2),
-      results.count == 2
-      else {
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 2) {
+    case .success(let results as [AnyObject]):
+      guard results.count == 2 else {
         return XCTFail("Should parse a multiple objects for multiple requests")
-    }
+      }
 
-    guard let firstResultbody = results.first as? [String: [String: String]],
-      let secondResultBody = results[1] as? [String: String]
-      else {
-        return XCTFail("Should parse a list of results for multiple requests")
-    }
+      guard let firstResultbody = results.first as? [String: [String: String]],
+        let secondResultBody = results[1] as? [String: String]
+        else {
+          return XCTFail("Should parse a list of results for multiple requests")
+      }
+      XCTAssertEqual(firstResultbody, SampleRawRemoteGraphResponseError.missingRequiredFields,
+                     "The body of the response should include the parsed error object")
+      XCTAssertEqual(secondResultBody, nameDictionary,
+                     "The body of the response should include the parsed error object")
 
-    XCTAssertEqual(firstResultbody, SampleRawRemoteGraphResponseError.missingRequiredFields,
-                   "The body of the response should include the parsed error object")
-    XCTAssertEqual(secondResultBody, nameDictionary,
-                   "The body of the response should include the parsed error object")
+    case .success, .failure:
+      XCTFail("An invalid error should be parsed as though it were an ordinary object")
+    }
   }
 
   func testParsingUnknownTopLevelErrorForSingleRequest() {
     let data = SampleRawRemoteGraphResponseError.SerializedData.valid
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid object for a single request")
-    }
-
-    guard let dictionary = results.first as? [String: Any],
-      let error = dictionary["error"] as? [String: Any]
-      else {
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [String: Any]):
+      guard let error = results["error"] as? [String: Any] else {
         return XCTFail("Parsed results should include the details for any parsed errors")
-    }
+      }
 
-    XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.type,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
-                   "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.type,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
+                     "Should store the correct type for a parsed error")
+
+    case .success, .failure:
+      XCTFail("An unknown error should be parsed as though it were an ordinary object")
+    }
   }
 
   func testParsingUnknownNestedErrorForSingleRequest() {
@@ -319,50 +318,47 @@ class GraphRequestJSONParserTests: XCTestCase {
     ]
     let data = try! JSONSerialization.data(withJSONObject: objects, options: [])
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse multiple results for multiple requests")
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [[String: Any]]):
+      guard let error = results.first?["error"] as? [String: Any]
+        else {
+          return XCTFail("Parsed results should include the details for any parsed errors")
+      }
+
+      XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.type,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
+                     "Should store the correct type for a parsed error")
+
+      XCTAssertEqual(results[1] as? [String: String], nameDictionary,
+                     "Should return the non-error object in the body of the response")
+
+    case .success, .failure:
+      XCTFail("An unknown error should be parsed as though it were an ordinary object")
     }
-
-    guard let body = results.first as? [[String: Any]],
-      let error = body.first?["error"] as? [String: Any]
-      else {
-        return XCTFail("Parsed results should include the details for any parsed errors")
-    }
-
-    XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.type,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
-                   "Should store the correct type for a parsed error")
-
-    XCTAssertEqual(body[1] as? [String: String], nameDictionary,
-                   "Should return the non-error object in the body of the response")
   }
 
   func testParsingUnknownTopLevelErrorForMultipleRequests() {
     let data = SampleRawRemoteGraphResponseError.SerializedData.valid
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 3),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single valid object for multiple requests")
-    }
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 3) {
+    case .success(let results as [[String: Any]]):
+      guard let error = results.first?["error"] as? [String: Any] else {
+          return XCTFail("Parsed results should include the details for any parsed errors")
+      }
 
-    guard let dictionary = results.first as? [String: Any],
-      let error = dictionary["error"] as? [String: Any]
-      else {
-        return XCTFail("Parsed results should include the details for any parsed errors")
-    }
+      XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.type,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
+                     "Should store the correct type for a parsed error")
 
-    XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.type,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
-                   "Should store the correct type for a parsed error")
+    case .success, .failure:
+      XCTFail("An unknown error should be parsed as though it were an ordinary object")
+    }
   }
 
   func testParsingUnknownNestedErrorForMultipleRequests() {
@@ -372,45 +368,43 @@ class GraphRequestJSONParserTests: XCTestCase {
     ]
     let data = try! JSONSerialization.data(withJSONObject: objects, options: [])
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 2),
-      results.count == 2
-      else {
-        return XCTFail("Should parse a multiple objects for multiple requests")
-    }
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 2) {
+    case .success(let results as [[String: Any]]):
+      guard let firstResultbody = results.first as? [String: [String: Any]],
+        let secondResultBody = results[1] as? [String: String]
+        else {
+          return XCTFail("Should parse a list of results for multiple requests")
+      }
 
-    guard let firstResultbody = results.first as? [String: [String: Any]],
-      let secondResultBody = results[1] as? [String: String]
-      else {
-        return XCTFail("Should parse a list of results for multiple requests")
-    }
+      XCTAssertEqual(firstResultbody["error"]?["type"] as? String, SampleRawRemoteGraphResponseError.type,
+                     "The body of the response should include the parsed error object")
+      XCTAssertEqual(secondResultBody, nameDictionary,
+                     "The body of the response should include the parsed error object")
 
-    XCTAssertEqual(firstResultbody["error"]?["type"] as? String, SampleRawRemoteGraphResponseError.type,
-                   "The body of the response should include the parsed error object")
-    XCTAssertEqual(secondResultBody, nameDictionary,
-                   "The body of the response should include the parsed error object")
+    case .success, .failure:
+      XCTFail("An unknown error should be parsed as though it were an ordinary object")
+    }
   }
 
   func testParsingTopLevelOAuthErrorForSingleRequest() {
     let data = SampleRawRemoteGraphResponseError.SerializedData.validOAuth
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse a single oauth error for a single request")
-    }
-
-    guard let dictionary = results.first as? [String: Any],
-      let error = dictionary["error"] as? [String: Any]
-      else {
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [String: Any]):
+      guard let error = results["error"] as? [String: Any] else {
         return XCTFail("Parsed results should include the details for any parsed errors")
-    }
+      }
 
-    XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.typeOAuth,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
-                   "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.typeOAuth,
+                     "Should store the correct type for a parsed error")
+      XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
+                     "Should store the correct type for a parsed error")
+
+    case .success, .failure:
+      XCTFail("An oauth error should be parsed as though it were an ordinary object")
+    }
   }
 
   func testParsingNestedOAuthErrorForSingleRequest() {
@@ -420,43 +414,11 @@ class GraphRequestJSONParserTests: XCTestCase {
     ]
     let data = try! JSONSerialization.data(withJSONObject: objects, options: [])
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 1),
-      results.count == 1
-      else {
-        return XCTFail("Should parse multiple results for multiple requests")
-    }
-
-    guard let body = results.first as? [[String: Any]],
-      let error = body.first?["error"] as? [String: Any]
-      else {
-        return XCTFail("Parsed results should include the details for any parsed errors")
-    }
-
-    XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.typeOAuth,
-                   "Should store the correct type for a parsed error")
-    XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
-                   "Should store the correct type for a parsed error")
-
-    XCTAssertEqual(body[1] as? [String: String], nameDictionary,
-                   "Should return the non-error object in the body of the response")
-  }
-
-  func testParsingTopLevelOAuthErrorForMultipleRequests() {
-    let data = SampleRawRemoteGraphResponseError.SerializedData.validOAuth
-
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 3),
-      results.count == 3
-      else {
-        return XCTFail("Should interpret an oauth error as multiple results matching the number of reqeusts")
-    }
-
-    results.enumerated().forEach { enumeration in
-      guard let dictionary = results[enumeration.offset] as? [String: Any],
-        let error = dictionary["error"] as? [String: Any]
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 1) {
+    case .success(let results as [[String: Any]]):
+      guard let error = results.first?["error"] as? [String: Any]
         else {
-          return XCTFail("Parsed results should present an oauth error for all results in a batch")
+          return XCTFail("Parsed results should include the details for any parsed errors")
       }
 
       XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
@@ -465,6 +427,39 @@ class GraphRequestJSONParserTests: XCTestCase {
                      "Should store the correct type for a parsed error")
       XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
                      "Should store the correct type for a parsed error")
+
+      XCTAssertEqual(results[1] as? [String: String], nameDictionary,
+                     "Should return the non-error object in the body of the response")
+
+    case .success, .failure:
+      XCTFail("An oauth error should be parsed as though it were an ordinary object")
+    }
+  }
+
+  func testParsingTopLevelOAuthErrorForMultipleRequests() {
+    let data = SampleRawRemoteGraphResponseError.SerializedData.validOAuth
+
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 3) {
+    case .success(let results as [[String: Any]]):
+      guard results.count == 3 else {
+        return XCTFail("Should interpret an oauth error as multiple results matching the number of reqeusts")
+      }
+
+      results.enumerated().forEach { enumeration in
+        guard let error = results[enumeration.offset]["error"] as? [String: Any] else {
+          return XCTFail("Parsed results should present an oauth error for all results in a batch")
+        }
+
+        XCTAssertEqual(error["code"] as? Int, SampleRawRemoteGraphResponseError.code,
+                       "Should store the correct type for a parsed error")
+        XCTAssertEqual(error["type"] as? String, SampleRawRemoteGraphResponseError.typeOAuth,
+                       "Should store the correct type for a parsed error")
+        XCTAssertEqual(error["message"] as? String, SampleRawRemoteGraphResponseError.message,
+                       "Should store the correct type for a parsed error")
+      }
+
+    case .success, .failure:
+      XCTFail("Parsed results should present an oauth error for all results in a batch")
     }
   }
 
@@ -475,21 +470,22 @@ class GraphRequestJSONParserTests: XCTestCase {
     ]
     let data = try! JSONSerialization.data(withJSONObject: objects, options: [])
 
-    guard let results = try? GraphRequestJSONParser.parse(data: data, requestCount: 2),
-      results.count == 2
-      else {
-        return XCTFail("Should parse a multiple objects for multiple requests")
-    }
+    switch GraphRequestJSONParser.parse(data: data, requestCount: 2) {
+    case .success(let results as [[String: Any]]):
+      guard results.count == 2,
+        let firstResultbody = results.first as? [String: [String: Any]],
+        let secondResultBody = results[1] as? [String: String]
+        else {
+          return XCTFail("Should parse a list of results for multiple requests")
+      }
 
-    guard let firstResultbody = results.first as? [String: [String: Any]],
-      let secondResultBody = results[1] as? [String: String]
-      else {
-        return XCTFail("Should parse a list of results for multiple requests")
-    }
+      XCTAssertEqual(firstResultbody["error"]?["type"] as? String, SampleRawRemoteGraphResponseError.typeOAuth,
+                     "The body of the response should include the parsed error object")
+      XCTAssertEqual(secondResultBody, nameDictionary,
+                     "The body of the response should include the parsed object")
 
-    XCTAssertEqual(firstResultbody["error"]?["type"] as? String, SampleRawRemoteGraphResponseError.typeOAuth,
-                   "The body of the response should include the parsed error object")
-    XCTAssertEqual(secondResultBody, nameDictionary,
-                   "The body of the response should include the parsed error object")
+    case .success, .failure:
+      XCTFail("A nested oauth result should not affect all the results in a batch")
+    }
   }
 }
