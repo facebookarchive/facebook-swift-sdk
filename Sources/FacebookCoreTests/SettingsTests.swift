@@ -54,4 +54,33 @@ class SettingsTests: XCTestCase {
     XCTAssertEqual(settings.loggingBehaviors, [.developerErrors],
                    "Logging behaviors should default to developer errors when settings are created with a plist that only has invalid entries")
   }
+
+  func testSettingDomainPrefixFromMissingPlistEntry() {
+    let fakeBundle = FakeBundle(infoDictionary: [:])
+    let settings = Settings(bundle: fakeBundle)
+
+    XCTAssertNil(settings.domainPrefix,
+                 "There should be no default value for a facebook domain prefix")
+  }
+
+  func testSettingDomainPrefixFromEmptyPlistEntry() {
+    let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": ""])
+    let settings = Settings(bundle: fakeBundle)
+
+    XCTAssertNil(settings.domainPrefix,
+                 "Should not use an empty string as a facebook domain prefix")
+  }
+
+  func testSettingFacebookDomainPrefixFromPlist() {
+    let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": "beta"])
+    let settings = Settings(bundle: fakeBundle)
+
+    XCTAssertEqual(settings.domainPrefix, "beta",
+                   "A developer should be able to set any string as the facebook domain prefix to use in building urls")
+  }
+
+  func testGraphAPIVersion() {
+    XCTAssertEqual(Settings().graphAPIVersion.description, "v3.2",
+                   "Settings should store a well-known default version of the graph api")
+  }
 }
