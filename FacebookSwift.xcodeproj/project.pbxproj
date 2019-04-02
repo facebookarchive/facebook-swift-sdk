@@ -471,7 +471,6 @@
 				DEFINES_MODULE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -482,7 +481,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -490,7 +488,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -498,7 +495,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -506,7 +502,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -514,7 +509,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

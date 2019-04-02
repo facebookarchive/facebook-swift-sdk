@@ -383,7 +383,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BA3CBF1D35949E00017B14 /* SwiftCatalog.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -391,7 +390,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BA3CBF1D35949E00017B14 /* SwiftCatalog.xcconfig */;
 			buildSettings = {
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
