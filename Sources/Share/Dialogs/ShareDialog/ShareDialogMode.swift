@@ -56,7 +56,8 @@ public enum ShareDialogMode {
     case .feedBrowser: self = .feedBrowser
     case .feedWeb:     self = .feedWeb
     @unknown default:
-      fatalError("Unknown Case")
+      assertionFailure("Unknown Case")
+      self = .automatic
     }
   }
 

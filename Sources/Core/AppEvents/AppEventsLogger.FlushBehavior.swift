@@ -40,7 +40,8 @@ public extension AppEventsLogger {
       case .auto: self = .auto
       case .explicitOnly: self = .explicitOnly
       @unknown default:
-        fatalError("Unknown Flush Behavior")
+        assertionFailure("Unknown Case")
+        self = .auto
       }
     }
 

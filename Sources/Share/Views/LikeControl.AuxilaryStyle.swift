@@ -50,7 +50,8 @@ public extension LikeControl {
         case .center: self = .center
         case .right: self = .right
         @unknown default:
-          fatalError("Unknown Case")
+          assertionFailure("Unknown Case")
+          self = .left
         }
       }
 
@@ -82,7 +83,8 @@ public extension LikeControl {
         case .inline: self = .inline
         case .bottom: self = .bottom
         @unknown default:
-          fatalError("Unknown Case")
+          assertionFailure("Unknown Case")
+          self = .top
         }
       }
 
@@ -146,7 +148,8 @@ public extension LikeControl {
       case .standard: self = .standard(horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
       case .boxCount: self = .boxCount(horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
       @unknown default:
-        fatalError("Unknown Case")
+        assertionFailure("Unknown Case")
+        self = .standard(horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
       }
     }
 

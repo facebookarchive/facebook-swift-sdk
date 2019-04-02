@@ -41,7 +41,8 @@ public enum LikableObject: Equatable {
     case .page: self = .page(objectId: sdkObjectId)
     case .unknown: self = .unknown(objectId: sdkObjectId)
     @unknown default:
-      fatalError("Unknown Case")
+      assertionFailure("Unknown Case")
+      self = .unknown
     }
   }
 

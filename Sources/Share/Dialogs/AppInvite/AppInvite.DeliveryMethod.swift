@@ -35,7 +35,8 @@ public extension AppInvite {
       case .facebook: self = .facebook
       case .messenger: self = .messenger
       @unknown default:
-        fatalError("Unknown Case")
+        assertionFailure("Unknown Case")
+        self = .facebook
       }
     }
 
