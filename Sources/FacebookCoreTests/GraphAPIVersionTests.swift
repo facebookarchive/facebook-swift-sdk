@@ -17,21 +17,34 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import XCTest
 
-class FakeSettings: SettingsManaging {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class GraphAPIVersionTests: XCTestCase {
+  func testCreatingWithoutMinorVersion() {
+    let version = GraphAPIVersion(major: 1)
 
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
+    XCTAssertEqual(version.description, "v1.0",
+                   "Minor version should default to zero when omitted")
+  }
 
-  init(
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = []
-    ) {
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
+  func testCreatingWithLowMinorVersion() {
+    let version = GraphAPIVersion(major: 1, minor: 1)
+
+    XCTAssertEqual(version.description, "v1.1",
+                   "Minor version should be set corectly")
+  }
+
+  func testCreatingWithHighMinorVersion() {
+    let version = GraphAPIVersion(major: 1, minor: 11)
+
+    XCTAssertEqual(version.description, "v1.11",
+                   "Minor version should be set corectly to two positions")
+  }
+
+  func testCreatingWithTooHighMinorVersion() {
+    let version = GraphAPIVersion(major: 1, minor: 111)
+
+    XCTAssertEqual(version.description, "v1.0",
+                   "Should default an invalid minor version to zero")
   }
 }

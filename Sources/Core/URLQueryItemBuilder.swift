@@ -16,14 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
 import Foundation
 
-class FakeServerConfigurationProvider: ServerConfigurationProviding {
-  var errorConfigurationWasRequested = false
-
-  var errorConfiguration: ErrorConfiguration {
-    errorConfigurationWasRequested = true
-    return ErrorConfiguration()
+enum URLQueryItemBuilder {
+  static func build(from values: [String: AnyHashable]) -> [URLQueryItem] {
+    return values.compactMap {
+      URLQueryItem(
+        name: $0.key,
+        value: $0.value.description
+      )
+    }
   }
 }

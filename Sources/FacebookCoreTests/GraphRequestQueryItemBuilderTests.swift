@@ -25,7 +25,7 @@ class GraphRequestQueryItemBuilderTests: XCTestCase {
   var dictionary = [String: AnyHashable]()
 
   func testBuildingWithEmptyDictionary() {
-    let items = GraphRequestQueryItemBuilder.build(from: dictionary)
+    let items = URLQueryItemBuilder.build(from: dictionary)
 
     XCTAssertTrue(items.isEmpty,
                   "Should not build query items from an empty dictionary")
@@ -35,7 +35,7 @@ class GraphRequestQueryItemBuilderTests: XCTestCase {
     dictionary = ["Foo": "Bar"]
     let expectedItems = [URLQueryItem(name: "Foo", value: "Bar")]
 
-    let items = GraphRequestQueryItemBuilder.build(from: dictionary)
+    let items = URLQueryItemBuilder.build(from: dictionary)
 
     XCTAssertEqual(items, expectedItems,
                    "Should build query items from string values")
@@ -53,7 +53,7 @@ class GraphRequestQueryItemBuilderTests: XCTestCase {
       URLQueryItem(name: "Float", value: "1.0")
       ].sorted { $0.name < $1.name }
 
-    let items = GraphRequestQueryItemBuilder.build(from: dictionary)
+    let items = URLQueryItemBuilder.build(from: dictionary)
       .sorted { $0.name < $1.name }
 
     XCTAssertEqual(items, expectedItems,
@@ -70,7 +70,7 @@ class GraphRequestQueryItemBuilderTests: XCTestCase {
       URLQueryItem(name: "data", value: "100 bytes")
       ].sorted { $0.name < $1.name }
 
-    let items = GraphRequestQueryItemBuilder.build(from: dictionary)
+    let items = URLQueryItemBuilder.build(from: dictionary)
       .sorted { $0.name < $1.name }
 
     XCTAssertEqual(items, expectedItems,
@@ -87,7 +87,7 @@ class GraphRequestQueryItemBuilderTests: XCTestCase {
       URLQueryItem(name: "url2", value: "https://www.example.com")
       ].sorted { $0.name < $1.name }
 
-    let items = GraphRequestQueryItemBuilder.build(from: dictionary)
+    let items = URLQueryItemBuilder.build(from: dictionary)
       .sorted { $0.name < $1.name }
 
     XCTAssertEqual(items, expectedItems,

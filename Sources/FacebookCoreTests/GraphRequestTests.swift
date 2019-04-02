@@ -23,7 +23,7 @@ class GraphRequestTests: XCTestCase {
   private let path: GraphPath = .other("Foo")
   private let parameters: [String: String] = ["Bar": "Baz"]
   private let token: AccessToken = AccessTokenFixtures.validToken
-  private let version: String = "0.0.1"
+  private let version = GraphAPIVersion(major: 1, minor: 1)
   private let method: GraphRequest.HTTPMethod = .post
 
   func testHTTPMethods() {
@@ -107,8 +107,10 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testDefaultVersionComesFromSettings() {
-    let version = "newVersion.0"
-    Settings.graphAPIVersion = version
+    defer { Settings.resetGraphAPIVersion() }
+
+    let version = GraphAPIVersion(major: 1, minor: 2)
+    Settings.shared.graphAPIVersion = version
     let request = GraphRequest(graphPath: path)
 
     XCTAssertEqual(request.version, version,
@@ -272,5 +274,11 @@ class GraphRequestTests: XCTestCase {
 
     XCTAssertTrue(request.hasAttachments,
                   "A request with parameters that include a graph request data attachment should be considered as having attachments")
+  }
+}
+
+private extension Settings {
+  static func resetGraphAPIVersion() {
+    Settings.shared.graphAPIVersion = GraphAPIVersion(major: 3, minor: 2)
   }
 }

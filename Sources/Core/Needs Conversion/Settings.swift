@@ -26,13 +26,15 @@ protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
+  var domainPrefix: String? { get set }
+  var graphAPIVersion: GraphAPIVersion { get set }
 
-  static var graphAPIVersion: String { get set }
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
 
 class Settings: SettingsManaging {
   private enum PListKeys {
+    static let domainPrefix: String = "FacebookDomainPrefix"
     static let loggingBehaviors: String = "FacebookLoggingBehavior"
   }
 
@@ -42,14 +44,25 @@ class Settings: SettingsManaging {
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
   let graphApiDebugParameter: GraphApiDebugParameter = .none
 
-  // TODO: probably should not be settable from everywhere but should come from some sort of config
-  static var graphAPIVersion: String = ""
+  /**
+   Overrides the default Graph API version to use with `GraphRequest`s. This overrides the provided default.
+   */
+  var graphAPIVersion = GraphAPIVersion(major: 3, minor: 2)
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var isGraphErrorRecoveryEnabled: Bool = false
 
   // TODO: There is a very good chance this will be needed when we start injecting settings various places
   static let shared = Settings()
+
+  /**
+   The Facebook domain part. This can be used to change the Facebook domain
+   (e.g. "beta") so that requests will be sent to `graph.beta.facebook.com`
+
+   This value will be read from the application's plist (FacebookDomainPart)
+   or may be explicitly set.
+   */
+  var domainPrefix: String?
 
   /**
    The current Facebook SDK logging behaviors.
@@ -74,6 +87,7 @@ class Settings: SettingsManaging {
     loggingBehaviors = [.developerErrors]
 
     setBehaviors(from: bundle)
+    setDomainPrefix(from: bundle)
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
@@ -91,5 +105,15 @@ class Settings: SettingsManaging {
     case false:
       self.loggingBehaviors = Set(behaviors)
     }
+  }
+
+  private func setDomainPrefix(from bundle: InfoDictionaryProviding) {
+    guard let prefix = bundle.object(forInfoDictionaryKey: PListKeys.domainPrefix) as? String,
+      !prefix.isEmpty
+      else {
+        return
+    }
+
+    domainPrefix = prefix
   }
 }
