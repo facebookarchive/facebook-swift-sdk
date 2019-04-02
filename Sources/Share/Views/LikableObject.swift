@@ -40,6 +40,8 @@ public enum LikableObject: Equatable {
     case .openGraph: self = .openGraph(objectId: sdkObjectId)
     case .page: self = .page(objectId: sdkObjectId)
     case .unknown: self = .unknown(objectId: sdkObjectId)
+    @unknown default:
+      fatalError("Unknown Case")
     }
   }
 

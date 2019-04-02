@@ -34,6 +34,8 @@ public extension AppInvite {
       switch sdkDestinationRepresentation {
       case .facebook: self = .facebook
       case .messenger: self = .messenger
+      @unknown default:
+        fatalError("Unknown Case")
       }
     }
 
