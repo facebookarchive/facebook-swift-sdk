@@ -1,0 +1,6 @@
+sources:
+  - ./Sources/Core
+templates:
+  - ./Sourcery/Templates
+output:
+  ./Sourcery/Generated

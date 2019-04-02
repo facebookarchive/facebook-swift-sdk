@@ -1,0 +1,54 @@
+{% for type in types.implementing.ObjCBridgeable|struct %}
+
+  @objc(FBSDK{{ type.name }})
+  class _ObjC{{ type.name }}: NSObject {
+    private(set) var {{ type.name|lowerFirstWord }}: {{ type.name }}
+
+    // Initializer to be used from Swift
+    init({{ type.name|lowerFirstWord }}: {{ type.name }}) {
+      self.{{ type.name|lowerFirstWord }} = {{ type.name|lowerFirstWord }}
+    }
+
+{% for variable in type.variables %}
+  {% if variable.type.kind == "struct" %}
+    var {{variable.name}} : _ObjC{{variable.type.name}} {
+        {% if variable.isMutable %}
+        get {
+        {% endif %}
+        {% if variable.isOptional %}
+            guard let value = self.{{type.name|lowerFirstWord}}.{{variable.name}} else {
+                return nil;
+            }
+        {% else %}
+            let value = self.{{type.name|lowerFirstWord}}.{{variable.name}}
+        {% endif %}
+            return _ObjC{{variable.type.name}}({{variable.type.name|lowerFirstWord}}: value)
+        {% if variable.isMutable %}
+        }
+        {% endif %}
+
+        {% if variable.isMutable %}
+        set {
+            self.{{type.name|lowerFirstWord}}.{{variable.name}} = newValue.{{variable.type.name|lowerFirstWord}}
+        }
+        {% endif %}
+    }
+    {% endif %}
+
+    {% if variable.type.kind != "struct" and variable.type.kind != "enum" %}
+    // Forwarding property for native types
+    var {{variable.name}}: {{variable.typeName}}
+    {
+        get {
+            return self.{{type.name|lowerFirstWord}}.{{variable.name}}
+        }
+        {% if variable.isMutable %}
+        set {
+            self.{{type.name|lowerFirstWord}}.{{variable.name}} = newValue
+        }
+        {% endif %}
+    }
+    {% endif %}
+  {% endfor %}
+  }
+{% endfor %}
