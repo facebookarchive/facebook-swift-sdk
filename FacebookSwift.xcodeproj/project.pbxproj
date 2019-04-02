@@ -241,7 +241,7 @@
 			dependencies = (
 			);
 			name = FacebookCore;
-			productName = FBSDKCoreKit;
+			productName = FacebookCore;
 			productReference = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -261,7 +261,7 @@
 				811C5E481CFFD4C800E4A925 /* PBXTargetDependency */,
 			);
 			name = FacebookLogin;
-			productName = FBSDKCoreKit;
+			productName = FacebookLogin;
 			productReference = 811C5DFD1CFFD36600E4A925 /* FacebookLogin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -281,7 +281,7 @@
 				811C5E551CFFD4F100E4A925 /* PBXTargetDependency */,
 			);
 			name = FacebookShare;
-			productName = FBSDKCoreKit;
+			productName = FacebookShare;
 			productReference = 811C5E0A1CFFD36D00E4A925 /* FacebookShare.framework */;
 			productType = "com.apple.product-type.framework";
 		};
