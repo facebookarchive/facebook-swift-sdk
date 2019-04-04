@@ -1,0 +1,67 @@
+import Foundation
+
+{# Helpers #}
+{% set isStructOrEnum %}{{ associatedValue.type.kind == "struct" or associatedValue.type.kind == "enum" }}{% endset %}
+{% set associatedTypeName %}{{ associatedValue.type.name }}{% endset %}
+
+
+// Bridging of enums
+{% macro bridgeStructOrNative associatedValue caseValue %}
+{% filter indent:10 %}
+{% if associatedValue.localName == nil %}
+caseValue.value{{forloop.counter}}{%if isStructOrEnum %}.{{associatedTypeName|lowerFirstWord}}{% endif %}
+{% else %}
+{{associatedValue.localName}}: caseValue.value{{forloop.counter}}
+{% endif %}
+{% endfilter %}
+{% endmacro %}
+
+{% for enum in types.implementing.ObjCBridgeable|enum %}
+@objc(FB{{enum.name}})
+public class _ObjC{{enum.name}} : NSObject {
+  private(set) var {{enum.name|lowerFirstWord}}: {{enum.name}}
+
+  // Initializer for Objective-C code
+  @objc public init(caseValue: Any) {
+  {% for case in enum.cases %}
+  {% if forloop.first %}
+    if let{% else %}
+    else if let{% endif %} {% if case.hasAssociatedValue %}caseValue{% else %}_{% endif %} = caseValue as? _ObjC{{ enum.name }}{{ case.name|capitalize }} {
+  {% if case.hasAssociatedValue %}
+      self.{{ enum.name|lowerFirstWord }} = .{{ case.name }}(
+        {% for associatedValue in case.associatedValues %}{% call bridgeStructOrNative associatedValue caseValue %}{% endfor %}
+      )
+  {% else %}
+      self.{{ enum.name|lowerFirstWord }} = .{{ case.name }}
+  {% endif %}
+    }
+  {% endfor %}
+    else {
+      preconditionFailure("Value \(caseValue) is not compatible with cases of {{enum.name}}")
+    }
+  }
+}
+
+{% for case in enum.cases %}
+// A case of {{enum.name}}
+@objc(FB{{enum.name}}{{case.name|capitalize}})
+public class _ObjC{{enum.name}}{{case.name|capitalize}} : NSObject {
+  {% for associatedValue in case.associatedValues %}
+  {% if isStructOrEnum %}
+  let value{{forloop.counter}} : _ObjC{{associatedValue.type.name}}
+  {% else %}
+  let value{{forloop.counter}} : {{associatedValue.typeName}}
+  {% endif %}
+  {% endfor %}
+
+  {% if not case.associatedValues.count == 0 %}
+  public init({% for associatedValue in case.associatedValues %}{% if isStructOrEnum %}value{{forloop.counter}} : _ObjC{{associatedValue.type.name}}{% else %}value{{forloop.counter}} : {{associatedValue.typeName}} {% endif %}{% if not forloop.last %},{% endif %}{% endfor %}) {
+  {% for associatedValue in case.associatedValues %}
+    self.value{{forloop.counter}} = value{{forloop.counter}}
+  {% endfor %}
+  }
+  {% endif %}
+}
+
+{% endfor %}
+{% endfor %}

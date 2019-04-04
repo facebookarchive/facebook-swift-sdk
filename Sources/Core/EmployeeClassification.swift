@@ -18,4 +18,17 @@
 
 import Foundation
 
-// Required by linter, delete as soon as possible.
+// FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
+
+/**
+ The type of employee
+ */
+public enum EmployeeClassification: Equatable {
+  /// A manager
+  case manager
+
+  /// A contributor
+  case contributor
+}
+
+extension EmployeeClassification: ObjCBridgeable {}

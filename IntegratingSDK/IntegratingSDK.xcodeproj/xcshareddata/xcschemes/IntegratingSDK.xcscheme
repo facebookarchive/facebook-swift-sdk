@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-               BuildableName = "FacebookCore.framework"
-               BlueprintName = "FacebookCore"
-               ReferencedContainer = "container:FacebookSwift.xcodeproj">
+               BlueprintIdentifier = "F40E3AD6225584C30066A569"
+               BuildableName = "IntegratingSDK.framework"
+               BlueprintName = "IntegratingSDK"
+               ReferencedContainer = "container:IntegratingSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,36 +27,8 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <PreActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;echo $PWD&#10;&#10;# Generate objc-friendly code&#10;./scripts/travis/generate_objc.sh&#10;&#10;">
-            </ActionContent>
-         </ExecutionAction>
-      </PreActions>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F40E3A40225424920066A569"
-               BuildableName = "FacebookCoreTests.xctest"
-               BlueprintName = "FacebookCoreTests"
-               ReferencedContainer = "container:FacebookSwift.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-            BuildableName = "FacebookCore.framework"
-            BlueprintName = "FacebookCore"
-            ReferencedContainer = "container:FacebookSwift.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -73,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-            BuildableName = "FacebookCore.framework"
-            BlueprintName = "FacebookCore"
-            ReferencedContainer = "container:FacebookSwift.xcodeproj">
+            BlueprintIdentifier = "F40E3AD6225584C30066A569"
+            BuildableName = "IntegratingSDK.framework"
+            BlueprintName = "IntegratingSDK"
+            ReferencedContainer = "container:IntegratingSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -91,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-            BuildableName = "FacebookCore.framework"
-            BlueprintName = "FacebookCore"
-            ReferencedContainer = "container:FacebookSwift.xcodeproj">
+            BlueprintIdentifier = "F40E3AD6225584C30066A569"
+            BuildableName = "IntegratingSDK.framework"
+            BlueprintName = "IntegratingSDK"
+            ReferencedContainer = "container:IntegratingSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

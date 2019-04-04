@@ -20,12 +20,10 @@ import Foundation
 
 // FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
 
-struct AccessTokenStruct {
-  let identifier: String
-  let code: Int
+public enum EmployeePayroll: Equatable {
+  case hourly(for: EmployeeClassification)
+  case salary(for: EmployeeClassification)
+  case terminated
 }
 
-// Phantom type to mark types that may be bridged to objc
-protocol ObjCBridgeable {}
-
-extension AccessTokenStruct: ObjCBridgeable {}
+extension EmployeePayroll: ObjCBridgeable {}
