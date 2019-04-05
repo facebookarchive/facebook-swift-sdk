@@ -12,35 +12,45 @@ import Foundation
 public class _ObjCRestaurant : NSObject {
   private (set) var restaurant: Restaurant
 
-  // Initializer to be used from Swift code
+  // TODO: Probably remove this if no clear use case arises
   public init(restaurant: Restaurant) {
     self.restaurant = restaurant
   }
 
   // Initializer to be used from ObjC code
   @objc public init(
+    soup: String = "Clam Chowder", 
+    bread: String = "Sourdough", 
     name: String , 
     specials: [String] , 
     regularMenu: [String] = ["Sandwiches"], 
+    orderTimestamp: Date , 
     employee: _ObjCEmployee, 
-
+    payrollEntry: Any, 
     payroll: Any, 
     registerCode: String , 
-    bathroomCode: String 
+    bathroomCode: String , 
+    uniformColors: _ObjCUniformColors
   ) {
-    // Unwrapping of enumeration
-    guard let enumeration8 = payroll as? _ObjCEmployeePayroll else {
+    guard let enumeration8 = payrollEntry as? _ObjCEmployeePayroll else {
+      preconditionFailure("Type of enumeration not valid for payrollEntry")
+    }
+    guard let enumerations9 = payroll as? [_ObjCEmployeePayroll] else {
       preconditionFailure("Type of enumeration not valid for payroll")
     }
-
+    let mappedEnumerations9 = enumerations9.map {
+      $0.employeePayroll
+    }
     let restaurant = Restaurant(
-      name: name,
-      specials: specials,
-      regularMenu: regularMenu,
-      employee: employee.employee,
-      payroll: enumeration8.employeePayroll,
-      registerCode: registerCode,
-      bathroomCode: bathroomCode
+        name: name,
+        specials: specials,
+        regularMenu: regularMenu,
+        employee: employee.employee,
+        payrollEntry: enumeration8.employeePayroll,
+        payroll: mappedEnumerations9,
+        registerCode: registerCode,
+        bathroomCode: bathroomCode,
+        uniformColors: uniformColors.uniformColors
     )
     self.restaurant = restaurant
   }
@@ -90,6 +100,7 @@ public class _ObjCRestaurant : NSObject {
     return self.restaurant.orderTimestamp
   }
 
+  // Forwarding to custom type
   @objc public var employee : _ObjCEmployee {
     get {
       let value = self.restaurant.employee
@@ -102,36 +113,84 @@ public class _ObjCRestaurant : NSObject {
   }
 
   // Computed property for enums
-  @objc public var payroll : Any {
+  @objc public var payrollEntry : Any {
     get {
-      let value = self.restaurant.payroll
+      let value = self.restaurant.payrollEntry
 
       switch value {
-        case .hourly(let value1):
-            return _ObjCEmployeePayrollHourly(
-              value1: value1
-              )
-        case .salary(let value1):
-            return _ObjCEmployeePayrollSalary(
-              value1: value1
-              )
-         case .terminated:
-            return _ObjCEmployeePayrollTerminated()
+      case .hourly(let value1):
+        return _ObjCEmployeePayrollHourly(
+          value1: value1
+        )
+
+      case .salary(let value1):
+        return _ObjCEmployeePayrollSalary(
+          value1: value1
+        )
+
+      case .terminated:
+        return _ObjCEmployeePayrollTerminated()
       }
     }
     set {
       if let caseValue = newValue as? _ObjCEmployeePayrollHourly  {
-        self.restaurant.payroll = .hourly(for: caseValue.value1)
+        self.restaurant.payrollEntry = .hourly(for: caseValue.value1)
       }
       if let caseValue = newValue as? _ObjCEmployeePayrollSalary  {
-        self.restaurant.payroll = .salary(for: caseValue.value1)
+        self.restaurant.payrollEntry = .salary(for: caseValue.value1)
       }
       if newValue as? _ObjCEmployeePayrollTerminated != nil  {
-        self.restaurant.payroll = .terminated
+        self.restaurant.payrollEntry = .terminated
       }
     }
   }
 
+  // Computed property for Array of enums
+  @objc public var payroll : Any {
+    get {
+      let values = self.restaurant.payroll
+
+      return values.map { value -> Any in
+        switch value {
+        case .hourly(let value1):
+          return _ObjCEmployeePayrollHourly(
+            value1: value1
+          )
+
+        case .salary(let value1):
+          return _ObjCEmployeePayrollSalary(
+            value1: value1
+          )
+
+        case .terminated:
+          return _ObjCEmployeePayrollTerminated()
+        }
+      } as Any
+    }
+    set {
+      var backingValues = [EmployeePayroll]()
+
+      guard let newValues = newValue as? [AnyObject] else {
+        return assertionFailure("Must be able to cast any into array of objects")
+      }
+
+      newValues.forEach { value in
+
+        if let caseValue = value as? _ObjCEmployeePayrollHourly  {
+          backingValues.append(.hourly(for: caseValue.value1))
+        }
+
+        if let caseValue = value as? _ObjCEmployeePayrollSalary  {
+          backingValues.append(.salary(for: caseValue.value1))
+        }
+
+        if value as? _ObjCEmployeePayrollTerminated != nil  {
+          backingValues.append(.terminated)
+        }
+      }
+      self.restaurant.payroll = backingValues
+    }
+  }
 
 
   // Forwarding property for native type
@@ -142,5 +201,38 @@ public class _ObjCRestaurant : NSObject {
     set {
       self.restaurant.bathroomCode = newValue
     }
+  }
+
+  // Forwarding to custom type
+  @objc public var uniformColors : _ObjCUniformColors {
+    get {
+      let value = self.restaurant.uniformColors
+      return _ObjCUniformColors(uniformColors: value)
+    }
+
+    set {
+      self.restaurant.uniformColors = newValue.uniformColors
+    }
+  }
+}
+
+@objc(FBUniformColors)
+public class _ObjCUniformColors : NSObject {
+  private (set) var uniformColors: UniformColors
+
+  // TODO: Probably remove this if no clear use case arises
+  public init(uniformColors: UniformColors) {
+    self.uniformColors = uniformColors
+  }
+
+
+  // Forwarding property for native type
+  @objc internal var hat : String {
+    return self.uniformColors.hat
+  }
+
+  // Forwarding property for native type
+  @objc internal var shirt : String {
+    return self.uniformColors.shirt
   }
 }

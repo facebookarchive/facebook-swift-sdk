@@ -44,7 +44,9 @@ public struct Restaurant: Equatable {
   public var employee: Employee
 
   // Enum Variable
-  public var payroll: EmployeePayroll
+  public var payrollEntry: EmployeePayroll
+
+  public var payroll: [EmployeePayroll]
 
   // Private Variable
   // Note: Including a private var means we need to include a custom initializer
@@ -55,6 +57,8 @@ public struct Restaurant: Equatable {
   // Public Variable
   public var bathroomCode: String
 
+  public var uniformColors: UniformColors
+
   // Necessary because of a private var.
   // This would show up when we wanted to use it ourselves anyway so no big deal
   // but again worth noting that you are able to write a valid struct that will not generate into a valid wrapper class
@@ -63,16 +67,20 @@ public struct Restaurant: Equatable {
     specials: [String],
     regularMenu: [String],
     employee: Employee,
-    payroll: EmployeePayroll,
-    bathroomCode: String
+    payrollEntry: EmployeePayroll,
+    payroll: [EmployeePayroll],
+    bathroomCode: String,
+    uniformColors: UniformColors
     ) {
     self.name = name
     self.specials = specials
     self.regularMenu = regularMenu
     self.bathroomCode = bathroomCode
     self.employee = employee
-    self.payroll = payroll
+    self.payrollEntry = payrollEntry
     self.registerCode = "secret"
+    self.uniformColors = uniformColors
+    self.payroll = payroll
   }
 
   init(
@@ -80,9 +88,11 @@ public struct Restaurant: Equatable {
     specials: [String],
     regularMenu: [String],
     employee: Employee,
-    payroll: EmployeePayroll,
+    payrollEntry: EmployeePayroll,
+    payroll: [EmployeePayroll],
     registerCode: String,
-    bathroomCode: String
+    bathroomCode: String,
+    uniformColors: UniformColors
     ) {
     self.name = name
     self.specials = specials
@@ -90,6 +100,8 @@ public struct Restaurant: Equatable {
     self.registerCode = registerCode
     self.bathroomCode = bathroomCode
     self.employee = employee
+    self.payrollEntry = payrollEntry
+    self.uniformColors = uniformColors
     self.payroll = payroll
   }
 }

@@ -1,0 +1,91 @@
+{# Macro for ObjC initializer's parameters #}
+{% macro initializerParameters type %}
+    {% filter indent:2 %}
+    {% for variable in type.variables %}
+    {# --- #}
+    {% set isClass %}{% call isClass variable %}{% endset %}
+    {% set isEnum %}{% call isEnum variable %}{% endset %}
+    {% set isEnumArray %}{% call isEnumArray variable %}{% endset %}
+    {% set isCustomType %}{% call isCustomType variable %}{% endset %}
+    {# --- #}
+    {% if isEnum %}
+      {% call enumParameterForInitializer variable %}
+    {% elif isEnumArray %}
+      {% call enumArrayParameterForInitializer variable %}
+    {% elif isCustomType %}
+      {% call classOrStructParameterForInitializer variable %}
+    {% elif not isStatic and not isComputed %}
+      {% call nativeTypeParameterForInitializer variable %}
+    {% endif %}
+    {% endfor %}
+    {% endfilter %}
+{% endmacro %}
+{#  #}
+{# Macro for required casting of 'enums' into their wrapper classes #}
+{% macro unwrapEnums type %}
+    {% for variable in type.variables %}
+    {# --- #}
+    {% set isClass %}{% call isClass variable %}{% endset %}
+    {% set isEnum %}{% call isEnum variable %}{% endset %}
+    {% set isEnumArray %}{% call isEnumArray variable %}{% endset %}
+    {% set isCustomType %}{% call isCustomType variable %}{% endset %}
+    {# --- #}
+    {% if isEnum %}
+    guard let enumeration{{ forloop.counter }} = {{ variable.name }} as? _ObjC{{ variable.type.name }} else {
+      preconditionFailure("Type of enumeration not valid for {{ variable.name }}")
+    }
+    {% elif isEnumArray %}
+    guard let enumerations{{ forloop.counter }} = {{ variable.name }} as? [_ObjC{{ variable.typeName.array.elementType.name }}] else {
+      preconditionFailure("Type of enumeration not valid for {{ variable.name }}")
+    }
+    let mappedEnumerations{{ forloop.counter }} = enumerations{{ forloop.counter }}.map {
+      $0.{{ variable.typeName.array.elementType.name|lowerFirstWord }}
+    }
+    {% endif %}
+    {% endfor %}
+{% endmacro %}
+{#  #}
+{# Macro for instantiating the backing type #}
+{% macro instantiateBackingType type %}
+  {% filter indent:2 %}
+  let {{ type.name|lowerFirstWord }} = {{ type.name }}(
+    {% filter indent:4 %}
+    {% for variable in type.variables %}
+    {# --- #}
+    {% set isClass %}{% call isClass variable %}{% endset %}
+    {% set isEnum %}{% call isEnum variable %}{% endset %}
+    {% set isEnumArray %}{% call isEnumArray variable %}{% endset %}
+    {% set isCustomType %}{% call isCustomType variable %}{% endset %}
+    {# --- #}
+    {% if isEnum %}
+      {% call setEnumValueOnBackingType variable %}
+    {% elif isCustomType %}
+      {% call setCustomValueOnBackingType variable %}
+    {% elif isEnumArray %}
+      {% call setEnumArrayValueOnBackingType variable %}
+    {% elif not variable.isStatic and not variable.isComputed %}
+      {% call setNativeValueOnBackingType variable %}
+    {% endif %}
+    {% endfor %}
+    {% endfilter %}
+  )
+  self.{{ type.name|lowerFirstWord }} = {{ type.name|lowerFirstWord }}
+  {% endfilter %}
+{% endmacro %}
+{#  #}
+{# Macro for ObjC initializer #}
+{% macro initialize type %}
+  {% for initializer in type.initializers %}
+  {% if initializer.accessLevel == "public" %}
+  // Initializer to be used from ObjC code
+  @objc {% if type.variables.count == 0  %}override {% endif %}{{ type.accessLevel }} init(
+    {% call initializerParameters type %}
+  ) {
+    {% call unwrapEnums type %}
+    {% call instantiateBackingType type %}
+  }
+  {% endif %}
+  {% endfor %}
+{% endmacro %}
+{#  #}
+{% call initialize type %}
