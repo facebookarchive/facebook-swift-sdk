@@ -1,3 +1,8 @@
+{% for type in types.all %}
+  // sourcery:file:Generated/{{ type.name}}+TemplateName
+  // sourcery:end
+{% endfor %}
+
 {# Macros for determining specific types #}
 {% macro isClass variable %}{% if variable.type.kind == "class" %}true{% endif %}{% endmacro %}
 {% macro isEnum variable %}{% if variable.type.kind == "enum" %}true{% endif %}{% endmacro %}
@@ -51,7 +56,23 @@ import Foundation
     self.{{ type.name|lowerFirstWord }} = {{ type.name|lowerFirstWord }}
   }
 
-  {% include "./Structs/SetupInitializer.stencil" %}
-  {% include "./Structs/SetupVariables.stencil" %}
+  {% include "./Shared/SetupInitializer.stencil" %}
+  {% include "./Shared/SetupVariables.stencil" %}
+}
+{% endfor %}
+{#  #}
+{% for type in types.implementing.ObjCBridgeable|class %}
+
+@objc(FB{{ type.name }})
+{{ type.accessLevel }} class _ObjC{{ type.name }} : NSObject {
+  private (set) var {{ type.name|lowerFirstWord }}: {{ type.name }}
+
+  // TODO: Probably remove this if no clear use case arises
+  {{ type.accessLevel }} init({{ type.name|lowerFirstWord }}: {{ type.name }}) {
+    self.{{ type.name|lowerFirstWord }} = {{ type.name|lowerFirstWord }}
+  }
+
+  {% include "./Shared/SetupInitializer.stencil" %}
+  {% include "./Shared/SetupVariables.stencil" %}
 }
 {% endfor %}

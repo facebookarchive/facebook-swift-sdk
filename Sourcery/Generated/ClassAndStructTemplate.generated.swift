@@ -5,6 +5,11 @@
 
 
 
+
+
+
+
+
 import Foundation
 
 
@@ -234,5 +239,41 @@ public class _ObjCUniformColors : NSObject {
   // Forwarding property for native type
   @objc internal var shirt : String {
     return self.uniformColors.shirt
+  }
+}
+
+@objc(FBEmployee)
+public class _ObjCEmployee : NSObject {
+  private (set) var employee: Employee
+
+  // TODO: Probably remove this if no clear use case arises
+  public init(employee: Employee) {
+    self.employee = employee
+  }
+
+  // Initializer to be used from ObjC code
+  @objc public init(
+    classification: Any
+  ) {
+    guard let enumeration1 = classification as? _ObjCEmployeeClassification else {
+      preconditionFailure("Type of enumeration not valid for classification")
+    }
+    let employee = Employee(
+        classification: enumeration1.employeeClassification
+    )
+    self.employee = employee
+  }
+
+  // Computed property for enums
+  @objc public var classification : Any {
+      let value = self.employee.classification
+
+      switch value {
+      case .manager:
+        return _ObjCEmployeeClassificationManager()
+
+      case .contributor:
+        return _ObjCEmployeeClassificationContributor()
+      }
   }
 }
