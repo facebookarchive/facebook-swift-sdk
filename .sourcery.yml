@@ -1,6 +1,6 @@
 sources:
   - ./Sources/Core
 templates:
-  - ./ObjCInteroperability/Templates
+  - ./Codegen/Templates
 output:
-  ./ObjCInteroperability/Generated
+  ./Codegen/Generated
