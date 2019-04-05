@@ -1,6 +1,6 @@
 sources:
   - ./Sources/Core
 templates:
-  - ./Sourcery/Templates
+  - ./ObjCInteroperability/Templates
 output:
-  ./Sourcery/Generated
+  ./ObjCInteroperability/Generated
