@@ -16,8 +16,9 @@
 		F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A65225517730066A569 /* EmployeeClassification.swift */; };
 		F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */; };
 		F40E3B05225672870066A569 /* UniformColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B04225672870066A569 /* UniformColors.swift */; };
-		F40E3B1322568A5F0066A569 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A62225516BB0066A569 /* EnumTemplate.generated.swift */; };
-		F40E3B192257D5F40066A569 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B182257D5F40066A569 /* ClassAndStructTemplate.generated.swift */; };
+		F40E3B1D22580FA30066A569 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B1A22580FA30066A569 /* EnumTemplate.generated.swift */; };
+		F40E3B1E22580FA30066A569 /* Annotations.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B1B22580FA30066A569 /* Annotations.generated.swift */; };
+		F40E3B1F22580FA30066A569 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B1C22580FA30066A569 /* ClassAndStructTemplate.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,11 +71,12 @@
 		F40E3A43225424930066A569 /* SourceryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceryTests.swift; sourceTree = "<group>"; };
 		F40E3A45225424930066A569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F40E3A5F225515840066A569 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
-		F40E3A62225516BB0066A569 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumTemplate.generated.swift; path = Sourcery/Generated/EnumTemplate.generated.swift; sourceTree = SOURCE_ROOT; };
 		F40E3A65225517730066A569 /* EmployeeClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeClassification.swift; sourceTree = "<group>"; };
 		F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePayroll.swift; sourceTree = "<group>"; };
 		F40E3B04225672870066A569 /* UniformColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformColors.swift; sourceTree = "<group>"; };
-		F40E3B182257D5F40066A569 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassAndStructTemplate.generated.swift; path = Sourcery/Generated/ClassAndStructTemplate.generated.swift; sourceTree = SOURCE_ROOT; };
+		F40E3B1A22580FA30066A569 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumTemplate.generated.swift; path = ObjCInteroperability/Generated/EnumTemplate.generated.swift; sourceTree = SOURCE_ROOT; };
+		F40E3B1B22580FA30066A569 /* Annotations.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Annotations.generated.swift; path = ObjCInteroperability/Generated/Annotations.generated.swift; sourceTree = SOURCE_ROOT; };
+		F40E3B1C22580FA30066A569 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassAndStructTemplate.generated.swift; path = ObjCInteroperability/Generated/ClassAndStructTemplate.generated.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +149,9 @@
 		811C5E5D1CFFD52B00E4A925 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				F40E3A4F225428540066A569 /* Generated */,
+				F40E3B1B22580FA30066A569 /* Annotations.generated.swift */,
+				F40E3B1C22580FA30066A569 /* ClassAndStructTemplate.generated.swift */,
+				F40E3B1A22580FA30066A569 /* EnumTemplate.generated.swift */,
 				811C5E5E1CFFD52B00E4A925 /* Core */,
 				811C5E601CFFD52B00E4A925 /* Login */,
 				811C5E621CFFD52B00E4A925 /* Share */,
@@ -243,15 +247,6 @@
 				F40E3A45225424930066A569 /* Info.plist */,
 			);
 			path = FacebookCoreTests;
-			sourceTree = "<group>";
-		};
-		F40E3A4F225428540066A569 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				F40E3B182257D5F40066A569 /* ClassAndStructTemplate.generated.swift */,
-				F40E3A62225516BB0066A569 /* EnumTemplate.generated.swift */,
-			);
-			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,11 +499,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F40E3B192257D5F40066A569 /* ClassAndStructTemplate.generated.swift in Sources */,
+				F40E3B1F22580FA30066A569 /* ClassAndStructTemplate.generated.swift in Sources */,
 				F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */,
+				F40E3B1D22580FA30066A569 /* EnumTemplate.generated.swift in Sources */,
+				F40E3B1E22580FA30066A569 /* Annotations.generated.swift in Sources */,
 				F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */,
 				F40E3A60225515840066A569 /* Employee.swift in Sources */,
-				F40E3B1322568A5F0066A569 /* EnumTemplate.generated.swift in Sources */,
 				F40E3B05225672870066A569 /* UniformColors.swift in Sources */,
 				F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */,
 			);

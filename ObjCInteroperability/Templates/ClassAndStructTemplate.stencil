@@ -1,8 +1,3 @@
-{% for type in types.all %}
-  // sourcery:file:Generated/{{ type.name}}+TemplateName
-  // sourcery:end
-{% endfor %}
-
 {# Macros for determining specific types #}
 {% macro isClass variable %}{% if variable.type.kind == "class" %}true{% endif %}{% endmacro %}
 {% macro isEnum variable %}{% if variable.type.kind == "enum" %}true{% endif %}{% endmacro %}
@@ -58,6 +53,7 @@ import Foundation
 
   {% include "./Shared/SetupInitializer.stencil" %}
   {% include "./Shared/SetupVariables.stencil" %}
+  {% include "./Shared/SetupMethods.stencil" %}
 }
 {% endfor %}
 {#  #}
@@ -74,5 +70,6 @@ import Foundation
 
   {% include "./Shared/SetupInitializer.stencil" %}
   {% include "./Shared/SetupVariables.stencil" %}
+  {% include "./Shared/SetupMethods.stencil" %}
 }
 {% endfor %}

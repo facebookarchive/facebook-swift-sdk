@@ -59,6 +59,10 @@ public struct Restaurant: Equatable {
 
   public var uniformColors: UniformColors
 
+  var timeNow: Date {
+    return Date()
+  }
+
   // Necessary because of a private var.
   // This would show up when we wanted to use it ourselves anyway so no big deal
   // but again worth noting that you are able to write a valid struct that will not generate into a valid wrapper class
@@ -104,6 +108,33 @@ public struct Restaurant: Equatable {
     self.uniformColors = uniformColors
     self.payroll = payroll
   }
+
+  // Public Method that uses an internal property
+  public func timeInOneHour() -> Date {
+    return timeNow.addingTimeInterval(Double(60 * 60 * 60))
+  }
+
+  // Public method with a lot of parameters
+  public func timeAdvanced(
+    byHours hours: Int,
+    minutes: Int,
+    _ seconds: Int) {
+    print("\(hours), \(minutes), \(seconds)")
+  }
+
+  public static func staticTimeAdvanced(
+    byHours hours: Int,
+    minutes: Int,
+    _ seconds: Int) {
+    print("\(hours), \(minutes), \(seconds)")
+  }
+  // Internal Method that uses an internal property
+
+  // Public Method that takes an enum
+
+  // Public Method that returns an enum
+
+  // Public Method that returns a bridged type
 }
 
 // Phantom type to mark types that may be bridged to objc

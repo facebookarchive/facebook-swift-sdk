@@ -21,6 +21,8 @@
                                                           payroll: payrollEntry
                                                      registerCode: @"123"
                                                      bathroomCode: @"345"];
+
+    [restaurant ]
     return restaurant;
 }
 

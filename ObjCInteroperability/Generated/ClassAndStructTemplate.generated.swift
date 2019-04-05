@@ -5,11 +5,6 @@
 
 
 
-
-
-
-
-
 import Foundation
 
 
@@ -24,26 +19,22 @@ public class _ObjCRestaurant : NSObject {
 
   // Initializer to be used from ObjC code
   @objc public init(
-    soup: String = "Clam Chowder", 
-    bread: String = "Sourdough", 
     name: String , 
     specials: [String] , 
-    regularMenu: [String] = ["Sandwiches"], 
-    orderTimestamp: Date , 
+    regularMenu: [String] , 
     employee: _ObjCEmployee, 
     payrollEntry: Any, 
     payroll: Any, 
-    registerCode: String , 
     bathroomCode: String , 
     uniformColors: _ObjCUniformColors
   ) {
-    guard let enumeration8 = payrollEntry as? _ObjCEmployeePayroll else {
+    guard let enumeration5 = payrollEntry as? _ObjCEmployeePayroll else {
       preconditionFailure("Type of enumeration not valid for payrollEntry")
     }
-    guard let enumerations9 = payroll as? [_ObjCEmployeePayroll] else {
+    guard let enumerations6 = payroll as? [_ObjCEmployeePayroll] else {
       preconditionFailure("Type of enumeration not valid for payroll")
     }
-    let mappedEnumerations9 = enumerations9.map {
+    let mappedEnumerations6 = enumerations6.map {
       $0.employeePayroll
     }
     let restaurant = Restaurant(
@@ -51,9 +42,8 @@ public class _ObjCRestaurant : NSObject {
         specials: specials,
         regularMenu: regularMenu,
         employee: employee.employee,
-        payrollEntry: enumeration8.employeePayroll,
-        payroll: mappedEnumerations9,
-        registerCode: registerCode,
+        payrollEntry: enumeration5.employeePayroll,
+        payroll: mappedEnumerations6,
         bathroomCode: bathroomCode,
         uniformColors: uniformColors.uniformColors
     )
@@ -219,6 +209,55 @@ public class _ObjCRestaurant : NSObject {
       self.restaurant.uniformColors = newValue.uniformColors
     }
   }
+
+  // Forwarding property for native type
+  @objc internal var timeNow : Date {
+    return self.restaurant.timeNow
+  }
+
+
+    // Shortname timeInOneHour
+    // Name timeInOneHour()
+    // Forwarding method
+    @objc public func timeInOneHour(
+    ) { // Next: Deal with return type {
+    self.restaurant.timeInOneHour(
+    )
+    }
+
+
+    // Shortname timeAdvanced
+    // Name timeAdvanced(    byHours hours: Int,    minutes: Int,    _ seconds: Int)
+    // Forwarding method
+    @objc public func timeAdvanced(
+    byHours hours: Int,
+    minutes minutes: Int,
+    _ seconds: Int
+    ) { // Next: Deal with return type {
+    self.restaurant.timeAdvanced(
+        byHours: hours,
+        minutes: minutes,
+        seconds
+    )
+    }
+
+
+    // Shortname staticTimeAdvanced
+    // Name staticTimeAdvanced(    byHours hours: Int,    minutes: Int,    _ seconds: Int)
+    // Forwarding method
+    @objc public static func staticTimeAdvanced(
+    byHours hours: Int,
+    minutes minutes: Int,
+    _ seconds: Int
+    ) { // Next: Deal with return type {
+    Restaurant.staticTimeAdvanced(
+        byHours: hours,
+        minutes: minutes,
+        seconds
+    )
+    }
+
+
 }
 
 @objc(FBUniformColors)
@@ -240,6 +279,8 @@ public class _ObjCUniformColors : NSObject {
   @objc internal var shirt : String {
     return self.uniformColors.shirt
   }
+
+
 }
 
 @objc(FBEmployee)
@@ -276,4 +317,25 @@ public class _ObjCEmployee : NSObject {
         return _ObjCEmployeeClassificationContributor()
       }
   }
+
+
+    // Shortname < 
+    // Name < (lhs: Employee, rhs: Employee)
+    // Forwarding method
+    @objc public static func < (
+    _ 
+  lhs: _ObjCEmployee, 
+    _ 
+  rhs: _ObjCEmployee
+    ) { // Next: Deal with return type {
+    Employee.< (
+        lhs,
+        rhs
+    )
+    }
+
+
+
+
+
 }

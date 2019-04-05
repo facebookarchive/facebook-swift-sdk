@@ -1,0 +1,97 @@
+{% macro methodParameterForEnum %}
+    {% if parameter.argumentLabel %}
+      {% if parameter.argumentLabel != parameter.name %}
+        {{ parameter.argumentLabel }}
+      {% endif %}
+    {% else %}
+        _
+    {% endif %}
+    {% call enumParameterForInitializer parameter %}
+{% endmacro %}
+{# --- #}
+{% macro methodParameterForEnumArray %}
+    {% if parameter.argumentLabel %}{{ parameter.argumentLabel }} {% else %}_ {% endif %}{% call enumArrayParameterForInitializer parameter %}
+{% endmacro %}
+{# --- #}
+{% macro methodParameterForCustomType %}
+    {% if parameter.argumentLabel %}{{ parameter.argumentLabel }} {% else %}_ {% endif %}{% call classOrStructParameterForInitializer parameter %}
+{% endmacro %}
+{# --- #}
+{% macro methodParameterForNativeType %}
+    {% if parameter.argumentLabel %}{{ parameter.argumentLabel }} {% else %}_ {% endif %}{{ parameter.name }}: {{ parameter.typeName }}{% if not forloop.last %},{% endif %}
+{% endmacro %}
+{# --- #}
+{% macro isEqualityOverload %}{% if method.shortName == "==" %}true{% endif %}{% endmacro %}
+{# --- #}
+
+{# Macro for Method Parameters #}
+{% macro setupParameters %}
+  {% for parameter in method.parameters %}
+  {# --- #}
+  {% set isClass %}{% call isClass parameter %}{% endset %}
+  {% set isEnum %}{% call isEnum parameter %}{% endset %}
+  {% set isEnumArray %}{% call isEnumArray parameter %}{% endset %}
+  {% set isCustomType %}{% call isCustomType parameter %}{% endset %}
+  {# --- #}
+  {% if isEnum %}
+    {% call methodParameterForEnum %}
+  {% elif isEnumArray %}
+    {% call methodParameterForEnumArray %}
+  {% elif isCustomType %}
+    {% call methodParameterForCustomType %}
+  {% elif not isStatic and not isComputed %}
+    {% call methodParameterForNativeType %}
+  {% endif %}
+  {% endfor %}
+{% endmacro %}
+{#  #}
+{# Macro for calling backing method #}
+{% macro invokeBackingMethod %}
+  {#  #}
+  {% set targetName %}{% if method.isStatic %}{{ type.name }}{% else %}self.{{ type.name|lowerFirstWord }}{% endif %}{% endset %}
+  {#  #}
+    {{ targetName }}.{{ method.shortName }}(
+      {% for parameter in method.parameters %}
+        {% if parameter.argumentLabel %}{{ parameter.argumentLabel }}: {% endif %}{{ parameter.name }}{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    )
+{% endmacro %}
+{#  #}
+{# Macro for ObjC Method Forwarding #}
+{% macro setupMethods type %}
+  {# For public methods that are not initializers or overloaded operators #}
+  {% for method in type.methods where method.accessLevel == "public"
+     and not method.isInitializer %}
+
+  {% if method.shortName == "== " %}
+
+  {% else %}
+    // Shortname {{ method.shortName }}
+    // Name {{ method.name }}
+    // Forwarding method
+    @objc {{ method.accessLevel }} {% if method.isStatic %}static {% endif %}func {{ method.shortName }}(
+      {% call setupParameters %}
+    ) { // Next: Deal with return type {
+      {% call invokeBackingMethod %}
+    }
+  {% endif %}
+     {# and not method.shortName == "== "
+     and not method.shortName == "< "
+     and not method.shortName == "> "
+     and not method.shortName == "<= "
+     and not method.shortName == ">= " #}
+
+  {% endfor %}
+{% endmacro %}
+{#  #}
+{% call setupMethods type %}
+
+{#
+  @objc public override func isEqual(_ object: Any?) -> Bool { // Next: Deal with return type {
+    guard let object = object as? _ObjCEmployee else {
+      return false
+    }
+
+    return self.employee == object.employee
+  }
+#}

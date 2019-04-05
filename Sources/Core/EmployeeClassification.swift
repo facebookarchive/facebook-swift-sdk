@@ -23,7 +23,12 @@ import Foundation
 /**
  The type of employee
  */
-public enum EmployeeClassification: Equatable {
+public enum EmployeeClassification: Equatable, Comparable {
+  public static func < (lhs: EmployeeClassification, rhs: EmployeeClassification) -> Bool {
+    // Everyone is equal~ yay!
+    return false
+  }
+
   /// A manager
   case manager
 

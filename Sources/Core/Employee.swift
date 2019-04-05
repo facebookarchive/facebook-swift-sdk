@@ -20,7 +20,11 @@ import Foundation
 
 // FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
 
-public class Employee: Equatable {
+public class Employee: Equatable, Comparable {
+  public static func < (lhs: Employee, rhs: Employee) -> Bool {
+    return lhs.classification < rhs.classification
+  }
+
   public static func == (lhs: Employee, rhs: Employee) -> Bool {
     return lhs.classification == rhs.classification
   }
