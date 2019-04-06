@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		811C5E4D1CFFD4D100E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		811C5E561CFFD4F800E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
-		BF_277665511198 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_182203888603 /* EnumTemplate.generated.swift */; };
-		BF_668056479222 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_647159191303 /* ClassAndStructTemplate.generated.swift */; };
+		BF_397709021963 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_831513126128 /* EnumTemplate.generated.swift */; };
+		BF_427150027273 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_405410238808 /* ClassAndStructTemplate.generated.swift */; };
 		F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A3922540D430066A569 /* Restaurant.swift */; };
 		F40E3A60225515840066A569 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A5F225515840066A569 /* Employee.swift */; };
 		F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A65225517730066A569 /* EmployeeClassification.swift */; };
@@ -61,8 +61,8 @@
 		F40E3A65225517730066A569 /* EmployeeClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeClassification.swift; sourceTree = "<group>"; };
 		F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePayroll.swift; sourceTree = "<group>"; };
 		F40E3B04225672870066A569 /* UniformColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformColors.swift; sourceTree = "<group>"; };
-		FR_182203888603 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = EnumTemplate.generated.swift; path = Generated/EnumTemplate.generated.swift; sourceTree = "<group>"; };
-		FR_647159191303 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = ClassAndStructTemplate.generated.swift; path = Generated/ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_405410238808 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_831513126128 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = EnumTemplate.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,10 +217,18 @@
 		G_6823197384614 /* Codegen */ = {
 			isa = PBXGroup;
 			children = (
-				FR_647159191303 /* ClassAndStructTemplate.generated.swift */,
-				FR_182203888603 /* EnumTemplate.generated.swift */,
+				G_8284527744714 /* Generated */,
 			);
 			path = Codegen;
+			sourceTree = "<group>";
+		};
+		G_8284527744714 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				FR_405410238808 /* ClassAndStructTemplate.generated.swift */,
+				FR_831513126128 /* EnumTemplate.generated.swift */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,8 +453,8 @@
 				F40E3A60225515840066A569 /* Employee.swift in Sources */,
 				F40E3B05225672870066A569 /* UniformColors.swift in Sources */,
 				F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */,
-				BF_668056479222 /* ClassAndStructTemplate.generated.swift in Sources */,
-				BF_277665511198 /* EnumTemplate.generated.swift in Sources */,
+				BF_427150027273 /* ClassAndStructTemplate.generated.swift in Sources */,
+				BF_397709021963 /* EnumTemplate.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
