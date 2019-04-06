@@ -491,7 +491,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./scripts/travis/generate_objc.sh\n\n#\n#echo \"COPYING GENERATED FILES FROM: \" \n#echo ${SRCROOT}/Codegen/Generated\n\n#echo \"TO:\"\n#echo ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n\n#find -L ${SRCROOT}/Codegen/Generated \\\n#-type f -not -name \".*\" \\\n-not -name \"`basename ${INFOPLIST_FILE}`\" \\\n| xargs -t -I {} \\\nmv {} ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n";
+			shellScript = "./scripts/travis/generate_objc.sh\n\nif [ $? -eq 0 ]; then\n  echo 'Generated Files and Added them to Project'\nelse\n  exit 1\nfi\n\n#\n#echo \"COPYING GENERATED FILES FROM: \" \n#echo ${SRCROOT}/Codegen/Generated\n\n#echo \"TO:\"\n#echo ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n\n#find -L ${SRCROOT}/Codegen/Generated \\\n#-type f -not -name \".*\" \\\n-not -name \"`basename ${INFOPLIST_FILE}`\" \\\n| xargs -t -I {} \\\nmv {} ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
