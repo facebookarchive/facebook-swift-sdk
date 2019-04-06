@@ -12,7 +12,6 @@
 		BF_632876430735 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_792966156771 /* EnumTemplate.generated.swift */; };
 		BF_874123705724 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_618264436644 /* ClassAndStructTemplate.generated.swift */; };
 		F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A3922540D430066A569 /* Restaurant.swift */; };
-		F40E3A44225424930066A569 /* SourceryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A43225424930066A569 /* SourceryTests.swift */; };
 		F40E3A46225424930066A569 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F40E3A60225515840066A569 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A5F225515840066A569 /* Employee.swift */; };
 		F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A65225517730066A569 /* EmployeeClassification.swift */; };
@@ -67,7 +66,6 @@
 		81654DD61D356E9A006401F1 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		F40E3A3922540D430066A569 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		F40E3A41225424920066A569 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F40E3A43225424930066A569 /* SourceryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceryTests.swift; sourceTree = "<group>"; };
 		F40E3A45225424930066A569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F40E3A5F225515840066A569 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		F40E3A65225517730066A569 /* EmployeeClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeClassification.swift; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 		F40E3A42225424930066A569 /* FacebookCoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				F40E3A43225424930066A569 /* SourceryTests.swift */,
 				F40E3A45225424930066A569 /* Info.plist */,
 			);
 			path = FacebookCoreTests;
@@ -285,7 +282,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8115C0E01CFE540D001FF33B /* Build configuration list for PBXNativeTarget "FacebookCore" */;
 			buildPhases = (
-				F40E3A562254F1EA0066A569 /* ShellScript */,
+				F40E3A562254F1EA0066A569 /* Generate ObjC Wrapper Classes */,
 				8115C0D31CFE540D001FF33B /* Sources */,
 				8115C0D41CFE540D001FF33B /* Frameworks */,
 				8115C0D51CFE540D001FF33B /* Headers */,
@@ -480,18 +477,19 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		F40E3A562254F1EA0066A569 /* ShellScript */ = {
+		F40E3A562254F1EA0066A569 /* Generate ObjC Wrapper Classes */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Generate ObjC Wrapper Classes";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./scripts/travis/generate_objc.sh\n\nif [ $? -eq 0 ]; then\n  echo 'Generated Files and Added them to Project'\nelse\n  exit 1\nfi\n\n#\n#echo \"COPYING GENERATED FILES FROM: \" \n#echo ${SRCROOT}/Codegen/Generated\n\n#echo \"TO:\"\n#echo ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n\n#find -L ${SRCROOT}/Codegen/Generated \\\n#-type f -not -name \".*\" \\\n-not -name \"`basename ${INFOPLIST_FILE}`\" \\\n| xargs -t -I {} \\\nmv {} ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n";
+			shellScript = "./scripts/travis/generate_objc.sh\n\nif [ $? -eq 0 ]; then\n  echo 'Generated Files and Added them to Project'\nelse\n  exit 1\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -528,7 +526,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F40E3A44225424930066A569 /* SourceryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
