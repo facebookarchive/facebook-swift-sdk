@@ -215,48 +215,46 @@ public class _ObjCRestaurant : NSObject {
     return self.restaurant.timeNow
   }
 
+  // Forwarding method
+  @objc public func timeInOneHour(
+    ) -> Date {
+      return self.restaurant.timeInOneHour(
+      )
+  }
 
-    // Shortname timeInOneHour
-    // Name timeInOneHour()
-    // Forwarding method
-    @objc public func timeInOneHour(
-    ) { // Next: Deal with return type {
-    self.restaurant.timeInOneHour(
-    )
-    }
-
-
-    // Shortname timeAdvanced
-    // Name timeAdvanced(    byHours hours: Int,    minutes: Int,    _ seconds: Int)
-    // Forwarding method
-    @objc public func timeAdvanced(
-    byHours hours: Int,
-    minutes minutes: Int,
-    _ seconds: Int
-    ) { // Next: Deal with return type {
-    self.restaurant.timeAdvanced(
+  // Forwarding method
+  @objc public func timeAdvanced(
+       byHours hours: Int,
+       minutes: Int,
+      _ seconds: Int
+    ) -> Void {
+      return self.restaurant.timeAdvanced(
         byHours: hours,
         minutes: minutes,
         seconds
-    )
-    }
+      )
+  }
 
-
-    // Shortname staticTimeAdvanced
-    // Name staticTimeAdvanced(    byHours hours: Int,    minutes: Int,    _ seconds: Int)
-    // Forwarding method
-    @objc public static func staticTimeAdvanced(
-    byHours hours: Int,
-    minutes minutes: Int,
-    _ seconds: Int
-    ) { // Next: Deal with return type {
-    Restaurant.staticTimeAdvanced(
+  // Forwarding method
+  @objc public static func staticTimeAdvanced(
+       byHours hours: Int,
+       minutes: Int,
+      _ seconds: Int
+    ) -> Void {
+      return Restaurant.staticTimeAdvanced(
         byHours: hours,
         minutes: minutes,
         seconds
-    )
-    }
+      )
+  }
 
+  // Forwarding method
+  @objc public func getEmployee(
+    ) -> _ObjCEmployee {
+      let backingType = self.restaurant.getEmployee(
+      )
+      return _ObjCEmployee(employee: backingType)
+  }
 
 }
 
@@ -279,7 +277,6 @@ public class _ObjCUniformColors : NSObject {
   @objc internal var shirt : String {
     return self.uniformColors.shirt
   }
-
 
 }
 
@@ -318,24 +315,23 @@ public class _ObjCEmployee : NSObject {
       }
   }
 
-
-    // Shortname < 
-    // Name < (lhs: Employee, rhs: Employee)
-    // Forwarding method
-    @objc public static func < (
-    _ 
-  lhs: _ObjCEmployee, 
-    _ 
-  rhs: _ObjCEmployee
-    ) { // Next: Deal with return type {
-    Employee.< (
-        lhs,
-        rhs
-    )
+  // Comparable passthrough
+  @objc public func compare(_ object: _ObjCEmployee) -> ComparisonResult {
+    if employee == object.employee {
+      return .orderedSame
+    } else if employee < object.employee {
+      return .orderedAscending
+    } else {
+      return .orderedDescending
     }
+  }
 
-
-
-
+  // Equatable passthrough
+  @objc public override func isEqual(_ object: Any?) -> Bool {
+    guard let object = object as? _ObjCEmployee else {
+      return false
+    }
+    return employee == object.employee
+  }
 
 }

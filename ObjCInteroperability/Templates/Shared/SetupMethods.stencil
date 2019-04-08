@@ -18,14 +18,15 @@
 {% endmacro %}
 {# --- #}
 {% macro methodParameterForNativeType %}
-    {% if parameter.argumentLabel %}{{ parameter.argumentLabel }} {% else %}_ {% endif %}{{ parameter.name }}: {{ parameter.typeName }}{% if not forloop.last %},{% endif %}
+    {% if parameter.argumentLabel %} {% if not parameter.argumentLabel == parameter.name %}{{ parameter.argumentLabel }} {% endif %}{% else %}_ {% endif %}{{ parameter.name }}: {{ parameter.typeName }}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro isEqualityOverload %}{% if method.shortName == "==" %}true{% endif %}{% endmacro %}
 {# --- #}
-
+{#  #}
 {# Macro for Method Parameters #}
 {% macro setupParameters %}
+  {% filter indent:2 %}
   {% for parameter in method.parameters %}
   {# --- #}
   {% set isClass %}{% call isClass parameter %}{% endset %}
@@ -43,18 +44,50 @@
     {% call methodParameterForNativeType %}
   {% endif %}
   {% endfor %}
+  {% endfilter %}
 {% endmacro %}
 {#  #}
+{# Macro for Return Type #}
+{% macro setupReturnType %}
+  {# --- #}
+  {% set isClass %}{% call isClass method.returnType %}{% endset %}
+  {% set isEnum %}{% call isEnum method.returnType %}{% endset %}
+  {% set isEnumArray %}{% call isEnumArray method.returnType %}{% endset %}
+  {% set isCustomType %}{% call isCustomType method.returnType %}{% endset %}
+  {# --- #}
+  {% if isEnum %}
+    ) -> {{ method.returnTypeName }} {
+  {% elif isEnumArray %}
+    ) -> {{ method.returnTypeName }} {
+  {% elif isCustomType %}
+    ) -> _ObjC{{ method.returnTypeName }} {
+  {% elif not isStatic and not isComputed %}
+    ) -> {{ method.returnTypeName }} {
+  {% endif %}
+{% endmacro %}
+{{ method.returnTypeName }}
+
+{#  #}
 {# Macro for calling backing method #}
-{% macro invokeBackingMethod %}
+{% macro returnInvokedBackingMethod %}
+  {% filter indent:2 %}
   {#  #}
   {% set targetName %}{% if method.isStatic %}{{ type.name }}{% else %}self.{{ type.name|lowerFirstWord }}{% endif %}{% endset %}
-  {#  #}
-    {{ targetName }}.{{ method.shortName }}(
-      {% for parameter in method.parameters %}
-        {% if parameter.argumentLabel %}{{ parameter.argumentLabel }}: {% endif %}{{ parameter.name }}{% if not forloop.last %},{% endif %}
-      {% endfor %}
+  {% set isCustomType %}{% call isCustomType method.returnType %}{% endset %}
+  {% set invokedMethod %}{{ targetName }}.{{ method.shortName }}(
+    {% for parameter in method.parameters %}
+      {% if parameter.argumentLabel %}{{ parameter.argumentLabel }}: {% endif %}{{ parameter.name }}{% if not forloop.last %},{% endif %}
+    {% endfor %}
     )
+  {% endset %}
+  {#  #}
+  {% if isCustomType %}
+    let backingType = {{ invokedMethod }}
+    return _ObjC{{ method.returnTypeName }}({{ method.returnTypeName|lowerFirstWord }}: backingType)
+  {% else %}
+    return {{ invokedMethod }}
+  {% endif %}
+  {% endfilter %}
 {% endmacro %}
 {#  #}
 {# Macro for ObjC Method Forwarding #}
@@ -62,18 +95,36 @@
   {# For public methods that are not initializers or overloaded operators #}
   {% for method in type.methods where method.accessLevel == "public"
      and not method.isInitializer %}
-
   {% if method.shortName == "== " %}
-
-  {% else %}
-    // Shortname {{ method.shortName }}
-    // Name {{ method.name }}
-    // Forwarding method
-    @objc {{ method.accessLevel }} {% if method.isStatic %}static {% endif %}func {{ method.shortName }}(
-      {% call setupParameters %}
-    ) { // Next: Deal with return type {
-      {% call invokeBackingMethod %}
+  // Equatable passthrough
+  @objc {{ method.accessLevel }} override func isEqual(_ object: Any?) -> Bool {
+    guard let object = object as? _ObjC{{ type.name }} else {
+      return false
     }
+    return {{ type.name|lowerFirstWord }} == object.{{ type.name|lowerFirstWord }}
+  }
+  {% elif method.shortName == "< "
+    or method.shortName == "> "
+    or method.shortName == "<= "
+    or method.shortName == ">= "
+    %}
+  // Comparable passthrough
+  @objc public func compare(_ object: _ObjC{{ type.name }}) -> ComparisonResult {
+    if {{ type.name|lowerFirstWord }} == object.{{ type.name|lowerFirstWord }} {
+      return .orderedSame
+    } else if {{ type.name|lowerFirstWord }} < object.{{ type.name|lowerFirstWord }} {
+      return .orderedAscending
+    } else {
+      return .orderedDescending
+    }
+  }
+  {% else %}
+  // Forwarding method
+  @objc {{ method.accessLevel }} {% if method.isStatic %}static {% endif %}func {{ method.shortName }}(
+    {% call setupParameters %}
+    {% call setupReturnType %}
+    {% call returnInvokedBackingMethod %}
+  }
   {% endif %}
      {# and not method.shortName == "== "
      and not method.shortName == "< "
@@ -85,13 +136,3 @@
 {% endmacro %}
 {#  #}
 {% call setupMethods type %}
-
-{#
-  @objc public override func isEqual(_ object: Any?) -> Bool { // Next: Deal with return type {
-    guard let object = object as? _ObjCEmployee else {
-      return false
-    }
-
-    return self.employee == object.employee
-  }
-#}

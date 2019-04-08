@@ -128,6 +128,11 @@ public struct Restaurant: Equatable {
     _ seconds: Int) {
     print("\(hours), \(minutes), \(seconds)")
   }
+
+  public func getEmployee() -> Employee {
+    return employee
+  }
+
   // Internal Method that uses an internal property
 
   // Public Method that takes an enum
