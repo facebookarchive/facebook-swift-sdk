@@ -3,6 +3,8 @@
 {% macro isEnum variable %}{% if variable.type.kind == "enum" %}true{% endif %}{% endmacro %}
 {% macro isCustomType variable %}{% if variable.type %}true{% endif %}{% endmacro %}
 {% macro isEnumArray variable %}{% if variable.typeName.array.elementType.kind == "enum" %}true{% endif %}{% endmacro %}
+{% macro isStruct variable %}{% if variable.type.kind == "struct" %}true{% endif %}{% endmacro %}
+{% macro associatedTypeName associatedValue %}{{ associatedValue.type.name }}{% endmacro %}
 
 {# Macros for setting parameters in ObjC initializer #}
 {% macro classOrStructParameterForInitializer variable %}
@@ -10,15 +12,15 @@
 {% endmacro %}
 {# --- #}
 {% macro enumParameterForInitializer variable %}
-  {{ variable.name }}: Any{% if variable.isOptional %}?{% endif %}{% if not forloop.last %}, {% endif %}
+  {{ variable.name }}: Any{% if variable.isOptional %}?{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro enumArrayParameterForInitializer variable %}
-  {{ variable.name }}: Any{% if variable.isOptional %}?{% endif %}{% if not forloop.last %}, {% endif %}
+  {{ variable.name }}: Any{% if variable.isOptional %}?{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro nativeTypeParameterForInitializer variable %}
-  {{ variable.name }}: {{ variable.typeName }} {% if variable.defaultValue != nil %}= {{ variable.defaultValue }}{% endif %}{% if not forloop.last %}, {% endif %}
+  {{ variable.name }}: {{ variable.typeName }} {% if variable.defaultValue != nil %}= {{ variable.defaultValue }}{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 
 {# Macros for calling initializer on backing type #}
@@ -52,7 +54,7 @@ import Foundation
   }
 
   {% include "./Shared/SetupInitializer.stencil" %}
-  {% include "./Shared/SetupVariables.stencil" %}
+  {% include "./Shared/SetupProperties.stencil" %}
   {% include "./Shared/SetupMethods.stencil" %}
 }
 {% endfor %}
@@ -69,7 +71,7 @@ import Foundation
   }
 
   {% include "./Shared/SetupInitializer.stencil" %}
-  {% include "./Shared/SetupVariables.stencil" %}
+  {% include "./Shared/SetupProperties.stencil" %}
   {% include "./Shared/SetupMethods.stencil" %}
 }
 {% endfor %}

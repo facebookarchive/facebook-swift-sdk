@@ -24,6 +24,26 @@ public enum EmployeePayroll: Equatable {
   case hourly(for: EmployeeClassification)
   case salary(for: EmployeeClassification)
   case terminated
+
+  public func getClassification() -> EmployeeClassification? {
+    switch self {
+    case .hourly(let classification), .salary(let classification):
+      return classification
+
+    case .terminated:
+      return nil
+    }
+  }
+
+  var classification: EmployeeClassification? {
+    switch self {
+    case .hourly(let classification), .salary(let classification):
+      return classification
+
+    case .terminated:
+      return nil
+    }
+  }
 }
 
 extension EmployeePayroll: ObjCBridgeable {}
