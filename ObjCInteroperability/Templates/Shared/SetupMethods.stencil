@@ -1,24 +1,17 @@
 {% macro methodParameterForEnum %}
-    {% if parameter.argumentLabel %}
-      {% if parameter.argumentLabel != parameter.name %}
-        {{ parameter.argumentLabel }}
-      {% endif %}
-    {% else %}
-        _
-    {% endif %}
-    {% call enumParameterForInitializer parameter %}
+    {% if parameter.argumentLabel %}{% if not parameter.argumentLabel == parameter.name %}{{ parameter.argumentLabel }} {% endif %}{% else %}_ {% endif %}{% call enumParameterForInitializer parameter %}
 {% endmacro %}
 {# --- #}
 {% macro methodParameterForEnumArray %}
-    {% if parameter.argumentLabel %}{{ parameter.argumentLabel }} {% else %}_ {% endif %}{% call enumArrayParameterForInitializer parameter %}
+    {% if parameter.argumentLabel %}{% if not parameter.argumentLabel == parameter.name %}{{ parameter.argumentLabel }} {% endif %}{% else %}_ {% endif %}{% call enumArrayParameterForInitializer parameter %}
 {% endmacro %}
 {# --- #}
 {% macro methodParameterForCustomType %}
-    {% if parameter.argumentLabel %}{{ parameter.argumentLabel }} {% else %}_ {% endif %}{% call classOrStructParameterForInitializer parameter %}
+    {% if parameter.argumentLabel %}{% if not parameter.argumentLabel == parameter.name %}{{ parameter.argumentLabel }} {% endif %}{% else %}_ {% endif %}{% call classOrStructParameterForInitializer parameter %}
 {% endmacro %}
 {# --- #}
 {% macro methodParameterForNativeType %}
-    {% if parameter.argumentLabel %} {% if not parameter.argumentLabel == parameter.name %}{{ parameter.argumentLabel }} {% endif %}{% else %}_ {% endif %}{{ parameter.name }}: {{ parameter.typeName }}{% if not forloop.last %},{% endif %}
+    {% if parameter.argumentLabel %}{% if not parameter.argumentLabel == parameter.name %}{{ parameter.argumentLabel }} {% endif %}{% else %}_ {% endif %}{{ parameter.name }}: {{ parameter.typeName }}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro isEqualityOverload %}{% if method.shortName == "==" %}true{% endif %}{% endmacro %}
@@ -26,7 +19,6 @@
 {#  #}
 {# Macro for Method Parameters #}
 {% macro setupParameters %}
-  {% filter indent:2 %}
   {% for parameter in method.parameters %}
   {# --- #}
   {% set isClass %}{% call isClass parameter %}{% endset %}
@@ -44,7 +36,6 @@
     {% call methodParameterForNativeType %}
   {% endif %}
   {% endfor %}
-  {% endfilter %}
 {% endmacro %}
 {#  #}
 {# Macro for Return Type #}
@@ -70,24 +61,34 @@
 {#  #}
 {# Macro for calling backing method #}
 {% macro returnInvokedBackingMethod %}
-  {% filter indent:2 %}
   {#  #}
   {% set targetName %}{% if method.isStatic %}{{ type.name }}{% else %}self.{{ type.name|lowerFirstWord }}{% endif %}{% endset %}
-  {% set isCustomType %}{% call isCustomType method.returnType %}{% endset %}
+  {% set isCustomReturnType %}{% call isCustomType method.returnType %}{% endset %}
   {% set invokedMethod %}{{ targetName }}.{{ method.shortName }}(
     {% for parameter in method.parameters %}
-      {% if parameter.argumentLabel %}{{ parameter.argumentLabel }}: {% endif %}{{ parameter.name }}{% if not forloop.last %},{% endif %}
+      {# --- #}
+      {% set isClass %}{% call isClass parameter.type %}{% endset %}
+      {% set isEnum %}{% call isEnum parameter.type %}{% endset %}
+      {% set isEnumArray %}{% call isEnumArray parameter.type %}{% endset %}
+      {% set isCustomType %}{% call isCustomType parameter.type %}{% endset %}
+      {# --- #}
+      {% if isCustomType %}
+        {% if parameter.argumentLabel %}{{ parameter.argumentLabel }}: {% endif %}{{ parameter.name }}.{{ parameter.type.name|lowerFirstWord }}{% if not forloop.last %},{% endif %}
+      {% elif isEnum %}
+        {% if parameter.argumentLabel %}{{ parameter.argumentLabel }}: {% endif %}{{ parameter.name }}.{{ parameter.type.name|lowerFirstWord }}{% if not forloop.last %},{% endif %}
+      {% else %}
+        {% if parameter.argumentLabel %}{{ parameter.argumentLabel }}: {% endif %}{{ parameter.name }}{% if not forloop.last %},{% endif %}
+      {% endif %}
     {% endfor %}
     )
   {% endset %}
   {#  #}
-  {% if isCustomType %}
+  {% if isCustomReturnType %}
     let backingType = {{ invokedMethod }}
     return _ObjC{{ method.returnTypeName }}({{ method.returnTypeName|lowerFirstWord }}: backingType)
   {% else %}
     return {{ invokedMethod }}
   {% endif %}
-  {% endfilter %}
 {% endmacro %}
 {#  #}
 {# Macro for ObjC Method Forwarding #}
@@ -126,12 +127,6 @@
     {% call returnInvokedBackingMethod %}
   }
   {% endif %}
-     {# and not method.shortName == "== "
-     and not method.shortName == "< "
-     and not method.shortName == "> "
-     and not method.shortName == "<= "
-     and not method.shortName == ">= " #}
-
   {% endfor %}
 {% endmacro %}
 {#  #}

@@ -133,8 +133,9 @@ public struct Restaurant: Equatable {
     return employee
   }
 
-  // Internal Method that uses an internal property
-
+  public mutating func changeUniformColors(newColors: UniformColors) {
+    self.uniformColors = newColors
+  }
   // Public Method that takes an enum
 
   // Public Method that returns an enum
