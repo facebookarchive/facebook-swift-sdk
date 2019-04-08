@@ -8,7 +8,7 @@
 
 {# Macros for setting parameters in ObjC initializer #}
 {% macro classOrStructParameterForInitializer variable %}
-  {{ variable.name }}: _ObjC{{ variable.typeName }}{% if variable.isOptional %}?{% endif %}{% if not forloop.last %}, {% endif %}
+  {{ variable.name }}: _ObjC{{ variable.typeName }}{% if variable.isOptional %}?{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro enumParameterForInitializer variable %}
@@ -20,7 +20,7 @@
 {% endmacro %}
 {# --- #}
 {% macro nativeTypeParameterForInitializer variable %}
-  {{ variable.name }}: {{ variable.typeName }} {% if variable.defaultValue != nil %}= {{ variable.defaultValue }}{% endif %}{% if not forloop.last %},{% endif %}
+  {{ variable.name }}: {{ variable.typeName }}{% if variable.defaultValue != nil %} = {{ variable.defaultValue }}{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 
 {# Macros for calling initializer on backing type #}
