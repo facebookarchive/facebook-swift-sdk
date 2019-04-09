@@ -41,16 +41,18 @@ public struct Restaurant: Equatable {
     return Date()
   }
 
+  // Variable that is a class
   public var employee: Employee
 
-  // Enum Variable
+  // Variable that is an enum
   public var payrollEntry: EmployeePayroll
 
+  // Variable that is an array of enum
   public var payroll: [EmployeePayroll]
 
   // Private Variable
   // Note: Including a private var means we need to include a custom initializer
-  // for the struct or the generated wrapper class will not compile.
+  // or the generated wrapper class will not compile.
   // This is not a huge deal but need to keep it in mind.
   private var registerCode: String
 
@@ -59,13 +61,11 @@ public struct Restaurant: Equatable {
 
   public var uniformColors: UniformColors
 
+  // Computed internal var
   var timeNow: Date {
     return Date()
   }
 
-  // Necessary because of a private var.
-  // This would show up when we wanted to use it ourselves anyway so no big deal
-  // but again worth noting that you are able to write a valid struct that will not generate into a valid wrapper class
   public init(
     name: String,
     specials: [String],
