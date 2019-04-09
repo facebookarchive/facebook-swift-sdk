@@ -77,7 +77,7 @@
 {% macro initialize type %}
   {% for initializer in type.initializers where initializer.accessLevel == "public" %}
   // Initializer to be used from ObjC code
-  @objc {% if parameters.count == 0  %}override {% endif %}{{ type.accessLevel }} init(
+  @objc {% if parameters.count == 0  %}override {% endif %}public init(
     {% call initializerParameters initializer.parameters %}
   ) {
     {% call unwrapEnums initializer.parameters %}

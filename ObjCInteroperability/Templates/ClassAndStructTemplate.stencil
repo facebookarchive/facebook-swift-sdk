@@ -4,22 +4,27 @@
 {% macro isCustomType variable %}{% if variable.type %}true{% endif %}{% endmacro %}
 {% macro isEnumArray variable %}{% if variable.typeName.array.elementType.kind == "enum" %}true{% endif %}{% endmacro %}
 {% macro isStruct variable %}{% if variable.type.kind == "struct" %}true{% endif %}{% endmacro %}
+{% macro isClosureType variable %}{% if variable.typeName.isClosure %}true{% endif %}{% endmacro %}
 {% macro associatedTypeName associatedValue %}{{ associatedValue.type.name }}{% endmacro %}
 
 {# Macros for setting parameters in ObjC initializer #}
 {% macro classOrStructParameterForInitializer variable %}
+  // Class or struct
   {{ variable.name }}: _ObjC{{ variable.typeName }}{% if variable.isOptional %}?{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro enumParameterForInitializer variable %}
+  // Enum
   {{ variable.name }}: Any{% if variable.isOptional %}?{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro enumArrayParameterForInitializer variable %}
+  // Enum Array
   {{ variable.name }}: Any{% if variable.isOptional %}?{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 {# --- #}
 {% macro nativeTypeParameterForInitializer variable %}
+  // Native type
   {{ variable.name }}: {{ variable.typeName }}{% if variable.defaultValue != nil %} = {{ variable.defaultValue }}{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 
@@ -45,33 +50,37 @@ import Foundation
 {% for type in types.implementing.ObjCBridgeable|struct %}
 
 @objc(FB{{ type.name }})
-{{ type.accessLevel }} class _ObjC{{ type.name }} : NSObject {
+public class _ObjC{{ type.name }} : NSObject {
   private (set) var {{ type.name|lowerFirstWord }}: {{ type.name }}
 
   // TODO: Probably remove this if no clear use case arises
-  {{ type.accessLevel }} init({{ type.name|lowerFirstWord }}: {{ type.name }}) {
+  public init({{ type.name|lowerFirstWord }}: {{ type.name }}) {
     self.{{ type.name|lowerFirstWord }} = {{ type.name|lowerFirstWord }}
   }
 
   {% include "./Shared/SetupInitializer.stencil" %}
   {% include "./Shared/SetupProperties.stencil" %}
   {% include "./Shared/SetupMethods.stencil" %}
+  {% include "./Shared/Equatable.stencil" %}
+  {% include "./Shared/Comparable.stencil" %}
 }
 {% endfor %}
 {#  #}
 {% for type in types.implementing.ObjCBridgeable|class %}
 
 @objc(FB{{ type.name }})
-{{ type.accessLevel }} class _ObjC{{ type.name }} : NSObject {
+public class _ObjC{{ type.name }} : NSObject {
   private (set) var {{ type.name|lowerFirstWord }}: {{ type.name }}
 
   // TODO: Probably remove this if no clear use case arises
-  {{ type.accessLevel }} init({{ type.name|lowerFirstWord }}: {{ type.name }}) {
+  public init({{ type.name|lowerFirstWord }}: {{ type.name }}) {
     self.{{ type.name|lowerFirstWord }} = {{ type.name|lowerFirstWord }}
   }
 
   {% include "./Shared/SetupInitializer.stencil" %}
   {% include "./Shared/SetupProperties.stencil" %}
   {% include "./Shared/SetupMethods.stencil" %}
+  {% include "./Shared/Equatable.stencil" %}
+  {% include "./Shared/Comparable.stencil" %}
 }
 {% endfor %}

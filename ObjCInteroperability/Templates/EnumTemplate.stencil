@@ -4,6 +4,7 @@
 {% macro isCustomType variable %}{% if variable.type %}true{% endif %}{% endmacro %}
 {% macro isEnumArray variable %}{% if variable.typeName.array.elementType.kind == "enum" %}true{% endif %}{% endmacro %}
 {% macro isStruct variable %}{% if variable.type.kind == "struct" %}true{% endif %}{% endmacro %}
+{% macro isClosureType variable %}{% if variable.typeName.isClosure %}true{% endif %}{% endmacro %}
 {% macro associatedTypeName associatedValue %}{{ associatedValue.type.name }}{% endmacro %}
 
 {# Macro for initializing enum wrapper #}
@@ -67,6 +68,8 @@ public class _ObjC{{type.name}} : NSObject {
 
   {% include "./Shared/SetupProperties.stencil" %}
   {% include "./Shared/SetupMethods.stencil" %}
+  {% include "./Shared/Equatable.stencil" %}
+  {% include "./Shared/Comparable.stencil" %}
 }
 
 {# Declaring wrappers for individual cases #}

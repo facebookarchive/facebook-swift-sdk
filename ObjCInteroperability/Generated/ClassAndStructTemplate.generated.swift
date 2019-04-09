@@ -19,13 +19,21 @@ public class _ObjCRestaurant : NSObject {
 
   // Initializer to be used from ObjC code
   @objc public init(
-    name: String , 
-    specials: [String] , 
-    regularMenu: [String] , 
-    employee: _ObjCEmployee, 
-    payrollEntry: Any, 
-    payroll: Any, 
-    bathroomCode: String , 
+    // Native type
+    name: String,
+    // Native type
+    specials: [String],
+    // Native type
+    regularMenu: [String],
+    // Class or struct
+    employee: _ObjCEmployee,
+    // Enum
+    payrollEntry: Any,
+    // Enum Array
+    payroll: Any,
+    // Native type
+    bathroomCode: String,
+    // Class or struct
     uniformColors: _ObjCUniformColors
   ) {
     guard let enumeration5 = payrollEntry as? _ObjCEmployeePayroll else {
@@ -215,45 +223,55 @@ public class _ObjCRestaurant : NSObject {
     return self.restaurant.timeNow
   }
 
-  // Forwarding method
   @objc public func timeInOneHour(
     ) -> Date {
-      return self.restaurant.timeInOneHour(
-      )
+    return self.restaurant.timeInOneHour(
+    )
   }
-
-  // Forwarding method
   @objc public func timeAdvanced(
-       byHours hours: Int,
-       minutes: Int,
+      byHours hours: Int,
+      minutes: Int,
       _ seconds: Int
     ) -> Void {
-      return self.restaurant.timeAdvanced(
-        byHours: hours,
-        minutes: minutes,
-        seconds
-      )
+    return self.restaurant.timeAdvanced(
+      byHours: hours,
+      minutes: minutes,
+      seconds
+    )
   }
-
-  // Forwarding method
   @objc public static func staticTimeAdvanced(
-       byHours hours: Int,
-       minutes: Int,
+      byHours hours: Int,
+      minutes: Int,
       _ seconds: Int
     ) -> Void {
-      return Restaurant.staticTimeAdvanced(
-        byHours: hours,
-        minutes: minutes,
-        seconds
-      )
+    return Restaurant.staticTimeAdvanced(
+      byHours: hours,
+      minutes: minutes,
+      seconds
+    )
   }
-
-  // Forwarding method
   @objc public func getEmployee(
     ) -> _ObjCEmployee {
-      let backingType = self.restaurant.getEmployee(
-      )
-      return _ObjCEmployee(employee: backingType)
+    let backingType = self.restaurant.getEmployee(
+    )
+    return _ObjCEmployee(
+        employee: backingType
+    )
+  }
+  @objc public func changeUniformColors(
+    // Custom Type parameter
+  // Class or struct
+  newColors: _ObjCUniformColors
+    ) -> Void {
+    return self.restaurant.changeUniformColors(
+      newColors: newColors.uniformColors
+    )
+  }
+  @objc public override func isEqual(_ object: Any?) -> Bool {
+    guard let object = object as? _ObjCRestaurant else {
+      return false
+    }
+    return restaurant == object.restaurant
   }
 
 }
@@ -278,6 +296,13 @@ public class _ObjCUniformColors : NSObject {
     return self.uniformColors.shirt
   }
 
+  @objc public override func isEqual(_ object: Any?) -> Bool {
+    guard let object = object as? _ObjCUniformColors else {
+      return false
+    }
+    return uniformColors == object.uniformColors
+  }
+
 }
 
 @objc(FBEmployee)
@@ -291,6 +316,7 @@ public class _ObjCEmployee : NSObject {
 
   // Initializer to be used from ObjC code
   @objc public init(
+    // Enum
     classification: Any
   ) {
     guard let enumeration1 = classification as? _ObjCEmployeeClassification else {
@@ -315,6 +341,13 @@ public class _ObjCEmployee : NSObject {
       }
   }
 
+  @objc public override func isEqual(_ object: Any?) -> Bool {
+    guard let object = object as? _ObjCEmployee else {
+      return false
+    }
+    return employee == object.employee
+  }
+
   // Comparable passthrough
   @objc public func compare(_ object: _ObjCEmployee) -> ComparisonResult {
     if employee == object.employee {
@@ -325,13 +358,4 @@ public class _ObjCEmployee : NSObject {
       return .orderedDescending
     }
   }
-
-  // Equatable passthrough
-  @objc public override func isEqual(_ object: Any?) -> Bool {
-    guard let object = object as? _ObjCEmployee else {
-      return false
-    }
-    return employee == object.employee
-  }
-
 }
