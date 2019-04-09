@@ -2,14 +2,14 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:IntegratingSDK/IntegratingSDK.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:FacebookSwift.xcodeproj">
    </FileRef>
    <Group
       location = "container:"
       name = "Samples">
+      <FileRef
+         location = "group:Samples/ObjCCatalog/ObjCCatalog/ObjCCatalog.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:Samples/Catalog/SwiftCatalog.xcodeproj">
       </FileRef>

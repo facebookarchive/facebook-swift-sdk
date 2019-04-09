@@ -12,7 +12,7 @@ struct SampleError: Error {}
 
 struct RemoteUser: Decodable {
   let identifier: Graph.RemoteObjectIdentifier
-  let full_name: String
+  let fullName: String
 }
 
 enum UserSource {

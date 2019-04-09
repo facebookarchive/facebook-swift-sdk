@@ -1,6 +1,13 @@
 sources:
   - ./Sources/Core
 templates:
-  - ./ObjCInteroperability/Templates
+  include:
+    - ./Codegen/Templates
+  exclude:
+    - ./Codegen/Templates/Shared
 output:
-  ./ObjCInteroperability/Generated
+  path: ./Codegen/Generated
+  link:
+    project: ./FacebookSwift.xcodeproj
+    target: FacebookCore
+    group: Codegen/Generated

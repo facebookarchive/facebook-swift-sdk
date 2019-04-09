@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		811C5E4D1CFFD4D100E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		811C5E561CFFD4F800E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
+		BF_530048238260 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_824138902923 /* EnumTemplate.generated.swift */; };
+		BF_718486289131 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_517954772214 /* ClassAndStructTemplate.generated.swift */; };
 		F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A3922540D430066A569 /* Restaurant.swift */; };
 		F40E3A44225424930066A569 /* SourceryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A43225424930066A569 /* SourceryTests.swift */; };
 		F40E3A46225424930066A569 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
@@ -16,8 +18,6 @@
 		F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A65225517730066A569 /* EmployeeClassification.swift */; };
 		F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */; };
 		F40E3B05225672870066A569 /* UniformColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B04225672870066A569 /* UniformColors.swift */; };
-		F40E3B1D22580FA30066A569 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B1A22580FA30066A569 /* EnumTemplate.generated.swift */; };
-		F40E3B1F22580FA30066A569 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B1C22580FA30066A569 /* ClassAndStructTemplate.generated.swift */; };
 		F40E3B23225BC57B0066A569 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B22225BC57B0066A569 /* Graph.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,9 +74,9 @@
 		F40E3A65225517730066A569 /* EmployeeClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeClassification.swift; sourceTree = "<group>"; };
 		F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePayroll.swift; sourceTree = "<group>"; };
 		F40E3B04225672870066A569 /* UniformColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformColors.swift; sourceTree = "<group>"; };
-		F40E3B1A22580FA30066A569 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumTemplate.generated.swift; path = ObjCInteroperability/Generated/EnumTemplate.generated.swift; sourceTree = SOURCE_ROOT; };
-		F40E3B1C22580FA30066A569 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassAndStructTemplate.generated.swift; path = ObjCInteroperability/Generated/ClassAndStructTemplate.generated.swift; sourceTree = SOURCE_ROOT; };
 		F40E3B22225BC57B0066A569 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		FR_517954772214 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = ClassAndStructTemplate.generated.swift; path = ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_824138902923 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = EnumTemplate.generated.swift; path = EnumTemplate.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +118,11 @@
 			isa = PBXGroup;
 			children = (
 				81654DC31D356E9A006401F1 /* Configurations */,
-				811C5E5D1CFFD52B00E4A925 /* Sources */,
-				8115C0E31CFE543A001FF33B /* Resources */,
 				F40E3A42225424930066A569 /* FacebookCoreTests */,
 				8115C0D91CFE540D001FF33B /* Products */,
+				8115C0E31CFE543A001FF33B /* Resources */,
+				811C5E5D1CFFD52B00E4A925 /* Sources */,
+				G_4309677203787 /* Codegen */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -149,8 +150,6 @@
 		811C5E5D1CFFD52B00E4A925 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				F40E3B1C22580FA30066A569 /* ClassAndStructTemplate.generated.swift */,
-				F40E3B1A22580FA30066A569 /* EnumTemplate.generated.swift */,
 				811C5E5E1CFFD52B00E4A925 /* Core */,
 				811C5E601CFFD52B00E4A925 /* Login */,
 				811C5E621CFFD52B00E4A925 /* Share */,
@@ -161,12 +160,12 @@
 		811C5E5E1CFFD52B00E4A925 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F40E3A3922540D430066A569 /* Restaurant.swift */,
 				F40E3A5F225515840066A569 /* Employee.swift */,
 				F40E3A65225517730066A569 /* EmployeeClassification.swift */,
 				F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */,
-				F40E3B04225672870066A569 /* UniformColors.swift */,
 				F40E3B22225BC57B0066A569 /* Graph.swift */,
+				F40E3A3922540D430066A569 /* Restaurant.swift */,
+				F40E3B04225672870066A569 /* UniformColors.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -188,11 +187,11 @@
 		81654DC31D356E9A006401F1 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				81654DC71D356E9A006401F1 /* Shared */,
 				81654DC41D356E9A006401F1 /* FacebookCore.xcconfig */,
 				81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */,
 				81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */,
 				811AD1B51D35D9C8007689DC /* Version.xcconfig */,
-				81654DC71D356E9A006401F1 /* Shared */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -200,10 +199,10 @@
 		81654DC71D356E9A006401F1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				81654DC81D356E9A006401F1 /* Common.xcconfig */,
 				81654DC91D356E9A006401F1 /* Platform */,
 				81654DCE1D356E9A006401F1 /* Product */,
 				81654DD31D356E9A006401F1 /* Project */,
+				81654DC81D356E9A006401F1 /* Common.xcconfig */,
 				81654DD61D356E9A006401F1 /* Warnings.xcconfig */,
 			);
 			path = Shared;
@@ -243,10 +242,29 @@
 		F40E3A42225424930066A569 /* FacebookCoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				F40E3A43225424930066A569 /* SourceryTests.swift */,
 				F40E3A45225424930066A569 /* Info.plist */,
+				F40E3A43225424930066A569 /* SourceryTests.swift */,
 			);
 			path = FacebookCoreTests;
+			sourceTree = "<group>";
+		};
+		G_2358207509305 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				FR_517954772214 /* ClassAndStructTemplate.generated.swift */,
+				FR_824138902923 /* EnumTemplate.generated.swift */,
+			);
+			name = Generated;
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		G_4309677203787 /* Codegen */ = {
+			isa = PBXGroup;
+			children = (
+				G_2358207509305 /* Generated */,
+			);
+			name = Codegen;
+			path = Codegen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,11 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -499,14 +513,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F40E3B1F22580FA30066A569 /* ClassAndStructTemplate.generated.swift in Sources */,
 				F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */,
-				F40E3B1D22580FA30066A569 /* EnumTemplate.generated.swift in Sources */,
 				F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */,
 				F40E3A60225515840066A569 /* Employee.swift in Sources */,
 				F40E3B23225BC57B0066A569 /* Graph.swift in Sources */,
 				F40E3B05225672870066A569 /* UniformColors.swift in Sources */,
 				F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */,
+				BF_718486289131 /* ClassAndStructTemplate.generated.swift in Sources */,
+				BF_530048238260 /* EnumTemplate.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
