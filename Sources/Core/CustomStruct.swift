@@ -136,8 +136,3 @@ public struct CustomStruct: Equatable {
 
   // Public Method that returns a bridged type
 }
-
-// Phantom type to mark types that may be bridged to objc
-protocol ObjCBridgeable {}
-
-extension CustomStruct: ObjCBridgeable {}

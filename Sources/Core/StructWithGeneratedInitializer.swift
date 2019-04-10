@@ -24,5 +24,3 @@ public struct StructWithGeneratedInitializer: Equatable {
   let hat: String = "red"
   let shirt: String = "blue"
 }
-
-extension StructWithGeneratedInitializer: ObjCBridgeable {}

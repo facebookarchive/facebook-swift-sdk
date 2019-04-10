@@ -45,5 +45,3 @@ public enum EmployeePayroll: Equatable {
     }
   }
 }
-
-extension EmployeePayroll: ObjCBridgeable {}

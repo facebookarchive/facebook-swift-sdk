@@ -6,11 +6,11 @@
 //  Copyright © 2019 facebook. All rights reserved.
 //
 
-#import "Restaurant.h"
+#import "CustomStruct.h"
 
-@implementation Restaurant
+@implementation CustomStruct
 
--(FBCustomStruct *)openRestaurant {
+-(FBCustomStruct *)customStruct {
     FBEmployeeClassificationManager *manager = [FBEmployeeClassificationManager new];
 
     FBEmployeeClassification *employeeClassification = [[FBEmployeeClassification alloc] initWithCaseValue:manager];
@@ -20,7 +20,7 @@
     NSArray<FBEmployeePayroll *> *payroll = @[payrollEntry, payrollEntry, payrollEntry];
     FBStructWithGeneratedInitializer *uniformColors = [[FBStructWithGeneratedInitializer alloc] init];
 
-    FBCustomStruct *restaurant = [[FBCustomStruct alloc] initWithStringConstant:@"Mama Cass's Sandwich Shack"
+    FBCustomStruct *customStruct = [[FBCustomStruct alloc] initWithStringConstant:@"Mama Cass's Sandwich Shack"
                                                                     stringArray:@[@"Ham sammiches"]
                                                     stringArrayWithDefaultValue:@[@"PB&Js"]
                                                             customClassVariable:employee
@@ -29,7 +29,7 @@
                                                                  stringVariable:@"123"
                                                                  structVariable:uniformColors];
 
-    return restaurant;
+    return customStruct;
 }
 
 -(NSString *)staticValueOnCustomStruct {

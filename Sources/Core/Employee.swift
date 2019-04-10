@@ -35,5 +35,3 @@ public class Employee: Equatable, Comparable {
     self.classification = classification
   }
 }
-
-extension Employee: ObjCBridgeable {}

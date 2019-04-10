@@ -18,17 +18,13 @@
 
 import Foundation
 
-// FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
+// Phantom type to mark types that may be bridged to objc
+protocol ObjCBridgeable {}
 
-public enum EmployeeClassification: Equatable, Comparable {
-  public static func < (lhs: EmployeeClassification, rhs: EmployeeClassification) -> Bool {
-    // Everyone is equal~ yay!
-    return false
-  }
-
-  /// A manager
-  case manager
-
-  /// A contributor
-  case contributor
-}
+extension CustomStruct: ObjCBridgeable {}
+extension StructWithGeneratedInitializer: ObjCBridgeable {}
+extension Parser: ObjCBridgeable {}
+extension Graph: ObjCBridgeable {}
+extension EmployeePayroll: ObjCBridgeable {}
+extension EmployeeClassification: ObjCBridgeable {}
+extension Employee: ObjCBridgeable {}

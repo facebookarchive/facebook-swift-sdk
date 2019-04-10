@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Restaurant : NSObject
+@import FacebookCore;
+
+@interface CustomStruct : NSObject
 
 @end
 

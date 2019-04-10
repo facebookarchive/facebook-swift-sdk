@@ -10,8 +10,8 @@
 		F46EC8C1225D1EE5000CB0D3 /* ObjCCatalog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46EC8B7225D1EE5000CB0D3 /* ObjCCatalog.framework */; };
 		F46EC8C6225D1EE5000CB0D3 /* ObjCCatalogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EC8C5225D1EE5000CB0D3 /* ObjCCatalogTests.m */; };
 		F46EC8C8225D1EE5000CB0D3 /* ObjCCatalog.h in Headers */ = {isa = PBXBuildFile; fileRef = F46EC8BA225D1EE5000CB0D3 /* ObjCCatalog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F46EC8E0225D1F96000CB0D3 /* Restaurant.h in Headers */ = {isa = PBXBuildFile; fileRef = F46EC8DE225D1F96000CB0D3 /* Restaurant.h */; };
-		F46EC8E1225D1F96000CB0D3 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EC8DF225D1F96000CB0D3 /* Restaurant.m */; };
+		F46EC8E0225D1F96000CB0D3 /* CustomStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = F46EC8DE225D1F96000CB0D3 /* CustomStruct.h */; };
+		F46EC8E1225D1F96000CB0D3 /* CustomStruct.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EC8DF225D1F96000CB0D3 /* CustomStruct.m */; };
 		F46EC8E2225D21EB000CB0D3 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46EC8D9225D1F23000CB0D3 /* FacebookCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,8 +61,8 @@
 		F46EC8C5225D1EE5000CB0D3 /* ObjCCatalogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCCatalogTests.m; sourceTree = "<group>"; };
 		F46EC8C7225D1EE5000CB0D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46EC8D2225D1F23000CB0D3 /* FacebookSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FacebookSwift.xcodeproj; path = ../../../FacebookSwift.xcodeproj; sourceTree = "<group>"; };
-		F46EC8DE225D1F96000CB0D3 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
-		F46EC8DF225D1F96000CB0D3 /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
+		F46EC8DE225D1F96000CB0D3 /* CustomStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomStruct.h; sourceTree = "<group>"; };
+		F46EC8DF225D1F96000CB0D3 /* CustomStruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomStruct.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +107,8 @@
 		F46EC8B9225D1EE5000CB0D3 /* ObjCCatalog */ = {
 			isa = PBXGroup;
 			children = (
-				F46EC8DE225D1F96000CB0D3 /* Restaurant.h */,
-				F46EC8DF225D1F96000CB0D3 /* Restaurant.m */,
+				F46EC8DE225D1F96000CB0D3 /* CustomStruct.h */,
+				F46EC8DF225D1F96000CB0D3 /* CustomStruct.m */,
 				F46EC8BA225D1EE5000CB0D3 /* ObjCCatalog.h */,
 				F46EC8BB225D1EE5000CB0D3 /* Info.plist */,
 			);
@@ -151,7 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46EC8C8225D1EE5000CB0D3 /* ObjCCatalog.h in Headers */,
-				F46EC8E0225D1F96000CB0D3 /* Restaurant.h in Headers */,
+				F46EC8E0225D1F96000CB0D3 /* CustomStruct.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46EC8E1225D1F96000CB0D3 /* Restaurant.m in Sources */,
+				F46EC8E1225D1F96000CB0D3 /* CustomStruct.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

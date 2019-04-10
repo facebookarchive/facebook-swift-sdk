@@ -124,6 +124,3 @@ public enum Parser {
     return Data()
   }
 }
-
-extension Parser: ObjCBridgeable {}
-extension Graph: ObjCBridgeable {}
