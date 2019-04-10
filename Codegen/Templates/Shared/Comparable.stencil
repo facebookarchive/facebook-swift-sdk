@@ -1,0 +1,12 @@
+{% if type.based.Comparable %}
+  // Comparable passthrough
+  @objc public func compare(_ object: _ObjC{{ type.name }}) -> ComparisonResult {
+    if {{ type.name|lowerFirstWord }} == object.{{ type.name|lowerFirstWord }} {
+      return .orderedSame
+    } else if {{ type.name|lowerFirstWord }} < object.{{ type.name|lowerFirstWord }} {
+      return .orderedAscending
+    } else {
+      return .orderedDescending
+    }
+  }
+{% endif %}

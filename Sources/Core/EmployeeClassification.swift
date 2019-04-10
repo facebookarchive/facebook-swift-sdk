@@ -18,4 +18,17 @@
 
 import Foundation
 
-// Required by linter, delete as soon as possible.
+// FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
+
+public enum EmployeeClassification: Equatable, Comparable {
+  public static func < (lhs: EmployeeClassification, rhs: EmployeeClassification) -> Bool {
+    // Everyone is equal~ yay!
+    return false
+  }
+
+  /// A manager
+  case manager
+
+  /// A contributor
+  case contributor
+}

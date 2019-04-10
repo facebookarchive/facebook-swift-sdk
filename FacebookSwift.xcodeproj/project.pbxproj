@@ -9,9 +9,16 @@
 /* Begin PBXBuildFile section */
 		811C5E4D1CFFD4D100E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		811C5E561CFFD4F800E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
-		F4A9494E22285B1C00228788 /* LinterRequired.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A9494D22285B1C00228788 /* LinterRequired.swift */; };
-		F4A9494F22285B4D00228788 /* LinterRequired.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A9494D22285B1C00228788 /* LinterRequired.swift */; };
-		F4A9495022285B4D00228788 /* LinterRequired.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A9494D22285B1C00228788 /* LinterRequired.swift */; };
+		BF_205956519634 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_572443970267 /* EnumTemplate.generated.swift */; };
+		BF_737343184475 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_265965143570 /* ClassAndStructTemplate.generated.swift */; };
+		F40E3A3A22540D430066A569 /* CustomStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A3922540D430066A569 /* CustomStruct.swift */; };
+		F40E3A44225424930066A569 /* SourceryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A43225424930066A569 /* SourceryTests.swift */; };
+		F40E3A46225424930066A569 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
+		F40E3A60225515840066A569 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A5F225515840066A569 /* Employee.swift */; };
+		F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A65225517730066A569 /* EmployeeClassification.swift */; };
+		F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */; };
+		F40E3B05225672870066A569 /* StructWithGeneratedInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */; };
+		F4AAF869225E98C2005D32CF /* ObjCBridgeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAF868225E98C2005D32CF /* ObjCBridgeable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,6 +30,13 @@
 			remoteInfo = FacebookCore;
 		};
 		811C5E541CFFD4F100E4A925 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8115C0CF1CFE540D001FF33B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8115C0D71CFE540D001FF33B;
+			remoteInfo = FacebookCore;
+		};
+		F40E3A47225424930066A569 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8115C0CF1CFE540D001FF33B /* Project object */;
 			proxyType = 1;
@@ -52,7 +66,17 @@
 		81654DD41D356E9A006401F1 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		81654DD51D356E9A006401F1 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		81654DD61D356E9A006401F1 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
-		F4A9494D22285B1C00228788 /* LinterRequired.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinterRequired.swift; sourceTree = "<group>"; };
+		F40E3A3922540D430066A569 /* CustomStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStruct.swift; sourceTree = "<group>"; };
+		F40E3A41225424920066A569 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F40E3A43225424930066A569 /* SourceryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceryTests.swift; sourceTree = "<group>"; };
+		F40E3A45225424930066A569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F40E3A5F225515840066A569 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		F40E3A65225517730066A569 /* EmployeeClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeClassification.swift; sourceTree = "<group>"; };
+		F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePayroll.swift; sourceTree = "<group>"; };
+		F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructWithGeneratedInitializer.swift; sourceTree = "<group>"; };
+		F4AAF868225E98C2005D32CF /* ObjCBridgeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCBridgeable.swift; sourceTree = "<group>"; };
+		FR_265965143570 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_572443970267 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = EnumTemplate.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,16 +103,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F40E3A3E225424920066A569 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F40E3A46225424930066A569 /* FacebookCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		8115C0CE1CFE540D001FF33B = {
 			isa = PBXGroup;
 			children = (
+				G_4309677203787 /* Codegen */,
 				81654DC31D356E9A006401F1 /* Configurations */,
-				811C5E5D1CFFD52B00E4A925 /* Sources */,
-				8115C0E31CFE543A001FF33B /* Resources */,
+				F40E3A42225424930066A569 /* FacebookCoreTests */,
 				8115C0D91CFE540D001FF33B /* Products */,
+				8115C0E31CFE543A001FF33B /* Resources */,
+				811C5E5D1CFFD52B00E4A925 /* Sources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -100,6 +134,7 @@
 				8115C0D81CFE540D001FF33B /* FacebookCore.framework */,
 				811C5DFD1CFFD36600E4A925 /* FacebookLogin.framework */,
 				811C5E0A1CFFD36D00E4A925 /* FacebookShare.framework */,
+				F40E3A41225424920066A569 /* FacebookCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,7 +150,6 @@
 		811C5E5D1CFFD52B00E4A925 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				F4A9494D22285B1C00228788 /* LinterRequired.swift */,
 				811C5E5E1CFFD52B00E4A925 /* Core */,
 				811C5E601CFFD52B00E4A925 /* Login */,
 				811C5E621CFFD52B00E4A925 /* Share */,
@@ -126,6 +160,12 @@
 		811C5E5E1CFFD52B00E4A925 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F40E3A3922540D430066A569 /* CustomStruct.swift */,
+				F40E3A5F225515840066A569 /* Employee.swift */,
+				F40E3A65225517730066A569 /* EmployeeClassification.swift */,
+				F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */,
+				F4AAF868225E98C2005D32CF /* ObjCBridgeable.swift */,
+				F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -147,11 +187,11 @@
 		81654DC31D356E9A006401F1 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				81654DC71D356E9A006401F1 /* Shared */,
 				81654DC41D356E9A006401F1 /* FacebookCore.xcconfig */,
 				81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */,
 				81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */,
 				811AD1B51D35D9C8007689DC /* Version.xcconfig */,
-				81654DC71D356E9A006401F1 /* Shared */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -159,10 +199,10 @@
 		81654DC71D356E9A006401F1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				81654DC81D356E9A006401F1 /* Common.xcconfig */,
 				81654DC91D356E9A006401F1 /* Platform */,
 				81654DCE1D356E9A006401F1 /* Product */,
 				81654DD31D356E9A006401F1 /* Project */,
+				81654DC81D356E9A006401F1 /* Common.xcconfig */,
 				81654DD61D356E9A006401F1 /* Warnings.xcconfig */,
 			);
 			path = Shared;
@@ -199,6 +239,40 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
+		F40E3A42225424930066A569 /* FacebookCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				F40E3A45225424930066A569 /* Info.plist */,
+				F40E3A43225424930066A569 /* SourceryTests.swift */,
+			);
+			path = FacebookCoreTests;
+			sourceTree = "<group>";
+		};
+		G_2358207509305 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				G_8578941187240 /* FacebookCore */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		G_4309677203787 /* Codegen */ = {
+			isa = PBXGroup;
+			children = (
+				G_2358207509305 /* Generated */,
+			);
+			path = Codegen;
+			sourceTree = "<group>";
+		};
+		G_8578941187240 /* FacebookCore */ = {
+			isa = PBXGroup;
+			children = (
+				FR_265965143570 /* ClassAndStructTemplate.generated.swift */,
+				FR_572443970267 /* EnumTemplate.generated.swift */,
+			);
+			path = FacebookCore;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -230,6 +304,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8115C0E01CFE540D001FF33B /* Build configuration list for PBXNativeTarget "FacebookCore" */;
 			buildPhases = (
+				F40E3A562254F1EA0066A569 /* ShellScript */,
 				8115C0D31CFE540D001FF33B /* Sources */,
 				8115C0D41CFE540D001FF33B /* Frameworks */,
 				8115C0D51CFE540D001FF33B /* Headers */,
@@ -285,12 +360,31 @@
 			productReference = 811C5E0A1CFFD36D00E4A925 /* FacebookShare.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		F40E3A40225424920066A569 /* FacebookCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F40E3A4B225424930066A569 /* Build configuration list for PBXNativeTarget "FacebookCoreTests" */;
+			buildPhases = (
+				F40E3A3D225424920066A569 /* Sources */,
+				F40E3A3E225424920066A569 /* Frameworks */,
+				F40E3A3F225424920066A569 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F40E3A48225424930066A569 /* PBXTargetDependency */,
+			);
+			name = FacebookCoreTests;
+			productName = FacebookCoreTests;
+			productReference = F40E3A41225424920066A569 /* FacebookCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8115C0CF1CFE540D001FF33B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Facebook Inc";
 				TargetAttributes = {
@@ -303,6 +397,10 @@
 					};
 					811C5DFF1CFFD36D00E4A925 = {
 						LastSwiftMigration = 1020;
+					};
+					F40E3A40225424920066A569 = {
+						CreatedOnToolsVersion = 10.2;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -322,6 +420,7 @@
 				8115C0D71CFE540D001FF33B /* FacebookCore */,
 				811C5DF21CFFD36600E4A925 /* FacebookLogin */,
 				811C5DFF1CFFD36D00E4A925 /* FacebookShare */,
+				F40E3A40225424920066A569 /* FacebookCoreTests */,
 			);
 		};
 /* End PBXProject section */
@@ -348,6 +447,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F40E3A3F225424920066A569 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -363,7 +469,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect --format\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		525709A520F6CB740053B9E3 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -393,6 +499,19 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
+		F40E3A562254F1EA0066A569 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./scripts/travis/generate_objc.sh\n\n# swiftlint autocorrect --format\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -400,7 +519,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4A9494E22285B1C00228788 /* LinterRequired.swift in Sources */,
+				F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */,
+				F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */,
+				F40E3A60225515840066A569 /* Employee.swift in Sources */,
+				F4AAF869225E98C2005D32CF /* ObjCBridgeable.swift in Sources */,
+				F40E3B05225672870066A569 /* StructWithGeneratedInitializer.swift in Sources */,
+				F40E3A3A22540D430066A569 /* CustomStruct.swift in Sources */,
+				BF_737343184475 /* ClassAndStructTemplate.generated.swift in Sources */,
+				BF_205956519634 /* EnumTemplate.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +534,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4A9494F22285B4D00228788 /* LinterRequired.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +541,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4A9495022285B4D00228788 /* LinterRequired.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F40E3A3D225424920066A569 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F40E3A44225424930066A569 /* SourceryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +564,11 @@
 			isa = PBXTargetDependency;
 			target = 8115C0D71CFE540D001FF33B /* FacebookCore */;
 			targetProxy = 811C5E541CFFD4F100E4A925 /* PBXContainerItemProxy */;
+		};
+		F40E3A48225424930066A569 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8115C0D71CFE540D001FF33B /* FacebookCore */;
+			targetProxy = F40E3A47225424930066A569 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -471,6 +608,7 @@
 				DEFINES_MODULE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -481,6 +619,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -488,6 +627,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -495,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -502,6 +643,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -509,6 +651,126 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F40E3A49225424930066A569 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = FacebookCoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.swift.FacebookCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F40E3A4A225424930066A569 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = FacebookCoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.swift.FacebookCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -547,6 +809,15 @@
 			buildConfigurations = (
 				811C5E081CFFD36D00E4A925 /* Debug */,
 				811C5E091CFFD36D00E4A925 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F40E3A4B225424930066A569 /* Build configuration list for PBXNativeTarget "FacebookCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F40E3A49225424930066A569 /* Debug */,
+				F40E3A4A225424930066A569 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
