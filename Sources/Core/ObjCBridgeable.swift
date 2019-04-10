@@ -23,8 +23,6 @@ protocol ObjCBridgeable {}
 
 extension CustomStruct: ObjCBridgeable {}
 extension StructWithGeneratedInitializer: ObjCBridgeable {}
-extension Parser: ObjCBridgeable {}
-extension Graph: ObjCBridgeable {}
 extension EmployeePayroll: ObjCBridgeable {}
 extension EmployeeClassification: ObjCBridgeable {}
 extension Employee: ObjCBridgeable {}

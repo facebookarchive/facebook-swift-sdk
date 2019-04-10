@@ -18,7 +18,6 @@
 		F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A65225517730066A569 /* EmployeeClassification.swift */; };
 		F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */; };
 		F40E3B05225672870066A569 /* StructWithGeneratedInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */; };
-		F40E3B23225BC57B0066A569 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B22225BC57B0066A569 /* Graph.swift */; };
 		F4AAF869225E98C2005D32CF /* ObjCBridgeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAF868225E98C2005D32CF /* ObjCBridgeable.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,10 +74,9 @@
 		F40E3A65225517730066A569 /* EmployeeClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeClassification.swift; sourceTree = "<group>"; };
 		F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePayroll.swift; sourceTree = "<group>"; };
 		F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructWithGeneratedInitializer.swift; sourceTree = "<group>"; };
-		F40E3B22225BC57B0066A569 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		F4AAF868225E98C2005D32CF /* ObjCBridgeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCBridgeable.swift; sourceTree = "<group>"; };
-		FR_265965143570 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = ClassAndStructTemplate.generated.swift; path = ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
-		FR_572443970267 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = EnumTemplate.generated.swift; path = EnumTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_265965143570 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_572443970267 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = EnumTemplate.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +164,6 @@
 				F40E3A5F225515840066A569 /* Employee.swift */,
 				F40E3A65225517730066A569 /* EmployeeClassification.swift */,
 				F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */,
-				F40E3B22225BC57B0066A569 /* Graph.swift */,
 				F4AAF868225E98C2005D32CF /* ObjCBridgeable.swift */,
 				F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */,
 			);
@@ -273,7 +270,6 @@
 				FR_265965143570 /* ClassAndStructTemplate.generated.swift */,
 				FR_572443970267 /* EnumTemplate.generated.swift */,
 			);
-			name = FacebookCore;
 			path = FacebookCore;
 			sourceTree = "<group>";
 		};
@@ -526,7 +522,6 @@
 				F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */,
 				F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */,
 				F40E3A60225515840066A569 /* Employee.swift in Sources */,
-				F40E3B23225BC57B0066A569 /* Graph.swift in Sources */,
 				F4AAF869225E98C2005D32CF /* ObjCBridgeable.swift in Sources */,
 				F40E3B05225672870066A569 /* StructWithGeneratedInitializer.swift in Sources */,
 				F40E3A3A22540D430066A569 /* CustomStruct.swift in Sources */,
