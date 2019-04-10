@@ -20,9 +20,6 @@ import Foundation
 
 // FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
 
-/**
- The type of employee
- */
 public enum EmployeeClassification: Equatable, Comparable {
   public static func < (lhs: EmployeeClassification, rhs: EmployeeClassification) -> Bool {
     // Everyone is equal~ yay!

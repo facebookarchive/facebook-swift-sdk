@@ -11,13 +11,13 @@
 		811C5E561CFFD4F800E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		BF_530048238260 /* EnumTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_824138902923 /* EnumTemplate.generated.swift */; };
 		BF_718486289131 /* ClassAndStructTemplate.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_517954772214 /* ClassAndStructTemplate.generated.swift */; };
-		F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A3922540D430066A569 /* Restaurant.swift */; };
+		F40E3A3A22540D430066A569 /* CustomStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A3922540D430066A569 /* CustomStruct.swift */; };
 		F40E3A44225424930066A569 /* SourceryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A43225424930066A569 /* SourceryTests.swift */; };
 		F40E3A46225424930066A569 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F40E3A60225515840066A569 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A5F225515840066A569 /* Employee.swift */; };
 		F40E3A66225517730066A569 /* EmployeeClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A65225517730066A569 /* EmployeeClassification.swift */; };
 		F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */; };
-		F40E3B05225672870066A569 /* UniformColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B04225672870066A569 /* UniformColors.swift */; };
+		F40E3B05225672870066A569 /* StructWithGeneratedInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */; };
 		F40E3B23225BC57B0066A569 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E3B22225BC57B0066A569 /* Graph.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,17 +66,17 @@
 		81654DD41D356E9A006401F1 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		81654DD51D356E9A006401F1 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		81654DD61D356E9A006401F1 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
-		F40E3A3922540D430066A569 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		F40E3A3922540D430066A569 /* CustomStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStruct.swift; sourceTree = "<group>"; };
 		F40E3A41225424920066A569 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40E3A43225424930066A569 /* SourceryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceryTests.swift; sourceTree = "<group>"; };
 		F40E3A45225424930066A569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F40E3A5F225515840066A569 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		F40E3A65225517730066A569 /* EmployeeClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeClassification.swift; sourceTree = "<group>"; };
 		F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePayroll.swift; sourceTree = "<group>"; };
-		F40E3B04225672870066A569 /* UniformColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformColors.swift; sourceTree = "<group>"; };
+		F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructWithGeneratedInitializer.swift; sourceTree = "<group>"; };
 		F40E3B22225BC57B0066A569 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
-		FR_517954772214 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = ClassAndStructTemplate.generated.swift; path = ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
-		FR_824138902923 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = EnumTemplate.generated.swift; path = EnumTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_517954772214 /* ClassAndStructTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = ClassAndStructTemplate.generated.swift; sourceTree = "<group>"; };
+		FR_824138902923 /* EnumTemplate.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = EnumTemplate.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +164,8 @@
 				F40E3A65225517730066A569 /* EmployeeClassification.swift */,
 				F40E3A6D22551DB20066A569 /* EmployeePayroll.swift */,
 				F40E3B22225BC57B0066A569 /* Graph.swift */,
-				F40E3A3922540D430066A569 /* Restaurant.swift */,
-				F40E3B04225672870066A569 /* UniformColors.swift */,
+				F40E3A3922540D430066A569 /* CustomStruct.swift */,
+				F40E3B04225672870066A569 /* StructWithGeneratedInitializer.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -254,7 +254,6 @@
 				FR_517954772214 /* ClassAndStructTemplate.generated.swift */,
 				FR_824138902923 /* EnumTemplate.generated.swift */,
 			);
-			name = Generated;
 			path = Generated;
 			sourceTree = "<group>";
 		};
@@ -263,7 +262,6 @@
 			children = (
 				G_2358207509305 /* Generated */,
 			);
-			name = Codegen;
 			path = Codegen;
 			sourceTree = "<group>";
 		};
@@ -517,8 +515,8 @@
 				F40E3A6E22551DB20066A569 /* EmployeePayroll.swift in Sources */,
 				F40E3A60225515840066A569 /* Employee.swift in Sources */,
 				F40E3B23225BC57B0066A569 /* Graph.swift in Sources */,
-				F40E3B05225672870066A569 /* UniformColors.swift in Sources */,
-				F40E3A3A22540D430066A569 /* Restaurant.swift in Sources */,
+				F40E3B05225672870066A569 /* StructWithGeneratedInitializer.swift in Sources */,
+				F40E3A3A22540D430066A569 /* CustomStruct.swift in Sources */,
 				BF_718486289131 /* ClassAndStructTemplate.generated.swift in Sources */,
 				BF_530048238260 /* EnumTemplate.generated.swift in Sources */,
 			);

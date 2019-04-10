@@ -10,30 +10,30 @@
 
 @implementation Restaurant
 
--(FBRestaurant *)openRestaurant {
-    FBEmployeeClassification *employeeClassification = [[FBEmployeeClassification alloc] initWithCaseValue:[FBEmployeeClassificationManager new]];
-    FBEmployeePayroll *employeePayrollEntry = [[FBEmployeePayroll alloc] initWithCaseValue: [[FBEmployeePayrollHourly alloc] initWithValue: ]];
-    FBEmployee *employee = [[FBEmployee alloc] initWithClassification:employeeClassification];
+-(FBCustomStruct *)openRestaurant {
+    FBEmployeeClassificationManager *manager = [FBEmployeeClassificationManager new];
 
-    FBRestaurant *restaurant = [[FBRestaurant alloc] initWithName:@"Mama Cass's Sandwich Shack"
-                                                         specials:@[@"Ham sammiches"]
-                                                      regularMenu:@[@"PB&Js"]
-                                                         employee:employee
-                                                     payrollEntry:<#(id _Nonnull)#>
-                                                          payroll:<#(id _Nonnull)#>
-                                                     bathroomCode:<#(NSString * _Nonnull)#>
-                                                    uniformColors:<#(FBUniformColors * _Nonnull)#>]
-    FBRestaurant *restaurant = [[FBRestaurant alloc] initWithName:@"Mama Cass's Sandwich Shack"
-                                                         specials:
-                                                      regularMenu:
-                                                          payroll:payrollEntry
-                                                     registerCode:@"123"
-                                                     bathroomCode:@"456"];
+    FBEmployeeClassification *employeeClassification = [[FBEmployeeClassification alloc] initWithCaseValue:manager];
+    FBEmployeePayrollHourly *hourly = [[FBEmployeePayrollHourly alloc] initWithValue1:employeeClassification];
+    FBEmployeePayroll *payrollEntry = [[FBEmployeePayroll alloc] initWithCaseValue:hourly];
+    FBEmployee *employee = [[FBEmployee alloc] initWithClassification:manager];
+    NSArray<FBEmployeePayroll *> *payroll = @[payrollEntry, payrollEntry, payrollEntry];
+    FBStructWithGeneratedInitializer *uniformColors = [[FBStructWithGeneratedInitializer alloc] init];
+
+    FBCustomStruct *restaurant = [[FBCustomStruct alloc] initWithStringConstant:@"Mama Cass's Sandwich Shack"
+                                                                    stringArray:@[@"Ham sammiches"]
+                                                    stringArrayWithDefaultValue:@[@"PB&Js"]
+                                                            customClassVariable:employee
+                                                                   enumVariable:employeeClassification
+                                                              enumArrayVariable:payroll
+                                                                 stringVariable:@"123"
+                                                                 structVariable:uniformColors];
+
     return restaurant;
 }
 
--(NSString *)soupOfTheDay {
-    return [FBRestaurant soup];
+-(NSString *)staticValueOnCustomStruct {
+    return [FBCustomStruct staticStringConstant];
 }
 
 

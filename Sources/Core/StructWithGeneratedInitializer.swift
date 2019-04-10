@@ -20,9 +20,9 @@ import Foundation
 
 // FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
 
-public struct UniformColors: Equatable {
+public struct StructWithGeneratedInitializer: Equatable {
   let hat: String = "red"
   let shirt: String = "blue"
 }
 
-extension UniformColors: ObjCBridgeable {}
+extension StructWithGeneratedInitializer: ObjCBridgeable {}

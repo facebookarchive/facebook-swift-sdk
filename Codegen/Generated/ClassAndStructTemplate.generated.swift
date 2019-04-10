@@ -8,117 +8,117 @@
 import Foundation
 
 
-@objc(FBRestaurant)
-public class _ObjCRestaurant : NSObject {
-  private (set) var restaurant: Restaurant
+@objc(FBCustomStruct)
+public class _ObjCCustomStruct : NSObject {
+  private (set) var customStruct: CustomStruct
 
   // TODO: Probably remove this if no clear use case arises
-  public init(restaurant: Restaurant) {
-    self.restaurant = restaurant
+  public init(customStruct: CustomStruct) {
+    self.customStruct = customStruct
   }
 
   // Initializer to be used from ObjC code
   @objc public init(
     // Native type
-    name: String,
+    stringConstant: String,
     // Native type
-    specials: [String],
+    stringArray: [String],
     // Native type
-    regularMenu: [String],
+    stringArrayWithDefaultValue: [String],
     // Class or struct
-    employee: _ObjCEmployee,
+    customClassVariable: _ObjCEmployee,
     // Enum
-    payrollEntry: Any,
+    enumVariable: Any,
     // Enum Array
-    payroll: Any,
+    enumArrayVariable: Any,
     // Native type
-    bathroomCode: String,
+    stringVariable: String,
     // Class or struct
-    uniformColors: _ObjCUniformColors
+    structVariable: _ObjCStructWithGeneratedInitializer
   ) {
-    guard let enumeration5 = payrollEntry as? _ObjCEmployeePayroll else {
-      preconditionFailure("Type of enumeration not valid for payrollEntry")
+    guard let enumeration5 = enumVariable as? _ObjCEmployeePayroll else {
+      preconditionFailure("Type of enumeration not valid for enumVariable")
     }
-    guard let enumerations6 = payroll as? [_ObjCEmployeePayroll] else {
-      preconditionFailure("Type of enumeration not valid for payroll")
+    guard let enumerations6 = enumArrayVariable as? [_ObjCEmployeePayroll] else {
+      preconditionFailure("Type of enumeration not valid for enumArrayVariable")
     }
     let mappedEnumerations6 = enumerations6.map {
       $0.employeePayroll
     }
-    let restaurant = Restaurant(
-        name: name,
-        specials: specials,
-        regularMenu: regularMenu,
-        employee: employee.employee,
-        payrollEntry: enumeration5.employeePayroll,
-        payroll: mappedEnumerations6,
-        bathroomCode: bathroomCode,
-        uniformColors: uniformColors.uniformColors
+    let customStruct = CustomStruct(
+        stringConstant: stringConstant,
+        stringArray: stringArray,
+        stringArrayWithDefaultValue: stringArrayWithDefaultValue,
+        customClassVariable: customClassVariable.employee,
+        enumVariable: enumeration5.employeePayroll,
+        enumArrayVariable: mappedEnumerations6,
+        stringVariable: stringVariable,
+        structVariable: structVariable.structWithGeneratedInitializer
     )
-    self.restaurant = restaurant
+    self.customStruct = customStruct
   }
 
   // Forwarding property for native type
-  @objc public static var soup : String {
-    return Restaurant.soup
+  @objc public static var staticStringConstant : String {
+    return CustomStruct.staticStringConstant
   }
 
   // Forwarding property for native type
-  @objc public static var bread : String {
+  @objc public static var staticStringVariable : String {
     get {
-      return Restaurant.bread
+      return CustomStruct.staticStringVariable
     }
     set {
-      Restaurant.bread = newValue
+      CustomStruct.staticStringVariable = newValue
     }
   }
 
   // Forwarding property for native type
-  @objc public var name : String {
-    return self.restaurant.name
+  @objc public var stringConstant : String {
+    return self.customStruct.stringConstant
   }
 
   // Forwarding property for native type
-  @objc public var specials : [String] {
+  @objc public var stringArray : [String] {
     get {
-      return self.restaurant.specials
+      return self.customStruct.stringArray
     }
     set {
-      self.restaurant.specials = newValue
+      self.customStruct.stringArray = newValue
     }
   }
 
   // Forwarding property for native type
-  @objc public var regularMenu : [String] {
+  @objc public var stringArrayWithDefaultValue : [String] {
     get {
-      return self.restaurant.regularMenu
+      return self.customStruct.stringArrayWithDefaultValue
     }
     set {
-      self.restaurant.regularMenu = newValue
+      self.customStruct.stringArrayWithDefaultValue = newValue
     }
   }
 
   // Forwarding property for native type
-  @objc public var orderTimestamp : Date {
-    return self.restaurant.orderTimestamp
+  @objc public var computedDate : Date {
+    return self.customStruct.computedDate
   }
 
   // Forwarding to custom type
-  @objc public var employee : _ObjCEmployee {
+  @objc public var customClassVariable : _ObjCEmployee {
     get {
-      let value = self.restaurant.employee
+      let value = self.customStruct.customClassVariable
       return _ObjCEmployee(employee: value)
     }
 
     set {
-      self.restaurant.employee = newValue.employee
+      self.customStruct.customClassVariable = newValue.employee
     }
   }
 
   // Computed property for enums
-  @objc public var payrollEntry : Any {
+  @objc public var enumVariable : Any {
     get {
-      let value = self.restaurant.payrollEntry
+      let value = self.customStruct.enumVariable
 
       switch value {
       case .hourly(let value1):
@@ -137,21 +137,21 @@ public class _ObjCRestaurant : NSObject {
     }
     set {
       if let caseValue = newValue as? _ObjCEmployeePayrollHourly  {
-        self.restaurant.payrollEntry = .hourly(for: caseValue.value1)
+        self.customStruct.enumVariable = .hourly(for: caseValue.value1)
       }
       if let caseValue = newValue as? _ObjCEmployeePayrollSalary  {
-        self.restaurant.payrollEntry = .salary(for: caseValue.value1)
+        self.customStruct.enumVariable = .salary(for: caseValue.value1)
       }
       if newValue as? _ObjCEmployeePayrollTerminated != nil  {
-        self.restaurant.payrollEntry = .terminated
+        self.customStruct.enumVariable = .terminated
       }
     }
   }
 
   // Computed property for Array of enums
-  @objc public var payroll : Any {
+  @objc public var enumArrayVariable : Any {
     get {
-      let values = self.restaurant.payroll
+      let values = self.customStruct.enumArrayVariable
 
       return values.map { value -> Any in
         switch value {
@@ -191,116 +191,119 @@ public class _ObjCRestaurant : NSObject {
           backingValues.append(.terminated)
         }
       }
-      self.restaurant.payroll = backingValues
+      self.customStruct.enumArrayVariable = backingValues
     }
   }
 
 
   // Forwarding property for native type
-  @objc public var bathroomCode : String {
+  @objc public var stringVariable : String {
     get {
-      return self.restaurant.bathroomCode
+      return self.customStruct.stringVariable
     }
     set {
-      self.restaurant.bathroomCode = newValue
+      self.customStruct.stringVariable = newValue
     }
   }
 
   // Forwarding to custom type
-  @objc public var uniformColors : _ObjCUniformColors {
+  @objc public var structVariable : _ObjCStructWithGeneratedInitializer {
     get {
-      let value = self.restaurant.uniformColors
-      return _ObjCUniformColors(uniformColors: value)
+      let value = self.customStruct.structVariable
+      return _ObjCStructWithGeneratedInitializer(structWithGeneratedInitializer: value)
     }
 
     set {
-      self.restaurant.uniformColors = newValue.uniformColors
+      self.customStruct.structVariable = newValue.structWithGeneratedInitializer
     }
   }
 
   // Forwarding property for native type
-  @objc internal var timeNow : Date {
-    return self.restaurant.timeNow
+  @objc internal var computedInternalDateVariable : Date {
+    return self.customStruct.computedInternalDateVariable
   }
 
-  @objc public func timeInOneHour(
+  @objc public func methodWithNoParametersReturnsNativeType(
     ) -> Date {
-    return self.restaurant.timeInOneHour(
+    return self.customStruct.methodWithNoParametersReturnsNativeType(
     )
   }
-  @objc public func timeAdvanced(
+  @objc public func methodWithParameters(
       byHours hours: Int,
       minutes: Int,
       _ seconds: Int
     ) -> Void {
-    return self.restaurant.timeAdvanced(
+    return self.customStruct.methodWithParameters(
       byHours: hours,
       minutes: minutes,
       seconds
     )
   }
-  @objc public static func staticTimeAdvanced(
+  @objc public static func staticMethodWithParameters(
       byHours hours: Int,
       minutes: Int,
       _ seconds: Int
     ) -> Void {
-    return Restaurant.staticTimeAdvanced(
+    return CustomStruct.staticMethodWithParameters(
       byHours: hours,
       minutes: minutes,
       seconds
     )
   }
-  @objc public func getEmployee(
+  @objc public func methodWithNoParametersReturnsClass(
     ) -> _ObjCEmployee {
-    let backingType = self.restaurant.getEmployee(
+    let backingType = self.customStruct.methodWithNoParametersReturnsClass(
     )
     return _ObjCEmployee(
         employee: backingType
     )
   }
-  @objc public func changeUniformColors(
+  @objc public func mutatingMethod(
     // Custom Type parameter
   // Class or struct
-  newColors: _ObjCUniformColors
+  newColors: _ObjCStructWithGeneratedInitializer
     ) -> Void {
-    return self.restaurant.changeUniformColors(
-      newColors: newColors.uniformColors
+    return self.customStruct.mutatingMethod(
+      newColors: newColors.structWithGeneratedInitializer
     )
   }
   @objc public override func isEqual(_ object: Any?) -> Bool {
-    guard let object = object as? _ObjCRestaurant else {
+    guard let object = object as? _ObjCCustomStruct else {
       return false
     }
-    return restaurant == object.restaurant
+    return customStruct == object.customStruct
   }
 
 }
 
-@objc(FBUniformColors)
-public class _ObjCUniformColors : NSObject {
-  private (set) var uniformColors: UniformColors
+@objc(FBStructWithGeneratedInitializer)
+public class _ObjCStructWithGeneratedInitializer : NSObject {
+  private (set) var structWithGeneratedInitializer: StructWithGeneratedInitializer
 
   // TODO: Probably remove this if no clear use case arises
-  public init(uniformColors: UniformColors) {
-    self.uniformColors = uniformColors
+  public init(structWithGeneratedInitializer: StructWithGeneratedInitializer) {
+    self.structWithGeneratedInitializer = structWithGeneratedInitializer
   }
 
+  @objc override public init() {
+    self.structWithGeneratedInitializer = StructWithGeneratedInitializer()
+  }
 
   // Forwarding property for native type
   @objc internal var hat : String {
-    return self.uniformColors.hat
+    return self.structWithGeneratedInitializer.hat
   }
 
   // Forwarding property for native type
   @objc internal var shirt : String {
-    return self.uniformColors.shirt
+    return self.structWithGeneratedInitializer.shirt
   }
 
   @objc public override func isEqual(_ object: Any?) -> Bool {
-    guard let object = object as? _ObjCUniformColors else {
+    guard let object = object as? _ObjCStructWithGeneratedInitializer else {
       return false
     }
-    return uniformColors == object.uniformColors
+    return structWithGeneratedInitializer == object.structWithGeneratedInitializer
   }
 
 }

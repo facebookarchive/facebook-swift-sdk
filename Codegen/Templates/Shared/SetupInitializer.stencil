@@ -75,6 +75,11 @@
 {#  #}
 {# Macro for ObjC initializer #}
 {% macro initialize type %}
+  {% if type.initializers.count == 0 %}
+  @objc override public init() {
+    self.{{ type.name|lowerFirstWord }} = {{ type.name }}()
+  }
+  {% endif %}
   {% for initializer in type.initializers where initializer.accessLevel == "public" %}
   // Initializer to be used from ObjC code
   @objc {% if parameters.count == 0  %}override {% endif %}public init(

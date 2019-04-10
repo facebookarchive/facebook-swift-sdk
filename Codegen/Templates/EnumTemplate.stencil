@@ -14,6 +14,7 @@
   {# --- #}
   {% if hasCases %}
     {# Handles caseless enum #}
+    // Enum has cases
   {% if hasCases %}private(set) var {{enum.name|lowerFirstWord}}: {{enum.name}}{% endif %}
     // Initializer for Objective-C code
     @objc public init(caseValue: Any) {
@@ -35,6 +36,7 @@
       }
     }
   {% else %}
+    // Enum has no cases
   @objc public override init() {}
   {% endif %}
 {% endmacro %}
@@ -59,7 +61,6 @@ import Foundation
 {% endmacro %}
 
 {% for type in types.implementing.ObjCBridgeable|enum %}
-
 {#  #}
 @objc(FB{{type.name}})
 public class _ObjC{{type.name}} : NSObject {
@@ -82,9 +83,20 @@ public class _ObjC{{type.name}}{{case.name|capitalize}} : NSObject {
   {% endfor %}
 
   {% if not case.associatedValues.count == 0 %}
-  public init({% for associatedValue in case.associatedValues %}value{{forloop.counter}} : {{associatedValue.typeName}} {% if not forloop.last %},{% endif %}{% endfor %}) {
+  init({% for associatedValue in case.associatedValues %}value{{forloop.counter}} : {{associatedValue.typeName}} {% if not forloop.last %},{% endif %}{% endfor %}) {
   {% for associatedValue in case.associatedValues %}
     self.value{{forloop.counter}} = value{{forloop.counter}}
+  {% endfor %}
+  }
+  {% endif %}
+
+  // Create initializer for the associated value
+  {% if case.associatedValues.count == 0 %}
+  @objc public override init() {}
+  {% else %}
+  @objc public init({% for associatedValue in case.associatedValues %}value{{forloop.counter}} : _ObjC{{ associatedValue.typeName }} {% if not forloop.last %},{% endif %}{% endfor %}) {
+  {% for associatedValue in case.associatedValues %}
+    self.value{{forloop.counter}} = value{{forloop.counter}}.{{ associatedValue.typeName|lowerFirstWord }}
   {% endfor %}
   }
   {% endif %}

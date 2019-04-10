@@ -8,10 +8,10 @@ import Foundation
 
 // Bridging of enums
 
-
 @objc(FBEmployeeClassification)
 public class _ObjCEmployeeClassification : NSObject {
 
+    // Enum has cases
   private(set) var employeeClassification: EmployeeClassification
     // Initializer for Objective-C code
     @objc public init(caseValue: Any) {
@@ -43,18 +43,24 @@ public class _ObjCEmployeeClassification : NSObject {
 @objc(FBEmployeeClassificationManager)
 public class _ObjCEmployeeClassificationManager : NSObject {
 
+
+  // Create initializer for the associated value
+  @objc public override init() {}
 }
 
 // A case of EmployeeClassification
 @objc(FBEmployeeClassificationContributor)
 public class _ObjCEmployeeClassificationContributor : NSObject {
 
-}
 
+  // Create initializer for the associated value
+  @objc public override init() {}
+}
 
 @objc(FBEmployeePayroll)
 public class _ObjCEmployeePayroll : NSObject {
 
+    // Enum has cases
   private(set) var employeePayroll: EmployeePayroll
     // Initializer for Objective-C code
     @objc public init(caseValue: Any) {
@@ -107,8 +113,13 @@ public class _ObjCEmployeePayroll : NSObject {
 public class _ObjCEmployeePayrollHourly : NSObject {
   let value1 : EmployeeClassification
 
-  public init(value1 : EmployeeClassification ) {
+  init(value1 : EmployeeClassification ) {
     self.value1 = value1
+  }
+
+  // Create initializer for the associated value
+  @objc public init(value1 : _ObjCEmployeeClassification ) {
+    self.value1 = value1.employeeClassification
   }
 }
 
@@ -117,8 +128,13 @@ public class _ObjCEmployeePayrollHourly : NSObject {
 public class _ObjCEmployeePayrollSalary : NSObject {
   let value1 : EmployeeClassification
 
-  public init(value1 : EmployeeClassification ) {
+  init(value1 : EmployeeClassification ) {
     self.value1 = value1
+  }
+
+  // Create initializer for the associated value
+  @objc public init(value1 : _ObjCEmployeeClassification ) {
+    self.value1 = value1.employeeClassification
   }
 }
 
@@ -126,12 +142,15 @@ public class _ObjCEmployeePayrollSalary : NSObject {
 @objc(FBEmployeePayrollTerminated)
 public class _ObjCEmployeePayrollTerminated : NSObject {
 
-}
 
+  // Create initializer for the associated value
+  @objc public override init() {}
+}
 
 @objc(FBGraph)
 public class _ObjCGraph : NSObject {
 
+    // Enum has no cases
   @objc public override init() {}
 
 
@@ -159,10 +178,10 @@ public class _ObjCGraph : NSObject {
   }
 }
 
-
 @objc(FBParser)
 public class _ObjCParser : NSObject {
 
+    // Enum has no cases
   @objc public override init() {}
 
 
