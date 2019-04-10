@@ -10,4 +10,4 @@ output:
   link:
     project: ./FacebookSwift.xcodeproj
     target: FacebookCore
-    group: Codegen/Generated
+    group: Codegen/Generated/FacebookCore
