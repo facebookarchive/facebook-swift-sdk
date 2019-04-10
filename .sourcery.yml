@@ -6,7 +6,7 @@ templates:
   exclude:
     - ./Codegen/Templates/Shared
 output:
-  path: ./Codegen/Generated
+  path: ./Codegen/Generated/FacebookCore
   link:
     project: ./FacebookSwift.xcodeproj
     target: FacebookCore
