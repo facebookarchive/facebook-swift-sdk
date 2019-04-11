@@ -20,49 +20,130 @@
 import XCTest
 
 class PermissionTests: XCTestCase {
+  let permissions: [Permission] = [
+    .email,
+    .groupsAccessMemberInfo,
+    .publishToGroups,
+    .userAgeRange,
+    .userBirthday,
+    .userEvents,
+    .userFriends,
+    .userGender,
+    .userHometown,
+    .userLikes,
+    .userLink,
+    .userLocation,
+    .userMobilePhone,
+    .userPhotos,
+    .userPosts,
+    .userTaggedPlaces,
+    .userVideos,
+    .other(value: "otherVal")
+  ]
+
   func testKnownCases() {
-    [
-      Permission.`default`,
-      .email,
-      .groupsAccessMemberInfo,
-      .publishToGroups,
-      .userAgeRange,
-      .userBirthday,
-      .userEvents,
-      .userFriends,
-      .userGender,
-      .userHometown,
-      .userLikes,
-      .userLink,
-      .userLocation,
-      .userMobilePhone,
-      .userPhotos,
-      .userPosts,
-      .userTaggedPlaces,
-      .userVideos
-    ].forEach { permission in
-        switch permission {
-        case .default,
-             .email,
-             .groupsAccessMemberInfo,
-             .publishToGroups,
-             .userAgeRange,
-             .userBirthday,
-             .userEvents,
-             .userFriends,
-             .userGender,
-             .userHometown,
-             .userLikes,
-             .userLink,
-             .userLocation,
-             .userMobilePhone,
-             .userPhotos,
-             .userPosts,
-             .userTaggedPlaces,
-             .userVideos,
-             .unknown:
-          break
-        }
+    XCTAssertEqual(permissions.count, 18)
+    XCTAssertEqual(permissions.map { $0.key }, Permission.CodingKeys.allCases)
+  }
+
+  func testDescriptions() {
+    let expected: [String] = [
+      "email",
+      "groupsAccessMemberInfo",
+      "publishToGroups",
+      "userAgeRange",
+      "userBirthday",
+      "userEvents",
+      "userFriends",
+      "userGender",
+      "userHometown",
+      "userLikes",
+      "userLink",
+      "userLocation",
+      "userMobilePhone",
+      "userPhotos",
+      "userPosts",
+      "userTaggedPlaces",
+      "userVideos",
+      "otherVal"
+    ]
+
+    XCTAssertEqual(permissions.map { $0.description }, expected)
+  }
+
+  func testStringLiterals() {
+    let input: [Permission] = [
+      "email",
+      "groupsAccessMemberInfo",
+      "publishToGroups",
+      "userAgeRange",
+      "userBirthday",
+      "userEvents",
+      "userFriends",
+      "userGender",
+      "userHometown",
+      "userLikes",
+      "userLink",
+      "userLocation",
+      "userMobilePhone",
+      "userPhotos",
+      "userPosts",
+      "userTaggedPlaces",
+      "userVideos",
+      "otherVal"
+    ]
+
+    XCTAssertEqual(permissions, input)
+  }
+
+  func testSnakeStringLiterals() {
+    let input: [Permission] = [
+      "email",
+      "groups_access_member_info",
+      "publish_to_groups",
+      "user_age_range",
+      "user_birthday",
+      "user_events",
+      "user_friends",
+      "user_gender",
+      "user_hometown",
+      "user_likes",
+      "user_link",
+      "user_location",
+      "user_mobile_phone",
+      "user_photos",
+      "user_posts",
+      "user_tagged_places",
+      "user_videos",
+      "otherVal"
+    ]
+
+    XCTAssertEqual(permissions, input)
+  }
+
+  func testEncoding() {
+    let expected: String = #"["email","groups_access_member_info","publish_to_groups","user_age_range","user_birthday","user_events","user_friends","user_gender","user_hometown","user_likes","user_link","user_location","user_mobile_phone","user_photos","user_posts","user_tagged_places","user_videos","other_val"]"#
+
+    let jsonEncoder = JSONEncoder()
+    do {
+      let jsonData = try jsonEncoder.encode(permissions)
+      let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
+      XCTAssertEqual(jsonString, expected)
+    } catch {
+      XCTAssertNil(error)
+    }
+  }
+
+  func testDecoding() {
+    let input: Data = #"["email","groups_access_member_info","publish_to_groups","user_age_range","user_birthday","user_events","user_friends","user_gender","user_hometown","user_likes","user_link","user_location","user_mobile_phone","user_photos","user_posts","user_tagged_places","user_videos","otherVal"]"#
+      .data(using: .utf8) ?? Data()
+
+    let jsonDecoder = JSONDecoder()
+    do {
+      let actual = try jsonDecoder.decode([Permission].self, from: input)
+      XCTAssertEqual(actual, permissions)
+    } catch {
+      XCTAssertNil(error)
     }
   }
 }
