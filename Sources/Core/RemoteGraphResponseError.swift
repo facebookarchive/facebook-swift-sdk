@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct RemoteGraphResponseError: Codable {
+struct RemoteGraphResponseError: Codable, FBError {
   let details: GraphResponseErrorDetails
 
   init(from decoder: Decoder) throws {

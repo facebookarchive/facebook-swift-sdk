@@ -49,7 +49,9 @@ class GraphRequestConnection: GraphRequestConnecting {
    */
   private(set) var urlResponse: HTTPURLResponse?
 
-  private var session: Session?
+  private lazy var session: Session = {
+    sessionProvider.session()
+  }()
   private var requestStartTime: Double = 0
 
   let sessionProvider: SessionProviding
@@ -72,10 +74,6 @@ class GraphRequestConnection: GraphRequestConnecting {
 
   func start() {
     errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
-
-    if session == nil {
-      session = sessionProvider.session()
-    }
 
     switch state {
     case .started, .cancelled, .completed:
@@ -151,5 +149,75 @@ class GraphRequestConnection: GraphRequestConnecting {
       fatalError("Implement this method to return the actual url we need")
     }
     return URLRequest(url: url)
+  }
+
+  private func urlRequest(with graphRequest: GraphRequest) -> URLRequest {
+    guard let url = URLBuilder().buildURL(path: graphRequest.graphPath.description) else {
+      fatalError("Should never fail to build a url from the url builder")
+    }
+
+    return URLRequest(url: url)
+  }
+
+  /**
+   Fetches the data that will later be turned into a Decodable object.
+   This uses a GraphRequest to create a URLRequest, spins up a URLSessionDataTask
+  and calls the completion with either the data from that task or an error
+
+   - Parameter graphRequest: The graph request object to use in creating the data request
+   - Parameter completion: A Result type with a Success of Data and Failure of Error
+
+   - Returns
+    URLSessionTaskProxy - a wrapper for a url session task that allows you to cancel an in-flight
+   request
+   */
+  func fetchData(
+    for graphRequest: GraphRequest,
+    completion: @escaping (Result<Data, Error>) -> Void
+    ) -> URLSessionTaskProxy? {
+    errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
+
+    piggybackManager.addPiggybackRequests(for: self)
+
+    let urlRequest: URLRequest = self.urlRequest(with: graphRequest)
+
+    logger.log(request: urlRequest, bodyLength: 0, bodyLogger: nil, attachmentLogger: nil)
+
+    requestStartTime = TimeUtility.currentTimeInMilliseconds
+
+    let task = URLSessionTaskProxy(
+      for: urlRequest,
+      fromSession: session
+    ) { data, response, error in
+      let result: Result<Data, Error>
+      defer { completion(result) }
+
+      switch (data, response, error) {
+      case (_, _, let error?):
+        result = .failure(error)
+
+      case (nil, nil, _), (nil, _, nil):
+        result = .failure(GraphRequestConnectionError.missingData)
+
+      case (_, nil, _):
+        result = .failure(GraphRequestConnectionError.missingURLResponse)
+
+      case let (data?, response?, nil):
+        guard let response = response as? HTTPURLResponse else {
+          result = .failure(GraphRequestConnectionError.invalidURLResponseType)
+          return
+        }
+
+        guard response.mimeType?.hasPrefix("image") == false else {
+          result = .failure(GraphRequestConnectionError.nonTextMimeType)
+          return
+        }
+
+        result = .success(data)
+      }
+    }
+    task.start()
+
+    return task
   }
 }

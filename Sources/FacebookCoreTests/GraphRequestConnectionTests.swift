@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable type_body_length file_length force_try force_cast
+
 @testable import FacebookCore
 import XCTest
 
@@ -23,11 +25,21 @@ class GraphRequestConnectionTests: XCTestCase {
   let fakeSession = FakeSession()
   var fakeSessionProvider: FakeSessionProvider!
   let fakeLogger = FakeLogger()
+  let fakeServerConfigurationManager = FakeServerConfigurationManager()
+  let fakePiggybackManager = FakeGraphRequestPiggybackManager.self
+  let graphRequest = GraphRequest(graphPath: .me)
+  var connection: GraphRequestConnection!
 
   override func setUp() {
     super.setUp()
 
     fakeSessionProvider = FakeSessionProvider(fakeSession: fakeSession)
+    connection = GraphRequestConnection(
+      sessionProvider: fakeSessionProvider,
+      logger: fakeLogger,
+      piggybackManager: fakePiggybackManager,
+      serverConfigurationManager: fakeServerConfigurationManager
+    )
   }
 
   func testCreatingConnection() {
@@ -162,114 +174,342 @@ class GraphRequestConnectionTests: XCTestCase {
                    "A connection should create a batch parameter for the added request when a batch entry name is provided")
   }
 
-  // MARK: Starting Connection
-  func testStartingCheckForUpdatedErrorConfigurationWithoutCache() {
+  // MARK: Fetching Data
+
+  func testFetchingDataChecksForUpdatedErrorConfigurationWithoutCache() {
     let fakeServerConfigurationManager = FakeServerConfigurationManager()
     fakeServerConfigurationManager.clearCache()
 
     let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
 
-    connection.start()
+    _ = connection.fetchData(for: graphRequest) { _ in }
 
     XCTAssertTrue(fakeServerConfigurationManager.cachedConfigurationWasRequested,
-                  "A connection should check for a cached configuration when starting a request")
+                  "A connection should check for a cached configuration when fetching data")
   }
 
-  func testStartingCheckForUpdatedErrorConfigurationWithCache() {
+  func testFetchingDataChecksForUpdatedErrorConfigurationWithCache() {
     let fakeServerConfigurationProvider = FakeServerConfigurationProvider()
     let fakeServerConfigurationManager = FakeServerConfigurationManager(cachedServerConfiguration: fakeServerConfigurationProvider)
     let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
 
-    connection.start()
+    _ = connection.fetchData(for: graphRequest) { _ in }
 
     guard let cache = fakeServerConfigurationManager.cachedServerConfiguration as? FakeServerConfigurationProvider else {
-      return XCTFail("A connection should check for an updated configuration when starting a request")
+      return XCTFail("A connection should check for an updated configuration when fetching data")
     }
     XCTAssertTrue(cache.errorConfigurationWasRequested,
-                  "A connection should check for an updated error configuration when starting a request")
+                  "A connection should check for an updated error configuration when fetching data")
   }
 
-  func testStartingWithoutSession() {
-    let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)
-
-    connection.start()
+  func testFetchingDataWithoutSession() {
+    _ = connection.fetchData(for: graphRequest) { _ in }
 
     XCTAssertEqual(fakeSessionProvider.sessionCallCount, 1,
-                   "A connection should request a new session from its session provider if starting a request without an existing session")
+                   "A connection should request a new session from its session provider if fetching data without an existing session")
   }
 
-  func testStartingWithSession() {
-    let connection = GraphRequestConnection(sessionProvider: fakeSessionProvider)
-
-    connection.start()
-    connection.start()
+  func testFetchingDataWithSession() {
+    _ = connection.fetchData(for: graphRequest) { _ in }
+    _ = connection.fetchData(for: graphRequest) { _ in }
 
     XCTAssertEqual(fakeSessionProvider.sessionCallCount, 1,
-                   "A connection should not request a new session from its session provider if starting a request with an existing session")
+                   "A connection should not request a new session from its session provider if fetching data with an existing session")
   }
 
-  func testStartingUpdatesState() {
-    let connection = GraphRequestConnection(logger: fakeLogger)
-
-    GraphRequestConnectionState.allCases.forEach { state in
-      defer { fakeLogger.capturedMessages = [] }
-
-      connection.state = state
-      connection.start()
-
-      switch state {
-      case .cancelled,
-           .completed:
-        XCTAssertNotNil(fakeLogger.capturedMessages.first,
-                        "Starting a connection in the invalid state: \(state) should log an error message")
-        XCTAssertNotEqual(connection.state, .started,
-                          "A connection with an invalid start state should not be placed into a started state")
-
-      case .started:
-        XCTAssertNotNil(fakeLogger.capturedMessages.first,
-                        "Starting an already started connection should log an error message")
-        XCTAssertEqual(connection.state, .started,
-                       "Starting an already started connection should not change its state")
-
-      case .created,
-           .serialized:
-        XCTAssertNil(fakeLogger.capturedMessages.first,
-                     "Starting a connection in the valid state: \(state) should not log an error message")
-        XCTAssertEqual(connection.state, .started,
-                       "Starting a connection in the valid state: \(state) should update the state to be started")
-      }
-    }
-  }
-
-  func testStartingInvokesPiggybackManager() {
+  func testFetchingDataInvokesPiggybackManager() {
+    defer { FakeGraphRequestPiggybackManager.reset() }
     let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
 
-    GraphRequestConnectionState.allCases.forEach { state in
-      defer { FakeGraphRequestPiggybackManager.reset() }
-
-      switch state {
-      case .cancelled,
-           .completed,
-           .started:
-        connection.state = state
-        connection.start()
-        XCTAssertTrue(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
-                      "Starting a request in the invalid state: \(state) should not invoke the piggyback manager")
-      case .created,
-           .serialized:
-        connection.state = state
-        connection.start()
-        XCTAssertFalse(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
-                       "Starting a request in the valid state: \(state) should invoke the piggyback manager")
-      }
-    }
+    _ = connection.fetchData(for: graphRequest) { _ in }
+    XCTAssertFalse(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
+                   "Fetching data should invoke the piggyback manager")
   }
 
-  func testStartingWithValidStateLogsRequests() {
-    let connection = GraphRequestConnection(logger: fakeLogger)
-    connection.start()
+  func testFetchingDataCreatesDataTask() {
+    let task = connection.fetchData(for: graphRequest) { _ in }
+    XCTAssertNotNil(task,
+                    "Fetching data should provide a session data task")
+  }
 
-    XCTAssertEqual(fakeLogger.logRequestCallCount, 1,
-                   "Successfully starting a connection should log the request")
+  // MARK: Fetch Data Task Completion
+
+  // Data | Response | Error
+  // nil  | nil      | nil
+  func testCompletingFetchDataTaskWithMissingDataResponseAndError() {
+    let expectation = self.expectation(description: name)
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that is missing data, response, and error")
+
+      case .failure(let error as GraphRequestConnectionError):
+        XCTAssertEqual(error, .missingData,
+                       "Should provide the expected error when completing a task with missing data")
+
+      case .failure:
+        XCTFail("Should only return expected errors")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: nil, nil, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // nil  |   nil    | yes
+  func testCompletingFetchDataTaskWithError() {
+    let expectation = self.expectation(description: name)
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that is missing data, and response")
+
+      case .failure(let error as NSError):
+        XCTAssertEqual(error, SampleNSError.validWithUserInfo,
+                       "Should provide the specific network error when completing a task with a specified error")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: nil, nil, SampleNSError.validWithUserInfo)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // nil | yes | nil
+  func testCompletingFetchDataTaskWithResponseNoData() {
+    let expectation = self.expectation(description: name)
+    let response = SampleHTTPURLResponse.valid
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that is missing data")
+
+      case .failure(let error as GraphRequestConnectionError):
+        XCTAssertEqual(error, .missingData,
+                       "Should provide the expected error when completing a task with missing data")
+
+      case .failure:
+        XCTFail("Should only return expected errors")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: nil, response, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // nil  |   yes    | nil
+  func testCompletingFetchDataTaskWithDataAndNonHTTPResponse() {
+    let expectation = self.expectation(description: name)
+    let response = SampleURLResponse.valid
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that has a non-http response")
+
+      case .failure(let error as GraphRequestConnectionError):
+        XCTAssertEqual(error, .invalidURLResponseType,
+                       "Should provide the expected error when completing a task with an invalid url response type")
+
+      case .failure:
+        XCTFail("Should only return expected errors")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, response, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // nil | yes | nil
+  func testCompletingFetchDataTaskWithDataAndInvalidMimeTypes() {
+    let expectation = self.expectation(description: name)
+    let response = SampleHTTPURLResponse.pngMimeType
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that has non text/javascript mimetype in response")
+
+      case .failure(let error as GraphRequestConnectionError):
+        XCTAssertEqual(error, .nonTextMimeType,
+                       "Should provide the expected error")
+
+      case .failure:
+        XCTFail("Should only return expected errors")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, response, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // nil  |   yes    | yes
+  func testCompletingFetchDataTaskWithResponseAndError() {
+    let expectation = self.expectation(description: name)
+    let response = SampleHTTPURLResponse.valid
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that has a request/result mismatch")
+
+      case .failure(let error as NSError):
+        XCTAssertEqual(error, SampleNSError.validWithUserInfo,
+                       "Should provide the specific network error when completing a task with a specified error")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: nil, response, SampleNSError.validWithUserInfo)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // yes | nil | nil
+  func testCompletingFetchDataTaskWithDataOnly() {
+    let expectation = self.expectation(description: name)
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that has a missing url response")
+
+      case .failure(let error as GraphRequestConnectionError):
+        XCTAssertEqual(error, .missingURLResponse,
+                       "Should provide the expected error")
+
+      case .failure:
+        XCTFail("Should only return expected errors")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, nil, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // yes  |   nil    | yes
+  func testCompletingFetchDataWithDataAndError() {
+    let expectation = self.expectation(description: name)
+
+    // Add a request
+    connection.state = .created
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully complete task that has a missing url response")
+
+      case .failure(let error as NSError):
+        XCTAssertEqual(error, SampleNSError.validWithUserInfo,
+                       "Should provide the expected error")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, nil, SampleNSError.validWithUserInfo)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // yes  |   yes    | nil
+  func testCompletingWithResponseAndData() {
+    let expectation = self.expectation(description: name)
+    let response = SampleHTTPURLResponse.valid
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success(let data):
+        XCTAssertEqual(data, SampleGraphResponse.dictionary.data,
+                       "Should return the data that corresponds with the fetch request")
+
+      case .failure:
+        XCTFail("Completing a task with data, a response, and no error should not result in a failure")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, response, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // yes  |   yes    | yes
+  func testCompletingFetchDataTaskWithResponseDataAndError() {
+    let expectation = self.expectation(description: name)
+    let response = SampleHTTPURLResponse.valid
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        XCTFail("Completing a fetch request with an error should result in a failure")
+
+      case .failure(let error as NSError):
+        XCTAssertEqual(error, SampleNSError.validWithUserInfo,
+                       "Should provide the expected error")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, response, SampleNSError.validWithUserInfo)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // MARK: Server Errors (not networking errors)
+
+  func complete(
+    _ proxyTask: URLSessionTaskProxy?,
+    with data: Data?,
+    _ response: URLResponse?,
+    _ error: Error?,
+    _ file: StaticString = #file,
+    _ line: UInt = #line) {
+    guard let task = proxyTask?.task as? FakeSessionDataTask else {
+      return XCTFail(
+        "A proxy created with a fake session should store a fake session data task",
+        file: file,
+        line: line
+      )
+    }
+
+    task.completionHandler(data, response, error)
+  }
+}
+
+private class NonExecutingOperationQueue: OperationQueue {
+  var addOperationCallCount = 0
+  var capturedOperations: [Operation] = []
+
+  // Keeps an accurate representation of the number of operation but does not
+  // allow them to automatically execute
+  override var operations: [Operation] {
+    return capturedOperations
+  }
+
+  override func addOperation(_ operation: Operation) {
+    addOperationCallCount += 1
+    capturedOperations.append(operation)
   }
 }
