@@ -205,9 +205,11 @@ class GraphRequestConnection: GraphRequestConnecting {
     data: Data,
     remoteType: RemoteType.Type
     ) -> Result<RemoteType, Error> {
-    if let error = try? JSONParser.parse(data: data, for: RemoteGraphResponseError.self) {
+    switch try? JSONParser.parse(data: data, for: RemoteGraphResponseError.self) {
+    case let error?:
       return .failure(error)
-    } else {
+
+    case nil:
       do {
         let object = try JSONParser.parse(data: data, for: remoteType)
         return .success(object)
