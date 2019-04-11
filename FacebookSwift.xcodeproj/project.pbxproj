@@ -76,12 +76,12 @@
 		F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */; };
 		F4516B7E225F7ED900979DD2 /* SampleGraphResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */; };
 		F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7F225F7F9200979DD2 /* JSONParser.swift */; };
-		F4516B82225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */; };
 		F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B83225F82EF00979DD2 /* RemoteGraphResponseError.swift */; };
 		F4516B86225FA32900979DD2 /* SampleNSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B85225FA32800979DD2 /* SampleNSError.swift */; };
 		F4516B88225FA3E400979DD2 /* SampleHTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */; };
 		F4516B8A225FA3FE00979DD2 /* SampleURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */; };
 		F4516B8C225FA44A00979DD2 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B8B225FA44A00979DD2 /* MimeType.swift */; };
+		F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */; };
 		F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */; };
 		F45734D1222D9343001F806A /* AccessTokenCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D0222D9343001F806A /* AccessTokenCacheTests.swift */; };
 		F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */; };
@@ -689,8 +689,8 @@
 				F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */,
 				F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */,
 				F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */,
-				F44715242243EDB10013495F /* SampleNSError.swift */,
 				F4516B85225FA32800979DD2 /* SampleNSError.swift */,
+				F44715242243EDB10013495F /* SampleNSError.swift */,
 				F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */,
 				F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */,
 				F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */,
@@ -982,7 +982,6 @@
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
-				F4516B82225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
@@ -1080,6 +1079,7 @@
 				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
+				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */,
 				F4B340012240779D00912F0F /* JSONLoader.swift in Sources */,
 				F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */,

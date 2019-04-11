@@ -67,4 +67,23 @@ class GraphJSONParserTests: XCTestCase {
       XCTFail("Trying to parse valid data that maps to a decodable object should not throw an error")
     }
   }
+
+  func testParsingOAuthError() {
+    let data = SampleRawRemoteGraphResponseError.SerializedData.validOAuth
+
+    do {
+      let error = try JSONParser.parse(data: data, for: RemoteGraphResponseError.self)
+
+      XCTAssertEqual(error.details.code, SampleRawRemoteGraphResponseError.code,
+                     "Should store the parsed error's code")
+      XCTAssertEqual(error.details.type, SampleRawRemoteGraphResponseError.typeOAuth,
+                     "Should store the parsed error's type")
+      XCTAssertEqual(error.details.message, SampleRawRemoteGraphResponseError.message,
+                     "Should store the parsed error's message")
+      XCTAssertTrue(error.isOAuthError,
+                    "An error should be able to tell that it is an oauth error")
+    } catch {
+      XCTFail("Trying to parse valid data that maps to a decodable object should not throw an error")
+    }
+  }
 }

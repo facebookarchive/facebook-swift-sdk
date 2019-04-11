@@ -160,11 +160,43 @@ class GraphRequestConnection: GraphRequestConnecting {
   }
 
   /**
+   The recommended way of retrieving objects from the Graph API
+
+   - Parameter remoteType: A generic Decodable type to return.
+   It is recommended that you keep this type flexible and use it as a starting point for building stronger typed
+   (canonical) models for use in your application
+   - Parameter graphRequest: The graph request object to use in creating the data request
+   - Parameter completion: A Result type with a Success of the specified Decodable type and a Failure of Error
+
+   - Returns
+   URLSessionTaskProxy - a wrapper for a url session task that allows you to cancel an in-flight
+   request
+   */
+  func getObject<RemoteType: Decodable>(
+    ofType remoteType: RemoteType.Type,
+    for graphRequest: GraphRequest,
+    completion: @escaping (Result<RemoteType, Error>) -> Void
+    ) -> URLSessionTaskProxy? {
+    return fetchData(for: graphRequest) { fetchResult in
+      let result: Result<RemoteType, Error>
+      defer { completion(result) }
+
+      switch fetchResult {
+      case .success(let data):
+        result = self.convertFetchedDataToObjectResult(data: data, remoteType: remoteType)
+
+      case .failure(let error):
+        result = .failure(error)
+      }
+    }
+  }
+
+  /**
    A utility method for converting the fetched data to a Decodable object.
    This will initially attempt to extract server-side error objects from the response
 
    - Parameter data: The data used for parsing into valid objects
-   - Parameter remoteType: A generic Decodable type to attemp to parse the data into
+   - Parameter remoteType: A generic Decodable type to attempt to parse the data into
 
    - Returns
     A Result type with a Success of the generic RemoteType and a Failure of Error
@@ -191,7 +223,7 @@ class GraphRequestConnection: GraphRequestConnecting {
   and calls the completion with either the data from that task or an error
 
    - Parameter graphRequest: The graph request object to use in creating the data request
-   - Parameter completion: A Result type with a Success of Data and Failure of Error
+   - Parameter completion: A Result type with a Success of Data and a Failure of Error
 
    - Returns
     URLSessionTaskProxy - a wrapper for a url session task that allows you to cancel an in-flight

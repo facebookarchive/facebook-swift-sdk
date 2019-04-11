@@ -477,7 +477,7 @@ class GraphRequestConnectionTests: XCTestCase {
     waitForExpectations(timeout: 1, handler: nil)
   }
 
-  // MARK: Server Errors (not networking errors)
+  // MARK: Converting Fetched Data To Objects
 
   func testConvertingEmptyFetchedDataToRemoteType() {
     let result = connection.convertFetchedDataToObjectResult(
@@ -586,6 +586,53 @@ class GraphRequestConnectionTests: XCTestCase {
     case .failure:
       XCTFail("Should only return expected errors")
     }
+  }
+
+  // MARK: Getting Objects
+
+  func testGettingObjectWithSuccess() {
+    let expectedObject = DecodablePerson(name: "bob")
+    let expectation = self.expectation(description: name)
+    let response = SampleHTTPURLResponse.valid
+
+    let proxy = connection.getObject(
+      ofType: DecodablePerson.self,
+      for: graphRequest) { result in
+        switch result {
+        case .success(let object):
+          XCTAssertEqual(object, expectedObject,
+                         "Should convert valid data to a matching decodable type")
+
+        case .failure:
+          XCTFail("Converting valid data to a matching decodable type should not result in a failure")
+        }
+        expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, response, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func testGettingObjectWithFailure() {
+    let expectation = self.expectation(description: name)
+
+    let proxy = connection.getObject(
+      ofType: DecodablePerson.self,
+      for: graphRequest) { result in
+        switch result {
+        case .success:
+          XCTFail("A request that is completed without data or a response should not be considered a success")
+
+        case .failure:
+          break
+        }
+        expectation.fulfill()
+    }
+
+    complete(proxy, with: nil, nil, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
   }
 
   func complete(
