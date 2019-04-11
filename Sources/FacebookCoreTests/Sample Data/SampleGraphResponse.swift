@@ -29,6 +29,7 @@ enum SampleGraphResponse {
   case homogenousStringArray
   case homogenousArrayOfDictionaries
   case heterogeneousArray
+  case dictionaryAndError
   case validDictionaries(count: Int)
 
   var unserialized: Any? {
@@ -41,6 +42,11 @@ enum SampleGraphResponse {
 
     case .dictionary:
       return ["name": "bob"]
+
+    case .dictionaryAndError:
+      return [
+        "name": "bob"
+      ].merging(SampleRawRemoteGraphResponseError.valid) { _, _ in }
 
     case .homogenousStringArray:
       return ["one", "two", "three"]
@@ -71,6 +77,7 @@ enum SampleGraphResponse {
       return (unserialized as! String).data(using: .utf8)!
 
     case .dictionary,
+         .dictionaryAndError,
          .homogenousStringArray,
          .homogenousArrayOfDictionaries,
          .heterogeneousArray,

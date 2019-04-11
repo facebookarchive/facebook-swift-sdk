@@ -160,6 +160,32 @@ class GraphRequestConnection: GraphRequestConnecting {
   }
 
   /**
+   A utility method for converting the fetched data to a Decodable object.
+   This will initially attempt to extract server-side error objects from the response
+
+   - Parameter data: The data used for parsing into valid objects
+   - Parameter remoteType: A generic Decodable type to attemp to parse the data into
+
+   - Returns
+    A Result type with a Success of the generic RemoteType and a Failure of Error
+   */
+  func convertFetchedDataToObjectResult<RemoteType: Decodable>(
+    data: Data,
+    remoteType: RemoteType.Type
+    ) -> Result<RemoteType, Error> {
+    if let error = try? JSONParser.parse(data: data, for: RemoteGraphResponseError.self) {
+      return .failure(error)
+    } else {
+      do {
+        let object = try JSONParser.parse(data: data, for: remoteType)
+        return .success(object)
+      } catch {
+        return .failure(error)
+      }
+    }
+  }
+
+  /**
    Fetches the data that will later be turned into a Decodable object.
    This uses a GraphRequest to create a URLRequest, spins up a URLSessionDataTask
   and calls the completion with either the data from that task or an error

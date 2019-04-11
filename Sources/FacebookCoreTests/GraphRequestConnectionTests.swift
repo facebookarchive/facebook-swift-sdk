@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length file_length force_try force_cast
+// swiftlint:disable type_body_length file_length
 
 @testable import FacebookCore
 import XCTest
@@ -479,13 +479,123 @@ class GraphRequestConnectionTests: XCTestCase {
 
   // MARK: Server Errors (not networking errors)
 
+  func testConvertingEmptyFetchedDataToRemoteType() {
+    let result = connection.convertFetchedDataToObjectResult(
+      data: Data(),
+      remoteType: DecodablePerson.self
+    )
+
+    switch result {
+    case .success:
+      XCTFail("Should not be able to convert empty data to a decodable type")
+
+    case .failure(_ as DecodingError):
+      break
+
+    case .failure:
+      XCTFail("Should only return expected errors")
+    }
+  }
+
+  func testConvertingInvalidFetchedDataToRemoteType() {
+    let result = connection.convertFetchedDataToObjectResult(
+      data: SampleGraphResponse.nonJSON.data,
+      remoteType: DecodablePerson.self
+    )
+
+    switch result {
+    case .success:
+      XCTFail("Should not be able to convert invalid data to a decodable type")
+
+    case .failure(_ as DecodingError):
+      break
+
+    case .failure:
+      XCTFail("Should only return expected errors")
+    }
+  }
+
+  func testConvertingValidFetchedDataToMatchingRemoteType() {
+    let expectedObject = DecodablePerson(name: "bob")
+    let result = connection.convertFetchedDataToObjectResult(
+      data: SampleGraphResponse.dictionary.data,
+      remoteType: DecodablePerson.self
+    )
+
+    switch result {
+    case .success(let object):
+      XCTAssertEqual(object, expectedObject,
+                     "Should convert valid data to a matching decodable type")
+
+    case .failure:
+      XCTFail("Converting valid data to a matching decodable type should not result in a failure")
+    }
+  }
+
+  func testConvertingValidFetchedDataToNonMatchingRemoteType() {
+    let result = connection.convertFetchedDataToObjectResult(
+      data: SampleGraphResponse.dictionary.data,
+      remoteType: DecodableAnimal.self
+    )
+
+    switch result {
+    case .success:
+      XCTFail("Should not be able to convert valid data to a non-matching decodable type")
+
+    case .failure(_ as DecodingError):
+      break
+
+    case .failure:
+      XCTFail("Should only return expected errors")
+    }
+  }
+
+  func testConvertingValidFetchedDataToServerError() {
+    let result = connection.convertFetchedDataToObjectResult(
+      data: SampleRawRemoteGraphResponseError.SerializedData.valid,
+      remoteType: DecodablePerson.self
+    )
+
+    switch result {
+    case .success:
+      XCTFail("Should not be able to convert valid data to a non-matching decodable type")
+
+    case .failure(let error as RemoteGraphResponseError):
+      XCTAssertEqual(error.details.type, "invalidArgs",
+                     "Parsing a remote graph response with a server error present in the data should result in a failure with that parsed server error")
+
+    case .failure:
+      XCTFail("Should only return expected errors")
+    }
+  }
+
+  func testConvertingValidFetchedDataPrioritizesErrors() {
+    let result = connection.convertFetchedDataToObjectResult(
+      data: SampleGraphResponse.dictionaryAndError.data,
+      remoteType: DecodablePerson.self
+    )
+
+    switch result {
+    case .success:
+      XCTFail("Should not be able to convert valid data to a non-matching decodable type")
+
+    case .failure(let error as RemoteGraphResponseError):
+      XCTAssertEqual(error.details.type, "invalidArgs",
+                     "Parsing a remote graph response with a matching decodable type as well as a server error present in the data should result in a failure with the parsed server error")
+
+    case .failure:
+      XCTFail("Should only return expected errors")
+    }
+  }
+
   func complete(
     _ proxyTask: URLSessionTaskProxy?,
     with data: Data?,
     _ response: URLResponse?,
     _ error: Error?,
     _ file: StaticString = #file,
-    _ line: UInt = #line) {
+    _ line: UInt = #line
+    ) {
     guard let task = proxyTask?.task as? FakeSessionDataTask else {
       return XCTFail(
         "A proxy created with a fake session should store a fake session data task",
@@ -495,6 +605,14 @@ class GraphRequestConnectionTests: XCTestCase {
     }
 
     task.completionHandler(data, response, error)
+  }
+
+  private struct DecodablePerson: Decodable, Equatable {
+    let name: String
+  }
+
+  private struct DecodableAnimal: Decodable {
+    let numberOfLegs: Int
   }
 }
 
