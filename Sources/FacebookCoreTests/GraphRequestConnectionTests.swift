@@ -335,6 +335,28 @@ class GraphRequestConnectionTests: XCTestCase {
 
   // Data | Response | Error
   // nil | yes | nil
+  func testCompletingFetchDataTaskWithDataAndMissingMimeType() {
+    let expectation = self.expectation(description: name)
+    let response = SampleHTTPURLResponse.missingMimeType
+
+    let proxy = connection.fetchData(for: graphRequest) { result in
+      switch result {
+      case .success:
+        break
+
+      case .failure:
+        XCTFail("Should not fail a task for a mime type that is not the mimetype for a png image")
+      }
+      expectation.fulfill()
+    }
+
+    complete(proxy, with: SampleGraphResponse.dictionary.data, response, nil)
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // Data | Response | Error
+  // nil | yes | nil
   func testCompletingFetchDataTaskWithDataAndInvalidMimeTypes() {
     let expectation = self.expectation(description: name)
     let response = SampleHTTPURLResponse.pngMimeType
@@ -342,7 +364,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let proxy = connection.fetchData(for: graphRequest) { result in
       switch result {
       case .success:
-        XCTFail("Should not successfully complete task that has non text/javascript mimetype in response")
+        XCTFail("Should not successfully complete task that has a png image mimetype in response")
 
       case .failure(let error as GraphRequestConnectionError):
         XCTAssertEqual(error, .nonTextMimeType,

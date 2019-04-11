@@ -18,6 +18,9 @@
 
 import Foundation
 
+typealias DataFetchResult = Result<Data, Error>
+typealias DataFetchCompletion = (DataFetchResult) -> Void
+
 class GraphRequestConnection: GraphRequestConnecting {
   // TODO: - figure out how this is used differently from default connection timeout
   /// Gets or sets the timeout interval to wait for a response before giving up.
@@ -233,7 +236,7 @@ class GraphRequestConnection: GraphRequestConnecting {
    */
   func fetchData(
     for graphRequest: GraphRequest,
-    completion: @escaping (Result<Data, Error>) -> Void
+    completion: @escaping DataFetchCompletion
     ) -> URLSessionTaskProxy? {
     errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
 
@@ -249,8 +252,10 @@ class GraphRequestConnection: GraphRequestConnecting {
       for: urlRequest,
       fromSession: session
     ) { data, response, error in
-      let result: Result<Data, Error>
-      defer { completion(result) }
+      let result: DataFetchResult
+      defer {
+        completion(result)
+      }
 
       switch (data, response, error) {
       case (_, _, let error?):
@@ -268,7 +273,7 @@ class GraphRequestConnection: GraphRequestConnecting {
           return
         }
 
-        guard response.mimeType?.hasPrefix("image") == false else {
+        guard response.mimeType?.hasPrefix("image") != true else {
           result = .failure(GraphRequestConnectionError.nonTextMimeType)
           return
         }
