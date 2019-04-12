@@ -1,7 +1,12 @@
 {# Macros for determining specific types #}
 {% macro isClass variable %}{% if variable.type.kind == "class" %}true{% endif %}{% endmacro %}
 {% macro isEnum variable %}{% if variable.type.kind == "enum" %}true{% endif %}{% endmacro %}
-{% macro isCustomType variable %}{% if variable.type %}true{% endif %}{% endmacro %}
+{% macro isCustomType variable %}{% if variable.type
+    and not variable.type.name == "String"
+    and not variable.type.name == "Int"
+    and not variable.type.name == "Double"
+    and not variable.type.name == "Float"
+    %}true{% endif %}{% endmacro %}
 {% macro isEnumArray variable %}{% if variable.typeName.array.elementType.kind == "enum" %}true{% endif %}{% endmacro %}
 {% macro isStruct variable %}{% if variable.type.kind == "struct" %}true{% endif %}{% endmacro %}
 {% macro isClosureType variable %}{% if variable.typeName.isClosure %}true{% endif %}{% endmacro %}
@@ -25,6 +30,7 @@
 {# --- #}
 {% macro nativeTypeParameterForInitializer variable %}
   // Native type
+  // {{variable.typeName.generic.name}}
   {{ variable.name }}: {{ variable.typeName }}{% if variable.defaultValue != nil %} = {{ variable.defaultValue }}{% endif %}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 
@@ -45,6 +51,7 @@
   {{ variable.name }}: {{ variable.name }}{% if not forloop.last %},{% endif %}
 {% endmacro %}
 
+import FacebookCore
 import Foundation
 
 {% for type in types.implementing.ObjCBridgeable|struct %}

@@ -9,5 +9,5 @@ output:
   path: ./Codegen/Generated/FacebookCore
   link:
     project: ./FacebookSwift.xcodeproj
-    target: FacebookCore
+    target: FacebookCoreObjC
     group: Codegen/Generated/FacebookCore

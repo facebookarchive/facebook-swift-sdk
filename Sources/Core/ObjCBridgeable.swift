@@ -20,9 +20,3 @@ import Foundation
 
 // Phantom type to mark types that may be bridged to objc
 protocol ObjCBridgeable {}
-
-extension CustomStruct: ObjCBridgeable {}
-extension StructWithGeneratedInitializer: ObjCBridgeable {}
-extension EmployeePayroll: ObjCBridgeable {}
-extension EmployeeClassification: ObjCBridgeable {}
-extension Employee: ObjCBridgeable {}

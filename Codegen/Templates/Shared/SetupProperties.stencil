@@ -165,7 +165,7 @@
 {#  #}
 {# Macro for setting up variables #}
 {% macro setupVariables type %}
-  {% for variable in type.variables %}
+  {% for variable in type.variables where variable.accessLevel == "public" %}
 
     {# --- #}
     {% set isClass %}{% call isClass variable %}{% endset %}
