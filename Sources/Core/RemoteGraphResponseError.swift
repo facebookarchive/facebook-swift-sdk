@@ -18,31 +18,25 @@
 
 import Foundation
 
-enum GraphRequestConnectionError: FBError, CaseIterable {
-  case accessTokenRequired
+struct RemoteGraphResponseError: Codable, FBError {
+  let details: GraphResponseErrorDetails
 
-  /**
-   Indicates that the URLResponse was an invalid type. Typically this is because
-   an HTTPURLResponse was expected but a vanilla URLResponse was received
-   */
-  case invalidURLResponseType
+  init(from decoder: Decoder) throws {
+    let detailsContainer = try decoder.container(keyedBy: CodingKeys.self)
+    details = try detailsContainer.decode(GraphResponseErrorDetails.self, forKey: .details)
+  }
 
-  /// Indicates that no data was returned
-  case missingData
+  enum CodingKeys: String, CodingKey {
+    case details = "error"
+  }
 
-  /// Indicates that a URLResponse was missing from the URLSessionDataTask completion
-  case missingURLResponse
+  var isOAuthError: Bool {
+    return details.type == "OAuthException"
+  }
+}
 
-  /**
-   Indicates an endpoint that returns a binary response was used with GraphRequestConnection.
-
-   Endpoints that return image/jpg, etc. should be accessed using URLRequest
-   */
-  case nonTextMimeType
-
-  /**
-   Indicates that a request was added to a connection that was in a state
-   that is incompatible with adding requests
-   */
-  case requestAddition
+struct GraphResponseErrorDetails: Codable {
+  let code: Int
+  let message: String
+  let type: String
 }

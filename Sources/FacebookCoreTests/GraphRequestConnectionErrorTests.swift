@@ -23,6 +23,10 @@ class GraphRequestConnectionErrorTests: XCTestCase {
   func testAllCases() {
     let expectedCases: [GraphRequestConnectionError] = [
       .accessTokenRequired,
+      .invalidURLResponseType,
+      .missingData,
+      .missingURLResponse,
+      .nonTextMimeType,
       .requestAddition
     ]
 
