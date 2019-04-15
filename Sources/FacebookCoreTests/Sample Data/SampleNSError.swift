@@ -24,4 +24,10 @@ enum SampleNSError {
     code: NSURLErrorSecureConnectionFailed,
     userInfo: [:]
   )
+
+  static let validWithUserInfo = NSError(
+    domain: NSURLErrorDomain,
+    code: 1,
+    userInfo: ["Foo": "Bar"]
+  )
 }
