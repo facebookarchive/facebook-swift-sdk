@@ -16,33 +16,28 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-enum GraphRequestConnectionError: FBError, CaseIterable {
-  case accessTokenRequired
+enum SampleHTTPURLResponse {
+  static let valid = HTTPURLResponse(
+    url: SampleURL.valid,
+    mimeType: MimeType.textJavascript.rawValue,
+    expectedContentLength: 0,
+    textEncodingName: nil
+  )
 
-  /**
-   Indicates that the URLResponse was an invalid type. Typically this is because
-   an HTTPURLResponse was expected but a vanilla URLResponse was received
-   */
-  case invalidURLResponseType
+  static let missingMimeType = HTTPURLResponse(
+    url: SampleURL.valid,
+    mimeType: nil,
+    expectedContentLength: 0,
+    textEncodingName: nil
+  )
 
-  /// Indicates that no data was returned
-  case missingData
-
-  /// Indicates that a URLResponse was missing from the URLSessionDataTask completion
-  case missingURLResponse
-
-  /**
-   Indicates an endpoint that returns a binary response was used with GraphRequestConnection.
-
-   Endpoints that return image/jpg, etc. should be accessed using URLRequest
-   */
-  case nonTextMimeType
-
-  /**
-   Indicates that a request was added to a connection that was in a state
-   that is incompatible with adding requests
-   */
-  case requestAddition
+  static let pngMimeType = HTTPURLResponse(
+    url: SampleURL.valid,
+    mimeType: MimeType.png.rawValue,
+    expectedContentLength: 0,
+    textEncodingName: nil
+  )
 }
