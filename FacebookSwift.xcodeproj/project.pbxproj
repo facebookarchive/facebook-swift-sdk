@@ -73,6 +73,14 @@
 		F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3401822430FC100912F0F /* LoggingBehavior.swift */; };
 		F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */; };
 		F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F566D224D344300D027FF /* GraphAPIVersion.swift */; };
+		F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */; };
+		F4516B7E225F7ED900979DD2 /* SampleGraphResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */; };
+		F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7F225F7F9200979DD2 /* JSONParser.swift */; };
+		F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B83225F82EF00979DD2 /* RemoteGraphResponseError.swift */; };
+		F4516B88225FA3E400979DD2 /* SampleHTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */; };
+		F4516B8A225FA3FE00979DD2 /* SampleURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */; };
+		F4516B8C225FA44A00979DD2 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B8B225FA44A00979DD2 /* MimeType.swift */; };
+		F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */; };
 		F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */; };
 		F45734D1222D9343001F806A /* AccessTokenCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D0222D9343001F806A /* AccessTokenCacheTests.swift */; };
 		F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */; };
@@ -248,6 +256,14 @@
 		F44DB6C2222B136F0083506E /* FakeGraphRequestPiggybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeGraphRequestPiggybackManager.swift; sourceTree = "<group>"; };
 		F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAPIVersionTests.swift; sourceTree = "<group>"; };
 		F44F566D224D344300D027FF /* GraphAPIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAPIVersion.swift; sourceTree = "<group>"; };
+		F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserTests.swift; sourceTree = "<group>"; };
+		F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleGraphResponse.swift; sourceTree = "<group>"; };
+		F4516B7F225F7F9200979DD2 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteGraphResponseError.swift; sourceTree = "<group>"; };
+		F4516B83225F82EF00979DD2 /* RemoteGraphResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteGraphResponseError.swift; sourceTree = "<group>"; };
+		F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHTTPURLResponse.swift; sourceTree = "<group>"; };
+		F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleURLResponse.swift; sourceTree = "<group>"; };
+		F4516B8B225FA44A00979DD2 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphConnectionProviderTests.swift; sourceTree = "<group>"; };
 		F45734D0222D9343001F806A /* AccessTokenCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenCacheTests.swift; sourceTree = "<group>"; };
 		F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionTests.swift; sourceTree = "<group>"; };
@@ -422,8 +438,11 @@
 				F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */,
 				F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */,
 				F408BE9E223981950068D24A /* GraphRequestSerializer.swift */,
+				F4516B7F225F7F9200979DD2 /* JSONParser.swift */,
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
+				F4516B8B225FA44A00979DD2 /* MimeType.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
+				F4516B83225F82EF00979DD2 /* RemoteGraphResponseError.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
 				F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */,
 				F4144C53224D0FA7006C8F9C /* URLBuilder.swift */,
@@ -619,6 +638,7 @@
 				F42687C42230772600A62C2E /* GraphRequestTests.swift */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
+				F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */,
 				F48A74B42239BE66007192F6 /* LocalizableStrings.strings */,
 				F48A749722399C97007192F6 /* LocalizationsTests.swift */,
 				F447151D2242FF010013495F /* LoggerTests.swift */,
@@ -664,11 +684,15 @@
 			isa = PBXGroup;
 			children = (
 				F4BEDA5422414078004F2C7E /* JSON */,
+				F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */,
+				F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */,
 				F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */,
 				F44715242243EDB10013495F /* SampleNSError.swift */,
 				F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */,
 				F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */,
+				F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
+				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
 			);
 			path = "Sample Data";
 			sourceTree = "<group>";
@@ -953,6 +977,7 @@
 				F4C32D9D223DA0F600FF1F86 /* ErrorConfiguration.swift in Sources */,
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
+				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
@@ -975,8 +1000,10 @@
 				F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */,
 				F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */,
 				F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */,
+				F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */,
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
+				F4516B8C225FA44A00979DD2 /* MimeType.swift in Sources */,
 				F4225DCE223EF88800F4DCFE /* ErrorConfigurationEntryBuilder.swift in Sources */,
 				F47056DD2232DF4500BE526B /* Logger.swift in Sources */,
 				F447152B22440B610013495F /* ProcessInfo+Extensions.swift in Sources */,
@@ -1020,6 +1047,7 @@
 				F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */,
 				F4C32D9F223DA12200FF1F86 /* ErrorConfigurationBuilderTests.swift in Sources */,
 				F44DB6C1222B11620083506E /* FakeGraphRequestConnection.swift in Sources */,
+				F4516B88225FA3E400979DD2 /* SampleHTTPURLResponse.swift in Sources */,
 				F4C32D99223D990A00FF1F86 /* SampleRawRemoteErrorConfigurationList.swift in Sources */,
 				F4C32DA4223DA13E00FF1F86 /* RemoteErrorCodeGroup+Extensions.swift in Sources */,
 				F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */,
@@ -1047,9 +1075,11 @@
 				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
+				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */,
 				F4B340012240779D00912F0F /* JSONLoader.swift in Sources */,
 				F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */,
+				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
 				F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
 				F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */,
@@ -1057,6 +1087,7 @@
 				F480D90D2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift in Sources */,
 				F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */,
 				F48BDD8B22470128003CCA5A /* SettingsTests.swift in Sources */,
+				F4516B8A225FA3FE00979DD2 /* SampleURLResponse.swift in Sources */,
 				F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */,
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
@@ -1073,6 +1104,7 @@
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F44715252243EDB10013495F /* SampleNSError.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
+				F4516B7E225F7ED900979DD2 /* SampleGraphResponse.swift in Sources */,
 				F480D9092235CF83001AB8D3 /* GraphRequestConnectionStateTests.swift in Sources */,
 				F4C32D96223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift in Sources */,
 				F447153222440EB60013495F /* FakeSession.swift in Sources */,
