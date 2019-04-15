@@ -504,7 +504,7 @@ class GraphRequestConnectionTests: XCTestCase {
   func testConvertingEmptyFetchedDataToRemoteType() {
     let result = connection.convertFetchedDataToObjectResult(
       data: Data(),
-      remoteType: DecodablePerson.self
+      DecodablePerson.self
     )
 
     switch result {
@@ -522,7 +522,7 @@ class GraphRequestConnectionTests: XCTestCase {
   func testConvertingInvalidFetchedDataToRemoteType() {
     let result = connection.convertFetchedDataToObjectResult(
       data: SampleGraphResponse.nonJSON.data,
-      remoteType: DecodablePerson.self
+      DecodablePerson.self
     )
 
     switch result {
@@ -541,7 +541,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let expectedObject = DecodablePerson(name: "bob")
     let result = connection.convertFetchedDataToObjectResult(
       data: SampleGraphResponse.dictionary.data,
-      remoteType: DecodablePerson.self
+      DecodablePerson.self
     )
 
     switch result {
@@ -557,7 +557,7 @@ class GraphRequestConnectionTests: XCTestCase {
   func testConvertingValidFetchedDataToNonMatchingRemoteType() {
     let result = connection.convertFetchedDataToObjectResult(
       data: SampleGraphResponse.dictionary.data,
-      remoteType: DecodableAnimal.self
+      DecodableAnimal.self
     )
 
     switch result {
@@ -575,7 +575,7 @@ class GraphRequestConnectionTests: XCTestCase {
   func testConvertingValidFetchedDataToServerError() {
     let result = connection.convertFetchedDataToObjectResult(
       data: SampleRawRemoteGraphResponseError.SerializedData.valid,
-      remoteType: DecodablePerson.self
+      DecodablePerson.self
     )
 
     switch result {
@@ -594,7 +594,7 @@ class GraphRequestConnectionTests: XCTestCase {
   func testConvertingValidFetchedDataPrioritizesErrors() {
     let result = connection.convertFetchedDataToObjectResult(
       data: SampleGraphResponse.dictionaryAndError.data,
-      remoteType: DecodablePerson.self
+      DecodablePerson.self
     )
 
     switch result {
@@ -618,7 +618,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let response = SampleHTTPURLResponse.valid
 
     let proxy = connection.getObject(
-      ofType: DecodablePerson.self,
+      DecodablePerson.self,
       for: graphRequest) { result in
         switch result {
         case .success(let object):
@@ -640,7 +640,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let expectation = self.expectation(description: name)
 
     let proxy = connection.getObject(
-      ofType: DecodablePerson.self,
+      DecodablePerson.self,
       for: graphRequest) { result in
         switch result {
         case .success:
