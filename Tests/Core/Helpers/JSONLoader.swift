@@ -46,4 +46,5 @@ class JSONLoader {
 enum JSONFileName: String {
   case validRemoteErrorConfiguration
   case validRemoteErrorConfigurationList
+  case validUserProfile
 }
