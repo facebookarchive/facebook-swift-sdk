@@ -186,7 +186,7 @@ class GraphRequestConnection: GraphRequestConnecting {
 
       switch fetchResult {
       case .success(let data):
-        result = self.convertFetchedDataToObjectResult(data: data, remoteType)
+        result = self.convertFetchedDataToObjectResult(remoteType, data: data)
 
       case .failure(let error):
         result = .failure(error)
@@ -205,8 +205,8 @@ class GraphRequestConnection: GraphRequestConnecting {
     A Result type with a Success of the generic RemoteType and a Failure of Error
    */
   func convertFetchedDataToObjectResult<RemoteType: Decodable>(
-    data: Data,
-    _ remoteType: RemoteType.Type
+    _ remoteType: RemoteType.Type,
+    data: Data
     ) -> Result<RemoteType, Error> {
     switch try? JSONParser.parse(data: data, for: RemoteGraphResponseError.self) {
     case let error?:

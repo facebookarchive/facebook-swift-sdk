@@ -503,8 +503,8 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testConvertingEmptyFetchedDataToRemoteType() {
     let result = connection.convertFetchedDataToObjectResult(
-      data: Data(),
-      DecodablePerson.self
+      DecodablePerson.self,
+      data: Data()
     )
 
     switch result {
@@ -521,8 +521,8 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testConvertingInvalidFetchedDataToRemoteType() {
     let result = connection.convertFetchedDataToObjectResult(
-      data: SampleGraphResponse.nonJSON.data,
-      DecodablePerson.self
+      DecodablePerson.self,
+      data: SampleGraphResponse.nonJSON.data
     )
 
     switch result {
@@ -540,8 +540,8 @@ class GraphRequestConnectionTests: XCTestCase {
   func testConvertingValidFetchedDataToMatchingRemoteType() {
     let expectedObject = DecodablePerson(name: "bob")
     let result = connection.convertFetchedDataToObjectResult(
-      data: SampleGraphResponse.dictionary.data,
-      DecodablePerson.self
+      DecodablePerson.self,
+      data: SampleGraphResponse.dictionary.data
     )
 
     switch result {
@@ -556,8 +556,8 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testConvertingValidFetchedDataToNonMatchingRemoteType() {
     let result = connection.convertFetchedDataToObjectResult(
-      data: SampleGraphResponse.dictionary.data,
-      DecodableAnimal.self
+      DecodableAnimal.self,
+      data: SampleGraphResponse.dictionary.data
     )
 
     switch result {
@@ -574,8 +574,8 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testConvertingValidFetchedDataToServerError() {
     let result = connection.convertFetchedDataToObjectResult(
-      data: SampleRawRemoteGraphResponseError.SerializedData.valid,
-      DecodablePerson.self
+      DecodablePerson.self,
+      data: SampleRawRemoteGraphResponseError.SerializedData.valid
     )
 
     switch result {
@@ -593,8 +593,8 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testConvertingValidFetchedDataPrioritizesErrors() {
     let result = connection.convertFetchedDataToObjectResult(
-      data: SampleGraphResponse.dictionaryAndError.data,
-      DecodablePerson.self
+      DecodablePerson.self,
+      data: SampleGraphResponse.dictionaryAndError.data
     )
 
     switch result {
