@@ -16,26 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-extension Notification.Name {
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
+class UserProfileConfigurationTests: XCTestCase {
+  let profileService = UserProfileService()
 
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-  */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(profileService.graphConnectionProvider is GraphConnectionProvider,
+                  "A profile service should have the expected concrete implementation for its graph connection provider")
+  }
 
-  /**
-   Notification indicating that the `currentProfile` has changed.
-
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
+  func testNotificationCenterDependency() {
+    XCTAssertTrue(profileService.notificationCenter is NotificationCenter,
+                  "A profile service should have the expected concrete implementation for its notification center dependency")
+  }
 }

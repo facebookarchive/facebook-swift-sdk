@@ -23,5 +23,16 @@ protocol NotificationPosting {
   func post(name aName: Notification.Name, object anObject: Any?, userInfo aUserInfo: [AnyHashable: Any]?)
 }
 
+protocol NotificationObserving {
+  func addObserver(
+    _ observer: Any,
+    selector aSelector: Selector,
+    name aName: NSNotification.Name?,
+    object anObject: Any?
+  )
+
+  func removeObserver(_ observer: Any)
+}
+
 // Default conformance to be able to inject and test a type we don't own
-extension NotificationCenter: NotificationPosting {}
+extension NotificationCenter: NotificationPosting, NotificationObserving {}

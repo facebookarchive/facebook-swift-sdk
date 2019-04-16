@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct UserProfile {
+struct UserProfile: Equatable, Decodable {
   /// The user id
   let identifier: String
 
