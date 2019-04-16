@@ -21,22 +21,22 @@
 /// The Secure Store Protocol
 protocol SecureStore {
   /**
-  Retrieves a secure string associated with a given key
+  Retrieves a secure value associated with a given key
 
-  - Parameter key: The key used to retrieve the secure string
-  - Returns: The secure string value
+  - Parameter key: The key used to retrieve the secure value
+  - Returns: The secure value
   - Throws: A secure store error
   */
-  func string(forKey key: String) throws -> String
+  func value<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable
 
   /**
-   Stores a secure string associated with a given key
+   Stores a secure value associated with a given key
 
-   - Parameter string: The value to store
-   - Parameter key: The key used to retrieve the secure string
+   - Parameter value: The value to store
+   - Parameter key: The key used to retrieve the secure value
    - Throws: A secure store error
    */
-  func set(_ string: String, forKey key: String) throws
+  mutating func set<T>(_ value: T, forKey key: String) throws where T: Encodable
 
   /**
    Removes a secure value associated with a given key
@@ -44,5 +44,30 @@ protocol SecureStore {
    - Parameter key: The key used to remove the secure value
    - Throws: A secure store error
    */
-  func remove(forKey key: String) throws
+  mutating func remove(forKey key: String) throws
+}
+
+/// SecureStore Extensions
+extension SecureStore {
+  /**
+   Retrieves a secure string associated with a given key
+
+   - Parameter key: The key used to retrieve the secure string
+   - Returns: The secure string
+   - Throws: A secure store error
+   */
+  func string(forKey key: String) throws -> String? {
+    return try value([String].self, forKey: key)?.first
+  }
+
+  /**
+   Stores a secure string associated with a given key
+
+   - Parameter string: The string to store
+   - Parameter key: The key used to retrieve the secure string
+   - Throws: A secure store error
+   */
+  mutating func setString(_ string: String, forKey key: String) throws {
+    try self.set([string], forKey: key)
+  }
 }

@@ -29,9 +29,58 @@ import Foundation
 // encoding formats.
 //
 class AccessTokenCache: AccessTokenCaching {
-  var accessToken: AccessToken?
+  // TODO: Migrate Old Access Token Caching Strategy for v4 Backwards compatability
 
-  func clearCache() {
-    // TODO: implementation
+  let accessTokenUserDefaultsKey: String = "com.facebook.sdk.v5.AccessTokenUUIDKey"
+
+  private var store: SecureStore
+
+  var accessToken: AccessToken? {
+    get {
+      let defaults: UserDefaults = .standard
+      guard let accessTokenKey = defaults.string(forKey: accessTokenUserDefaultsKey) else {
+        return nil
+      }
+
+      do {
+        return try store.value(AccessToken.self, forKey: accessTokenKey)
+      } catch {
+        print(error)
+        return nil
+      }
+    }
+    set(token) {
+      let defaults: UserDefaults = .standard
+      let accessTokenKey = defaults.string(forKey: accessTokenUserDefaultsKey) ?? UUID().uuidString
+
+      guard let token = token else {
+        do {
+          try store.remove(forKey: accessTokenKey)
+        } catch {
+          print(error)
+        }
+
+        defaults.removeObject(forKey: accessTokenUserDefaultsKey)
+        defaults.synchronize()
+        return
+      }
+
+      do {
+        // TODO: Implement access control loadkSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+        try store.set(token, forKey: accessTokenKey)
+      } catch {
+        print(error)
+      }
+
+      defaults.set(accessTokenKey, forKey: accessTokenUserDefaultsKey)
+      defaults.synchronize()
+    }
+  }
+
+  required init(
+    secureStore: SecureStore =
+      KeychainStore(service: "com.facebook.sdk.tokencache.\(Bundle.main.bundleIdentifier ?? "")")
+  ) {
+    self.store = secureStore
   }
 }

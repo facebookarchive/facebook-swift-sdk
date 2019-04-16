@@ -24,7 +24,6 @@ import Foundation
 struct KeychainStore: SecureStore {
   /// Keychain Errors
   enum KeychainError: FBError {
-    case noPassword
     case unexpectedPasswordData
     case unexpectedItemData
     case unhandledError(status: OSStatus)
@@ -60,7 +59,22 @@ struct KeychainStore: SecureStore {
     self.accessGroup = accessGroup
   }
 
-  func string(forKey key: String) throws -> String {
+  func value<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
+    guard let passwordData = try data(forKey: key) else {
+      return nil
+    }
+
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+    do {
+      return try decoder.decode(type, from: passwordData)
+    } catch {
+      throw KeychainError.unexpectedPasswordData
+    }
+  }
+
+  func data(forKey key: String) throws -> Data? {
     var query = self.query(forKey: key)
     query[kSecReturnData as String] = kCFBooleanTrue
     query[kSecReturnAttributes as String] = kCFBooleanTrue
@@ -72,48 +86,52 @@ struct KeychainStore: SecureStore {
     }
 
     guard status != errSecItemNotFound else {
-      throw KeychainError.noPassword
+      return nil
     }
 
     guard status == noErr else {
       throw KeychainError.unhandledError(status: status)
     }
 
-    guard let result = queryResult as? [String: AnyObject],
-      let data = result[kSecValueData as String] as? Data,
-      let password = String(data: data, encoding: .utf8)
-      else {
+    guard let result = queryResult as? [String: AnyObject], let data = result[kSecValueData as String] as? Data else {
         throw KeychainError.unexpectedPasswordData
     }
 
-    return password
+    return data
   }
 
-  func set(_ string: String, forKey key: String) throws {
-    // Encode the password into an Data object.
-    guard let encodedPassword = string.data(using: .utf8) else {
-      throw KeychainError.unexpectedPasswordData
-    }
+  func set<T>(_ value: T, forKey key: String) throws where T: Encodable {
+    let encoder = JSONEncoder()
+    encoder.keyEncodingStrategy = .convertToSnakeCase
 
     do {
-      try _ = self.string(forKey: key)
+      let encodedData = try encoder.encode(value)
+      try set(encodedData, forKey: key)
+    } catch {
+      throw KeychainError.unexpectedPasswordData
+    }
+  }
 
-      var attributesToUpdate: [String: AnyObject] = [:]
-      attributesToUpdate[kSecValueData as String] = encodedPassword as AnyObject
-
+  func set(_ data: Data, forKey key: String) throws {
+    guard try self.data(forKey: key) == nil else {
       let query = self.query(forKey: key)
+      var attributesToUpdate: [String: AnyObject] = [:]
+      attributesToUpdate[kSecValueData as String] = data as AnyObject
+
       let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
       guard status == noErr else {
         throw KeychainError.unhandledError(status: status)
       }
-    } catch KeychainError.noPassword {
-      var newItem = self.query(forKey: key)
-      newItem[kSecValueData as String] = encodedPassword as AnyObject
 
-      let status = SecItemAdd(newItem as CFDictionary, nil)
-      guard status == noErr else {
-        throw KeychainError.unhandledError(status: status)
-      }
+      return
+    }
+
+    var query = self.query(forKey: key)
+    query[kSecValueData as String] = data as AnyObject
+
+    let status = SecItemAdd(query as CFDictionary, nil)
+    guard status == noErr else {
+      throw KeychainError.unhandledError(status: status)
     }
   }
 

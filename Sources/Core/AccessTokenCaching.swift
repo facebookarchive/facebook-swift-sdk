@@ -16,22 +16,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeAccessTokenCache: AccessTokenCaching {
-  private var secureStore: SecureStore
+// This will eventually be replaced by the rewrite of FBSDKAccessTokenCaching
+// for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
 
-  var accessToken: AccessToken? {
-    didSet {
-      accessTokenWasSet = true
-      capturedAccessToken = accessToken
-    }
-  }
+protocol AccessTokenCaching: AnyObject {
+  var accessToken: AccessToken? { get set }
 
-  var accessTokenWasSet = false
-  var capturedAccessToken: AccessToken?
-
-  required init(secureStore: SecureStore) {
-    self.secureStore = secureStore
-  }
+  init(secureStore: SecureStore)
 }

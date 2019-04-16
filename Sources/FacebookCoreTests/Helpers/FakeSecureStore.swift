@@ -17,12 +17,27 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+@testable import FacebookCore
 
-// This will eventually be replaced by the rewrite of FBSDKAccessTokenCaching
-// for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
+struct FakeSecureStore: SecureStore {
+  private var insecureValues: [String: Data] = [:]
 
-protocol AccessTokenCaching: AnyObject {
-  var accessToken: AccessToken? { get set }
+  func value<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
+    guard let data = insecureValues[key] else {
+      return nil
+    }
 
-  func clearCache()
+    let decoder = JSONDecoder()
+    return try decoder.decode(type, from: data)
+  }
+
+  mutating func set<T>(_ value: T, forKey key: String) throws where T: Encodable {
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(value)
+    insecureValues[key] = data
+  }
+
+  mutating func remove(forKey key: String) throws {
+    insecureValues.removeValue(forKey: key)
+  }
 }

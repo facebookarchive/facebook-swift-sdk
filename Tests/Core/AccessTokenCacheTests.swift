@@ -21,10 +21,18 @@ import XCTest
 
 class AccessTokenCacheTests: XCTestCase {
   func testHasClearCacheMethod() {
-    let cache = AccessTokenCache()
-    cache.accessToken = AccessTokenFixtures.validToken
+    let store = FakeSecureStore()
+    let cache = AccessTokenCache(secureStore: store)
 
-    cache.clearCache()
+    let defaults: UserDefaults = .standard
+    defaults.removeObject(forKey: cache.accessTokenUserDefaultsKey)
+    defaults.synchronize()
+
+    cache.accessToken = AccessTokenFixtures.validToken
+    XCTAssertEqual(cache.accessToken, AccessTokenFixtures.validToken)
+
+    cache.accessToken = nil
+    XCTAssertNil(cache.accessToken)
 
     // TODO: add assertion for clearing token when caching logic is implemented
   }
