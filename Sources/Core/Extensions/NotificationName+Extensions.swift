@@ -28,4 +28,14 @@ extension Notification.Name {
    */
   static let FBSDKAccessTokenDidChangeNotification: Notification.Name
     = Notification.Name("FBSDKAccessTokenDidChangeNotification")
+
+  /**
+   Notification indicating that the `currentProfile` has changed.
+
+   the userInfo dictionary of the notification will contain keys
+   `FBSDKProfileChangeOldKey` and
+   `FBSDKProfileChangeNewKey`.
+   */
+  static let FBSDKProfileDidChangeNotification: Notification.Name
+    = Notification.Name("FBSDKProfileDidChangeNotification")
 }

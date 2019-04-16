@@ -142,6 +142,10 @@
 		F4C46F7322652930007A0C38 /* UserProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C46F7222652930007A0C38 /* UserProfileBuilder.swift */; };
 		F4C46F752265297C007A0C38 /* RemoteUserProfile+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C46F742265297C007A0C38 /* RemoteUserProfile+Extensions.swift */; };
 		F4C46F77226532C9007A0C38 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C46F76226532C9007A0C38 /* UserProfile.swift */; };
+		F4C46F7E22661EE4007A0C38 /* UserProfileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C46F7D22661EE4007A0C38 /* UserProfileServiceTests.swift */; };
+		F4C46F8022663179007A0C38 /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C46F7F22663179007A0C38 /* UserProfileService.swift */; };
+		F4C46F8222663257007A0C38 /* UserProfileConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C46F8122663257007A0C38 /* UserProfileConfigurationTests.swift */; };
+		F4C46F8422663C62007A0C38 /* SampleUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C46F8322663C62007A0C38 /* SampleUserProfile.swift */; };
 		F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971D22444EDD005EE2EE /* FakeServerConfigurationProvider.swift */; };
 		F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */; };
 		F4D5DAE422492BCD0014C14D /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
@@ -336,6 +340,10 @@
 		F4C46F7222652930007A0C38 /* UserProfileBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileBuilder.swift; sourceTree = "<group>"; };
 		F4C46F742265297C007A0C38 /* RemoteUserProfile+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteUserProfile+Extensions.swift"; sourceTree = "<group>"; };
 		F4C46F76226532C9007A0C38 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		F4C46F7D22661EE4007A0C38 /* UserProfileServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileServiceTests.swift; sourceTree = "<group>"; };
+		F4C46F7F22663179007A0C38 /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
+		F4C46F8122663257007A0C38 /* UserProfileConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileConfigurationTests.swift; sourceTree = "<group>"; };
+		F4C46F8322663C62007A0C38 /* SampleUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUserProfile.swift; sourceTree = "<group>"; };
 		F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeServerConfigurationManager.swift; sourceTree = "<group>"; };
 		F4D5DAE322492BCD0014C14D /* FakeBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBundle.swift; sourceTree = "<group>"; };
 		F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -473,6 +481,7 @@
 				F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */,
 				F4C46F76226532C9007A0C38 /* UserProfile.swift */,
 				F4C46F7222652930007A0C38 /* UserProfileBuilder.swift */,
+				F4C46F7F22663179007A0C38 /* UserProfileService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -678,6 +687,8 @@
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
 				F4C46F70226527EA007A0C38 /* UserProfileBuilderTests.swift */,
+				F4C46F8122663257007A0C38 /* UserProfileConfigurationTests.swift */,
+				F4C46F7D22661EE4007A0C38 /* UserProfileServiceTests.swift */,
 			);
 			path = FacebookCoreTests;
 			sourceTree = "<group>";
@@ -722,6 +733,7 @@
 				F4C46F6C22651789007A0C38 /* SampleRawRemoteUser.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
+				F4C46F8322663C62007A0C38 /* SampleUserProfile.swift */,
 			);
 			path = "Sample Data";
 			sourceTree = "<group>";
@@ -1042,6 +1054,7 @@
 				F4225DDF223F210E00F4DCFE /* ErrorConfigurationBuilder.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
+				F4C46F8022663179007A0C38 /* UserProfileService.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
 				F4E1A9EC22416F2200503354 /* FBError.swift in Sources */,
 				F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */,
@@ -1122,6 +1135,7 @@
 				F4C32D98223D990A00FF1F86 /* SampleRawRemoteConfiguration.swift in Sources */,
 				F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */,
 				F4C32D9F223DA12200FF1F86 /* ErrorConfigurationBuilderTests.swift in Sources */,
+				F4C46F7E22661EE4007A0C38 /* UserProfileServiceTests.swift in Sources */,
 				F44DB6C1222B11620083506E /* FakeGraphRequestConnection.swift in Sources */,
 				F4516B88225FA3E400979DD2 /* SampleHTTPURLResponse.swift in Sources */,
 				F4C46F6D22651789007A0C38 /* SampleRawRemoteUser.swift in Sources */,
@@ -1152,6 +1166,7 @@
 				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
+				F4C46F8422663C62007A0C38 /* SampleUserProfile.swift in Sources */,
 				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */,
 				F4B340012240779D00912F0F /* JSONLoader.swift in Sources */,
@@ -1169,6 +1184,7 @@
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
 				F4B3401722430F9A00912F0F /* LoggingBehaviorTests.swift in Sources */,
+				F4C46F8222663257007A0C38 /* UserProfileConfigurationTests.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F447153022440E860013495F /* SampleURL.swift in Sources */,

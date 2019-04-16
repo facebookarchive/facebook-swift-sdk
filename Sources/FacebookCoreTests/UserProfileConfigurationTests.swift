@@ -16,32 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-struct UserProfile: Equatable, Decodable {
-  /// The user id
-  let identifier: String
+class UserProfileConfigurationTests: XCTestCase {
+  let profileService = UserProfileService()
 
-  /// The user's complete name
-  let name: String
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(profileService.graphConnectionProvider is GraphConnectionProvider,
+                  "A profile service should have the expected concrete implementation for its graph connection provider")
+  }
 
-  /// The user's first name
-  let firstName: String?
-
-  /// The user's middle name
-  let middleName: String?
-
-  /// The user's last name
-  let lastName: String?
-
-  /**
-   A URL to the user's profile.
-
-   Consider using the `AppLinkResolver` utility to resolve this
-   to an app link to link directly to the user's profile in the Facebook app.
-   */
-  let url: URL?
-
-  /// The last time the profile data was fetched.
-  let fetchedDate: Date
+  func testNotificationCenterDependency() {
+    XCTAssertTrue(profileService.notificationCenter is NotificationCenter,
+                  "A profile service should have the expected concrete implementation for its notification center dependency")
+  }
 }

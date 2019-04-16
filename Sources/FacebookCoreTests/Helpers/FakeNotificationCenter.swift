@@ -19,13 +19,34 @@
 @testable import FacebookCore
 import Foundation
 
-class FakeNotificationCenter: NotificationPosting {
+class FakeNotificationCenter: NotificationPosting, NotificationObserving {
   var capturedPostedNotificationName: Notification.Name?
   var capturedPostedUserInfo: [AnyHashable: Any]?
+  var capturedAddObserverNotificationName: NSNotification.Name?
+  var capturedAddObserverSelector: Selector?
+  var capturedAddedObserver: Any?
+  var capturedAddObserverObject: Any?
+  var capturedRemovedObserver: Any?
 
   func post(name aName: Notification.Name, object anObject: Any?, userInfo aUserInfo: [AnyHashable: Any]?) {
     capturedPostedNotificationName = aName
     capturedPostedUserInfo = aUserInfo
+  }
+
+  func addObserver(
+    _ observer: Any,
+    selector aSelector: Selector,
+    name aName: NSNotification.Name?,
+    object anObject: Any?
+    ) {
+    capturedAddObserverNotificationName = aName
+    capturedAddedObserver = observer
+    capturedAddObserverSelector = aSelector
+    capturedAddObserverObject = anObject
+  }
+
+  func removeObserver(_ observer: Any) {
+    capturedRemovedObserver = observer
   }
 
   // Helpers for extracting data from user info
@@ -42,5 +63,30 @@ class FakeNotificationCenter: NotificationPosting {
   var capturedDidChangeUserId: Bool? {
     let userInfo = capturedPostedUserInfo ?? [:]
     return userInfo[AccessTokenWallet.NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey] as? Bool
+  }
+
+  var capturedPostedPreviousUserProfile: UserProfile? {
+    let userInfo = capturedPostedUserInfo ?? [:]
+    return userInfo[
+      UserProfileService.NotificationKeys.FBSDKProfileChangeOldKey
+    ] as? UserProfile
+  }
+
+  var capturedPostedUserProfile: UserProfile? {
+    let userInfo = capturedPostedUserInfo ?? [:]
+    return userInfo[
+      UserProfileService.NotificationKeys.FBSDKProfileChangeNewKey
+      ] as? UserProfile
+  }
+
+  // Mechanism to reset captured data to avoid having to keep track of multiple notifications in certain cases. If you add a property to this fake, add ability to reset please.
+  func reset() {
+    capturedPostedNotificationName = nil
+    capturedPostedUserInfo = nil
+    capturedAddObserverNotificationName = nil
+    capturedAddObserverSelector = nil
+    capturedAddedObserver = nil
+    capturedAddObserverObject = nil
+    capturedRemovedObserver = nil
   }
 }

@@ -16,32 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-struct UserProfile: Equatable, Decodable {
-  /// The user id
-  let identifier: String
-
-  /// The user's complete name
-  let name: String
-
-  /// The user's first name
-  let firstName: String?
-
-  /// The user's middle name
-  let middleName: String?
-
-  /// The user's last name
-  let lastName: String?
-
-  /**
-   A URL to the user's profile.
-
-   Consider using the `AppLinkResolver` utility to resolve this
-   to an app link to link directly to the user's profile in the Facebook app.
-   */
-  let url: URL?
-
-  /// The last time the profile data was fetched.
-  let fetchedDate: Date
+enum SampleUserProfile {
+  static func valid(createdOn date: Date = Date()) -> UserProfile {
+    return UserProfile(
+      identifier: "abc",
+      name: "Bob",
+      firstName: "Bob",
+      middleName: "C",
+      lastName: "Martin",
+      url: SampleURL.valid,
+      fetchedDate: date
+    )
+  }
 }

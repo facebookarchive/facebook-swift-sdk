@@ -26,6 +26,12 @@ protocol GraphRequestConnecting {
     batchParameters: [String: AnyHashable],
     completion: @escaping GraphRequestBlock
     ) throws
+
+  func getObject<RemoteType: Decodable>(
+    _ remoteType: RemoteType.Type,
+    for graphRequest: GraphRequest,
+    completion: @escaping (Result<RemoteType, Error>) -> Void
+    ) -> URLSessionTaskProxy?
 }
 
 extension GraphRequestConnecting {
