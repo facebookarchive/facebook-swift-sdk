@@ -43,7 +43,7 @@ class AccessTokenCache: AccessTokenCaching {
       }
 
       do {
-        return try store.value(AccessToken.self, forKey: accessTokenKey)
+        return try store.get(AccessToken.self, forKey: accessTokenKey)
       } catch {
         print(error)
         return nil

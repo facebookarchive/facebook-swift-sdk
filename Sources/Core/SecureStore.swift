@@ -27,7 +27,7 @@ protocol SecureStore {
   - Returns: The secure value
   - Throws: A secure store error
   */
-  func value<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable
+  func get<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable
 
   /**
    Stores a secure value associated with a given key
@@ -45,29 +45,4 @@ protocol SecureStore {
    - Throws: A secure store error
    */
   mutating func remove(forKey key: String) throws
-}
-
-/// SecureStore Extensions
-extension SecureStore {
-  /**
-   Retrieves a secure string associated with a given key
-
-   - Parameter key: The key used to retrieve the secure string
-   - Returns: The secure string
-   - Throws: A secure store error
-   */
-  func string(forKey key: String) throws -> String? {
-    return try value([String].self, forKey: key)?.first
-  }
-
-  /**
-   Stores a secure string associated with a given key
-
-   - Parameter string: The string to store
-   - Parameter key: The key used to retrieve the secure string
-   - Throws: A secure store error
-   */
-  mutating func setString(_ string: String, forKey key: String) throws {
-    try self.set([string], forKey: key)
-  }
 }

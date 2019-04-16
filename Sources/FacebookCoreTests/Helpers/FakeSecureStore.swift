@@ -22,7 +22,7 @@ import Foundation
 struct FakeSecureStore: SecureStore {
   private var insecureValues: [String: Data] = [:]
 
-  func value<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
+  func get<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
     guard let data = insecureValues[key] else {
       return nil
     }

@@ -59,16 +59,23 @@ struct KeychainStore: SecureStore {
     self.accessGroup = accessGroup
   }
 
-  func value<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
+  func get<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
     guard let passwordData = try data(forKey: key) else {
       return nil
     }
 
     let decoder = JSONDecoder()
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
 
     do {
       return try decoder.decode(type, from: passwordData)
+    } catch DecodingError.typeMismatch {
+      // JSON Decoder must have Array or Dictionary as top level
+      do {
+        // Attempt to decode first value from an array of `T`
+        return try decoder.decode([T].self, from: passwordData).first
+      } catch {
+        throw KeychainError.unexpectedPasswordData
+      }
     } catch {
       throw KeychainError.unexpectedPasswordData
     }
@@ -102,14 +109,23 @@ struct KeychainStore: SecureStore {
 
   func set<T>(_ value: T, forKey key: String) throws where T: Encodable {
     let encoder = JSONEncoder()
-    encoder.keyEncodingStrategy = .convertToSnakeCase
+    let encodedData: Data
 
     do {
-      let encodedData = try encoder.encode(value)
-      try set(encodedData, forKey: key)
+      encodedData = try encoder.encode(value)
+    } catch EncodingError.invalidValue {
+      // JSON Encoder must have Array or Dictionary as top level
+      do {
+        // Encode array of `T` containing value
+        encodedData = try encoder.encode([value])
+      } catch {
+        throw KeychainError.unexpectedPasswordData
+      }
     } catch {
       throw KeychainError.unexpectedPasswordData
     }
+
+    try set(encodedData, forKey: key)
   }
 
   func set(_ data: Data, forKey key: String) throws {
