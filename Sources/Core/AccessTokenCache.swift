@@ -66,7 +66,6 @@ class AccessTokenCache: AccessTokenCaching {
       }
 
       do {
-        // TODO: Implement access control loadkSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
         try store.set(token, forKey: accessTokenKey)
       } catch {
         print(error)

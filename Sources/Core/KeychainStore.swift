@@ -42,6 +42,19 @@ struct KeychainStore: SecureStore {
     }
   }
 
+  /// Keychain Password Types
+  enum PasswordAccessibility: String, CaseIterable {
+    case afterFirstUnlockThisDeviceOnly
+
+    /// The `CFString` associated value
+    var cfString: CFString {
+      switch self {
+      case .afterFirstUnlockThisDeviceOnly:
+        return kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+      }
+    }
+  }
+
   /// The keychain service
   let service: String
 
@@ -164,7 +177,11 @@ struct KeychainStore: SecureStore {
   - Parameter key: The optional key to use for the query
   - Returns: The query dictionary to use with the keychain
   */
-  private func query(_ type: PasswordType = .genericPassword, forKey key: String? = nil) -> [String: AnyObject] {
+  private func query(
+    forKey key: String? = nil,
+    type: PasswordType = .genericPassword,
+    accessibility: PasswordAccessibility = .afterFirstUnlockThisDeviceOnly
+    ) -> [String: AnyObject] {
     var query: [String: AnyObject] = [:]
     query[kSecClass as String] = type.cfString
     query[kSecAttrService as String] = service as AnyObject
@@ -176,6 +193,8 @@ struct KeychainStore: SecureStore {
     if let key = key {
       query[kSecAttrAccount as String] = key as AnyObject
     }
+
+    query[kSecAttrAccessible as String] = accessibility.cfString
 
     return query
   }
