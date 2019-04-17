@@ -24,18 +24,22 @@ class KeychainStoreTests: XCTestCase {
 
   func testKeychainStorePasswordTypes() {
     let passwordTypes: [KeychainStore.PasswordType] = [.genericPassword]
-    XCTAssertEqual(KeychainStore.PasswordType.allCases, passwordTypes)
+    XCTAssertEqual(KeychainStore.PasswordType.allCases, passwordTypes,
+                   "Ensure all cases are accounted for")
 
     let passwordCFStrings: [CFString] = [kSecClassGenericPassword]
-    XCTAssertEqual(passwordTypes.map { $0.cfString }, passwordCFStrings)
+    XCTAssertEqual(passwordTypes.map { $0.cfString }, passwordCFStrings,
+                   "Ensure all case variables are correct")
   }
 
   func testKeychainStorePasswordAccessibilities() {
     let passwordAccessibilities: [KeychainStore.PasswordAccessibility] = [.afterFirstUnlockThisDeviceOnly]
-    XCTAssertEqual(KeychainStore.PasswordAccessibility.allCases, passwordAccessibilities)
+    XCTAssertEqual(KeychainStore.PasswordAccessibility.allCases, passwordAccessibilities,
+                   "Ensure all cases are accounted for")
 
     let passwordCFStrings: [CFString] = [kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly]
-    XCTAssertEqual(passwordAccessibilities.map { $0.cfString }, passwordCFStrings)
+    XCTAssertEqual(passwordAccessibilities.map { $0.cfString }, passwordCFStrings,
+                   "Ensure all case variables are correct")
   }
 
   func testKeychainStore() {
@@ -46,22 +50,26 @@ class KeychainStoreTests: XCTestCase {
       try store.set("value1", forKey: "key1")
     } catch {
       print(error)
-      //XCTAssertNil(error)
+//      XCTAssertNil(error,
+//                   "Error should be nil")
     }
 
     do {
       let value = try store.string(forKey: "key1")
-      //XCTAssertEqual(value, "value1")
+//      XCTAssertEqual(value, "value1",
+//                     "String retrieved should be equal to the string stored")
     } catch {
       print(error)
-      //XCTAssertNil(error)
+//      XCTAssertNil(error,
+//                   "Error should be nil")
     }
 
     do {
       try store.remove(forKey: "key1")
     } catch {
       print(error)
-      //XCTAssertNil(error)
+//      XCTAssertNil(error,
+//                   "Error should be nil")
     }
   }
 
@@ -79,28 +87,35 @@ class KeychainStoreTests: XCTestCase {
       let arrayData = try encoder.encode(arrayVar)
 
       let stringResult = try store.decode(String.self, from: stringData)
-      XCTAssertEqual(stringResult, stringVar)
+      XCTAssertEqual(stringResult, stringVar,
+                     "Should retrieve as a String")
 
       let arrayResult = try store.decode([String].self, from: arrayData)
-      XCTAssertEqual(arrayResult, arrayVar)
+      XCTAssertEqual(arrayResult, arrayVar,
+                     "Should retrieve as an Array")
     } catch {
-      XCTAssertNil(error)
+      XCTAssertNil(error,
+                   "Error should be nil")
     }
 
     do {
       let arrayData = try encoder.encode(arrayVar)
 
       let intResult = try store.decode(Int.self, from: arrayData)
-      XCTAssertNil(intResult)
+      XCTAssertNil(intResult,
+                   "Should fail")
     } catch {
-      XCTAssertNotNil(error)
+      XCTAssertNotNil(error,
+                      "The parse above should throw an error")
     }
 
     do {
       let result = try store.decode(String.self, from: Data())
-      XCTAssertNil(result)
+      XCTAssertNil(result,
+                   "Should fail")
     } catch {
-      XCTAssertNotNil(error)
+      XCTAssertNotNil(error,
+                      "The parse above should throw an error")
     }
   }
 
@@ -118,28 +133,35 @@ class KeychainStoreTests: XCTestCase {
 
       // JSON Decoder must have Array or Dictionary as top level
       let stringResult = try decoder.decode([String].self, from: stringData)
-      XCTAssertEqual(stringResult, [stringVar])
+      XCTAssertEqual(stringResult, [stringVar],
+                     "Should retrieve as an Array, since JSON Decoder requires an Array or Dictionary as top level")
 
       let arrayResult = try decoder.decode([String].self, from: arrayData)
-      XCTAssertEqual(arrayResult, arrayVar)
+      XCTAssertEqual(arrayResult, arrayVar,
+                     "Should retrieve as an Array")
     } catch {
-      XCTAssertNil(error)
+      XCTAssertNil(error,
+                   "Error should be nil")
     }
 
     do {
       let arrayData = try store.encode(arrayVar)
 
       let intResult = try decoder.decode(Int.self, from: arrayData)
-      XCTAssertNil(intResult)
+      XCTAssertNil(intResult,
+                   "Should fail")
     } catch {
-      XCTAssertNotNil(error)
+      XCTAssertNotNil(error,
+                      "The parse above should throw an error")
     }
 
     do {
       let result = try store.decode(String.self, from: Data())
-      XCTAssertNil(result)
+      XCTAssertNil(result,
+                   "Should fail")
     } catch {
-      XCTAssertNotNil(error)
+      XCTAssertNotNil(error,
+                      "The parse above should throw an error")
     }
   }
 }

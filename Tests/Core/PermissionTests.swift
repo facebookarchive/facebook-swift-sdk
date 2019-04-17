@@ -38,12 +38,14 @@ class PermissionTests: XCTestCase {
     .userPosts,
     .userTaggedPlaces,
     .userVideos,
-    .other(value: "otherVal")
+    .other(value: "other_val")
   ]
 
   func testKnownCases() {
-    XCTAssertEqual(permissions.count, 18)
-    XCTAssertEqual(permissions.map { $0.key }, Permission.CodingKeys.allCases)
+    XCTAssertEqual(permissions.count, 18,
+                   "Should account for all cases")
+    XCTAssertEqual(permissions.map { $0.key }, Permission.CodingKeys.allCases,
+                   "Should account for all cases")
   }
 
   func testDescriptions() {
@@ -65,10 +67,11 @@ class PermissionTests: XCTestCase {
       "userPosts",
       "userTaggedPlaces",
       "userVideos",
-      "otherVal"
+      "other_val"
     ]
 
-    XCTAssertEqual(permissions.map { $0.description }, expected)
+    XCTAssertEqual(permissions.map { $0.description }, expected,
+                   "Should have the proper descriptions")
   }
 
   func testStringLiterals() {
@@ -90,10 +93,11 @@ class PermissionTests: XCTestCase {
       "userPosts",
       "userTaggedPlaces",
       "userVideos",
-      "otherVal"
+      "other_val"
     ]
 
-    XCTAssertEqual(permissions, input)
+    XCTAssertEqual(permissions, input,
+                   "Should have the proper string literal representations")
   }
 
   func testSnakeStringLiterals() {
@@ -115,35 +119,37 @@ class PermissionTests: XCTestCase {
       "user_posts",
       "user_tagged_places",
       "user_videos",
-      "otherVal"
+      "other_val"
     ]
 
-    XCTAssertEqual(permissions, input)
+    XCTAssertEqual(permissions, input,
+                   "Should have the proper snake case string literal representations")
   }
 
   func testEncoding() {
     let expected: String = #"["email","groups_access_member_info","publish_to_groups","user_age_range","user_birthday","user_events","user_friends","user_gender","user_hometown","user_likes","user_link","user_location","user_mobile_phone","user_photos","user_posts","user_tagged_places","user_videos","other_val"]"#
 
-    let jsonEncoder = JSONEncoder()
     do {
-      let jsonData = try jsonEncoder.encode(permissions)
-      let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
-      XCTAssertEqual(jsonString, expected)
+      let jsonData = try JSONEncoder().encode(permissions)
+      XCTAssertEqual(String(data: jsonData, encoding: .utf8), expected,
+                     "Should properly encode")
     } catch {
-      XCTAssertNil(error)
+      XCTAssertNil(error,
+                   "Error should be nil")
     }
   }
 
   func testDecoding() {
-    let input: Data = #"["email","groups_access_member_info","publish_to_groups","user_age_range","user_birthday","user_events","user_friends","user_gender","user_hometown","user_likes","user_link","user_location","user_mobile_phone","user_photos","user_posts","user_tagged_places","user_videos","otherVal"]"#
-      .data(using: .utf8) ?? Data()
+    let data: Data? = #"["email","groups_access_member_info","publish_to_groups","user_age_range","user_birthday","user_events","user_friends","user_gender","user_hometown","user_likes","user_link","user_location","user_mobile_phone","user_photos","user_posts","user_tagged_places","user_videos","other_val"]"#
+      .data(using: .utf8)
 
-    let jsonDecoder = JSONDecoder()
     do {
-      let actual = try jsonDecoder.decode([Permission].self, from: input)
-      XCTAssertEqual(actual, permissions)
+      let actual = try JSONDecoder().decode([Permission].self, from: data ?? Data())
+      XCTAssertEqual(actual, permissions,
+                     "Should properly decode")
     } catch {
-      XCTAssertNil(error)
+      XCTAssertNil(error,
+                   "Error should be nil")
     }
   }
 }

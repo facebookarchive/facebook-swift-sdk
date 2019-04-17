@@ -36,7 +36,8 @@ class StringExtensionTests: XCTestCase {
       ]
 
       for val in zip(inputs, expected) {
-        XCTAssertEqual(val.0.camelCased(), val.1)
+        XCTAssertEqual(val.0.camelCased(), val.1,
+                       "Should properly convert to camelCase")
       }
     }
 
@@ -58,7 +59,8 @@ class StringExtensionTests: XCTestCase {
     ]
 
     for val in zip(inputs, expected) {
-      XCTAssertEqual(val.0.snakeCased(), val.1)
+      XCTAssertEqual(val.0.snakeCased(), val.1,
+                     "Should properly convert to snake_case")
     }
   }
 }

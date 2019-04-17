@@ -27,25 +27,29 @@ class AccessTokenCacheTests: XCTestCase {
 
   func testAccessTokenCaching() {
     cache.accessToken = AccessTokenFixtures.validToken
-    XCTAssertEqual(cache.accessToken, AccessTokenFixtures.validToken)
+    XCTAssertEqual(cache.accessToken, AccessTokenFixtures.validToken,
+                   "The cached access token should equal the passed in token")
 
     cache.accessToken = nil
-    XCTAssertNil(cache.accessToken)
+    XCTAssertNil(cache.accessToken,
+                 "The cached token should be nil after setting to nil")
   }
 
   func testAccessTokenCacheErrorHandling() {
     store.alwaysError = true
-    XCTAssertNil(cache.accessToken)
 
     cache.accessToken = AccessTokenFixtures.validToken
-    XCTAssertNil(cache.accessToken)
+    XCTAssertNil(cache.accessToken,
+                 "When `alwaysError == true`, cache should be nil")
 
     cache.accessToken = nil
-    XCTAssertNil(cache.accessToken)
+    XCTAssertNil(cache.accessToken,
+                 "When `alwaysError == true`, cache should be nil")
   }
 
   func testDefaultInit() {
     let cache = AccessTokenCache()
-    XCTAssertNotNil(cache)
+    XCTAssertNotNil(cache,
+                    "Convenience init should work")
   }
 }
