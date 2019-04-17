@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length file_length
 
 @testable import FacebookCore
 import XCTest
@@ -373,5 +373,31 @@ class UserProfileServiceTests: XCTestCase {
       expectedQueryItems.sorted { $0.name < $1.name },
       "Should provide an image url that has query items for type, width, and height"
     )
+  }
+
+  // MARK: Refreshing
+
+  func testRefreshingStaleProfileOnAccessTokenChange() {
+    service = UserProfileService(
+      graphConnectionProvider: fakeGraphConnectionProvider
+    )
+    service.shouldUpdateOnAccessTokenChange = true
+    let token = AccessTokenFixtures.validToken
+
+    // Stub a fetch result
+    fakeConnection.stubGetObjectCompletionResult = .failure(SampleNSError.validWithUserInfo)
+
+    // Attempt to load the profile via a notification
+    NotificationCenter.default.post(
+      name: .FBSDKAccessTokenDidChangeNotification,
+      object: self,
+      userInfo: [
+        AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeNewKey: token
+      ]
+    )
+
+    // Assert
+    XCTAssertTrue(fakeConnection.getObjectWasCalled,
+                  "Should attempt to fetch a new profile when a notification is received for a new access token")
   }
 }
