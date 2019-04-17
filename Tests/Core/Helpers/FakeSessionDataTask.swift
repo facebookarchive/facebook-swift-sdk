@@ -27,6 +27,11 @@ class FakeSessionDataTask: SessionDataTask {
   var capturedUrlRequest: URLRequest?
   let completionHandler: SessionTaskCompletion
 
+  var getObjectWasCalled = false
+  var capturedGetObjectRemoteType: Any?
+  var capturedGetObjectGraphRequest: GraphRequest?
+  var stubGetObjectCompletionResult: Result<Decodable, Error>?
+
   init(
     request: URLRequest? = nil,
     completionHandler: @escaping SessionTaskCompletion = { _, _, _ in }

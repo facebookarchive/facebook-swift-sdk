@@ -22,8 +22,10 @@ import XCTest
 class UserProfileBuilderTests: XCTestCase {
   func testBuildingWithEmptyName() {
     let remote = RemoteUserProfile(name: "")
-    XCTAssertNil(UserProfileBuilder.build(from: remote),
-                 "Should not build a user profile with an empty name")
+    XCTAssertNil(
+        UserProfileBuilder.build(from: remote),
+        "Should not build a user profile with an empty name"
+    )
   }
 
   func testBuildingWithEmptyNameFields() {
