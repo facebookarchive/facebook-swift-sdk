@@ -16,22 +16,37 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeAccessTokenCache: AccessTokenCaching {
-  private(set) var secureStore: SecureStore
+extension String {
+  /**
+   Converts a camelCase string to snake_case
 
-  var accessToken: AccessToken? {
-    didSet {
-      accessTokenWasSet = true
-      capturedAccessToken = accessToken
+   - Returns: The string converted to snake case
+   */
+  func snakeCased() -> String {
+    let pattern = "([a-z0-9])([A-Z])"
+
+    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+      return self
     }
+
+    let range = NSRange(location: 0, length: count)
+    return regex
+      .stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "$1_$2")
+      .lowercased()
   }
 
-  var accessTokenWasSet = false
-  var capturedAccessToken: AccessToken?
+  /**
+   Converts a snake_case string to camelCase
 
-  required init(secureStore: SecureStore) {
-    self.secureStore = secureStore
+   - Returns: The string converted to camel case
+   */
+  func camelCased(with separator: Character = "_") -> String {
+    return self.lowercased()
+      .split(separator: separator)
+      .enumerated()
+      .map { $0.offset > 0 ? $0.element.capitalized : $0.element.lowercased() }
+      .joined()
   }
 }

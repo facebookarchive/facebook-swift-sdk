@@ -16,13 +16,51 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-// This will eventually be replaced by the rewrite of FBSDKAccessTokenCaching
-// for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
+class StringExtensionTests: XCTestCase {
+  func testSnakeCaseToCamelCase() {
+    let inputs: [String] = [
+      "test",
+      "test_test",
+      "test_test_test_test",
+      "testtesttesttest"
+    ]
 
-protocol AccessTokenCaching: AnyObject {
-  var accessToken: AccessToken? { get set }
+    let expected: [String] = [
+      "test",
+      "testTest",
+      "testTestTestTest",
+      "testtesttesttest"
+    ]
 
-  func clearCache()
+    for val in zip(inputs, expected) {
+      XCTAssertEqual(val.0.camelCased(), val.1,
+                     "Should properly convert to camelCase")
+    }
+  }
+
+  func testCamelCaseToSnakeCase() {
+    let inputs: [String] = [
+      "test",
+      "testTest",
+      "testTestTestTest",
+      "testtesttesttest",
+      "test1Testtesttest"
+    ]
+
+    let expected: [String] = [
+      "test",
+      "test_test",
+      "test_test_test_test",
+      "testtesttesttest",
+      "test1_testtesttest"
+    ]
+
+    for val in zip(inputs, expected) {
+      XCTAssertEqual(val.0.snakeCased(), val.1,
+                     "Should properly convert to snake_case")
+    }
+  }
 }
