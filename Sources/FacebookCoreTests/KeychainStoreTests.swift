@@ -20,6 +20,8 @@
 import XCTest
 
 class KeychainStoreTests: XCTestCase {
+  let bundleId = Bundle(for: KeychainStoreTests.self).bundleIdentifier ?? ""
+
   func testKeychainStorePasswordTypes() {
     let passwordTypes: [KeychainStore.PasswordType] = [.genericPassword]
     XCTAssertEqual(KeychainStore.PasswordType.allCases, passwordTypes)
@@ -28,13 +30,20 @@ class KeychainStoreTests: XCTestCase {
     XCTAssertEqual(passwordTypes.map { $0.cfString }, passwordCFStrings)
   }
 
+  func testKeychainStorePasswordAccessibilities() {
+    let passwordAccessibilities: [KeychainStore.PasswordAccessibility] = [.afterFirstUnlockThisDeviceOnly]
+    XCTAssertEqual(KeychainStore.PasswordAccessibility.allCases, passwordAccessibilities)
+
+    let passwordCFStrings: [CFString] = [kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly]
+    XCTAssertEqual(passwordAccessibilities.map { $0.cfString }, passwordCFStrings)
+  }
+
   func testKeychainStore() {
-    let bundleId = Bundle(for: KeychainStoreTests.self).bundleIdentifier ?? ""
     var store: SecureStore = KeychainStore(service: "com.facebook.sdk.tokencache.\(bundleId)")
 
-    // TODO: Add Entitlements so this passes tests and enable //XCTAssertNil(error)
+    // TODO: Add Entitlements so this passes tests and enable checks below
     do {
-      try store.setString("value1", forKey: "key1")
+      try store.set("value1", forKey: "key1")
     } catch {
       print(error)
       //XCTAssertNil(error)
@@ -53,6 +62,84 @@ class KeychainStoreTests: XCTestCase {
     } catch {
       print(error)
       //XCTAssertNil(error)
+    }
+  }
+
+  func testKeychainStoreDecoding() {
+    let stringVar: String = "testing"
+    let arrayVar: [String] = ["testing"]
+
+    let encoder = JSONEncoder()
+
+    let store = KeychainStore(service: "com.facebook.sdk.tokencache.\(bundleId)")
+
+    // JSON Encoder must have Array or Dictionary as top level
+    do {
+      let stringData = try encoder.encode([stringVar])
+      let arrayData = try encoder.encode(arrayVar)
+
+      let stringResult = try store.decode(String.self, from: stringData)
+      XCTAssertEqual(stringResult, stringVar)
+
+      let arrayResult = try store.decode([String].self, from: arrayData)
+      XCTAssertEqual(arrayResult, arrayVar)
+    } catch {
+      XCTAssertNil(error)
+    }
+
+    do {
+      let arrayData = try encoder.encode(arrayVar)
+
+      let intResult = try store.decode(Int.self, from: arrayData)
+      XCTAssertNil(intResult)
+    } catch {
+      XCTAssertNotNil(error)
+    }
+
+    do {
+      let result = try store.decode(String.self, from: Data())
+      XCTAssertNil(result)
+    } catch {
+      XCTAssertNotNil(error)
+    }
+  }
+
+  func testKeychainStoreEncoding() {
+    let stringVar: String = "testing"
+    let arrayVar: [String] = ["testing"]
+
+    let decoder = JSONDecoder()
+
+    let store = KeychainStore(service: "com.facebook.sdk.tokencache.\(bundleId)")
+
+    do {
+      let stringData = try store.encode(stringVar)
+      let arrayData = try store.encode(arrayVar)
+
+      // JSON Decoder must have Array or Dictionary as top level
+      let stringResult = try decoder.decode([String].self, from: stringData)
+      XCTAssertEqual(stringResult, [stringVar])
+
+      let arrayResult = try decoder.decode([String].self, from: arrayData)
+      XCTAssertEqual(arrayResult, arrayVar)
+    } catch {
+      XCTAssertNil(error)
+    }
+
+    do {
+      let arrayData = try store.encode(arrayVar)
+
+      let intResult = try decoder.decode(Int.self, from: arrayData)
+      XCTAssertNil(intResult)
+    } catch {
+      XCTAssertNotNil(error)
+    }
+
+    do {
+      let result = try store.decode(String.self, from: Data())
+      XCTAssertNil(result)
+    } catch {
+      XCTAssertNotNil(error)
     }
   }
 }

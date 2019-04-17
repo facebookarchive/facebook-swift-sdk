@@ -16,13 +16,23 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
 @testable import FacebookCore
+import Foundation
 
-struct FakeSecureStore: SecureStore {
+class FakeSecureStore: SecureStore {
+  /// Keychain Errors
+  enum FakeSecureStoreError: FBError {
+    case fakeError
+  }
+
   private var insecureValues: [String: Data] = [:]
+  var alwaysError: Bool = false
 
   func get<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
+    guard !alwaysError else {
+      throw FakeSecureStoreError.fakeError
+    }
+
     guard let data = insecureValues[key] else {
       return nil
     }
@@ -31,13 +41,21 @@ struct FakeSecureStore: SecureStore {
     return try decoder.decode(type, from: data)
   }
 
-  mutating func set<T>(_ value: T, forKey key: String) throws where T: Encodable {
+  func set<T>(_ value: T, forKey key: String) throws where T: Encodable {
+    guard !alwaysError else {
+      throw FakeSecureStoreError.fakeError
+    }
+
     let encoder = JSONEncoder()
     let data = try encoder.encode(value)
     insecureValues[key] = data
   }
 
-  mutating func remove(forKey key: String) throws {
+  func remove(forKey key: String) throws {
+    guard !alwaysError else {
+      throw FakeSecureStoreError.fakeError
+    }
+
     insecureValues.removeValue(forKey: key)
   }
 }

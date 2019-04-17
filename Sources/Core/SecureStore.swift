@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// MARK: - Protocols
+// MARK: Protocols -
 
 /// The Secure Store Protocol
 protocol SecureStore {
@@ -45,4 +45,20 @@ protocol SecureStore {
    - Throws: A secure store error
    */
   mutating func remove(forKey key: String) throws
+}
+
+// MARK: - Extensions -
+
+/// Secure Store Extensions
+extension SecureStore {
+  /**
+   Retrieves a secure string associated with a given key
+
+   - Parameter key: The key used to retrieve the secure string
+   - Returns: The secure string
+   - Throws: A secure store error
+   */
+  func string(forKey key: String) throws -> String? {
+    return try get(String.self, forKey: key)
+  }
 }
