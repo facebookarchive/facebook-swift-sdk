@@ -16,22 +16,49 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// MARK: Imports -
+
 import Foundation
 
-// This will eventually be replaced by the rewrite of FBSDKAccessTokenCache
-// for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
-
-// TODO:
-// This public, canonical type makes this usable from anywhere that knows about access tokens.
-// Internally, it should have a bi-directional codable "mirror type", something like
-// `CacheableAccessToken` that is used for converting a canonical AccessToken to/from a
-// serializable medium. This will help separate the AccessToken type from any specific
-// encoding formats.
-//
+/// The Access Token Cache
 class AccessTokenCache: AccessTokenCaching {
-  var accessToken: AccessToken?
+  // TODO: Use FBID as key to store in keychain?
 
-  func clearCache() {
-    // TODO: implementation
+  /// Used to store the `UUID` in `UserDefaults`
+  let accessTokenKey: String = "com.facebook.sdk.v5.AccessTokenKey"
+  private let logger = Logger()
+
+  /// Used to cache the Access Token
+  private(set) var secureStore: SecureStore
+
+  var accessToken: AccessToken? {
+    get {
+      do {
+        return try secureStore.get(AccessToken.self, forKey: accessTokenKey)
+      } catch {
+        logger.log(.cacheErrors, "Failed to retrieve AccessToken cache: \(error)")
+        return nil
+      }
+    }
+    set {
+      do {
+        switch newValue {
+        case let token?:
+          try secureStore.set(token, forKey: accessTokenKey)
+
+        case nil:
+          try secureStore.remove(forKey: accessTokenKey)
+        }
+      } catch {
+        logger.log(.cacheErrors, "Failed to set AccessToken cache: \(error)")
+      }
+    }
+  }
+
+  init(
+    secureStore: SecureStore =
+    KeychainStore(service: "com.facebook.sdk.tokencache.\(Bundle.main.bundleIdentifier ?? "")")
+    ) {
+    self.secureStore = secureStore
   }
 }

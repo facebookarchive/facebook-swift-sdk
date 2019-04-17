@@ -17,21 +17,45 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import Foundation
 
-class FakeAccessTokenCache: AccessTokenCaching {
-  private(set) var secureStore: SecureStore
-
-  var accessToken: AccessToken? {
-    didSet {
-      accessTokenWasSet = true
-      capturedAccessToken = accessToken
-    }
+class FakeSecureStore: SecureStore {
+  /// Keychain Errors
+  enum FakeSecureStoreError: FBError {
+    case fakeError
   }
 
-  var accessTokenWasSet = false
-  var capturedAccessToken: AccessToken?
+  private var insecureValues: [String: Data] = [:]
+  var alwaysError: Bool = false
 
-  required init(secureStore: SecureStore) {
-    self.secureStore = secureStore
+  func get<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable {
+    guard !alwaysError else {
+      throw FakeSecureStoreError.fakeError
+    }
+
+    guard let data = insecureValues[key] else {
+      return nil
+    }
+
+    let decoder = JSONDecoder()
+    return try decoder.decode(type, from: data)
+  }
+
+  func set<T>(_ value: T, forKey key: String) throws where T: Encodable {
+    guard !alwaysError else {
+      throw FakeSecureStoreError.fakeError
+    }
+
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(value)
+    insecureValues[key] = data
+  }
+
+  func remove(forKey key: String) throws {
+    guard !alwaysError else {
+      throw FakeSecureStoreError.fakeError
+    }
+
+    insecureValues.removeValue(forKey: key)
   }
 }
