@@ -38,8 +38,7 @@ class Settings: SettingsManaging {
     static let loggingBehaviors: String = "FacebookLoggingBehavior"
   }
 
-  // TODO: Probably needs to be private and weak. Revisit this during rewrite
-  weak var accessTokenCache: AccessTokenCaching?
+  var accessTokenCache: AccessTokenCaching?
 
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
   let graphApiDebugParameter: GraphApiDebugParameter = .none

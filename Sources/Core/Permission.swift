@@ -16,14 +16,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// MARK: Imports
+
 import Foundation
 
-// TODO: Introduce a type to JSON encode permissions
-// This object will be responsible for translating between JSON
-// with snake_case keys and our canonical camelCased cases
+// MARK: -
 
-enum Permission: Hashable {
-  case `default`
+enum Permission: Hashable, Codable, ExpressibleByStringLiteral, CustomStringConvertible {
   case email
   case groupsAccessMemberInfo
   case publishToGroups
@@ -41,5 +40,171 @@ enum Permission: Hashable {
   case userPosts
   case userTaggedPlaces
   case userVideos
-  case unknown(value: String)
+  case other(value: String)
+
+  // MARK: -
+
+  enum CodingKeys: String, CodingKey, CaseIterable {
+    case email
+    case groupsAccessMemberInfo
+    case publishToGroups
+    case userAgeRange
+    case userBirthday
+    case userEvents
+    case userFriends
+    case userGender
+    case userHometown
+    case userLikes
+    case userLink
+    case userLocation
+    case userMobilePhone
+    case userPhotos
+    case userPosts
+    case userTaggedPlaces
+    case userVideos
+    case other
+  }
+
+  // MARK: - Inits
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    let val = try container.decode(String.self)
+    self.init(stringLiteral: val)
+  }
+
+  init(stringLiteral value: String) {
+    let keyVal = CodingKeys(rawValue: value) ?? CodingKeys(rawValue: value.camelCased())
+
+    switch keyVal {
+    case .email?:
+      self = .email
+
+    case .groupsAccessMemberInfo?:
+      self = .groupsAccessMemberInfo
+
+    case .publishToGroups?:
+      self = .publishToGroups
+
+    case .userAgeRange?:
+      self = .userAgeRange
+
+    case .userBirthday?:
+      self = .userBirthday
+
+    case .userEvents?:
+      self = .userEvents
+
+    case .userFriends?:
+      self = .userFriends
+
+    case .userGender?:
+      self = .userGender
+
+    case .userHometown?:
+      self = .userHometown
+
+    case .userLikes?:
+      self = .userLikes
+
+    case .userLink?:
+      self = .userLink
+
+    case .userLocation?:
+      self = .userLocation
+
+    case .userMobilePhone?:
+      self = .userMobilePhone
+
+    case .userPhotos?:
+      self = .userPhotos
+
+    case .userPosts?:
+      self = .userPosts
+
+    case .userTaggedPlaces?:
+      self = .userTaggedPlaces
+
+    case .userVideos?:
+      self = .userVideos
+
+    case .other?, nil:
+      self = .other(value: value)
+    }
+  }
+
+  // MARK: - Variables
+
+  var key: CodingKeys {
+    switch self {
+    case .email:
+      return .email
+
+    case .groupsAccessMemberInfo:
+      return .groupsAccessMemberInfo
+
+    case .publishToGroups:
+      return .publishToGroups
+
+    case .userAgeRange:
+      return .userAgeRange
+
+    case .userBirthday:
+      return .userBirthday
+
+    case .userEvents:
+      return .userEvents
+
+    case .userFriends:
+      return .userFriends
+
+    case .userGender:
+      return .userGender
+
+    case .userHometown:
+      return .userHometown
+
+    case .userLikes:
+      return .userLikes
+
+    case .userLink:
+      return .userLink
+
+    case .userLocation:
+      return .userLocation
+
+    case .userMobilePhone:
+      return .userMobilePhone
+
+    case .userPhotos:
+      return .userPhotos
+
+    case .userPosts:
+      return .userPosts
+
+    case .userTaggedPlaces:
+      return .userTaggedPlaces
+
+    case .userVideos:
+      return .userVideos
+
+    case .other:
+      return .other
+    }
+  }
+
+  var description: String {
+    guard case .other(let value) = self else {
+      return key.rawValue
+    }
+
+    return value
+  }
+
+  // MARK: - Functions
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    try container.encode(description.snakeCased())
+  }
 }

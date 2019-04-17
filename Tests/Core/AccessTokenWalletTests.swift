@@ -24,6 +24,7 @@ class AccessTokenWalletTests: XCTestCase {
   private let token = AccessTokenFixtures.validToken
   private var fakeCookieUtility: FakeCookieUtility.Type!
   private var fakeAccessTokenCache: FakeAccessTokenCache!
+  private var fakeSecureStore: FakeSecureStore!
   private var fakeSetttings = FakeSettings(graphApiDebugParameter: .none)
   private var fakeNotificationCenter: FakeNotificationCenter!
   private var fakeConnection: FakeGraphRequestConnection!
@@ -46,7 +47,8 @@ class AccessTokenWalletTests: XCTestCase {
   func setupDependencies() {
     fakeCookieUtility = FakeCookieUtility.self
     fakeGraphRequestPiggybackManager = FakeGraphRequestPiggybackManager.self
-    fakeAccessTokenCache = FakeAccessTokenCache()
+    fakeSecureStore = FakeSecureStore()
+    fakeAccessTokenCache = FakeAccessTokenCache(secureStore: fakeSecureStore)
     fakeSetttings.accessTokenCache = fakeAccessTokenCache
     fakeNotificationCenter = FakeNotificationCenter()
     fakeConnection = FakeGraphRequestConnection()
