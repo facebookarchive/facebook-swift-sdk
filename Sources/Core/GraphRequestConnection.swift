@@ -155,7 +155,7 @@ class GraphRequestConnection: GraphRequestConnecting {
   }
 
   private func urlRequest(with graphRequest: GraphRequest) -> URLRequest {
-    guard let url = URLBuilder().buildURL(path: graphRequest.graphPath.description) else {
+    guard let url = URLBuilder().buildURL(for: graphRequest) else {
       fatalError("Should never fail to build a url from the url builder")
     }
 
