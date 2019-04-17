@@ -21,6 +21,7 @@ import Foundation
 class UserProfileService {
   private let oneDayInSeconds = TimeInterval(60 * 60 * 24)
   private(set) var graphConnectionProvider: GraphConnectionProviding
+  private(set) var logger: Logging
   private(set) var notificationCenter: NotificationObserving & NotificationPosting
 
   private(set) var userProfile: UserProfile?
@@ -52,9 +53,11 @@ class UserProfileService {
 
   init(
     graphConnectionProvider: GraphConnectionProviding = GraphConnectionProvider(),
+    logger: Logging = Logger(),
     notificationCenter: NotificationObserving & NotificationPosting = NotificationCenter.default
     ) {
     self.graphConnectionProvider = graphConnectionProvider
+    self.logger = logger
     self.notificationCenter = notificationCenter
   }
 
@@ -100,14 +103,13 @@ class UserProfileService {
         .graphRequestConnection()
         .getObject(
           UserProfile.self,
-          for: request) { result in
+          for: request) { [weak self] result in
             switch result {
             case let .success(profile):
-              self.setCurrent(profile)
+              self?.setCurrent(profile)
 
-            case let .failure:
-              // TODO: Figure out what to log here
-              break
+            case let .failure(error):
+              self?.logger.log(.networkRequests, error.localizedDescription)
             }
             completion(result)
         }

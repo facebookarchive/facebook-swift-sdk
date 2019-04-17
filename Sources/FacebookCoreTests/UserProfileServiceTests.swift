@@ -22,6 +22,7 @@ import XCTest
 class UserProfileServiceTests: XCTestCase {
   private let oneDayInSeconds = TimeInterval(60 * 60 * 24)
   private var fakeConnection: FakeGraphRequestConnection!
+  private var fakeLogger: FakeLogger!
   private var fakeGraphConnectionProvider: FakeGraphConnectionProvider!
   private let fakeNotificationCenter = FakeNotificationCenter()
   private var service: UserProfileService!
@@ -30,10 +31,12 @@ class UserProfileServiceTests: XCTestCase {
     super.setUp()
 
     fakeConnection = FakeGraphRequestConnection()
+    fakeLogger = FakeLogger()
     fakeGraphConnectionProvider = FakeGraphConnectionProvider(connection: fakeConnection)
 
     service = UserProfileService(
       graphConnectionProvider: fakeGraphConnectionProvider,
+      logger: fakeLogger,
       notificationCenter: fakeNotificationCenter
     )
   }
@@ -136,6 +139,8 @@ class UserProfileServiceTests: XCTestCase {
                  "Should not set a profile if no profile is fetched")
     XCTAssertNil(fakeNotificationCenter.capturedPostedUserProfile,
                  "Should not notify on a failure to fetch a user profile")
+    XCTAssertEqual(fakeLogger.capturedMessages, ["The operation couldn’t be completed. (NSURLErrorDomain error 1.)"],
+                   "Should log the expected error on a failure to fetch a user profile")
   }
 
   func testLoadingWithFreshProfileAndMatchingTokenIdentifier() {
@@ -241,6 +246,8 @@ class UserProfileServiceTests: XCTestCase {
                    "Should not change the existing user profile on failure to fetch a new profile")
     XCTAssertNil(fakeNotificationCenter.capturedPostedUserProfile,
                  "Should not post a notification if a user profile fails to load")
+    XCTAssertEqual(fakeLogger.capturedMessages, ["The operation couldn’t be completed. (NSURLErrorDomain error 1.)"],
+                   "Should log the expected error on a failure to fetch a user profile")
   }
 
   func testSuccessfullyLoadingWithStaleProfileNonMatchingTokenIdentifier() {
@@ -290,5 +297,7 @@ class UserProfileServiceTests: XCTestCase {
                   "Should attempt to fetch a new profile if the token's user id does not match the existing profile's id")
     XCTAssertEqual(service.userProfile, profile,
                    "Should not fetch a new profile if the token's user id does not match the existing profile's id")
+    XCTAssertEqual(fakeLogger.capturedMessages, ["The operation couldn’t be completed. (NSURLErrorDomain error 1.)"],
+                   "Should log the expected error on a failure to fetch a user profile")
   }
 }
