@@ -122,7 +122,7 @@ class URLSessionTaskProxy {
     if nsError.domain == NSURLErrorDomain,
       nsError.code == NSURLErrorSecureConnectionFailed,
       processInfo.isOperatingSystemAtLeast(version) {
-        logger.log(.developerErrors, DeveloperErrorStrings.appTransportSecurity.localized)
+      logger.log(.developerErrors, DeveloperErrorStrings.appTransportSecurity.localized)
     }
   }
 }

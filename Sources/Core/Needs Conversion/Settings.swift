@@ -66,19 +66,19 @@ class Settings: SettingsManaging {
 
   /**
    The current Facebook SDK logging behaviors.
-   
+
    This should consist of a set of LoggingBehavior enum values backed by `String`s indicating
    what information should be logged.
-   
+
    Set to an empty set in order to disable all logging.
-   
+
    You can also define this via a `String` array in your app plist with key "FacebookLoggingBehavior"
-   
+
    **IMPORTANT:** any single behavior in your plist must match the rawValue of the corresponding
    `LoggingBehavior` you want to enable.
-   
+
    You may also add and remove individual values via standard `Set` value convenience setters
-   
+
    The default is a set consisting of one value: `LoggingBehavior.developerErrors`
    */
   var loggingBehaviors: Set<LoggingBehavior>

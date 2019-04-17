@@ -111,8 +111,8 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testNonExpiredToken() {
-      XCTAssertFalse(AccessTokenFixtures.validToken.isExpired,
-                     "A token should not be considered expired if its expiration date (distant future by default) is later than now")
+    XCTAssertFalse(AccessTokenFixtures.validToken.isExpired,
+                   "A token should not be considered expired if its expiration date (distant future by default) is later than now")
   }
 
   func testExpiredToken() {

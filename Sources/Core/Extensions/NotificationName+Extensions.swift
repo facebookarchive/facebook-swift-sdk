@@ -25,7 +25,7 @@ extension Notification.Name {
    The userInfo dictionary of the notification will contain keys
    `FBSDKAccessTokenChangeOldKey` and
    `FBSDKAccessTokenChangeNewKey`.
-  */
+   */
   static let FBSDKAccessTokenDidChangeNotification: Notification.Name
     = Notification.Name("FBSDKAccessTokenDidChangeNotification")
 }
