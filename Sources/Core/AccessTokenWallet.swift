@@ -30,7 +30,7 @@ class AccessTokenWallet {
    The global shared instance of AccessTokenWallet
 
    Overriding this value may result in unexpected and unwanted behavior
-  */
+   */
   static let shared = AccessTokenWallet()
   // swiftlint:enable explicit_type_interface
 
@@ -53,45 +53,45 @@ class AccessTokenWallet {
 
    The `currentAccessToken` is a convenient representation of the token of the
    current user and is used by other SDK components (like `FBSDKLoginManager`).
-  */
+   */
   var currentAccessToken: AccessToken? {
     return accessToken
   }
 
   /// Sets the stored access token. Passing a nil value will clear the `currentAccessToken` and delete web view cookies
   func setCurrent(_ token: AccessToken?) {
-      if token != currentAccessToken {
-        var userInfo: [AnyHashable: Any] = [:]
+    if token != currentAccessToken {
+      var userInfo: [AnyHashable: Any] = [:]
 
-        if let token = token {
-          userInfo.updateValue(token, forKey: NotificationKeys.FBSDKAccessTokenChangeNewKey)
-        }
-        if let previousToken = currentAccessToken {
-          userInfo.updateValue(previousToken, forKey: NotificationKeys.FBSDKAccessTokenChangeOldKey)
-        }
-
-        // We set this flag also when the current Access Token was not valid,
-        // since there might be legacy code relying on it
-        if currentAccessToken?.userID != token?.userID || !isCurrentAccessTokenActive {
-            userInfo.updateValue(true, forKey: NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey)
-        }
-
-        accessToken = token
-
-        // Only need to keep current session in web view for the case when token is current
-        // When token is abandoned cookies must to be cleaned up immediately
-        if token == nil {
-          cookieUtility.deleteFacebookCookies()
-        }
-
-        settings.accessTokenCache?.accessToken = token
-
-        notificationCenter.post(
-          name: .FBSDKAccessTokenDidChangeNotification,
-          object: AccessToken.self,
-          userInfo: userInfo
-        )
+      if let token = token {
+        userInfo.updateValue(token, forKey: NotificationKeys.FBSDKAccessTokenChangeNewKey)
       }
+      if let previousToken = currentAccessToken {
+        userInfo.updateValue(previousToken, forKey: NotificationKeys.FBSDKAccessTokenChangeOldKey)
+      }
+
+      // We set this flag also when the current Access Token was not valid,
+      // since there might be legacy code relying on it
+      if currentAccessToken?.userID != token?.userID || !isCurrentAccessTokenActive {
+        userInfo.updateValue(true, forKey: NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey)
+      }
+
+      accessToken = token
+
+      // Only need to keep current session in web view for the case when token is current
+      // When token is abandoned cookies must to be cleaned up immediately
+      if token == nil {
+        cookieUtility.deleteFacebookCookies()
+      }
+
+      settings.accessTokenCache?.accessToken = token
+
+      notificationCenter.post(
+        name: .FBSDKAccessTokenDidChangeNotification,
+        object: AccessToken.self,
+        userInfo: userInfo
+      )
+    }
   }
 
   /// Returns true if the currentAccessToken is not nil AND currentAccessToken is not expired
@@ -128,28 +128,28 @@ class AccessTokenWallet {
      On a fresh start of the app where the SDK reads in the cached value
      of an access token, this key will also exist since the access token
      is moving from a null state (no user) to a non-null state (user).
-    */
+     */
     static let FBSDKAccessTokenDidChangeUserIDKey: String = "FBSDKAccessTokenDidChangeUserIDKey"
 
     /**
      key in notification's userInfo object for getting the new token.
 
      If there is no new token, the key will not be present.
-    */
+     */
     static let FBSDKAccessTokenChangeNewKey: String = "FBSDKAccessToken"
 
     /**
      key in notification's userInfo object for getting the old token.
 
      If there was no old token, the key will not be present.
-    */
+     */
     static let FBSDKAccessTokenChangeOldKey: String = "FBSDKAccessTokenOld"
 
     // TODO: can probably move this into TokenExpirer when it is included in the project
-//    ///
-//    /// A key in the notification's userInfo that will be set
-//    /// if and only if the token has expired.
-//    ///
-//    static let FBSDKAccessTokenDidExpireKey = "FBSDKAccessTokenDidExpireKey"
+    //    ///
+    //    /// A key in the notification's userInfo that will be set
+    //    /// if and only if the token has expired.
+    //    ///
+    //    static let FBSDKAccessTokenDidExpireKey = "FBSDKAccessTokenDidExpireKey"
   }
 }
