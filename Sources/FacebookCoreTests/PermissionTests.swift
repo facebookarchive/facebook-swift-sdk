@@ -62,7 +62,7 @@ class PermissionTests: XCTestCase {
              .userVideos,
              .unknown:
           break
-      }
+        }
     }
   }
 }

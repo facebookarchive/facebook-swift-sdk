@@ -53,7 +53,7 @@ struct GraphRequest {
   /**
    The HTTPMethod to use for the request, access rawValues for encoding purposes
    ex: HTTPMethod.get.rawValue is "GET".
-  */
+   */
   let httpMethod: HTTPMethod
 
   /// An optional access token used by the request.
@@ -62,7 +62,7 @@ struct GraphRequest {
   /**
    The Graph API version to use (e.g., "v2.0")
    Defaults to `Settings.graphAPIVersion` if not specified during initialization
-  */
+   */
   let version: GraphAPIVersion
 
   var flags: Flags
@@ -70,12 +70,12 @@ struct GraphRequest {
   /**
    Initializes a new instance of a graph request.
 
-     - Parameter graphPath: the graph path (e.g., @"me")
-     - Parameter parameters: the optional parameters dictionary
-     - Parameter tokenString: an optional access token to use, must provide a token for paths that require a token
-     - Parameter version: the optional Graph API version (e.g., "v2.0"). defaults to `Settings.shared.graphAPIVersion`
-     - Parameter httpMethod: the HTTP method. Empty String defaults to `HTTPMethod.get`
-  */
+   - Parameter graphPath: the graph path (e.g., @"me")
+   - Parameter parameters: the optional parameters dictionary
+   - Parameter tokenString: an optional access token to use, must provide a token for paths that require a token
+   - Parameter version: the optional Graph API version (e.g., "v2.0"). defaults to `Settings.shared.graphAPIVersion`
+   - Parameter httpMethod: the HTTP method. Empty String defaults to `HTTPMethod.get`
+   */
   init(
     graphPath: GraphPath,
     parameters: [String: AnyHashable] = [:],
@@ -129,7 +129,7 @@ struct GraphRequest {
    - Parameter completion: A handler for when the `GraphRequestConnection` completes the `GraphRequest`
 
    - Returns: An object that conforms to `GraphRequestConnecting` and is executing the `GraphRequest`
-  */
+   */
   func start(
     with connection: GraphRequestConnecting = GraphRequestConnection(),
     completion: @escaping GraphRequestBlock

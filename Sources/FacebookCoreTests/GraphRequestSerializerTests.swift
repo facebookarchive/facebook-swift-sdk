@@ -190,7 +190,7 @@ class GraphRequestSerializerTests: XCTestCase {
       with: validURL,
       graphRequest: postRequestWithParameters
       ) else {
-      return XCTFail("Should be able to serialize a valid url and request")
+        return XCTFail("Should be able to serialize a valid url and request")
     }
 
     XCTAssertEqual(serializedURL.absoluteString, expectedURLString,
@@ -205,7 +205,7 @@ class GraphRequestSerializerTests: XCTestCase {
       with: validURL,
       graphRequest: getRequestWithParameters
       ) else {
-      return XCTFail("Should be able to serialize a valid url and request")
+        return XCTFail("Should be able to serialize a valid url and request")
     }
 
     XCTAssertEqual(serializedURL.absoluteString, expectedURLString,

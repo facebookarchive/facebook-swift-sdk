@@ -20,15 +20,15 @@
 import XCTest
 
 class GraphConnectionProviderTests: XCTestCase {
-    func testProvidingMultipleConnections() {
-      let provider = GraphConnectionProvider()
+  func testProvidingMultipleConnections() {
+    let provider = GraphConnectionProvider()
 
-      guard let connection1 = provider.graphRequestConnection() as? GraphRequestConnection,
-        let connection2 = provider.graphRequestConnection() as? GraphRequestConnection else {
-          return XCTFail("A graph connection provider should be able to provider graph request connections of a known type")
-      }
-
-      XCTAssertFalse(connection1 === connection2,
-                     "A graph connection provider should return a unique connection instance per request")
+    guard let connection1 = provider.graphRequestConnection() as? GraphRequestConnection,
+      let connection2 = provider.graphRequestConnection() as? GraphRequestConnection else {
+        return XCTFail("A graph connection provider should be able to provider graph request connections of a known type")
     }
+
+    XCTAssertFalse(connection1 === connection2,
+                   "A graph connection provider should return a unique connection instance per request")
+  }
 }

@@ -30,8 +30,8 @@ import Foundation
  Decoding
  ```
  [
-  ["name": "joe"],
-  ["name": ""]
+ ["name": "joe"],
+ ["name": ""]
  ]
  ```
  Should result in a list with a single User entry with the name "joe" as opposed to failing to

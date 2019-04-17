@@ -202,7 +202,7 @@ class GraphRequestConnection: GraphRequestConnecting {
    - Parameter remoteType: A generic Decodable type to attempt to parse the data into
 
    - Returns
-    A Result type with a Success of the generic RemoteType and a Failure of Error
+   A Result type with a Success of the generic RemoteType and a Failure of Error
    */
   func convertFetchedDataToObjectResult<RemoteType: Decodable>(
     _ remoteType: RemoteType.Type,
@@ -225,13 +225,13 @@ class GraphRequestConnection: GraphRequestConnecting {
   /**
    Fetches the data that will later be turned into a Decodable object.
    This uses a GraphRequest to create a URLRequest, spins up a URLSessionDataTask
-  and calls the completion with either the data from that task or an error
+   and calls the completion with either the data from that task or an error
 
    - Parameter graphRequest: The graph request object to use in creating the data request
    - Parameter completion: A Result type with a Success of Data and a Failure of Error
 
    - Returns
-    URLSessionTaskProxy - a wrapper for a url session task that allows you to cancel an in-flight
+   URLSessionTaskProxy - a wrapper for a url session task that allows you to cancel an in-flight
    request
    */
   func fetchData(

@@ -40,7 +40,7 @@ class ErrorConfigurationEntryTests: XCTestCase {
       options: [SampleLocalizableStrings.bar.rawValue, SampleLocalizableStrings.baz.rawValue],
       bundle: testBundle
       ) else {
-      return XCTFail("Should be able to create error strings with valid message and option strings")
+        return XCTFail("Should be able to create error strings with valid message and option strings")
     }
     let configuration = ErrorConfigurationEntry(
       strings: strings,

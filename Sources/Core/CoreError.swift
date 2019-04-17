@@ -37,7 +37,7 @@ enum CoreError: FBError {
   /**
    Indicates a request failed due to a network error. Use the underlying error property to retrieve
    the error object from the NSURLSession for more information.
-  */
+   */
   case network
 
   /// Used for errors encountered during an App Events flush.
@@ -47,7 +47,7 @@ enum CoreError: FBError {
    Indicates an endpoint that returns a binary response was used with GraphRequestConnection.
 
    Endpoints that return image/jpg, etc. should be accessed using URLRequest
-  */
+   */
   case graphRequestNonTextMimeTypeReturned
 
   /**
@@ -55,7 +55,7 @@ enum CoreError: FBError {
 
    You can get this error if you are not using the most recent SDK, or you are accessing a version of the
    Graph API incompatible with the current SDK.
-  */
+   */
   case graphRequestProtocolMismatch
 
   // TODO: this may be part of a more specific error Type (GraphRequestError)
@@ -71,7 +71,7 @@ enum CoreError: FBError {
    or that the dialog is unavailable.
 
    Subsequent attempts to use the dialog may succeed as the configuration is loaded.
-  */
+   */
   case dialogUnavailable
 
   /// Indicates an operation failed because a required access token was not found.
