@@ -70,8 +70,8 @@ struct GraphRequestSerializer {
   /**
    Returns an updated list of parameters that includes information about debug levels
 
-    - Parameter parameters: a list of `URLQueryItem`s to use in constructing a new list of `URLQueryItem`
-                    that includes information about debug levels
+   - Parameter parameters: a list of `URLQueryItem`s to use in constructing a new list of `URLQueryItem`
+   that includes information about debug levels
    */
   func preProcess(_ parameters: [URLQueryItem]) -> [URLQueryItem] {
     switch settings.graphApiDebugParameter {
