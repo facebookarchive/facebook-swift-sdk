@@ -65,7 +65,13 @@ class UserProfileService {
   }
 
   @objc
-  func refresh() {}
+  func refresh(notification: Notification) {
+    if let newToken = notification.userInfo?[
+      AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeNewKey
+      ] as? AccessToken {
+      loadProfile(withToken: newToken)
+    }
+  }
 
   func setCurrent(_ userProfile: UserProfile) {
     var userInfo = [
@@ -88,9 +94,18 @@ class UserProfileService {
     )
   }
 
+  /**
+   Loads the current profile and passes it to an optional completion block.
+
+   - Parameter token: AccessToken
+   - Parameter completion: The Result closure to be invoked once the profile is loaded
+
+   If the profile is already loaded, this method will call the completion synchronously, otherwise it
+   will begin a graph request to update `userProfile` and then call the completion when finished.
+   */
   func loadProfile(
     withToken token: AccessToken,
-    completion: @escaping (Result<UserProfile, Error>) -> Void
+    completion: ((Result<UserProfile, Error>) -> Void)? = nil
     ) {
     let request = GraphRequest(
       graphPath: GraphPath.me,
@@ -115,7 +130,7 @@ class UserProfileService {
             case let .failure(error):
               self?.logger.log(.networkRequests, error.localizedDescription)
             }
-            completion(result)
+            completion?(result)
         }
     }
   }
