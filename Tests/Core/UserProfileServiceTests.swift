@@ -26,6 +26,8 @@ class UserProfileServiceTests: XCTestCase {
   private var fakeGraphConnectionProvider: FakeGraphConnectionProvider!
   private let fakeNotificationCenter = FakeNotificationCenter()
   private var service: UserProfileService!
+  private var userDefaultsSpy: UserDefaultsSpy!
+  private var store: UserProfileStore!
 
   override func setUp() {
     super.setUp()
@@ -33,11 +35,14 @@ class UserProfileServiceTests: XCTestCase {
     fakeConnection = FakeGraphRequestConnection()
     fakeLogger = FakeLogger()
     fakeGraphConnectionProvider = FakeGraphConnectionProvider(connection: fakeConnection)
+    userDefaultsSpy = UserDefaultsSpy(name: name)
+    store = UserProfileStore(store: userDefaultsSpy)
 
     service = UserProfileService(
       graphConnectionProvider: fakeGraphConnectionProvider,
       logger: fakeLogger,
-      notificationCenter: fakeNotificationCenter
+      notificationCenter: fakeNotificationCenter,
+      store: store
     )
   }
 
@@ -299,5 +304,16 @@ class UserProfileServiceTests: XCTestCase {
                    "Should not fetch a new profile if the token's user id does not match the existing profile's id")
     XCTAssertEqual(fakeLogger.capturedMessages, ["The operation couldn’t be completed. (NSURLErrorDomain error 1.)"],
                    "Should log the expected error on a failure to fetch a user profile")
+  }
+
+  // MARK: - Persistence
+
+  func testSettingProfileInvokesCache() {
+    let profile = SampleUserProfile.valid()
+
+    service.setCurrent(profile)
+
+    XCTAssertEqual(store.cachedProfile, profile,
+                   "Setting a user profile on the service should persist it in the cache")
   }
 }
