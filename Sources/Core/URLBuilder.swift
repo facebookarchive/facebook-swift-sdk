@@ -49,6 +49,18 @@ struct URLBuilder {
     return components.url
   }
 
+  /**
+   Convenience initializer for building a `URL` from a `GraphRequest`
+   */
+  func buildURL(for request: GraphRequest) -> URL? {
+    let queryItems = URLQueryItemBuilder.build(from: request.parameters)
+
+    return self.buildURL(
+      path: request.graphPath.description,
+      queryItems: queryItems
+    )
+  }
+
   private func urlHost(with prefix: String) -> String {
     let domainPrefix = settings.domainPrefix ?? ""
     var host = domainPrefix.isEmpty ? URLBuilder.hostname : "\(domainPrefix).\(URLBuilder.hostname)"
