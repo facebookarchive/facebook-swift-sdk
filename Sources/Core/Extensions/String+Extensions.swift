@@ -19,6 +19,11 @@
 import Foundation
 
 extension String {
+  /**
+   Converts a camelCase string to snake_case
+
+   - Returns: The string converted to snake case
+   */
   func snakeCased() -> String? {
     let pattern = "([a-z0-9])([A-Z])"
 
@@ -30,6 +35,11 @@ extension String {
     return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "$1_$2").lowercased()
   }
 
+  /**
+   Converts a snake_case string to camelCase
+
+   - Returns: The string converted to camel case
+   */
   func camelCased(with separator: Character = "_") -> String {
     return self.lowercased()
       .split(separator: separator)
