@@ -16,13 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
-
-// This will eventually be replaced by the rewrite of FBSDKAccessTokenCaching
-// for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
-
+/// The Access Token Caching Protocol
 protocol AccessTokenCaching: AnyObject {
+  /// Returns an `AccessToken` cached in the keychain, if present. Else, returns `nil`
   var accessToken: AccessToken? { get set }
 
+  /**
+  Creates an `AccessTokenCaching` instance
+
+  - Parameter secureStore: The `SecureStore` to use for caching
+  */
   init(secureStore: SecureStore)
 }

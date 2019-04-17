@@ -31,7 +31,6 @@ class AccessTokenCache: AccessTokenCaching {
   /// Used to cache the Access Token
   private var store: SecureStore
 
-  /// Computed
   var accessToken: AccessToken? {
     get {
       do {
