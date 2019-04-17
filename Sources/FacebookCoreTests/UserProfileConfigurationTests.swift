@@ -27,6 +27,11 @@ class UserProfileConfigurationTests: XCTestCase {
                   "A profile service should have the expected concrete implementation for its graph connection provider")
   }
 
+  func testLoggerDependency() {
+    XCTAssertTrue(profileService.logger is Logger,
+                  "A profile service should have the expected concrete implementation for its logging dependency")
+  }
+
   func testNotificationCenterDependency() {
     XCTAssertTrue(profileService.notificationCenter is NotificationCenter,
                   "A profile service should have the expected concrete implementation for its notification center dependency")
