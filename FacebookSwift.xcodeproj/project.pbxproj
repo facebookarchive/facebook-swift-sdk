@@ -371,6 +371,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5209106F2266C61F00BA8715 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F49FA47A222880FE0008CAD6 /* Core */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		8115C0CE1CFE540D001FF33B = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +387,7 @@
 				8115C0D91CFE540D001FF33B /* Products */,
 				8115C0E31CFE543A001FF33B /* Resources */,
 				811C5E5D1CFFD52B00E4A925 /* Sources */,
+				5209106F2266C61F00BA8715 /* Tests */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -407,7 +416,6 @@
 			isa = PBXGroup;
 			children = (
 				811C5E5E1CFFD52B00E4A925 /* Core */,
-				F49FA47A222880FE0008CAD6 /* FacebookCoreTests */,
 				811C5E601CFFD52B00E4A925 /* Login */,
 				811C5E621CFFD52B00E4A925 /* Share */,
 				F48A749D22399FAB007192F6 /* LocalizableStrings.strings */,
@@ -606,7 +614,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		F49FA47A222880FE0008CAD6 /* FacebookCoreTests */ = {
+		F49FA47A222880FE0008CAD6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				F4C32DA0223DA13E00FF1F86 /* Extensions */,
@@ -658,7 +666,7 @@
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
 			);
-			path = FacebookCoreTests;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		F49FA49F222896310008CAD6 /* Configurations */ = {
@@ -1323,7 +1331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/FacebookCoreTests/Info.plist;
+				INFOPLIST_FILE = Tests/Core/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1381,7 +1389,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/FacebookCoreTests/Info.plist;
+				INFOPLIST_FILE = Tests/Core/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1483,7 +1491,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/FacebookCoreTests/Info.plist;
+				INFOPLIST_FILE = Tests/Core/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
