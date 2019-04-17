@@ -16,32 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// MARK: Imports -
+
 import Foundation
 
-// This will eventually be replaced by the rewrite of FBSDKAccessTokenCache
-// for now it is needed as a transient dependency of AccessTokenWallet (via Settings)
-
-// TODO:
-// This public, canonical type makes this usable from anywhere that knows about access tokens.
-// Internally, it should have a bi-directional codable "mirror type", something like
-// `CacheableAccessToken` that is used for converting a canonical AccessToken to/from a
-// serializable medium. This will help separate the AccessToken type from any specific
-// encoding formats.
-//
+/// The Access Token Cache
 class AccessTokenCache: AccessTokenCaching {
   // TODO: Migrate Old Access Token Caching Strategy for v4 Backwards compatability
+  // TODO: Use FBID as key to store in keychain?
 
-  let accessTokenUserDefaultsKey: String = "com.facebook.sdk.v5.AccessTokenUUIDKey"
+  /// Used to store the `UUID` in `UserDefaults`
+  let accessTokenKey: String = "com.facebook.sdk.v5.AccessTokenKey"
 
+  /// Used to cache the Access Token
   private var store: SecureStore
 
+  /// Computed
   var accessToken: AccessToken? {
     get {
-      let defaults: UserDefaults = .standard
-      guard let accessTokenKey = defaults.string(forKey: accessTokenUserDefaultsKey) else {
-        return nil
-      }
-
       do {
         return try store.get(AccessToken.self, forKey: accessTokenKey)
       } catch {
@@ -49,30 +41,18 @@ class AccessTokenCache: AccessTokenCaching {
         return nil
       }
     }
-    set(token) {
-      let defaults: UserDefaults = .standard
-      let accessTokenKey = defaults.string(forKey: accessTokenUserDefaultsKey) ?? UUID().uuidString
-
-      guard let token = token else {
-        do {
-          try store.remove(forKey: accessTokenKey)
-        } catch {
-          print(error)
-        }
-
-        defaults.removeObject(forKey: accessTokenUserDefaultsKey)
-        defaults.synchronize()
-        return
-      }
-
+    set {
       do {
-        try store.set(token, forKey: accessTokenKey)
+        switch newValue {
+        case let token?:
+          try store.set(token, forKey: accessTokenKey)
+
+        case nil:
+          try store.remove(forKey: accessTokenKey)
+        }
       } catch {
         print(error)
       }
-
-      defaults.set(accessTokenKey, forKey: accessTokenUserDefaultsKey)
-      defaults.synchronize()
     }
   }
 

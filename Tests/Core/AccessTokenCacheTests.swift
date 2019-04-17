@@ -20,18 +20,10 @@
 import XCTest
 
 class AccessTokenCacheTests: XCTestCase {
-  var cache: AccessTokenCache!
   var store = FakeSecureStore()
-
-  override func setUp() {
-    super.setUp()
-
-    cache = AccessTokenCache(secureStore: store)
-
-    let defaults: UserDefaults = .standard
-    defaults.removeObject(forKey: cache.accessTokenUserDefaultsKey)
-    defaults.synchronize()
-  }
+  lazy var cache = {
+    AccessTokenCache(secureStore: self.store)
+  }()
 
   func testAccessTokenCaching() {
     cache.accessToken = AccessTokenFixtures.validToken
