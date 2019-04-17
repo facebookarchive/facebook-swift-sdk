@@ -23,6 +23,7 @@ class UserProfileService {
   private(set) var graphConnectionProvider: GraphConnectionProviding
   private(set) var logger: Logging
   private(set) var notificationCenter: NotificationObserving & NotificationPosting
+  private(set) var store: UserProfileStore
 
   private(set) var userProfile: UserProfile?
 
@@ -54,11 +55,13 @@ class UserProfileService {
   init(
     graphConnectionProvider: GraphConnectionProviding = GraphConnectionProvider(),
     logger: Logging = Logger(),
-    notificationCenter: NotificationObserving & NotificationPosting = NotificationCenter.default
+    notificationCenter: NotificationObserving & NotificationPosting = NotificationCenter.default,
+    store: UserProfileStore = UserProfileStore()
     ) {
     self.graphConnectionProvider = graphConnectionProvider
     self.logger = logger
     self.notificationCenter = notificationCenter
+    self.store = store
   }
 
   @objc
@@ -76,6 +79,7 @@ class UserProfileService {
       )
     }
 
+    store.cache(userProfile)
     self.userProfile = userProfile
     notificationCenter.post(
       name: .FBSDKProfileDidChangeNotification,

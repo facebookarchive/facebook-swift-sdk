@@ -18,30 +18,25 @@
 
 import Foundation
 
-struct UserProfile: Equatable, Codable {
-  /// The user id
-  let identifier: String
+struct UserProfileStore {
+  let store: DataPersisting
+  let profileKey: String = "userProfile"
 
-  /// The user's complete name
-  let name: String
+  var cachedProfile: UserProfile? {
+    guard let data = store.data(forKey: profileKey) else {
+      return nil
+    }
 
-  /// The user's first name
-  let firstName: String?
+    return try? PropertyListDecoder().decode(UserProfile.self, from: data)
+  }
 
-  /// The user's middle name
-  let middleName: String?
+  init(store: DataPersisting = UserDefaults.standard) {
+    self.store = store
+  }
 
-  /// The user's last name
-  let lastName: String?
+  func cache(_ profile: UserProfile) {
+    let data = try? PropertyListEncoder().encode(profile)
 
-  /**
-   A URL to the user's profile.
-
-   Consider using the `AppLinkResolver` utility to resolve this
-   to an app link to link directly to the user's profile in the Facebook app.
-   */
-  let url: URL?
-
-  /// The last time the profile data was fetched.
-  let fetchedDate: Date
+    store.set(data, forKey: profileKey)
+  }
 }

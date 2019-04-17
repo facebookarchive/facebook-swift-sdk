@@ -18,30 +18,9 @@
 
 import Foundation
 
-struct UserProfile: Equatable, Codable {
-  /// The user id
-  let identifier: String
+extension UserDefaults: DataPersisting {}
 
-  /// The user's complete name
-  let name: String
-
-  /// The user's first name
-  let firstName: String?
-
-  /// The user's middle name
-  let middleName: String?
-
-  /// The user's last name
-  let lastName: String?
-
-  /**
-   A URL to the user's profile.
-
-   Consider using the `AppLinkResolver` utility to resolve this
-   to an app link to link directly to the user's profile in the Facebook app.
-   */
-  let url: URL?
-
-  /// The last time the profile data was fetched.
-  let fetchedDate: Date
+protocol DataPersisting {
+  func set(_ value: Any?, forKey defaultName: String)
+  func data(forKey defaultName: String) -> Data?
 }
