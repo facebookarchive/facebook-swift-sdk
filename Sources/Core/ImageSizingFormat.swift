@@ -16,29 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable identifier_name
-
 import Foundation
 
-enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
-  case me
-  case picture
-  case other(String)
-
-  init(stringLiteral value: String) {
-    self = .other(value)
-  }
+enum ImageSizingFormat: CustomStringConvertible {
+  case normal(height: UInt, width: UInt)
+  case square(height: UInt)
 
   var description: String {
     switch self {
-    case .me:
-      return "me"
+    case .normal:
+      return "normal"
 
-    case .picture:
-      return "picture"
-
-    case .other(let value):
-      return value
+    case .square:
+      return "square"
     }
   }
 }
