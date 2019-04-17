@@ -57,8 +57,8 @@ class AccessTokenCache: AccessTokenCaching {
 
   required init(
     secureStore: SecureStore =
-      KeychainStore(service: "com.facebook.sdk.tokencache.\(Bundle.main.bundleIdentifier ?? "")")
-  ) {
+    KeychainStore(service: "com.facebook.sdk.tokencache.\(Bundle.main.bundleIdentifier ?? "")")
+    ) {
     self.store = secureStore
   }
 }

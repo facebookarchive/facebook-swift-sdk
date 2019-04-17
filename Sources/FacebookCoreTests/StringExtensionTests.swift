@@ -20,26 +20,26 @@
 import XCTest
 
 class StringExtensionTests: XCTestCase {
-    func testSnakeCaseToCamelCase() {
-      let inputs: [String] = [
-        "test",
-        "test_test",
-        "test_test_test_test",
-        "testtesttesttest"
-      ]
+  func testSnakeCaseToCamelCase() {
+    let inputs: [String] = [
+      "test",
+      "test_test",
+      "test_test_test_test",
+      "testtesttesttest"
+    ]
 
-      let expected: [String] = [
-        "test",
-        "testTest",
-        "testTestTestTest",
-        "testtesttesttest"
-      ]
+    let expected: [String] = [
+      "test",
+      "testTest",
+      "testTestTestTest",
+      "testtesttesttest"
+    ]
 
-      for val in zip(inputs, expected) {
-        XCTAssertEqual(val.0.camelCased(), val.1,
-                       "Should properly convert to camelCase")
-      }
+    for val in zip(inputs, expected) {
+      XCTAssertEqual(val.0.camelCased(), val.1,
+                     "Should properly convert to camelCase")
     }
+  }
 
   func testCamelCaseToSnakeCase() {
     let inputs: [String] = [

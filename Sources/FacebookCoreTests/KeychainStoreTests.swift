@@ -50,26 +50,26 @@ class KeychainStoreTests: XCTestCase {
       try store.set("value1", forKey: "key1")
     } catch {
       print(error)
-//      XCTAssertNil(error,
-//                   "Error should be nil")
+      //      XCTAssertNil(error,
+      //                   "Error should be nil")
     }
 
     do {
       let value = try store.string(forKey: "key1")
-//      XCTAssertEqual(value, "value1",
-//                     "String retrieved should be equal to the string stored")
+      //      XCTAssertEqual(value, "value1",
+      //                     "String retrieved should be equal to the string stored")
     } catch {
       print(error)
-//      XCTAssertNil(error,
-//                   "Error should be nil")
+      //      XCTAssertNil(error,
+      //                   "Error should be nil")
     }
 
     do {
       try store.remove(forKey: "key1")
     } catch {
       print(error)
-//      XCTAssertNil(error,
-//                   "Error should be nil")
+      //      XCTAssertNil(error,
+      //                   "Error should be nil")
     }
   }
 

@@ -21,12 +21,12 @@
 /// The Secure Store Protocol
 protocol SecureStore {
   /**
-  Retrieves a secure value associated with a given key
+   Retrieves a secure value associated with a given key
 
-  - Parameter key: The key used to retrieve the secure value
-  - Returns: The secure value
-  - Throws: A secure store error
-  */
+   - Parameter key: The key used to retrieve the secure value
+   - Returns: The secure value
+   - Throws: A secure store error
+   */
   func get<T>(_ type: T.Type, forKey key: String) throws -> T? where T: Decodable
 
   /**

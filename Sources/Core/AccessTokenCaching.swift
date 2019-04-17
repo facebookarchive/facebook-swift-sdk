@@ -22,9 +22,9 @@ protocol AccessTokenCaching: AnyObject {
   var accessToken: AccessToken? { get set }
 
   /**
-  Creates an `AccessTokenCaching` instance
+   Creates an `AccessTokenCaching` instance
 
-  - Parameter secureStore: The `SecureStore` to use for caching
-  */
+   - Parameter secureStore: The `SecureStore` to use for caching
+   */
   init(secureStore: SecureStore)
 }

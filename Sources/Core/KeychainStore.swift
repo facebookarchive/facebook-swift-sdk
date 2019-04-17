@@ -69,12 +69,12 @@ struct KeychainStore: SecureStore {
 
   // MARK: - Inits
 
-/**
+  /**
    Creates a new KeychainStore
 
    - Parameter service: The keychain service to use
    - Parameter accessGroup: The optional keychain accessGroup to use
- */
+   */
   init(service: String, accessGroup: String? = nil) {
     self.service = service
     self.accessGroup = accessGroup
@@ -85,12 +85,12 @@ struct KeychainStore: SecureStore {
   // MARK: Keychain Access
 
   /**
-  Retrieves `Data` from the keychain using a provided key
+   Retrieves `Data` from the keychain using a provided key
 
-  - Parameter key: The key used to access the value in the keychain
-  - Returns: The data found within the keychain, or `nil` if nothing was found
-  - Throws: `KeychainError`
-  */
+   - Parameter key: The key used to access the value in the keychain
+   - Returns: The data found within the keychain, or `nil` if nothing was found
+   - Throws: `KeychainError`
+   */
   func keychainData(forKey key: String) throws -> Data? {
     var query = self.query(forKey: key)
     query[kSecReturnData as String] = kCFBooleanTrue
@@ -111,19 +111,19 @@ struct KeychainStore: SecureStore {
     }
 
     guard let result = queryResult as? [String: AnyObject], let data = result[kSecValueData as String] as? Data else {
-        throw KeychainError.unexpectedPasswordData
+      throw KeychainError.unexpectedPasswordData
     }
 
     return data
   }
 
   /**
-  Store `Data` to the keychain using a provided key
+   Store `Data` to the keychain using a provided key
 
-  - Parameter data: The data to store in the keychain
-  - Parameter key: The key used to store the value in the keychain
-  - Throws: `KeychainError`
-  */
+   - Parameter data: The data to store in the keychain
+   - Parameter key: The key used to store the value in the keychain
+   - Throws: `KeychainError`
+   */
   func set(_ data: Data, forKey key: String) throws {
     guard try self.keychainData(forKey: key) == nil else {
       let query = self.query(forKey: key)
@@ -148,13 +148,13 @@ struct KeychainStore: SecureStore {
   }
 
   /**
-  Creates a Keychain Query
+   Creates a Keychain Query
 
-  - Parameter key: The optional key to use for the query
-  - Parameter type: The `PasswordType` to use
-  - Parameter accessibility: The `PasswordAccessibility` to use
-  - Returns: The query dictionary to use with the keychain
-  */
+   - Parameter key: The optional key to use for the query
+   - Parameter type: The `PasswordType` to use
+   - Parameter accessibility: The `PasswordAccessibility` to use
+   - Returns: The query dictionary to use with the keychain
+   */
   private func query(
     forKey key: String? = nil,
     type: PasswordType = .genericPassword,
@@ -180,13 +180,13 @@ struct KeychainStore: SecureStore {
   // MARK: Data Coding
 
   /**
-  Decodes data from the keychain into the Type specified
+   Decodes data from the keychain into the Type specified
 
-  - Parameter type: The type to decode the data into
-  - Parameter data: The data to decode
-  - Returns: The data decoded into the Type specified
-  - Throws: `KeychainError`
-  */
+   - Parameter type: The type to decode the data into
+   - Parameter data: The data to decode
+   - Returns: The data decoded into the Type specified
+   - Throws: `KeychainError`
+   */
   func decode<T>(_ type: T.Type, from data: Data) throws -> T? where T: Decodable {
     let decoder = JSONDecoder()
 
