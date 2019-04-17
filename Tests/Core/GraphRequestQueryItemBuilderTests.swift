@@ -93,4 +93,23 @@ class GraphRequestQueryItemBuilderTests: XCTestCase {
     XCTAssertEqual(items, expectedItems,
                    "Should be able to build query items from data values")
   }
+
+  func testBuildingWithMixedValues() {
+    dictionary = [
+      "a": "abc",
+      "b": 5,
+      "c": URL(string: "https://www.example.com")!
+    ]
+    let expectedItems = [
+      URLQueryItem(name: "a", value: "abc"),
+      URLQueryItem(name: "b", value: "5"),
+      URLQueryItem(name: "c", value: "https://www.example.com")
+      ].sorted { $0.name < $1.name }
+
+    let items = URLQueryItemBuilder.build(from: dictionary)
+      .sorted { $0.name < $1.name }
+
+    XCTAssertEqual(items, expectedItems,
+                   "Should be able to build query items from mixed values")
+  }
 }

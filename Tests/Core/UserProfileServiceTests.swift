@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable type_body_length
+
 @testable import FacebookCore
 import XCTest
 
@@ -315,5 +317,61 @@ class UserProfileServiceTests: XCTestCase {
 
     XCTAssertEqual(store.cachedProfile, profile,
                    "Setting a user profile on the service should persist it in the cache")
+  }
+
+  // MARK: - Image URL
+
+  func testNormalImageURL() {
+    let profile = SampleUserProfile.valid()
+
+    service.setCurrent(profile)
+
+    let expectedQueryItems = [
+      URLQueryItem(name: "type", value: "normal"),
+      URLQueryItem(name: "width", value: String(describing: 20)),
+      URLQueryItem(name: "height", value: String(describing: 20))
+    ]
+
+    guard let url = service.imageURL(for: .normal(height: 20, width: 20)),
+      let queryItems = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        )?.queryItems
+      else {
+        return XCTFail("Should be able to get query items from url")
+    }
+
+    XCTAssertEqual(
+      queryItems.sorted { $0.name < $1.name },
+      expectedQueryItems.sorted { $0.name < $1.name },
+      "Should provide an image url that has query items for type, width, and height"
+    )
+  }
+
+  func testSquareImageURL() {
+    let profile = SampleUserProfile.valid()
+
+    service.setCurrent(profile)
+
+    let expectedQueryItems = [
+      URLQueryItem(name: "type", value: "square"),
+      URLQueryItem(name: "width", value: String(describing: 20)),
+      URLQueryItem(name: "height", value: String(describing: 20))
+    ]
+
+    guard let url = service.imageURL(for: .square(height: 20)),
+      let queryItems = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        )?.queryItems
+      else {
+        return XCTFail("Should be able to get query items from url")
+    }
+
+    XCTAssertEqual(
+      queryItems.sorted { $0.name < $1.name },
+      expectedQueryItems.sorted { $0.name < $1.name },
+      "Should provide an image url that has query items for type, width, and height"
+    )
   }
 }
