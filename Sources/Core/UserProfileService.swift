@@ -120,6 +120,36 @@ class UserProfileService {
     }
   }
 
+  func imageURL(for mode: ImageSizingFormat) -> URL? {
+    let queryItems: [URLQueryItem]
+
+    switch mode {
+    case let .normal(height, width):
+      queryItems = URLQueryItemBuilder.build(
+        from: [
+          "type": mode.description,
+          "height": String(height),
+          "width": String(width)
+        ]
+      )
+
+    case let .square(height):
+      queryItems = URLQueryItemBuilder.build(
+        from: [
+        "type": mode.description,
+        "height": String(height),
+        "width": String(height)
+        ]
+      )
+    }
+
+    return URLBuilder().buildURL(
+      withHostPrefix: "graph",
+      path: GraphPath.picture.description,
+      queryItems: queryItems
+    )
+  }
+
   enum NotificationKeys {
     /**
      Key in notification's userInfo object for getting the old profile.
