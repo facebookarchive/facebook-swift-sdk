@@ -133,6 +133,29 @@ class URLBuilderTests: XCTestCase {
     )
   }
 
+  func testBuildingWithRequest() {
+    let parameters: [String: AnyHashable] = ["Fields": "name,age", "limit": 5]
+    let expectedQueryItems = URLQueryItemBuilder.build(from: parameters)
+    let request = GraphRequest(graphPath: .me, parameters: parameters)
+
+    guard let url = URLBuilder().buildURL(for: request),
+      let queryItems = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        )?.queryItems
+      else {
+        return XCTFail("Should be able to get query items from url")
+    }
+
+    XCTAssertEqual(
+      queryItems,
+      expectedQueryItems,
+      "Builder should use the provided query items"
+    )
+
+    validateBaseUrl(url, withPath: "/v3.2/me")
+  }
+
   private func validateBaseUrl(
     _ url: URL?,
     withPrefix prefix: String = "",
