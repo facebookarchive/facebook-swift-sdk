@@ -20,12 +20,36 @@
 import XCTest
 
 class AccessTokenCacheTests: XCTestCase {
-  func testHasClearCacheMethod() {
-    let cache = AccessTokenCache()
+  var store = FakeSecureStore()
+  lazy var cache = {
+    AccessTokenCache(secureStore: self.store)
+  }()
+
+  func testAccessTokenCaching() {
     cache.accessToken = AccessTokenFixtures.validToken
+    XCTAssertEqual(cache.accessToken, AccessTokenFixtures.validToken,
+                   "The cached access token should equal the passed in token")
 
-    cache.clearCache()
+    cache.accessToken = nil
+    XCTAssertNil(cache.accessToken,
+                 "The cached token should be nil after setting to nil")
+  }
 
-    // TODO: add assertion for clearing token when caching logic is implemented
+  func testAccessTokenCacheErrorHandling() {
+    store.alwaysError = true
+
+    cache.accessToken = AccessTokenFixtures.validToken
+    XCTAssertNil(cache.accessToken,
+                 "Access token cache should handle errors properly")
+
+    cache.accessToken = nil
+    XCTAssertNil(cache.accessToken,
+                 "Access token cache should handle errors properly")
+  }
+
+  func testDefaultInit() {
+    let cache = AccessTokenCache()
+    XCTAssertNotNil(cache,
+                    "Convenience init should work")
   }
 }

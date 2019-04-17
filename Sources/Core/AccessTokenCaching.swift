@@ -16,22 +16,11 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+/// The Access Token Caching Protocol
+protocol AccessTokenCaching: AnyObject {
+  /// The `AccessToken` cached in the keychain
+  var accessToken: AccessToken? { get set }
 
-class FakeAccessTokenCache: AccessTokenCaching {
-  private(set) var secureStore: SecureStore
-
-  var accessToken: AccessToken? {
-    didSet {
-      accessTokenWasSet = true
-      capturedAccessToken = accessToken
-    }
-  }
-
-  var accessTokenWasSet = false
-  var capturedAccessToken: AccessToken?
-
-  required init(secureStore: SecureStore) {
-    self.secureStore = secureStore
-  }
+  /// The `SecureStore` to use for caching
+  var secureStore: SecureStore { get }
 }
