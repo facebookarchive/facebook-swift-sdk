@@ -22,21 +22,21 @@ import Foundation
 
 /// The Access Token Cache
 class AccessTokenCache: AccessTokenCaching {
-  // TODO: Migrate Old Access Token Caching Strategy for v4 Backwards compatability
   // TODO: Use FBID as key to store in keychain?
 
   /// Used to store the `UUID` in `UserDefaults`
   let accessTokenKey: String = "com.facebook.sdk.v5.AccessTokenKey"
+  private let logger = Logger()
 
   /// Used to cache the Access Token
-  private var store: SecureStore
+  private(set) var secureStore: SecureStore
 
   var accessToken: AccessToken? {
     get {
       do {
-        return try store.get(AccessToken.self, forKey: accessTokenKey)
+        return try secureStore.get(AccessToken.self, forKey: accessTokenKey)
       } catch {
-        print(error)
+        logger.log(.cacheErrors, "Failed to retrieve AccessToken cache: \(error)")
         return nil
       }
     }
@@ -44,21 +44,21 @@ class AccessTokenCache: AccessTokenCaching {
       do {
         switch newValue {
         case let token?:
-          try store.set(token, forKey: accessTokenKey)
+          try secureStore.set(token, forKey: accessTokenKey)
 
         case nil:
-          try store.remove(forKey: accessTokenKey)
+          try secureStore.remove(forKey: accessTokenKey)
         }
       } catch {
-        print(error)
+        logger.log(.cacheErrors, "Failed to set AccessToken cache: \(error)")
       }
     }
   }
 
-  required init(
+  init(
     secureStore: SecureStore =
     KeychainStore(service: "com.facebook.sdk.tokencache.\(Bundle.main.bundleIdentifier ?? "")")
     ) {
-    self.store = secureStore
+    self.secureStore = secureStore
   }
 }

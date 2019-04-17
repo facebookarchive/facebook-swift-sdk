@@ -51,7 +51,7 @@ class KeychainStoreTests: XCTestCase {
     } catch {
       print(error)
       //      XCTAssertNil(error,
-      //                   "Error should be nil")
+      //                   "Store should store value properly")
     }
 
     do {
@@ -61,7 +61,7 @@ class KeychainStoreTests: XCTestCase {
     } catch {
       print(error)
       //      XCTAssertNil(error,
-      //                   "Error should be nil")
+      //                   "Store should retrieve value properly")
     }
 
     do {
@@ -69,7 +69,7 @@ class KeychainStoreTests: XCTestCase {
     } catch {
       print(error)
       //      XCTAssertNil(error,
-      //                   "Error should be nil")
+      //                   "Store should remove value properly")
     }
   }
 
@@ -95,7 +95,7 @@ class KeychainStoreTests: XCTestCase {
                      "Should retrieve as an Array")
     } catch {
       XCTAssertNil(error,
-                   "Error should be nil")
+                   "Store should decode value properly")
     }
 
     do {
@@ -103,19 +103,19 @@ class KeychainStoreTests: XCTestCase {
 
       let intResult = try store.decode(Int.self, from: arrayData)
       XCTAssertNil(intResult,
-                   "Should fail")
+                   "Should fail to decode non-matching values")
     } catch {
       XCTAssertNotNil(error,
-                      "The parse above should throw an error")
+                      "Should fail to decode non-matching values")
     }
 
     do {
       let result = try store.decode(String.self, from: Data())
       XCTAssertNil(result,
-                   "Should fail")
+                   "Should fail to decode non-matching values")
     } catch {
       XCTAssertNotNil(error,
-                      "The parse above should throw an error")
+                      "Should fail to decode non-matching values")
     }
   }
 
@@ -141,7 +141,7 @@ class KeychainStoreTests: XCTestCase {
                      "Should retrieve as an Array")
     } catch {
       XCTAssertNil(error,
-                   "Error should be nil")
+                   "Store should encode value properly")
     }
 
     do {
@@ -149,19 +149,19 @@ class KeychainStoreTests: XCTestCase {
 
       let intResult = try decoder.decode(Int.self, from: arrayData)
       XCTAssertNil(intResult,
-                   "Should fail")
+                   "Should fail to encode non-matching values")
     } catch {
       XCTAssertNotNil(error,
-                      "The parse above should throw an error")
+                      "Should fail to encode non-matching values")
     }
 
     do {
       let result = try store.decode(String.self, from: Data())
       XCTAssertNil(result,
-                   "Should fail")
+                   "Should fail to encode non-matching values")
     } catch {
       XCTAssertNotNil(error,
-                      "The parse above should throw an error")
+                      "Should fail to encode non-matching values")
     }
   }
 }

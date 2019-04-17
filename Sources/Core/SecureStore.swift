@@ -36,7 +36,7 @@ protocol SecureStore {
    - Parameter key: The key used to retrieve the secure value
    - Throws: A secure store error
    */
-  mutating func set<T>(_ value: T, forKey key: String) throws where T: Encodable
+  func set<T>(_ value: T, forKey key: String) throws where T: Encodable
 
   /**
    Removes a secure value associated with a given key
@@ -44,7 +44,7 @@ protocol SecureStore {
    - Parameter key: The key used to remove the secure value
    - Throws: A secure store error
    */
-  mutating func remove(forKey key: String) throws
+  func remove(forKey key: String) throws
 }
 
 // MARK: - Extensions -

@@ -622,8 +622,8 @@
 				F44DB6B3222B022E0083506E /* NotificationCenter+Extensions.swift */,
 				F44DB6AF222B019D0083506E /* NotificationName+Extensions.swift */,
 				F447152A22440B610013495F /* ProcessInfo+Extensions.swift */,
-				F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */,
 				523CAE4A225EC94C00D196C3 /* String+Extensions.swift */,
+				F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

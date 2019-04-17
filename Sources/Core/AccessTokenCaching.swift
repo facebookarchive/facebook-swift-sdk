@@ -18,13 +18,9 @@
 
 /// The Access Token Caching Protocol
 protocol AccessTokenCaching: AnyObject {
-  /// Returns an `AccessToken` cached in the keychain, if present. Else, returns `nil`
+  /// The `AccessToken` cached in the keychain
   var accessToken: AccessToken? { get set }
 
-  /**
-   Creates an `AccessTokenCaching` instance
-
-   - Parameter secureStore: The `SecureStore` to use for caching
-   */
-  init(secureStore: SecureStore)
+  /// The `SecureStore` to use for caching
+  var secureStore: SecureStore { get }
 }

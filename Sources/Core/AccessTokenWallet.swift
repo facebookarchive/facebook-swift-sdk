@@ -21,7 +21,7 @@ import Foundation
 class AccessTokenWallet {
   private var accessToken: AccessToken?
   let cookieUtility: CookieHandling.Type
-  private(set) var settings: SettingsManaging
+  let settings: SettingsManaging
   let notificationCenter: NotificationPosting
   let graphConnectionProvider: GraphConnectionProviding
   let graphRequestPiggybackManager: GraphRequestPiggybackManaging.Type

@@ -19,7 +19,7 @@
 @testable import FacebookCore
 
 class FakeAccessTokenCache: AccessTokenCaching {
-  private var secureStore: SecureStore
+  private(set) var secureStore: SecureStore
 
   var accessToken: AccessToken? {
     didSet {

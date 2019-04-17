@@ -40,11 +40,11 @@ class AccessTokenCacheTests: XCTestCase {
 
     cache.accessToken = AccessTokenFixtures.validToken
     XCTAssertNil(cache.accessToken,
-                 "When `alwaysError == true`, cache should be nil")
+                 "Access token cache should handle errors properly")
 
     cache.accessToken = nil
     XCTAssertNil(cache.accessToken,
-                 "When `alwaysError == true`, cache should be nil")
+                 "Access token cache should handle errors properly")
   }
 
   func testDefaultInit() {

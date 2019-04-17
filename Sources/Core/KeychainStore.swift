@@ -110,8 +110,9 @@ struct KeychainStore: SecureStore {
       throw KeychainError.unhandledError(status: status)
     }
 
-    guard let result = queryResult as? [String: AnyObject], let data = result[kSecValueData as String] as? Data else {
-      throw KeychainError.unexpectedPasswordData
+    guard let result = queryResult as? [String: AnyObject],
+      let data = result[kSecValueData as String] as? Data else {
+        throw KeychainError.unexpectedPasswordData
     }
 
     return data
