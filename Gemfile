@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rake'
-gem 'jazzy'
 gem 'cocoapods'
+gem 'jazzy'
+gem 'rake'
+gem 'synx'
 gem 'xcpretty'
