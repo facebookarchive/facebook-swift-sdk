@@ -26,6 +26,8 @@ jobs:
     - stage: analysis
       name: Linting
       script: sh scripts/travis/swiftlint.sh
+      name: Synx
+      script: sh scripts/travis/synx.sh
     - stage: analysis
       name: Unit Tests
       script: sh scripts/travis/unit_tests.sh

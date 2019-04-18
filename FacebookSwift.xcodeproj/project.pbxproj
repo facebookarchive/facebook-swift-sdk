@@ -677,10 +677,10 @@
 				F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */,
 				F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */,
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
+				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
 				F4144C51224D0F6C006C8F9C /* URLBuilderTests.swift */,
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
-				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -816,6 +816,7 @@
 				8115C0D51CFE540D001FF33B /* Headers */,
 				8115C0D61CFE540D001FF33B /* Resources */,
 				5257097220F6C9800053B9E3 /* Swiftlint */,
+				F42E3C992268CF1500287DC4 /* Synx */,
 			);
 			buildRules = (
 			);
