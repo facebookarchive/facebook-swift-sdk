@@ -19,7 +19,7 @@
 @testable import FacebookCore
 import XCTest
 
-class UserProfileConfigurationTests: XCTestCase {
+class UserProfileServiceConfigurationTests: XCTestCase {
   let profileService = UserProfileService()
 
   func testGraphConnectionProviderDependency() {
@@ -35,5 +35,10 @@ class UserProfileConfigurationTests: XCTestCase {
   func testNotificationCenterDependency() {
     XCTAssertTrue(profileService.notificationCenter is NotificationCenter,
                   "A profile service should have the expected concrete implementation for its notification center dependency")
+  }
+
+  func testAccessTokenProviderDependency() {
+    XCTAssertTrue(profileService.accessTokenProvider is AccessTokenWallet,
+                  "A profile service should have the expected concrete implementation for its access token providing dependency")
   }
 }
