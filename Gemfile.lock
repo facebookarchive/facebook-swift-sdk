@@ -9,6 +9,7 @@ GEM
       tzinfo (~> 1.1)
     atomos (0.1.3)
     claide (1.0.2)
+    clamp (0.6.5)
     cocoapods (1.6.1)
       activesupport (>= 4.0.2, < 5)
       claide (>= 1.0.2, < 2.0)
@@ -43,6 +44,7 @@ GEM
       netrc (~> 0.11)
     cocoapods-try (1.1.0)
     colored2 (3.1.2)
+    colorize (0.8.1)
     concurrent-ruby (1.1.4)
     escape (0.0.4)
     ffi (1.10.0)
@@ -81,6 +83,10 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     sqlite3 (1.4.0)
+    synx (0.2.1)
+      clamp (~> 0.6)
+      colorize (~> 0.7)
+      xcodeproj (~> 1.0)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
@@ -102,7 +108,8 @@ DEPENDENCIES
   cocoapods
   jazzy
   rake
+  synx
   xcpretty
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
