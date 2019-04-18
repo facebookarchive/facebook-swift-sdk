@@ -1,9 +1,0 @@
-{% if type.based.Equatable %}
-  @objc public override func isEqual(_ object: Any?) -> Bool {
-    guard let object = object as? _ObjC{{ type.name }} else {
-      return false
-    }
-    return {{ type.name|lowerFirstWord }} == object.{{ type.name|lowerFirstWord }}
-  }
-
-{% endif %}
