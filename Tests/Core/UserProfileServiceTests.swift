@@ -30,6 +30,7 @@ class UserProfileServiceTests: XCTestCase {
   private var service: UserProfileService!
   private var userDefaultsSpy: UserDefaultsSpy!
   private var store: UserProfileStore!
+  private var wallet: AccessTokenWallet!
 
   override func setUp() {
     super.setUp()
@@ -39,12 +40,14 @@ class UserProfileServiceTests: XCTestCase {
     fakeGraphConnectionProvider = FakeGraphConnectionProvider(connection: fakeConnection)
     userDefaultsSpy = UserDefaultsSpy(name: name)
     store = UserProfileStore(store: userDefaultsSpy)
+    wallet = AccessTokenWallet()
 
     service = UserProfileService(
       graphConnectionProvider: fakeGraphConnectionProvider,
       logger: fakeLogger,
       notificationCenter: fakeNotificationCenter,
-      store: store
+      store: store,
+      accessTokenProvider: wallet
     )
   }
 
@@ -108,6 +111,49 @@ class UserProfileServiceTests: XCTestCase {
   }
 
   // MARK: Fetching Profile
+
+  func testFetchingWithMissingAccessToken() {
+    let expectation = self.expectation(description: name)
+
+    service.loadProfile { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully fetch a profile with a missing access token")
+
+      case let .failure(error):
+        if case CoreError.accessTokenRequired = error {
+          expectation.fulfill()
+        } else {
+          XCTFail("Should inform the user that an access token is required to fetch a profile")
+        }
+      }
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func testFetchingWithAvailableAccessToken() {
+    let expectation = self.expectation(description: name)
+    let profile = SampleUserProfile.valid()
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    fakeConnection.stubGetObjectCompletionResult = .success(profile)
+
+    service.loadProfile { result in
+      switch result {
+      case let .success(fetchedProfile):
+        XCTAssertEqual(profile, fetchedProfile,
+                       "Should fetch a profile using the access token from the access token provider")
+
+      case .failure:
+        XCTFail("Should attempt to fetch a profile when an access token is available to use in the call")
+      }
+      expectation.fulfill()
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
 
   func testSuccessfullyLoadingWithNilProfile() {
     let expectation = self.expectation(description: name)
