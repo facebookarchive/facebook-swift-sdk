@@ -39,11 +39,11 @@ struct RemoteUserProfile: Decodable {
     }
     self.identifier = identifier
 
-    self.name = try? container?.decode(String.self, forKey: .name)
-    self.firstName = try? container?.decode(String.self, forKey: .firstName)
-    self.middleName = try? container?.decode(String.self, forKey: .middleName)
-    self.lastName = try? container?.decode(String.self, forKey: .lastName)
-    self.linkURL = try? container?.decode(String.self, forKey: .linkURL)
+    self.name = try? container?.decodeIfPresent(String.self, forKey: .name)
+    self.firstName = try? container?.decodeIfPresent(String.self, forKey: .firstName)
+    self.middleName = try? container?.decodeIfPresent(String.self, forKey: .middleName)
+    self.lastName = try? container?.decodeIfPresent(String.self, forKey: .lastName)
+    self.linkURL = try? container?.decodeIfPresent(String.self, forKey: .linkURL)
   }
 
   private enum CodingKeys: String, CodingKey {
