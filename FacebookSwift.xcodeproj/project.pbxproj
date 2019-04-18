@@ -816,7 +816,6 @@
 				8115C0D51CFE540D001FF33B /* Headers */,
 				8115C0D61CFE540D001FF33B /* Resources */,
 				5257097220F6C9800053B9E3 /* Swiftlint */,
-				F42E3C992268CF1500287DC4 /* Synx */,
 			);
 			buildRules = (
 			);

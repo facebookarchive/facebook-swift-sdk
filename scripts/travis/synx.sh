@@ -26,7 +26,7 @@
 set -e
 
 if [ "$TRAVIS_BUILD_STAGE_NAME" = Analysis ]; then
-  synx FacebookSwift.xcodeproj
+  synx --exclusion /Codegen FacebookSwift.xcodeproj
 
   if output=$(git status --porcelain) && [ -n "$output" ]; then
     echo "Working directory isn't clean. Try running synx utility locally and commit the changes"
