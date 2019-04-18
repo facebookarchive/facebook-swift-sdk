@@ -77,6 +77,14 @@
 		F447153022440E860013495F /* SampleURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447152F22440E860013495F /* SampleURL.swift */; };
 		F447153222440EB60013495F /* FakeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447153122440EB60013495F /* FakeSession.swift */; };
 		F447153422440EE50013495F /* FakeSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447153322440EE50013495F /* FakeSessionDataTask.swift */; };
+		F44847DC2268E36E00527D49 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DB2268E36E00527D49 /* ProfilePictureView.swift */; };
+		F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */; };
+		F44847E62268FAAA00527D49 /* ProfilePictureViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E52268FAAA00527D49 /* ProfilePictureViewModelTests.swift */; };
+		F44847E82268FD0000527D49 /* ImageSizingFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E72268FD0000527D49 /* ImageSizingFormatTests.swift */; };
+		F44847EA22690E0D00527D49 /* ProfilePictureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E922690E0D00527D49 /* ProfilePictureViewModel.swift */; };
+		F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */; };
+		F44847EE2269219500527D49 /* IconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847ED2269219500527D49 /* IconTests.swift */; };
+		F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
 		F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69122299FA10083506E /* AccessTokenWallet.swift */; };
 		F44DB6942229AB460083506E /* InternalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6932229AB460083506E /* InternalUtility.swift */; };
 		F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */; };
@@ -284,6 +292,14 @@
 		F447152F22440E860013495F /* SampleURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleURL.swift; sourceTree = "<group>"; };
 		F447153122440EB60013495F /* FakeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSession.swift; sourceTree = "<group>"; };
 		F447153322440EE50013495F /* FakeSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSessionDataTask.swift; sourceTree = "<group>"; };
+		F44847DB2268E36E00527D49 /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
+		F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewTests.swift; sourceTree = "<group>"; };
+		F44847E52268FAAA00527D49 /* ProfilePictureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewModelTests.swift; sourceTree = "<group>"; };
+		F44847E72268FD0000527D49 /* ImageSizingFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizingFormatTests.swift; sourceTree = "<group>"; };
+		F44847E922690E0D00527D49 /* ProfilePictureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewModel.swift; sourceTree = "<group>"; };
+		F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanSilhouetteIcon.swift; sourceTree = "<group>"; };
+		F44847ED2269219500527D49 /* IconTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTests.swift; sourceTree = "<group>"; };
+		F44847F8226928E300527D49 /* TestAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestAssets.xcassets; sourceTree = "<group>"; };
 		F44DB69122299FA10083506E /* AccessTokenWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWallet.swift; sourceTree = "<group>"; };
 		F44DB6932229AB460083506E /* InternalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtility.swift; sourceTree = "<group>"; };
 		F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCookieUtility.swift; sourceTree = "<group>"; };
@@ -479,6 +495,7 @@
 				F417F9172249822D00E771F1 /* Logging */,
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F41640F3224C27A000842120 /* String Constants */,
+				F44847DD2268E37400527D49 /* UI */,
 				F409967222289D3000F23464 /* AccessToken.swift */,
 				F44DB69E2229B4C50083506E /* AccessTokenCache.swift */,
 				F44DB69C2229B4420083506E /* AccessTokenCaching.swift */,
@@ -610,6 +627,16 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
+		F44847DD2268E37400527D49 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
+				F44847E922690E0D00527D49 /* ProfilePictureViewModel.swift */,
+				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		F44DB6972229AE040083506E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,6 +745,8 @@
 				F447151D2242FF010013495F /* LoggerTests.swift */,
 				F4B3401622430F9A00912F0F /* LoggingBehaviorTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
+				F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */,
+				F44847E52268FAAA00527D49 /* ProfilePictureViewModelTests.swift */,
 				F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */,
 				F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */,
 				F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */,
@@ -731,6 +760,9 @@
 				F42E3C7F2267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift */,
 				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 				F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */,
+				F44847E72268FD0000527D49 /* ImageSizingFormatTests.swift */,
+				F44847ED2269219500527D49 /* IconTests.swift */,
+				F44847F8226928E300527D49 /* TestAssets.xcassets */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1014,6 +1046,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BEDA59224141AE004F2C7E /* validRemoteErrorConfiguration.json in Resources */,
+				F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */,
 				F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */,
 				F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */,
 				F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */,
@@ -1093,6 +1126,7 @@
 				524A49B9225EA39300786C11 /* SecureStore.swift in Sources */,
 				F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */,
 				F4E1A9ED22416F2200503354 /* RemoteErrorCodeGroup.swift in Sources */,
+				F44847DC2268E36E00527D49 /* ProfilePictureView.swift in Sources */,
 				F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */,
 				F4225DDF223F210E00F4DCFE /* ErrorConfigurationBuilder.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
@@ -1107,6 +1141,7 @@
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
+				F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
 				F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */,
@@ -1137,6 +1172,7 @@
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
 				F4516B8C225FA44A00979DD2 /* MimeType.swift in Sources */,
+				F44847EA22690E0D00527D49 /* ProfilePictureViewModel.swift in Sources */,
 				F4225DCE223EF88800F4DCFE /* ErrorConfigurationEntryBuilder.swift in Sources */,
 				F42E3C922268BB9B00287DC4 /* ImageSizingFormat.swift in Sources */,
 				F42E3C952268BBB900287DC4 /* UserDefaults+Extensions.swift in Sources */,
@@ -1211,6 +1247,7 @@
 				F44DB6BF222B10040083506E /* FakeGraphConnectionProvider.swift in Sources */,
 				F480D9132236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift in Sources */,
 				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */,
+				F44847E82268FD0000527D49 /* ImageSizingFormatTests.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				523CAE4D225ED58900D196C3 /* StringExtensionTests.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
@@ -1222,6 +1259,7 @@
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
 				F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
+				F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */,
 				F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */,
 				F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */,
 				F480D90D2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift in Sources */,
@@ -1234,7 +1272,9 @@
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
 				F4B3401722430F9A00912F0F /* LoggingBehaviorTests.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
+				F44847E62268FAAA00527D49 /* ProfilePictureViewModelTests.swift in Sources */,
 				F42E3C832267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift in Sources */,
+				F44847EE2269219500527D49 /* IconTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F447153022440E860013495F /* SampleURL.swift in Sources */,
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,

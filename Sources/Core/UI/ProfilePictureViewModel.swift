@@ -18,27 +18,50 @@
 
 import UIKit
 
-enum ImageSizingFormat: CustomStringConvertible {
-  case normal(height: UInt, width: UInt)
-  case square(height: UInt)
+struct ProfilePictureViewModel {
+  let imageShouldFit: Bool
+  /**
+   The format for the receiver to determine the aspect ratio of the source image.
+   */
+  let imageSizingFormat: ImageSizingFormat
+  let identifier: String
+  let scale: CGFloat
+  let size: CGSize
 
-  var description: String {
-    switch self {
-    case .normal:
-      return "normal"
-
-    case .square:
-      return "square"
-    }
+  init(
+    format: ImageSizingFormat,
+    scale: CGFloat,
+    contentMode: UIView.ContentMode,
+    profileIdentifier: String
+    ) {
+    imageSizingFormat = format
+    identifier = profileIdentifier
+    imageShouldFit = ProfilePictureViewModel.imageShouldFit(for: contentMode)
+    size = imageSizingFormat.size
+    self.scale = scale
   }
 
-  var size: CGSize {
-    switch self {
-    case let .normal(height, width):
-      return CGSize(width: Int(width), height: Int(height))
+  static func imageShouldFit(for contentMode: UIView.ContentMode) -> Bool {
+    switch contentMode {
+    case .bottom,
+         .bottomLeft,
+         .bottomRight,
+         .center,
+         .left,
+         .redraw,
+         .right,
+         .scaleAspectFit,
+         .top,
+         .topLeft,
+         .topRight:
+      return true
 
-    case let .square(height):
-      return CGSize(width: Int(height), height: Int(height))
+    case .scaleToFill,
+         .scaleAspectFill:
+      return false
+
+    @unknown default:
+      return false
     }
   }
 }

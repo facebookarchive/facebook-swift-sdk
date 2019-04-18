@@ -16,29 +16,33 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+// swiftlint:disable unused_closure_parameter
 
-enum ImageSizingFormat: CustomStringConvertible {
-  case normal(height: UInt, width: UInt)
-  case square(height: UInt)
+@testable import FacebookCore
+import XCTest
 
-  var description: String {
-    switch self {
-    case .normal:
-      return "normal"
+class ImageSizingFormatTests: XCTestCase {
+  func testGettingSizeForNormal() {
+    let format = ImageSizingFormat.normal(height: 20, width: 10)
+    let expectedSize = CGSize(width: 10, height: 20)
 
-    case .square:
-      return "square"
-    }
+    XCTAssertEqual(format.size, expectedSize,
+                   "Image sizing format should be able to provide a correct size")
   }
 
-  var size: CGSize {
-    switch self {
-    case let .normal(height, width):
-      return CGSize(width: Int(width), height: Int(height))
+  func testGettingSizeForSquare() {
+    let format = ImageSizingFormat.square(height: 10)
+    let expectedSize = CGSize(width: 10, height: 10)
 
-    case let .square(height):
-      return CGSize(width: Int(height), height: Int(height))
-    }
+    XCTAssertEqual(format.size, expectedSize,
+                   "Image sizing format should be able to provide a correct size")
+  }
+
+  func testEmptySize() {
+    let format = ImageSizingFormat.square(height: 0)
+    let expectedSize = CGSize.zero
+
+    XCTAssertEqual(format.size, expectedSize,
+                   "Image sizing format should be able to provide a correct size")
   }
 }
