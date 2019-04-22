@@ -464,24 +464,59 @@ class UserProfileServiceTests: XCTestCase {
 
   // MARK: Fetching Image
 
+  func testFetchingImageWithMissingAccessToken() {
+    let expectation = self.expectation(description: name)
+
+    service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully fetch a profile image with a missing access token")
+
+      case let .failure(error):
+        if case CoreError.accessTokenRequired = error {
+          expectation.fulfill()
+        } else {
+          XCTFail("Should inform the user that an access token is required to fetch a profile image")
+        }
+      }
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
   func testFetchingProfileImageForDefaultIdentifier() {
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
     // Request image
     _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { _ in }
 
+    // Assert
     XCTAssertEqual(fakeConnection.capturedGetObjectGraphRequest?.graphPath.description, "me/picture")
   }
 
   func testFetchingProfileImageWithCustomIdentifier() {
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    // Request image
     _ = service.fetchProfileImage(
       for: "user123",
       sizingConfiguration: sizingConfiguration
     ) { _ in }
 
+    // Assert
     XCTAssertEqual(fakeConnection.capturedGetObjectGraphRequest?.graphPath.description, "user123/picture")
   }
 
   func testFetchingProfileFailure() {
     let expectation = self.expectation(description: name)
+
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
 
     // Stub a fetch result
     fakeConnection.stubGetObjectCompletionResult = .failure(GraphRequestConnectionError.missingData)
@@ -509,6 +544,10 @@ class UserProfileServiceTests: XCTestCase {
     let expectation = self.expectation(description: name)
     let data = Data()
 
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
     // Stub a fetch result
     fakeConnection.stubGetObjectCompletionResult = .success(data)
 
@@ -534,6 +573,10 @@ class UserProfileServiceTests: XCTestCase {
   func testFetchingProfileImageBadData() {
     let expectation = self.expectation(description: name)
     let data = "Not an image".data(using: .utf8)
+
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
 
     // Stub a fetch result
     fakeConnection.stubGetObjectCompletionResult = .success(data)
@@ -561,6 +604,10 @@ class UserProfileServiceTests: XCTestCase {
     let expectation = self.expectation(description: name)
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
+
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
 
     // Stub a fetch result
     let image = UIImage(

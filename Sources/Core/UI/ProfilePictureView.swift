@@ -18,20 +18,46 @@
 
 import UIKit
 
-class ProfilePictureView: UIView {
+public class ProfilePictureView: UIView {
   lazy var imageView: UIImageView = {
     let imageView = UIImageView(frame: bounds)
     imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     return imageView
   }()
 
-  private(set) var profileIdentifier: GraphPath = .me
+  /**
+   The format to use for displaying an image. One of `ImageSizingFormat`
+   Setting to a new value will invalidate the current placeholder image and attempt to fetch an updated image
+   */
+  public var format: ImageSizingFormat = .normal {
+    didSet {
+      guard format == oldValue else {
+        return setNeedsImageUpdate()
+      }
+    }
+  }
+
+  /**
+   The identifier of the profile to display. Can update to fetch a profile image for a specific user id
+   Setting to a new value will invalidate the current placeholder image and attempt to fetch an updated image.
+
+   Defaults to "me"
+   */
+  public var profileIdentifier: String = GraphPath.me.description {
+    didSet {
+      guard profileIdentifier == oldValue else {
+        placeholderImageIsValid = false
+        return setNeedsImageUpdate()
+      }
+    }
+  }
+
   var needsImageUpdate: Bool = false
   var hasProfileImage: Bool = false
   var placeholderImageIsValid: Bool = false
   private(set) var userProfileProvider: UserProfileProviding = UserProfileService()
 
-  var format: ImageSizingFormat = .normal
+  private var sizingConfiguration: ImageSizingConfiguration?
 
   // TODO: has to store the last view model so it can compare after a fetch to see if the size is still valid
 
@@ -57,7 +83,6 @@ class ProfilePictureView: UIView {
   }
 
   func configureView() {
-    self.profileIdentifier = GraphPath.me
     backgroundColor = .white
     contentMode = .scaleAspectFit
     isUserInteractionEnabled = false
@@ -65,7 +90,7 @@ class ProfilePictureView: UIView {
     addSubview(imageView)
   }
 
-  override var contentMode: UIView.ContentMode {
+  override public var contentMode: UIView.ContentMode {
     didSet {
       guard imageView.contentMode != contentMode else {
         return
@@ -77,7 +102,7 @@ class ProfilePictureView: UIView {
     }
   }
 
-  override var bounds: CGRect {
+  override public var bounds: CGRect {
     get {
       return super.bounds
     }
@@ -91,7 +116,13 @@ class ProfilePictureView: UIView {
   }
 
   // TODO: Figure out why this needs the debounce code. This makes little sense to me right now.
-  func setNeedsImageUpdate() {
+  /**
+   Explicitly marks the receiver as needing to update the image.
+
+   This method is called whenever any properties that affect the source image are modified, but this can also
+   be used to trigger a manual update of the image if it needs to be re-downloaded.
+   */
+  public func setNeedsImageUpdate() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self,
         !self.bounds.isEmpty else {
@@ -128,7 +159,21 @@ class ProfilePictureView: UIView {
       scale: scale
     )
 
-    // TODO: will need to call with correct parameters and unwrap result, for now just check that it was invoked.
+    if !placeholderImageIsValid {
+      setPlaceholderImage()
+    }
+
+    // If the sizing configuration used to set the current image is different
+    // from the sizing configuration being used to set the fetched image,
+    // clear out the current image and set a placeholder while the new image is being fetched.
+    if let priorSizingConfig = self.sizingConfiguration {
+      guard priorSizingConfig == sizingConfiguration else {
+        setPlaceholderImage()
+        return
+      }
+    }
+    self.sizingConfiguration = sizingConfiguration
+
     userProfileProvider.fetchProfileImage(
       for: profileIdentifier.description,
       sizingConfiguration: sizingConfiguration
@@ -136,55 +181,6 @@ class ProfilePictureView: UIView {
       // use result to set image
       print(result)
     }
-
-//
-//    if (!_profileID) {
-//      if (!_placeholderImageIsValid) {
-//        [self _setPlaceholderImage];
-//      }
-//      return;
-//    }
-//
-//    // if the current image is no longer representative of the current state, clear the current value out; otherwise,
-//    // leave the current value until the new resolution image is downloaded
-//    BOOL imageShouldFit = [self _imageShouldFit];
-//    UIScreen *screen = self.window.screen ?: [UIScreen mainScreen];
-//    CGFloat scale = screen.scale;
-//    CGSize imageSize = [self _imageSize:imageShouldFit scale:scale];
-//    FBSDKProfilePictureViewState *state = [[FBSDKProfilePictureViewState alloc] initWithProfileID:_profileID
-//    size:imageSize
-//    scale:scale
-//    pictureMode:_pictureMode
-//    imageShouldFit:imageShouldFit];
-//    if (![_lastState isValidForState:state]) {
-//      [self _setPlaceholderImage];
-//    }
-//    _lastState = state;
-//
-//    FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
-//    if ([state.profileID isEqualToString:@"me"] && !accessToken) {
-//      return;
-//    }
-//
-//    NSString *path = [[NSString alloc] initWithFormat:@"/%@/picture", [FBSDKUtility URLEncode:state.profileID]];
-//    CGSize size = state.size;
-//    NSMutableDictionary<NSString *, id> *parameters = [[NSMutableDictionary alloc] init];
-//    parameters[@"width"] = @(size.width);
-//    parameters[@"height"] = @(size.height);
-//    [FBSDKInternalUtility dictionary:parameters setObject:accessToken.tokenString forKey:@"access_token"];
-//    NSURL *imageURL = [FBSDKInternalUtility facebookURLWithHostPrefix:@"graph" path:path queryParameters:parameters error:NULL];
-//
-//    __weak FBSDKProfilePictureView *weakSelf = self;
-//
-//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:imageURL];
-//    NSURLSession *session = [NSURLSession sharedSession];
-//    [[session
-//    dataTaskWithRequest:request
-//    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//    if (!error && data.length) {
-//    [weakSelf _updateImageWithData:data state:state];
-//    }
-//    }] resume];
   }
 
   func setPlaceholderImage() {

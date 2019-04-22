@@ -83,6 +83,7 @@
 		F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */; };
 		F44847EE2269219500527D49 /* IconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847ED2269219500527D49 /* IconTests.swift */; };
 		F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
+		F44847FB226E2F5200527D49 /* FakeUserProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */; };
 		F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB69122299FA10083506E /* AccessTokenWallet.swift */; };
 		F44DB6942229AB460083506E /* InternalUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6932229AB460083506E /* InternalUtility.swift */; };
 		F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */; };
@@ -296,6 +297,7 @@
 		F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanSilhouetteIcon.swift; sourceTree = "<group>"; };
 		F44847ED2269219500527D49 /* IconTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTests.swift; sourceTree = "<group>"; };
 		F44847F8226928E300527D49 /* TestAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestAssets.xcassets; sourceTree = "<group>"; };
+		F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserProfileProvider.swift; sourceTree = "<group>"; };
 		F44DB69122299FA10083506E /* AccessTokenWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenWallet.swift; sourceTree = "<group>"; };
 		F44DB6932229AB460083506E /* InternalUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtility.swift; sourceTree = "<group>"; };
 		F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCookieUtility.swift; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				F4B340002240779D00912F0F /* JSONLoader.swift */,
 				F48A74A02239B4E0007192F6 /* LocalizedStringValidation.swift */,
 				F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */,
+				F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1243,6 +1246,7 @@
 				F44847E82268FD0000527D49 /* ImageSizingConfigurationTests.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				523CAE4D225ED58900D196C3 /* StringExtensionTests.swift in Sources */,
+				F44847FB226E2F5200527D49 /* FakeUserProfileProvider.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
 				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */,

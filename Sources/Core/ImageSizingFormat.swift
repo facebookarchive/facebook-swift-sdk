@@ -22,7 +22,7 @@ import UIKit
  format, content mode, size and scale.
 
  */
-struct ImageSizingConfiguration {
+struct ImageSizingConfiguration: Equatable {
   let format: ImageSizingFormat
   let size: CGSize
   let scale: CGFloat
@@ -74,10 +74,9 @@ struct ImageSizingConfiguration {
       return false
     }
   }
-
 }
 
-enum ImageSizingFormat: String {
+public enum ImageSizingFormat: String {
   case normal
   case square
 }

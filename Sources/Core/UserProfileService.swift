@@ -161,7 +161,7 @@ class UserProfileService: UserProfileProviding {
     let request = GraphRequest(
       graphPath: GraphPath.me,
       parameters: ["fields": "id,first_name,middle_name,last_name,name,link"],
-      accessToken: AccessTokenWallet.shared.currentAccessToken,
+      accessToken: accessTokenProvider.currentAccessToken,
       flags: GraphRequest.Flags.doNotInvalidateTokenOnError
         .union(GraphRequest.Flags.disableErrorRecovery)
     )
@@ -260,8 +260,11 @@ class UserProfileService: UserProfileProviding {
       ]
     }
 
-    // This sizing needs to come from somewhere else. THis is not quite right.
-    return GraphRequest(graphPath: .picture(identifier: identifier), parameters: parameters)
+    return GraphRequest(
+      graphPath: .picture(identifier: identifier),
+      parameters: parameters,
+      accessToken: accessTokenProvider.currentAccessToken
+    )
   }
 
   // TODO: make this actually work.
@@ -270,6 +273,11 @@ class UserProfileService: UserProfileProviding {
     sizingConfiguration configuration: ImageSizingConfiguration,
     completion: @escaping (Result<UIImage, Error>) -> Void
     ) {
+    guard accessTokenProvider.currentAccessToken != nil else {
+      completion(.failure(CoreError.accessTokenRequired))
+      return
+    }
+
     let request = imageRequest(for: identifier, sizingConfiguration: configuration)
 
     // TODO: this shoudl probably return a task that can be cancelled
