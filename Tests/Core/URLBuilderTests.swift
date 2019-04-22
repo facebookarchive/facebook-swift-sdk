@@ -133,7 +133,7 @@ class URLBuilderTests: XCTestCase {
     )
   }
 
-  func testBuildingWithRequest() {
+  func testBuildingWithRequestAndDefaultHostPrefix() {
     let parameters: [String: AnyHashable] = ["Fields": "name,age", "limit": 5]
     let expectedQueryItems = URLQueryItemBuilder.build(from: parameters)
     let request = GraphRequest(graphPath: .me, parameters: parameters)
@@ -153,7 +153,42 @@ class URLBuilderTests: XCTestCase {
       "Builder should use the provided query items"
     )
 
-    validateBaseUrl(url, withPath: "/v3.2/me")
+    validateBaseUrl(
+      url,
+      withPrefix: "graph",
+      withPath: "/v3.2/me"
+    )
+  }
+
+  func testBuildingWithRequestAndCustomHostPrefix() {
+    let parameters: [String: AnyHashable] = ["Fields": "name,age", "limit": 5]
+    let expectedQueryItems = URLQueryItemBuilder.build(from: parameters)
+    let request = GraphRequest(graphPath: .me, parameters: parameters)
+
+    guard let url = URLBuilder().buildURL(
+      for: request,
+      withHostPrefix: "foo"
+      ),
+      let queryItems = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        )?.queryItems
+      else {
+        return XCTFail("Should be able to get query items from url")
+    }
+
+    XCTAssertEqual(
+      queryItems.sorted { $0.name < $1.name },
+      expectedQueryItems.sorted { $0.name < $1.name },
+      "Builder should use the provided query items"
+    )
+
+    validateBaseUrl(
+      url,
+      withPrefix: "foo",
+      withPath: "/v3.2/me"
+    )
+
   }
 
   private func validateBaseUrl(

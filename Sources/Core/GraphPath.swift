@@ -20,16 +20,18 @@
 
 import Foundation
 
-enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
+/// A representation of the path used for constructing `GraphRequest`s
+public enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
   case me
   case picture(identifier: String)
   case other(String)
 
-  init(stringLiteral value: String) {
+  public init(stringLiteral value: String) {
     self = .other(value)
   }
 
-  var description: String {
+  /// The string representation of a `GraphPath`
+  public var description: String {
     switch self {
     case .me:
       return "me"
