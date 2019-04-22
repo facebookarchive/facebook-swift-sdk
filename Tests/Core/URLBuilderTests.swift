@@ -188,7 +188,6 @@ class URLBuilderTests: XCTestCase {
       withPrefix: "foo",
       withPath: "/v3.2/me"
     )
-
   }
 
   private func validateBaseUrl(

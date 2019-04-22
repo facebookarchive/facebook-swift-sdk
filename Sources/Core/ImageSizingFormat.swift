@@ -26,6 +26,7 @@ struct ImageSizingConfiguration: Equatable {
   let format: ImageSizingFormat
   let size: CGSize
   let scale: CGFloat
+  let imageShouldFit: Bool
 
   init(
     format: ImageSizingFormat,
@@ -35,6 +36,7 @@ struct ImageSizingConfiguration: Equatable {
     ) {
     self.format = format
     self.scale = scale
+    self.imageShouldFit = ImageSizingConfiguration.imageShouldFit(for: contentMode)
 
     switch format {
     case .normal:
@@ -42,7 +44,7 @@ struct ImageSizingConfiguration: Equatable {
 
     case .square:
       let length: CGFloat
-      if ImageSizingConfiguration.imageShouldFit(for: contentMode) {
+      if imageShouldFit {
         length = min(size.width, size.height)
       } else {
         length = max(size.width, size.height)

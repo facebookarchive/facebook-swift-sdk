@@ -52,22 +52,26 @@ public class ProfilePictureView: UIView {
     }
   }
 
-  var needsImageUpdate: Bool = false
+  private(set) var needsImageUpdate: Bool = false
   var hasProfileImage: Bool = false
   var placeholderImageIsValid: Bool = false
   private(set) var userProfileProvider: UserProfileProviding = UserProfileService()
-
-  private var sizingConfiguration: ImageSizingConfiguration?
+  private(set) var notificationCenter: NotificationObserving = NotificationCenter.default
+  private(set) var sizingConfiguration: ImageSizingConfiguration?
 
   // TODO: has to store the last view model so it can compare after a fetch to see if the size is still valid
 
   convenience init(
     frame: CGRect,
-    userProfileProvider: UserProfileProviding = UserProfileService()
+    userProfileProvider: UserProfileProviding = UserProfileService(),
+    notificationCenter: NotificationObserving = NotificationCenter.default
     ) {
     self.init(frame: frame)
 
     self.userProfileProvider = userProfileProvider
+    self.notificationCenter = notificationCenter
+
+    setupNotifications()
   }
 
   override init(frame: CGRect) {
@@ -90,6 +94,15 @@ public class ProfilePictureView: UIView {
     addSubview(imageView)
   }
 
+  private func setupNotifications() {
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(accessTokenDidChange),
+      name: .FBSDKAccessTokenDidChangeNotification,
+      object: nil
+    )
+  }
+
   override public var contentMode: UIView.ContentMode {
     didSet {
       guard imageView.contentMode != contentMode else {
@@ -98,7 +111,7 @@ public class ProfilePictureView: UIView {
 
       super.contentMode = contentMode
       imageView.contentMode = contentMode
-      needsImageUpdate = true
+      setNeedsImageUpdate()
     }
   }
 
@@ -115,7 +128,6 @@ public class ProfilePictureView: UIView {
     }
   }
 
-  // TODO: Figure out why this needs the debounce code. This makes little sense to me right now.
   /**
    Explicitly marks the receiver as needing to update the image.
 
@@ -137,13 +149,20 @@ public class ProfilePictureView: UIView {
         break
       }
 
-      // debounce calls to needsImage against the main runloop
-      if self.needsImageUpdate {
-        return
-      }
-
       self.needsImageUpdate = true
       self.updateImageIfNeeded()
+    }
+  }
+
+  @objc
+  func accessTokenDidChange(notification: Notification) {
+    if let didChangeUserIdentifier = notification.userInfo?[
+      AccessTokenWallet.NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey
+      ] as? Bool,
+      didChangeUserIdentifier,
+      profileIdentifier == GraphPath.me.description {
+      sizingConfiguration = nil
+      setNeedsImageUpdate()
     }
   }
 
@@ -166,12 +185,11 @@ public class ProfilePictureView: UIView {
     // If the sizing configuration used to set the current image is different
     // from the sizing configuration being used to set the fetched image,
     // clear out the current image and set a placeholder while the new image is being fetched.
-    if let priorSizingConfig = self.sizingConfiguration {
-      guard priorSizingConfig == sizingConfiguration else {
-        setPlaceholderImage()
-        return
-      }
+    if let priorSizingConfig = self.sizingConfiguration,
+      priorSizingConfig != sizingConfiguration {
+      setPlaceholderImage()
     }
+
     self.sizingConfiguration = sizingConfiguration
 
     userProfileProvider.fetchProfileImage(

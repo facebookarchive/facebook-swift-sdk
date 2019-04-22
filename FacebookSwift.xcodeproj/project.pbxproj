@@ -628,8 +628,8 @@
 		F44847DD2268E37400527D49 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
 				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
+				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -655,10 +655,10 @@
 				F447153322440EE50013495F /* FakeSessionDataTask.swift */,
 				F480D9102236E1F7001AB8D3 /* FakeSessionProvider.swift */,
 				F44DB6A22229C6B60083506E /* FakeSettings.swift */,
+				F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */,
 				F4B340002240779D00912F0F /* JSONLoader.swift */,
 				F48A74A02239B4E0007192F6 /* LocalizedStringValidation.swift */,
 				F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */,
-				F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -734,6 +734,8 @@
 				F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */,
 				F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */,
 				F42687C42230772600A62C2E /* GraphRequestTests.swift */,
+				F44847ED2269219500527D49 /* IconTests.swift */,
+				F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */,
 				F40C3E022260F49800E1222B /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
 				F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */,
@@ -750,6 +752,7 @@
 				F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */,
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
 				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
+				F44847F8226928E300527D49 /* TestAssets.xcassets */,
 				F4144C51224D0F6C006C8F9C /* URLBuilderTests.swift */,
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
@@ -757,9 +760,6 @@
 				F42E3C7F2267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift */,
 				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 				F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */,
-				F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */,
-				F44847ED2269219500527D49 /* IconTests.swift */,
-				F44847F8226928E300527D49 /* TestAssets.xcassets */,
 			);
 			path = Core;
 			sourceTree = "<group>";

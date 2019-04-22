@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping
+// swiftlint:disable force_unwrapping file_length
 
 @testable import FacebookCore
 import XCTest
@@ -24,6 +24,7 @@ import XCTest
 class ProfilePictureViewTests: XCTestCase {
   private var view: ProfilePictureView!
   private var fakeUserProfileProvider: FakeUserProfileProvider!
+  private let fakeNotificationCenter = FakeNotificationCenter()
   private var frame = CGRect(
     origin: .zero,
     size: CGSize(width: 100, height: 100)
@@ -46,10 +47,14 @@ class ProfilePictureViewTests: XCTestCase {
 
     view = ProfilePictureView(
       frame: frame,
-      userProfileProvider: fakeUserProfileProvider
+      userProfileProvider: fakeUserProfileProvider,
+      notificationCenter: fakeNotificationCenter
     )
 
-    view.needsImageUpdate = false
+    // Await and then clean up values set during initialization
+    awaitPlaceholderImage()
+    fakeUserProfileProvider.fetchProfileImageCallCount = 0
+    view.imageView.image = nil
   }
 
   // MARK: - Dependencies
@@ -61,13 +66,20 @@ class ProfilePictureViewTests: XCTestCase {
                   "A profile picture view should have the expected concrete implementation for its user profile provider")
   }
 
+  func testNotificationCenterDependency() {
+    view = ProfilePictureView(frame: frame)
+
+    XCTAssertTrue(view.notificationCenter is NotificationCenter,
+                  "A profile picture view should have the expected concrete implementation for its notification center dependency")
+  }
+
   func testNeedsImageUpdate() {
     view = ProfilePictureView(
       frame: frame
     )
 
-    XCTAssertTrue(view.needsImageUpdate,
-                  "A newly created profile picture view should require an image update")
+    XCTAssertFalse(view.needsImageUpdate,
+                   "A newly created profile picture view should not require an image update")
   }
 
   func testInitialConfiguration() {
@@ -93,26 +105,14 @@ class ProfilePictureViewTests: XCTestCase {
   // MARK: - Placeholder Image
 
   func testPlaceholderImage() {
-    let expectation = self.expectation(description: name)
-
     view.setPlaceholderImage()
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
-
-    // Waits for async image assignation
-    guard let image = view.imageView.image else {
-      return XCTFail("Setting a placeholder image should set an image on the image view")
-    }
+    awaitPlaceholderImage("Setting a placeholder image should set the expected image on the image view")
 
     XCTAssertTrue(view.placeholderImageIsValid,
                   "Should consider a just-set placeholder to be valid")
     XCTAssertFalse(view.hasProfileImage,
                    "View is not considered to have a profile image when it has a placeholder image")
-    XCTAssertEqual(image.pngData(), expectedPlaceholderImage.pngData(),
-                   "Should use the expected placeholder image")
   }
 
   // MARK: - Setting Needs Image Update
@@ -120,17 +120,14 @@ class ProfilePictureViewTests: XCTestCase {
   func testSetNeedImageUpdateWithNoBounds() {
     let expectation = self.expectation(description: name)
 
+    fakeUserProfileProvider = FakeUserProfileProvider()
     view = ProfilePictureView(
       frame: CGRect(origin: .zero, size: .zero),
       userProfileProvider: fakeUserProfileProvider
     )
-    view.needsImageUpdate = false
     view.setNeedsImageUpdate()
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 0,
                    "Should not attempt to fetch a profile image if there is no space to show a fetched image")
@@ -138,41 +135,13 @@ class ProfilePictureViewTests: XCTestCase {
                  "Should not set an image if there is no space to show an image")
   }
 
-  func testSetNeedsImageUpdateWithPlaceholderAndProfileImage() {
-    let expectation = self.expectation(description: name)
-
-    // Should not be possible to set this state but technically it can happen
-    // Need to figure out good way to set this state organically
-    view.placeholderImageIsValid = true
-    view.hasProfileImage = true
-    view.setNeedsImageUpdate()
-
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
-
-    XCTAssertNotEqual(view.imageView.image?.pngData(), expectedPlaceholderImage.pngData(),
-                      "Should not set a placeholder image if there is a profile image and the valid placeholder image")
-    XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
-                   "Should attempt to fetch a profile image when an image update is needed")
-  }
-
   func testSetNeedsImageUpdateWithInvalidPlaceholderAndProfileImage() {
-    let expectation = self.expectation(description: name)
-
     view.placeholderImageIsValid = false
     view.hasProfileImage = true
     view.setNeedsImageUpdate()
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
+    awaitPlaceholderImage("Should set a placeholder image if the current placeholder image is invalid")
 
-    waitForExpectations(timeout: 1, handler: nil)
-
-    XCTAssertNotEqual(view.imageView.image?.pngData(), expectedPlaceholderImage.pngData(),
-                      "Should not set a placeholder image if there is a profile image or valid placeholder image")
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
                    "Should attempt to fetch a profile image when an image update is needed")
   }
@@ -182,16 +151,13 @@ class ProfilePictureViewTests: XCTestCase {
 
     view.placeholderImageIsValid = true
     view.hasProfileImage = false
+
     view.setNeedsImageUpdate()
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertNotEqual(view.imageView.image?.pngData(), expectedPlaceholderImage.pngData(),
-                      "Should not set a placeholder image if there is a profile image or valid placeholder image")
+                      "Should set a placeholder image if there is a profile image or valid placeholder image")
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
                    "Should attempt to fetch a profile image when an image update is needed")
   }
@@ -199,34 +165,19 @@ class ProfilePictureViewTests: XCTestCase {
   func testSetNeedsImageUpdateWithInvalidPlaceholderAndNoProfileImage() {
     view.placeholderImageIsValid = false
     view.hasProfileImage = false
+
     view.setNeedsImageUpdate()
 
-    let predicate = NSPredicate { _, _ in
-      self.view.imageView.image?.pngData() == self.expectedPlaceholderImage.pngData()
-    }
-    expectation(for: predicate, evaluatedWith: self, handler: nil)
-    waitForExpectations(timeout: 3, handler: nil)
-
-    XCTAssertEqual(view.imageView.image?.pngData(), expectedPlaceholderImage.pngData(),
-                   "Should set a placeholder image if there is no profile image and no valid placeholder image")
-
-    // calls needs image update which sets the flag to false after a debounce. Not sure how to test this
-    XCTAssertFalse(view.needsImageUpdate,
-                   "Should resolve the needs image update flag once the image service has been invoked")
+    awaitPlaceholderImage()
   }
 
   // MARK: - Updating Image
 
   func testUpdatingImageWithInvalidPlaceholderImage() {
-    let expectation = self.expectation(description: name)
     view.placeholderImageIsValid = false
-
     view.updateImageIfNeeded()
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitPlaceholderImage()
 
     XCTAssertTrue(view.placeholderImageIsValid,
                   "Should consider a just-set placeholder to be valid")
@@ -235,9 +186,6 @@ class ProfilePictureViewTests: XCTestCase {
   func testUpdatingImageWithDifferentSizingConfiguration() {
     view.imageView.image = puppyImage
 
-    let expectation = self.expectation(description: name)
-    view.placeholderImageIsValid = true
-
     // Starts to fetch an image with the current sizing configuration, this caches it locally
     view.updateImageIfNeeded()
 
@@ -245,13 +193,9 @@ class ProfilePictureViewTests: XCTestCase {
     view.format = .square
     view.updateImageIfNeeded()
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
-
-    XCTAssertNotEqual(view.imageView.image?.pngData(), puppyImage.pngData(),
-                      "Should clear out the set image when trying to update the image with a new sizing configuration")
+    awaitPlaceholderImage(
+      "Should clear out the set image when trying to update the image with a new sizing configuration"
+    )
   }
 
   // MARK: - Responsive Properties
@@ -274,19 +218,29 @@ class ProfilePictureViewTests: XCTestCase {
     ]
 
     contentModes.forEach { mode in
-      view.needsImageUpdate = false
       view.contentMode = mode
 
       XCTAssertEqual(view.imageView.contentMode, mode,
                      "Setting content mode: \(mode) on the view should set content mode: \(mode) on the image view")
-      XCTAssertTrue(view.needsImageUpdate,
-                    "Setting a new content mode: \(mode) on the view should set a flag to update the image view")
-      view.needsImageUpdate = false
-      view.contentMode = mode
-
-      XCTAssertFalse(view.needsImageUpdate,
-                     "Setting an identical content mode: \(mode) on the view should not set a flag to update the image view")
     }
+  }
+
+  func testSettingIdenticalContentMode() {
+    let expectation = self.expectation(description: name)
+
+    view.contentMode = view.contentMode
+
+    awaitAndFulfillOnMainQueue(expectation)
+
+    XCTAssertNotEqual(view.imageView.image?.pngData(), expectedPlaceholderImage.pngData(),
+                      "Should not set a new placeholder when a content mode changes to an identical content mode")
+  }
+
+  func testSettingPlaceholderInvalidatingContentMode() {
+    // Set content mode to a mode that is no longer considered to 'fit'
+    view.contentMode = .scaleToFill
+
+    awaitPlaceholderImage("Changing a content mode that 'fits' to a mode that does not 'fit' the image view should set an updated placeholder value")
   }
 
   func testSettingIdenticalBounds() {
@@ -294,10 +248,7 @@ class ProfilePictureViewTests: XCTestCase {
 
     view.bounds = frame
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 0,
                    "Should not attempt to fetch a profile image when the bounds change to identical values")
@@ -315,10 +266,7 @@ class ProfilePictureViewTests: XCTestCase {
     )
     view.bounds = frame
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
                    "Should attempt to fetch a profile image when the bounds change")
@@ -329,10 +277,7 @@ class ProfilePictureViewTests: XCTestCase {
 
     view.format = .normal
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 0,
                    "Should not attempt to fetch a profile image when the image sizing format changes to an identical value")
@@ -343,10 +288,7 @@ class ProfilePictureViewTests: XCTestCase {
 
     view.format = .square
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
                    "Should attempt to fetch a profile image when the image sizing format changes to a new value")
@@ -357,10 +299,7 @@ class ProfilePictureViewTests: XCTestCase {
 
     view.profileIdentifier = GraphPath.me.description
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 0,
                    "Should not attempt to fetch a profile image when the profile identifier changes to an identical value")
@@ -375,10 +314,7 @@ class ProfilePictureViewTests: XCTestCase {
     XCTAssertFalse(view.placeholderImageIsValid,
                    "Should invalidate placeholder image when setting a new profile identifier")
 
-    DispatchQueue.main.async {
-      expectation.fulfill()
-    }
-    waitForExpectations(timeout: 1, handler: nil)
+    awaitAndFulfillOnMainQueue(expectation)
 
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
                    "Should attempt to fetch a profile image when the profile identifier changes to a new value")
@@ -386,4 +322,104 @@ class ProfilePictureViewTests: XCTestCase {
 
   // MARK: - Responding to notifications
 
+  func testObservesAccessTokenChanges() {
+    XCTAssertEqual(
+      fakeNotificationCenter.capturedAddObserverNotificationName,
+      .FBSDKAccessTokenDidChangeNotification,
+      "Should add an observer for access token changes by default"
+    )
+  }
+
+  func testObservingAccessTokenChangeWithCustomProfileIdentifier() {
+    var expectation = self.expectation(description: name)
+
+    // Sets a custom profile identifier, this triggers a setting of the image view so need to wait for this and reset the service fake afterwards
+    view.profileIdentifier = "foo"
+
+    awaitAndFulfillOnMainQueue(expectation)
+
+    // Reset the fake
+    fakeUserProfileProvider.fetchProfileImageCallCount = 0
+
+    expectation = self.expectation(description: name + "1")
+
+    let fakeNotification = Notification(
+      name: .FBSDKAccessTokenDidChangeNotification,
+      object: AccessToken.self,
+      userInfo: [AccessTokenWallet.NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey: true]
+    )
+
+    view.accessTokenDidChange(notification: fakeNotification)
+
+    awaitAndFulfillOnMainQueue(expectation)
+
+    XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 0,
+                   "Should not attempt to fetch a profile image when the access token changes to a token with a non-changed user identifier")
+  }
+
+  func testObservingAccessTokenChangeToIdenticalUserIdentifier() {
+    let expectation = self.expectation(description: name)
+
+    let fakeNotification = Notification(
+      name: .FBSDKAccessTokenDidChangeNotification,
+      object: AccessToken.self,
+      userInfo: [AccessTokenWallet.NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey: false]
+    )
+
+    view.accessTokenDidChange(notification: fakeNotification)
+
+    awaitAndFulfillOnMainQueue(expectation)
+
+    XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 0,
+                   "Should not attempt to fetch a profile image when the access token changes to a token with a non-changed user identifier")
+  }
+
+  func testObservingAccessTokenChangeToNewUserIdentifier() {
+    let expectation = self.expectation(description: name)
+
+    let fakeNotification = Notification(
+      name: .FBSDKAccessTokenDidChangeNotification,
+      object: AccessToken.self,
+      userInfo: [AccessTokenWallet.NotificationKeys.FBSDKAccessTokenDidChangeUserIDKey: true]
+    )
+
+    view.accessTokenDidChange(notification: fakeNotification)
+
+    awaitAndFulfillOnMainQueue(expectation)
+
+    XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
+                   "Should attempt to fetch a profile image when the access token changes to a token with a new user identifier")
+  }
+
+  func awaitPlaceholderImage(
+    _ message: String = "Timed out waiting for expectation",
+    _ file: StaticString = #file,
+    _ line: UInt = #line
+    ) {
+    let predicate = NSPredicate { _, _ in
+      self.view.imageView.image?.pngData() == self.expectedPlaceholderImage.pngData()
+    }
+    expectation(for: predicate, evaluatedWith: self, handler: nil)
+
+    waitForExpectations(timeout: 1) { potentialError in
+      guard potentialError == nil else {
+        return XCTFail(message, file: file, line: line)
+      }
+    }
+  }
+
+  func awaitAndFulfillOnMainQueue(
+    _ expectation: XCTestExpectation,
+    _ file: StaticString = #file,
+    _ line: UInt = #line
+    ) {
+    DispatchQueue.main.async {
+      expectation.fulfill()
+    }
+    waitForExpectations(timeout: 1) { potentialError in
+      guard potentialError == nil else {
+        return XCTFail("Timed out waiting for expectation", file: file, line: line)
+      }
+    }
+  }
 }
