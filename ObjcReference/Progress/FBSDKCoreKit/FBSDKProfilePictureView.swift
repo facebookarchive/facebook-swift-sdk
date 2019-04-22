@@ -119,24 +119,24 @@ class FBSDKProfilePictureView: UIView {
             })
         }
     }
-
-    override var contentMode: UIView.ContentMode {
-        return (imageView?._contentMode)!
-    }
-
-    override var contentMode: UIView.ContentMode {
-        get {
-            return super.contentMode
-        }
-        set(contentMode) {
-            if imageView?.contentMode != contentMode {
-                imageView?.contentMode = contentMode
-                super.contentMode = contentMode
-                setNeedsImageUpdate()
-            }
-        }
-    }
-
+//
+//    override var contentMode: UIView.ContentMode {
+//        return (imageView?._contentMode)!
+//    }
+//
+//    override var contentMode: UIView.ContentMode {
+//        get {
+//            return super.contentMode
+//        }
+//        set(contentMode) {
+//            if imageView?.contentMode != contentMode {
+//                imageView?.contentMode = contentMode
+//                super.contentMode = contentMode
+//                setNeedsImageUpdate()
+//            }
+//        }
+//    }
+//
     func setMode(_ pictureMode: FBSDKProfilePictureMode) {
         if self.pictureMode != pictureMode {
             self.pictureMode = pictureMode
@@ -156,11 +156,11 @@ class FBSDKProfilePictureView: UIView {
     }
 
     func _configureProfilePictureView() {
-        imageView = UIImageView(frame: bounds)
-        imageView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        if let imageView = imageView {
-            addSubview(imageView)
-        }
+//        imageView = UIImageView(frame: bounds)
+//        imageView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        if let imageView = imageView {
+//            addSubview(imageView)
+//        }
 
         profileID = "me"
         backgroundColor = UIColor.white
@@ -266,7 +266,7 @@ class FBSDKProfilePictureView: UIView {
         })
     }
 
-    func _updateImage(with PlacesResponseKey.data: Data?, state PlacesResponseKey.state: FBSDKProfilePictureViewState?) {
+    func _updateImage(with data: Data?, state: FBSDKProfilePictureViewState?) {
         // make sure we haven't updated the state since we began fetching the image
         if !(PlacesResponseKey.state?.isValid(for: lastState) ?? false) {
             return
@@ -274,7 +274,7 @@ class FBSDKProfilePictureView: UIView {
 
         var image: UIImage? = nil
         if let data = PlacesResponseKey.data {
-            image = UIImage(data: data, scale: PlacesResponseKey.state?.scale ?? 0.0)
+            image = UIImage(data: data, scale: state?.scale ?? 0.0)
         }
         if image != nil {
             hasProfileImage = true

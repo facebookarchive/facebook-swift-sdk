@@ -22,7 +22,7 @@ import Foundation
 
 enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
   case me
-  case picture
+  case picture(identifier: String)
   case other(String)
 
   init(stringLiteral value: String) {
@@ -34,8 +34,8 @@ enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
     case .me:
       return "me"
 
-    case .picture:
-      return "picture"
+    case let .picture(identifier):
+      return "\(identifier)/picture"
 
     case .other(let value):
       return value

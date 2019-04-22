@@ -18,27 +18,66 @@
 
 import UIKit
 
-enum ImageSizingFormat: CustomStringConvertible {
-  case normal(height: UInt, width: UInt)
-  case square(height: UInt)
+/** A configuration object for determining the size of an image based on a sizing
+ format, content mode, size and scale.
 
-  var description: String {
-    switch self {
+ */
+struct ImageSizingConfiguration {
+  let format: ImageSizingFormat
+  let size: CGSize
+  let scale: CGFloat
+
+  init(
+    format: ImageSizingFormat,
+    contentMode: UIView.ContentMode,
+    size: CGSize,
+    scale: CGFloat = UIScreen.main.scale
+    ) {
+    self.format = format
+    self.scale = scale
+
+    switch format {
     case .normal:
-      return "normal"
+      self.size = CGSize(width: size.width * scale, height: size.height * scale)
 
     case .square:
-      return "square"
+      let length: CGFloat
+      if ImageSizingConfiguration.imageShouldFit(for: contentMode) {
+        length = min(size.width, size.height)
+      } else {
+        length = max(size.width, size.height)
+      }
+      self.size = CGSize(width: length * scale, height: length * scale)
     }
   }
 
-  var size: CGSize {
-    switch self {
-    case let .normal(height, width):
-      return CGSize(width: Int(width), height: Int(height))
+  static func imageShouldFit(for contentMode: UIView.ContentMode) -> Bool {
+    switch contentMode {
+    case .bottom,
+         .bottomLeft,
+         .bottomRight,
+         .center,
+         .left,
+         .redraw,
+         .right,
+         .scaleAspectFit,
+         .top,
+         .topLeft,
+         .topRight:
+      return true
 
-    case let .square(height):
-      return CGSize(width: Int(height), height: Int(height))
+    case .scaleToFill,
+         .scaleAspectFill:
+      return false
+
+    @unknown default:
+      return false
     }
   }
+
+}
+
+enum ImageSizingFormat: String {
+  case normal
+  case square
 }

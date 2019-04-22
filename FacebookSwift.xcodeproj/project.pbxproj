@@ -79,9 +79,7 @@
 		F447153422440EE50013495F /* FakeSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447153322440EE50013495F /* FakeSessionDataTask.swift */; };
 		F44847DC2268E36E00527D49 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DB2268E36E00527D49 /* ProfilePictureView.swift */; };
 		F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */; };
-		F44847E62268FAAA00527D49 /* ProfilePictureViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E52268FAAA00527D49 /* ProfilePictureViewModelTests.swift */; };
-		F44847E82268FD0000527D49 /* ImageSizingFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E72268FD0000527D49 /* ImageSizingFormatTests.swift */; };
-		F44847EA22690E0D00527D49 /* ProfilePictureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E922690E0D00527D49 /* ProfilePictureViewModel.swift */; };
+		F44847E82268FD0000527D49 /* ImageSizingConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */; };
 		F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */; };
 		F44847EE2269219500527D49 /* IconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847ED2269219500527D49 /* IconTests.swift */; };
 		F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
@@ -294,9 +292,7 @@
 		F447153322440EE50013495F /* FakeSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSessionDataTask.swift; sourceTree = "<group>"; };
 		F44847DB2268E36E00527D49 /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewTests.swift; sourceTree = "<group>"; };
-		F44847E52268FAAA00527D49 /* ProfilePictureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewModelTests.swift; sourceTree = "<group>"; };
-		F44847E72268FD0000527D49 /* ImageSizingFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizingFormatTests.swift; sourceTree = "<group>"; };
-		F44847E922690E0D00527D49 /* ProfilePictureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewModel.swift; sourceTree = "<group>"; };
+		F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizingConfigurationTests.swift; sourceTree = "<group>"; };
 		F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanSilhouetteIcon.swift; sourceTree = "<group>"; };
 		F44847ED2269219500527D49 /* IconTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTests.swift; sourceTree = "<group>"; };
 		F44847F8226928E300527D49 /* TestAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestAssets.xcassets; sourceTree = "<group>"; };
@@ -631,7 +627,6 @@
 			isa = PBXGroup;
 			children = (
 				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
-				F44847E922690E0D00527D49 /* ProfilePictureViewModel.swift */,
 				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
 			);
 			path = UI;
@@ -746,7 +741,6 @@
 				F4B3401622430F9A00912F0F /* LoggingBehaviorTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
 				F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */,
-				F44847E52268FAAA00527D49 /* ProfilePictureViewModelTests.swift */,
 				F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */,
 				F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */,
 				F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */,
@@ -760,7 +754,7 @@
 				F42E3C7F2267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift */,
 				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 				F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */,
-				F44847E72268FD0000527D49 /* ImageSizingFormatTests.swift */,
+				F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */,
 				F44847ED2269219500527D49 /* IconTests.swift */,
 				F44847F8226928E300527D49 /* TestAssets.xcassets */,
 			);
@@ -1058,7 +1052,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5257097220F6C9800053B9E3 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1100,7 +1094,7 @@
 		};
 		F4C46F5A22650595007A0C38 /* GenCode */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -1108,7 +1102,7 @@
 			name = GenCode;
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${CONFIGURATION}\" != \"Test\" ]; then\necho \"Generating ObjC files\"\n./scripts/travis/generate_objc.sh\nfi\n";
 		};
@@ -1172,7 +1166,6 @@
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
 				F4516B8C225FA44A00979DD2 /* MimeType.swift in Sources */,
-				F44847EA22690E0D00527D49 /* ProfilePictureViewModel.swift in Sources */,
 				F4225DCE223EF88800F4DCFE /* ErrorConfigurationEntryBuilder.swift in Sources */,
 				F42E3C922268BB9B00287DC4 /* ImageSizingFormat.swift in Sources */,
 				F42E3C952268BBB900287DC4 /* UserDefaults+Extensions.swift in Sources */,
@@ -1247,7 +1240,7 @@
 				F44DB6BF222B10040083506E /* FakeGraphConnectionProvider.swift in Sources */,
 				F480D9132236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift in Sources */,
 				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */,
-				F44847E82268FD0000527D49 /* ImageSizingFormatTests.swift in Sources */,
+				F44847E82268FD0000527D49 /* ImageSizingConfigurationTests.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				523CAE4D225ED58900D196C3 /* StringExtensionTests.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
@@ -1272,7 +1265,6 @@
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
 				F4B3401722430F9A00912F0F /* LoggingBehaviorTests.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
-				F44847E62268FAAA00527D49 /* ProfilePictureViewModelTests.swift in Sources */,
 				F42E3C832267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift in Sources */,
 				F44847EE2269219500527D49 /* IconTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
