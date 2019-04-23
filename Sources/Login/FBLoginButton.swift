@@ -16,31 +16,32 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
-
+import FacebookCore
+import FBSDKCoreKit
 import FBSDKLoginKit
+import UIKit
 
 /**
- Indicates which default audience to use for sessions that post data to Facebook.
+ A button that initiates a log in or log out flow upon tapping.
 
- Certain operations such as publishing a status or publishing a photo require an audience.
- When the user grants an application permission to perform a publish operation,
- a default audience is selected as the publication ceiling for the application.
- This enumerated value allows the application to select which audience to ask the user to grant publish permission for.
+ `LoginButton` works with `AccessToken.current` to determine what to display,
+ and automatically starts authentication when tapped (i.e., you do not need to manually subscribe action targets).
+
+ Like `LoginManager`, you should make sure your app delegate is connected to `ApplicationDelegate`
+ in order for the button's delegate to receive messages.
+
+ `LoginButton` has a fixed height of @c 30 pixels, but you may change the width.
+ Initializing the button with `nil` frame will size the button to its minimum frame.
  */
-public enum LoginDefaultAudience {
-  /// Indicates that the user's friends are able to see posts made by the application.
-  case friends
-  /// Indicates that only the user is able to see posts made by the application.
-  case onlyMe
-  /// Indicates that all Facebook users are able to see posts made by the application.
-  case everyone
+public extension FBLoginButton {
+  /**
+   Create a new `LoginButton` with a given optional frame and read permissions.
 
-  internal var sdkAudience: FBSDKDefaultAudience {
-    switch self {
-    case .friends: return .friends
-    case .onlyMe: return .onlyMe
-    case .everyone: return .everyone
-    }
+   - Parameter frame: Optional frame to initialize with. Default: `nil`, which uses a default size for the button.
+   - Parameter permissions: Array of read permissions to request when logging in.
+   */
+  convenience init(frame: CGRect = .zero, permissions: [Permission] = [.publicProfile]) {
+    self.init(frame: frame)
+    self.permissions = permissions.map { $0.name }
   }
 }

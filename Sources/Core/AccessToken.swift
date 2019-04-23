@@ -27,21 +27,21 @@ public extension AccessToken {
    Returns the known granted permissions.
    */
   var permissions: Set<Permission> {
-    return Set(__permissions.map { Permission(name: $0) })
+    return Set(__permissions.map { Permission(stringLiteral: $0) })
   }
 
   /**
    Returns the known declined permissions.
    */
   var declinedPermissions: Set<Permission> {
-    return Set(__declinedPermissions.map { Permission(name: $0) })
+    return Set(__declinedPermissions.map { Permission(stringLiteral: $0) })
   }
 
   /**
    Returns the known expired permissions.
    */
   var expiredPermissions: Set<Permission> {
-    return Set(__expiredPermissions.map { Permission(name: $0) })
+    return Set(__expiredPermissions.map { Permission(stringLiteral: $0) })
   }
 
   /**
