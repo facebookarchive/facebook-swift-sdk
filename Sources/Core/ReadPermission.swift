@@ -110,7 +110,7 @@ public enum ReadPermission: PermissionRepresentable {
   case custom(String)
 
   // MARK: PermissionRepresentable
-  internal var permissionValue: Permission {
+  public var permission: Permission {
     switch self {
     case .publicProfile: return "public_profile"
     case .userFriends: return "user_friends"

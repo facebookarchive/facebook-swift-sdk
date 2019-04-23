@@ -16,25 +16,31 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-extension Dictionary {
-  func keyValueMap<K, V>(_ transform: (Element) throws -> (K, V)) rethrows -> [K: V] {
-    var dictionary: [K: V] = [:]
-    try forEach {
-      let transformed = try transform($0)
-      dictionary[transformed.0] = transformed.1
-    }
-    return dictionary
-  }
+import FBSDKCoreKit
+import Foundation
 
-  func keyValueFlatMap<K, V>(_ transform: (Element) throws -> (K?, V?)) rethrows -> [K: V] {
-    var dictionary: [K: V] = [:]
-    try forEach {
-      let transformed = try transform($0)
-      if let key = transformed.0,
-        let value = transformed.1 {
-        dictionary[key] = value
-      }
+//--------------------------------------
+// MARK: - SDKSettings
+//--------------------------------------
+
+/**
+ Provides access to settings and configuration used by the entire SDK.
+ */
+public extension Settings {
+  //--------------------------------------
+  // MARK: - SDKSettings + Logging Behavior
+  //--------------------------------------
+
+  /**
+   Current logging behaviors of Facebook SDK.
+   The default enabled behavior is `.DeveloperErrors` only.
+   */
+  static var loggingBehaviors: Set<LoggingBehavior> {
+    get {
+      return Set(Settings.__loggingBehaviors.map { LoggingBehavior(rawValue: $0) })
     }
-    return dictionary
+    set {
+      Settings.__loggingBehaviors = Set(newValue.map { $0.rawValue })
+    }
   }
 }

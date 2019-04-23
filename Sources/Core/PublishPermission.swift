@@ -47,7 +47,7 @@ public enum PublishPermission: PermissionRepresentable {
 
   // MARK: PermissionRepresentable
 
-  internal var permissionValue: Permission {
+  public var permission: Permission {
     switch self {
     case .publishActions: return "publish_actions"
     case .managePages: return "manage_pages"

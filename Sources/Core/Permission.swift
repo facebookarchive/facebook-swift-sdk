@@ -24,7 +24,6 @@ import Foundation
  See a full list at https://developers.facebook.com/docs/facebook-login/permissions
  */
 public struct Permission: Hashable, ExpressibleByStringLiteral {
-
   /// Name of the permission.
   public let name: String
 
@@ -66,6 +65,8 @@ public struct Permission: Hashable, ExpressibleByStringLiteral {
     self.init(name: value)
   }
 
+  // MARK: Hashable
+
   /**
    Compare two `Permission`s for equality.
 
@@ -79,6 +80,8 @@ public struct Permission: Hashable, ExpressibleByStringLiteral {
   }
 }
 
-internal protocol PermissionRepresentable {
-  var permissionValue: Permission { get }
+/// Permission Representable Protocol
+public protocol PermissionRepresentable {
+  /// The permission represented
+  var permission: Permission { get }
 }

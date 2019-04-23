@@ -16,19 +16,39 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import FBSDKCoreKit
+import Foundation
+
 /**
- Represents result of a single request.
- Can either be `.success` or `.failed`
+ AccessToken Extension
  */
-public enum GraphRequestResult<T: GraphRequestProtocol> {
+public extension AccessToken {
   /**
-   Represents succesful result of a `GraphRequestProtocol`.
-   Encapsulates response from the server.
+   Returns the known granted permissions.
    */
-  case success(response: T.Response)
+  var permissions: Set<Permission> {
+    return Set(__permissions.map { Permission(name: $0) })
+  }
+
   /**
-   Represents errored result of a `GraphRequestProtocol`.
-   Encapsulates error that was encountered.
+   Returns the known declined permissions.
    */
-  case failed(Error)
+  var declinedPermissions: Set<Permission> {
+    return Set(__declinedPermissions.map { Permission(name: $0) })
+  }
+
+  /**
+   Returns the known expired permissions.
+   */
+  var expiredPermissions: Set<Permission> {
+    return Set(__expiredPermissions.map { Permission(name: $0) })
+  }
+
+  /**
+   Convenience getter to determine if a permission has been granted
+   - parameter permission: The permission to check
+   */
+  func hasGranted(_ permission: Permission) -> Bool {
+    return hasGranted(permission: permission.name)
+  }
 }

@@ -16,40 +16,11 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import FBSDKCoreKit.FBSDKAppEvents
+import FBSDKCoreKit
+import Foundation
 
-public extension AppEventsLogger {
-  /**
-   Specifies when `AppEventsLogger` sends log events to the server.
-   */
-  enum FlushBehavior {
-    /**
-     Flush automatically: periodically (once a minute or every 100 logged events) and always at app reactivation.
-     */
-    case auto
-
-    /**
-     Only flush when the `flush` method is called.
-     When an app is moved to background/terminated, the events are persisted and re-established at activation,
-     but they will only be written with an explicit call to `flush`.
-     */
-    case explicitOnly
-
-    internal init(sdkFlushBehavior: FBSDKAppEventsFlushBehavior) {
-      switch sdkFlushBehavior {
-      case .auto: self = .auto
-      case .explicitOnly: self = .explicitOnly
-      @unknown default:
-        assertionFailure("Unknown Case")
-        self = .auto
-      }
-    }
-
-    internal var sdkFlushBehavior: FBSDKAppEventsFlushBehavior {
-      switch self {
-      case .auto: return .auto
-      case .explicitOnly: return .explicitOnly
-      }
-    }
-  }
+/** AppEvents.Name Extension */
+public extension AppEvents.Name {
+  /** Parameter key used to specify a purchase. */
+  static let purchased: AppEvents.Name = AppEvents.Name(rawValue: "fb_mobile_purchase")
 }
