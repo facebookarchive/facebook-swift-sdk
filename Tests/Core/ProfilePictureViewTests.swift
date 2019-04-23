@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping file_length
+// swiftlint:disable force_unwrapping file_length type_body_length force_try
 
 @testable import FacebookCore
 import XCTest
@@ -25,6 +25,7 @@ class ProfilePictureViewTests: XCTestCase {
   private var view: ProfilePictureView!
   private var fakeUserProfileProvider: FakeUserProfileProvider!
   private let fakeNotificationCenter = FakeNotificationCenter()
+  private let fakeLogger = FakeLogger()
   private var frame = CGRect(
     origin: .zero,
     size: CGSize(width: 100, height: 100)
@@ -45,12 +46,20 @@ class ProfilePictureViewTests: XCTestCase {
 
     fakeUserProfileProvider = FakeUserProfileProvider()
 
+    createView()
+    awaitInitialViewSetup()
+  }
+
+  func createView() {
     view = ProfilePictureView(
       frame: frame,
       userProfileProvider: fakeUserProfileProvider,
-      notificationCenter: fakeNotificationCenter
+      notificationCenter: fakeNotificationCenter,
+      logger: fakeLogger
     )
+  }
 
+  func awaitInitialViewSetup() {
     // Await and then clean up values set during initialization
     awaitPlaceholderImage()
     fakeUserProfileProvider.fetchProfileImageCallCount = 0
@@ -73,10 +82,23 @@ class ProfilePictureViewTests: XCTestCase {
                   "A profile picture view should have the expected concrete implementation for its notification center dependency")
   }
 
+  func testLoggerDependency() {
+    view = ProfilePictureView(frame: frame)
+
+    XCTAssertTrue(view.logger is Logger,
+                  "A profile picture view should have the expected concrete implementation for its logger dependency")
+  }
+
+  // MARK: - View Configuration
+
+  func testInitializingWithCoder() {
+    let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+    let view = ProfilePictureView(coder: archiver)
+    XCTAssertNil(view, "Should not be able to initialize a profile picture view from empty date")
+  }
+
   func testNeedsImageUpdate() {
-    view = ProfilePictureView(
-      frame: frame
-    )
+    view = ProfilePictureView(frame: frame)
 
     XCTAssertFalse(view.needsImageUpdate,
                    "A newly created profile picture view should not require an image update")
@@ -169,6 +191,41 @@ class ProfilePictureViewTests: XCTestCase {
     view.setNeedsImageUpdate()
 
     awaitPlaceholderImage()
+  }
+
+  func testSetNeedsImageUpdateFetchSuccess() {
+    XCTAssertFalse(view.hasProfileImage,
+                   "View should not be considered to have a profile image on creation")
+
+    view.setNeedsImageUpdate()
+
+    fakeUserProfileProvider.capturedFetchProfileImageCompletion?(
+      .success(puppyImage)
+    )
+
+    let expectation = self.expectation(description: name)
+    awaitAndFulfillOnMainQueue(expectation)
+
+    XCTAssertEqual(view.imageView.image?.pngData(), puppyImage.pngData(),
+                   "View should set a successfully fetched image on its child image view")
+    XCTAssertTrue(view.hasProfileImage,
+                  "View should be considered to have a profile image after a fetched image is set on its child view")
+  }
+
+  func testSetNeedsImageUpdateFetchFailure() {
+    view.setNeedsImageUpdate()
+
+    fakeUserProfileProvider.capturedFetchProfileImageCompletion?(
+      .failure(SampleError())
+    )
+
+    let expectation = self.expectation(description: name)
+    awaitAndFulfillOnMainQueue(expectation)
+
+    XCTAssertFalse(view.hasProfileImage,
+                   "View should not be considered to have a profile image if fetching a profile image failed")
+    XCTAssertEqual(fakeLogger.capturedMessages.count, 1,
+                   "Should invoke the logger on a failure to set an image")
   }
 
   // MARK: - Updating Image
@@ -401,7 +458,7 @@ class ProfilePictureViewTests: XCTestCase {
     }
     expectation(for: predicate, evaluatedWith: self, handler: nil)
 
-    waitForExpectations(timeout: 1) { potentialError in
+    waitForExpectations(timeout: 2) { potentialError in
       guard potentialError == nil else {
         return XCTFail(message, file: file, line: line)
       }

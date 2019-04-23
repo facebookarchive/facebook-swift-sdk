@@ -272,7 +272,8 @@ class UserProfileService: UserProfileProviding {
 
    - Parameter identifier: A String to identify the user to fetch a profile for.
     Defaults to 'me'
-    - Parameter sizingConfiguration: A configuration object used for specifying dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
+    - Parameter sizingConfiguration: A configuration object used for specifying
+   dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
    - Parameter completion: A completion that takes a Result Type with a success of UIImage and a failure of Error
    */
   func fetchProfileImage(
@@ -280,9 +281,14 @@ class UserProfileService: UserProfileProviding {
     sizingConfiguration configuration: ImageSizingConfiguration,
     completion: @escaping (Result<UIImage, Error>) -> Void
     ) {
-    guard accessTokenProvider.currentAccessToken != nil else {
+    // Access token is required to fetch a profile image but only for the 'me' path
+    switch identifier == GraphPath.me.description &&
+      accessTokenProvider.currentAccessToken == nil {
+    case true:
       completion(.failure(CoreError.accessTokenRequired))
-      return
+
+    case false:
+      break
     }
 
     let request = imageRequest(for: identifier, sizingConfiguration: configuration)

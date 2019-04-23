@@ -68,16 +68,19 @@ public class ProfilePictureView: UIView {
   private(set) var notificationCenter: NotificationObserving = NotificationCenter.default
   private(set) var sizingConfiguration: ImageSizingConfiguration?
   private(set) var userProfileProvider: UserProfileProviding = UserProfileService()
+  private(set) var logger: Logging = Logger()
 
   convenience init(
     frame: CGRect,
     userProfileProvider: UserProfileProviding = UserProfileService(),
-    notificationCenter: NotificationObserving = NotificationCenter.default
+    notificationCenter: NotificationObserving = NotificationCenter.default,
+    logger: Logging = Logger()
     ) {
     self.init(frame: frame)
 
     self.userProfileProvider = userProfileProvider
     self.notificationCenter = notificationCenter
+    self.logger = logger
 
     setupNotifications()
   }
@@ -89,9 +92,7 @@ public class ProfilePictureView: UIView {
   }
 
   required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-
-    configureView()
+    return nil
   }
 
   func configureView() {
@@ -120,7 +121,8 @@ public class ProfilePictureView: UIView {
    or not the current image will fit.
 
    ex: Changing from .bottom to .left will not reset the image because .bottom and .left are both considered to 'fit'
-   whereas changing from .bottom to .scaleAspectFill will trigger an update because .scaleAspectFill is not considered to 'fit' the image.
+   whereas changing from .bottom to .scaleAspectFill will trigger an update because
+   .scaleAspectFill is not considered to 'fit' the image.
    */
   override public var contentMode: UIView.ContentMode {
     didSet {
@@ -223,9 +225,20 @@ public class ProfilePictureView: UIView {
     userProfileProvider.fetchProfileImage(
       for: profileIdentifier.description,
       sizingConfiguration: sizingConfiguration
-    ) { result in
-      // use result to set image
-      print(result)
+    ) { [weak self] result in
+      switch result {
+      case let .failure(error):
+        self?.hasProfileImage = false
+        self?.placeholderImageIsValid = false
+        self?.setNeedsImageUpdate()
+        self?.logger.log(.networkRequests, error.localizedDescription)
+
+      case let .success(image):
+        self?.hasProfileImage = true
+        DispatchQueue.main.async {
+          self?.imageView.image = image
+        }
+      }
     }
   }
 

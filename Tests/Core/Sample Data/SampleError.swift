@@ -16,20 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
-import UIKit
+import Foundation
 
-class FakeUserProfileProvider: UserProfileProviding {
-  var fetchProfileImageCallCount = 0
-  var capturedFetchProfileImageCompletion: ((Result<UIImage, Error>) -> Void)?
-
-  func fetchProfileImage(
-    for identifier: String,
-    sizingConfiguration: ImageSizingConfiguration,
-    completion: @escaping (Result<UIImage, Error>) -> Void
-    ) {
-    fetchProfileImageCallCount += 1
-
-    capturedFetchProfileImageCompletion = completion
-  }
-}
+struct SampleError: Error {}

@@ -464,24 +464,41 @@ class UserProfileServiceTests: XCTestCase {
 
   // MARK: Fetching Image
 
-  func testFetchingImageWithMissingAccessToken() {
+  func testFetchingImageWithMissingAccessTokenAndDefaultIdentifier() {
     let expectation = self.expectation(description: name)
 
-    service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
+    service.fetchProfileImage(
+      sizingConfiguration: sizingConfiguration
+    ) { result in
       switch result {
       case .success:
-        XCTFail("Should not successfully fetch a profile image with a missing access token")
+        XCTFail("Should not successfully fetch a profile image with a missing access token if the profile identifier is me")
 
       case let .failure(error):
         if case CoreError.accessTokenRequired = error {
           expectation.fulfill()
         } else {
-          XCTFail("Should inform the user that an access token is required to fetch a profile image")
+          XCTFail("Should inform the user that an access token is required to fetch a profile image when the identifier is me")
         }
       }
     }
 
     waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func testFetchingImageWithMissingAccessTokenAndCustomIdentifier() {
+    service.fetchProfileImage(
+      for: "abc123",
+      sizingConfiguration: sizingConfiguration
+    ) { result in
+      switch result {
+      case .success:
+        break
+
+      case .failure:
+        XCTFail("Should not immediately fail to fetch the profile image for a given user id since this is public information")
+      }
+    }
   }
 
   func testFetchingProfileImageForDefaultIdentifier() {
