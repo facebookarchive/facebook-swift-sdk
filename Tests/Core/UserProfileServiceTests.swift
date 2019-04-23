@@ -462,7 +462,45 @@ class UserProfileServiceTests: XCTestCase {
     )
   }
 
-  // MARK: Fetching Image
+  // MARK: - Image Request
+
+  func testNormalImageRequest() {
+    let profile = SampleUserProfile.valid()
+    service.setCurrent(profile)
+
+    let expectedParameters: [String: AnyHashable] = [
+      "type": ImageSizingFormat.normal,
+      "width": 40,
+      "height": 40
+    ]
+    let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
+
+    XCTAssertEqual(request.parameters, expectedParameters,
+                   "Creating a request with a sizing configuration should provide the expected dimensions to the request parameters")
+  }
+
+  func testSquareImageRequest() {
+    let profile = SampleUserProfile.valid()
+    service.setCurrent(profile)
+
+    sizingConfiguration = ImageSizingConfiguration(
+      format: .square,
+      contentMode: .scaleAspectFit,
+      size: CGSize(width: 20, height: 80),
+      scale: 1.0
+    )
+    let expectedParameters: [String: AnyHashable] = [
+      "type": ImageSizingFormat.square,
+      "width": 20,
+      "height": 20
+    ]
+    let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
+
+    XCTAssertEqual(request.parameters, expectedParameters,
+                   "Creating a request with a sizing configuration should provide the expected dimensions to the request parameters")
+  }
+
+  // MARK: - Fetching Image
 
   func testFetchingImageWithMissingAccessTokenAndDefaultIdentifier() {
     let expectation = self.expectation(description: name)
@@ -652,7 +690,7 @@ class UserProfileServiceTests: XCTestCase {
     waitForExpectations(timeout: 1, handler: nil)
   }
 
-  // MARK: Refreshing
+  // MARK: - Refreshing
 
   func testRefreshingStaleProfileOnAccessTokenChange() {
     service = UserProfileService(

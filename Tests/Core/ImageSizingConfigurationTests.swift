@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable force_unwrapping
+
 @testable import FacebookCore
 import XCTest
 
@@ -49,6 +51,10 @@ class ImageSizingConfigurationTests: XCTestCase {
       XCTAssertFalse(ImageSizingConfiguration.imageShouldFit(for: mode),
                      "Configuration should not consider an image to fit if its content mode is: \(mode)")
     }
+
+    let unknownContentMode = UIView.ContentMode(rawValue: 2000)!
+    XCTAssertFalse(ImageSizingConfiguration.imageShouldFit(for: unknownContentMode),
+                   "Configuration should not consider an image to fit if its content mode is unknown")
   }
 
   func testGettingSizeForNormalFitting() {

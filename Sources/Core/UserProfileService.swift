@@ -233,7 +233,8 @@ class UserProfileService: UserProfileProviding {
 
    - Parameter identifier: The identifier to use for retrieving a user's profile image. Defaults
    to "me"
-   - Parameter sizingConfiguration: A configuration object used for specifying dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
+   - Parameter sizingConfiguration: A configuration object used for specifying dimensions
+   and tracking whether an image should fit for a given `UIView.ContentMode`
 
    - Returns a GraphRequest to use in a GraphRequestConnection
    */
