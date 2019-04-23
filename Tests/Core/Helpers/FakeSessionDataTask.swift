@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable force_cast
+
 @testable import FacebookCore
 import Foundation
 
@@ -25,12 +27,53 @@ class FakeSessionDataTask: SessionDataTask {
   var capturedUrlRequest: URLRequest?
   let completionHandler: SessionTaskCompletion
 
+  var getObjectWasCalled = false
+  var capturedGetObjectRemoteType: Any?
+  var capturedGetObjectGraphRequest: GraphRequest?
+  var stubGetObjectCompletionResult: Result<Decodable, Error>?
+
   init(
     request: URLRequest? = nil,
     completionHandler: @escaping SessionTaskCompletion = { _, _, _ in }
     ) {
     capturedUrlRequest = request
     self.completionHandler = completionHandler
+  }
+
+  func stubCompletion<RemoteType: Decodable>(
+    result: Result<RemoteType, Error>,
+    completion: @escaping (Result<RemoteType, Error>) -> Void
+    ) {
+    completion(result)
+  }
+
+  func getObject<RemoteType: Decodable>(
+    _ remoteType: RemoteType.Type,
+    for graphRequest: GraphRequest,
+    completion: @escaping (Result<RemoteType, Error>) -> Void
+    ) -> URLSessionTaskProxy? {
+    getObjectWasCalled = true
+    capturedGetObjectRemoteType = remoteType
+    capturedGetObjectGraphRequest = graphRequest
+
+    // Since there is no way (I can figure out) of capturing and storing the completion outside of this scope
+    // I'm opting to call it immediately with values that I CAN set outside of this scope
+    switch stubGetObjectCompletionResult {
+    case nil:
+      break
+
+    case let .some(result):
+      switch result {
+      case let .success(object):
+        let object = object as! RemoteType
+        completion(.success(object))
+
+      case let .failure(error):
+        completion(.failure(error))
+      }
+    }
+
+    return URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
   }
 
   func resume() {

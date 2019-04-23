@@ -18,20 +18,38 @@
 
 import Foundation
 
-// FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
+enum UserProfileBuilder {
+  static func build(from remote: RemoteUserProfile) -> UserProfile? {
+    guard let name = remote.name,
+      !name.isEmpty
+      else {
+        return nil
+    }
 
-public class Employee: Equatable, Comparable {
-  public static func < (lhs: Employee, rhs: Employee) -> Bool {
-    return lhs.classification < rhs.classification
+    var url: URL?
+    if let remoteURL = remote.linkURL,
+      let validUrl = URL(string: remoteURL) {
+      url = validUrl
+    }
+
+    return UserProfile(
+      identifier: remote.identifier,
+      name: name,
+      firstName: nullifyIfEmpty(remote.firstName),
+      middleName: nullifyIfEmpty(remote.middleName),
+      lastName: nullifyIfEmpty(remote.lastName),
+      url: url,
+      fetchedDate: remote.fetchedDate
+    )
   }
 
-  public static func == (lhs: Employee, rhs: Employee) -> Bool {
-    return lhs.classification == rhs.classification
-  }
+  private static func nullifyIfEmpty(_ string: String?) -> String? {
+    guard let string = string,
+      !string.isEmpty
+      else {
+        return nil
+    }
 
-  public let classification: EmployeeClassification
-
-  public init(classification: EmployeeClassification) {
-    self.classification = classification
+    return string
   }
 }
