@@ -22,52 +22,9 @@
 		81AB8A951D36D44C00066F63 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81AB8A4B1D36D41700066F63 /* FBSDKLoginKit.framework */; };
 		81AB8A9F1D36D46100066F63 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81AB8A3D1D36D41700066F63 /* FBSDKCoreKit.framework */; };
 		81AB8AA01D36D46100066F63 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81AB8A581D36D41700066F63 /* FBSDKShareKit.framework */; };
-		81D6468A1D2C8D7800690609 /* ContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646521D2C8D7800690609 /* ContentProtocol.swift */; };
-		81D6468B1D2C8D7800690609 /* ContentSharingResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646531D2C8D7800690609 /* ContentSharingResultProtocol.swift */; };
-		81D6468C1D2C8D7800690609 /* Hashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646541D2C8D7800690609 /* Hashtag.swift */; };
-		81D6468D1D2C8D7800690609 /* PostSharingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646551D2C8D7800690609 /* PostSharingResult.swift */; };
-		81D6468E1D2C8D7800690609 /* LinkShareContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646571D2C8D7800690609 /* LinkShareContent.swift */; };
-		81D6468F1D2C8D7800690609 /* OpenGraphAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646591D2C8D7800690609 /* OpenGraphAction.swift */; };
-		81D646901D2C8D7800690609 /* OpenGraphObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6465A1D2C8D7800690609 /* OpenGraphObject.swift */; };
-		81D646911D2C8D7800690609 /* OpenGraphPropertyContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6465B1D2C8D7800690609 /* OpenGraphPropertyContaining.swift */; };
-		81D646921D2C8D7800690609 /* OpenGraphPropertyName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6465C1D2C8D7800690609 /* OpenGraphPropertyName.swift */; };
-		81D646931D2C8D7800690609 /* OpenGraphPropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6465D1D2C8D7800690609 /* OpenGraphPropertyValue.swift */; };
-		81D646941D2C8D7800690609 /* OpenGraphShareContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6465E1D2C8D7800690609 /* OpenGraphShareContent.swift */; };
-		81D646951D2C8D7800690609 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646601D2C8D7800690609 /* Photo.swift */; };
-		81D646961D2C8D7800690609 /* PhotoShareContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646611D2C8D7800690609 /* PhotoShareContent.swift */; };
-		81D646971D2C8D7800690609 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646631D2C8D7800690609 /* Video.swift */; };
-		81D646981D2C8D7800690609 /* VideoShareContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646641D2C8D7800690609 /* VideoShareContent.swift */; };
-		81D646991D2C8D7800690609 /* ContentSharingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646661D2C8D7800690609 /* ContentSharingProtocol.swift */; };
-		81D6469A1D2C8D7800690609 /* GraphSharer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646671D2C8D7800690609 /* GraphSharer.swift */; };
-		81D646A11D2C8D7800690609 /* ContentSharingDialogProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646701D2C8D7800690609 /* ContentSharingDialogProtocol.swift */; };
-		81D646A21D2C8D7800690609 /* GameRequest.ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646721D2C8D7800690609 /* GameRequest.ActionType.swift */; };
-		81D646A31D2C8D7800690609 /* GameRequest.Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646731D2C8D7800690609 /* GameRequest.Dialog.swift */; };
-		81D646A41D2C8D7800690609 /* GameRequest.Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646741D2C8D7800690609 /* GameRequest.Recipient.swift */; };
-		81D646A51D2C8D7800690609 /* GameRequest.RecipientsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646751D2C8D7800690609 /* GameRequest.RecipientsFilter.swift */; };
-		81D646A61D2C8D7800690609 /* GameRequest.Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646761D2C8D7800690609 /* GameRequest.Result.swift */; };
-		81D646A71D2C8D7800690609 /* GameRequest.SDKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646771D2C8D7800690609 /* GameRequest.SDKDelegate.swift */; };
-		81D646A81D2C8D7800690609 /* GameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646781D2C8D7800690609 /* GameRequest.swift */; };
-		81D646A91D2C8D7800690609 /* MessageDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6467A1D2C8D7800690609 /* MessageDialog.swift */; };
-		81D646AA1D2C8D7800690609 /* ShareDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6467C1D2C8D7800690609 /* ShareDialog.swift */; };
-		81D646AB1D2C8D7800690609 /* ShareDialogMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6467D1D2C8D7800690609 /* ShareDialogMode.swift */; };
-		81D646AC1D2C8D7800690609 /* ShareResultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6467F1D2C8D7800690609 /* ShareResultKeys.swift */; };
-		81D646AD1D2C8D7800690609 /* ContentBridger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646801D2C8D7800690609 /* ContentBridger.swift */; };
-		81D646AE1D2C8D7800690609 /* SDKSharingDelegateBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646811D2C8D7800690609 /* SDKSharingDelegateBridge.swift */; };
-		81D646AF1D2C8D7800690609 /* ShareError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646821D2C8D7800690609 /* ShareError.swift */; };
-		81D646B01D2C8D7800690609 /* LikableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646841D2C8D7800690609 /* LikableObject.swift */; };
-		81D646B11D2C8D7800690609 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646851D2C8D7800690609 /* LikeButton.swift */; };
-		81D646B21D2C8D7800690609 /* LikeControl.AuxilaryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646861D2C8D7800690609 /* LikeControl.AuxilaryStyle.swift */; };
-		81D646B31D2C8D7800690609 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646871D2C8D7800690609 /* LikeControl.swift */; };
-		81D646B41D2C8D7800690609 /* SendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646881D2C8D7800690609 /* SendButton.swift */; };
-		81D646B51D2C8D7800690609 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646891D2C8D7800690609 /* ShareButton.swift */; };
+		81D646AF1D2C8D7800690609 /* Enums+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646821D2C8D7800690609 /* Enums+Extensions.swift */; };
 		81FC4B601D064F68003F3A46 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B5F1D064F68003F3A46 /* LoginManager.swift */; };
 		81FC4C981D067448003F3A46 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4C971D067448003F3A46 /* Permission.swift */; };
-		F5FE8BFC1D2DDB1100A0E4CF /* AppInvite.DeliveryMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FE8BF61D2DDB1100A0E4CF /* AppInvite.DeliveryMethod.swift */; };
-		F5FE8BFD1D2DDB1100A0E4CF /* AppInvite.Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FE8BF71D2DDB1100A0E4CF /* AppInvite.Dialog.swift */; };
-		F5FE8BFE1D2DDB1100A0E4CF /* AppInvite.PromoCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FE8BF81D2DDB1100A0E4CF /* AppInvite.PromoCode.swift */; };
-		F5FE8BFF1D2DDB1100A0E4CF /* AppInvite.Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FE8BF91D2DDB1100A0E4CF /* AppInvite.Result.swift */; };
-		F5FE8C001D2DDB1100A0E4CF /* AppInvite.SDKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FE8BFA1D2DDB1100A0E4CF /* AppInvite.SDKDelegate.swift */; };
-		F5FE8C011D2DDB1100A0E4CF /* AppInvite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FE8BFB1D2DDB1100A0E4CF /* AppInvite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -259,52 +216,9 @@
 		81AB8A091D36D41700066F63 /* FBSDKCoreKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FBSDKCoreKit.xcodeproj; path = "../Carthage/Checkouts/facebook-objc-sdk/FBSDKCoreKit/FBSDKCoreKit.xcodeproj"; sourceTree = "<group>"; };
 		81AB8A0C1D36D41700066F63 /* FBSDKLoginKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FBSDKLoginKit.xcodeproj; path = "../Carthage/Checkouts/facebook-objc-sdk/FBSDKLoginKit/FBSDKLoginKit.xcodeproj"; sourceTree = "<group>"; };
 		81AB8A0F1D36D41700066F63 /* FBSDKShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FBSDKShareKit.xcodeproj; path = "../Carthage/Checkouts/facebook-objc-sdk/FBSDKShareKit/FBSDKShareKit.xcodeproj"; sourceTree = "<group>"; };
-		81D646521D2C8D7800690609 /* ContentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProtocol.swift; sourceTree = "<group>"; };
-		81D646531D2C8D7800690609 /* ContentSharingResultProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSharingResultProtocol.swift; sourceTree = "<group>"; };
-		81D646541D2C8D7800690609 /* Hashtag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashtag.swift; sourceTree = "<group>"; };
-		81D646551D2C8D7800690609 /* PostSharingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostSharingResult.swift; sourceTree = "<group>"; };
-		81D646571D2C8D7800690609 /* LinkShareContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkShareContent.swift; sourceTree = "<group>"; };
-		81D646591D2C8D7800690609 /* OpenGraphAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGraphAction.swift; sourceTree = "<group>"; };
-		81D6465A1D2C8D7800690609 /* OpenGraphObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGraphObject.swift; sourceTree = "<group>"; };
-		81D6465B1D2C8D7800690609 /* OpenGraphPropertyContaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGraphPropertyContaining.swift; sourceTree = "<group>"; };
-		81D6465C1D2C8D7800690609 /* OpenGraphPropertyName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGraphPropertyName.swift; sourceTree = "<group>"; };
-		81D6465D1D2C8D7800690609 /* OpenGraphPropertyValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGraphPropertyValue.swift; sourceTree = "<group>"; };
-		81D6465E1D2C8D7800690609 /* OpenGraphShareContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGraphShareContent.swift; sourceTree = "<group>"; };
-		81D646601D2C8D7800690609 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		81D646611D2C8D7800690609 /* PhotoShareContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoShareContent.swift; sourceTree = "<group>"; };
-		81D646631D2C8D7800690609 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		81D646641D2C8D7800690609 /* VideoShareContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoShareContent.swift; sourceTree = "<group>"; };
-		81D646661D2C8D7800690609 /* ContentSharingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSharingProtocol.swift; sourceTree = "<group>"; };
-		81D646671D2C8D7800690609 /* GraphSharer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphSharer.swift; sourceTree = "<group>"; };
-		81D646701D2C8D7800690609 /* ContentSharingDialogProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSharingDialogProtocol.swift; sourceTree = "<group>"; };
-		81D646721D2C8D7800690609 /* GameRequest.ActionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRequest.ActionType.swift; sourceTree = "<group>"; };
-		81D646731D2C8D7800690609 /* GameRequest.Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRequest.Dialog.swift; sourceTree = "<group>"; };
-		81D646741D2C8D7800690609 /* GameRequest.Recipient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRequest.Recipient.swift; sourceTree = "<group>"; };
-		81D646751D2C8D7800690609 /* GameRequest.RecipientsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRequest.RecipientsFilter.swift; sourceTree = "<group>"; };
-		81D646761D2C8D7800690609 /* GameRequest.Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRequest.Result.swift; sourceTree = "<group>"; };
-		81D646771D2C8D7800690609 /* GameRequest.SDKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRequest.SDKDelegate.swift; sourceTree = "<group>"; };
-		81D646781D2C8D7800690609 /* GameRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRequest.swift; sourceTree = "<group>"; };
-		81D6467A1D2C8D7800690609 /* MessageDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDialog.swift; sourceTree = "<group>"; };
-		81D6467C1D2C8D7800690609 /* ShareDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDialog.swift; sourceTree = "<group>"; };
-		81D6467D1D2C8D7800690609 /* ShareDialogMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDialogMode.swift; sourceTree = "<group>"; };
-		81D6467F1D2C8D7800690609 /* ShareResultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareResultKeys.swift; sourceTree = "<group>"; };
-		81D646801D2C8D7800690609 /* ContentBridger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentBridger.swift; sourceTree = "<group>"; };
-		81D646811D2C8D7800690609 /* SDKSharingDelegateBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSharingDelegateBridge.swift; sourceTree = "<group>"; };
-		81D646821D2C8D7800690609 /* ShareError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareError.swift; sourceTree = "<group>"; };
-		81D646841D2C8D7800690609 /* LikableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikableObject.swift; sourceTree = "<group>"; };
-		81D646851D2C8D7800690609 /* LikeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
-		81D646861D2C8D7800690609 /* LikeControl.AuxilaryStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeControl.AuxilaryStyle.swift; sourceTree = "<group>"; };
-		81D646871D2C8D7800690609 /* LikeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
-		81D646881D2C8D7800690609 /* SendButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendButton.swift; sourceTree = "<group>"; };
-		81D646891D2C8D7800690609 /* ShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
+		81D646821D2C8D7800690609 /* Enums+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enums+Extensions.swift"; sourceTree = "<group>"; };
 		81FC4B5F1D064F68003F3A46 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		81FC4C971D067448003F3A46 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
-		F5FE8BF61D2DDB1100A0E4CF /* AppInvite.DeliveryMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInvite.DeliveryMethod.swift; sourceTree = "<group>"; };
-		F5FE8BF71D2DDB1100A0E4CF /* AppInvite.Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInvite.Dialog.swift; sourceTree = "<group>"; };
-		F5FE8BF81D2DDB1100A0E4CF /* AppInvite.PromoCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInvite.PromoCode.swift; sourceTree = "<group>"; };
-		F5FE8BF91D2DDB1100A0E4CF /* AppInvite.Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInvite.Result.swift; sourceTree = "<group>"; };
-		F5FE8BFA1D2DDB1100A0E4CF /* AppInvite.SDKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInvite.SDKDelegate.swift; sourceTree = "<group>"; };
-		F5FE8BFB1D2DDB1100A0E4CF /* AppInvite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInvite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,12 +329,7 @@
 		811C5E621CFFD52B00E4A925 /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				81D646501D2C8D7800690609 /* Content */,
-				81D646651D2C8D7800690609 /* Content Sharing */,
-				81D646681D2C8D7800690609 /* Dialogs */,
-				81D646831D2C8D7800690609 /* Views */,
-				81D646821D2C8D7800690609 /* ShareError.swift */,
-				81D6467E1D2C8D7800690609 /* Internal */,
+				81D646821D2C8D7800690609 /* Enums+Extensions.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -516,143 +425,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		81D646501D2C8D7800690609 /* Content */ = {
-			isa = PBXGroup;
-			children = (
-				81D646511D2C8D7800690609 /* Common */,
-				81D646561D2C8D7800690609 /* Link */,
-				81D646581D2C8D7800690609 /* OpenGraph */,
-				81D6465F1D2C8D7800690609 /* Photo */,
-				81D646621D2C8D7800690609 /* Video */,
-			);
-			path = Content;
-			sourceTree = "<group>";
-		};
-		81D646511D2C8D7800690609 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				81D646521D2C8D7800690609 /* ContentProtocol.swift */,
-				81D646531D2C8D7800690609 /* ContentSharingResultProtocol.swift */,
-				81D646541D2C8D7800690609 /* Hashtag.swift */,
-				81D646551D2C8D7800690609 /* PostSharingResult.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		81D646561D2C8D7800690609 /* Link */ = {
-			isa = PBXGroup;
-			children = (
-				81D646571D2C8D7800690609 /* LinkShareContent.swift */,
-			);
-			path = Link;
-			sourceTree = "<group>";
-		};
-		81D646581D2C8D7800690609 /* OpenGraph */ = {
-			isa = PBXGroup;
-			children = (
-				81D646591D2C8D7800690609 /* OpenGraphAction.swift */,
-				81D6465A1D2C8D7800690609 /* OpenGraphObject.swift */,
-				81D6465B1D2C8D7800690609 /* OpenGraphPropertyContaining.swift */,
-				81D6465C1D2C8D7800690609 /* OpenGraphPropertyName.swift */,
-				81D6465D1D2C8D7800690609 /* OpenGraphPropertyValue.swift */,
-				81D6465E1D2C8D7800690609 /* OpenGraphShareContent.swift */,
-			);
-			path = OpenGraph;
-			sourceTree = "<group>";
-		};
-		81D6465F1D2C8D7800690609 /* Photo */ = {
-			isa = PBXGroup;
-			children = (
-				81D646601D2C8D7800690609 /* Photo.swift */,
-				81D646611D2C8D7800690609 /* PhotoShareContent.swift */,
-			);
-			path = Photo;
-			sourceTree = "<group>";
-		};
-		81D646621D2C8D7800690609 /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				81D646631D2C8D7800690609 /* Video.swift */,
-				81D646641D2C8D7800690609 /* VideoShareContent.swift */,
-			);
-			path = Video;
-			sourceTree = "<group>";
-		};
-		81D646651D2C8D7800690609 /* Content Sharing */ = {
-			isa = PBXGroup;
-			children = (
-				81D646661D2C8D7800690609 /* ContentSharingProtocol.swift */,
-				81D646671D2C8D7800690609 /* GraphSharer.swift */,
-			);
-			path = "Content Sharing";
-			sourceTree = "<group>";
-		};
-		81D646681D2C8D7800690609 /* Dialogs */ = {
-			isa = PBXGroup;
-			children = (
-				F5FE8BF51D2DDB1100A0E4CF /* AppInvite */,
-				81D646701D2C8D7800690609 /* ContentSharingDialogProtocol.swift */,
-				81D646711D2C8D7800690609 /* GameRequest */,
-				81D646791D2C8D7800690609 /* MessageDialog */,
-				81D6467B1D2C8D7800690609 /* ShareDialog */,
-			);
-			path = Dialogs;
-			sourceTree = "<group>";
-		};
-		81D646711D2C8D7800690609 /* GameRequest */ = {
-			isa = PBXGroup;
-			children = (
-				81D646721D2C8D7800690609 /* GameRequest.ActionType.swift */,
-				81D646731D2C8D7800690609 /* GameRequest.Dialog.swift */,
-				81D646741D2C8D7800690609 /* GameRequest.Recipient.swift */,
-				81D646751D2C8D7800690609 /* GameRequest.RecipientsFilter.swift */,
-				81D646761D2C8D7800690609 /* GameRequest.Result.swift */,
-				81D646771D2C8D7800690609 /* GameRequest.SDKDelegate.swift */,
-				81D646781D2C8D7800690609 /* GameRequest.swift */,
-			);
-			path = GameRequest;
-			sourceTree = "<group>";
-		};
-		81D646791D2C8D7800690609 /* MessageDialog */ = {
-			isa = PBXGroup;
-			children = (
-				81D6467A1D2C8D7800690609 /* MessageDialog.swift */,
-			);
-			path = MessageDialog;
-			sourceTree = "<group>";
-		};
-		81D6467B1D2C8D7800690609 /* ShareDialog */ = {
-			isa = PBXGroup;
-			children = (
-				81D6467C1D2C8D7800690609 /* ShareDialog.swift */,
-				81D6467D1D2C8D7800690609 /* ShareDialogMode.swift */,
-			);
-			path = ShareDialog;
-			sourceTree = "<group>";
-		};
-		81D6467E1D2C8D7800690609 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				81D6467F1D2C8D7800690609 /* ShareResultKeys.swift */,
-				81D646801D2C8D7800690609 /* ContentBridger.swift */,
-				81D646811D2C8D7800690609 /* SDKSharingDelegateBridge.swift */,
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		81D646831D2C8D7800690609 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				81D646841D2C8D7800690609 /* LikableObject.swift */,
-				81D646851D2C8D7800690609 /* LikeButton.swift */,
-				81D646861D2C8D7800690609 /* LikeControl.AuxilaryStyle.swift */,
-				81D646871D2C8D7800690609 /* LikeControl.swift */,
-				81D646881D2C8D7800690609 /* SendButton.swift */,
-				81D646891D2C8D7800690609 /* ShareButton.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		81E94E461CFFD0FA009844F2 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,19 +442,6 @@
 				81AB8A0F1D36D41700066F63 /* FBSDKShareKit.xcodeproj */,
 			);
 			name = ObjC;
-			sourceTree = "<group>";
-		};
-		F5FE8BF51D2DDB1100A0E4CF /* AppInvite */ = {
-			isa = PBXGroup;
-			children = (
-				F5FE8BF61D2DDB1100A0E4CF /* AppInvite.DeliveryMethod.swift */,
-				F5FE8BF71D2DDB1100A0E4CF /* AppInvite.Dialog.swift */,
-				F5FE8BF81D2DDB1100A0E4CF /* AppInvite.PromoCode.swift */,
-				F5FE8BF91D2DDB1100A0E4CF /* AppInvite.Result.swift */,
-				F5FE8BFA1D2DDB1100A0E4CF /* AppInvite.SDKDelegate.swift */,
-				F5FE8BFB1D2DDB1100A0E4CF /* AppInvite.swift */,
-			);
-			path = AppInvite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1037,50 +796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81D646991D2C8D7800690609 /* ContentSharingProtocol.swift in Sources */,
-				81D646B21D2C8D7800690609 /* LikeControl.AuxilaryStyle.swift in Sources */,
-				F5FE8BFC1D2DDB1100A0E4CF /* AppInvite.DeliveryMethod.swift in Sources */,
-				81D6469A1D2C8D7800690609 /* GraphSharer.swift in Sources */,
-				81D646B51D2C8D7800690609 /* ShareButton.swift in Sources */,
-				81D646B01D2C8D7800690609 /* LikableObject.swift in Sources */,
-				81D646A51D2C8D7800690609 /* GameRequest.RecipientsFilter.swift in Sources */,
-				81D646A91D2C8D7800690609 /* MessageDialog.swift in Sources */,
-				81D646A31D2C8D7800690609 /* GameRequest.Dialog.swift in Sources */,
-				81D646951D2C8D7800690609 /* Photo.swift in Sources */,
-				81D646AB1D2C8D7800690609 /* ShareDialogMode.swift in Sources */,
-				81D646A11D2C8D7800690609 /* ContentSharingDialogProtocol.swift in Sources */,
-				81D6468F1D2C8D7800690609 /* OpenGraphAction.swift in Sources */,
-				81D646B31D2C8D7800690609 /* LikeControl.swift in Sources */,
-				81D646A61D2C8D7800690609 /* GameRequest.Result.swift in Sources */,
-				81D646901D2C8D7800690609 /* OpenGraphObject.swift in Sources */,
-				81D6468A1D2C8D7800690609 /* ContentProtocol.swift in Sources */,
-				81D646AD1D2C8D7800690609 /* ContentBridger.swift in Sources */,
-				81D646AE1D2C8D7800690609 /* SDKSharingDelegateBridge.swift in Sources */,
-				81D646A21D2C8D7800690609 /* GameRequest.ActionType.swift in Sources */,
-				81D6468C1D2C8D7800690609 /* Hashtag.swift in Sources */,
-				81D646A81D2C8D7800690609 /* GameRequest.swift in Sources */,
-				F5FE8BFD1D2DDB1100A0E4CF /* AppInvite.Dialog.swift in Sources */,
-				81D646AF1D2C8D7800690609 /* ShareError.swift in Sources */,
-				81D646971D2C8D7800690609 /* Video.swift in Sources */,
-				81D646921D2C8D7800690609 /* OpenGraphPropertyName.swift in Sources */,
-				81D6468B1D2C8D7800690609 /* ContentSharingResultProtocol.swift in Sources */,
-				F5FE8C011D2DDB1100A0E4CF /* AppInvite.swift in Sources */,
-				81D646981D2C8D7800690609 /* VideoShareContent.swift in Sources */,
-				81D646B11D2C8D7800690609 /* LikeButton.swift in Sources */,
-				81D646A41D2C8D7800690609 /* GameRequest.Recipient.swift in Sources */,
-				81D646911D2C8D7800690609 /* OpenGraphPropertyContaining.swift in Sources */,
-				81D646941D2C8D7800690609 /* OpenGraphShareContent.swift in Sources */,
-				81D646931D2C8D7800690609 /* OpenGraphPropertyValue.swift in Sources */,
-				81D646A71D2C8D7800690609 /* GameRequest.SDKDelegate.swift in Sources */,
-				81D646961D2C8D7800690609 /* PhotoShareContent.swift in Sources */,
-				F5FE8BFE1D2DDB1100A0E4CF /* AppInvite.PromoCode.swift in Sources */,
-				F5FE8C001D2DDB1100A0E4CF /* AppInvite.SDKDelegate.swift in Sources */,
-				81D6468D1D2C8D7800690609 /* PostSharingResult.swift in Sources */,
-				81D646AC1D2C8D7800690609 /* ShareResultKeys.swift in Sources */,
-				81D646AA1D2C8D7800690609 /* ShareDialog.swift in Sources */,
-				81D646B41D2C8D7800690609 /* SendButton.swift in Sources */,
-				F5FE8BFF1D2DDB1100A0E4CF /* AppInvite.Result.swift in Sources */,
-				81D6468E1D2C8D7800690609 /* LinkShareContent.swift in Sources */,
+				81D646AF1D2C8D7800690609 /* Enums+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

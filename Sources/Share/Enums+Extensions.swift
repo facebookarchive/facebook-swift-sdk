@@ -19,44 +19,31 @@
 import FBSDKShareKit
 
 /**
- Represents a valid hashtag.
+ ShareDialog.Mode CustomStringConvertible
  */
-public struct Hashtag: Hashable {
-  /// The hashtag string.
-  public let stringValue: String
-
-  /**
-   Attempt to create a hashtag for a given string.
-
-   - parameter string: The string to create from.
-   If this is not a valid hashtag (matching the regular expression `#\w+`), the initializer returns `nil`.
-   */
-  public init?(_ string: String) {
-    guard let sdkHashtag = FBSDKHashtag(string: string) else { return nil }
-    self.init(sdkHashtag: sdkHashtag)
+extension ShareDialog.Mode: CustomStringConvertible {
+  /// The string description
+  public var description: String {
+    return __NSStringFromFBSDKShareDialogMode(self)
   }
+}
 
-  internal init?(sdkHashtag: FBSDKHashtag) {
-    if !sdkHashtag.isValid {
-      return nil
-    }
-    self.stringValue = sdkHashtag.stringRepresentation
+/**
+ AppGroupPrivacy CustomStringConvertible
+ */
+extension AppGroupPrivacy: CustomStringConvertible {
+  /// The string description
+  public var description: String {
+    return __NSStringFromFBSDKAppGroupPrivacy(self)
   }
+}
 
-  internal var sdkHashtagRepresentation: FBSDKHashtag {
-    return FBSDKHashtag(string: stringValue)
+/**
+ LikeObjectType CustomStringConvertible
+ */
+extension LikeObjectType: CustomStringConvertible {
+  /// The string description
+  public var description: String {
+    return __NSStringFromFBSDKLikeObjectType(self)
   }
-
-  /**
-   Check if two hashtags are equal.
-
-   - parameter lhs: The first hashtag to compare.
-   - parameter rhs: The second hashtag to compare.
-
-   - returns: `true` if the hashtags are equal, `false` otherwise.
-   */
-  public static func == (lhs: Hashtag, rhs: Hashtag) -> Bool {
-    return lhs.stringValue == rhs.stringValue
-  }
-
 }
