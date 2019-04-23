@@ -233,7 +233,7 @@ class UserProfileService: UserProfileProviding {
 
    - Parameter identifier: The identifier to use for retrieving a user's profile image. Defaults
    to "me"
-   - Parameter mode: The picture mode which includes associated values to specifies dimensions
+   - Parameter sizingConfiguration: A configuration object used for specifying dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
 
    - Returns a GraphRequest to use in a GraphRequestConnection
    */
@@ -267,7 +267,14 @@ class UserProfileService: UserProfileProviding {
     )
   }
 
-  // TODO: make this actually work.
+  /**
+   Fetches a profile image for a user identifier.
+
+   - Parameter identifier: A String to identify the user to fetch a profile for.
+    Defaults to 'me'
+    - Parameter sizingConfiguration: A configuration object used for specifying dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
+   - Parameter completion: A completion that takes a Result Type with a success of UIImage and a failure of Error
+   */
   func fetchProfileImage(
     for identifier: String = GraphPath.me.description,
     sizingConfiguration configuration: ImageSizingConfiguration,

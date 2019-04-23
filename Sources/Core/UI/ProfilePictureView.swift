@@ -18,6 +18,13 @@
 
 import UIKit
 
+/**
+ A view to display a profile picture.
+
+ Automatically sets a placeholder image while fetching a profile image
+ and reacts to changes in sizing, format as well as subscribing to changes
+ to the shared `AccessToken`
+ */
 public class ProfilePictureView: UIView {
   lazy var imageView: UIImageView = {
     let imageView = UIImageView(frame: bounds)
@@ -38,10 +45,12 @@ public class ProfilePictureView: UIView {
   }
 
   /**
-   The identifier of the profile to display. Can update to fetch a profile image for a specific user id
+   The identifier of the profile to display. Update this value to fetch a profile image
+   for a specific user id.
+
    Setting to a new value will invalidate the current placeholder image and attempt to fetch an updated image.
 
-   Defaults to "me"
+   Defaults to the String value of the "me" `GraphPath`
    */
   public var profileIdentifier: String = GraphPath.me.description {
     didSet {
@@ -52,14 +61,13 @@ public class ProfilePictureView: UIView {
     }
   }
 
-  private(set) var needsImageUpdate: Bool = false
   var hasProfileImage: Bool = false
   var placeholderImageIsValid: Bool = false
-  private(set) var userProfileProvider: UserProfileProviding = UserProfileService()
+
+  private(set) var needsImageUpdate: Bool = false
   private(set) var notificationCenter: NotificationObserving = NotificationCenter.default
   private(set) var sizingConfiguration: ImageSizingConfiguration?
-
-  // TODO: has to store the last view model so it can compare after a fetch to see if the size is still valid
+  private(set) var userProfileProvider: UserProfileProviding = UserProfileService()
 
   convenience init(
     frame: CGRect,
@@ -103,6 +111,17 @@ public class ProfilePictureView: UIView {
     )
   }
 
+  /**
+   Overrides `contentMode` to set identical content mode on child `UIImageView`
+
+   This will also update the image if the value has changed.
+
+   Note: The image will not be updated if the content mode does not change whether
+   or not the current image will fit.
+
+   ex: Changing from .bottom to .left will not reset the image because .bottom and .left are both considered to 'fit'
+   whereas changing from .bottom to .scaleAspectFill will trigger an update because .scaleAspectFill is not considered to 'fit' the image.
+   */
   override public var contentMode: UIView.ContentMode {
     didSet {
       guard imageView.contentMode != contentMode else {
@@ -115,6 +134,11 @@ public class ProfilePictureView: UIView {
     }
   }
 
+  /**
+   Overrides `bounds` and sets a new value if it is different from the old.
+
+   Note: Changing bounds will invalidate the current placeholder and attempt to refetch the profile image.
+   */
   override public var bounds: CGRect {
     get {
       return super.bounds
@@ -166,6 +190,10 @@ public class ProfilePictureView: UIView {
     }
   }
 
+  /**
+   Prefer `setNeedsImageUpdate` over calling this directly as this method will
+   not perform the same safety and sanity checks before fetching a new image.
+   */
   func updateImageIfNeeded() {
     needsImageUpdate = false
     let screen = self.window?.screen ?? UIScreen.main

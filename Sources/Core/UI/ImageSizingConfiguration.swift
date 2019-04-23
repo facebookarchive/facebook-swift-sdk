@@ -18,9 +18,9 @@
 
 import UIKit
 
-/** A configuration object for determining the size of an image based on a sizing
- format, content mode, size and scale.
-
+/**
+ A configuration object for determining the size of an image based on a sizing
+ format, a content mode, a size, and a scale.
  */
 struct ImageSizingConfiguration: Equatable {
   let format: ImageSizingFormat
@@ -78,7 +78,11 @@ struct ImageSizingConfiguration: Equatable {
   }
 }
 
+/// Available formats for displaying a profile picture.
 public enum ImageSizingFormat: String {
   case normal
   case square
+
+  // TODO: as needed include additional sizing formats accepted by the server
+  //  small, album, large
 }

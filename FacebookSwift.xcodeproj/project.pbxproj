@@ -56,7 +56,7 @@
 		F42E3C8B2267E64500287DC4 /* RemoteUserProfile+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */; };
 		F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */; };
 		F42E3C8F2268BB7B00287DC4 /* UserProfileStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */; };
-		F42E3C922268BB9B00287DC4 /* ImageSizingFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C902268BB9B00287DC4 /* ImageSizingFormat.swift */; };
+		F42E3C922268BB9B00287DC4 /* ImageSizingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C902268BB9B00287DC4 /* ImageSizingConfiguration.swift */; };
 		F42E3C932268BB9B00287DC4 /* UserProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */; };
 		F42E3C952268BBB900287DC4 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C942268BBB900287DC4 /* UserDefaults+Extensions.swift */; };
 		F42E3C972268C57300287DC4 /* AccessTokenWallet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */; };
@@ -270,7 +270,7 @@
 		F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteUserProfile+Extensions.swift"; sourceTree = "<group>"; };
 		F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSpy.swift; sourceTree = "<group>"; };
 		F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStoreTests.swift; sourceTree = "<group>"; };
-		F42E3C902268BB9B00287DC4 /* ImageSizingFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSizingFormat.swift; sourceTree = "<group>"; };
+		F42E3C902268BB9B00287DC4 /* ImageSizingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSizingConfiguration.swift; sourceTree = "<group>"; };
 		F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStore.swift; sourceTree = "<group>"; };
 		F42E3C942268BBB900287DC4 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccessTokenWallet+Extensions.swift"; sourceTree = "<group>"; };
@@ -514,7 +514,6 @@
 				F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */,
 				F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */,
 				F408BE9E223981950068D24A /* GraphRequestSerializer.swift */,
-				F42E3C902268BB9B00287DC4 /* ImageSizingFormat.swift */,
 				F4516B7F225F7F9200979DD2 /* JSONParser.swift */,
 				524A49B6225EA2ED00786C11 /* KeychainStore.swift */,
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
@@ -629,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
+				F42E3C902268BB9B00287DC4 /* ImageSizingConfiguration.swift */,
 				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
 			);
 			path = UI;
@@ -1170,7 +1170,7 @@
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
 				F4516B8C225FA44A00979DD2 /* MimeType.swift in Sources */,
 				F4225DCE223EF88800F4DCFE /* ErrorConfigurationEntryBuilder.swift in Sources */,
-				F42E3C922268BB9B00287DC4 /* ImageSizingFormat.swift in Sources */,
+				F42E3C922268BB9B00287DC4 /* ImageSizingConfiguration.swift in Sources */,
 				F42E3C952268BBB900287DC4 /* UserDefaults+Extensions.swift in Sources */,
 				F47056DD2232DF4500BE526B /* Logger.swift in Sources */,
 				F447152B22440B610013495F /* ProcessInfo+Extensions.swift in Sources */,

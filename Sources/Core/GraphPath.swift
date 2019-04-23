@@ -20,7 +20,25 @@
 
 import Foundation
 
-/// A representation of the path used for constructing `GraphRequest`s
+/**
+ A representation of the path used for constructing `GraphRequest`s
+
+ Creating paths is flexible. Take the example of a path for fetching a
+ profile picture
+
+ It could be instantiated several ways:
+
+ ```
+ // Using a known case for convenience
+ let path = GraphPath.picture("user123") // description resolves to "user123/picture"
+
+ // Instantiating directly from the initializer with a String
+ let path = GraphPath("user123/picture") // description resolves to "user123/picture"
+
+ // Instantiating with an unknown path that has an associated String
+ let path = GraphPath.other("user123/picture") // description resolves to "user123/picture"
+ ```
+ */
 public enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
   case me
   case picture(identifier: String)
