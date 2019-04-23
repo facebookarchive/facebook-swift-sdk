@@ -16,45 +16,27 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-enum LoggingBehavior: String, CaseIterable {
-  /// Include access token in logging
-  case accessTokens
-
-  /// Log performance characteristics
-  case performanceCharacteristics
-
-  /// Log FBSDKAppEvents interactions
-  case appEvents
-
-  /// Log Informational occurrences
-  case informational
-
-  /// Log cache errors.
-  case cacheErrors
-
-  /// Log errors from SDK UI controls
-  case uiControlErrors
-
-  /**
-   Log debug warnings from API response,
-   i.e. when friends fields requested, but user_friends permission isn't granted.
-   */
-  case graphAPIDebugWarning
-
-  /**
-   Log warnings from API response, i.e. when requested feature will be deprecated in next version of API.
-   Info is the lowest level of severity, using it will result in logging all previously mentioned levels.
-   */
-  case graphAPIDebugInfo
-
-  /// Log errors from SDK network requests
-  case networkRequests
-
-  /**
-   Log errors likely to be preventable by the developer.
-   This is in the default set of enabled logging behaviors.
-   */
-  case developerErrors
+// TODO: Consider adding initializer to internal. Really do not want to do this but may
+// be the only way to silence this error.
+// See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
+extension RemoteUserProfile {
+  init(
+    identifier: String = "abc",
+    name: String? = "Bob",
+    firstName: String? = "Bob",
+    middleName: String? = "C",
+    lastName: String? = "Martin",
+    linkURL: String? = "https://www.example.com"
+    ) {
+    self.identifier = identifier
+    self.name = name
+    self.firstName = firstName
+    self.middleName = middleName
+    self.lastName = lastName
+    self.linkURL = linkURL
+    self.fetchedDate = Date()
+  }
 }

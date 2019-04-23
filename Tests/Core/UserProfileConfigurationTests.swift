@@ -16,19 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-// FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
+class UserProfileConfigurationTests: XCTestCase {
+  let profileService = UserProfileService()
 
-public enum EmployeeClassification: Equatable, Comparable {
-  public static func < (lhs: EmployeeClassification, rhs: EmployeeClassification) -> Bool {
-    // Everyone is equal~ yay!
-    return false
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(profileService.graphConnectionProvider is GraphConnectionProvider,
+                  "A profile service should have the expected concrete implementation for its graph connection provider")
   }
 
-  /// A manager
-  case manager
+  func testLoggerDependency() {
+    XCTAssertTrue(profileService.logger is Logger,
+                  "A profile service should have the expected concrete implementation for its logging dependency")
+  }
 
-  /// A contributor
-  case contributor
+  func testNotificationCenterDependency() {
+    XCTAssertTrue(profileService.notificationCenter is NotificationCenter,
+                  "A profile service should have the expected concrete implementation for its notification center dependency")
+  }
 }

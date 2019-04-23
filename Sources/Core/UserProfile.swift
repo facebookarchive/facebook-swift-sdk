@@ -18,30 +18,30 @@
 
 import Foundation
 
-// FOR SOURCERY DEMO ONLY. NOT THE REAL THING.
+struct UserProfile: Equatable, Decodable {
+  /// The user id
+  let identifier: String
 
-public enum EmployeePayroll: Equatable {
-  case hourly(for: EmployeeClassification)
-  case salary(for: EmployeeClassification)
-  case terminated
+  /// The user's complete name
+  let name: String
 
-  public func getClassification() -> EmployeeClassification? {
-    switch self {
-    case .hourly(let classification), .salary(let classification):
-      return classification
+  /// The user's first name
+  let firstName: String?
 
-    case .terminated:
-      return nil
-    }
-  }
+  /// The user's middle name
+  let middleName: String?
 
-  var classification: EmployeeClassification? {
-    switch self {
-    case .hourly(let classification), .salary(let classification):
-      return classification
+  /// The user's last name
+  let lastName: String?
 
-    case .terminated:
-      return nil
-    }
-  }
+  /**
+   A URL to the user's profile.
+
+   Consider using the `AppLinkResolver` utility to resolve this
+   to an app link to link directly to the user's profile in the Facebook app.
+   */
+  let url: URL?
+
+  /// The last time the profile data was fetched.
+  let fetchedDate: Date
 }

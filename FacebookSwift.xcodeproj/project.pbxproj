@@ -42,6 +42,18 @@
 		F4225DE5223F4F5100F4DCFE /* ErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4225DE4223F4F5100F4DCFE /* ErrorStrings.swift */; };
 		F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */; };
 		F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687C42230772600A62C2E /* GraphRequestTests.swift */; };
+		F42E3C782267E45100287DC4 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C742267E45000287DC4 /* UserProfile.swift */; };
+		F42E3C792267E45100287DC4 /* UserProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C752267E45000287DC4 /* UserProfileBuilder.swift */; };
+		F42E3C7A2267E45100287DC4 /* RemoteUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C762267E45100287DC4 /* RemoteUserProfile.swift */; };
+		F42E3C7B2267E45100287DC4 /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C772267E45100287DC4 /* UserProfileService.swift */; };
+		F42E3C802267E5E800287DC4 /* RemoteUserProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */; };
+		F42E3C812267E5E800287DC4 /* UserProfileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */; };
+		F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */; };
+		F42E3C832267E5E800287DC4 /* UserProfileConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */; };
+		F42E3C862267E5FD00287DC4 /* SampleUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */; };
+		F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */; };
+		F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */ = {isa = PBXBuildFile; fileRef = F42E3C882267E60900287DC4 /* validUserProfile.json */; };
+		F42E3C8B2267E64500287DC4 /* RemoteUserProfile+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */; };
 		F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */; };
 		F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */; };
 		F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F52236FFA6007D3A34 /* FakeError.swift */; };
@@ -231,6 +243,18 @@
 		F4225DE4223F4F5100F4DCFE /* ErrorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStrings.swift; sourceTree = "<group>"; };
 		F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerTests.swift; sourceTree = "<group>"; };
 		F42687C42230772600A62C2E /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
+		F42E3C742267E45000287DC4 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		F42E3C752267E45000287DC4 /* UserProfileBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileBuilder.swift; sourceTree = "<group>"; };
+		F42E3C762267E45100287DC4 /* RemoteUserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUserProfile.swift; sourceTree = "<group>"; };
+		F42E3C772267E45100287DC4 /* UserProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
+		F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUserProfileTests.swift; sourceTree = "<group>"; };
+		F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileServiceTests.swift; sourceTree = "<group>"; };
+		F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileBuilderTests.swift; sourceTree = "<group>"; };
+		F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileConfigurationTests.swift; sourceTree = "<group>"; };
+		F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleUserProfile.swift; sourceTree = "<group>"; };
+		F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteUser.swift; sourceTree = "<group>"; };
+		F42E3C882267E60900287DC4 /* validUserProfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validUserProfile.json; sourceTree = "<group>"; };
+		F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteUserProfile+Extensions.swift"; sourceTree = "<group>"; };
 		F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadataTests.swift; sourceTree = "<group>"; };
 		F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadata.swift; sourceTree = "<group>"; };
 		F432E9F52236FFA6007D3A34 /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
@@ -470,12 +494,16 @@
 				F40908462260EAC900A51FC1 /* ObjCBridgeable.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F4516B83225F82EF00979DD2 /* RemoteGraphResponseError.swift */,
+				F42E3C762267E45100287DC4 /* RemoteUserProfile.swift */,
 				524A49B8225EA39300786C11 /* SecureStore.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
 				F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */,
 				F4144C53224D0FA7006C8F9C /* URLBuilder.swift */,
 				F40739402231E4EB0018505A /* URLQueryItemBuilder.swift */,
 				F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */,
+				F42E3C742267E45000287DC4 /* UserProfile.swift */,
+				F42E3C752267E45000287DC4 /* UserProfileBuilder.swift */,
+				F42E3C772267E45100287DC4 /* UserProfileService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -676,11 +704,15 @@
 				F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */,
 				F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */,
 				F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */,
+				F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */,
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
 				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
 				F4144C51224D0F6C006C8F9C /* URLBuilderTests.swift */,
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
+				F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */,
+				F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */,
+				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -698,6 +730,7 @@
 			children = (
 				F4BEDA5522414078004F2C7E /* validRemoteErrorConfiguration.json */,
 				F4BEDA5622414078004F2C7E /* validRemoteErrorConfigurationList.json */,
+				F42E3C882267E60900287DC4 /* validUserProfile.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -721,8 +754,10 @@
 				F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */,
 				F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */,
 				F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */,
+				F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
+				F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */,
 			);
 			path = "Sample Data";
 			sourceTree = "<group>";
@@ -733,6 +768,7 @@
 				F4C32DA1223DA13E00FF1F86 /* RemoteErrorCodeGroup+Extensions.swift */,
 				F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */,
 				F4C32DA2223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift */,
+				F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -960,6 +996,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BEDA59224141AE004F2C7E /* validRemoteErrorConfiguration.json in Resources */,
+				F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */,
 				F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */,
 				F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */,
 			);
@@ -1044,6 +1081,7 @@
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
 				F4E1A9EC22416F2200503354 /* FBError.swift in Sources */,
+				F42E3C792267E45100287DC4 /* UserProfileBuilder.swift in Sources */,
 				F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */,
 				F4C32D9D223DA0F600FF1F86 /* ErrorConfiguration.swift in Sources */,
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
@@ -1062,11 +1100,14 @@
 				F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */,
 				F4E1A9EE22416F2200503354 /* RemoteErrorConfigurationEntry.swift in Sources */,
 				F41640F7224C27A000842120 /* ErrorRecoveryStrings.swift in Sources */,
+				F42E3C7B2267E45100287DC4 /* UserProfileService.swift in Sources */,
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
+				F42E3C782267E45100287DC4 /* UserProfile.swift in Sources */,
 				F432E9FC22370C9C007D3A34 /* SessionProvider.swift in Sources */,
 				F44DB6B1222B01A30083506E /* NotificationName+Extensions.swift in Sources */,
 				F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */,
 				F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */,
+				F42E3C7A2267E45100287DC4 /* RemoteUserProfile.swift in Sources */,
 				F4225DE5223F4F5100F4DCFE /* ErrorStrings.swift in Sources */,
 				523CAE4B225EC94C00D196C3 /* String+Extensions.swift in Sources */,
 				F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */,
@@ -1123,9 +1164,11 @@
 				F4C32D99223D990A00FF1F86 /* SampleRawRemoteErrorConfigurationList.swift in Sources */,
 				F4C32DA4223DA13E00FF1F86 /* RemoteErrorCodeGroup+Extensions.swift in Sources */,
 				F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */,
+				F42E3C8B2267E64500287DC4 /* RemoteUserProfile+Extensions.swift in Sources */,
 				F4C32DA5223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift in Sources */,
 				F407393D2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift in Sources */,
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
+				F42E3C812267E5E800287DC4 /* UserProfileServiceTests.swift in Sources */,
 				F4C32D9B223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift in Sources */,
 				F480D90722347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift in Sources */,
 				F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */,
@@ -1150,6 +1193,7 @@
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
 				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */,
+				F42E3C862267E5FD00287DC4 /* SampleUserProfile.swift in Sources */,
 				F4B340012240779D00912F0F /* JSONLoader.swift in Sources */,
 				F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */,
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
@@ -1159,6 +1203,7 @@
 				F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */,
 				F480D90D2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift in Sources */,
 				F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */,
+				F42E3C802267E5E800287DC4 /* RemoteUserProfileTests.swift in Sources */,
 				F48BDD8B22470128003CCA5A /* SettingsTests.swift in Sources */,
 				F4516B8A225FA3FE00979DD2 /* SampleURLResponse.swift in Sources */,
 				F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */,
@@ -1166,15 +1211,18 @@
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
 				F4B3401722430F9A00912F0F /* LoggingBehaviorTests.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
+				F42E3C832267E5E800287DC4 /* UserProfileConfigurationTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F447153022440E860013495F /* SampleURL.swift in Sources */,
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
 				F447151E2242FF010013495F /* LoggerTests.swift in Sources */,
 				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
+				F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */,
 				F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */,
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
+				F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */,
 				F44715252243EDB10013495F /* SampleNSError.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
 				F4516B7E225F7ED900979DD2 /* SampleGraphResponse.swift in Sources */,
