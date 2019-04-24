@@ -18,9 +18,10 @@
 
 @testable import FacebookCore
 
-class FakeSettings: SettingsManaging {
+class FakeSettings: SettingsManaging, AppIdentifierProviding {
   static var isGraphErrorRecoveryEnabled: Bool = false
 
+  var appIdentifier: String
   var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
   var accessTokenCache: AccessTokenCaching?
   let graphApiDebugParameter: GraphApiDebugParameter
@@ -28,9 +29,11 @@ class FakeSettings: SettingsManaging {
   var domainPrefix: String?
 
   init(
+    appIdentifier: String = "foo",
     graphApiDebugParameter: GraphApiDebugParameter = .none,
     loggingBehaviors: Set<LoggingBehavior> = []
     ) {
+    self.appIdentifier = appIdentifier
     self.graphApiDebugParameter = graphApiDebugParameter
     self.loggingBehaviors = loggingBehaviors
   }

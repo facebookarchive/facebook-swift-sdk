@@ -16,20 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-struct Gatekeeper: Codable {
-  let name: String
-  let isEnabled: Bool
-
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    name = try container.decode(String.self, forKey: .name)
-    isEnabled = try container.decode(Bool.self, forKey: .isEnabled)
-  }
-
-  enum CodingKeys: String, CodingKey {
-    case name = "key"
-    case isEnabled = "value"
+enum SampleRemoteGatekeeperList {
+  static func valid(with gatekeepers: [Gatekeeper]) -> RemoteGatekeeperList {
+    return RemoteGatekeeperList(
+      data: [
+        [
+          "gatekeepers": gatekeepers
+        ]
+      ]
+    )
   }
 }

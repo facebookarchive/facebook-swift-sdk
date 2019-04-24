@@ -23,16 +23,22 @@ import Foundation
 
 // TODO: Make sure this protocol makes sense in terms of the reworked class
 protocol SettingsManaging {
+  var appIdentifier: String { get set }
   var accessTokenCache: AccessTokenCaching? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
+  var sdkVersion: String { get }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
 
-class Settings: SettingsManaging {
+protocol AppIdentifierProviding {
+  var appIdentifier: String { get }
+}
+
+class Settings: SettingsManaging, AppIdentifierProviding {
   private enum PListKeys {
     static let domainPrefix: String = "FacebookDomainPrefix"
     static let loggingBehaviors: String = "FacebookLoggingBehavior"
@@ -81,6 +87,12 @@ class Settings: SettingsManaging {
    The default is a set consisting of one value: `LoggingBehavior.developerErrors`
    */
   var loggingBehaviors: Set<LoggingBehavior>
+
+  // TODO: Get this from a plist entry
+  var appIdentifier: String = "Foo"
+
+  // TODO: Consider a file for configuration constants like this one
+  var sdkVersion: String = "1.0"
 
   init(bundle: InfoDictionaryProviding = Bundle.main) {
     loggingBehaviors = [.developerErrors]

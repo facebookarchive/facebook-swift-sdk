@@ -18,18 +18,34 @@
 
 import Foundation
 
-struct Gatekeeper: Codable {
-  let name: String
-  let isEnabled: Bool
-
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    name = try container.decode(String.self, forKey: .name)
-    isEnabled = try container.decode(Bool.self, forKey: .isEnabled)
+struct GatekeeperStore {
+  private(set) var appIdentifierProvider: AppIdentifierProviding
+  let store: DataPersisting
+  var retrievalKey: String {
+    return "com.facebook.sdk:gateKeeper\(appIdentifierProvider.appIdentifier)"
   }
 
-  enum CodingKeys: String, CodingKey {
-    case name = "key"
-    case isEnabled = "value"
+  var cachedGatekeepers: [Gatekeeper] {
+    guard let data = store.data(forKey: retrievalKey),
+      let gatekeepers = try? JSONDecoder().decode([Gatekeeper].self, from: data)
+      else {
+        return []
+    }
+
+    return gatekeepers
+  }
+
+  init(
+    store: DataPersisting = UserDefaults.standard,
+    appIdentifierProvider: AppIdentifierProviding = Settings.shared
+    ) {
+    self.appIdentifierProvider = appIdentifierProvider
+    self.store = store
+  }
+
+  func cache(_ gatekeepers: [Gatekeeper]) {
+    let data = try? JSONEncoder().encode(gatekeepers)
+
+    store.set(data, forKey: retrievalKey)
   }
 }
