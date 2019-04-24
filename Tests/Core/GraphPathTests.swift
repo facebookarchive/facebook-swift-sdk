@@ -27,6 +27,9 @@ class GraphPathTests: XCTestCase {
 
     pathDescriptionPairs.forEach { path, description in
       switch path {
+      case .gatekeepers:
+        break
+
       case .me:
         break
 

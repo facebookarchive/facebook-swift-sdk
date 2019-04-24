@@ -47,6 +47,11 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
     capturedAddRequestHandler = completion
   }
 
+  /**
+   Use this to stub a generic Result type completion handler
+   This will execute basically immediately so tests will be fast
+   but will not simulate network latency.
+   */
   func stubCompletion<RemoteType: Decodable>(
     result: Result<RemoteType, Error>,
     completion: @escaping (Result<RemoteType, Error>) -> Void

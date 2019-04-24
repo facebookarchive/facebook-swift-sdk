@@ -27,14 +27,17 @@ class FakeSettings: SettingsManaging, AppIdentifierProviding {
   let graphApiDebugParameter: GraphApiDebugParameter
   var loggingBehaviors: Set<LoggingBehavior> = []
   var domainPrefix: String?
+  var sdkVersion: String
 
   init(
     appIdentifier: String = "foo",
     graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = []
+    loggingBehaviors: Set<LoggingBehavior> = [],
+    sdkVersion: String = "1.0"
     ) {
     self.appIdentifier = appIdentifier
     self.graphApiDebugParameter = graphApiDebugParameter
     self.loggingBehaviors = loggingBehaviors
+    self.sdkVersion = sdkVersion
   }
 }

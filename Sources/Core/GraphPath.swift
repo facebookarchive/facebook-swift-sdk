@@ -42,6 +42,7 @@ import Foundation
 public enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
   case me
   case picture(identifier: String)
+  case gatekeepers(appIdentifier: String)
   case other(String)
 
   public init(stringLiteral value: String) {
@@ -51,6 +52,9 @@ public enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
   /// The string representation of a `GraphPath`
   public var description: String {
     switch self {
+    case let .gatekeepers(appIdentifier):
+      return "\(appIdentifier)/mobile_sdk_gk"
+
     case .me:
       return "me"
 
