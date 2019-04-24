@@ -74,6 +74,9 @@
 		F43AB0322270BFB000610974 /* SampleRawRemoteGatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0312270BFB000610974 /* SampleRawRemoteGatekeeper.swift */; };
 		F43AB0342270C0B800610974 /* SampleRawRemoteGatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0332270C0B800610974 /* SampleRawRemoteGatekeeperList.swift */; };
 		F43AB0362270C78D00610974 /* GatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0352270C78D00610974 /* GatekeeperList.swift */; };
+		F43AB0382270CCB800610974 /* GatekeeperListBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0372270CCB800610974 /* GatekeeperListBuilderTests.swift */; };
+		F43AB03A2270CDD500610974 /* SampleGatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0392270CDD500610974 /* SampleGatekeeper.swift */; };
+		F43AB03C2270D2DE00610974 /* GatekeeperListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB03B2270D2DE00610974 /* GatekeeperListBuilder.swift */; };
 		F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */; };
 		F447151A2242DBEE0013495F /* URLSessionTaskProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */; };
 		F447151C2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */; };
@@ -297,6 +300,9 @@
 		F43AB0312270BFB000610974 /* SampleRawRemoteGatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteGatekeeper.swift; sourceTree = "<group>"; };
 		F43AB0332270C0B800610974 /* SampleRawRemoteGatekeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteGatekeeperList.swift; sourceTree = "<group>"; };
 		F43AB0352270C78D00610974 /* GatekeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperList.swift; sourceTree = "<group>"; };
+		F43AB0372270CCB800610974 /* GatekeeperListBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperListBuilderTests.swift; sourceTree = "<group>"; };
+		F43AB0392270CDD500610974 /* SampleGatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleGatekeeper.swift; sourceTree = "<group>"; };
+		F43AB03B2270D2DE00610974 /* GatekeeperListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperListBuilder.swift; sourceTree = "<group>"; };
 		F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyTests.swift; sourceTree = "<group>"; };
 		F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxy.swift; sourceTree = "<group>"; };
 		F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyConfigurationTests.swift; sourceTree = "<group>"; };
@@ -520,6 +526,7 @@
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
 				F43AB0292270B61600610974 /* Gatekeeper.swift */,
 				F43AB0352270C78D00610974 /* GatekeeperList.swift */,
+				F43AB03B2270D2DE00610974 /* GatekeeperListBuilder.swift */,
 				F44F566D224D344300D027FF /* GraphAPIVersion.swift */,
 				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
@@ -739,6 +746,7 @@
 				F408BEAD223986040068D24A /* ErrorConfigurationEntryTests.swift */,
 				F4225DE2223F4ED700F4DCFE /* ErrorStringsTests.swift */,
 				F4B8832C22305791000971C9 /* FBErrorTests.swift */,
+				F43AB0372270CCB800610974 /* GatekeeperListBuilderTests.swift */,
 				F43AB0272270B55600610974 /* GatekeeperTests.swift */,
 				F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */,
 				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
@@ -819,6 +827,7 @@
 			children = (
 				F4BEDA5422414078004F2C7E /* JSON */,
 				F4484807226F770400527D49 /* SampleError.swift */,
+				F43AB0392270CDD500610974 /* SampleGatekeeper.swift */,
 				F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */,
 				F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */,
 				F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */,
@@ -1199,6 +1208,7 @@
 				F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */,
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
+				F43AB03C2270D2DE00610974 /* GatekeeperListBuilder.swift in Sources */,
 				F4516B8C225FA44A00979DD2 /* MimeType.swift in Sources */,
 				F4225DCE223EF88800F4DCFE /* ErrorConfigurationEntryBuilder.swift in Sources */,
 				F42E3C922268BB9B00287DC4 /* ImageSizingConfiguration.swift in Sources */,
@@ -1269,6 +1279,7 @@
 				F408BEB4223988BD0068D24A /* ErrorCategoryTests.swift in Sources */,
 				F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
+				F43AB0382270CCB800610974 /* GatekeeperListBuilderTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,
 				F447153422440EE50013495F /* FakeSessionDataTask.swift in Sources */,
 				F4C32DA6223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift in Sources */,
@@ -1288,6 +1299,7 @@
 				F4B340012240779D00912F0F /* JSONLoader.swift in Sources */,
 				F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */,
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
+				F43AB03A2270CDD500610974 /* SampleGatekeeper.swift in Sources */,
 				F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
 				F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */,

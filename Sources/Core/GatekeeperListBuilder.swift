@@ -16,37 +16,16 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_try
-
-@testable import FacebookCore
 import Foundation
 
-enum SampleRawRemoteGatekeeper {
-  static let validEnabled = [
-    "key": "foo",
-    "value": true
-  ] as [String: Any]
+enum GatekeeperListBuilder {
+  private static let gatekeepersKey = "gatekeepers"
 
-  static let validDisabled = [
-    "key": "foo",
-    "value": false
-  ] as [String: Any]
+  static func build(from remoteList: RemoteGatekeeperList) -> [Gatekeeper] {
+    guard let list = remoteList.data.first?[gatekeepersKey] else {
+      return []
+    }
 
-  static let missingKey = [
-    "value": false
-  ]
-
-  static let missingValue = [
-    "key": "foo"
-  ]
-
-  enum SerializedData {
-    static let validEnabled: Data = {
-      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validEnabled, options: [])
-    }()
-
-    static let validDisabled: Data = {
-      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validDisabled, options: [])
-    }()
+    return list
   }
 }

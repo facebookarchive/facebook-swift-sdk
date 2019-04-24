@@ -21,32 +21,17 @@
 @testable import FacebookCore
 import Foundation
 
-enum SampleRawRemoteGatekeeper {
-  static let validEnabled = [
-    "key": "foo",
-    "value": true
-  ] as [String: Any]
-
-  static let validDisabled = [
-    "key": "foo",
-    "value": false
-  ] as [String: Any]
-
-  static let missingKey = [
-    "value": false
-  ]
-
-  static let missingValue = [
-    "key": "foo"
-  ]
-
-  enum SerializedData {
-    static let validEnabled: Data = {
-      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validEnabled, options: [])
-    }()
-
-    static let validDisabled: Data = {
-      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validDisabled, options: [])
-    }()
-  }
+enum SampleGatekeeper {
+  static let validEnabled: Gatekeeper = {
+    try! JSONDecoder().decode(
+      Gatekeeper.self,
+      from: SampleRawRemoteGatekeeper.SerializedData.validEnabled
+    )
+  }()
+  static let validDisabled: Gatekeeper = {
+    try! JSONDecoder().decode(
+      Gatekeeper.self,
+      from: SampleRawRemoteGatekeeper.SerializedData.validDisabled
+    )
+  }()
 }

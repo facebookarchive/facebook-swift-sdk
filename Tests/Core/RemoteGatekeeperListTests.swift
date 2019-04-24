@@ -38,22 +38,16 @@ class RemoteGatekeeperListTests: XCTestCase {
   func testCreatingListMissingGatekeepersKey() {
     do {
       _ = try decoder.decode(RemoteGatekeeperList.self, from: SampleListData.missingGatekeepers)
-      XCTFail("Should not create a remote gatekeeper list without an entry for the gatekeepers")
-    } catch _ as DecodingError {
-      // This is expected
     } catch {
-      XCTFail("Errors decoding should throw decoding errors")
+      XCTFail("Should create a remote representation of a gatekeeper list as long as the top level key is valid")
     }
   }
 
   func testCreatingListWithEmptyGatekeepers() {
     do {
       _ = try decoder.decode(RemoteGatekeeperList.self, from: SampleListData.emptyGatekeepers)
-      XCTFail("Should not create a remote gatekeeper list from a list of invalid configurations")
-    } catch _ as DecodingError {
-      // This is expected
     } catch {
-      XCTFail("Errors decoding should throw decoding errors")
+      XCTFail("Should create a remote representation of a gatekeeper list as long as the top level key is valid")
     }
   }
 
