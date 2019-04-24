@@ -49,7 +49,7 @@
 		F42E3C802267E5E800287DC4 /* RemoteUserProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */; };
 		F42E3C812267E5E800287DC4 /* UserProfileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */; };
 		F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */; };
-		F42E3C832267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7F2267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift */; };
+		F42E3C832267E5E800287DC4 /* UserProfileConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */; };
 		F42E3C862267E5FD00287DC4 /* SampleUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */; };
 		F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */; };
 		F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */ = {isa = PBXBuildFile; fileRef = F42E3C882267E60900287DC4 /* validUserProfile.json */; };
@@ -264,7 +264,7 @@
 		F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUserProfileTests.swift; sourceTree = "<group>"; };
 		F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileServiceTests.swift; sourceTree = "<group>"; };
 		F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileBuilderTests.swift; sourceTree = "<group>"; };
-		F42E3C7F2267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileServiceConfigurationTests.swift; sourceTree = "<group>"; };
+		F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileConfigurationTests.swift; sourceTree = "<group>"; };
 		F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleUserProfile.swift; sourceTree = "<group>"; };
 		F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteUser.swift; sourceTree = "<group>"; };
 		F42E3C882267E60900287DC4 /* validUserProfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validUserProfile.json; sourceTree = "<group>"; };
@@ -759,7 +759,7 @@
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
 				F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */,
-				F42E3C7F2267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift */,
+				F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */,
 				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 				F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */,
 			);
@@ -1273,8 +1273,10 @@
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
 				F4B3401722430F9A00912F0F /* LoggingBehaviorTests.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
-				F42E3C832267E5E800287DC4 /* UserProfileServiceConfigurationTests.swift in Sources */,
+				F42E3C832267E5E800287DC4 /* UserProfileConfigurationTests.swift in Sources */,
 				F44847EE2269219500527D49 /* IconTests.swift in Sources */,
+				F42E3C832267E5E800287DC4 /* UserProfileConfigurationTests.swift in Sources */,
+				F42E3C832267E5E800287DC4 /* UserProfileConfigurationTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F447153022440E860013495F /* SampleURL.swift in Sources */,
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,
