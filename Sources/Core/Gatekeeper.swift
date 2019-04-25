@@ -18,11 +18,11 @@
 
 import Foundation
 
-struct Gatekeeper: Codable {
-  let name: String
-  let isEnabled: Bool
+public struct Gatekeeper: Codable {
+  public let name: String
+  public let isEnabled: Bool
 
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     name = try container.decode(String.self, forKey: .name)
     isEnabled = try container.decode(Bool.self, forKey: .isEnabled)

@@ -25,6 +25,10 @@ struct GatekeeperStore {
     return "com.facebook.sdk:gateKeeper\(appIdentifierProvider.appIdentifier)"
   }
 
+  var hasDataForCurrentAppIdentifier: Bool {
+    return store.data(forKey: retrievalKey) != nil
+  }
+
   var cachedGatekeepers: [Gatekeeper] {
     guard let data = store.data(forKey: retrievalKey),
       let gatekeepers = try? JSONDecoder().decode([Gatekeeper].self, from: data)

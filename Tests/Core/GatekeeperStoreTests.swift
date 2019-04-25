@@ -58,6 +58,23 @@ class GatekeeperStoreTests: XCTestCase {
 
   // MARK: - Caching
 
+  func testInitialDataForCurrentAppIdentifier() {
+    XCTAssertFalse(store.hasDataForCurrentAppIdentifier,
+                   "A store should not have data for the current app identifier by default")
+  }
+
+  func testDataForCurrentAppIdentifierAfterFetching() {
+    store.cache(gatekeepers)
+
+    XCTAssertTrue(store.hasDataForCurrentAppIdentifier,
+                  "A store should be considered to have data if gatekeepers have been stored for the current app identifier")
+
+    fakeSettings.appIdentifier = "name"
+
+    XCTAssertFalse(store.hasDataForCurrentAppIdentifier,
+                   "A store should be considered to have data for an app identifier if nothing have been cached for it")
+  }
+
   func testRetrievalKey() {
     fakeSettings.appIdentifier = "foo"
     XCTAssertEqual(store.retrievalKey, "com.facebook.sdk:gateKeeperfoo",

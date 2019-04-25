@@ -189,13 +189,37 @@ class GatekeeperServiceTests: XCTestCase {
 
   // MARK: - Fetching
 
-  func testLoadingWithValidGatekeeper() {
+  func testLoadingWithValidGatekeeperAndFetchedIdentifier() {
+    // Seed the store so that it will have data for the current app identifier
+    store.cache([SampleGatekeeper.validEnabled])
+    precondition(store.hasDataForCurrentAppIdentifier)
+
     setGatekeeper(toValid: true)
 
     service.loadGatekeepers()
 
     XCTAssertNil(fakeConnection.capturedGetObjectRemoteType,
                  "Should not attempt to load a remote list of gatekeepers if the current gatekeepers are valid")
+  }
+
+  func testLoadingWithValidGatekeeperAndUnfetchedIdentifier() {
+    setGatekeeper(toValid: true)
+    precondition(!store.hasDataForCurrentAppIdentifier)
+
+    service.loadGatekeepers()
+
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is RemoteGatekeeperList.Type,
+                  "Should attempt to load a remote list of gatekeepers if no fetch has occured for the current application identifier")
+  }
+
+  func testLoadingWithInvalidGatekeeperAndUnfetchedIdentifier() {
+    setGatekeeper(toValid: false)
+    assert(store.hasDataForCurrentAppIdentifier == false)
+
+    service.loadGatekeepers()
+
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is RemoteGatekeeperList.Type,
+                  "Should attempt to load a remote list of gatekeepers if no fetch has occured for the current application identifier")
   }
 
   func testLoadingWithValidGatekeeperAndPendingRequest() {
@@ -254,6 +278,19 @@ class GatekeeperServiceTests: XCTestCase {
                   "Should attempt to load a remote list of gatekeepers if the current gatekeepers are invalid and there are no pending tasks")
   }
 
+  func testSuccessfulLoadStoresValuesLocally() {
+    let expectedGatekeepers = [SampleGatekeeper.validEnabled]
+    setGatekeeper(toValid: false)
+
+    fakeConnection.stubGetObjectCompletionResult = .success(
+      SampleRemoteGatekeeperList.valid(with: expectedGatekeepers)
+    )
+    service.loadGatekeepers()
+
+    XCTAssertEqual(service.gatekeepers[fakeSettings.appIdentifier], expectedGatekeepers,
+                   "Fetched gatekeepers should be stored locally under the app identifier that was used to fetch them")
+  }
+
   func testSuccessfulLoadCachesFetchedValues() {
     let expectedGatekeepers = [SampleGatekeeper.validEnabled]
     setGatekeeper(toValid: false)
@@ -292,6 +329,38 @@ class GatekeeperServiceTests: XCTestCase {
                    "Failing to load gatekeepers should lot a network request error message")
   }
 
+  // MARK: - Checking Gatekeeper Status
+
+  func testRetrievingLocallyStoredGatekeeperUsesDefaultAppIdentifier() {
+    let gatekeepers = [SampleGatekeeper.validEnabled]
+    setGatekeeper(toValid: false)
+
+    fakeConnection.stubGetObjectCompletionResult = .success(
+      SampleRemoteGatekeeperList.valid(with: gatekeepers)
+    )
+    service.loadGatekeepers()
+
+    XCTAssertNotNil(service.gatekeeper("foo"),
+                    "Retrieving a gatekeeper uses the current application identifier by default")
+    XCTAssertNil(service.gatekeeper("foo", forAppIdentifier: "bar"),
+                 "Retrieving a gatekeeper with a specific application identifier should return nil if no records exist for that identifier")
+  }
+
+  func testCheckingLocallyStoredGatekeeperUsesDefaultAppIdentifier() {
+    let gatekeepers = [SampleGatekeeper.validEnabled]
+    setGatekeeper(toValid: false)
+
+    fakeConnection.stubGetObjectCompletionResult = .success(
+      SampleRemoteGatekeeperList.valid(with: gatekeepers)
+    )
+    service.loadGatekeepers()
+
+    XCTAssertTrue(service.isGatekeeperEnabled(name: "foo"),
+                  "Checking if a gatekeeper is enabled should use the current application identifier by default")
+    XCTAssertFalse(service.isGatekeeperEnabled(name: "foo", appIdentifier: "bar"),
+                   "Checking if a gatekeeper is enabled should use a specific application identifier if provided")
+  }
+
   func setGatekeeper(toValid isValid: Bool, _ file: StaticString = #file, _ line: UInt = #line) {
     service.isRequeryFinishedForAppStart = isValid ? true : false
     service.timestamp = isValid ? Date() : Date.distantFuture
@@ -315,5 +384,3 @@ class GatekeeperServiceTests: XCTestCase {
     }
   }
 }
-
-//https://graph.facebook.com/v3.2/(null)/mobile_sdk_gk?fields=gatekeepers&format=json&include_headers=false&platform=ios&sdk=ios&sdk_version=4.41.0

@@ -83,6 +83,48 @@ public class GatekeeperService {
   }
 
   /**
+   Returns whether a `Gatekeeper` with a given name and application identifier exists
+   and is enabled.
+
+   - Parameter name: The name of the gatekeeper to retrieve
+   - Parameter appIdentifier: The identifier that was used to fetch the
+   `Gatekeeper` being retrieved, defaults to the app identifier stored in `Settings`
+
+   - Returns: false if a) a `Gatekeeper` cannot be found under the given app identifier and name
+   or b) the `Gatekeeper` is found but is not enabled
+   */
+  public func isGatekeeperEnabled(
+    name: String,
+    appIdentifier: String? = nil
+    ) -> Bool {
+    guard let gatekeeper = gatekeeper(name, forAppIdentifier: appIdentifier) else {
+      return false
+    }
+
+    return gatekeeper.isEnabled
+  }
+
+  /**
+   Attempts to retrieve a `Gatekeeper` with a given name and application identifier
+
+   - Parameter name: The name of the gatekeeper to retrieve
+   - Parameter appIdentifier: The identifier that was used to fetch the
+   `Gatekeeper` being retrieved, defaults to the app identifier stored in `Settings`
+
+   - Returns: a `Gatekeeper` if one is stored under the given app identifier and name
+   */
+  public func gatekeeper(
+    _ name: String,
+    forAppIdentifier appIdentifier: String? = nil
+    ) -> Gatekeeper? {
+    let identifier = appIdentifier ?? settings.appIdentifier
+
+    return gatekeepers[identifier]?.first {
+      $0.name == name
+    }
+  }
+
+  /**
    Loads gatekeepers for a particular application identifier
 
    Will search `UserDefaults` first and caches the retrieved results locally
@@ -92,12 +134,14 @@ public class GatekeeperService {
    application identifier that was used to fetch them.
 
    Values will be fetched from the server if it is the first time they are
-   requested or if they are out of date (they expire within one hour)
+   requested for an application identifier or if they are out of date
+   (they expire within one hour)
    */
   public func loadGatekeepers() {
     self.gatekeepers[settings.appIdentifier] = store.cachedGatekeepers
 
-    guard !isGatekeeperValid,
+    // Ensure it's valid for the current app identifier or that the store has data for the current app identifier
+    guard !isGatekeeperValid || !store.hasDataForCurrentAppIdentifier,
       !isLoading
       else {
         return
@@ -111,18 +155,23 @@ public class GatekeeperService {
         RemoteGatekeeperList.self,
         for: loadGatekeepersRequest
       ) { [weak self] result in
-        self?.isLoading = false
-        self?.isRequeryFinishedForAppStart = true
+        guard let self = self else {
+          return
+        }
+
+        self.isLoading = false
+        self.isRequeryFinishedForAppStart = true
 
         switch result {
         case let .failure(error):
-          self?.logger.log(.networkRequests, error.localizedDescription)
+          self.logger.log(.networkRequests, error.localizedDescription)
 
         case let .success(remote):
           let list = GatekeeperListBuilder.build(from: remote)
 
-          self?.timestamp = Date()
-          self?.store.cache(list)
+          self.timestamp = Date()
+          self.gatekeepers.updateValue(list, forKey: self.settings.appIdentifier)
+          self.store.cache(list)
         }
       }
   }
