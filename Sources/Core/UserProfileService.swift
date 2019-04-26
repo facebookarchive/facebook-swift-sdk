@@ -49,8 +49,7 @@ class UserProfileService {
    You can observe `FBSDKProfileDidChangeNotification` for when the profile is updated.
 
    Note that if `AccessTokenWallet.shared.currentAccessToken` is unset, the `currentProfile` instance remains.
-   It's also possible
-   for `currentProfile` to return nil until the data is fetched.
+   It's also possible for `currentProfile` to return nil until the data is fetched.
    */
   var shouldUpdateOnAccessTokenChange: Bool = false {
     didSet {
