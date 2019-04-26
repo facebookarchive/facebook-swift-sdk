@@ -16,38 +16,37 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping
-
-@testable import FacebookCore
 import Foundation
 
-class UserDefaultsSpy: UserDefaults {
-  let userDefaults: UserDefaults?
+struct UserDataStore {
+  let store: DataPersisting
+  let retrievalKey: String = "com.facebook.appevents.UserDataStore.userData"
 
-  var capturedValues = [String: Any]()
-  var capturedDataRetrievalKey: String?
-  var capturedStringRetrievalKey: String?
-
-  init(name: String) {
-    self.userDefaults = UserDefaults(suiteName: name)
-
-    super.init(suiteName: name)!
-  }
-
-  override func set(_ value: Any?, forKey defaultName: String) {
-    if let value = value {
-      capturedValues.updateValue(value, forKey: defaultName)
+  var cachedUserData: UserData? {
+    guard let json = store.string(forKey: retrievalKey),
+      let data = json.data(using: .utf8) else {
+      return nil
     }
-    userDefaults?.set(value, forKey: defaultName)
+
+    return try? JSONDecoder().decode(UserData.self, from: data)
   }
 
-  override func data(forKey defaultName: String) -> Data? {
-    capturedDataRetrievalKey = defaultName
-    return userDefaults?.data(forKey: defaultName)
+  init(store: DataPersisting = UserDefaults.standard) {
+    self.store = store
   }
 
-  override func string(forKey defaultName: String) -> String? {
-    capturedStringRetrievalKey = defaultName
-    return userDefaults?.string(forKey: defaultName)
+  func cache(_ userData: UserData) {
+    let encoded = UserDataStore.encoded(userData)
+
+    store.set(encoded, forKey: retrievalKey)
+  }
+
+  static func encoded(_ userData: UserData) -> String {
+    guard let data = try? JSONEncoder().encode(userData),
+     let encoded = String(data: data, encoding: .utf8)
+      else {
+        return "{}"
+    }
+    return encoded
   }
 }
