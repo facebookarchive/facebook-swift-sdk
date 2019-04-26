@@ -106,9 +106,9 @@ class UserDataTests: XCTestCase {
       let data = pair.element.data(using: .utf8)!
 
       XCTAssertEqual(
-        UserData.encrypted(data),
+        UserData.hashed(data),
         encryptedValues[pair.offset],
-        "Values should be encrypted in a predictable fashion"
+        "Values should be hashed in a predictable fashion"
       )
     }
   }

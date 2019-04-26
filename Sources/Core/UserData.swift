@@ -18,7 +18,11 @@
 
 import Foundation
 
-struct UserData: Codable {
+/**
+ Used for storing demographic information about a user. Primarily used for
+ analytics and app events.
+ */
+public struct UserData: Codable {
   var email: String?
   var firstName: String?
   var lastName: String?
@@ -54,7 +58,10 @@ struct UserData: Codable {
     self.country = country
   }
 
-  func encode(to encoder: Encoder) throws {
+  /**
+   Encodes the UserData after normalizing and hashing the information
+   */
+  public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
 
     if let email = UserData.encodable(email, forKey: .email) {
@@ -103,7 +110,6 @@ struct UserData: Codable {
       return nil
     }
 
-    // Don't re-hash hashed values
     guard !isHashed(value) else {
       return value
     }
@@ -113,7 +119,7 @@ struct UserData: Codable {
     guard let data = normalized.data(using: .utf8) else {
       return nil
     }
-    return encrypted(data)
+    return hashed(data)
   }
 
   private static func isHashed(_ value: String) -> Bool {
@@ -145,7 +151,7 @@ struct UserData: Codable {
     return normalized
   }
 
-  static func encrypted(_ data: Data) -> String {
+  static func hashed(_ data: Data) -> String {
     var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
     data.withUnsafeBytes {
       _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &digest)
