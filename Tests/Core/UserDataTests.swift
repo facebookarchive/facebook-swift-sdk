@@ -215,6 +215,24 @@ class UserDataTests: XCTestCase {
                    "Should represent user data as a json dictionary of hashed key value pairs")
   }
 
+  func testEncodingHashedValue() {
+    userData = UserData(gender: "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881")
+    let hashed = self.hashed(userData)
+    let expectedJSONRepresentation = "{\"ge\":\"2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881\"}"
+
+    XCTAssertEqual(hashed, expectedJSONRepresentation,
+                   "Should not re-hash values")
+  }
+
+  func testEncodingHashLikeValue() {
+    userData = UserData(gender: "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a48812d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a48812d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881")
+    let hashed = self.hashed(userData)
+    let expectedJSONRepresentation = "{\"ge\":\"d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35\"}"
+
+    XCTAssertEqual(hashed, expectedJSONRepresentation,
+                   "Should hash a value that appears to be a hash but is actually too long")
+  }
+
   func testEncodingFullUserData() {
     let hashed = self.hashed(userData)
     let expectedJSONRepresentation = """

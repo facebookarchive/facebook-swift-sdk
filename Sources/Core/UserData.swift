@@ -123,7 +123,7 @@ struct UserData: Codable {
   }
 
   private static func isHashed(_ value: String) -> Bool {
-    return value.range(of: "[A-Fa-f0-9]{64}", options: .regularExpression) != nil
+    return value.range(of: "^[A-Fa-f0-9]{64}$", options: .regularExpression) != nil
   }
 
   static func normalized(value: String, forKey key: CodingKeys) -> String {
