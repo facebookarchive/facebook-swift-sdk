@@ -45,10 +45,11 @@ class UserProfileService {
    @param enable YES is observing
 
    If observing, this class will issue a graph request for public profile data when the current token's userID
-   differs from the current profile. You can observe `FBSDKProfileDidChangeNotification` for when the profile is updated.
+   differs from the current profile.
+   You can observe `FBSDKProfileDidChangeNotification` for when the profile is updated.
 
-   Note that if `AccessTokenWallet.shared.currentAccessToken` is unset, the `currentProfile` instance remains. It's also possible
-   for `currentProfile` to return nil until the data is fetched.
+   Note that if `AccessTokenWallet.shared.currentAccessToken` is unset, the `currentProfile` instance remains.
+   It's also possible for `currentProfile` to return nil until the data is fetched.
    */
   var shouldUpdateOnAccessTokenChange: Bool = false {
     didSet {
