@@ -22,12 +22,12 @@ import Foundation
  Stores a hashed representation of `UserData` to a persistent data store
   (defaults to `UserDefaults`)
  */
-public struct UserDataStore {
+struct UserDataStore {
   let store: DataPersisting
   let retrievalKey: String = "com.facebook.appevents.UserDataStore.userData"
 
   /// The currently cached `UserData` object if available
-  public var cachedUserData: UserData? {
+  var cachedUserData: UserData? {
     guard let json = store.string(forKey: retrievalKey),
       let data = json.data(using: .utf8) else {
       return nil

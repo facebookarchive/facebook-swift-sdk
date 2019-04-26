@@ -22,7 +22,7 @@ import Foundation
  Used for storing demographic information about a user. Primarily used for
  analytics and app events.
  */
-public struct UserData: Codable {
+struct UserData: Codable {
   var email: String?
   var firstName: String?
   var lastName: String?
@@ -61,7 +61,7 @@ public struct UserData: Codable {
   /**
    Encodes the UserData after normalizing and hashing the information
    */
-  public func encode(to encoder: Encoder) throws {
+  func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
 
     if let email = UserData.encodable(email, forKey: .email) {
