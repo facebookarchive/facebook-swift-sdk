@@ -22,7 +22,7 @@ import Foundation
  Represents a target defined in App Link metadata, consisting of at least
  a `URL`, and optionally an App Store ID and name.
  */
-public struct AppLinkTarget {
+public struct AppLinkTarget: Hashable {
   /// The URL prefix for this app link target
   public let url: URL
 
