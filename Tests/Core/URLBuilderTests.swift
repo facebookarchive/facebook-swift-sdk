@@ -148,8 +148,8 @@ class URLBuilderTests: XCTestCase {
     }
 
     XCTAssertEqual(
-      queryItems,
-      expectedQueryItems,
+      queryItems.sorted { $0.name < $1.name },
+      expectedQueryItems.sorted { $0.name < $1.name },
       "Builder should use the provided query items"
     )
 

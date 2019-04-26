@@ -7,7 +7,6 @@ included:
 
 excluded:
   - Pods
-  - Codegen
 
 indentation: 2
 line_length: 120

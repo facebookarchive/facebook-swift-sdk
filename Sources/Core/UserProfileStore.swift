@@ -18,5 +18,25 @@
 
 import Foundation
 
-// Phantom type to mark types that may be bridged to objc
-protocol ObjCBridgeable {}
+struct UserProfileStore {
+  let store: DataPersisting
+  let profileKey: String = "userProfile"
+
+  var cachedProfile: UserProfile? {
+    guard let data = store.data(forKey: profileKey) else {
+      return nil
+    }
+
+    return try? PropertyListDecoder().decode(UserProfile.self, from: data)
+  }
+
+  init(store: DataPersisting = UserDefaults.standard) {
+    self.store = store
+  }
+
+  func cache(_ profile: UserProfile) {
+    let data = try? PropertyListEncoder().encode(profile)
+
+    store.set(data, forKey: profileKey)
+  }
+}

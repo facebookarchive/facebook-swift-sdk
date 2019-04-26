@@ -16,29 +16,29 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable identifier_name
+@testable import FacebookCore
+import XCTest
 
-import Foundation
+class UserProfileServiceConfigurationTests: XCTestCase {
+  let profileService = UserProfileService()
 
-enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
-  case me
-  case picture
-  case other(String)
-
-  init(stringLiteral value: String) {
-    self = .other(value)
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(profileService.graphConnectionProvider is GraphConnectionProvider,
+                  "A profile service should have the expected concrete implementation for its graph connection provider")
   }
 
-  var description: String {
-    switch self {
-    case .me:
-      return "me"
+  func testLoggerDependency() {
+    XCTAssertTrue(profileService.logger is Logger,
+                  "A profile service should have the expected concrete implementation for its logging dependency")
+  }
 
-    case .picture:
-      return "picture"
+  func testNotificationCenterDependency() {
+    XCTAssertTrue(profileService.notificationCenter is NotificationCenter,
+                  "A profile service should have the expected concrete implementation for its notification center dependency")
+  }
 
-    case .other(let value):
-      return value
-    }
+  func testAccessTokenProviderDependency() {
+    XCTAssertTrue(profileService.accessTokenProvider is AccessTokenWallet,
+                  "A profile service should have the expected concrete implementation for its access token providing dependency")
   }
 }
