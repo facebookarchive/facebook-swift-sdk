@@ -19,7 +19,7 @@
 import Foundation
 
 enum GatekeeperListBuilder {
-  private static let gatekeepersKey = "gatekeepers"
+  private static let gatekeepersKey: String = "gatekeepers"
 
   static func build(from remoteList: RemoteGatekeeperList) -> [Gatekeeper] {
     guard let list = remoteList.data.first?[gatekeepersKey] else {
