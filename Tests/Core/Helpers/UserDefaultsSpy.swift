@@ -16,29 +16,32 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable identifier_name
+// swiftlint:disable force_unwrapping
 
+@testable import FacebookCore
 import Foundation
 
-enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
-  case me
-  case picture
-  case other(String)
+class UserDefaultsSpy: UserDefaults {
+  let userDefaults: UserDefaults?
 
-  init(stringLiteral value: String) {
-    self = .other(value)
+  var capturedValues = [String: Any]()
+  var capturedDataRetrievalKey: String?
+
+  init(name: String) {
+    self.userDefaults = UserDefaults(suiteName: name)
+
+    super.init(suiteName: name)!
   }
 
-  var description: String {
-    switch self {
-    case .me:
-      return "me"
-
-    case .picture:
-      return "picture"
-
-    case .other(let value):
-      return value
+  override func set(_ value: Any?, forKey defaultName: String) {
+    if let value = value {
+      capturedValues.updateValue(value, forKey: defaultName)
     }
+    userDefaults?.set(value, forKey: defaultName)
+  }
+
+  override func data(forKey defaultName: String) -> Data? {
+    capturedDataRetrievalKey = defaultName
+    return userDefaults?.data(forKey: defaultName)
   }
 }

@@ -16,29 +16,27 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable identifier_name
-
 import Foundation
 
-enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
-  case me
-  case picture
-  case other(String)
+struct UserProfileStore {
+  let store: DataPersisting
+  let profileKey: String = "userProfile"
 
-  init(stringLiteral value: String) {
-    self = .other(value)
+  var cachedProfile: UserProfile? {
+    guard let data = store.data(forKey: profileKey) else {
+      return nil
+    }
+
+    return try? PropertyListDecoder().decode(UserProfile.self, from: data)
   }
 
-  var description: String {
-    switch self {
-    case .me:
-      return "me"
+  init(store: DataPersisting = UserDefaults.standard) {
+    self.store = store
+  }
 
-    case .picture:
-      return "picture"
+  func cache(_ profile: UserProfile) {
+    let data = try? PropertyListEncoder().encode(profile)
 
-    case .other(let value):
-      return value
-    }
+    store.set(data, forKey: profileKey)
   }
 }

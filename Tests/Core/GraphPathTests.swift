@@ -30,6 +30,9 @@ class GraphPathTests: XCTestCase {
       case .me:
         break
 
+      case .picture:
+        break
+
       case .other:
         break
       }
