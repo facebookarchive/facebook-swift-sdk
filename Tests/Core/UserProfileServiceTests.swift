@@ -32,6 +32,7 @@ class UserProfileServiceTests: XCTestCase {
   private var store: UserProfileStore!
   private var wallet: AccessTokenWallet!
   private var sizingConfiguration: ImageSizingConfiguration!
+  private let scale = UIScreen.main.scale
 
   override func setUp() {
     super.setUp()
@@ -400,13 +401,15 @@ class UserProfileServiceTests: XCTestCase {
   }
 
   func testNormalImageURL() {
+    let expectedHeight = UInt(sizingConfiguration.size.height)
+    let expectedWidth = UInt(sizingConfiguration.size.width)
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
 
     let expectedQueryItems = [
       URLQueryItem(name: "type", value: "normal"),
-      URLQueryItem(name: "width", value: String(describing: 40)),
-      URLQueryItem(name: "height", value: String(describing: 40))
+      URLQueryItem(name: "width", value: String(describing: expectedWidth)),
+      URLQueryItem(name: "height", value: String(describing: expectedHeight))
     ]
 
     guard let url = service.imageURL(sizingConfiguration: sizingConfiguration),
@@ -468,10 +471,13 @@ class UserProfileServiceTests: XCTestCase {
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
 
+    let expectedHeight = UInt(sizingConfiguration.size.height)
+    let expectedWidth = UInt(sizingConfiguration.size.width)
+
     let expectedParameters: [String: AnyHashable] = [
       "type": ImageSizingFormat.normal,
-      "width": 40,
-      "height": 40
+      "width": expectedWidth,
+      "height": expectedHeight
     ]
     let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
 
@@ -665,10 +671,9 @@ class UserProfileServiceTests: XCTestCase {
     wallet.setCurrent(token)
 
     // Stub a fetch result
-    let image = UIImage(
-      named: "redSilhouette.png",
-      in: Bundle(for: UserProfileServiceTests.self),
-      compatibleWith: nil
+    let image = HumanSilhouetteIcon.image(
+      size: sizingConfiguration.size,
+      color: .red
     )!
 
     let imageData = image.pngData()

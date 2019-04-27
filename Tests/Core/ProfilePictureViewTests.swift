@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping file_length type_body_length force_try
+// swiftlint:disable force_unwrapping file_length type_body_length
 
 @testable import FacebookCore
 import XCTest
@@ -30,22 +30,22 @@ class ProfilePictureViewTests: XCTestCase {
     origin: .zero,
     size: CGSize(width: 100, height: 100)
   )
-  private let expectedPlaceholderImage = UIImage(
-    named: "customColorSilhouette.png",
-    in: Bundle(for: ProfilePictureViewTests.self),
-    compatibleWith: nil
-  )!
+  var placeholderImageData: Data!
   private let puppyImage = UIImage(
     named: "puppy.jpeg",
     in: Bundle(for: ProfilePictureViewTests.self),
     compatibleWith: nil
-  )!
+    )!
 
   override func setUp() {
     super.setUp()
 
     fakeUserProfileProvider = FakeUserProfileProvider()
-
+    placeholderImageData = HumanSilhouetteIcon.image(
+      size: frame.size,
+      color: HumanSilhouetteIcon.placeholderImageColor
+      )?
+      .pngData()
     createView()
     awaitInitialViewSetup()
   }
@@ -178,7 +178,7 @@ class ProfilePictureViewTests: XCTestCase {
 
     awaitAndFulfillOnMainQueue(expectation)
 
-    XCTAssertNotEqual(view.imageView.image?.pngData(), expectedPlaceholderImage.pngData(),
+    XCTAssertNotEqual(view.imageView.image?.pngData(), placeholderImageData,
                       "Should set a placeholder image if there is a profile image or valid placeholder image")
     XCTAssertEqual(fakeUserProfileProvider.fetchProfileImageCallCount, 1,
                    "Should attempt to fetch a profile image when an image update is needed")
@@ -289,7 +289,7 @@ class ProfilePictureViewTests: XCTestCase {
 
     awaitAndFulfillOnMainQueue(expectation)
 
-    XCTAssertNotEqual(view.imageView.image?.pngData(), expectedPlaceholderImage.pngData(),
+    XCTAssertNotEqual(view.imageView.image?.pngData(), placeholderImageData,
                       "Should not set a new placeholder when a content mode changes to an identical content mode")
   }
 
@@ -454,7 +454,7 @@ class ProfilePictureViewTests: XCTestCase {
     _ line: UInt = #line
     ) {
     let predicate = NSPredicate { _, _ in
-      self.view.imageView.image?.pngData() == self.expectedPlaceholderImage.pngData()
+      self.view.imageView.image?.pngData() == self.placeholderImageData
     }
     expectation(for: predicate, evaluatedWith: self, handler: nil)
 
