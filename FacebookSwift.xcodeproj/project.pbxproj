@@ -131,6 +131,12 @@
 		F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */; };
 		F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */; };
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
+		F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */; };
+		F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC222720B5F00EFE037 /* UserDataStore.swift */; };
+		F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */; };
+		F46DCFD32272140700EFE037 /* FacebookSwift-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */; };
+		F46DCFD52272317200EFE037 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD42272317200EFE037 /* UserDataTests.swift */; };
+		F46DCFD7227267F000EFE037 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD6227267F000EFE037 /* UserData.swift */; };
 		F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056D82232CEEF00BE526B /* FakeLogger.swift */; };
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
@@ -362,6 +368,12 @@
 		F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionTests.swift; sourceTree = "<group>"; };
 		F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestPiggybackManagerTests.swift; sourceTree = "<group>"; };
 		F45734D6222D9535001F806A /* InternalUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtilityTests.swift; sourceTree = "<group>"; };
+		F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoreTests.swift; sourceTree = "<group>"; };
+		F46DCFC222720B5F00EFE037 /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
+		F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUserData.swift; sourceTree = "<group>"; };
+		F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FacebookSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		F46DCFD42272317200EFE037 /* UserDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTests.swift; sourceTree = "<group>"; };
+		F46DCFD6227267F000EFE037 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F47056D82232CEEF00BE526B /* FakeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLogger.swift; sourceTree = "<group>"; };
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -520,6 +532,7 @@
 				F4C32D81223D98D300FF1F86 /* Configurations */,
 				F4C32DA9223FFA8800FF1F86 /* ErrorHandling */,
 				F44DB6B2222B01B60083506E /* Extensions */,
+				F46DCFD12272140700EFE037 /* Internal */,
 				F417F9172249822D00E771F1 /* Logging */,
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F41640F3224C27A000842120 /* String Constants */,
@@ -562,6 +575,8 @@
 				F4144C53224D0FA7006C8F9C /* URLBuilder.swift */,
 				F40739402231E4EB0018505A /* URLQueryItemBuilder.swift */,
 				F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */,
+				F46DCFD6227267F000EFE037 /* UserData.swift */,
+				F46DCFC222720B5F00EFE037 /* UserDataStore.swift */,
 				F42E3C742267E45000287DC4 /* UserProfile.swift */,
 				F42E3C752267E45000287DC4 /* UserProfileBuilder.swift */,
 				F42E3C772267E45100287DC4 /* UserProfileService.swift */,
@@ -732,6 +747,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		F46DCFD12272140700EFE037 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
 		F49FA47A222880FE0008CAD6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,6 +818,8 @@
 				F4144C51224D0F6C006C8F9C /* URLBuilderTests.swift */,
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
+				F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */,
+				F46DCFD42272317200EFE037 /* UserDataTests.swift */,
 				F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */,
 				F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */,
 				F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */,
@@ -851,6 +876,7 @@
 				F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
+				F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */,
 				F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */,
 			);
 			path = "Sample Data";
@@ -891,6 +917,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F46DCFD32272140700EFE037 /* FacebookSwift-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,6 +1157,7 @@
 				F48A749F2239A3C7007192F6 /* Localizable.swift in Sources */,
 				F4C3C5252273CABC004B487E /* ImageSizingConfiguration.swift in Sources */,
 				F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */,
+				F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */,
 				524A49B9225EA39300786C11 /* SecureStore.swift in Sources */,
 				F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */,
 				F4E1A9ED22416F2200503354 /* RemoteErrorCodeGroup.swift in Sources */,
@@ -1138,6 +1166,7 @@
 				F4225DDF223F210E00F4DCFE /* ErrorConfigurationBuilder.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
+				F46DCFD7227267F000EFE037 /* UserData.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
 				F4E1A9EC22416F2200503354 /* FBError.swift in Sources */,
 				F42E3C792267E45100287DC4 /* UserProfileBuilder.swift in Sources */,
@@ -1245,6 +1274,7 @@
 				F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */,
 				F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */,
 				F480D90F2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift in Sources */,
+				F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */,
 				F4C32D97223D990A00FF1F86 /* SampleLocalizedStrings.swift in Sources */,
 				F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */,
 				F447152E22440CD30013495F /* FakeProcessInfo.swift in Sources */,
@@ -1262,6 +1292,7 @@
 				F480D9132236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift in Sources */,
 				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */,
 				F44847E82268FD0000527D49 /* ImageSizingConfigurationTests.swift in Sources */,
+				F46DCFD52272317200EFE037 /* UserDataTests.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
 				523CAE4D225ED58900D196C3 /* StringExtensionTests.swift in Sources */,
 				F44847FB226E2F5200527D49 /* FakeUserProfileProvider.swift in Sources */,
@@ -1293,6 +1324,7 @@
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
 				F43AB04622710E3200610974 /* SampleRemoteGatekeeperList.swift in Sources */,
 				F43AB0342270C0B800610974 /* SampleRawRemoteGatekeeperList.swift in Sources */,
+				F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F447153022440E860013495F /* SampleURL.swift in Sources */,
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,
@@ -1390,6 +1422,7 @@
 				DEFINES_MODULE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "--PRODUCT-BUNDLE-IDENTIFIER-";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Sources/Core/Internal/FacebookSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1402,6 +1435,7 @@
 				DEFINES_MODULE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "--PRODUCT-BUNDLE-IDENTIFIER-";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Sources/Core/Internal/FacebookSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
