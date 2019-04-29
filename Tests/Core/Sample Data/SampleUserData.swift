@@ -16,38 +16,26 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping
-
 @testable import FacebookCore
 import Foundation
 
-class UserDefaultsSpy: UserDefaults {
-  let userDefaults: UserDefaults?
+enum SampleUserData {
+  static let valid = UserData(
+    email: "test@example.com",
+    firstName: "TestFirstName",
+    lastName: "TestLastName",
+    phone: "TestPhone",
+    dateOfBirth: "TestDOB",
+    gender: "TestNonBinary",
+    city: "TestDenver",
+    state: "TestCalifornia",
+    zip: "Test12345",
+    country: "TestUSA"
+  )
 
-  var capturedValues = [String: Any]()
-  var capturedDataRetrievalKey: String?
-  var capturedStringRetrievalKey: String?
-
-  init(name: String) {
-    self.userDefaults = UserDefaults(suiteName: name)
-
-    super.init(suiteName: name)!
-  }
-
-  override func set(_ value: Any?, forKey defaultName: String) {
-    if let value = value {
-      capturedValues.updateValue(value, forKey: defaultName)
-    }
-    userDefaults?.set(value, forKey: defaultName)
-  }
-
-  override func data(forKey defaultName: String) -> Data? {
-    capturedDataRetrievalKey = defaultName
-    return userDefaults?.data(forKey: defaultName)
-  }
-
-  override func string(forKey defaultName: String) -> String? {
-    capturedStringRetrievalKey = defaultName
-    return userDefaults?.string(forKey: defaultName)
-  }
+  static let partial = UserData(
+    email: "test@example.com",
+    firstName: "TestFirstName",
+    zip: "Test12345"
+  )
 }
