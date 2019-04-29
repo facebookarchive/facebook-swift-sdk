@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -18,3 +17,41 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+
+/**
+ Stores a hashed representation of `UserData` to a persistent data store
+  (defaults to `UserDefaults`)
+ */
+struct UserDataStore {
+  let store: DataPersisting
+  let retrievalKey: String = "com.facebook.appevents.UserDataStore.userData"
+
+  /// The currently cached `UserData` object if available
+  var cachedUserData: UserData? {
+    guard let json = store.string(forKey: retrievalKey),
+      let data = json.data(using: .utf8) else {
+      return nil
+    }
+
+    return try? JSONDecoder().decode(UserData.self, from: data)
+  }
+
+  init(store: DataPersisting = UserDefaults.standard) {
+    self.store = store
+  }
+
+  func cache(_ userData: UserData) {
+    let encoded = UserDataStore.encoded(userData)
+
+    store.set(encoded, forKey: retrievalKey)
+  }
+
+  static func encoded(_ userData: UserData) -> String {
+    guard let data = try? JSONEncoder().encode(userData),
+     let encoded = String(data: data, encoding: .utf8)
+      else {
+        return "{}"
+    }
+    return encoded
+  }
+}
