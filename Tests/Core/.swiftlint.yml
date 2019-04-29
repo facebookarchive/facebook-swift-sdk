@@ -1,5 +1,3 @@
-swiftlint_version: 0.31.0
-
 disabled_rules:
   - closure_body_length
   - closure_end_indentation
