@@ -19,7 +19,7 @@
 import Foundation
 
 struct URLBuilder {
-  static let graphAPIHostPrefix = "graph"
+  static let graphAPIHostPrefix: String = "graph"
   static let hostname: String = "facebook.com"
   let settings: SettingsManaging
 
