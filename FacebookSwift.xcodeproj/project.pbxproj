@@ -166,6 +166,8 @@
 		F4C32DA5223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DA2223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift */; };
 		F4C32DA6223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */; };
 		F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */; };
+		F4C3C52E22779627004B487E /* AppLinkIdiomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C52D22779627004B487E /* AppLinkIdiomTests.swift */; };
+		F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C52F2277991C004B487E /* AppLinkIdiom.swift */; };
 		F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971D22444EDD005EE2EE /* FakeServerConfigurationProvider.swift */; };
 		F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */; };
 		F4D5DAE422492BCD0014C14D /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
@@ -386,6 +388,8 @@
 		F4C32DA2223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteErrorConfigurationEntryList+Extensions.swift"; sourceTree = "<group>"; };
 		F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteErrorConfigurationEntry+Extensions.swift"; sourceTree = "<group>"; };
 		F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorConfigurationTests.swift; sourceTree = "<group>"; };
+		F4C3C52D22779627004B487E /* AppLinkIdiomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkIdiomTests.swift; sourceTree = "<group>"; };
+		F4C3C52F2277991C004B487E /* AppLinkIdiom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkIdiom.swift; sourceTree = "<group>"; };
 		F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeServerConfigurationManager.swift; sourceTree = "<group>"; };
 		F4D5DAE322492BCD0014C14D /* FakeBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBundle.swift; sourceTree = "<group>"; };
 		F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -540,6 +544,7 @@
 				F42E3C752267E45000287DC4 /* UserProfileBuilder.swift */,
 				F42E3C772267E45100287DC4 /* UserProfileService.swift */,
 				F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */,
+				F4C3C52F2277991C004B487E /* AppLinkIdiom.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -766,6 +771,7 @@
 				F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */,
 				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 				F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */,
+				F4C3C52D22779627004B487E /* AppLinkIdiomTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1094,6 +1100,7 @@
 				F4E1A9ED22416F2200503354 /* RemoteErrorCodeGroup.swift in Sources */,
 				F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */,
 				F4225DDF223F210E00F4DCFE /* ErrorConfigurationBuilder.swift in Sources */,
+				F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F46DCFD7227267F000EFE037 /* UserData.swift in Sources */,
@@ -1244,6 +1251,7 @@
 				F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F447153022440E860013495F /* SampleURL.swift in Sources */,
+				F4C3C52E22779627004B487E /* AppLinkIdiomTests.swift in Sources */,
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
 				F447151E2242FF010013495F /* LoggerTests.swift in Sources */,
