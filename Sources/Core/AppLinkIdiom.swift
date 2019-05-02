@@ -18,7 +18,7 @@
 
 import UIKit
 
-enum AppLinkIdiom: String {
+enum AppLinkIdiom: String, Decodable {
   case iOS = "ios"
   case iPhone = "iphone"
   case iPad = "ipad"
@@ -40,3 +40,5 @@ enum AppLinkIdiom: String {
     }
   }
 }
+
+extension AppLinkIdiom: CodingKey {}
