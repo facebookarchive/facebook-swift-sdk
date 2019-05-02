@@ -16,37 +16,42 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable convenience_type
+import Foundation
 
-import XCTest
+/// An idiom-targets pairing used for constructing AppLinks
+struct RemoteAppLinkDetail: Decodable {
+  let idiom: AppLinkIdiom
+  let targets: Set<RemoteAppLinkTarget>
 
-class JSONLoader {
-  static func loadData(
-    for filename: JSONFileName,
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> Data? {
-    let testBundle = Bundle(for: JSONLoader.self)
-    guard let path = testBundle.path(forResource: filename.rawValue, ofType: "json") else {
-      XCTFail("Invalid path for json file: \(filename.rawValue).json not found", file: file, line: line)
-      return nil
-    }
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: []) else {
-      XCTFail("Invalid or malformed json in: \(filename.rawValue).json")
-      return nil
-    }
-    return data
+  init(
+    idiom: AppLinkIdiom,
+    targets: Set<RemoteAppLinkTarget>
+    ) {
+    self.idiom = idiom
+    self.targets = targets
   }
-}
 
-/**
- Used for loading specific json files into your test.
- Assumes that the raw value will match the name of a .json file in the test target
- */
-enum JSONFileName: String {
-  case validAppLinkTarget
-  case validRemoteAppLinkDetail
-  case validRemoteErrorConfiguration
-  case validRemoteErrorConfigurationList
-  case validUserProfile
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: AppLinkIdiom.self)
+
+    guard let idiomRawValue = container.allKeys.first?.rawValue,
+      let idiom = AppLinkIdiom(rawValue: idiomRawValue)
+      else {
+        throw DecodingError.missingIdiom
+    }
+
+    self.idiom = idiom
+
+    switch try? container.decode(Set<RemoteAppLinkTarget>.self, forKey: idiom) {
+    case nil:
+      self.targets = []
+
+    case let .some(targets):
+      self.targets = targets
+    }
+  }
+
+  enum DecodingError: Error {
+    case missingIdiom
+  }
 }
