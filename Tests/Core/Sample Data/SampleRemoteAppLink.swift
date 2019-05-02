@@ -16,27 +16,47 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+@testable import FacebookCore
+import Foundation
 
-enum AppLinkIdiom: String, Decodable, CodingKey {
-  case iOS = "ios"
-  case iPhone = "iphone"
-  case iPad = "ipad"
-  case web = "web"
+enum SampleRemoteAppLink {
+  static let sourceURL = SampleURL.valid
+  static let webURL = SampleURL.valid(withPath: "web")
 
-  init?(userInterfaceIdiom: UIUserInterfaceIdiom) {
-    switch userInterfaceIdiom {
-    case .phone:
-      self = .iPhone
+  static let iOSDetail = RemoteAppLinkDetail(
+    idiom: .iOS,
+    targets: [
+      SampleRemoteAppLinkTarget.valid()
+    ]
+  )
 
-    case .pad:
-      self = .iPad
+  static let emptyDetails = RemoteAppLink(
+    sourceURLString: sourceURL.absoluteString,
+    details: [],
+    webURL: webURL
+  )
 
-    case .carPlay, .tv, .unspecified:
-      return nil
+  static let invalidSourceURLString = RemoteAppLink(
+    sourceURLString: "^not_valid",
+    details: [iOSDetail],
+    webURL: webURL
+  )
 
-    @unknown default:
-      return nil
-    }
+  static let noValidURLS = RemoteAppLink(
+    sourceURLString: "^not_valid",
+    details: [iOSDetail],
+    webURL: nil
+  )
+
+  static func valid(
+    sourceURLString: String = sourceURL.absoluteString,
+    details: [RemoteAppLinkDetail] = [],
+    webURL: URL = webURL
+    ) -> RemoteAppLink {
+    return RemoteAppLink(
+      sourceURLString: sourceURLString,
+      details: details,
+      webURL: webURL
+    )
   }
 }

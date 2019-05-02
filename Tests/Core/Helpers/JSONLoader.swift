@@ -45,6 +45,7 @@ class JSONLoader {
  */
 enum JSONFileName: String {
   case validAppLinkTarget
+  case validRemoteAppLink
   case validRemoteAppLinkDetail
   case validRemoteErrorConfiguration
   case validRemoteErrorConfigurationList

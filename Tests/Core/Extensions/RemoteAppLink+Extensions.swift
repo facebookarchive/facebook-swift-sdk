@@ -16,27 +16,20 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+@testable import FacebookCore
+import Foundation
 
-enum AppLinkIdiom: String, Decodable, CodingKey {
-  case iOS = "ios"
-  case iPhone = "iphone"
-  case iPad = "ipad"
-  case web = "web"
-
-  init?(userInterfaceIdiom: UIUserInterfaceIdiom) {
-    switch userInterfaceIdiom {
-    case .phone:
-      self = .iPhone
-
-    case .pad:
-      self = .iPad
-
-    case .carPlay, .tv, .unspecified:
-      return nil
-
-    @unknown default:
-      return nil
-    }
+// TODO: Consider adding initializer to internal. Really do not want to do this but may
+// be the only way to silence this error.
+// See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
+extension RemoteAppLink {
+  init(
+    sourceURLString: String,
+    details: [RemoteAppLinkDetail],
+    webURL: URL?
+    ) {
+    self.sourceURLString = sourceURLString
+    self.details = details
+    self.webURL = webURL
   }
 }

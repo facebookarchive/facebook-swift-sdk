@@ -16,27 +16,23 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-enum AppLinkIdiom: String, Decodable, CodingKey {
-  case iOS = "ios"
-  case iPhone = "iphone"
-  case iPad = "ipad"
-  case web = "web"
-
-  init?(userInterfaceIdiom: UIUserInterfaceIdiom) {
-    switch userInterfaceIdiom {
-    case .phone:
-      self = .iPhone
-
-    case .pad:
-      self = .iPad
-
-    case .carPlay, .tv, .unspecified:
-      return nil
-
-    @unknown default:
+enum AppLinkBuilder {
+  static func build(from remoteAppLink: RemoteAppLink) -> AppLink? {
+    guard let url = URL(string: remoteAppLink.sourceURLString) else {
       return nil
     }
+
+    let remoteTargets = remoteAppLink.details.flatMap { $0.targets }
+
+    let targets: Set<AppLinkTarget> = Set(remoteTargets.compactMap(AppLinkTargetBuilder.build))
+
+    return AppLink(
+      sourceURL: url,
+      targets: targets,
+      webURL: remoteAppLink.webURL,
+      isBackToReferrer: false
+    )
   }
 }
