@@ -22,24 +22,28 @@ import Foundation
  Represents a target defined in App Link metadata, consisting of at least
  a `URL`, and optionally an App Store ID and name.
  */
-public struct AppLinkTarget: Hashable {
+struct AppLinkTarget: Hashable, Decodable {
   /// The URL prefix for this app link target
-  public let url: URL
+  let url: URL
 
   /// The application identifier for the app store
-  public let appIdentifier: String?
+  let appIdentifier: String?
 
   /// The name of the application
-  public let appName: String?
+  let appName: String?
+
+  let shouldFallback: Bool
 
   /// Creates an AppLinkTarget with a `URL` and an optional name and identifier
-  public init(
+  init(
     url: URL,
     appIdentifier: String? = nil,
-    appName: String? = nil
+    appName: String? = nil,
+    shouldFallback: Bool = false
     ) {
     self.url = url
     self.appIdentifier = appIdentifier
     self.appName = appName
+    self.shouldFallback = shouldFallback
   }
 }
