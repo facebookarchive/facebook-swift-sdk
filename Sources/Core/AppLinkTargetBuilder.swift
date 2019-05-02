@@ -16,36 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable convenience_type
+import Foundation
 
-import XCTest
-
-class JSONLoader {
-  static func loadData(
-    for filename: JSONFileName,
-    file: StaticString = #file,
-    line: UInt = #line
-    ) -> Data? {
-    let testBundle = Bundle(for: JSONLoader.self)
-    guard let path = testBundle.path(forResource: filename.rawValue, ofType: "json") else {
-      XCTFail("Invalid path for json file: \(filename.rawValue).json not found", file: file, line: line)
+enum AppLinkTargetBuilder {
+  static func build(from remote: RemoteAppLinkTarget) -> AppLinkTarget? {
+    guard let url = remote.url else {
       return nil
     }
-    guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: []) else {
-      XCTFail("Invalid or malformed json in: \(filename.rawValue).json")
-      return nil
-    }
-    return data
+    return AppLinkTarget(
+      url: url,
+      appIdentifier: remote.appIdentifier,
+      appName: remote.appName,
+      shouldFallback: remote.shouldFallback ?? false
+    )
   }
-}
-
-/**
- Used for loading specific json files into your test.
- Assumes that the raw value will match the name of a .json file in the test target
- */
-enum JSONFileName: String {
-  case validAppLinkTarget
-  case validRemoteErrorConfiguration
-  case validRemoteErrorConfigurationList
-  case validUserProfile
 }
