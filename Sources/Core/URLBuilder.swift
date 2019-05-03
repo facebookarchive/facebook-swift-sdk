@@ -56,6 +56,7 @@ struct URLBuilder {
     let queryItems = URLQueryItemBuilder.build(from: request.parameters)
 
     return self.buildURL(
+      withHostPrefix: "graph",
       path: request.graphPath.description,
       queryItems: queryItems
     )

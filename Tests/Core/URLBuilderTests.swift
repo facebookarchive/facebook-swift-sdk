@@ -153,7 +153,7 @@ class URLBuilderTests: XCTestCase {
       "Builder should use the provided query items"
     )
 
-    validateBaseUrl(url, withPath: "/v3.2/me")
+    validateBaseUrl(url, withPrefix: "graph", withPath: "/v3.2/me")
   }
 
   private func validateBaseUrl(

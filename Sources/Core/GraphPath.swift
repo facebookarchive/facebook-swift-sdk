@@ -23,6 +23,9 @@ import Foundation
 enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
   case me
   case picture
+
+  // Possibly name this none and have it be the default instead of an empty string where it's used.
+  case root
   case other(String)
 
   init(stringLiteral value: String) {
@@ -36,6 +39,9 @@ enum GraphPath: ExpressibleByStringLiteral, CustomStringConvertible {
 
     case .picture:
       return "picture"
+
+    case .root:
+      return ""
 
     case .other(let value):
       return value

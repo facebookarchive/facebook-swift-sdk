@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable switch_case_on_newline
+
 @testable import FacebookCore
 import XCTest
 
@@ -27,14 +29,13 @@ class GraphPathTests: XCTestCase {
 
     pathDescriptionPairs.forEach { path, description in
       switch path {
-      case .me:
-        break
+      case .me: break
 
-      case .picture:
-        break
+      case .picture: break
 
-      case .other:
-        break
+      case .root: break
+
+      case .other: break
       }
 
       XCTAssertEqual(path.description, description,
