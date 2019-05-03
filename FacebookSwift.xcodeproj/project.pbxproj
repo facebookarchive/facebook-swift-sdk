@@ -121,6 +121,10 @@
 		F46DCFD32272140700EFE037 /* FacebookSwift-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */; };
 		F46DCFD52272317200EFE037 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD42272317200EFE037 /* UserDataTests.swift */; };
 		F46DCFD7227267F000EFE037 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD6227267F000EFE037 /* UserData.swift */; };
+		F46DCFDB22734C5F00EFE037 /* AppLinkTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */; };
+		F46DCFDD22734E7800EFE037 /* AppLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDC22734E7800EFE037 /* AppLinkTarget.swift */; };
+		F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */; };
+		F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFE0227364F500EFE037 /* AppLink.swift */; };
 		F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056D82232CEEF00BE526B /* FakeLogger.swift */; };
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
@@ -343,6 +347,10 @@
 		F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FacebookSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		F46DCFD42272317200EFE037 /* UserDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTests.swift; sourceTree = "<group>"; };
 		F46DCFD6227267F000EFE037 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkTargetTests.swift; sourceTree = "<group>"; };
+		F46DCFDC22734E7800EFE037 /* AppLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkTarget.swift; sourceTree = "<group>"; };
+		F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkTests.swift; sourceTree = "<group>"; };
+		F46DCFE0227364F500EFE037 /* AppLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLink.swift; sourceTree = "<group>"; };
 		F47056D82232CEEF00BE526B /* FakeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLogger.swift; sourceTree = "<group>"; };
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -510,6 +518,8 @@
 				F44DB69E2229B4C50083506E /* AccessTokenCache.swift */,
 				F44DB69C2229B4420083506E /* AccessTokenCaching.swift */,
 				F44DB69122299FA10083506E /* AccessTokenWallet.swift */,
+				F46DCFE0227364F500EFE037 /* AppLink.swift */,
+				F46DCFDC22734E7800EFE037 /* AppLinkTarget.swift */,
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
 				F44F566D224D344300D027FF /* GraphAPIVersion.swift */,
@@ -730,6 +740,8 @@
 				F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */,
 				F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */,
 				F409967422299BE200F23464 /* AccessTokenWalletTests.swift */,
+				F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */,
+				F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
@@ -1108,6 +1120,7 @@
 				F48A749F2239A3C7007192F6 /* Localizable.swift in Sources */,
 				F4C3C5252273CABC004B487E /* ImageSizingConfiguration.swift in Sources */,
 				F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */,
+				F46DCFDD22734E7800EFE037 /* AppLinkTarget.swift in Sources */,
 				F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */,
 				524A49B9225EA39300786C11 /* SecureStore.swift in Sources */,
 				F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */,
@@ -1126,6 +1139,7 @@
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
+				F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */,
@@ -1259,6 +1273,7 @@
 				F42E3C802267E5E800287DC4 /* RemoteUserProfileTests.swift in Sources */,
 				F48BDD8B22470128003CCA5A /* SettingsTests.swift in Sources */,
 				F4516B8A225FA3FE00979DD2 /* SampleURLResponse.swift in Sources */,
+				F46DCFDB22734C5F00EFE037 /* AppLinkTargetTests.swift in Sources */,
 				F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */,
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
@@ -1273,6 +1288,7 @@
 				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
 				F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */,
 				F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */,
+				F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */,
 				F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */,
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
