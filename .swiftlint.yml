@@ -1,4 +1,4 @@
-swiftlint_version: 0.31.0
+swiftlint_version: 0.32.0
 
 included:
   - Sources
@@ -99,6 +99,7 @@ opt_in_rules:
   - file_header
   - file_length
   - file_name
+  - file_types_order
   - first_where
   - for_where
   - force_cast
@@ -145,6 +146,8 @@ opt_in_rules:
   - no_grouping_extension
   - notification_center_detachment
   - nslocalizedstring_key
+  - nslocalizedstring_require_bundle
+  - nsobject_prefer_isequal
   - object_literal
   - opening_brace
   - operator_usage_whitespace
@@ -162,6 +165,8 @@ opt_in_rules:
   - quick_discouraged_call
   - quick_discouraged_focused_test
   - quick_discouraged_pending_test
+  - reduce_boolean
+  - reduce_into
   - redundant_discardable_let
   - redundant_nil_coalescing
   - redundant_objc_attribute
@@ -170,6 +175,7 @@ opt_in_rules:
   - redundant_string_enum_value
   - redundant_type_annotation
   - redundant_void_return
+  - required_deinit
   - required_enum_case
   - return_arrow_whitespace
   - shorthand_operator
@@ -192,11 +198,13 @@ opt_in_rules:
   - trailing_semicolon
   - trailing_whitespace
   - type_body_length
+  - type_contents_order
   - type_name
   - unavailable_function
   - unneeded_break_in_switch
   - unneeded_parentheses_in_closure_argument
   - untyped_error_in_catch
+  - unused_capture_list
   - unused_closure_parameter
   - unused_control_flow_label
   - unused_enumerated
