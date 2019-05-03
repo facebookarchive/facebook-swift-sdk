@@ -22,6 +22,10 @@ import Foundation
 
 enum SampleURL {
   static let valid = URL(string: "https://www.example.com")!
+
+  static func valid(withPath path: String) -> URL {
+    return valid.appendingPathComponent(path)
+  }
 }
 
 enum SampleURLRequest {

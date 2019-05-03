@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -19,7 +18,28 @@
 
 import Foundation
 
-/*!
+/**
  Represents a target defined in App Link metadata, consisting of at least
- a URL, and optionally an App Store ID and name.
+ a `URL`, and optionally an App Store ID and name.
  */
+public struct AppLinkTarget: Hashable {
+  /// The URL prefix for this app link target
+  public let url: URL
+
+  /// The application identifier for the app store
+  public let appIdentifier: String?
+
+  /// The name of the application
+  public let appName: String?
+
+  /// Creates an AppLinkTarget with a `URL` and an optional name and identifier
+  public init(
+    url: URL,
+    appIdentifier: String? = nil,
+    appName: String? = nil
+    ) {
+    self.url = url
+    self.appIdentifier = appIdentifier
+    self.appName = appName
+  }
+}

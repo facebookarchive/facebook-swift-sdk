@@ -43,7 +43,7 @@ class KeychainStoreTests: XCTestCase {
   }
 
   func testKeychainStore() {
-    var store: SecureStore = KeychainStore(service: "com.facebook.sdk.tokencache.\(bundleId)")
+    let store: SecureStore = KeychainStore(service: "com.facebook.sdk.tokencache.\(bundleId)")
 
     // TODO: Add Entitlements so this passes tests and enable checks below
     do {
@@ -55,7 +55,7 @@ class KeychainStoreTests: XCTestCase {
     }
 
     do {
-      let value = try store.string(forKey: "key1")
+      _ = try store.string(forKey: "key1")
       //      XCTAssertEqual(value, "value1",
       //                     "String retrieved should be equal to the string stored")
     } catch {
