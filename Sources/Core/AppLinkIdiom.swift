@@ -16,34 +16,27 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import UIKit
 
-/**
- Represents a target defined in App Link metadata, consisting of at least
- a `URL`, and optionally an App Store ID and name.
- */
-struct AppLinkTarget: Hashable, Decodable {
-  /// The URL prefix for this app link target
-  let url: URL
+enum AppLinkIdiom: String, Decodable, CodingKey {
+  case iOS = "ios"
+  case iPhone = "iphone"
+  case iPad = "ipad"
+  case web = "web"
 
-  /// The application identifier for the app store
-  let appIdentifier: String?
+  init?(userInterfaceIdiom: UIUserInterfaceIdiom) {
+    switch userInterfaceIdiom {
+    case .phone:
+      self = .iPhone
 
-  /// The name of the application
-  let appName: String?
+    case .pad:
+      self = .iPad
 
-  let shouldFallback: Bool
+    case .carPlay, .tv, .unspecified:
+      return nil
 
-  /// Creates an AppLinkTarget with a `URL` and an optional name and identifier
-  init(
-    url: URL,
-    appIdentifier: String? = nil,
-    appName: String? = nil,
-    shouldFallback: Bool = false
-    ) {
-    self.url = url
-    self.appIdentifier = appIdentifier
-    self.appName = appName
-    self.shouldFallback = shouldFallback
+    @unknown default:
+      return nil
+    }
   }
 }

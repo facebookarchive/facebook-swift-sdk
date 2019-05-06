@@ -27,18 +27,18 @@ import Foundation
  https://developer.apple.com/documentation/uikit/core_app/allowing_apps_and_websites_to_link_to_your_content
  )
  */
-public struct AppLink {
+struct AppLink {
   /// The URL from which the `AppLink` was derived
-  public let sourceURL: URL
+  let sourceURL: URL
 
   /**
    The set of targets applicable to this platform that will be used
    for navigation
    */
-  public let targets: Set<AppLinkTarget>
+  let targets: Set<AppLinkTarget>
 
   /// The fallback web URL to use if none of the `AppLinkTarget`s are installed on this device
-  public let webURL: URL?
+  let webURL: URL?
 
   let isBackToReferrer: Bool
 
@@ -52,7 +52,7 @@ public struct AppLink {
    - Parameter targets: A set of `AppLinkTargets` for this platform
    - Parameter webURL: the fallback web URL, if available
    */
-  public init(
+  init(
     sourceURL: URL,
     targets: Set<AppLinkTarget> = [],
     webURL: URL? = nil
