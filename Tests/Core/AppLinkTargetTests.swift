@@ -20,7 +20,7 @@
 import XCTest
 
 class AppLinkTargetTests: XCTestCase {
-  func testCreatingWithURL() {
+  func testCreatingWithURLOnly() {
     let appLinkTarget = AppLinkTarget(url: SampleURL.valid)
 
     XCTAssertEqual(appLinkTarget.url, SampleURL.valid,

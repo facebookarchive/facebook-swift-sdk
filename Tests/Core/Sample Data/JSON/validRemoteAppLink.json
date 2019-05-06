@@ -1,0 +1,14 @@
+{
+  "http://example.com": {
+    "app_links": {
+      "ios": [
+        {
+          "app_name": "Foo",
+          "app_store_id": "123",
+          "url": "www.example.com"
+        }
+      ]
+    },
+    "id": "http://example.com"
+  }
+}

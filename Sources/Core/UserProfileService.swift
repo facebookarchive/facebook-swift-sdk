@@ -18,11 +18,14 @@
 
 import UIKit
 
+typealias UserProfileResult = Result<UserProfile, Error>
+typealias UserProfileImageResult = Result<UIImage, Error>
+
 protocol UserProfileProviding {
   func fetchProfileImage(
     for identifier: String,
     sizingConfiguration: ImageSizingConfiguration,
-    completion: @escaping (Result<UIImage, Error>) -> Void
+    completion: @escaping (UserProfileImageResult) -> Void
   )
 }
 
@@ -136,7 +139,7 @@ class UserProfileService: UserProfileProviding {
    If the profile is already loaded, this method will call the completion block synchronously, otherwise it
    will begin a graph request to update `userProfile` and then call the completion block when finished.
    */
-  func loadProfile(completion: ((Result<UserProfile, Error>) -> Void)? = nil) {
+  func loadProfile(completion: ((UserProfileResult) -> Void)? = nil) {
     guard let token = accessTokenProvider.currentAccessToken else {
       completion?(.failure(CoreError.accessTokenRequired))
       return
@@ -156,7 +159,7 @@ class UserProfileService: UserProfileProviding {
    */
   func loadProfile(
     withToken token: AccessToken,
-    completion: ((Result<UserProfile, Error>) -> Void)? = nil
+    completion: ((UserProfileResult) -> Void)? = nil
     ) {
     let request = GraphRequest(
       graphPath: GraphPath.me,
@@ -280,7 +283,7 @@ class UserProfileService: UserProfileProviding {
   func fetchProfileImage(
     for identifier: String = GraphPath.me.description,
     sizingConfiguration configuration: ImageSizingConfiguration,
-    completion: @escaping (Result<UIImage, Error>) -> Void
+    completion: @escaping (UserProfileImageResult) -> Void
     ) {
     // Access token is required to fetch a profile image but only for the 'me' path
     switch identifier == GraphPath.me.description &&
