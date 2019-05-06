@@ -16,34 +16,47 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-/**
- Represents a target defined in App Link metadata, consisting of at least
- a `URL`, and optionally an App Store ID and name.
- */
-struct AppLinkTarget: Hashable, Decodable {
-  /// The URL prefix for this app link target
-  let url: URL
+enum SampleRemoteAppLink {
+  static let sourceURL = SampleURL.valid
+  static let webURL = SampleURL.valid(withPath: "web")
 
-  /// The application identifier for the app store
-  let appIdentifier: String?
+  static let iOSDetail = RemoteAppLinkDetail(
+    idiom: .iOS,
+    targets: [
+      SampleRemoteAppLinkTarget.valid()
+    ]
+  )
 
-  /// The name of the application
-  let appName: String?
+  static let emptyDetails = RemoteAppLink(
+    sourceURLString: sourceURL.absoluteString,
+    details: [],
+    webURL: webURL
+  )
 
-  let shouldFallback: Bool
+  static let invalidSourceURLString = RemoteAppLink(
+    sourceURLString: "^not_valid",
+    details: [iOSDetail],
+    webURL: webURL
+  )
 
-  /// Creates an AppLinkTarget with a `URL` and an optional name and identifier
-  init(
-    url: URL,
-    appIdentifier: String? = nil,
-    appName: String? = nil,
-    shouldFallback: Bool = false
-    ) {
-    self.url = url
-    self.appIdentifier = appIdentifier
-    self.appName = appName
-    self.shouldFallback = shouldFallback
+  static let noValidURLS = RemoteAppLink(
+    sourceURLString: "^not_valid",
+    details: [iOSDetail],
+    webURL: nil
+  )
+
+  static func valid(
+    sourceURLString: String = sourceURL.absoluteString,
+    details: [RemoteAppLinkDetail] = [],
+    webURL: URL = webURL
+    ) -> RemoteAppLink {
+    return RemoteAppLink(
+      sourceURLString: sourceURLString,
+      details: details,
+      webURL: webURL
+    )
   }
 }
