@@ -1,0 +1,9 @@
+{
+  "ios": [
+    {
+      "app_name": "Example",
+      "app_store_id": "456",
+      "url": "example://things/1234567890"
+    }
+  ]
+}

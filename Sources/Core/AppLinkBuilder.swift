@@ -18,32 +18,21 @@
 
 import Foundation
 
-/**
- Represents a target defined in App Link metadata, consisting of at least
- a `URL`, and optionally an App Store ID and name.
- */
-struct AppLinkTarget: Hashable, Decodable {
-  /// The URL prefix for this app link target
-  let url: URL
+enum AppLinkBuilder {
+  static func build(from remoteAppLink: RemoteAppLink) -> AppLink? {
+    guard let url = URL(string: remoteAppLink.sourceURLString) else {
+      return nil
+    }
 
-  /// The application identifier for the app store
-  let appIdentifier: String?
+    let remoteTargets = remoteAppLink.details.flatMap { $0.targets }
 
-  /// The name of the application
-  let appName: String?
+    let targets: Set<AppLinkTarget> = Set(remoteTargets.compactMap(AppLinkTargetBuilder.build))
 
-  let shouldFallback: Bool
-
-  /// Creates an AppLinkTarget with a `URL` and an optional name and identifier
-  init(
-    url: URL,
-    appIdentifier: String? = nil,
-    appName: String? = nil,
-    shouldFallback: Bool = false
-    ) {
-    self.url = url
-    self.appIdentifier = appIdentifier
-    self.appName = appName
-    self.shouldFallback = shouldFallback
+    return AppLink(
+      sourceURL: url,
+      targets: targets,
+      webURL: remoteAppLink.webURL,
+      isBackToReferrer: false
+    )
   }
 }

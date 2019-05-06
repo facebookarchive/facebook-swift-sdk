@@ -18,32 +18,40 @@
 
 import Foundation
 
-/**
- Represents a target defined in App Link metadata, consisting of at least
- a `URL`, and optionally an App Store ID and name.
- */
-struct AppLinkTarget: Hashable, Decodable {
-  /// The URL prefix for this app link target
-  let url: URL
+/// An idiom-targets pairing used for constructing AppLinks
+struct RemoteAppLinkDetail: Decodable {
+  let idiom: AppLinkIdiom
+  let targets: Set<RemoteAppLinkTarget>
 
-  /// The application identifier for the app store
-  let appIdentifier: String?
-
-  /// The name of the application
-  let appName: String?
-
-  let shouldFallback: Bool
-
-  /// Creates an AppLinkTarget with a `URL` and an optional name and identifier
   init(
-    url: URL,
-    appIdentifier: String? = nil,
-    appName: String? = nil,
-    shouldFallback: Bool = false
+    idiom: AppLinkIdiom,
+    targets: Set<RemoteAppLinkTarget>
     ) {
-    self.url = url
-    self.appIdentifier = appIdentifier
-    self.appName = appName
-    self.shouldFallback = shouldFallback
+    self.idiom = idiom
+    self.targets = targets
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: AppLinkIdiom.self)
+
+    guard let idiomRawValue = container.allKeys.first?.rawValue,
+      let idiom = AppLinkIdiom(rawValue: idiomRawValue)
+      else {
+        throw DecodingError.missingIdiom
+    }
+
+    self.idiom = idiom
+
+    switch try? container.decode(Set<RemoteAppLinkTarget>.self, forKey: idiom) {
+    case nil:
+      self.targets = []
+
+    case let .some(targets):
+      self.targets = targets
+    }
+  }
+
+  enum DecodingError: Error {
+    case missingIdiom
   }
 }

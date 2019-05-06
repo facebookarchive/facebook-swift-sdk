@@ -16,34 +16,20 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-/**
- Represents a target defined in App Link metadata, consisting of at least
- a `URL`, and optionally an App Store ID and name.
- */
-struct AppLinkTarget: Hashable, Decodable {
-  /// The URL prefix for this app link target
-  let url: URL
-
-  /// The application identifier for the app store
-  let appIdentifier: String?
-
-  /// The name of the application
-  let appName: String?
-
-  let shouldFallback: Bool
-
-  /// Creates an AppLinkTarget with a `URL` and an optional name and identifier
+// TODO: Consider adding initializer to internal. Really do not want to do this but may
+// be the only way to silence this error.
+// See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
+extension RemoteAppLink {
   init(
-    url: URL,
-    appIdentifier: String? = nil,
-    appName: String? = nil,
-    shouldFallback: Bool = false
+    sourceURLString: String,
+    details: [RemoteAppLinkDetail],
+    webURL: URL?
     ) {
-    self.url = url
-    self.appIdentifier = appIdentifier
-    self.appName = appName
-    self.shouldFallback = shouldFallback
+    self.sourceURLString = sourceURLString
+    self.details = details
+    self.webURL = webURL
   }
 }
