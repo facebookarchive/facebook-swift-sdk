@@ -20,10 +20,24 @@
 
 import Foundation
 
-struct FakeBundle: InfoDictionaryProviding {
-  let infoDictionary: [String: Any?]
+class FakeBundle: InfoDictionaryProviding {
+  var infoDictionary: [String: Any?]
+  private(set) var lastCapturedKey: String?
+  private(set) var capturedKeys = [String]()
+
+  init(infoDictionary: [String: Any?]) {
+    self.infoDictionary = infoDictionary
+  }
 
   func object(forInfoDictionaryKey key: String) -> Any? {
+    // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
+    lastCapturedKey = key
+    capturedKeys.append(key)
     return infoDictionary[key] as Any?
+  }
+
+  func reset() {
+    lastCapturedKey = nil
+    infoDictionary = [:]
   }
 }

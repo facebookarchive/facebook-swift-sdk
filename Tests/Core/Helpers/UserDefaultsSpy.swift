@@ -22,13 +22,16 @@
 import Foundation
 
 class UserDefaultsSpy: UserDefaults {
+  private let suiteName: String
   let userDefaults: UserDefaults?
 
   var capturedValues = [String: Any]()
   var capturedDataRetrievalKey: String?
   var capturedStringRetrievalKey: String?
+  var capturedObjectRetrievalKey: String?
 
   init(name: String) {
+    self.suiteName = name
     self.userDefaults = UserDefaults(suiteName: name)
 
     super.init(suiteName: name)!
@@ -49,5 +52,19 @@ class UserDefaultsSpy: UserDefaults {
   override func string(forKey defaultName: String) -> String? {
     capturedStringRetrievalKey = defaultName
     return userDefaults?.string(forKey: defaultName)
+  }
+
+  override func object(forKey defaultName: String) -> Any? {
+    capturedObjectRetrievalKey = defaultName
+    return userDefaults?.object(forKey: defaultName)
+  }
+
+  func reset() {
+    removeSuite(named: suiteName)
+    removePersistentDomain(forName: suiteName)
+    capturedValues = [String: Any]()
+    capturedDataRetrievalKey = nil
+    capturedStringRetrievalKey = nil
+    capturedObjectRetrievalKey = nil
   }
 }

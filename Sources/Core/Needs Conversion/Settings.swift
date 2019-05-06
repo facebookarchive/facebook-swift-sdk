@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import UIKit
 
 // This will eventually be replaced by the rewrite of FBSDKSettings
 // for now it is needed as a dependency of AccessTokenWallet and GraphRequest
@@ -33,10 +33,7 @@ protocol SettingsManaging {
 }
 
 class Settings: SettingsManaging {
-  private enum PListKeys {
-    static let domainPrefix: String = "FacebookDomainPrefix"
-    static let loggingBehaviors: String = "FacebookLoggingBehavior"
-  }
+  static let loggingBehaviorsPlistKey: String = "FacebookLoggingBehavior"
 
   var accessTokenCache: AccessTokenCaching?
 
@@ -54,6 +51,59 @@ class Settings: SettingsManaging {
   // TODO: There is a very good chance this will be needed when we start injecting settings various places
   static let shared = Settings()
 
+  private let bundle: InfoDictionaryProviding
+  let store: DataPersisting
+
+  /**
+   The Facebook App Identifier used by the SDK
+
+   If not explicitly set, the default will be read from the application's plist under the key: *FacebookAppID*.
+   */
+  var appIdentifier: String? {
+    didSet {
+      guard TokenString(value: appIdentifier) != nil else {
+        appIdentifier = oldValue
+        return
+      }
+    }
+  }
+
+  /**
+   The Client Token
+   This is needed for certain API calls when made anonymously. i.e. without a user-based access token.
+
+   The Facebook App's "client token", which, for a given appid can be found in the Security
+   section of the Advanced tab of the Facebook App settings found
+   at <https://developers.facebook.com/apps/[your-app-id]>
+
+   If not explicitly set, the default will be read from the application's plist under the key: *FacebookClientToken*.
+   */
+  var clientToken: String? {
+    didSet {
+      guard TokenString(value: clientToken) != nil else {
+        clientToken = oldValue
+        return
+      }
+    }
+  }
+
+  /**
+   The Facebook Display Name used by the SDK.
+
+   This should match the Display Name that has been set for the app with the corresponding Facebook App ID,
+   in the Facebook App Dashboard.
+
+   If not explicitly set, the default will be read from the application's plist under the key: *FacebookDisplayName*.
+   */
+  var displayName: String? {
+    didSet {
+      guard TokenString(value: displayName) != nil else {
+        displayName = oldValue
+        return
+      }
+    }
+  }
+
   /**
    The Facebook domain part. This can be used to change the Facebook domain
    (e.g. "beta") so that requests will be sent to `graph.beta.facebook.com`
@@ -61,7 +111,104 @@ class Settings: SettingsManaging {
    This value will be read from the application's plist (FacebookDomainPart)
    or may be explicitly set.
    */
-  var domainPrefix: String?
+  var domainPrefix: String? {
+    didSet {
+      guard TokenString(value: domainPrefix) != nil else {
+        domainPrefix = oldValue
+        return
+      }
+    }
+  }
+
+  /**
+   The quality of JPEG images sent to Facebook from the SDK,
+   expressed as a value from 0.0 to 1.0 with 0.0 being the most compressed (lowest quality)
+   and 1.0 being the least compressed (highest quality)
+
+   If not explicitly set, the default is 0.9.
+
+   @see [UIImageJPEGRepresentation](https://developer.apple.com/documentation/uikit/uiimage/1624115-jpegdata)
+   */
+  var jpegCompressionQuality: CGFloat {
+    didSet {
+      guard BoundedCGFloat(
+        value: jpegCompressionQuality,
+        lowerBound: 0,
+        upperBound: 1
+        )?.value != nil
+        else {
+          jpegCompressionQuality = oldValue
+          return
+      }
+    }
+  }
+
+  /**
+   The default url scheme suffix used for sessions.
+
+   If not explicitly set, the default will be read from the application's plist
+   under the key: *FacebookUrlSchemeSuffix*.
+   */
+  var urlSchemeSuffix: String? {
+    didSet {
+      guard TokenString(value: urlSchemeSuffix) != nil else {
+        urlSchemeSuffix = oldValue
+        return
+      }
+    }
+  }
+
+  /**
+   Controls sdk auto initialization.
+   Defaults to true if not explicitly set
+   */
+  var isAutoInitializationEnabled: Bool {
+    get {
+      return value(for: .autoInitEnabled) ?? true
+    }
+    set {
+      cache(newValue, forProperty: .autoInitEnabled)
+    }
+  }
+
+  /**
+   Controls the auto logging of basic app events, such as activateApp and deactivateApp.
+   If not explicitly set, the default is true
+   */
+  var isAutoLogAppEventsEnabled: Bool {
+    get {
+      return value(for: .autoLogAppEventsEnabled) ?? true
+    }
+    set {
+      cache(newValue, forProperty: .autoLogAppEventsEnabled)
+    }
+  }
+
+  /**
+   Controls whether advertiser identifier collection is enabled
+   If not explicitly set, the default is true
+   */
+  var isAdvertiserIdentifierCollectionEnabled: Bool {
+    get {
+      return value(for: .advertiserIDCollectionEnabled) ?? true
+    }
+    set {
+      cache(newValue, forProperty: .advertiserIDCollectionEnabled)
+    }
+  }
+
+  /**
+   Controls the fb_codeless_debug logging event
+   If not explicitly set, the default is false
+   */
+  var isCodelessDebugLogEnabled: Bool {
+    get {
+      return value(for: .codelessDebugLogEnabled) ?? false
+    }
+    set {
+      cache(newValue, forProperty: .codelessDebugLogEnabled)
+    }
+  }
 
   /**
    The current Facebook SDK logging behaviors.
@@ -82,37 +229,90 @@ class Settings: SettingsManaging {
    */
   var loggingBehaviors: Set<LoggingBehavior>
 
-  init(bundle: InfoDictionaryProviding = Bundle.main) {
+  init(
+    bundle: InfoDictionaryProviding = Bundle.main,
+    store: DataPersisting = UserDefaults.standard
+    ) {
+    self.bundle = bundle
+    self.store = store
+
     loggingBehaviors = [.developerErrors]
+    jpegCompressionQuality = 0.9
 
     setBehaviors(from: bundle)
-    setDomainPrefix(from: bundle)
+
+    // Non-persisted fields have values that are drawn from the plist
+    appIdentifier = TokenString(value: value(for: .appIdentifier))?.value
+    clientToken = TokenString(value: value(for: .clientToken))?.value
+    displayName = TokenString(value: value(for: .displayName))?.value
+    domainPrefix = TokenString(value: value(for: .domainPrefix))?.value
+    urlSchemeSuffix = TokenString(value: value(for: .urlSchemeSuffix))?.value
+
+    if let jpegCompressionQuality = BoundedCGFloat(
+      value: value(for: .jpegCompressionQuality),
+      lowerBound: 0,
+      upperBound: 1
+      )?.value {
+      self.jpegCompressionQuality = jpegCompressionQuality
+    }
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
-    guard let rawValues = bundle.object(forInfoDictionaryKey: PListKeys.loggingBehaviors)
+    guard let rawValues = bundle.object(forInfoDictionaryKey: Settings.loggingBehaviorsPlistKey)
       as? [String] else {
         return
     }
 
     let behaviors = rawValues.compactMap { LoggingBehavior(rawValue: $0) }
 
-    switch behaviors.isEmpty {
-    case true:
-      self.loggingBehaviors = [.developerErrors]
-
-    case false:
-      self.loggingBehaviors = Set(behaviors)
-    }
+    loggingBehaviors = behaviors.isEmpty ? [.developerErrors] : Set(behaviors)
   }
 
-  private func setDomainPrefix(from bundle: InfoDictionaryProviding) {
-    guard let prefix = bundle.object(forInfoDictionaryKey: PListKeys.domainPrefix) as? String,
-      !prefix.isEmpty
-      else {
-        return
+  private func value<T>(for property: PropertyStorageKey) -> T? {
+    guard property.isCacheEnabled else {
+      return valueFromPlist(for: property)
     }
 
-    domainPrefix = prefix
+    return store.object(forKey: property.rawValue) as? T ??
+      valueFromPlist(for: property)
+  }
+
+  private func valueFromPlist<T>(for property: PropertyStorageKey) -> T? {
+    return bundle.object(forInfoDictionaryKey: property.rawValue) as? T
+  }
+
+  private func cache(_ value: Any, forProperty property: PropertyStorageKey) {
+    store.set(value, forKey: property.rawValue)
+  }
+
+  enum PropertyStorageKey: String {
+    case advertiserIDCollectionEnabled = "FacebookAdvertiserIDCollectionEnabled"
+    case appIdentifier = "FacebookAppID"
+    case autoInitEnabled = "FacebookAutoInitEnabled"
+    case autoLogAppEventsEnabled = "FacebookAutoLogAppEventsEnabled"
+    case clientToken = "FacebookClientToken"
+    case codelessDebugLogEnabled = "FacebookCodelessDebugLogEnabled"
+    case displayName = "FacebookDisplayName"
+    case domainPrefix = "FacebookDomainPrefix"
+    case jpegCompressionQuality = "FacebookJpegCompressionQuality"
+    case urlSchemeSuffix = "FacebookUrlSchemeSuffix"
+
+    var isCacheEnabled: Bool {
+      switch self {
+      case .advertiserIDCollectionEnabled,
+           .autoInitEnabled,
+           .autoLogAppEventsEnabled,
+           .codelessDebugLogEnabled:
+        return true
+
+      case .appIdentifier,
+           .clientToken,
+           .displayName,
+           .domainPrefix,
+           .jpegCompressionQuality,
+           .urlSchemeSuffix:
+        return false
+      }
+    }
   }
 }
