@@ -47,33 +47,6 @@ class AppLinkServiceTests: XCTestCase {
 
   // MARK: - Request
 
-  // ?fields=app_links.fields(ios,iphone)&ids=http://facebook.com
-  // assert has correct top field of app_links
-  // assert has edge fields of ios and potentially idiom
-  // assert has all the urls in utf8 encoded strings
-
-  func testRequestWithForSingleURL() {
-    let expectedQueryItems = [
-      URLQueryItem(name: "fields", value: "app_links.fields(ios)"),
-      URLQueryItem(name: "ids", value: "\(SampleURL.valid.absoluteString)")
-    ]
-
-    let request = service.request(for: SampleURL.valid)
-
-    validate(request: request, expectedQueryItems: expectedQueryItems)
-  }
-
-  func testRequestWithForSingleURLWithSpecifiedIdiom() {
-    let expectedQueryItems = [
-      URLQueryItem(name: "fields", value: "app_links.fields(ios,iphone)"),
-      URLQueryItem(name: "ids", value: "\(SampleURL.valid.absoluteString)")
-    ]
-
-    let request = service.request(for: SampleURL.valid, userInterfaceIdiom: .phone)
-
-    validate(request: request, expectedQueryItems: expectedQueryItems)
-  }
-
   func testRequestForMultipleURLs() {
     let expectedQueryItems = [
       URLQueryItem(name: "fields", value: "app_links.fields(ios)"),
@@ -226,7 +199,7 @@ class AppLinkServiceTests: XCTestCase {
 
     _ = service.appLinks(for: [urlOne, urlTwo]) { result in
       guard case let .success(linksDictionary) = result else {
-        return XCTFail("This is impossible. Cannot have a failure for a call that is stubbed to success")
+        return XCTFail("This is impossible. Cannot have a failure for a call that is stubbed to a valid success value")
       }
       XCTAssertTrue(linksDictionary.keys.contains(urlOne),
                     "Should return previously fetched and cached urls in the callback")
@@ -248,6 +221,7 @@ class AppLinkServiceTests: XCTestCase {
   }
 
   func testFetchingWithFullyCached() {
+    let expectation = self.expectation(description: name)
     fakeConnection.stubGetObjectCompletionResult = .success([SampleRemoteAppLink.valid()])
     _ = service.appLinks(for: [SampleURL.valid]) { _ in }
 
@@ -257,9 +231,20 @@ class AppLinkServiceTests: XCTestCase {
     // the closure for the request runs synchronously and the cache is set by the time the method returns.
     // This would not work with an actual network request.
 
-    _ = service.appLinks(for: [SampleURL.valid]) { _ in }
+    _ = service.appLinks(for: [SampleURL.valid]) { result in
+      guard case let .success(linksDictionary) = result else {
+        return XCTFail("This is impossible. Cannot have a failure for a call that is stubbed to a valid success value")
+      }
+
+      XCTAssertTrue(linksDictionary.keys.contains(SampleURL.valid),
+                    "Should return previously fetched and cached urls in the callback")
+      expectation.fulfill()
+    }
+
     XCTAssertNil(fakeConnection.capturedGetObjectGraphRequest,
                  "Should not make a request for previously fetched urls")
+
+    waitForExpectations(timeout: 1, handler: nil)
   }
 
   // MARK: - Handling Results

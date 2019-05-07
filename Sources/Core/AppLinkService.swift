@@ -43,18 +43,6 @@ class AppLinkService {
   /**
    Convenience method for generating a `GraphRequest` for fetching `AppLink`s
 
-   - Parameter url: a `URL` to fetch links for
-   - Parameter userInterfaceIdiom: a `UIUserInterfaceIdiom` with a default value of `unspecified`
-
-   - Returns: a `GraphRequest`
-   */
-  func request(for url: URL, userInterfaceIdiom: UIUserInterfaceIdiom = .unspecified) -> GraphRequest {
-    return request(for: [url], userInterfaceIdiom: userInterfaceIdiom)
-  }
-
-  /**
-   Convenience method for generating a `GraphRequest` for fetching `AppLink`s
-
    - Parameter urls: an ordered list of `URL`s to fetch links for
    - Parameter userInterfaceIdiom: a `UIUserInterfaceIdiom` with a default value of `unspecified`
 
@@ -77,7 +65,7 @@ class AppLinkService {
     ]
 
     return GraphRequest(
-      graphPath: .root,
+      graphPath: .other(""),
       parameters: parameters,
       accessToken: accessTokenProvider.currentAccessToken,
       flags: GraphRequest.Flags.doNotInvalidateTokenOnError
@@ -111,6 +99,7 @@ class AppLinkService {
     }
 
     guard !uncachedURLs.isEmpty else {
+      completion(.success(cache))
       return cache
     }
 

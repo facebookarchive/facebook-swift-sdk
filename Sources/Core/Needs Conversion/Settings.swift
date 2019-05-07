@@ -35,7 +35,7 @@ protocol SettingsManaging {
 
 class Settings: SettingsManaging {
   // TODO: Remove when updating settings to get this from plist
-  var clientToken: String? = nil
+  var clientToken: String?
 
   private enum PListKeys {
     static let domainPrefix: String = "FacebookDomainPrefix"
