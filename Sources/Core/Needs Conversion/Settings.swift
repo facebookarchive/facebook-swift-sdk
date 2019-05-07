@@ -24,6 +24,7 @@ import Foundation
 // TODO: Make sure this protocol makes sense in terms of the reworked class
 protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
+  var clientToken: String? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }
@@ -33,6 +34,9 @@ protocol SettingsManaging {
 }
 
 class Settings: SettingsManaging {
+  // TODO: Remove when updating settings to get this from plist
+  var clientToken: String? = nil
+
   private enum PListKeys {
     static let domainPrefix: String = "FacebookDomainPrefix"
     static let loggingBehaviors: String = "FacebookLoggingBehavior"

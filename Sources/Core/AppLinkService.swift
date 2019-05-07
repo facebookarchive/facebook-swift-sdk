@@ -18,19 +18,26 @@
 
 import UIKit
 
+typealias AppLinkDictionary = [URL: AppLink]
+typealias AppLinkResult = (Result<AppLinkDictionary, Error>) -> Void
+
 class AppLinkService {
   private(set) var graphConnectionProvider: GraphConnectionProviding
   private(set) var logger: Logging
   private(set) var accessTokenProvider: AccessTokenProviding
+  private(set) var clientTokenProvider: ClientTokenProviding
+  private var cache: AppLinkDictionary = [:]
 
   init(
     graphConnectionProvider: GraphConnectionProviding = GraphConnectionProvider(),
     logger: Logging = Logger(),
-    accessTokenProvider: AccessTokenProviding = AccessTokenWallet.shared
+    accessTokenProvider: AccessTokenProviding = AccessTokenWallet.shared,
+    clientTokenProvider: ClientTokenProviding = Settings.shared
     ) {
     self.graphConnectionProvider = graphConnectionProvider
     self.logger = logger
     self.accessTokenProvider = accessTokenProvider
+    self.clientTokenProvider = clientTokenProvider
   }
 
   /**
@@ -78,10 +85,77 @@ class AppLinkService {
     )
   }
 
+  /**
+   Synchronously returns a cached dictionary of type `[URL: AppLink]`
+   while asynchronously resolving `AppLink` data for a given array of `URL`s.
+
+   - Parameter urls: The list of `URL`s to resolve into dictionary of type `[URL: AppLink]`.
+   - Parameter completion: The completion handler that will return a `[URL: AppLink]` Result Type
+
+   - Returns a dictionary of type `[URL: AppLink]`
+   */
+  func appLinks(
+    for urls: [URL],
+    userInterfaceIdiom: UIUserInterfaceIdiom = .unspecified,
+    completion: @escaping AppLinkResult
+    ) -> AppLinkDictionary {
+    guard accessTokenProvider.currentAccessToken != nil ||
+      clientTokenProvider.clientToken != nil else {
+        logger.log(.developerErrors, "A user access token or clientToken is required to fetch AppLinks")
+        completion(.failure(AppLinkService.FetchError.tokenRequired))
+        return cache
+    }
+
+    let uncachedURLs = urls.filter { url in
+      !cache.keys.contains { $0 == url }
+    }
+
+    guard !uncachedURLs.isEmpty else {
+      return cache
+    }
+
+    let request = self.request(for: uncachedURLs, userInterfaceIdiom: userInterfaceIdiom)
+
+    _ = graphConnectionProvider
+      .graphRequestConnection()
+      .getObject(
+        [RemoteAppLink].self,
+        for: request
+      ) { [weak self] result in
+        guard let self = self else {
+          return
+        }
+        switch result {
+        case let .failure(error):
+          completion(.failure(error))
+
+        case let .success(remoteLinks):
+          for remote in remoteLinks {
+            guard let link = AppLinkBuilder.build(from: remote) else {
+              completion(.failure(ParsingError.invalidRemoteAppLink))
+              return
+            }
+
+            self.cache.updateValue(link, forKey: link.sourceURL)
+          }
+          completion(.success(self.cache))
+        }
+      }
+    return cache
+  }
+
   private enum Keys {
     static let fields: String = "fields"
     static let appLinks: String = "app_links"
     static let ios: String = "ios"
     static let ids: String = "ids"
+  }
+
+  enum FetchError: FBError {
+    case tokenRequired
+  }
+
+  enum ParsingError: FBError {
+    case invalidRemoteAppLink
   }
 }

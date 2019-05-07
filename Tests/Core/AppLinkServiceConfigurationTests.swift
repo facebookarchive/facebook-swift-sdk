@@ -17,22 +17,28 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import XCTest
 
-class FakeSettings: SettingsManaging, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class AppLinkServiceConfigurationTests: XCTestCase {
+  let service = AppLinkService()
 
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var clientToken: String?
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(service.graphConnectionProvider is GraphConnectionProvider,
+                  "An app link service should have the expected concrete implementation for its graph connection provider")
+  }
 
-  init(
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = []
-    ) {
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
+  func testLoggerDependency() {
+    XCTAssertTrue(service.logger is Logger,
+                  "An app link service should have the expected concrete implementation for its logging dependency")
+  }
+
+  func testClientTokenProviderDependency() {
+    XCTAssertTrue(service.clientTokenProvider is Settings,
+                  "An app link service should have the expected concrete implementation for its client token providing dependency")
+  }
+
+  func testAccessTokenProviderDependency() {
+    XCTAssertTrue(service.accessTokenProvider is AccessTokenWallet,
+                  "An app link service should have the expected concrete implementation for its access token providing dependency")
   }
 }
