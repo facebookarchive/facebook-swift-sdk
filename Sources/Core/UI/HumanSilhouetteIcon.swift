@@ -18,7 +18,7 @@
 
 import UIKit
 
-enum HumanSilhouetteIcon {
+enum HumanSilhouetteIcon: Icon {
   // swiftlint:disable:next object_literal
   static let placeholderImageColor = UIColor(
     red: 157.0 / 255.0,
@@ -135,24 +135,5 @@ enum HumanSilhouetteIcon {
       transform: scaleTranform
     )
     return path
-  }
-
-  static func image(size: CGSize, color: UIColor = .white) -> UIImage? {
-    guard size != .zero else {
-      return nil
-    }
-
-    defer {
-      UIGraphicsEndImageContext()
-    }
-
-    let scale = UIScreen.main.scale
-    UIGraphicsBeginImageContextWithOptions(size, false, scale)
-    let context = UIGraphicsGetCurrentContext()
-    context?.addPath(path(withSize: size))
-    context?.setFillColor(color.cgColor)
-    context?.fillPath()
-
-    return UIGraphicsGetImageFromCurrentImageContext()
   }
 }
