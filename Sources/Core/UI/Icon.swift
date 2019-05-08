@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -18,3 +17,32 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
+
+protocol Icon {
+  static func image(size: CGSize, scale: CGFloat, color: UIColor) -> UIImage?
+  static func path(withSize size: CGSize) -> CGPath
+}
+
+extension Icon {
+  static func image(
+    size: CGSize,
+    scale: CGFloat = UIScreen.main.scale,
+    color: UIColor = .white
+    ) -> UIImage? {
+    guard size != .zero else {
+      return nil
+    }
+
+    defer {
+      UIGraphicsEndImageContext()
+    }
+
+    UIGraphicsBeginImageContextWithOptions(size, false, scale)
+    let context = UIGraphicsGetCurrentContext()
+    context?.addPath(path(withSize: size))
+    context?.setFillColor(color.cgColor)
+    context?.fillPath()
+
+    return UIGraphicsGetImageFromCurrentImageContext()
+  }
+}
