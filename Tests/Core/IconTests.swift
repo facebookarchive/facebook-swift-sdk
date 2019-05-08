@@ -47,6 +47,8 @@ class IconTests: XCTestCase {
     )
   }
 
+  // MARK: Human Silhouette Icon
+
   func testPlaceholderImageColor() {
     guard let image = HumanSilhouetteIcon.image(
       size: CGSize(width: 100, height: 100),
@@ -64,6 +66,29 @@ class IconTests: XCTestCase {
       image.pngData(),
       customIcon?.pngData(),
       "Should create the expected image for the size and color"
+    )
+  }
+
+  // MARK: Logo Icon
+
+  func testLogo() {
+    guard let drawnImage = Logo.image(
+      size: CGSize(width: 100, height: 100),
+      color: .red
+      ) else {
+      return XCTFail("Should be able to provide a logo with a valid size")
+    }
+
+    let storedImage = UIImage(
+      named: "redLogo.png",
+      in: Bundle(for: IconTests.self),
+      compatibleWith: nil
+    )
+
+    XCTAssertEqual(
+      drawnImage.pngData(),
+      storedImage?.pngData(),
+      "Should create the expected image"
     )
   }
 }
