@@ -19,12 +19,16 @@
 import UIKit
 
 protocol Icon {
-  static func image(size: CGSize, color: UIColor) -> UIImage?
+  static func image(size: CGSize, scale: CGFloat, color: UIColor) -> UIImage?
   static func path(withSize size: CGSize) -> CGPath
 }
 
 extension Icon {
-  static func image(size: CGSize, color: UIColor = .white) -> UIImage? {
+  static func image(
+    size: CGSize,
+    scale: CGFloat = UIScreen.main.scale,
+    color: UIColor = .white
+    ) -> UIImage? {
     guard size != .zero else {
       return nil
     }
@@ -33,7 +37,6 @@ extension Icon {
       UIGraphicsEndImageContext()
     }
 
-    let scale = UIScreen.main.scale
     UIGraphicsBeginImageContextWithOptions(size, false, scale)
     let context = UIGraphicsGetCurrentContext()
     context?.addPath(path(withSize: size))

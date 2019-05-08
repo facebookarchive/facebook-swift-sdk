@@ -22,6 +22,17 @@ import XCTest
 class IconTests: XCTestCase {
   let size = CGSize(width: 100, height: 100)
 
+  func testDefaultScale() {
+    guard let image = HumanSilhouetteIcon.image(
+      size: CGSize(width: 100, height: 100)
+      ) else {
+        return XCTFail("Should be able to provide a placeholder image with a valid size and color")
+    }
+
+    XCTAssertEqual(image.scale, UIScreen.main.scale,
+                   "Icons should default their scale to the scale of the main screen")
+  }
+
   func testImageWithoutSize() {
     XCTAssertNil(HumanSilhouetteIcon.image(size: .zero),
                  "Should not create an image if provided with a zero size")
@@ -30,6 +41,7 @@ class IconTests: XCTestCase {
   func testSystemColor() {
     guard let image = HumanSilhouetteIcon.image(
       size: CGSize(width: 100, height: 100),
+      scale: 2.0,
       color: .red
       ) else {
         return XCTFail("Should be able to provide a placeholder image with a valid size and color")
@@ -52,6 +64,7 @@ class IconTests: XCTestCase {
   func testPlaceholderImageColor() {
     guard let image = HumanSilhouetteIcon.image(
       size: CGSize(width: 100, height: 100),
+      scale: 2.0,
       color: HumanSilhouetteIcon.placeholderImageColor
       ) else {
         return XCTFail("Should be able to provide a placeholder image with a valid size and color")
@@ -74,6 +87,7 @@ class IconTests: XCTestCase {
   func testLogo() {
     guard let drawnImage = Logo.image(
       size: CGSize(width: 100, height: 100),
+      scale: 2.0,
       color: .red
       ) else {
       return XCTFail("Should be able to provide a logo with a valid size")
