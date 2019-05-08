@@ -73,6 +73,7 @@ enum Permission: Hashable, Codable, ExpressibleByStringLiteral, CustomStringConv
     self.init(stringLiteral: val)
   }
 
+  // swiftlint:disable:next cyclomatic_complexity
   init(stringLiteral value: String) {
     let keyVal = CodingKeys(rawValue: value) ?? CodingKeys(rawValue: value.camelCased())
 

@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length file_length
+// swiftlint:disable type_body_length file_length force_unwrapping
 
 @testable import FacebookCore
 import XCTest
@@ -31,10 +31,17 @@ class UserProfileServiceTests: XCTestCase {
   private var userDefaultsSpy: UserDefaultsSpy!
   private var store: UserProfileStore!
   private var wallet: AccessTokenWallet!
+  private var sizingConfiguration: ImageSizingConfiguration!
+  private let scale = UIScreen.main.scale
 
   override func setUp() {
     super.setUp()
 
+    sizingConfiguration = ImageSizingConfiguration(
+      format: .normal,
+      contentMode: .scaleAspectFit,
+      size: CGSize(width: 20, height: 20)
+    )
     fakeConnection = FakeGraphRequestConnection()
     fakeLogger = FakeLogger()
     fakeGraphConnectionProvider = FakeGraphConnectionProvider(connection: fakeConnection)
@@ -367,18 +374,45 @@ class UserProfileServiceTests: XCTestCase {
 
   // MARK: - Image URL
 
-  func testNormalImageURL() {
+  func testImageURLDefaultProfileIdentifier() {
     let profile = SampleUserProfile.valid()
+    service.setCurrent(profile)
 
+    guard let url = service.imageURL(sizingConfiguration: sizingConfiguration) else {
+      return XCTFail("Should be able to create an image url")
+    }
+
+    XCTAssertEqual(url.path, "/v3.2/me/picture",
+                   "A url created for fetching an image should use a default identifier to fetch an image for")
+  }
+
+  func testImageURLDefaultProfileAlternateIdentifier() {
+    let profile = SampleUserProfile.valid()
+    service.setCurrent(profile)
+
+    guard let url = service.imageURL(
+      for: "user123",
+      sizingConfiguration: sizingConfiguration) else {
+      return XCTFail("Should be able to create an image url")
+    }
+
+    XCTAssertEqual(url.path, "/v3.2/user123/picture",
+                   "A url created for fetching an image should allow for a specific identifier to fetch an image for")
+  }
+
+  func testNormalImageURL() {
+    let expectedHeight = UInt(sizingConfiguration.size.height)
+    let expectedWidth = UInt(sizingConfiguration.size.width)
+    let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
 
     let expectedQueryItems = [
       URLQueryItem(name: "type", value: "normal"),
-      URLQueryItem(name: "width", value: String(describing: 20)),
-      URLQueryItem(name: "height", value: String(describing: 20))
+      URLQueryItem(name: "width", value: String(describing: expectedWidth)),
+      URLQueryItem(name: "height", value: String(describing: expectedHeight))
     ]
 
-    guard let url = service.imageURL(for: .normal(height: 20, width: 20)),
+    guard let url = service.imageURL(sizingConfiguration: sizingConfiguration),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false
@@ -387,6 +421,8 @@ class UserProfileServiceTests: XCTestCase {
         return XCTFail("Should be able to get query items from url")
     }
 
+    XCTAssertEqual(url.path, "/v3.2/me/picture",
+                   "A url created for fetching an image should have the correct path")
     XCTAssertEqual(
       queryItems.sorted { $0.name < $1.name },
       expectedQueryItems.sorted { $0.name < $1.name },
@@ -396,6 +432,12 @@ class UserProfileServiceTests: XCTestCase {
 
   func testSquareImageURL() {
     let profile = SampleUserProfile.valid()
+    sizingConfiguration = ImageSizingConfiguration(
+      format: .square,
+      contentMode: .scaleAspectFit,
+      size: CGSize(width: 20, height: 20),
+      scale: 1.0
+    )
 
     service.setCurrent(profile)
 
@@ -405,7 +447,7 @@ class UserProfileServiceTests: XCTestCase {
       URLQueryItem(name: "height", value: String(describing: 20))
     ]
 
-    guard let url = service.imageURL(for: .square(height: 20)),
+    guard let url = service.imageURL(sizingConfiguration: sizingConfiguration),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false
@@ -414,6 +456,8 @@ class UserProfileServiceTests: XCTestCase {
         return XCTFail("Should be able to get query items from url")
     }
 
+    XCTAssertEqual(url.path, "/v3.2/me/picture",
+                   "A url created for fetching an image should have the correct path")
     XCTAssertEqual(
       queryItems.sorted { $0.name < $1.name },
       expectedQueryItems.sorted { $0.name < $1.name },
@@ -421,7 +465,237 @@ class UserProfileServiceTests: XCTestCase {
     )
   }
 
-  // MARK: Refreshing
+  // MARK: - Image Request
+
+  func testNormalImageRequest() {
+    let profile = SampleUserProfile.valid()
+    service.setCurrent(profile)
+
+    let expectedHeight = UInt(sizingConfiguration.size.height)
+    let expectedWidth = UInt(sizingConfiguration.size.width)
+
+    let expectedParameters: [String: AnyHashable] = [
+      "type": ImageSizingFormat.normal,
+      "width": expectedWidth,
+      "height": expectedHeight
+    ]
+    let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
+
+    XCTAssertEqual(request.parameters, expectedParameters,
+                   "Creating a request with a sizing configuration should provide the expected dimensions to the request parameters")
+  }
+
+  func testSquareImageRequest() {
+    let profile = SampleUserProfile.valid()
+    service.setCurrent(profile)
+
+    sizingConfiguration = ImageSizingConfiguration(
+      format: .square,
+      contentMode: .scaleAspectFit,
+      size: CGSize(width: 20, height: 80),
+      scale: 1.0
+    )
+    let expectedParameters: [String: AnyHashable] = [
+      "type": ImageSizingFormat.square,
+      "width": 20,
+      "height": 20
+    ]
+    let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
+
+    XCTAssertEqual(request.parameters, expectedParameters,
+                   "Creating a request with a sizing configuration should provide the expected dimensions to the request parameters")
+  }
+
+  // MARK: - Fetching Image
+
+  func testFetchingImageWithMissingAccessTokenAndDefaultIdentifier() {
+    let expectation = self.expectation(description: name)
+
+    service.fetchProfileImage(
+      sizingConfiguration: sizingConfiguration
+    ) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully fetch a profile image with a missing access token if the profile identifier is me")
+
+      case let .failure(error):
+        if case CoreError.accessTokenRequired = error {
+          expectation.fulfill()
+        } else {
+          XCTFail("Should inform the user that an access token is required to fetch a profile image when the identifier is me")
+        }
+      }
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func testFetchingImageWithMissingAccessTokenAndCustomIdentifier() {
+    service.fetchProfileImage(
+      for: "abc123",
+      sizingConfiguration: sizingConfiguration
+    ) { result in
+      switch result {
+      case .success:
+        break
+
+      case .failure:
+        XCTFail("Should not immediately fail to fetch the profile image for a given user id since this is public information")
+      }
+    }
+  }
+
+  func testFetchingProfileImageForDefaultIdentifier() {
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    // Request image
+    _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { _ in }
+
+    // Assert
+    XCTAssertEqual(fakeConnection.capturedGetObjectGraphRequest?.graphPath.description, "me/picture")
+  }
+
+  func testFetchingProfileImageWithCustomIdentifier() {
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    // Request image
+    _ = service.fetchProfileImage(
+      for: "user123",
+      sizingConfiguration: sizingConfiguration
+    ) { _ in }
+
+    // Assert
+    XCTAssertEqual(fakeConnection.capturedGetObjectGraphRequest?.graphPath.description, "user123/picture")
+  }
+
+  func testFetchingProfileFailure() {
+    let expectation = self.expectation(description: name)
+
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    // Stub a fetch result
+    fakeConnection.stubGetObjectCompletionResult = .failure(GraphRequestConnectionError.missingData)
+
+    // Request image
+    _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
+      switch result {
+      case .success:
+        XCTFail("Should fail on a graph connection failure")
+
+      case let .failure(error as GraphRequestConnectionError):
+        XCTAssertEqual(error, .missingData,
+                       "Should return the exact error that was received from the failed graph connection")
+
+      case .failure:
+        XCTFail("Should return known errors on failure")
+      }
+      expectation.fulfill()
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func testFetchingProfileImageEmptyData() {
+    let expectation = self.expectation(description: name)
+    let data = Data()
+
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    // Stub a fetch result
+    fakeConnection.stubGetObjectCompletionResult = .success(data)
+
+    // Request image
+    _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
+      switch result {
+      case .success:
+        XCTFail("Should fail to convert empty data into an image")
+
+      case let .failure(error as UserProfileService.ImageFetchError):
+        XCTAssertEqual(error, .invalidImageData,
+                       "Should return the correct error for failing to fetch an image")
+
+      case .failure:
+        XCTFail("Should return known errors on failure")
+      }
+      expectation.fulfill()
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func testFetchingProfileImageBadData() {
+    let expectation = self.expectation(description: name)
+    let data = "Not an image".data(using: .utf8)
+
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    // Stub a fetch result
+    fakeConnection.stubGetObjectCompletionResult = .success(data)
+
+    // Request image
+    _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
+      switch result {
+      case .success:
+        XCTFail("Should fail to convert empty data into an image")
+
+      case let .failure(error as UserProfileService.ImageFetchError):
+        XCTAssertEqual(error, .invalidImageData,
+                       "Should return the correct error for failing to fetch an image")
+
+      case .failure:
+        XCTFail("Should return known errors on failure")
+      }
+      expectation.fulfill()
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  func testSuccessfullyFetchingProfileImage() {
+    let expectation = self.expectation(description: name)
+    let profile = SampleUserProfile.valid()
+    service.setCurrent(profile)
+
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
+
+    // Stub a fetch result
+    let image = HumanSilhouetteIcon.image(
+      size: sizingConfiguration.size,
+      color: .red
+    )!
+
+    let imageData = image.pngData()
+    fakeConnection.stubGetObjectCompletionResult = .success(imageData)
+
+    // Request image
+    _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
+      switch result {
+      case let .success(fetchedImage):
+        XCTAssertEqual(image.pngData(), fetchedImage.pngData(),
+                       "Should convert the fetched image data into an image to return")
+
+      case .failure:
+        XCTFail("Should not fail to convert valid image data into a result")
+      }
+      expectation.fulfill()
+    }
+
+    waitForExpectations(timeout: 1, handler: nil)
+  }
+
+  // MARK: - Refreshing
 
   func testRefreshingStaleProfileOnAccessTokenChange() {
     service = UserProfileService(
