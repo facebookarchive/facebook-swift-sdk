@@ -46,10 +46,10 @@ class GatekeeperServiceTests: XCTestCase {
     wallet = AccessTokenWallet()
 
     service = GatekeeperService(
-      graphConnectionProvider: fakeGraphConnectionProvider, // GraphConnectionProviding = GraphConnectionProvider(),
-      logger: fakeLogger, // Logging = Logger(),
-      store: store, // UserProfileStore = UserProfileStore(),
-      accessTokenProvider: wallet, // AccessTokenProviding = AccessTokenWallet.shared
+      graphConnectionProvider: fakeGraphConnectionProvider,
+      logger: fakeLogger,
+      store: store,
+      accessTokenProvider: wallet,
       settings: fakeSettings
     )
   }
