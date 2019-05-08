@@ -18,17 +18,4 @@
 
 import Foundation
 
-enum ImageSizingFormat: CustomStringConvertible {
-  case normal(height: UInt, width: UInt)
-  case square(height: UInt)
-
-  var description: String {
-    switch self {
-    case .normal:
-      return "normal"
-
-    case .square:
-      return "square"
-    }
-  }
-}
+struct SampleError: Error {}
