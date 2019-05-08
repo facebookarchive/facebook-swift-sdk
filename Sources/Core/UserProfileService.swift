@@ -16,7 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import UIKit
+
+typealias UserProfileResult = Result<UserProfile, Error>
+typealias UserProfileImageResult = Result<UIImage, Error>
+
+protocol UserProfileProviding {
+  func fetchProfileImage(
+    for identifier: String,
+    sizingConfiguration: ImageSizingConfiguration,
+    completion: @escaping (UserProfileImageResult) -> Void
+  )
+}
 
 /**
  A service for retrieving an immutable Facebook profile
@@ -30,7 +41,7 @@ import Foundation
 
  You can use this class to build your own `ProfilePictureView` or in place of typical requests to "/me".
  */
-class UserProfileService {
+class UserProfileService: UserProfileProviding {
   private let oneDayInSeconds = TimeInterval(60 * 60 * 24)
   private(set) var graphConnectionProvider: GraphConnectionProviding
   private(set) var logger: Logging
@@ -128,7 +139,7 @@ class UserProfileService {
    If the profile is already loaded, this method will call the completion block synchronously, otherwise it
    will begin a graph request to update `userProfile` and then call the completion block when finished.
    */
-  func loadProfile(completion: ((Result<UserProfile, Error>) -> Void)? = nil) {
+  func loadProfile(completion: ((UserProfileResult) -> Void)? = nil) {
     guard let token = accessTokenProvider.currentAccessToken else {
       completion?(.failure(CoreError.accessTokenRequired))
       return
@@ -148,12 +159,12 @@ class UserProfileService {
    */
   func loadProfile(
     withToken token: AccessToken,
-    completion: ((Result<UserProfile, Error>) -> Void)? = nil
+    completion: ((UserProfileResult) -> Void)? = nil
     ) {
     let request = GraphRequest(
       graphPath: GraphPath.me,
       parameters: ["fields": "id,first_name,middle_name,last_name,name,link"],
-      accessToken: AccessTokenWallet.shared.currentAccessToken,
+      accessToken: accessTokenProvider.currentAccessToken,
       flags: GraphRequest.Flags.doNotInvalidateTokenOnError
         .union(GraphRequest.Flags.disableErrorRecovery)
     )
@@ -180,38 +191,125 @@ class UserProfileService {
 
   /**
    A convenience method for returning a complete `NSURL` for retrieving the user's profile image.
+   - Parameter identifier: The identifier to use for retrieving a user's profile image. Defaults
+   to "me"
    - Parameter mode: The picture mode which includes associated values to specifies dimensions
 
    - Returns an optional URL
    */
-  func imageURL(for mode: ImageSizingFormat) -> URL? {
+  func imageURL(
+    for identifier: String = GraphPath.me.description,
+    sizingConfiguration: ImageSizingConfiguration
+    ) -> URL? {
     let queryItems: [URLQueryItem]
+    let size = sizingConfiguration.size
 
-    switch mode {
-    case let .normal(height, width):
+    switch sizingConfiguration.format {
+    case .normal:
       queryItems = URLQueryItemBuilder.build(
         from: [
-          "type": mode.description,
-          "height": String(height),
-          "width": String(width)
+          "type": sizingConfiguration.format,
+          "height": Int(size.height),
+          "width": Int(size.width)
         ]
       )
 
-    case let .square(height):
+    case .square:
       queryItems = URLQueryItemBuilder.build(
         from: [
-        "type": mode.description,
-        "height": String(height),
-        "width": String(height)
+        "type": sizingConfiguration.format,
+        "height": Int(size.height),
+        "width": Int(size.height)
         ]
       )
     }
 
     return URLBuilder().buildURL(
       withHostPrefix: "graph",
-      path: GraphPath.picture.description,
+      path: GraphPath.picture(identifier: identifier).description,
       queryItems: queryItems
     )
+  }
+
+  /**
+    Creates a graph request to use for fetching a user's profile image
+
+   - Parameter identifier: The identifier to use for retrieving a user's profile image. Defaults
+   to "me"
+   - Parameter sizingConfiguration: A configuration object used for specifying dimensions
+   and tracking whether an image should fit for a given `UIView.ContentMode`
+
+   - Returns a GraphRequest to use in a GraphRequestConnection
+   */
+  func imageRequest(
+    for identifier: String = GraphPath.me.description,
+    sizingConfiguration: ImageSizingConfiguration
+    ) -> GraphRequest {
+    let parameters: [String: AnyHashable]
+    let size = sizingConfiguration.size
+
+    switch sizingConfiguration.format {
+    case .normal:
+      parameters = [
+        "type": sizingConfiguration.format,
+        "height": Int(size.height),
+        "width": Int(size.width)
+      ]
+
+    case .square:
+      parameters = [
+        "type": sizingConfiguration.format,
+        "height": Int(size.height),
+        "width": Int(size.height)
+      ]
+    }
+
+    return GraphRequest(
+      graphPath: .picture(identifier: identifier),
+      parameters: parameters,
+      accessToken: accessTokenProvider.currentAccessToken
+    )
+  }
+
+  /**
+   Fetches a profile image for a user identifier.
+
+   - Parameter identifier: A String to identify the user to fetch a profile for.
+    Defaults to 'me'
+    - Parameter sizingConfiguration: A configuration object used for specifying
+   dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
+   - Parameter completion: A completion that takes a Result Type with a success of UIImage and a failure of Error
+   */
+  func fetchProfileImage(
+    for identifier: String = GraphPath.me.description,
+    sizingConfiguration configuration: ImageSizingConfiguration,
+    completion: @escaping (UserProfileImageResult) -> Void
+    ) {
+    // Access token is required to fetch a profile image but only for the 'me' path
+    switch identifier == GraphPath.me.description &&
+      accessTokenProvider.currentAccessToken == nil {
+    case true:
+      completion(.failure(CoreError.accessTokenRequired))
+
+    case false:
+      break
+    }
+
+    let request = imageRequest(for: identifier, sizingConfiguration: configuration)
+
+    // TODO: this shoudl probably return a task that can be cancelled
+    _ = graphConnectionProvider.graphRequestConnection().getObject(Data.self, for: request) { result in
+      switch result {
+      case let .success(data):
+        guard let image = UIImage(data: data, scale: configuration.scale) else {
+          return completion(.failure(ImageFetchError.invalidImageData))
+        }
+        completion(.success(image))
+
+      case let .failure(error):
+        completion(.failure(error))
+      }
+    }
   }
 
   enum NotificationKeys {
@@ -228,5 +326,9 @@ class UserProfileService {
      If there is no new profile, the key will not be present.
      */
     static let FBSDKProfileChangeNewKey: String = "FBSDKProfileNew"
+  }
+
+  enum ImageFetchError: Error {
+    case invalidImageData
   }
 }

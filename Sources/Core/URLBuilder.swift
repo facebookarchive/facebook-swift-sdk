@@ -19,6 +19,7 @@
 import Foundation
 
 struct URLBuilder {
+  static let graphAPIHostPrefix: String = "graph"
   static let hostname: String = "facebook.com"
   let settings: SettingsManaging
 
@@ -52,10 +53,14 @@ struct URLBuilder {
   /**
    Convenience initializer for building a `URL` from a `GraphRequest`
    */
-  func buildURL(for request: GraphRequest) -> URL? {
+  func buildURL(
+    for request: GraphRequest,
+    withHostPrefix hostPrefix: String = URLBuilder.graphAPIHostPrefix
+    ) -> URL? {
     let queryItems = URLQueryItemBuilder.build(from: request.parameters)
 
     return self.buildURL(
+      withHostPrefix: hostPrefix,
       path: request.graphPath.description,
       queryItems: queryItems
     )
