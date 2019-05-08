@@ -24,7 +24,7 @@ struct RemoteAppLink: Decodable {
   let webURL: URL?
 
   init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let container = try decoder.container(keyedBy: VariantCodingKey.self)
 
     guard let sourceURLKey = container.allKeys.first else {
         throw DecodingError.missingIdentifier
@@ -113,28 +113,5 @@ struct RemoteAppLink: Decodable {
   enum DetailsContainerKey: String, CodingKey {
     case appLinks = "app_links"
     case identifier = "id"
-  }
-
-  enum CodingKeys: CodingKey {
-    case custom(value: String)
-
-    var stringValue: String {
-      switch self {
-      case let .custom(value):
-        return value
-      }
-    }
-
-    init?(stringValue: String) {
-      self = .custom(value: stringValue)
-    }
-
-    var intValue: Int? {
-      return nil
-    }
-
-    init?(intValue: Int) {
-      return nil
-    }
   }
 }
