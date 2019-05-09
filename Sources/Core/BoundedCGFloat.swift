@@ -16,28 +16,23 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import UIKit
 
-import Foundation
+struct BoundedCGFloat {
+  let value: CGFloat
 
-class FakeBundle: InfoDictionaryProviding {
-  var infoDictionary: [String: Any?]
-  private(set) var lastCapturedKey: String?
-  private(set) var capturedKeys = [String]()
+  init?(
+    value: CGFloat?,
+    lowerBound: CGFloat,
+    upperBound: CGFloat
+    ) {
+    guard let value = value,
+      lowerBound < upperBound,
+      (lowerBound ... upperBound).contains(value)
+      else {
+        return nil
+    }
 
-  init(infoDictionary: [String: Any?]) {
-    self.infoDictionary = infoDictionary
-  }
-
-  func object(forInfoDictionaryKey key: String) -> Any? {
-    // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
-    lastCapturedKey = key
-    capturedKeys.append(key)
-    return infoDictionary[key] as Any?
-  }
-
-  func reset() {
-    lastCapturedKey = nil
-    infoDictionary = [:]
+    self.value = value
   }
 }

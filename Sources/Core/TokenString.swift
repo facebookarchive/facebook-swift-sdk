@@ -16,28 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
-
 import Foundation
 
-class FakeBundle: InfoDictionaryProviding {
-  var infoDictionary: [String: Any?]
-  private(set) var lastCapturedKey: String?
-  private(set) var capturedKeys = [String]()
+struct TokenString {
+  private(set) var value: String
 
-  init(infoDictionary: [String: Any?]) {
-    self.infoDictionary = infoDictionary
-  }
+  init?(value: String?) {
+    guard let value = value,
+      !value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+      else {
+        return nil
+    }
 
-  func object(forInfoDictionaryKey key: String) -> Any? {
-    // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
-    lastCapturedKey = key
-    capturedKeys.append(key)
-    return infoDictionary[key] as Any?
-  }
-
-  func reset() {
-    lastCapturedKey = nil
-    infoDictionary = [:]
+    self.value = value
   }
 }
