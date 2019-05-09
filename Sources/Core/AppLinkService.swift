@@ -19,7 +19,7 @@
 import UIKit
 
 typealias AppLinkDictionary = [URL: AppLink]
-typealias AppLinkResult = (Result<AppLinkDictionary, Error>) -> Void
+typealias AppLinkResult = (Result<AppLinkDictionary, FBError>) -> Void
 
 class AppLinkService {
   private(set) var graphConnectionProvider: GraphConnectionProviding
