@@ -17,27 +17,33 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import XCTest
 
-import Foundation
-
-class FakeBundle: InfoDictionaryProviding {
-  var infoDictionary: [String: Any?]
-  private(set) var lastCapturedKey: String?
-  private(set) var capturedKeys = [String]()
-
-  init(infoDictionary: [String: Any?]) {
-    self.infoDictionary = infoDictionary
+class TokenStringTests: XCTestCase {
+  func testCreatingWithNilString() {
+    XCTAssertNil(
+      TokenString(value: nil),
+      "Should not create a token string from a nil value"
+    )
   }
 
-  func object(forInfoDictionaryKey key: String) -> Any? {
-    // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
-    lastCapturedKey = key
-    capturedKeys.append(key)
-    return infoDictionary[key] as Any?
+  func testCreatingWithEmptyString() {
+    XCTAssertNil(
+      TokenString(value: ""),
+      "Should not create a token string from an empty string"
+    )
   }
 
-  func reset() {
-    lastCapturedKey = nil
-    infoDictionary = [:]
+  func testCreatingWithWhitespaceOnlyString() {
+    XCTAssertNil(
+      TokenString(value: " "),
+      "Should not create a token string from a whitespace only string"
+    )
+  }
+  func testCreatingWithValidString() {
+    XCTAssertNotNil(
+      TokenString(value: "Foo"),
+      "Should create a valid token string from a non-empty string"
+    )
   }
 }

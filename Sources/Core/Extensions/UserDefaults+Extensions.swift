@@ -24,4 +24,5 @@ protocol DataPersisting {
   func set(_ value: Any?, forKey defaultName: String)
   func data(forKey defaultName: String) -> Data?
   func string(forKey defaultName: String) -> String?
+  func object(forKey defaultName: String) -> Any?
 }

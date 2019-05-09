@@ -153,6 +153,10 @@
 		F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48A74B42239BE66007192F6 /* LocalizableStrings.strings */; };
 		F48BDD8B22470128003CCA5A /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48BDD8A22470128003CCA5A /* SettingsTests.swift */; };
 		F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0822807F510020C282 /* TokenStringTests.swift */; };
+		F4932E0B22808DB50020C282 /* TokenString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0A22808DB50020C282 /* TokenString.swift */; };
+		F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */; };
+		F4932E0F2280A1CA0020C282 /* BoundedCGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
 		F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE42712245846A00E3B99C /* GraphPathTests.swift */; };
@@ -406,6 +410,10 @@
 		F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorStringTests.swift; sourceTree = "<group>"; };
 		F48A74B42239BE66007192F6 /* LocalizableStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = LocalizableStrings.strings; sourceTree = "<group>"; };
 		F48BDD8A22470128003CCA5A /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
+		F4932E0822807F510020C282 /* TokenStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStringTests.swift; sourceTree = "<group>"; };
+		F4932E0A22808DB50020C282 /* TokenString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenString.swift; sourceTree = "<group>"; };
+		F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloatTests.swift; sourceTree = "<group>"; };
+		F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloat.swift; sourceTree = "<group>"; };
 		F49FA479222880FE0008CAD6 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
@@ -578,6 +586,7 @@
 				F4C3C52F2277991C004B487E /* AppLinkIdiom.swift */,
 				F4C3C556227B6686004B487E /* AppLinkTarget.swift */,
 				F4C3C54C227A443E004B487E /* AppLinkTargetBuilder.swift */,
+				F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */,
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
 				F44F566D224D344300D027FF /* GraphAPIVersion.swift */,
@@ -607,6 +616,7 @@
 				524A49B8225EA39300786C11 /* SecureStore.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
 				F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */,
+				F4932E0A22808DB50020C282 /* TokenString.swift */,
 				F4144C53224D0FA7006C8F9C /* URLBuilder.swift */,
 				F40739402231E4EB0018505A /* URLQueryItemBuilder.swift */,
 				F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */,
@@ -809,6 +819,7 @@
 				F4C3C552227B5B3E004B487E /* AppLinkTargetBuilderTests.swift */,
 				F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */,
 				F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */,
+				F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
@@ -856,6 +867,7 @@
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
 				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
 				F44847F8226928E300527D49 /* TestAssets.xcassets */,
+				F4932E0822807F510020C282 /* TokenStringTests.swift */,
 				F4144C51224D0F6C006C8F9C /* URLBuilderTests.swift */,
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
@@ -1216,6 +1228,7 @@
 				F4225DDF223F210E00F4DCFE /* ErrorConfigurationBuilder.swift in Sources */,
 				F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
+				F4932E0B22808DB50020C282 /* TokenString.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F46DCFD7227267F000EFE037 /* UserData.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
@@ -1276,6 +1289,7 @@
 				F44DB6B7222B07050083506E /* GraphRequestConnection.swift in Sources */,
 				F41640F6224C27A000842120 /* DeveloperErrorStrings.swift in Sources */,
 				F447151A2242DBEE0013495F /* URLSessionTaskProxy.swift in Sources */,
+				F4932E0F2280A1CA0020C282 /* BoundedCGFloat.swift in Sources */,
 				F4C3C557227B6686004B487E /* AppLinkTarget.swift in Sources */,
 				F406F8692282378E006B0D4E /* Logo.swift in Sources */,
 				F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */,
@@ -1305,6 +1319,7 @@
 			files = (
 				F48A74B12239B81B007192F6 /* DefaultErrorStringTests.swift in Sources */,
 				F447151C2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift in Sources */,
+				F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */,
 				F48A749822399C97007192F6 /* LocalizationsTests.swift in Sources */,
 				F4225DDD223F1FB700F4DCFE /* ErrorConfigurationEntryBuilderTests.swift in Sources */,
 				F45734D1222D9343001F806A /* AccessTokenCacheTests.swift in Sources */,
@@ -1323,6 +1338,7 @@
 				F4C32DA5223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift in Sources */,
 				F407393D2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift in Sources */,
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
+				F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */,
 				F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */,
 				F42E3C812267E5E800287DC4 /* UserProfileServiceTests.swift in Sources */,
 				F4C32D9B223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift in Sources */,
