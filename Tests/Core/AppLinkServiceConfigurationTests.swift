@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,19 +16,29 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-let FBSDKAppLinkDataParameterName = ""
-let FBSDKAppLinkTargetKeyName = ""
-let FBSDKAppLinkUserAgentKeyName = ""
-let FBSDKAppLinkExtrasKeyName = ""
-let FBSDKAppLinkVersionKeyName = ""
-let FBSDKAppLinkRefererAppLink = ""
-let FBSDKAppLinkRefererAppName = ""
-let FBSDKAppLinkRefererUrl = ""
+@testable import FacebookCore
+import XCTest
 
-extension FBSDKAppLink {
-    convenience init(sourceURL: URL?, targets: [FBSDKAppLinkTarget]?, webURL: URL?, isBackToReferrer: Bool) {
-    }
+class AppLinkServiceConfigurationTests: XCTestCase {
+  let service = AppLinkService()
 
-    //! return if this AppLink is to go back to referrer.
-    private(set) var backToReferrer = false
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(service.graphConnectionProvider is GraphConnectionProvider,
+                  "An app link service should have the expected concrete implementation for its graph connection provider")
+  }
+
+  func testLoggerDependency() {
+    XCTAssertTrue(service.logger is Logger,
+                  "An app link service should have the expected concrete implementation for its logging dependency")
+  }
+
+  func testClientTokenProviderDependency() {
+    XCTAssertTrue(service.clientTokenProvider is Settings,
+                  "An app link service should have the expected concrete implementation for its client token providing dependency")
+  }
+
+  func testAccessTokenProviderDependency() {
+    XCTAssertTrue(service.accessTokenProvider is AccessTokenWallet,
+                  "An app link service should have the expected concrete implementation for its access token providing dependency")
+  }
 }

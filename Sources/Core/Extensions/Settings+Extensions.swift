@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -19,20 +18,8 @@
 
 import Foundation
 
-/**
- Describes the callback for appLinkFromURLInBackground.
- @param appLink the FBSDKAppLink representing the deferred App Link
- @param error the error during the request, if any
-
- */
-typealias FBSDKAppLinkBlock = (FBSDKAppLink?, Error?) -> Void
-
-protocol FBSDKAppLinkResolving: NSObjectProtocol {
-    /**
-     Asynchronously resolves App Link data for a given URL.
-    
-     @param url The URL to resolve into an App Link.
-     @param handler The completion block that will return an App Link for the given URL.
-     */
-    func appLink(from PlacesResponseKey.url: URL?, handler: FBSDKAppLinkBlock)
+protocol ClientTokenProviding {
+  var clientToken: String? { get set }
 }
+
+extension Settings: ClientTokenProviding {}

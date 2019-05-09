@@ -24,6 +24,7 @@ import UIKit
 // TODO: Make sure this protocol makes sense in terms of the reworked class
 protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
+  var clientToken: String? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }

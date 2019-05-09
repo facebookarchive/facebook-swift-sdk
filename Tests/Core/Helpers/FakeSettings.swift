@@ -18,7 +18,7 @@
 
 @testable import FacebookCore
 
-class FakeSettings: SettingsManaging {
+class FakeSettings: SettingsManaging, ClientTokenProviding {
   static var isGraphErrorRecoveryEnabled: Bool = false
 
   var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
@@ -26,6 +26,7 @@ class FakeSettings: SettingsManaging {
   let graphApiDebugParameter: GraphApiDebugParameter
   var loggingBehaviors: Set<LoggingBehavior> = []
   var domainPrefix: String?
+  var clientToken: String?
 
   init(
     graphApiDebugParameter: GraphApiDebugParameter = .none,
