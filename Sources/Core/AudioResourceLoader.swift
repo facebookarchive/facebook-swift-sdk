@@ -66,7 +66,6 @@ struct AudioResourceLoader {
     return versionedDirectoryURL.appendingPathComponent(resource.name)
   }
 
-  @discardableResult
   mutating func load(resource: AudioResource.Type) throws -> SystemSoundID {
     switch cache[resource.name] {
     case let systemSoundIdentifier?:
@@ -83,7 +82,6 @@ struct AudioResourceLoader {
         try resource.data.write(to: url, options: .atomicWrite)
       }
 
-      // Creating the system sound
       var systemSoundIdentifier: SystemSoundID = 0
       let status = audioService.setSystemSoundIdentifier(
         with: url,
