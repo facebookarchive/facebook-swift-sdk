@@ -671,7 +671,7 @@ class UserProfileServiceTests: XCTestCase {
     wallet.setCurrent(token)
 
     // Stub a fetch result
-    let image = HumanSilhouetteIcon.image(
+    let image = HumanSilhouetteIcon().image(
       size: sizingConfiguration.size,
       color: .red
     )!

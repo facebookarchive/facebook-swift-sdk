@@ -19,11 +19,11 @@
 @testable import FacebookCore
 import XCTest
 
-class IconTests: XCTestCase {
+class DrawableTests: XCTestCase {
   let size = CGSize(width: 100, height: 100)
 
   func testDefaultScale() {
-    guard let image = HumanSilhouetteIcon.image(
+    guard let image = HumanSilhouetteIcon().image(
       size: CGSize(width: 100, height: 100)
       ) else {
         return XCTFail("Should be able to provide a placeholder image with a valid size and color")
@@ -34,12 +34,12 @@ class IconTests: XCTestCase {
   }
 
   func testImageWithoutSize() {
-    XCTAssertNil(HumanSilhouetteIcon.image(size: .zero),
+    XCTAssertNil(HumanSilhouetteIcon().image(size: .zero),
                  "Should not create an image if provided with a zero size")
   }
 
   func testSystemColor() {
-    guard let image = HumanSilhouetteIcon.image(
+    guard let image = HumanSilhouetteIcon().image(
       size: CGSize(width: 100, height: 100),
       scale: 2.0,
       color: .red
@@ -48,7 +48,7 @@ class IconTests: XCTestCase {
     }
     let redIcon = UIImage(
       named: "redSilhouette.png",
-      in: Bundle(for: IconTests.self),
+      in: Bundle(for: DrawableTests.self),
       compatibleWith: nil
     )
 
@@ -62,7 +62,7 @@ class IconTests: XCTestCase {
   // MARK: Human Silhouette Icon
 
   func testPlaceholderImageColor() {
-    guard let image = HumanSilhouetteIcon.image(
+    guard let image = HumanSilhouetteIcon().image(
       size: CGSize(width: 100, height: 100),
       scale: 2.0,
       color: HumanSilhouetteIcon.placeholderImageColor
@@ -71,7 +71,7 @@ class IconTests: XCTestCase {
     }
     let customIcon = UIImage(
       named: "customColorSilhouette.png",
-      in: Bundle(for: IconTests.self),
+      in: Bundle(for: DrawableTests.self),
       compatibleWith: nil
     )
 
@@ -85,7 +85,7 @@ class IconTests: XCTestCase {
   // MARK: Logo Icon
 
   func testLogo() {
-    guard let drawnImage = Logo.image(
+    guard let drawnImage = Logo().image(
       size: CGSize(width: 100, height: 100),
       scale: 2.0,
       color: .red
@@ -95,7 +95,7 @@ class IconTests: XCTestCase {
 
     let storedImage = UIImage(
       named: "redLogo.png",
-      in: Bundle(for: IconTests.self),
+      in: Bundle(for: DrawableTests.self),
       compatibleWith: nil
     )
 

@@ -18,13 +18,13 @@
 
 import UIKit
 
-protocol Icon {
-  static func image(size: CGSize, scale: CGFloat, color: UIColor) -> UIImage?
-  static func path(withSize size: CGSize) -> CGPath
+protocol Drawable {
+  func image(size: CGSize, scale: CGFloat, color: UIColor) -> UIImage?
+  func path(withSize size: CGSize) -> CGPath
 }
 
-extension Icon {
-  static func image(
+extension Drawable {
+  func image(
     size: CGSize,
     scale: CGFloat = UIScreen.main.scale,
     color: UIColor = .white

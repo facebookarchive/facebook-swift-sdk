@@ -18,9 +18,9 @@
 
 import UIKit
 
-enum Logo: Icon {
-  // swiftlint:disable:next function_body_length
-  static func path(withSize size: CGSize) -> CGPath {
+struct Logo: Drawable {
+  // swiftlint:disable:next function_body_lengt
+  func path(withSize size: CGSize) -> CGPath {
     let scaleTranform = CGAffineTransform(
       scaleX: size.width / 136.0,
       y: size.height / 136.0
