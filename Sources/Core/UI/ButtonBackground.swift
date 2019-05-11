@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -19,6 +18,38 @@
 
 import UIKit
 
-/**
-  A base class for common SDK buttons.
- */
+struct ButtonBackground: Drawable {
+  let cornerRadius: CGFloat
+
+  func path(withSize size: CGSize) -> CGPath {
+    let path = CGMutablePath()
+
+    path.move(to: CGPoint(x: cornerRadius + 1, y: 0))
+    path.addArc(
+      tangent1End: CGPoint(x: size.width, y: 0),
+      tangent2End: CGPoint(x: size.width, y: cornerRadius),
+      radius: cornerRadius
+    )
+    path.addLine(to: CGPoint(x: size.width, y: cornerRadius + 1))
+    path.addArc(
+      tangent1End: CGPoint(x: size.width, y: size.height),
+      tangent2End: CGPoint(x: cornerRadius + 1, y: size.height),
+      radius: cornerRadius
+    )
+    path.addLine(to: CGPoint(x: cornerRadius, y: size.height))
+    path.addArc(
+      tangent1End: CGPoint(x: 0, y: size.height),
+      tangent2End: CGPoint(x: 0, y: cornerRadius + 1),
+      radius: cornerRadius
+    )
+    path.addLine(to: CGPoint(x: 0.0, y: cornerRadius))
+    path.addArc(
+      tangent1End: CGPoint(x: 0, y: 0),
+      tangent2End: CGPoint(x: cornerRadius, y: 0),
+      radius: cornerRadius
+    )
+    path.closeSubpath()
+
+    return path
+  }
+}

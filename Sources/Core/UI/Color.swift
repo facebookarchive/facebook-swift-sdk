@@ -18,30 +18,7 @@
 
 import UIKit
 
-protocol Drawable {
-  func path(withSize size: CGSize) -> CGPath
-}
-
-extension Drawable {
-  func image(
-    size: CGSize,
-    scale: CGFloat = UIScreen.main.scale,
-    color: UIColor = .white
-    ) -> UIImage? {
-    guard size != .zero else {
-      return nil
-    }
-
-    defer {
-      UIGraphicsEndImageContext()
-    }
-
-    UIGraphicsBeginImageContextWithOptions(size, false, scale)
-    let context = UIGraphicsGetCurrentContext()
-    context?.addPath(path(withSize: size))
-    context?.setFillColor(color.cgColor)
-    context?.fillPath()
-
-    return UIGraphicsGetImageFromCurrentImageContext()
-  }
+enum Color {
+  static let defaultButtonBackground = UIColor(red: 65.0 / 255.0, green: 93.0 / 255.0, blue: 174.0 / 255.0, alpha: 1)
+  static let defaultButtonBackgroundHighlighted = UIColor(red: 47.0 / 255.0, green: 71.0 / 255.0, blue: 122.0 / 255.0, alpha: 1)
 }
