@@ -674,7 +674,7 @@ class UserProfileServiceTests: XCTestCase {
     let image = HumanSilhouetteIcon().image(
       size: sizingConfiguration.size,
       color: .red
-    )!
+    )
 
     let imageData = image.pngData()
     fakeConnection.stubGetObjectCompletionResult = .success(imageData)

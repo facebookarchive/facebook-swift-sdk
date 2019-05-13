@@ -44,7 +44,7 @@ class ProfilePictureViewTests: XCTestCase {
     placeholderImageData = HumanSilhouetteIcon().image(
       size: frame.size,
       color: HumanSilhouetteIcon.placeholderImageColor
-      )?
+      )
       .pngData()
     createView()
     awaitInitialViewSetup()

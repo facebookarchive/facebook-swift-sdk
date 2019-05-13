@@ -27,21 +27,20 @@ extension Drawable {
     size: CGSize,
     scale: CGFloat = UIScreen.main.scale,
     color: UIColor = .white
-    ) -> UIImage? {
-    guard size != .zero else {
-      return nil
-    }
-
+    ) -> UIImage {
     defer {
       UIGraphicsEndImageContext()
     }
 
     UIGraphicsBeginImageContextWithOptions(size, false, scale)
-    let context = UIGraphicsGetCurrentContext()
-    context?.addPath(path(withSize: size))
-    context?.setFillColor(color.cgColor)
-    context?.fillPath()
+    guard let context = UIGraphicsGetCurrentContext() else {
+      return UIImage()
+    }
 
-    return UIGraphicsGetImageFromCurrentImageContext()
+    context.addPath(path(withSize: size))
+    context.setFillColor(color.cgColor)
+    context.fillPath()
+
+    return UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
   }
 }
