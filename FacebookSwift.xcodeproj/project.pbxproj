@@ -67,6 +67,9 @@
 		F4317E5B2286288200EBF926 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5A2286288200EBF926 /* Button.swift */; };
 		F4317E5F22862B8000EBF926 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5E22862B8000EBF926 /* Color.swift */; };
 		F4317E61228635EC00EBF926 /* ButtonBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E60228635EC00EBF926 /* ButtonBackground.swift */; };
+		F4317E9D2289B81300EBF926 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9C2289B81300EBF926 /* UIUtility.swift */; };
+		F4317E9F2289B96700EBF926 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9E2289B96700EBF926 /* Math.swift */; };
+		F4317EA12289C03B00EBF926 /* UIUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */; };
 		F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */; };
 		F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */; };
 		F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F52236FFA6007D3A34 /* FakeError.swift */; };
@@ -332,6 +335,9 @@
 		F4317E5A2286288200EBF926 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F4317E5E22862B8000EBF926 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F4317E60228635EC00EBF926 /* ButtonBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBackground.swift; sourceTree = "<group>"; };
+		F4317E9C2289B81300EBF926 /* UIUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtility.swift; sourceTree = "<group>"; };
+		F4317E9E2289B96700EBF926 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilityTests.swift; sourceTree = "<group>"; };
 		F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadataTests.swift; sourceTree = "<group>"; };
 		F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadata.swift; sourceTree = "<group>"; };
 		F432E9F52236FFA6007D3A34 /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
@@ -645,6 +651,7 @@
 				F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */,
 				F4020CF82283631E00710558 /* VariantCodingKey.swift */,
 				F4317E5A2286288200EBF926 /* Button.swift */,
+				F4317E9E2289B96700EBF926 /* Math.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -747,6 +754,7 @@
 				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
 				F4317E5E22862B8000EBF926 /* Color.swift */,
 				F4317E60228635EC00EBF926 /* ButtonBackground.swift */,
+				F4317E9C2289B81300EBF926 /* UIUtility.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -903,6 +911,7 @@
 				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 				F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */,
 				F4020CF62283556C00710558 /* VariantCodingKeyTests.swift */,
+				F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1254,6 +1263,7 @@
 				F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F4932E0B22808DB50020C282 /* TokenString.swift in Sources */,
+				F4317E9D2289B81300EBF926 /* UIUtility.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F46DCFD7227267F000EFE037 /* UserData.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
@@ -1301,6 +1311,7 @@
 				F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */,
 				F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */,
 				F4C3C54D227A443E004B487E /* AppLinkTargetBuilder.swift in Sources */,
+				F4317E9F2289B96700EBF926 /* Math.swift in Sources */,
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
 				F4C3C555227B651D004B487E /* AppLinkBuilder.swift in Sources */,
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
@@ -1434,6 +1445,7 @@
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
 				F4317E592286239300EBF926 /* ButtonTests.swift in Sources */,
+				F4317EA12289C03B00EBF926 /* UIUtilityTests.swift in Sources */,
 				F447151E2242FF010013495F /* LoggerTests.swift in Sources */,
 				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
 				F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */,
