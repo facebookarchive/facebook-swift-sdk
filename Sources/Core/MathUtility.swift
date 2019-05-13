@@ -28,4 +28,40 @@ enum MathUtility {
     )
     return CGSize(width: ceilWidth, height: ceilHeight)
   }
+
+  static func floor(for size: CGSize) -> CGSize {
+    let floorWidth = CGFloat(
+      floorf(Float(size.width))
+    )
+    let floorHeight = CGFloat(
+      floorf(Float(size.height))
+    )
+    return CGSize(width: floorWidth, height: floorHeight)
+  }
+
+  static func ceil(for point: CGPoint) -> CGPoint {
+    let ceilX = CGFloat(
+      ceilf(Float(point.x))
+    )
+    let ceilY = CGFloat(
+      ceilf(Float(point.y))
+    )
+    return CGPoint(
+      x: ceilX,
+      y: ceilY
+    )
+  }
+
+  static func floor(for point: CGPoint) -> CGPoint {
+    let floorX = CGFloat(
+      floorf(Float(point.x))
+    )
+    let floorY = CGFloat(
+      floorf(Float(point.y))
+    )
+    return CGPoint(
+      x: floorX,
+      y: floorY
+    )
+  }
 }
