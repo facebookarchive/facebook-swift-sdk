@@ -67,9 +67,9 @@
 		F4317E5B2286288200EBF926 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5A2286288200EBF926 /* Button.swift */; };
 		F4317E5F22862B8000EBF926 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5E22862B8000EBF926 /* Color.swift */; };
 		F4317E9B2288C4BF00EBF926 /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4317E9A2288C4BF00EBF926 /* ButtonView.xib */; };
-		F4317E9D2289B81300EBF926 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9C2289B81300EBF926 /* UIUtility.swift */; };
+		F4317E9D2289B81300EBF926 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */; };
 		F4317E9F2289B96700EBF926 /* MathUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9E2289B96700EBF926 /* MathUtility.swift */; };
-		F4317EA12289C03B00EBF926 /* UIUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */; };
+		F4317EA12289C03B00EBF926 /* CGFloatExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */; };
 		F4317EA32289DC7F00EBF926 /* MathUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317EA22289DC7F00EBF926 /* MathUtilityTests.swift */; };
 		F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */; };
 		F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */; };
@@ -140,6 +140,9 @@
 		F46DCFDD22734E7800EFE037 /* RemoteAppLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDC22734E7800EFE037 /* RemoteAppLinkTarget.swift */; };
 		F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */; };
 		F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFE0227364F500EFE037 /* AppLink.swift */; };
+		F46DDCBC228B49BB00BA7359 /* CGSizeExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */; };
+		F46DDCBE228B4A2200BA7359 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */; };
+		F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */; };
 		F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056D82232CEEF00BE526B /* FakeLogger.swift */; };
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
@@ -336,9 +339,9 @@
 		F4317E5A2286288200EBF926 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F4317E5E22862B8000EBF926 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F4317E9A2288C4BF00EBF926 /* ButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
-		F4317E9C2289B81300EBF926 /* UIUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtility.swift; sourceTree = "<group>"; };
+		F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		F4317E9E2289B96700EBF926 /* MathUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtility.swift; sourceTree = "<group>"; };
-		F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilityTests.swift; sourceTree = "<group>"; };
+		F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensionsTests.swift; sourceTree = "<group>"; };
 		F4317EA22289DC7F00EBF926 /* MathUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtilityTests.swift; sourceTree = "<group>"; };
 		F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadataTests.swift; sourceTree = "<group>"; };
 		F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadata.swift; sourceTree = "<group>"; };
@@ -409,6 +412,9 @@
 		F46DCFDC22734E7800EFE037 /* RemoteAppLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAppLinkTarget.swift; sourceTree = "<group>"; };
 		F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkTests.swift; sourceTree = "<group>"; };
 		F46DCFE0227364F500EFE037 /* AppLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLink.swift; sourceTree = "<group>"; };
+		F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensionTests.swift; sourceTree = "<group>"; };
+		F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		F47056D82232CEEF00BE526B /* FakeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLogger.swift; sourceTree = "<group>"; };
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -755,7 +761,6 @@
 				F4C3C5242273CABC004B487E /* ImageSizingConfiguration.swift */,
 				F406F8682282378E006B0D4E /* Logo.swift */,
 				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
-				F4317E9C2289B81300EBF926 /* UIUtility.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -814,6 +819,8 @@
 			children = (
 				F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */,
 				F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */,
+				F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */,
+				F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */,
 				F44DB6B3222B022E0083506E /* NotificationCenter+Extensions.swift */,
 				F44DB6AF222B019D0083506E /* NotificationName+Extensions.swift */,
 				F447152A22440B610013495F /* ProcessInfo+Extensions.swift */,
@@ -854,6 +861,8 @@
 				F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */,
 				F4317E582286239300EBF926 /* ButtonTests.swift */,
 				F4317E9A2288C4BF00EBF926 /* ButtonView.xib */,
+				F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */,
+				F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
@@ -901,9 +910,9 @@
 				F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */,
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
 				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
+				F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */,
 				F44847F8226928E300527D49 /* TestAssets.xcassets */,
 				F4932E0822807F510020C282 /* TokenStringTests.swift */,
-				F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */,
 				F4144C51224D0F6C006C8F9C /* URLBuilderTests.swift */,
 				F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */,
 				F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */,
@@ -1267,7 +1276,7 @@
 				F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F4932E0B22808DB50020C282 /* TokenString.swift in Sources */,
-				F4317E9D2289B81300EBF926 /* UIUtility.swift in Sources */,
+				F4317E9D2289B81300EBF926 /* CGFloat+Extensions.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F46DCFD7227267F000EFE037 /* UserData.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
@@ -1307,6 +1316,7 @@
 				F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */,
 				F42E3C972268C57300287DC4 /* AccessTokenWallet+Extensions.swift in Sources */,
 				F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */,
+				F46DDCBE228B4A2200BA7359 /* CGSize+Extensions.swift in Sources */,
 				F42E3C7A2267E45100287DC4 /* RemoteUserProfile.swift in Sources */,
 				F4225DE5223F4F5100F4DCFE /* ErrorStrings.swift in Sources */,
 				523CAE4B225EC94C00D196C3 /* String+Extensions.swift in Sources */,
@@ -1426,6 +1436,7 @@
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
 				F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
+				F46DDCBC228B49BB00BA7359 /* CGSizeExtensionTests.swift in Sources */,
 				F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */,
 				F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */,
 				F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */,
@@ -1448,10 +1459,11 @@
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
 				F4317E592286239300EBF926 /* ButtonTests.swift in Sources */,
-				F4317EA12289C03B00EBF926 /* UIUtilityTests.swift in Sources */,
+				F4317EA12289C03B00EBF926 /* CGFloatExtensionsTests.swift in Sources */,
 				F447151E2242FF010013495F /* LoggerTests.swift in Sources */,
 				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
 				F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */,
+				F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */,
 				F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */,
 				F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */,
 				F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */,

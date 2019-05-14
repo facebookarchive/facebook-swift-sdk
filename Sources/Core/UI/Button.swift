@@ -169,8 +169,10 @@ class Button: UIButton {
       break
 
     case false:
-      guard let label = titleLabel else {
-        return .zero
+      guard let label = titleLabel,
+        let text = label.text
+        else {
+          return .zero
       }
       if label.textAlignment == NSTextAlignment.center {
         // if the text is centered, we need to adjust the frame for the titleLabel
@@ -178,8 +180,7 @@ class Button: UIButton {
         // without adding extra blank space to the right when unnecessary
         // 1. the text fits centered within the button without colliding with the image (imagePaddingWidth)
         // 2. the text would run into the image, so adjust the insets to effectively left align it (textPaddingWidth)
-        let titleSize = UIUtility.textSize(
-          text: label.text ?? "",
+        let titleSize = text.textSize(
           font: label.font,
           constrainingSize: titleRect.size,
           lineBreakMode: label.lineBreakMode
@@ -248,7 +249,7 @@ class Button: UIButton {
     let font = titleLabel?.font ?? Button.defaultFont
 
     let height = self.height(for: font)
-    let constrainedContentSize = UIUtility.size(from: size, withInsets: contentEdgeInsets)
+    let constrainedContentSize = size.inset(by: contentEdgeInsets)
 
     let titleSize: CGSize
     switch (title, titleLabel) {
@@ -256,8 +257,7 @@ class Button: UIButton {
       titleSize = .zero
 
     case let (title?, titleLabel?):
-      titleSize = UIUtility.textSize(
-        text: title,
+      titleSize = title.textSize(
         font: font,
         constrainingSize: constrainedContentSize,
         lineBreakMode: titleLabel.lineBreakMode
@@ -272,7 +272,7 @@ class Button: UIButton {
       height: height
     )
 
-    return UIUtility.size(contentSize, outsetBy: contentEdgeInsets)
+    return contentSize.outset(by: contentEdgeInsets)
   }
 
   /**

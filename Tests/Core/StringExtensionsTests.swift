@@ -16,168 +16,12 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable function_body_length type_body_length switch_case_on_newline
+// swiftlint:disable function_body_length switch_case_on_newline
 
 @testable import FacebookCore
 import XCTest
 
-class UIUtilityTests: XCTestCase {
-  func testSizeFromSizeWithInsets() {
-    let sizes = [
-      CGSize(width: 300, height: 500),
-      CGSize(width: 20, height: 20),
-      CGSize(width: 1, height: 511),
-      CGSize.zero,
-      CGSize(width: 0, height: 1000),
-      CGSize(width: 10, height: 0)
-    ]
-
-    let expectedSizes = [
-      CGSize(width: 298, height: 498),
-      CGSize(width: 18, height: 18),
-      CGSize(width: -1, height: 509),
-      CGSize(width: -2, height: -2),
-      CGSize(width: -2, height: 998),
-      CGSize(width: 8, height: -2)
-    ]
-
-    sizes.enumerated().forEach { enumeration in
-      let insets = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-
-      XCTAssertEqual(
-        UIUtility.size(from: enumeration.element, withInsets: insets),
-        expectedSizes[enumeration.offset],
-        "Should provide the expected size given starting size \(enumeration.element) and insets: \(insets)"
-      )
-    }
-  }
-
-  func testSizeOutsetByInsets() {
-    let sizes = [
-      CGSize(width: 300, height: 500),
-      CGSize(width: 20, height: 20),
-      CGSize(width: 1, height: 511),
-      CGSize.zero,
-      CGSize(width: 0, height: 1000),
-      CGSize(width: 10, height: 0)
-    ]
-
-    let expectedSizes = [
-      CGSize(width: 302, height: 502),
-      CGSize(width: 22, height: 22),
-      CGSize(width: 3, height: 513),
-      CGSize(width: 2, height: 2),
-      CGSize(width: 2, height: 1002),
-      CGSize(width: 12, height: 2)
-    ]
-
-    sizes.enumerated().forEach { enumeration in
-      let insets = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-
-      XCTAssertEqual(
-        UIUtility.size(enumeration.element, outsetBy: insets),
-        expectedSizes[enumeration.offset],
-        "Should provide the expected size given starting size \(enumeration.element) and insets: \(insets)"
-      )
-    }
-  }
-
-  func testPointsForPixelsLimitedByCeiling() {
-    let fixtures: [(scale: CGFloat, pointValue: CGFloat, expectedPoints: CGFloat)] = [
-      (1.0, 10.4, 11),
-      (1.0, 10.5, 11),
-      (1.0, 10.6, 11),
-      (1.0, 100, 100),
-
-      (2.0, 10.4, 10.5),
-      (2.0, 10.5, 10.5),
-      (2.0, 10.6, 11),
-      (2.0, 100, 100),
-
-      (3.0, 10.4, 10.666666666666666),
-      (3.0, 10.5, 10.666666666666666),
-      (3.0, 10.6, 10.666666666666666),
-      (3.0, 100, 100),
-
-      (4.0, 10.4, 10.5),
-      (4.0, 10.5, 10.5),
-      (4.0, 10.6, 10.75),
-      (4.0, 100, 100)
-    ]
-
-    fixtures.forEach { fixture in
-      XCTAssertEqual(
-        UIUtility.pointsForScreenPixels(limitFunction: ceilf, screenScale: fixture.scale, pointValue: fixture.pointValue),
-        fixture.expectedPoints,
-        "Should provide the correct value given the ceilf limit function, screen scale of: \(fixture.scale) and point value: \(fixture.pointValue)"
-      )
-    }
-  }
-
-  func testPointsForPixelsLimitedByFloor() {
-    let fixtures: [(scale: CGFloat, pointValue: CGFloat, expectedPoints: CGFloat)] = [
-      (1.0, 10.4, 10),
-      (1.0, 10.5, 10),
-      (1.0, 10.6, 10),
-      (1.0, 100, 100),
-
-      (2.0, 10.4, 10),
-      (2.0, 10.5, 10.5),
-      (2.0, 10.6, 10.5),
-      (2.0, 100, 100),
-
-      (3.0, 10.4, 10.333333333333334),
-      (3.0, 10.5, 10.333333333333334),
-      (3.0, 10.6, 10.333333333333334),
-      (3.0, 100, 100),
-
-      (4.0, 10.4, 10.25),
-      (4.0, 10.5, 10.5),
-      (4.0, 10.6, 10.5),
-      (4.0, 100, 100)
-    ]
-
-    fixtures.forEach { fixture in
-      XCTAssertEqual(
-        UIUtility.pointsForScreenPixels(limitFunction: floorf, screenScale: fixture.scale, pointValue: fixture.pointValue),
-        fixture.expectedPoints,
-        "Should provide the correct value given the ceilf limit function, screen scale of: \(fixture.scale) and point value: \(fixture.pointValue)"
-      )
-    }
-  }
-
-  func testPointsForPixelsLimitedByRounding() {
-    let fixtures: [(scale: CGFloat, pointValue: CGFloat, expectedPoints: CGFloat)] = [
-      (1.0, 10.4, 10),
-      (1.0, 10.5, 11),
-      (1.0, 10.6, 11),
-      (1.0, 100, 100),
-
-      (2.0, 10.4, 10.5),
-      (2.0, 10.5, 10.5),
-      (2.0, 10.6, 10.5),
-      (2.0, 100, 100),
-
-      (3.0, 10.4, 10.333333333333334),
-      (3.0, 10.5, 10.666666666666666),
-      (3.0, 10.6, 10.666666666666666),
-      (3.0, 100, 100),
-
-      (4.0, 10.4, 10.5),
-      (4.0, 10.5, 10.5),
-      (4.0, 10.6, 10.5),
-      (4.0, 100, 100)
-    ]
-
-    fixtures.forEach { fixture in
-      XCTAssertEqual(
-        UIUtility.pointsForScreenPixels(limitFunction: roundf, screenScale: fixture.scale, pointValue: fixture.pointValue),
-        fixture.expectedPoints,
-        "Should provide the correct value given the ceilf limit function, screen scale of: \(fixture.scale) and point value: \(fixture.pointValue)"
-      )
-    }
-  }
-
+class StringExtensionsTests: XCTestCase {
   func testConstrainedTextSizeEmptyText() {
     let systemFont5 = UIFont.systemFont(ofSize: 5)
     let systemFont10 = UIFont.systemFont(ofSize: 10)
@@ -217,8 +61,7 @@ class UIUtilityTests: XCTestCase {
 
     fixtures.forEach { fixture in
       XCTAssertEqual(
-        UIUtility.textSize(
-          text: fixture.text,
+        fixture.text.textSize(
           font: fixture.font,
           constrainingSize: fixture.startingSize,
           lineBreakMode: fixture.lineBreakMode
@@ -267,8 +110,7 @@ class UIUtilityTests: XCTestCase {
 
     fixtures.forEach { fixture in
       XCTAssertEqual(
-        UIUtility.textSize(
-          text: fixture.text,
+        fixture.text.textSize(
           font: fixture.font,
           constrainingSize: fixture.startingSize,
           lineBreakMode: fixture.lineBreakMode
@@ -336,8 +178,7 @@ class UIUtilityTests: XCTestCase {
 
     fixtures.forEach { fixture in
       XCTAssertEqual(
-        UIUtility.textSize(
-          text: fixture.text,
+        fixture.text.textSize(
           font: fixture.font,
           constrainingSize: fixture.startingSize,
           lineBreakMode: fixture.lineBreakMode
