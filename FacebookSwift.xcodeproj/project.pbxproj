@@ -66,6 +66,7 @@
 		F4317E592286239300EBF926 /* ButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E582286239300EBF926 /* ButtonTests.swift */; };
 		F4317E5B2286288200EBF926 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5A2286288200EBF926 /* Button.swift */; };
 		F4317E5F22862B8000EBF926 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5E22862B8000EBF926 /* Color.swift */; };
+		F4317E9B2288C4BF00EBF926 /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4317E9A2288C4BF00EBF926 /* ButtonView.xib */; };
 		F4317E9D2289B81300EBF926 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9C2289B81300EBF926 /* UIUtility.swift */; };
 		F4317E9F2289B96700EBF926 /* MathUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9E2289B96700EBF926 /* MathUtility.swift */; };
 		F4317EA12289C03B00EBF926 /* UIUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */; };
@@ -161,7 +162,7 @@
 		F48A74B12239B81B007192F6 /* DefaultErrorStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */; };
 		F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48A74B42239BE66007192F6 /* LocalizableStrings.strings */; };
 		F48BDD8B22470128003CCA5A /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48BDD8A22470128003CCA5A /* SettingsTests.swift */; };
-		F48E7C2A22413BFC00DC9C23 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0822807F510020C282 /* TokenStringTests.swift */; };
 		F4932E0B22808DB50020C282 /* TokenString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0A22808DB50020C282 /* TokenString.swift */; };
 		F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */; };
@@ -178,7 +179,7 @@
 		F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4BEDA5622414078004F2C7E /* validRemoteErrorConfigurationList.json */; };
 		F4C32D88223D98D400FF1F86 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */; };
 		F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */; };
-		F4C32D8C223D98D400FF1F86 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F4C32D8C223D98D400FF1F86 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F4C32D96223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */; };
 		F4C32D97223D990A00FF1F86 /* SampleLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */; };
 		F4C32D98223D990A00FF1F86 /* SampleRawRemoteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */; };
@@ -334,6 +335,7 @@
 		F4317E582286239300EBF926 /* ButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTests.swift; sourceTree = "<group>"; };
 		F4317E5A2286288200EBF926 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F4317E5E22862B8000EBF926 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		F4317E9A2288C4BF00EBF926 /* ButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
 		F4317E9C2289B81300EBF926 /* UIUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtility.swift; sourceTree = "<group>"; };
 		F4317E9E2289B96700EBF926 /* MathUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtility.swift; sourceTree = "<group>"; };
 		F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilityTests.swift; sourceTree = "<group>"; };
@@ -651,8 +653,6 @@
 				F42E3C772267E45100287DC4 /* UserProfileService.swift */,
 				F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */,
 				F4020CF82283631E00710558 /* VariantCodingKey.swift */,
-				F4317E5A2286288200EBF926 /* Button.swift */,
-				F4317E9E2289B96700EBF926 /* Math.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -748,12 +748,13 @@
 		F44847DD2268E37400527D49 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
+				F4317E5A2286288200EBF926 /* Button.swift */,
+				F4317E5E22862B8000EBF926 /* Color.swift */,
 				F406F86522823703006B0D4E /* Drawable.swift */,
+				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
 				F4C3C5242273CABC004B487E /* ImageSizingConfiguration.swift */,
 				F406F8682282378E006B0D4E /* Logo.swift */,
 				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
-				F4317E5E22862B8000EBF926 /* Color.swift */,
 				F4317E9C2289B81300EBF926 /* UIUtility.swift */,
 			);
 			path = UI;
@@ -835,7 +836,6 @@
 		F49FA47A222880FE0008CAD6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F4317E582286239300EBF926 /* ButtonTests.swift */,
 				F4C32DA0223DA13E00FF1F86 /* Extensions */,
 				F44DB6AE222AF5420083506E /* Fixtures */,
 				F44DB6972229AE040083506E /* Helpers */,
@@ -852,10 +852,13 @@
 				F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */,
 				F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */,
 				F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */,
+				F4317E582286239300EBF926 /* ButtonTests.swift */,
+				F4317E9A2288C4BF00EBF926 /* ButtonView.xib */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
 				F44715222243E3FF0013495F /* DeveloperErrorStringsTests.swift */,
+				F44847ED2269219500527D49 /* DrawableTests.swift */,
 				F408BEB3223988BD0068D24A /* ErrorCategoryTests.swift */,
 				F4C32D9E223DA12200FF1F86 /* ErrorConfigurationBuilderTests.swift */,
 				F4225DDC223F1FB700F4DCFE /* ErrorConfigurationEntryBuilderTests.swift */,
@@ -877,7 +880,6 @@
 				F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */,
 				F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */,
 				F42687C42230772600A62C2E /* GraphRequestTests.swift */,
-				F44847ED2269219500527D49 /* DrawableTests.swift */,
 				F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
@@ -913,7 +915,6 @@
 				F42E3C7D2267E5E800287DC4 /* UserProfileServiceTests.swift */,
 				F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */,
 				F4020CF62283556C00710558 /* VariantCodingKeyTests.swift */,
-				F4317EA02289C03B00EBF926 /* UIUtilityTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1189,6 +1190,7 @@
 				F4C3C55D227B6F4C004B487E /* validRemoteAppLink.json in Resources */,
 				F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */,
 				F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */,
+				F4317E9B2288C4BF00EBF926 /* ButtonView.xib in Resources */,
 				F4C3C53C2278C4D7004B487E /* validRemoteAppLinkDetail.json in Resources */,
 				F4C3C52A22776208004B487E /* validAppLinkTarget.json in Resources */,
 				F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */,
@@ -1288,7 +1290,7 @@
 				F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */,
 				F408BEB62239893F0068D24A /* GraphRequestErrorCategory.swift in Sources */,
 				F47853C1222DCF8600A4269C /* CoreError.swift in Sources */,
-				F4C32D8C223D98D400FF1F86 /* (null) in Sources */,
+				F4C32D8C223D98D400FF1F86 /* BuildFile in Sources */,
 				F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */,
 				F4E1A9EE22416F2200503354 /* RemoteErrorConfigurationEntry.swift in Sources */,
 				F42E3C932268BB9B00287DC4 /* UserProfileStore.swift in Sources */,
@@ -1386,7 +1388,7 @@
 				F4C32D9B223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift in Sources */,
 				F480D90722347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift in Sources */,
 				F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */,
-				F48E7C2A22413BFC00DC9C23 /* (null) in Sources */,
+				F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */,
 				F480D90F2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift in Sources */,
 				F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */,
 				F4020CF72283556C00710558 /* VariantCodingKeyTests.swift in Sources */,

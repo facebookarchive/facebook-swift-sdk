@@ -18,7 +18,17 @@
 
 import UIKit
 
-enum Color {
-  static let defaultButtonBackground = UIColor(red: 65.0 / 255.0, green: 93.0 / 255.0, blue: 174.0 / 255.0, alpha: 1)
-  static let defaultButtonBackgroundHighlighted = UIColor(red: 47.0 / 255.0, green: 71.0 / 255.0, blue: 122.0 / 255.0, alpha: 1)
+extension UIColor {
+  convenience init(red: UInt8, green: UInt8, blue: UInt8, alpha: CGFloat = 1) {
+    self.init(
+      red: UIColor.normalize8BitColor(red),
+      green: UIColor.normalize8BitColor(green),
+      blue: UIColor.normalize8BitColor(blue),
+      alpha: alpha
+    )
+  }
+
+  private static func normalize8BitColor(_ value: UInt8) -> CGFloat {
+    return CGFloat(value) / 255
+  }
 }

@@ -19,7 +19,7 @@
 import UIKit
 
 struct Logo: Drawable {
-  // swiftlint:disable:next function_body_lengt
+  // swiftlint:disable:next function_body_length
   func path(withSize size: CGSize) -> CGPath {
     let scaleTranform = CGAffineTransform(
       scaleX: size.width / 136.0,
