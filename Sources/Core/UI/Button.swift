@@ -20,7 +20,7 @@
 
 import UIKit
 
-class Button: UIButton {
+public class Button: UIButton {
   private static let defaultFont = UIFont.systemFont(ofSize: 14)
   private static let heightToMargin: Float = 0.27
   private static let heightToFontSize: Float = 0.47
@@ -34,7 +34,7 @@ class Button: UIButton {
 
   // MARK: - Overrides
 
-  override var isEnabled: Bool {
+  override public var isEnabled: Bool {
     didSet {
       isExplicitlyDisabled = !isEnabled
 
@@ -60,7 +60,7 @@ class Button: UIButton {
     registerForNotifications()
   }
 
-  override func awakeFromNib() {
+  override public func awakeFromNib() {
     super.awakeFromNib()
 
     skipIntrinsicContentSizing = true
@@ -76,7 +76,7 @@ class Button: UIButton {
     skipIntrinsicContentSizing = false
   }
 
-  override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+  override public func imageRect(forContentRect contentRect: CGRect) -> CGRect {
     if isHidden || bounds.isEmpty {
       return .zero
     }
@@ -90,7 +90,7 @@ class Button: UIButton {
     return imageRect
   }
 
-  override var intrinsicContentSize: CGSize {
+  override public var intrinsicContentSize: CGSize {
     if skipIntrinsicContentSizing {
       return .zero
     }
@@ -107,7 +107,7 @@ class Button: UIButton {
     return size
   }
 
-  override func sizeThatFits(_ size: CGSize) -> CGSize {
+  override public func sizeThatFits(_ size: CGSize) -> CGSize {
     guard !isHidden else {
       return .zero
     }
@@ -121,7 +121,7 @@ class Button: UIButton {
     )
   }
 
-  override func sizeToFit() {
+  override public func sizeToFit() {
     let maxSize = CGSize(
       width: CGFloat.greatestFiniteMagnitude,
       height: CGFloat.greatestFiniteMagnitude
@@ -129,7 +129,7 @@ class Button: UIButton {
     bounds.size = sizeThatFits(maxSize)
   }
 
-  override func layoutSubviews() {
+  override public func layoutSubviews() {
     // TODO: Add impression tracking
 //    // automatic impression tracking if the button conforms to FBSDKButtonImpressionTracking
 //    if ([self conformsToProtocol:@protocol(FBSDKButtonImpressionTracking)]) {
@@ -145,7 +145,7 @@ class Button: UIButton {
     super.layoutSubviews()
   }
 
-  override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+  override public func titleRect(forContentRect contentRect: CGRect) -> CGRect {
     guard !isHidden,
       !bounds.isEmpty
       else {
