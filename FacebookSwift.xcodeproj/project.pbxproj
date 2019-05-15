@@ -143,6 +143,8 @@
 		F46DDCBC228B49BB00BA7359 /* CGSizeExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */; };
 		F46DDCBE228B4A2200BA7359 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */; };
 		F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */; };
+		F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDD00228C8BB700BA7359 /* DeviceButton.swift */; };
+		F46DDD03228C8C1400BA7359 /* DeviceButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */; };
 		F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056D82232CEEF00BE526B /* FakeLogger.swift */; };
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
@@ -415,6 +417,8 @@
 		F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensionTests.swift; sourceTree = "<group>"; };
 		F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		F46DDD00228C8BB700BA7359 /* DeviceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceButton.swift; sourceTree = "<group>"; };
+		F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceButtonTests.swift; sourceTree = "<group>"; };
 		F47056D82232CEEF00BE526B /* FakeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLogger.swift; sourceTree = "<group>"; };
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -756,6 +760,7 @@
 			children = (
 				F4317E5A2286288200EBF926 /* Button.swift */,
 				F4317E5E22862B8000EBF926 /* Color.swift */,
+				F46DDD00228C8BB700BA7359 /* DeviceButton.swift */,
 				F406F86522823703006B0D4E /* Drawable.swift */,
 				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
 				F4C3C5242273CABC004B487E /* ImageSizingConfiguration.swift */,
@@ -867,6 +872,7 @@
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
 				F44715222243E3FF0013495F /* DeveloperErrorStringsTests.swift */,
+				F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */,
 				F44847ED2269219500527D49 /* DrawableTests.swift */,
 				F408BEB3223988BD0068D24A /* ErrorCategoryTests.swift */,
 				F4C32D9E223DA12200FF1F86 /* ErrorConfigurationBuilderTests.swift */,
@@ -1347,6 +1353,7 @@
 				F406F8692282378E006B0D4E /* Logo.swift in Sources */,
 				F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */,
 				F4E1A9EB22416F2200503354 /* ErrorConfigurationEntry.swift in Sources */,
+				F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */,
 				F406F86622823703006B0D4E /* Drawable.swift in Sources */,
 				F40739412231E4EB0018505A /* URLQueryItemBuilder.swift in Sources */,
 			);
@@ -1371,6 +1378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F48A74B12239B81B007192F6 /* DefaultErrorStringTests.swift in Sources */,
+				F46DDD03228C8C1400BA7359 /* DeviceButtonTests.swift in Sources */,
 				F447151C2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift in Sources */,
 				F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */,
 				F48A749822399C97007192F6 /* LocalizationsTests.swift in Sources */,
