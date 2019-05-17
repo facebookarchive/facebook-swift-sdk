@@ -122,6 +122,8 @@
 		F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */; };
 		F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */; };
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
+		F45E54DD228E0B42008A6011 /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */; };
+		F45E54DF228E0BE6008A6011 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DE228E0BE6008A6011 /* ImageService.swift */; };
 		F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */; };
 		F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC222720B5F00EFE037 /* UserDataStore.swift */; };
 		F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */; };
@@ -383,6 +385,8 @@
 		F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionTests.swift; sourceTree = "<group>"; };
 		F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestPiggybackManagerTests.swift; sourceTree = "<group>"; };
 		F45734D6222D9535001F806A /* InternalUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtilityTests.swift; sourceTree = "<group>"; };
+		F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceTests.swift; sourceTree = "<group>"; };
+		F45E54DE228E0BE6008A6011 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoreTests.swift; sourceTree = "<group>"; };
 		F46DCFC222720B5F00EFE037 /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUserData.swift; sourceTree = "<group>"; };
@@ -612,6 +616,7 @@
 				F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */,
 				F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */,
 				F408BE9E223981950068D24A /* GraphRequestSerializer.swift */,
+				F45E54DE228E0BE6008A6011 /* ImageService.swift */,
 				F4516B7F225F7F9200979DD2 /* JSONParser.swift */,
 				524A49B6225EA2ED00786C11 /* KeychainStore.swift */,
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
@@ -858,6 +863,7 @@
 				F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */,
 				F42687C42230772600A62C2E /* GraphRequestTests.swift */,
 				F44847ED2269219500527D49 /* IconTests.swift */,
+				F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */,
 				F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
 				F45734D6222D9535001F806A /* InternalUtilityTests.swift */,
@@ -1298,6 +1304,7 @@
 				F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */,
 				F408BE9F223981950068D24A /* GraphRequestSerializer.swift in Sources */,
 				524A49B7225EA2ED00786C11 /* KeychainStore.swift in Sources */,
+				F45E54DF228E0BE6008A6011 /* ImageService.swift in Sources */,
 				F404972022444F43005EE2EE /* ServerConfiguration.swift in Sources */,
 				F4E1A9EA22416F2200503354 /* DefaultErrorStrings.swift in Sources */,
 				F44DB6B7222B07050083506E /* GraphRequestConnection.swift in Sources */,
@@ -1354,6 +1361,7 @@
 				F44DB6A92229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift in Sources */,
 				F4CF0342227387A900807A61 /* AppLinkServiceTests.swift in Sources */,
 				F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */,
+				F45E54DD228E0B42008A6011 /* ImageServiceTests.swift in Sources */,
 				F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */,
 				F42E3C812267E5E800287DC4 /* UserProfileServiceTests.swift in Sources */,
 				F4C32D9B223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift in Sources */,
