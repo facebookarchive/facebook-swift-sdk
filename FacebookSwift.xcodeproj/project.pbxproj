@@ -125,6 +125,7 @@
 		F45E54F5228F8699008A6011 /* PListURLConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */; };
 		F45E54F7228F87B1008A6011 /* PListURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */; };
 		F45E54FA229319C2008A6011 /* InfoDictionaryProvidingExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */; };
+		F45E54FC229320E1008A6011 /* SampleInfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */; };
 		F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */; };
 		F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC222720B5F00EFE037 /* UserDataStore.swift */; };
 		F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */; };
@@ -389,6 +390,7 @@
 		F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfigurationTests.swift; sourceTree = "<group>"; };
 		F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfiguration.swift; sourceTree = "<group>"; };
 		F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionaryProvidingExtensionsTests.swift; sourceTree = "<group>"; };
+		F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleInfoDictionary.swift; sourceTree = "<group>"; };
 		F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoreTests.swift; sourceTree = "<group>"; };
 		F46DCFC222720B5F00EFE037 /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUserData.swift; sourceTree = "<group>"; };
@@ -955,6 +957,7 @@
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
 				F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */,
 				F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */,
+				F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */,
 			);
 			path = "Sample Data";
 			sourceTree = "<group>";
@@ -1382,6 +1385,7 @@
 				F44715232243E3FF0013495F /* DeveloperErrorStringsTests.swift in Sources */,
 				F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */,
 				F408BEB4223988BD0068D24A /* ErrorCategoryTests.swift in Sources */,
+				F45E54FC229320E1008A6011 /* SampleInfoDictionary.swift in Sources */,
 				F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,

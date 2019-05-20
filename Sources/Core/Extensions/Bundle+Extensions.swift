@@ -26,10 +26,10 @@ protocol InfoDictionaryProviding {
 
   func decodeFromInfoPlist<T: Decodable>(type: T.Type) throws -> T
   func isRegisteredURLScheme(_ urlScheme: String) -> Bool
-  func isValidFacebookURLScheme(
+  func validateFacebookURLScheme(
   for appID: String,
   settings: SettingsManaging
-  ) -> Bool
+  ) throws
 }
 
 extension InfoDictionaryProviding {
@@ -58,17 +58,34 @@ extension InfoDictionaryProviding {
     return false
   }
 
-  func isValidFacebookURLScheme(
+  func validateFacebookURLScheme(
     for appID: String,
     settings: SettingsManaging = Settings.shared
-    ) -> Bool {
+    ) throws {
     guard !appID.isEmpty else {
-      return false
+      throw InfoDictionaryProvidingError.invalidAppIdentifier
     }
 
     let scheme = "fb\(appID)\(settings.urlSchemeSuffix ?? "")"
 
-    return isRegisteredURLScheme(scheme)
+    guard isRegisteredURLScheme(scheme) else {
+      throw InfoDictionaryProvidingError.urlSchemeNotRegistered(scheme)
+    }
+  }
+}
+
+enum InfoDictionaryProvidingError: FBError {
+  case invalidAppIdentifier
+  case urlSchemeNotRegistered(String)
+
+  var developerMessage: String {
+    switch self {
+    case .invalidAppIdentifier:
+      return "Missing an application identifier. Please add it to your Info.plist under the key: FacebookAppID"
+
+    case let .urlSchemeNotRegistered(scheme):
+      return "\(scheme) is not registered as a URL scheme. Please add it to your Info.plist"
+    }
   }
 }
 
