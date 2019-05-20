@@ -20,7 +20,8 @@ import Foundation
 
 struct URLBuilder {
   static let graphAPIHostPrefix: String = "graph"
-  static let hostname: String = "facebook.com"
+  static let defaultHostname: String = "facebook.com"
+  static let defaultScheme: String = "https"
   let settings: SettingsManaging
 
   init(settings: SettingsManaging = Settings.shared) {
@@ -30,21 +31,26 @@ struct URLBuilder {
   /**
    For building a facebook url
 
+   - Parameter scheme: The scheme for the `URL` defaults to 'https'
    - Parameter hostPrefix: A prefix for the qualified hostname. `Ex: hostPrefix.domainQualifier.domain`
    - Parameter path: A path to use for the url. Should not include the "/", this will be added for you
    - Parameter queryItems: An array of `URLQueryItem`, recommended to build these by providing a dictionary of
    type `[String: AnyHashable]` to the `URLQueryItemBuilder`
    */
   func buildURL(
-    withHostPrefix hostPrefix: String = "",
+    scheme: String = URLBuilder.defaultScheme,
+    hostPrefix: String = "",
+    hostName: String = URLBuilder.defaultHostname,
     path: String = "",
     queryItems: [URLQueryItem] = []
     ) -> URL? {
+    let nonEmptyScheme = !scheme.isEmpty ? scheme : URLBuilder.defaultScheme
+    let nonEmptyHostName = !hostName.isEmpty ? hostName : URLBuilder.defaultHostname
     var components = URLComponents()
 
-    components.scheme = "https"
-    components.host = urlHost(with: hostPrefix)
-    components.path = build(path)
+    components.scheme = nonEmptyScheme
+    components.host = urlHost(with: hostPrefix, hostName: nonEmptyHostName)
+    components.path = path.prependingSlashIfNeeded
     components.queryItems = queryItems
 
     return components.url
@@ -55,31 +61,42 @@ struct URLBuilder {
    */
   func buildURL(
     for request: GraphRequest,
-    withHostPrefix hostPrefix: String = URLBuilder.graphAPIHostPrefix
+    hostPrefix: String = URLBuilder.graphAPIHostPrefix
     ) -> URL? {
     let queryItems = URLQueryItemBuilder.build(from: request.parameters)
+    let path = build(request.graphPath.description)
 
     return self.buildURL(
-      withHostPrefix: hostPrefix,
-      path: request.graphPath.description,
+      hostPrefix: hostPrefix,
+      path: path,
       queryItems: queryItems
     )
   }
 
-  private func urlHost(with prefix: String) -> String {
+  private func urlHost(with prefix: String, hostName: String) -> String {
     let domainPrefix = settings.domainPrefix ?? ""
-    var host = domainPrefix.isEmpty ? URLBuilder.hostname : "\(domainPrefix).\(URLBuilder.hostname)"
+    var host = domainPrefix.isEmpty ? hostName : "\(domainPrefix).\(hostName)"
     host = prefix.isEmpty ? host : "\(prefix).\(host)"
 
     return host
   }
 
   private func build(_ path: String) -> String {
-    let basePath = "/\(settings.graphAPIVersion.description)"
+    let basePath = "\(settings.graphAPIVersion.description)"
     guard !path.isEmpty else {
       return basePath
     }
 
-    return "\(basePath)/\(path)"
+    return "\(basePath)/\(path)".prependingSlashIfNeeded
+  }
+}
+
+private extension String {
+  var prependingSlashIfNeeded: String {
+    guard self.first != "/" else {
+      return self
+    }
+
+    return "/\(self)"
   }
 }

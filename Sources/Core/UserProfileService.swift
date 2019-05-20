@@ -190,48 +190,6 @@ class UserProfileService: UserProfileProviding {
   }
 
   /**
-   A convenience method for returning a complete `NSURL` for retrieving the user's profile image.
-   - Parameter identifier: The identifier to use for retrieving a user's profile image. Defaults
-   to "me"
-   - Parameter mode: The picture mode which includes associated values to specifies dimensions
-
-   - Returns an optional URL
-   */
-  func imageURL(
-    for identifier: String = GraphPath.me.description,
-    sizingConfiguration: ImageSizingConfiguration
-    ) -> URL? {
-    let queryItems: [URLQueryItem]
-    let size = sizingConfiguration.size
-
-    switch sizingConfiguration.format {
-    case .normal:
-      queryItems = URLQueryItemBuilder.build(
-        from: [
-          "type": sizingConfiguration.format,
-          "height": Int(size.height),
-          "width": Int(size.width)
-        ]
-      )
-
-    case .square:
-      queryItems = URLQueryItemBuilder.build(
-        from: [
-          "type": sizingConfiguration.format,
-          "height": Int(size.height),
-          "width": Int(size.height)
-        ]
-      )
-    }
-
-    return URLBuilder().buildURL(
-      withHostPrefix: "graph",
-      path: GraphPath.picture(identifier: identifier).description,
-      queryItems: queryItems
-    )
-  }
-
-  /**
    Creates a graph request to use for fetching a user's profile image
 
    - Parameter identifier: The identifier to use for retrieving a user's profile image. Defaults
