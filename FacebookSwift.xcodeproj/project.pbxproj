@@ -81,7 +81,6 @@
 		F447153222440EB60013495F /* FakeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447153122440EB60013495F /* FakeSession.swift */; };
 		F447153422440EE50013495F /* FakeSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447153322440EE50013495F /* FakeSessionDataTask.swift */; };
 		F44847DC2268E36E00527D49 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DB2268E36E00527D49 /* ProfilePictureView.swift */; };
-		F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */; };
 		F44847E82268FD0000527D49 /* ImageSizingConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */; };
 		F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */; };
 		F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
@@ -942,6 +941,7 @@
 				F4484807226F770400527D49 /* SampleError.swift */,
 				F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */,
 				F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */,
+				F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */,
 				F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */,
 				F44715242243EDB10013495F /* SampleNSError.swift */,
 				F4C3C5332277C3B6004B487E /* SampleRawRemoteAppLink.swift */,
@@ -957,7 +957,6 @@
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
 				F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */,
 				F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */,
-				F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */,
 			);
 			path = "Sample Data";
 			sourceTree = "<group>";
@@ -1413,7 +1412,6 @@
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
 				F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
-				F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */,
 				F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */,
 				F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */,
 				F480D90D2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift in Sources */,
@@ -1443,6 +1441,7 @@
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */,
+				F45E54FD22935B50008A6011 /* ProfilePictureViewTests.swift in Sources */,
 				F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */,
 				F44715252243EDB10013495F /* SampleNSError.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
