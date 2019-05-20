@@ -29,6 +29,7 @@ protocol SettingsManaging {
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
+  var urlSchemeSuffix: String? { get set }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
@@ -284,6 +285,11 @@ class Settings: SettingsManaging {
 
   private func cache(_ value: Any, forProperty property: PropertyStorageKey) {
     store.set(value, forKey: property.rawValue)
+  }
+
+  enum PListKeys {
+    static let cfBundleURLTypes: String = "CFBundleURLTypes"
+    static let cfBundleURLSchemes: String = "CFBundleURLSchemes"
   }
 
   enum PropertyStorageKey: String {

@@ -27,6 +27,7 @@ class FakeSettings: SettingsManaging, ClientTokenProviding {
   var loggingBehaviors: Set<LoggingBehavior> = []
   var domainPrefix: String?
   var clientToken: String?
+  var urlSchemeSuffix: String?
 
   init(
     graphApiDebugParameter: GraphApiDebugParameter = .none,

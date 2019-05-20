@@ -19,7 +19,57 @@
 import Foundation
 
 protocol InfoDictionaryProviding {
+  // swiftlint:disable:next discouraged_optional_collection
+  var infoDictionary: [String: Any]? { get }
+
   func object(forInfoDictionaryKey key: String) -> Any?
+
+  func decodeFromInfoPlist<T: Decodable>(type: T.Type) throws -> T
+  func isRegisteredURLScheme(_ urlScheme: String) -> Bool
+  func isValidFacebookURLScheme(
+  for appID: String,
+  settings: SettingsManaging
+  ) -> Bool
+}
+
+extension InfoDictionaryProviding {
+  func decodeFromInfoPlist<T: Decodable>(type: T.Type) throws -> T {
+    let decoder = JSONDecoder()
+    let data = try JSONSerialization.data(withJSONObject: infoDictionary as Any, options: [])
+    return try decoder.decode(T.self, from: data)
+  }
+
+  func isRegisteredURLScheme(_ urlScheme: String) -> Bool {
+    guard let plistConfig = try? decodeFromInfoPlist(type: PListURLConfiguration.self) else {
+      return false
+    }
+
+    for type in plistConfig.types {
+      for scheme in type.urlSchemes {
+        switch scheme == urlScheme {
+        case true:
+          return true
+
+        case false:
+          continue
+        }
+      }
+    }
+    return false
+  }
+
+  func isValidFacebookURLScheme(
+    for appID: String,
+    settings: SettingsManaging = Settings.shared
+    ) -> Bool {
+    guard !appID.isEmpty else {
+      return false
+    }
+
+    let scheme = "fb\(appID)\(settings.urlSchemeSuffix ?? "")"
+
+    return isRegisteredURLScheme(scheme)
+  }
 }
 
 extension Bundle: InfoDictionaryProviding {}
