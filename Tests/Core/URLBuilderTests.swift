@@ -35,19 +35,19 @@ class URLBuilderTests: XCTestCase {
   }
 
   func testBuildingWithDefaultScheme() {
-    let url = URLBuilder().buildURL()
+    let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url)
   }
 
   func testBuildingWithEmptyScheme() {
-    let url = URLBuilder().buildURL(scheme: "")
+    let url = URLBuilder().buildURL(scheme: "", hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url, scheme: "https")
   }
 
   func testBuildingWithCustomScheme() {
-    let url = URLBuilder().buildURL(scheme: "myApp")
+    let url = URLBuilder().buildURL(scheme: "myApp", hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url, scheme: "myApp")
   }
@@ -55,7 +55,7 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithUnspecifiedDomainPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: [:])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL()
+    let url = URLBuilder(settings: settings).buildURL(hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url)
   }
@@ -63,7 +63,7 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithEmptyDomainPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": ""])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL()
+    let url = URLBuilder(settings: settings).buildURL(hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url)
   }
@@ -71,19 +71,19 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithDomainPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": "beta"])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL()
+    let url = URLBuilder(settings: settings).buildURL(hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url, prefix: "beta")
   }
 
   func testBuildingWithEmptyPrefix() {
-    let url = URLBuilder().buildURL(hostPrefix: "")
+    let url = URLBuilder().buildURL(hostPrefix: "", hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url)
   }
 
   func testBuildingWithHostPrefix() {
-    let url = URLBuilder().buildURL(hostPrefix: "m")
+    let url = URLBuilder().buildURL(hostPrefix: "m", hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url, prefix: "m")
   }
@@ -91,15 +91,9 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithDomainAndHostPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": "beta"])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL(hostPrefix: "m")
+    let url = URLBuilder(settings: settings).buildURL(hostPrefix: "m", hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url, prefix: "m", domainPrefix: "beta")
-  }
-
-  func testBuildingWithDefaultHostName() {
-    let url = URLBuilder().buildURL()
-
-    validateBaseUrl(url)
   }
 
   func testBuildingWithEmptyHostName() {
@@ -115,7 +109,7 @@ class URLBuilderTests: XCTestCase {
   }
 
   func testBuildingWithDefaultPath() {
-    let url = URLBuilder().buildURL()
+    let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname)
     let expectedPathComponents = ["/"]
 
     XCTAssertEqual(url?.pathComponents, expectedPathComponents,
@@ -123,7 +117,7 @@ class URLBuilderTests: XCTestCase {
   }
 
   func testBuildingWithCustomPath() {
-    let url = URLBuilder().buildURL(path: "me")
+    let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname, path: "me")
     let expectedPathComponents = [
       "/",
       "me"
@@ -135,7 +129,7 @@ class URLBuilderTests: XCTestCase {
   }
 
   func testBuildingWithoutQueryParameters() {
-    guard let url = URLBuilder().buildURL(),
+    guard let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false
@@ -151,7 +145,7 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithQueryParameters() {
     let expectedQueryItems = URLQueryItemBuilder.build(from: ["limit": 5])
 
-    guard let url = URLBuilder().buildURL(queryItems: expectedQueryItems),
+    guard let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname, queryItems: expectedQueryItems),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false

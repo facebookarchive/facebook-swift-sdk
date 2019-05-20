@@ -33,7 +33,7 @@ struct URLBuilder {
 
    - Parameter scheme: The scheme for the `URL` defaults to 'https'
    - Parameter hostPrefix: A prefix for the qualified hostname. `Ex: hostPrefix.domainQualifier.domain`
-   - Parameter hostName: A hostname for the `URL`, defaults to 'facebook.com'
+   - Parameter hostName: A hostname for the `URL`
    - Parameter path: A path to use for the url. Should not include the "/", this will be added for you.
    Defaults to '/'
    - Parameter queryItems: An array of `URLQueryItem`, recommended to build these by providing a dictionary of
@@ -42,7 +42,7 @@ struct URLBuilder {
   func buildURL(
     scheme: String = URLBuilder.defaultScheme,
     hostPrefix: String = "",
-    hostName: String = URLBuilder.defaultHostname,
+    hostName: String,
     path: String = "/",
     queryItems: [URLQueryItem] = []
     ) -> URL? {
@@ -70,6 +70,7 @@ struct URLBuilder {
 
     return self.buildURL(
       hostPrefix: hostPrefix,
+      hostName: URLBuilder.defaultHostname,
       path: path,
       queryItems: queryItems
     )
