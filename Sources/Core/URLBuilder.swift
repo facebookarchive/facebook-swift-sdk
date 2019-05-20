@@ -33,7 +33,9 @@ struct URLBuilder {
 
    - Parameter scheme: The scheme for the `URL` defaults to 'https'
    - Parameter hostPrefix: A prefix for the qualified hostname. `Ex: hostPrefix.domainQualifier.domain`
-   - Parameter path: A path to use for the url. Should not include the "/", this will be added for you
+   - Parameter hostName: A hostname for the `URL`, defaults to 'facebook.com'
+   - Parameter path: A path to use for the url. Should not include the "/", this will be added for you.
+   Defaults to '/'
    - Parameter queryItems: An array of `URLQueryItem`, recommended to build these by providing a dictionary of
    type `[String: AnyHashable]` to the `URLQueryItemBuilder`
    */
@@ -41,7 +43,7 @@ struct URLBuilder {
     scheme: String = URLBuilder.defaultScheme,
     hostPrefix: String = "",
     hostName: String = URLBuilder.defaultHostname,
-    path: String = "",
+    path: String = "/",
     queryItems: [URLQueryItem] = []
     ) -> URL? {
     let nonEmptyScheme = !scheme.isEmpty ? scheme : URLBuilder.defaultScheme
@@ -64,7 +66,7 @@ struct URLBuilder {
     hostPrefix: String = URLBuilder.graphAPIHostPrefix
     ) -> URL? {
     let queryItems = URLQueryItemBuilder.build(from: request.parameters)
-    let path = build(request.graphPath.description)
+    let path = buildGraphAPIPath(from: request.graphPath.description)
 
     return self.buildURL(
       hostPrefix: hostPrefix,
@@ -81,7 +83,7 @@ struct URLBuilder {
     return host
   }
 
-  private func build(_ path: String) -> String {
+  private func buildGraphAPIPath(from path: String) -> String {
     let basePath = "\(settings.graphAPIVersion.description)"
     guard !path.isEmpty else {
       return basePath
