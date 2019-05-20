@@ -35,8 +35,6 @@ protocol SettingsManaging {
 }
 
 class Settings: SettingsManaging {
-  static let loggingBehaviorsPlistKey: String = "FacebookLoggingBehavior"
-
   var accessTokenCache: AccessTokenCaching?
 
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
@@ -260,7 +258,7 @@ class Settings: SettingsManaging {
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
-    guard let rawValues = bundle.object(forInfoDictionaryKey: Settings.loggingBehaviorsPlistKey)
+    guard let rawValues = bundle.object(forInfoDictionaryKey: Settings.PListKeys.loggingBehaviors)
       as? [String] else {
         return
     }
@@ -288,6 +286,7 @@ class Settings: SettingsManaging {
   }
 
   enum PListKeys {
+    static let loggingBehaviors: String = "FacebookLoggingBehavior"
     static let cfBundleURLTypes: String = "CFBundleURLTypes"
     static let cfBundleURLSchemes: String = "CFBundleURLSchemes"
   }
