@@ -30,6 +30,7 @@ protocol SettingsManaging {
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
   var urlSchemeSuffix: String? { get set }
+  var appIdentifier: String? { get set }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }

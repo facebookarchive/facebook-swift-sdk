@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable static_operator
-
 @testable import FacebookCore
 import XCTest
 
@@ -30,34 +28,39 @@ class InfoDictionaryProvidingExtensionsTests: XCTestCase {
   }
 
   func testValidatingForFacebookWithValidAppIDValidPlistEntryUsesSuffix() {
+    fakeSettings.appIdentifier = "abc123"
     fakeSettings.urlSchemeSuffix = ".me"
     expectedSchemes = ["fbabc123.me"]
 
     do {
-      try fakeBundle.validateFacebookURLScheme(for: "abc123", settings: fakeSettings)
+      try fakeBundle.validateFacebookURLScheme(settings: fakeSettings)
     } catch {
       XCTAssertNil(error, "Should be considered valid with app ID and scheme")
     }
   }
 
   func testValidatingForFacebookWithValidAppIDValidPlistEntryMissingSuffix() {
+    fakeSettings.appIdentifier = "abc123"
     fakeSettings.urlSchemeSuffix = nil
     expectedSchemes = ["fbabc123"]
 
     do {
-      try fakeBundle.validateFacebookURLScheme(for: "abc123", settings: fakeSettings)
+      try fakeBundle.validateFacebookURLScheme(settings: fakeSettings)
     } catch {
       XCTAssertNil(error, "Should be considered valid when no suffix specified")
     }
   }
 
   func testValidatingForFacebookWithInvalidAppIDValidPlistEntry() {
+    fakeSettings.appIdentifier = ""
+
     do {
-      try fakeBundle.validateFacebookURLScheme(for: "", settings: fakeSettings)
+      try fakeBundle.validateFacebookURLScheme(settings: fakeSettings)
       XCTFail("Should only be considered valid with app ID and scheme")
     } catch let error as InfoDictionaryProvidingError {
-      XCTAssertTrue(error == .invalidAppIdentifier,
-                    "Should provide a meaningful error")
+      guard case .invalidAppIdentifier = error else {
+        return XCTFail("Should provide a meaningful error")
+      }
       XCTAssertEqual((error as FBError).developerMessage,
                      "Missing an application identifier. Please add it to your Info.plist under the key: FacebookAppID",
                      "Error should provide hints on how to fix the issue")
@@ -67,14 +70,16 @@ class InfoDictionaryProvidingExtensionsTests: XCTestCase {
   }
 
   func testValidatingForFacebookWithValidAppIDMissingPlistEntry() {
+    fakeSettings.appIdentifier = "abc123"
     fakeBundle.infoDictionary = [:]
 
     do {
-      try fakeBundle.validateFacebookURLScheme(for: "abc123", settings: fakeSettings)
+      try fakeBundle.validateFacebookURLScheme(settings: fakeSettings)
       XCTFail("Should only be considered valid with app ID and scheme")
     } catch let error as InfoDictionaryProvidingError {
-      XCTAssertTrue(error == .urlSchemeNotRegistered("fbabc123"),
-                    "Should provide a meaningful error")
+      guard case .urlSchemeNotRegistered("fbabc123") = error else {
+        return XCTFail("Should provide a meaningful error")
+      }
       XCTAssertEqual((error as FBError).developerMessage,
                      "fbabc123 is not registered as a URL scheme. Please add it to your Info.plist",
                      "Error should provide hints on how to fix the issue")
@@ -84,32 +89,21 @@ class InfoDictionaryProvidingExtensionsTests: XCTestCase {
   }
 
   func testValidatingForFacebookWithValidAppIDInvalidPlistEntry() {
+    fakeSettings.appIdentifier = "abc123"
     fakeBundle.infoDictionary = [Settings.PListKeys.cfBundleURLTypes: ""]
 
     do {
-      try fakeBundle.validateFacebookURLScheme(for: "abc123", settings: fakeSettings)
+      try fakeBundle.validateFacebookURLScheme(settings: fakeSettings)
       XCTFail("Should only be considered valid with app ID and scheme")
     } catch let error as InfoDictionaryProvidingError {
-      XCTAssertTrue(error == .urlSchemeNotRegistered("fbabc123"),
-                    "Should provide a meaningful error")
+      guard case .urlSchemeNotRegistered("fbabc123") = error else {
+        return XCTFail("Should provide a meaningful error")
+      }
       XCTAssertEqual((error as FBError).developerMessage,
                      "fbabc123 is not registered as a URL scheme. Please add it to your Info.plist",
                      "Error should provide hints on how to fix the issue")
     } catch {
       XCTFail("Should only throw known errors")
     }
-  }
-}
-
-private func == (lhs: InfoDictionaryProvidingError, rhs: InfoDictionaryProvidingError) -> Bool {
-  switch (lhs, rhs) {
-  case (.invalidAppIdentifier, .invalidAppIdentifier):
-    return true
-
-  case let (.urlSchemeNotRegistered(lhsValue), .urlSchemeNotRegistered(rhsValue)):
-    return lhsValue == rhsValue
-
-  default:
-    return false
   }
 }

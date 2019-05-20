@@ -26,10 +26,7 @@ protocol InfoDictionaryProviding {
 
   func decodeFromInfoPlist<T: Decodable>(type: T.Type) throws -> T
   func isRegisteredURLScheme(_ urlScheme: String) -> Bool
-  func validateFacebookURLScheme(
-  for appID: String,
-  settings: SettingsManaging
-  ) throws
+  func validateFacebookURLScheme(settings: SettingsManaging) throws
 }
 
 extension InfoDictionaryProviding {
@@ -58,11 +55,9 @@ extension InfoDictionaryProviding {
     return false
   }
 
-  func validateFacebookURLScheme(
-    for appID: String,
-    settings: SettingsManaging = Settings.shared
-    ) throws {
-    guard !appID.isEmpty else {
+  func validateFacebookURLScheme(settings: SettingsManaging = Settings.shared) throws {
+    guard let appID = settings.appIdentifier,
+      !appID.isEmpty else {
       throw InfoDictionaryProvidingError.invalidAppIdentifier
     }
 
