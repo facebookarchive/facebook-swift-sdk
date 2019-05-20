@@ -217,9 +217,9 @@ class UserProfileService: UserProfileProviding {
     case .square:
       queryItems = URLQueryItemBuilder.build(
         from: [
-        "type": sizingConfiguration.format,
-        "height": Int(size.height),
-        "width": Int(size.height)
+          "type": sizingConfiguration.format,
+          "height": Int(size.height),
+          "width": Int(size.height)
         ]
       )
     }
@@ -232,7 +232,7 @@ class UserProfileService: UserProfileProviding {
   }
 
   /**
-    Creates a graph request to use for fetching a user's profile image
+   Creates a graph request to use for fetching a user's profile image
 
    - Parameter identifier: The identifier to use for retrieving a user's profile image. Defaults
    to "me"
@@ -275,8 +275,8 @@ class UserProfileService: UserProfileProviding {
    Fetches a profile image for a user identifier.
 
    - Parameter identifier: A String to identify the user to fetch a profile for.
-    Defaults to 'me'
-    - Parameter sizingConfiguration: A configuration object used for specifying
+   Defaults to 'me'
+   - Parameter sizingConfiguration: A configuration object used for specifying
    dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
    - Parameter completion: A completion that takes a Result Type with a success of UIImage and a failure of Error
    */

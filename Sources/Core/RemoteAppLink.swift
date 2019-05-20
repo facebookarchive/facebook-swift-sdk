@@ -27,7 +27,7 @@ struct RemoteAppLink: Decodable {
     let container = try decoder.container(keyedBy: VariantCodingKey.self)
 
     guard let sourceURLKey = container.allKeys.first else {
-        throw DecodingError.missingIdentifier
+      throw DecodingError.missingIdentifier
     }
 
     sourceURLString = sourceURLKey.stringValue

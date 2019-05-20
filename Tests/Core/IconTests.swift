@@ -90,7 +90,7 @@ class IconTests: XCTestCase {
       scale: 2.0,
       color: .red
       ) else {
-      return XCTFail("Should be able to provide a logo with a valid size")
+        return XCTFail("Should be able to provide a logo with a valid size")
     }
 
     let storedImage = UIImage(

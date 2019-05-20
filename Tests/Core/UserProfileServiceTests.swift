@@ -393,7 +393,7 @@ class UserProfileServiceTests: XCTestCase {
     guard let url = service.imageURL(
       for: "user123",
       sizingConfiguration: sizingConfiguration) else {
-      return XCTFail("Should be able to create an image url")
+        return XCTFail("Should be able to create an image url")
     }
 
     XCTAssertEqual(url.path, "/v3.2/user123/picture",
@@ -674,7 +674,7 @@ class UserProfileServiceTests: XCTestCase {
     let image = HumanSilhouetteIcon.image(
       size: sizingConfiguration.size,
       color: .red
-    )!
+      )!
 
     let imageData = image.pngData()
     fakeConnection.stubGetObjectCompletionResult = .success(imageData)
