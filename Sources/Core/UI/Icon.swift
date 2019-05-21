@@ -16,28 +16,33 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import UIKit
 
-import Foundation
+protocol Icon {
+  static func image(size: CGSize, scale: CGFloat, color: UIColor) -> UIImage?
+  static func path(withSize size: CGSize) -> CGPath
+}
 
-class FakeBundle: InfoDictionaryProviding {
-  var infoDictionary: [String: Any?]
-  private(set) var lastCapturedKey: String?
-  private(set) var capturedKeys = [String]()
+extension Icon {
+  static func image(
+    size: CGSize,
+    scale: CGFloat = UIScreen.main.scale,
+    color: UIColor = .white
+    ) -> UIImage? {
+    guard size != .zero else {
+      return nil
+    }
 
-  init(infoDictionary: [String: Any?]) {
-    self.infoDictionary = infoDictionary
-  }
+    defer {
+      UIGraphicsEndImageContext()
+    }
 
-  func object(forInfoDictionaryKey key: String) -> Any? {
-    // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
-    lastCapturedKey = key
-    capturedKeys.append(key)
-    return infoDictionary[key] as Any?
-  }
+    UIGraphicsBeginImageContextWithOptions(size, false, scale)
+    let context = UIGraphicsGetCurrentContext()
+    context?.addPath(path(withSize: size))
+    context?.setFillColor(color.cgColor)
+    context?.fillPath()
 
-  func reset() {
-    lastCapturedKey = nil
-    infoDictionary = [:]
+    return UIGraphicsGetImageFromCurrentImageContext()
   }
 }

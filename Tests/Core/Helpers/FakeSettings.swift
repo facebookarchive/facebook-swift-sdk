@@ -18,16 +18,17 @@
 
 @testable import FacebookCore
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding {
+class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
   static var isGraphErrorRecoveryEnabled: Bool = false
 
-  var appIdentifier: String
+  var appIdentifier: String?
   var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
   var accessTokenCache: AccessTokenCaching?
   let graphApiDebugParameter: GraphApiDebugParameter
   var loggingBehaviors: Set<LoggingBehavior> = []
   var domainPrefix: String?
   var sdkVersion: String
+  var clientToken: String?
 
   init(
     appIdentifier: String = "foo",

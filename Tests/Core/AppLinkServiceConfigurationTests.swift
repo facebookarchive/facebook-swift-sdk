@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,22 +16,29 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-/**
- Describes the callback for appLinkFromURLInBackground.
- @param appLink the FBSDKAppLink representing the deferred App Link
- @param error the error during the request, if any
+class AppLinkServiceConfigurationTests: XCTestCase {
+  let service = AppLinkService()
 
- */
-typealias FBSDKAppLinkBlock = (FBSDKAppLink?, Error?) -> Void
+  func testGraphConnectionProviderDependency() {
+    XCTAssertTrue(service.graphConnectionProvider is GraphConnectionProvider,
+                  "An app link service should have the expected concrete implementation for its graph connection provider")
+  }
 
-protocol FBSDKAppLinkResolving: NSObjectProtocol {
-    /**
-     Asynchronously resolves App Link data for a given URL.
-    
-     @param url The URL to resolve into an App Link.
-     @param handler The completion block that will return an App Link for the given URL.
-     */
-    func appLink(from PlacesResponseKey.url: URL?, handler: FBSDKAppLinkBlock)
+  func testLoggerDependency() {
+    XCTAssertTrue(service.logger is Logger,
+                  "An app link service should have the expected concrete implementation for its logging dependency")
+  }
+
+  func testClientTokenProviderDependency() {
+    XCTAssertTrue(service.clientTokenProvider is Settings,
+                  "An app link service should have the expected concrete implementation for its client token providing dependency")
+  }
+
+  func testAccessTokenProviderDependency() {
+    XCTAssertTrue(service.accessTokenProvider is AccessTokenWallet,
+                  "An app link service should have the expected concrete implementation for its access token providing dependency")
+  }
 }

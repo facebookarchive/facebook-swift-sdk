@@ -87,4 +87,16 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
 
     return URLSessionTaskProxy(for: SampleURLRequest.valid) { _, _, _ in }
   }
+
+  func reset() {
+    startCalled = false
+    capturedAddRequest = nil
+    capturedBatchParameters = nil
+    capturedAddRequestHandler = nil
+
+    getObjectWasCalled = false
+    capturedGetObjectRemoteType = nil
+    capturedGetObjectGraphRequest = nil
+    stubGetObjectCompletionResult = nil
+  }
 }

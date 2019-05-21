@@ -22,7 +22,11 @@ struct GatekeeperStore {
   private(set) var appIdentifierProvider: AppIdentifierProviding
   let store: DataPersisting
   var retrievalKey: String {
-    return "com.facebook.sdk:gateKeeper\(appIdentifierProvider.appIdentifier)"
+    let domain = "com.facebook.sdk:gateKeeper"
+    guard let identifier = appIdentifierProvider.appIdentifier else {
+      return domain
+    }
+    return "\(domain)\(identifier)"
   }
 
   var hasDataForCurrentAppIdentifier: Bool {

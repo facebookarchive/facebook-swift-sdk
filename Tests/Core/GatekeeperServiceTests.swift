@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping type_body_length
+// swiftlint:disable force_unwrapping type_body_length file_length
 
 @testable import FacebookCore
 import XCTest
@@ -39,6 +39,7 @@ class GatekeeperServiceTests: XCTestCase {
     fakeConnection = FakeGraphRequestConnection()
     fakeLogger = FakeLogger()
     fakeGraphConnectionProvider = FakeGraphConnectionProvider(connection: fakeConnection)
+    fakeSettings.appIdentifier = "abc123"
     store = GatekeeperStore(
       store: userDefaultsSpy,
       appIdentifierProvider: fakeSettings
@@ -122,6 +123,13 @@ class GatekeeperServiceTests: XCTestCase {
                    "A gatekeeper should not be considered valid if it has a valid timestamp and a non-finished requery")
   }
 
+  func testLoadGatekeepersRequestMissingAppIdentifier() {
+    fakeSettings.appIdentifier = nil
+
+    XCTAssertNil(service.loadGatekeepersRequest,
+                 "Should not provide a gatekeeper load request without an app identifier")
+  }
+
   func testLoadGatekeepersRequest() {
     let expectedQueryItems = [
       URLQueryItem(name: "fields", value: "gatekeepers"),
@@ -132,7 +140,9 @@ class GatekeeperServiceTests: XCTestCase {
       URLQueryItem(name: "sdk_version", value: "1.0")
     ]
 
-    let request = service.loadGatekeepersRequest
+    guard let request = service.loadGatekeepersRequest else {
+      return XCTFail("Should be able to create a load gatekeepers request")
+    }
 
     guard let url = URLBuilder().buildURL(for: request),
       let queryItems = URLComponents(
@@ -143,7 +153,7 @@ class GatekeeperServiceTests: XCTestCase {
         return XCTFail("Should be able to build a url from a graph request and get query items from it")
     }
 
-    XCTAssertEqual(url.path, "/v3.2/foo/mobile_sdk_gk",
+    XCTAssertEqual(url.path, "/v3.2/abc123/mobile_sdk_gk",
                    "A url created for fetching gatekeepers should have the correct path")
     XCTAssertEqual(
       queryItems.sorted { $0.name < $1.name },
@@ -161,7 +171,7 @@ class GatekeeperServiceTests: XCTestCase {
 
     XCTAssertEqual(userDefaultsSpy.capturedDataRetrievalKey, store.retrievalKey,
                    "Loading gatekeepers should invoke the cache")
-    XCTAssertEqual(service.gatekeepers[fakeSettings.appIdentifier]!, [],
+    XCTAssertEqual(service.gatekeepers[fakeSettings.appIdentifier!]!, [],
                    "Should store the values loaded from the cache")
   }
 
@@ -171,7 +181,7 @@ class GatekeeperServiceTests: XCTestCase {
 
     service.loadGatekeepers()
 
-    XCTAssertEqual(service.gatekeepers[fakeSettings.appIdentifier]!, gatekeepers,
+    XCTAssertEqual(service.gatekeepers[fakeSettings.appIdentifier!]!, gatekeepers,
                    "Should store the values loaded from the cache")
   }
 
@@ -183,8 +193,17 @@ class GatekeeperServiceTests: XCTestCase {
 
     service.loadGatekeepers()
 
-    XCTAssertEqual(service.gatekeepers[name]!, [],
+    XCTAssertEqual(service.gatekeepers[name], [],
                    "Should not load cached gatekeepers if the app identifier is different from the one they were saved under")
+  }
+
+  func testLoadingWithMissingAppIdentifier() {
+    fakeSettings.appIdentifier = nil
+
+    service.loadGatekeepers()
+
+    XCTAssertNil(service.gatekeepers[name],
+                 "Should not load any gatekeeper with a missing app identifier")
   }
 
   // MARK: - Fetching
@@ -287,7 +306,7 @@ class GatekeeperServiceTests: XCTestCase {
     )
     service.loadGatekeepers()
 
-    XCTAssertEqual(service.gatekeepers[fakeSettings.appIdentifier], expectedGatekeepers,
+    XCTAssertEqual(service.gatekeepers[fakeSettings.appIdentifier!], expectedGatekeepers,
                    "Fetched gatekeepers should be stored locally under the app identifier that was used to fetch them")
   }
 

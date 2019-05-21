@@ -62,7 +62,7 @@ public class GatekeeperService {
     return isRequeryFinishedForAppStart && isTimestampValid
   }
 
-  var loadGatekeepersRequest: GraphRequest {
+  var loadGatekeepersRequest: GraphRequest? {
     // TODO: Add timeout of 4.0 to this graph request
 
     let parameters = [
@@ -74,8 +74,12 @@ public class GatekeeperService {
       "sdk_version": settings.sdkVersion
     ]
 
+    guard let appIdentifier = settings.appIdentifier else {
+      return nil
+    }
+
     return GraphRequest(
-      graphPath: .gatekeepers(appIdentifier: settings.appIdentifier),
+      graphPath: .gatekeepers(appIdentifier: appIdentifier),
       parameters: parameters,
       flags: GraphRequest.Flags.doNotInvalidateTokenOnError
         .union(GraphRequest.Flags.disableErrorRecovery)
@@ -117,7 +121,9 @@ public class GatekeeperService {
     _ name: String,
     forAppIdentifier appIdentifier: String? = nil
     ) -> Gatekeeper? {
-    let identifier = appIdentifier ?? settings.appIdentifier
+    guard let identifier = appIdentifier ?? settings.appIdentifier else {
+      return nil
+    }
 
     return gatekeepers[identifier]?.first {
       $0.name == name
@@ -138,7 +144,14 @@ public class GatekeeperService {
    (they expire within one hour)
    */
   public func loadGatekeepers() {
-    self.gatekeepers[settings.appIdentifier] = store.cachedGatekeepers
+    guard let appIdentifier = settings.appIdentifier,
+      let request = loadGatekeepersRequest
+      else {
+        logger.log(.developerErrors, "Missing app identifier. Please add one in Settings.")
+        return
+    }
+
+    self.gatekeepers[appIdentifier] = store.cachedGatekeepers
 
     // Ensure it's valid for the current app identifier or that the store has data for the current app identifier
     guard !isGatekeeperValid || !store.hasDataForCurrentAppIdentifier,
@@ -153,7 +166,7 @@ public class GatekeeperService {
       .graphRequestConnection()
       .getObject(
         RemoteGatekeeperList.self,
-        for: loadGatekeepersRequest
+        for: request
       ) { [weak self] result in
         guard let self = self else {
           return
@@ -170,7 +183,7 @@ public class GatekeeperService {
           let list = GatekeeperListBuilder.build(from: remote)
 
           self.timestamp = Date()
-          self.gatekeepers.updateValue(list, forKey: self.settings.appIdentifier)
+          self.gatekeepers.updateValue(list, forKey: appIdentifier)
           self.store.cache(list)
         }
       }
