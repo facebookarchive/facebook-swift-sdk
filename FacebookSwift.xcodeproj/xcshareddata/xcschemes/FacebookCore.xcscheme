@@ -39,6 +39,16 @@
                ReferencedContainer = "container:FacebookSwift.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F46740462297097B00D3F7AF"
+               BuildableName = "FacebookCoreHostRequiredTests.xctest"
+               BlueprintName = "FacebookCoreHostRequiredTests"
+               ReferencedContainer = "container:FacebookSwift.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
