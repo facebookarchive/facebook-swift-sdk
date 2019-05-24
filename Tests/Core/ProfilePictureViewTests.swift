@@ -41,10 +41,10 @@ class ProfilePictureViewTests: XCTestCase {
     super.setUp()
 
     fakeUserProfileProvider = FakeUserProfileProvider()
-    placeholderImageData = HumanSilhouetteIcon.image(
+    placeholderImageData = HumanSilhouetteIcon().image(
       size: frame.size,
       color: HumanSilhouetteIcon.placeholderImageColor
-      )?
+      )
       .pngData()
     createView()
     awaitInitialViewSetup()

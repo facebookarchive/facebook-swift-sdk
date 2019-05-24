@@ -18,7 +18,7 @@
 
 import UIKit
 
-enum HumanSilhouetteIcon: Icon {
+struct HumanSilhouetteIcon: Drawable {
   // swiftlint:disable:next object_literal
   static let placeholderImageColor = UIColor(
     red: 157.0 / 255.0,
@@ -28,7 +28,7 @@ enum HumanSilhouetteIcon: Icon {
   )
 
   // swiftlint:disable:next function_body_length
-  static func path(withSize size: CGSize) -> CGPath {
+  func path(withSize size: CGSize) -> CGPath {
     let scaleTranform = CGAffineTransform(
       scaleX: size.width / 158.783,
       y: size.height / 158.783
