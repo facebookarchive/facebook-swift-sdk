@@ -39,7 +39,7 @@ class RemoteGatekeeperListTests: XCTestCase {
     do {
       _ = try decoder.decode(RemoteGatekeeperList.self, from: SampleListData.missingGatekeepers)
     } catch {
-      XCTFail("Should create a remote representation of a gatekeeper list as long as the top level key is valid")
+      XCTAssertNil(error, "Should create a remote representation of a gatekeeper list as long as the top level key is valid")
     }
   }
 

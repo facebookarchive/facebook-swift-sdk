@@ -403,3 +403,10 @@ class GatekeeperServiceTests: XCTestCase {
     }
   }
 }
+
+extension Gatekeeper: Equatable {
+  public static func == (lhs: Gatekeeper, rhs: Gatekeeper) -> Bool {
+    return lhs.name == rhs.name &&
+    lhs.isEnabled == rhs.isEnabled
+  }
+}

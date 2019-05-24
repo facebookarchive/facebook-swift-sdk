@@ -23,7 +23,7 @@ import Foundation
  application identifier
  */
 public class GatekeeperService {
-  private(set) var gatekeepers: [String: [Gatekeeper]] = [:]
+  private(set) var gatekeepers: GatekeeperList = [:]
   private(set) var graphConnectionProvider: GraphConnectionProviding
   private(set) var logger: Logging
   private(set) var store: GatekeeperStore
@@ -133,7 +133,7 @@ public class GatekeeperService {
   /**
    Loads gatekeepers for a particular application identifier
 
-   Will search `UserDefaults` first and caches the retrieved results locally
+   Will search `UserDefaults` first and cache the retrieved results locally
    if they are available.
 
    Values cached in `UserDefaults` are keyed to be associated with the
@@ -180,7 +180,7 @@ public class GatekeeperService {
           self.logger.log(.networkRequests, error.localizedDescription)
 
         case let .success(remote):
-          let list = GatekeeperListBuilder.build(from: remote)
+          let list = remote.gatekeepers
 
           self.timestamp = Date()
           self.gatekeepers.updateValue(list, forKey: appIdentifier)

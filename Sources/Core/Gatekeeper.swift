@@ -22,12 +22,6 @@ public struct Gatekeeper: Codable {
   public let name: String
   public let isEnabled: Bool
 
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    name = try container.decode(String.self, forKey: .name)
-    isEnabled = try container.decode(Bool.self, forKey: .isEnabled)
-  }
-
   enum CodingKeys: String, CodingKey {
     case name = "key"
     case isEnabled = "value"
