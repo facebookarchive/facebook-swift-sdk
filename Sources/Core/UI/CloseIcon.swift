@@ -19,7 +19,8 @@
 import UIKit
 
 enum CloseIcon {
-  private static let gradientColors: CFArray = [
+  private static let gradientColors: CFArray = [0.7, 0.3, 0.1, 0.0]
+    .map { UIColor.white.withAlphaComponent($0).cgColor } as CFArray
     UIColor.white.withAlphaComponent(0.7).cgColor,
     UIColor.white.withAlphaComponent(0.3).cgColor,
     UIColor.white.withAlphaComponent(0.1).cgColor,
