@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -19,6 +18,50 @@
 
 import UIKit
 
-/**
-  A base class for common SDK buttons.
- */
+enum MathUtility {
+  static func ceil(for size: CGSize) -> CGSize {
+    let ceilWidth = CGFloat(
+      ceilf(Float(size.width))
+    )
+    let ceilHeight = CGFloat(
+      ceilf(Float(size.height))
+    )
+    return CGSize(width: ceilWidth, height: ceilHeight)
+  }
+
+  static func floor(for size: CGSize) -> CGSize {
+    let floorWidth = CGFloat(
+      floorf(Float(size.width))
+    )
+    let floorHeight = CGFloat(
+      floorf(Float(size.height))
+    )
+    return CGSize(width: floorWidth, height: floorHeight)
+  }
+
+  static func ceil(for point: CGPoint) -> CGPoint {
+    let ceilX = CGFloat(
+      ceilf(Float(point.x))
+    )
+    let ceilY = CGFloat(
+      ceilf(Float(point.y))
+    )
+    return CGPoint(
+      x: ceilX,
+      y: ceilY
+    )
+  }
+
+  static func floor(for point: CGPoint) -> CGPoint {
+    let floorX = CGFloat(
+      floorf(Float(point.x))
+    )
+    let floorY = CGFloat(
+      floorf(Float(point.y))
+    )
+    return CGPoint(
+      x: floorX,
+      y: floorY
+    )
+  }
+}
