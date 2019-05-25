@@ -29,13 +29,13 @@ protocol SettingsManaging {
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
+  var urlSchemeSuffix: String? { get set }
+  var appIdentifier: String? { get set }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
 
 class Settings: SettingsManaging {
-  static let loggingBehaviorsPlistKey: String = "FacebookLoggingBehavior"
-
   var accessTokenCache: AccessTokenCaching?
 
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
@@ -259,7 +259,7 @@ class Settings: SettingsManaging {
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
-    guard let rawValues = bundle.object(forInfoDictionaryKey: Settings.loggingBehaviorsPlistKey)
+    guard let rawValues = bundle.object(forInfoDictionaryKey: Settings.PListKeys.loggingBehaviors)
       as? [String] else {
         return
     }
@@ -284,6 +284,12 @@ class Settings: SettingsManaging {
 
   private func cache(_ value: Any, forProperty property: PropertyStorageKey) {
     store.set(value, forKey: property.rawValue)
+  }
+
+  enum PListKeys {
+    static let loggingBehaviors: String = "FacebookLoggingBehavior"
+    static let cfBundleURLTypes: String = "CFBundleURLTypes"
+    static let cfBundleURLSchemes: String = "CFBundleURLSchemes"
   }
 
   enum PropertyStorageKey: String {

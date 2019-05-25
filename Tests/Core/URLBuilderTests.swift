@@ -28,14 +28,34 @@ class URLBuilderTests: XCTestCase {
   }
 
   func testKnownValues() {
-    XCTAssertEqual(URLBuilder.hostname, "facebook.com",
+    XCTAssertEqual(URLBuilder.defaultHostname, "facebook.com",
                    "There should be a known hostname for building facebook urls")
+    XCTAssertEqual(URLBuilder.defaultScheme, "https",
+                   "There should be a known scheme for building facebook urls")
+  }
+
+  func testBuildingWithDefaultScheme() {
+    let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname)
+
+    validateBaseUrl(url)
+  }
+
+  func testBuildingWithEmptyScheme() {
+    let url = URLBuilder().buildURL(scheme: "", hostName: URLBuilder.defaultHostname)
+
+    validateBaseUrl(url, scheme: "https")
+  }
+
+  func testBuildingWithCustomScheme() {
+    let url = URLBuilder().buildURL(scheme: "myApp", hostName: URLBuilder.defaultHostname)
+
+    validateBaseUrl(url, scheme: "myApp")
   }
 
   func testBuildingWithUnspecifiedDomainPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: [:])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL()
+    let url = URLBuilder(settings: settings).buildURL(hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url)
   }
@@ -43,7 +63,7 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithEmptyDomainPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": ""])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL()
+    let url = URLBuilder(settings: settings).buildURL(hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url)
   }
@@ -51,57 +71,65 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithDomainPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": "beta"])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL()
+    let url = URLBuilder(settings: settings).buildURL(hostName: URLBuilder.defaultHostname)
 
-    validateBaseUrl(url, withDomainPrefix: "beta")
+    validateBaseUrl(url, prefix: "beta")
   }
 
   func testBuildingWithEmptyPrefix() {
-    let url = URLBuilder().buildURL(withHostPrefix: "")
+    let url = URLBuilder().buildURL(hostPrefix: "", hostName: URLBuilder.defaultHostname)
 
     validateBaseUrl(url)
   }
 
   func testBuildingWithHostPrefix() {
-    let url = URLBuilder().buildURL(withHostPrefix: "m")
+    let url = URLBuilder().buildURL(hostPrefix: "m", hostName: URLBuilder.defaultHostname)
 
-    validateBaseUrl(url, withPrefix: "m")
+    validateBaseUrl(url, prefix: "m")
   }
 
   func testBuildingWithDomainAndHostPrefix() {
     let fakeBundle = FakeBundle(infoDictionary: ["FacebookDomainPrefix": "beta"])
     let settings = Settings(bundle: fakeBundle)
-    let url = URLBuilder(settings: settings).buildURL(withHostPrefix: "m")
+    let url = URLBuilder(settings: settings).buildURL(hostPrefix: "m", hostName: URLBuilder.defaultHostname)
 
-    validateBaseUrl(url, withPrefix: "m", withDomainPrefix: "beta")
+    validateBaseUrl(url, prefix: "m", domainPrefix: "beta")
+  }
+
+  func testBuildingWithEmptyHostName() {
+    let url = URLBuilder().buildURL(hostName: "")
+
+    validateBaseUrl(url)
+  }
+
+  func testBuildingWithCustomHostName() {
+    let url = URLBuilder().buildURL(hostName: "example.com")
+
+    validateBaseUrl(url, hostName: "example.com")
   }
 
   func testBuildingWithDefaultPath() {
-    let url = URLBuilder().buildURL()
-    let expectedPathComponents = [
-      "/",
-      Settings().graphAPIVersion.description
-    ]
+    let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname)
+    let expectedPathComponents = ["/"]
 
     XCTAssertEqual(url?.pathComponents, expectedPathComponents,
                    "Should build a url with only the expected path components")
   }
 
-  func testBuildingWithPath() {
-    let url = URLBuilder().buildURL(path: "me")
+  func testBuildingWithCustomPath() {
+    let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname, path: "me")
     let expectedPathComponents = [
       "/",
-      Settings().graphAPIVersion.description,
       "me"
     ]
-    validateBaseUrl(url, withPath: "/v3.2/me")
+    validateBaseUrl(url, path: "/v3.2/me")
 
     XCTAssertEqual(url?.pathComponents, expectedPathComponents,
                    "Should build a url with only the expected path components")
   }
 
   func testBuildingWithoutQueryParameters() {
-    guard let url = URLBuilder().buildURL(),
+    guard let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false
@@ -117,7 +145,7 @@ class URLBuilderTests: XCTestCase {
   func testBuildingWithQueryParameters() {
     let expectedQueryItems = URLQueryItemBuilder.build(from: ["limit": 5])
 
-    guard let url = URLBuilder().buildURL(queryItems: expectedQueryItems),
+    guard let url = URLBuilder().buildURL(hostName: URLBuilder.defaultHostname, queryItems: expectedQueryItems),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false
@@ -155,8 +183,8 @@ class URLBuilderTests: XCTestCase {
 
     validateBaseUrl(
       url,
-      withPrefix: "graph",
-      withPath: "/v3.2/me"
+      prefix: "graph",
+      path: "/v3.2/me"
     )
   }
 
@@ -167,7 +195,7 @@ class URLBuilderTests: XCTestCase {
 
     guard let url = URLBuilder().buildURL(
       for: request,
-      withHostPrefix: "foo"
+      hostPrefix: "foo"
       ),
       let queryItems = URLComponents(
         url: url,
@@ -185,17 +213,19 @@ class URLBuilderTests: XCTestCase {
 
     validateBaseUrl(
       url,
-      withPrefix: "foo",
-      withPath: "/v3.2/me"
+      prefix: "foo",
+      path: "/v3.2/me"
     )
   }
 
   private func validateBaseUrl(
     _ url: URL?,
-    withPrefix prefix: String = "",
-    withDomainPrefix domainPrefix: String = "",
-    withPath path: String? = nil,
-    forVersion version: GraphAPIVersion = Settings.shared.graphAPIVersion,
+    scheme: String = URLBuilder.defaultScheme,
+    prefix: String = "",
+    domainPrefix: String = "",
+    hostName: String = URLBuilder.defaultHostname,
+    path: String? = nil,
+    version: GraphAPIVersion? = nil,
     inFile file: StaticString = #file,
     atLine line: UInt = #line
     ) {
@@ -206,13 +236,13 @@ class URLBuilderTests: XCTestCase {
         line: line
       )
     }
-    var expectedHost = domainPrefix.isEmpty ? URLBuilder.hostname : "\(domainPrefix).\(URLBuilder.hostname)"
+    var expectedHost = domainPrefix.isEmpty ? hostName : "\(domainPrefix).\(hostName)"
     expectedHost = prefix.isEmpty ? expectedHost : "\(prefix).\(expectedHost)"
 
     XCTAssertEqual(
       url.scheme,
-      "https",
-      "URL should use a secure protocol",
+      scheme,
+      "URL should use the scheme: \(scheme)",
       file: file,
       line: line
     )
@@ -230,15 +260,8 @@ class URLBuilderTests: XCTestCase {
       line: line
     )
     XCTAssertTrue(
-      url.pathComponents.contains(version.description),
+      url.pathComponents.contains(version?.description ?? "/"),
       "URL path should contain information about the graph api version",
-      file: file,
-      line: line
-    )
-    XCTAssertEqual(
-      url.path,
-      path ?? "/v3.2",
-      "URL path should contain the graph api version",
       file: file,
       line: line
     )
