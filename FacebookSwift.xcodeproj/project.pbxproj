@@ -19,8 +19,8 @@
 		F4020CF92283631E00710558 /* VariantCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4020CF82283631E00710558 /* VariantCodingKey.swift */; };
 		F404971A22443D99005EE2EE /* ServerConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971922443D99005EE2EE /* ServerConfigurationManager.swift */; };
 		F404972022444F43005EE2EE /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971F22444F43005EE2EE /* ServerConfiguration.swift */; };
-		F406F86622823703006B0D4E /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F406F86522823703006B0D4E /* Icon.swift */; };
-		F406F8672282376C006B0D4E /* IconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847ED2269219500527D49 /* IconTests.swift */; };
+		F406F86622823703006B0D4E /* Drawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F406F86522823703006B0D4E /* Drawable.swift */; };
+		F406F8672282376C006B0D4E /* DrawableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847ED2269219500527D49 /* DrawableTests.swift */; };
 		F406F8692282378E006B0D4E /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F406F8682282378E006B0D4E /* Logo.swift */; };
 		F407393D2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F407393C2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift */; };
 		F40739412231E4EB0018505A /* URLQueryItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40739402231E4EB0018505A /* URLQueryItemBuilder.swift */; };
@@ -63,6 +63,14 @@
 		F42E3C932268BB9B00287DC4 /* UserProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */; };
 		F42E3C952268BBB900287DC4 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C942268BBB900287DC4 /* UserDefaults+Extensions.swift */; };
 		F42E3C972268C57300287DC4 /* AccessTokenWallet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */; };
+		F4317E592286239300EBF926 /* ButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E582286239300EBF926 /* ButtonTests.swift */; };
+		F4317E5B2286288200EBF926 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5A2286288200EBF926 /* Button.swift */; };
+		F4317E5F22862B8000EBF926 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5E22862B8000EBF926 /* Color.swift */; };
+		F4317E9B2288C4BF00EBF926 /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4317E9A2288C4BF00EBF926 /* ButtonView.xib */; };
+		F4317E9D2289B81300EBF926 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */; };
+		F4317E9F2289B96700EBF926 /* MathUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E9E2289B96700EBF926 /* MathUtility.swift */; };
+		F4317EA12289C03B00EBF926 /* CGFloatExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */; };
+		F4317EA32289DC7F00EBF926 /* MathUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317EA22289DC7F00EBF926 /* MathUtilityTests.swift */; };
 		F432E9F22236F95E007D3A34 /* GraphRequestMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */; };
 		F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */; };
 		F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F52236FFA6007D3A34 /* FakeError.swift */; };
@@ -134,6 +142,11 @@
 		F46DCFDD22734E7800EFE037 /* RemoteAppLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDC22734E7800EFE037 /* RemoteAppLinkTarget.swift */; };
 		F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */; };
 		F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFE0227364F500EFE037 /* AppLink.swift */; };
+		F46DDCBC228B49BB00BA7359 /* CGSizeExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */; };
+		F46DDCBE228B4A2200BA7359 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */; };
+		F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */; };
+		F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDD00228C8BB700BA7359 /* DeviceButton.swift */; };
+		F46DDD03228C8C1400BA7359 /* DeviceButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */; };
 		F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056D82232CEEF00BE526B /* FakeLogger.swift */; };
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
@@ -283,7 +296,7 @@
 		F404971922443D99005EE2EE /* ServerConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationManager.swift; sourceTree = "<group>"; };
 		F404971D22444EDD005EE2EE /* FakeServerConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeServerConfigurationProvider.swift; sourceTree = "<group>"; };
 		F404971F22444F43005EE2EE /* ServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfiguration.swift; sourceTree = "<group>"; };
-		F406F86522823703006B0D4E /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		F406F86522823703006B0D4E /* Drawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawable.swift; sourceTree = "<group>"; };
 		F406F8682282378E006B0D4E /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
 		F407393C2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestQueryItemBuilderTests.swift; sourceTree = "<group>"; };
 		F40739402231E4EB0018505A /* URLQueryItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLQueryItemBuilder.swift; sourceTree = "<group>"; };
@@ -326,6 +339,14 @@
 		F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStore.swift; sourceTree = "<group>"; };
 		F42E3C942268BBB900287DC4 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccessTokenWallet+Extensions.swift"; sourceTree = "<group>"; };
+		F4317E582286239300EBF926 /* ButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTests.swift; sourceTree = "<group>"; };
+		F4317E5A2286288200EBF926 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		F4317E5E22862B8000EBF926 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		F4317E9A2288C4BF00EBF926 /* ButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
+		F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		F4317E9E2289B96700EBF926 /* MathUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtility.swift; sourceTree = "<group>"; };
+		F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensionsTests.swift; sourceTree = "<group>"; };
+		F4317EA22289DC7F00EBF926 /* MathUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtilityTests.swift; sourceTree = "<group>"; };
 		F432E9F12236F95E007D3A34 /* GraphRequestMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadataTests.swift; sourceTree = "<group>"; };
 		F432E9F32236FA53007D3A34 /* GraphRequestMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestMetadata.swift; sourceTree = "<group>"; };
 		F432E9F52236FFA6007D3A34 /* FakeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeError.swift; sourceTree = "<group>"; };
@@ -347,7 +368,7 @@
 		F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewTests.swift; sourceTree = "<group>"; };
 		F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizingConfigurationTests.swift; sourceTree = "<group>"; };
 		F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanSilhouetteIcon.swift; sourceTree = "<group>"; };
-		F44847ED2269219500527D49 /* IconTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTests.swift; sourceTree = "<group>"; };
+		F44847ED2269219500527D49 /* DrawableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawableTests.swift; sourceTree = "<group>"; };
 		F44847F8226928E300527D49 /* TestAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestAssets.xcassets; sourceTree = "<group>"; };
 		F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserProfileProvider.swift; sourceTree = "<group>"; };
 		F4484807226F770400527D49 /* SampleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleError.swift; sourceTree = "<group>"; };
@@ -397,6 +418,11 @@
 		F46DCFDC22734E7800EFE037 /* RemoteAppLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAppLinkTarget.swift; sourceTree = "<group>"; };
 		F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkTests.swift; sourceTree = "<group>"; };
 		F46DCFE0227364F500EFE037 /* AppLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLink.swift; sourceTree = "<group>"; };
+		F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensionTests.swift; sourceTree = "<group>"; };
+		F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		F46DDD00228C8BB700BA7359 /* DeviceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceButton.swift; sourceTree = "<group>"; };
+		F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceButtonTests.swift; sourceTree = "<group>"; };
 		F47056D82232CEEF00BE526B /* FakeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLogger.swift; sourceTree = "<group>"; };
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -620,6 +646,7 @@
 				F4516B7F225F7F9200979DD2 /* JSONParser.swift */,
 				524A49B6225EA2ED00786C11 /* KeychainStore.swift */,
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
+				F4317E9E2289B96700EBF926 /* MathUtility.swift */,
 				F4516B8B225FA44A00979DD2 /* MimeType.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F4C3C5352277C43E004B487E /* RemoteAppLink.swift */,
@@ -736,8 +763,11 @@
 		F44847DD2268E37400527D49 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F4317E5A2286288200EBF926 /* Button.swift */,
+				F4317E5E22862B8000EBF926 /* Color.swift */,
+				F46DDD00228C8BB700BA7359 /* DeviceButton.swift */,
+				F406F86522823703006B0D4E /* Drawable.swift */,
 				F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */,
-				F406F86522823703006B0D4E /* Icon.swift */,
 				F4C3C5242273CABC004B487E /* ImageSizingConfiguration.swift */,
 				F406F8682282378E006B0D4E /* Logo.swift */,
 				F44847DB2268E36E00527D49 /* ProfilePictureView.swift */,
@@ -799,6 +829,8 @@
 			children = (
 				F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */,
 				F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */,
+				F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */,
+				F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */,
 				F44DB6B3222B022E0083506E /* NotificationCenter+Extensions.swift */,
 				F44DB6AF222B019D0083506E /* NotificationName+Extensions.swift */,
 				F447152A22440B610013495F /* ProcessInfo+Extensions.swift */,
@@ -837,10 +869,16 @@
 				F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */,
 				F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */,
 				F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */,
+				F4317E582286239300EBF926 /* ButtonTests.swift */,
+				F4317E9A2288C4BF00EBF926 /* ButtonView.xib */,
+				F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */,
+				F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
 				F44715222243E3FF0013495F /* DeveloperErrorStringsTests.swift */,
+				F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */,
+				F44847ED2269219500527D49 /* DrawableTests.swift */,
 				F408BEB3223988BD0068D24A /* ErrorCategoryTests.swift */,
 				F4C32D9E223DA12200FF1F86 /* ErrorConfigurationBuilderTests.swift */,
 				F4225DDC223F1FB700F4DCFE /* ErrorConfigurationEntryBuilderTests.swift */,
@@ -862,7 +900,6 @@
 				F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */,
 				F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */,
 				F42687C42230772600A62C2E /* GraphRequestTests.swift */,
-				F44847ED2269219500527D49 /* IconTests.swift */,
 				F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */,
 				F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */,
 				F49FA47D222880FE0008CAD6 /* Info.plist */,
@@ -873,6 +910,7 @@
 				F48A749722399C97007192F6 /* LocalizationsTests.swift */,
 				F447151D2242FF010013495F /* LoggerTests.swift */,
 				F4B3401622430F9A00912F0F /* LoggingBehaviorTests.swift */,
+				F4317EA22289DC7F00EBF926 /* MathUtilityTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
 				F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */,
 				F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */,
@@ -884,6 +922,7 @@
 				F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */,
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
 				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
+				F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */,
 				F44847F8226928E300527D49 /* TestAssets.xcassets */,
 				F4932E0822807F510020C282 /* TokenStringTests.swift */,
 				F4144C51224D0F6C006C8F9C /* URLBuilderTests.swift */,
@@ -1172,6 +1211,7 @@
 				F4C3C55D227B6F4C004B487E /* validRemoteAppLink.json in Resources */,
 				F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */,
 				F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */,
+				F4317E9B2288C4BF00EBF926 /* ButtonView.xib in Resources */,
 				F4C3C53C2278C4D7004B487E /* validRemoteAppLinkDetail.json in Resources */,
 				F4C3C52A22776208004B487E /* validAppLinkTarget.json in Resources */,
 				F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */,
@@ -1231,6 +1271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F404971A22443D99005EE2EE /* ServerConfigurationManager.swift in Sources */,
+				F4317E5F22862B8000EBF926 /* Color.swift in Sources */,
 				F44DB6BD222B0DD20083506E /* GraphRequestPiggybackManager.swift in Sources */,
 				F48A749F2239A3C7007192F6 /* Localizable.swift in Sources */,
 				F4020CF92283631E00710558 /* VariantCodingKey.swift in Sources */,
@@ -1247,6 +1288,7 @@
 				F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F4932E0B22808DB50020C282 /* TokenString.swift in Sources */,
+				F4317E9D2289B81300EBF926 /* CGFloat+Extensions.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F46DCFD7227267F000EFE037 /* UserData.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
@@ -1275,6 +1317,7 @@
 				F42E3C932268BB9B00287DC4 /* UserProfileStore.swift in Sources */,
 				F41640F7224C27A000842120 /* ErrorRecoveryStrings.swift in Sources */,
 				F429ACD12280DD31000916BF /* Settings+Extensions.swift in Sources */,
+				F4317E5B2286288200EBF926 /* Button.swift in Sources */,
 				F4C3C561227BA339004B487E /* AppLinkService.swift in Sources */,
 				F42E3C7B2267E45100287DC4 /* UserProfileService.swift in Sources */,
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
@@ -1285,6 +1328,7 @@
 				F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */,
 				F42E3C972268C57300287DC4 /* AccessTokenWallet+Extensions.swift in Sources */,
 				F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */,
+				F46DDCBE228B4A2200BA7359 /* CGSize+Extensions.swift in Sources */,
 				F42E3C7A2267E45100287DC4 /* RemoteUserProfile.swift in Sources */,
 				F4225DE5223F4F5100F4DCFE /* ErrorStrings.swift in Sources */,
 				523CAE4B225EC94C00D196C3 /* String+Extensions.swift in Sources */,
@@ -1293,6 +1337,7 @@
 				F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */,
 				F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */,
 				F4C3C54D227A443E004B487E /* AppLinkTargetBuilder.swift in Sources */,
+				F4317E9F2289B96700EBF926 /* MathUtility.swift in Sources */,
 				F44DB69B2229B37F0083506E /* Settings.swift in Sources */,
 				F4C3C555227B651D004B487E /* AppLinkBuilder.swift in Sources */,
 				F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */,
@@ -1315,7 +1360,8 @@
 				F406F8692282378E006B0D4E /* Logo.swift in Sources */,
 				F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */,
 				F4E1A9EB22416F2200503354 /* ErrorConfigurationEntry.swift in Sources */,
-				F406F86622823703006B0D4E /* Icon.swift in Sources */,
+				F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */,
+				F406F86622823703006B0D4E /* Drawable.swift in Sources */,
 				F40739412231E4EB0018505A /* URLQueryItemBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1339,6 +1385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F48A74B12239B81B007192F6 /* DefaultErrorStringTests.swift in Sources */,
+				F46DDD03228C8C1400BA7359 /* DeviceButtonTests.swift in Sources */,
 				F447151C2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift in Sources */,
 				F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */,
 				F48A749822399C97007192F6 /* LocalizationsTests.swift in Sources */,
@@ -1382,7 +1429,7 @@
 				F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,
-				F406F8672282376C006B0D4E /* IconTests.swift in Sources */,
+				F406F8672282376C006B0D4E /* DrawableTests.swift in Sources */,
 				F447153422440EE50013495F /* FakeSessionDataTask.swift in Sources */,
 				F4C32DA6223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift in Sources */,
 				F44DB6BF222B10040083506E /* FakeGraphConnectionProvider.swift in Sources */,
@@ -1405,6 +1452,7 @@
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
 				F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
+				F46DDCBC228B49BB00BA7359 /* CGSizeExtensionTests.swift in Sources */,
 				F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */,
 				F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */,
 				F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */,
@@ -1426,9 +1474,12 @@
 				F4C3C52E22779627004B487E /* AppLinkIdiomTests.swift in Sources */,
 				F48A74A12239B4E0007192F6 /* LocalizedStringValidation.swift in Sources */,
 				F4B8832F22305798000971C9 /* CoreErrorTests.swift in Sources */,
+				F4317E592286239300EBF926 /* ButtonTests.swift in Sources */,
+				F4317EA12289C03B00EBF926 /* CGFloatExtensionsTests.swift in Sources */,
 				F447151E2242FF010013495F /* LoggerTests.swift in Sources */,
 				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
 				F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */,
+				F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */,
 				F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */,
 				F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */,
 				F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */,
@@ -1444,6 +1495,7 @@
 				F4C3C559227B68A3004B487E /* SampleAppLinkTarget.swift in Sources */,
 				F4C3C52C227762A7004B487E /* SampleRawRemoteAppLinkTarget.swift in Sources */,
 				F4C3C5382278C236004B487E /* SampleRemoteAppLinkTarget.swift in Sources */,
+				F4317EA32289DC7F00EBF926 /* MathUtilityTests.swift in Sources */,
 				F4C32D96223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift in Sources */,
 				F447153222440EB60013495F /* FakeSession.swift in Sources */,
 				F4C3C5342277C3B6004B487E /* SampleRawRemoteAppLink.swift in Sources */,

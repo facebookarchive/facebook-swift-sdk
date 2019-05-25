@@ -18,31 +18,29 @@
 
 import UIKit
 
-protocol Icon {
-  static func image(size: CGSize, scale: CGFloat, color: UIColor) -> UIImage?
-  static func path(withSize size: CGSize) -> CGPath
+protocol Drawable {
+  func path(withSize size: CGSize) -> CGPath
 }
 
-extension Icon {
-  static func image(
+extension Drawable {
+  func image(
     size: CGSize,
     scale: CGFloat = UIScreen.main.scale,
     color: UIColor = .white
-    ) -> UIImage? {
-    guard size != .zero else {
-      return nil
-    }
-
+    ) -> UIImage {
     defer {
       UIGraphicsEndImageContext()
     }
 
     UIGraphicsBeginImageContextWithOptions(size, false, scale)
-    let context = UIGraphicsGetCurrentContext()
-    context?.addPath(path(withSize: size))
-    context?.setFillColor(color.cgColor)
-    context?.fillPath()
+    guard let context = UIGraphicsGetCurrentContext() else {
+      return UIImage()
+    }
 
-    return UIGraphicsGetImageFromCurrentImageContext()
+    context.addPath(path(withSize: size))
+    context.setFillColor(color.cgColor)
+    context.fillPath()
+
+    return UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
   }
 }

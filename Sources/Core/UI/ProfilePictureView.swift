@@ -245,7 +245,7 @@ public class ProfilePictureView: UIView {
   func setPlaceholderImage() {
     placeholderImageIsValid = true
     hasProfileImage = false
-    let placeholderImage = HumanSilhouetteIcon.image(
+    let placeholderImage = HumanSilhouetteIcon().image(
       size: imageView.bounds.size,
       color: HumanSilhouetteIcon.placeholderImageColor
     )
