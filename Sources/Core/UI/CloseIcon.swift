@@ -21,11 +21,6 @@ import UIKit
 enum CloseIcon {
   private static let gradientColors: CFArray = [0.7, 0.3, 0.1, 0.0]
     .map { UIColor.white.withAlphaComponent($0).cgColor } as CFArray
-    UIColor.white.withAlphaComponent(0.7).cgColor,
-    UIColor.white.withAlphaComponent(0.3).cgColor,
-    UIColor.white.withAlphaComponent(0.1).cgColor,
-    UIColor.white.withAlphaComponent(0.0).cgColor
-  ] as CFArray
   private static let gradientLocations: [CGFloat] = [
     0.7,
     0.8,
@@ -70,7 +65,7 @@ enum CloseIcon {
       x: rect.midX - step / 6,
       y: rect.midY + step / 4
     )
-    context?.drawRadialGradient(
+    context.drawRadialGradient(
       gradient,
       startCenter: center,
       startRadius: 0.0,
@@ -82,12 +77,12 @@ enum CloseIcon {
     // outer circle
     rect = rect.insetBy(dx: step, dy: step).integral
     UIColor.white.setFill()
-    context?.fillEllipse(in: rect)
+    context.fillEllipse(in: rect)
 
     // inner circle
     rect = rect.insetBy(dx: step, dy: step).integral
     UIColor.black.setFill()
-    context?.fillEllipse(in: rect)
+    context.fillEllipse(in: rect)
 
     // cross
     rect = rect.insetBy(dx: step, dy: step).integral
@@ -96,14 +91,14 @@ enum CloseIcon {
     rect.size.height = lineWidth
     UIColor.white.setFill()
 
-    context?.translateBy(x: size.width / 2, y: size.height / 2)
-    context?.rotate(by: CGFloat(Double.pi / 4))
-    context?.translateBy(x: -size.width / 2, y: -size.width / 2)
-    context?.fill(rect)
-    context?.translateBy(x: size.width / 2, y: size.height / 2)
-    context?.rotate(by: CGFloat(Double.pi / 2))
-    context?.translateBy(x: -size.width / 2, y: -size.height / 2)
-    context?.fill(rect)
+    context.translateBy(x: size.width / 2, y: size.height / 2)
+    context.rotate(by: CGFloat(Double.pi / 4))
+    context.translateBy(x: -size.width / 2, y: -size.width / 2)
+    context.fill(rect)
+    context.translateBy(x: size.width / 2, y: size.height / 2)
+    context.rotate(by: CGFloat(Double.pi / 2))
+    context.translateBy(x: -size.width / 2, y: -size.height / 2)
+    context.fill(rect)
 
     guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
       return UIImage()
