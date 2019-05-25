@@ -16,30 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import UIKit
 
-extension Notification.Name {
+extension CGFloat {
   /**
-   Notification indicating that the `currentAccessToken` has changed.
+   Limits a CGFloat value, using the scale to limit to pixels (instead of points).
 
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
+   The limitFunction is frequention floorf, ceilf or roundf.  If the scale is 2.0,
+   you may get back values of *.5 to correspond to pixels.
    */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
-
-  /**
-   Notification indicating that the `currentProfile` has changed.
-
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
-
-  // swiftlint:disable:next identifier_name
-  static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
-    = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+  typealias LimitFunction = (Float) -> Float
+  static func pointsForScreenPixels(
+    limitFunction: LimitFunction,
+    screenScale: CGFloat,
+    pointValue: CGFloat
+    ) -> CGFloat {
+    let limitedFloat = limitFunction(Float(pointValue * screenScale))
+    return CGFloat(limitedFloat) / screenScale
+  }
 }

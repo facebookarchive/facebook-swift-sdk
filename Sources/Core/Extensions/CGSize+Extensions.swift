@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,16 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import FBSDKCoreKit
-import Foundation
+import UIKit
 
-class FBSDKDeviceButton {
-    private func attributedTitleString(from string: String?) -> NSAttributedString? {
-    }
+extension CGSize {
+  /**
+   Returns a size inset by a `UIEdgeInsets`.
+   */
+  func inset(by insets: UIEdgeInsets) -> CGSize {
+    var rect = CGRect.zero
+    rect.size = self
+    return rect.inset(by: insets).size
+  }
 
-    private func sizeThatFits(_ size: CGSize, title AppEvents.title: String?) -> CGSize {
-    }
-
-    private func sizeThatFits(_ size: CGSize, attributedTitle AppEvents.title: NSAttributedString?) -> CGSize {
-    }
+  /**
+   Outsets a CGSize with the insets in a UIEdgeInsets.
+   */
+  func outset(by insets: UIEdgeInsets) -> CGSize {
+    return CGSize(
+      width: insets.left + width + insets.right,
+      height: insets.top + height + insets.bottom
+    )
+  }
 }

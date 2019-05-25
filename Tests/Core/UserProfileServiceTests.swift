@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length file_length force_unwrapping
+// swiftlint:disable type_body_length file_length
 
 @testable import FacebookCore
 import XCTest
@@ -389,6 +389,7 @@ class UserProfileServiceTests: XCTestCase {
   func testImageURLDefaultProfileAlternateIdentifier() {
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
+
     let request = service.imageRequest(
       for: "user123",
       sizingConfiguration: sizingConfiguration
@@ -676,10 +677,10 @@ class UserProfileServiceTests: XCTestCase {
     wallet.setCurrent(token)
 
     // Stub a fetch result
-    let image = HumanSilhouetteIcon.image(
+    let image = HumanSilhouetteIcon().image(
       size: sizingConfiguration.size,
       color: .red
-      )!
+    )
 
     let imageData = image.pngData()
     fakeConnection.stubGetObjectCompletionResult = .success(imageData)
