@@ -43,6 +43,10 @@
 		F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */; };
 		F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4225DE2223F4ED700F4DCFE /* ErrorStringsTests.swift */; };
 		F4225DE5223F4F5100F4DCFE /* ErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4225DE4223F4F5100F4DCFE /* ErrorStrings.swift */; };
+		F422F0812284A29E00AFD0DF /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422F0802284A29E00AFD0DF /* AudioService.swift */; };
+		F422F0832284A37D00AFD0DF /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422F0822284A37D00AFD0DF /* FileManager+Extensions.swift */; };
+		F422F0852284A40000AFD0DF /* FakeFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422F0842284A40000AFD0DF /* FakeFileManager.swift */; };
+		F422F0872284A44600AFD0DF /* FakeAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422F0862284A44600AFD0DF /* FakeAudioService.swift */; };
 		F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */; };
 		F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42687C42230772600A62C2E /* GraphRequestTests.swift */; };
 		F429ACD12280DD31000916BF /* Settings+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F429ACD02280DD31000916BF /* Settings+Extensions.swift */; };
@@ -228,6 +232,8 @@
 		F4D5DAE422492BCD0014C14D /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
 		F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */; };
 		F4D694912273B1FD00A0B1CD /* UserProfileServiceConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */; };
+		F4DC46FF2283678F00C0A309 /* AudioResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DC46FE2283678F00C0A309 /* AudioResourceLoader.swift */; };
+		F4DC470122836F6B00C0A309 /* AudioResourceLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */; };
 		F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */; };
 		F4E1A9EA22416F2200503354 /* DefaultErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E422416F2200503354 /* DefaultErrorStrings.swift */; };
 		F4E1A9EB22416F2200503354 /* ErrorConfigurationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E522416F2200503354 /* ErrorConfigurationEntry.swift */; };
@@ -317,6 +323,10 @@
 		F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationEntryListTests.swift; sourceTree = "<group>"; };
 		F4225DE2223F4ED700F4DCFE /* ErrorStringsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStringsTests.swift; sourceTree = "<group>"; };
 		F4225DE4223F4F5100F4DCFE /* ErrorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStrings.swift; sourceTree = "<group>"; };
+		F422F0802284A29E00AFD0DF /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		F422F0822284A37D00AFD0DF /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
+		F422F0842284A40000AFD0DF /* FakeFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFileManager.swift; sourceTree = "<group>"; };
+		F422F0862284A44600AFD0DF /* FakeAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAudioService.swift; sourceTree = "<group>"; };
 		F42687BE223076F400A62C2E /* GraphRequestSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerTests.swift; sourceTree = "<group>"; };
 		F42687C42230772600A62C2E /* GraphRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestTests.swift; sourceTree = "<group>"; };
 		F429ACD02280DD31000916BF /* Settings+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Extensions.swift"; sourceTree = "<group>"; };
@@ -504,6 +514,8 @@
 		F4D5DAE322492BCD0014C14D /* FakeBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBundle.swift; sourceTree = "<group>"; };
 		F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileServiceConfigurationTests.swift; sourceTree = "<group>"; };
+		F4DC46FE2283678F00C0A309 /* AudioResourceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResourceLoader.swift; sourceTree = "<group>"; };
+		F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResourceLoaderTests.swift; sourceTree = "<group>"; };
 		F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationEntryList.swift; sourceTree = "<group>"; };
 		F4E1A9E422416F2200503354 /* DefaultErrorStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorStrings.swift; sourceTree = "<group>"; };
 		F4E1A9E522416F2200503354 /* ErrorConfigurationEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorConfigurationEntry.swift; sourceTree = "<group>"; };
@@ -623,6 +635,8 @@
 				F4C3C560227BA339004B487E /* AppLinkService.swift */,
 				F4C3C556227B6686004B487E /* AppLinkTarget.swift */,
 				F4C3C54C227A443E004B487E /* AppLinkTargetBuilder.swift */,
+				F4DC46FE2283678F00C0A309 /* AudioResourceLoader.swift */,
+				F422F0802284A29E00AFD0DF /* AudioService.swift */,
 				F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */,
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
@@ -777,9 +791,11 @@
 			isa = PBXGroup;
 			children = (
 				F44DB6A02229C50E0083506E /* FakeAccessTokenCache.swift */,
+				F422F0862284A44600AFD0DF /* FakeAudioService.swift */,
 				F4D5DAE322492BCD0014C14D /* FakeBundle.swift */,
 				F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */,
 				F432E9F52236FFA6007D3A34 /* FakeError.swift */,
+				F422F0842284A40000AFD0DF /* FakeFileManager.swift */,
 				F44DB6BE222B10040083506E /* FakeGraphConnectionProvider.swift */,
 				F44DB6C0222B11620083506E /* FakeGraphRequestConnection.swift */,
 				F480D90C2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift */,
@@ -829,6 +845,7 @@
 				F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */,
 				F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */,
 				F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */,
+				F422F0822284A37D00AFD0DF /* FileManager+Extensions.swift */,
 				F44DB6B3222B022E0083506E /* NotificationCenter+Extensions.swift */,
 				F44DB6AF222B019D0083506E /* NotificationName+Extensions.swift */,
 				F447152A22440B610013495F /* ProcessInfo+Extensions.swift */,
@@ -866,6 +883,7 @@
 				F4C3C552227B5B3E004B487E /* AppLinkTargetBuilderTests.swift */,
 				F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */,
 				F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */,
+				F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */,
 				F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */,
 				F4317E582286239300EBF926 /* ButtonTests.swift */,
 				F4317E9A2288C4BF00EBF926 /* ButtonView.xib */,
@@ -1276,6 +1294,7 @@
 				F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */,
 				F46DCFDD22734E7800EFE037 /* RemoteAppLinkTarget.swift in Sources */,
 				F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */,
+				F422F0812284A29E00AFD0DF /* AudioService.swift in Sources */,
 				524A49B9225EA39300786C11 /* SecureStore.swift in Sources */,
 				F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */,
 				F4E1A9ED22416F2200503354 /* RemoteErrorCodeGroup.swift in Sources */,
@@ -1298,9 +1317,11 @@
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
 				F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */,
+				F422F0832284A37D00AFD0DF /* FileManager+Extensions.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */,
+				F4DC46FF2283678F00C0A309 /* AudioResourceLoader.swift in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
 				F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */,
@@ -1415,6 +1436,7 @@
 				F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */,
 				F4020CF72283556C00710558 /* VariantCodingKeyTests.swift in Sources */,
 				F4C32D97223D990A00FF1F86 /* SampleLocalizedStrings.swift in Sources */,
+				F422F0872284A44600AFD0DF /* FakeAudioService.swift in Sources */,
 				F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */,
 				F447152E22440CD30013495F /* FakeProcessInfo.swift in Sources */,
 				F429ACD32280DDF2000916BF /* AppLinkServiceConfigurationTests.swift in Sources */,
@@ -1484,6 +1506,7 @@
 				F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */,
 				F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */,
 				F44715252243EDB10013495F /* SampleNSError.swift in Sources */,
+				F4DC470122836F6B00C0A309 /* AudioResourceLoaderTests.swift in Sources */,
 				F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */,
 				F4516B7E225F7ED900979DD2 /* SampleGraphResponse.swift in Sources */,
 				F480D9092235CF83001AB8D3 /* GraphRequestConnectionStateTests.swift in Sources */,
@@ -1502,6 +1525,7 @@
 				F4C3C54F227A4CFD004B487E /* RemoteAppLinkTarget+Extensions.swift in Sources */,
 				F408BEAE223986040068D24A /* ErrorConfigurationEntryTests.swift in Sources */,
 				F4144A10222DAFCD00CB83E0 /* PermissionTests.swift in Sources */,
+				F422F0852284A40000AFD0DF /* FakeFileManager.swift in Sources */,
 				520D344D2265325900CEE2ED /* KeychainStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
