@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,11 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import FBSDKCoreKit
 import UIKit
 
-/*
-  An internal base class for device related flows.
+extension UIColor {
+  convenience init(red: UInt8, green: UInt8, blue: UInt8, alpha: CGFloat = 1) {
+    self.init(
+      red: UIColor.normalize8BitColor(red),
+      green: UIColor.normalize8BitColor(green),
+      blue: UIColor.normalize8BitColor(blue),
+      alpha: alpha
+    )
+  }
 
- This is an internal API that should not be used directly and is subject to change.
- */
+  private static func normalize8BitColor(_ value: UInt8) -> CGFloat {
+    return CGFloat(value) / 255
+  }
+}

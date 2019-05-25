@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import UIKit
 
 extension String {
   /**
@@ -48,5 +48,35 @@ extension String {
       .enumerated()
       .map { $0.offset > 0 ? $0.element.capitalized : $0.element.lowercased() }
       .joined()
+  }
+
+  func textSize(
+    font: UIFont,
+    constrainingSize: CGSize,
+    lineBreakMode: NSLineBreakMode
+    ) -> CGSize {
+    guard !self.isEmpty else {
+      return .zero
+    }
+
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineBreakMode = lineBreakMode
+    let attributes = [
+      NSAttributedString.Key.font: font,
+      NSAttributedString.Key.paragraphStyle: paragraphStyle
+    ]
+
+    let attributedString = NSAttributedString(string: self, attributes: attributes)
+    let boundingRectSize = attributedString.boundingRect(
+      with: constrainingSize,
+      options: NSStringDrawingOptions
+        .usesDeviceMetrics
+        .union(.usesLineFragmentOrigin)
+        .union(.usesFontLeading),
+      context: nil
+      ).size
+    let size = MathUtility.ceil(for: boundingRectSize)
+
+    return MathUtility.ceil(for: size)
   }
 }
