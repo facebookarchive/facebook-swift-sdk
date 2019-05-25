@@ -168,7 +168,7 @@ class AudioResourceLoaderTests: XCTestCase {
       XCTFail("Should throw a meaningful error on failure to create a system sound")
     } catch {
       XCTAssertEqual(
-        error as? AudioResourceLoader.SystemError, .soundCreationFailed,
+        error as? AudioResourceLoader.AudioSystemError, .soundCreationFailed,
         "Should throw a meaningful error on failure to create a system sound")
     }
   }
@@ -230,7 +230,7 @@ class AudioResourceLoaderTests: XCTestCase {
       XCTFail("Should throw a meaningful error on failure to create a system sound for playback")
     } catch {
       XCTAssertEqual(
-        error as? AudioResourceLoader.SystemError, .soundCreationFailed,
+        error as? AudioResourceLoader.AudioSystemError, .soundCreationFailed,
         "Should throw a meaningful error on failure to create a system sound for playback")
     }
   }

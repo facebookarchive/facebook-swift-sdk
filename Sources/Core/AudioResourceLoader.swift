@@ -89,7 +89,7 @@ struct AudioResourceLoader {
       )
 
       guard status == kAudioServicesNoError else {
-        throw SystemError.soundCreationFailed
+        throw AudioSystemError.soundCreationFailed
       }
 
       cache.updateValue(systemSoundIdentifier, forKey: resource.name)
@@ -103,7 +103,7 @@ struct AudioResourceLoader {
     audioService.playSystemSound(with: systemSoundIdentifier)
   }
 
-  enum SystemError: FBError {
+  enum AudioSystemError: FBError {
     case soundCreationFailed
   }
 }
