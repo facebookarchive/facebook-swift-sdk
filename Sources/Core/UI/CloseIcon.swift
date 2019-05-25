@@ -43,7 +43,9 @@ enum CloseIcon {
 
     UIGraphicsBeginImageContextWithOptions(size, false, scale)
 
-    let context = UIGraphicsGetCurrentContext()
+    guard let context = UIGraphicsGetCurrentContext() else {
+      return UIImage()
+    }
     let iconSize = min(size.width, size.height)
     var rect = CGRect(
       x: (size.width - iconSize) / 2,
