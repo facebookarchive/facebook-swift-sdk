@@ -21,11 +21,12 @@
 import Foundation
 
 class FakeBundle: InfoDictionaryProviding {
-  var infoDictionary: [String: Any?]
+  var infoDictionary: [String: Any]?
+
   private(set) var lastCapturedKey: String?
   private(set) var capturedKeys = [String]()
 
-  init(infoDictionary: [String: Any?]) {
+  init(infoDictionary: [String: Any] = [:]) {
     self.infoDictionary = infoDictionary
   }
 
@@ -33,7 +34,7 @@ class FakeBundle: InfoDictionaryProviding {
     // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
     lastCapturedKey = key
     capturedKeys.append(key)
-    return infoDictionary[key] as Any?
+    return infoDictionary?[key] as Any?
   }
 
   func reset() {

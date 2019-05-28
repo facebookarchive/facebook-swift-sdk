@@ -17,29 +17,27 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import XCTest
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class PListURLConfigurationTests: XCTestCase {
+  func testDecodingURLSchemesFromPList() {
+    guard let url = Bundle(for: PListURLConfigurationTests.self).url(forResource: "Info", withExtension: "plist") else {
+      return XCTFail("There should be a plist in the test bundle")
+    }
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+    let decoder = PropertyListDecoder()
+    do {
+      let config = try decoder.decode(PListURLConfiguration.self, from: Data(contentsOf: url))
+      guard let firstScheme = config.types.first else {
+        return XCTFail("Should have a url scheme nested under the first type")
+      }
 
-  init(
-    appIdentifier: String = "foo",
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
-    ) {
-    self.appIdentifier = appIdentifier
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
+      XCTAssertEqual(firstScheme.urlSchemes.count, 1,
+                     "Should have expected number of entries")
+      XCTAssertEqual(firstScheme.urlSchemes.first, "example.com",
+                     "Should have expected scheme")
+    } catch {
+      XCTFail("Should extract a plist url configuration")
+    }
   }
 }

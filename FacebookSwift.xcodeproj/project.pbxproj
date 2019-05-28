@@ -81,6 +81,19 @@
 		F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F722370B32007D3A34 /* GraphRequestConnecting.swift */; };
 		F432E9FA22370C07007D3A34 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */; };
 		F432E9FC22370C9C007D3A34 /* SessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9FB22370C9C007D3A34 /* SessionProvider.swift */; };
+		F43AB0282270B55600610974 /* GatekeeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0272270B55600610974 /* GatekeeperTests.swift */; };
+		F43AB02A2270B61600610974 /* Gatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0292270B61600610974 /* Gatekeeper.swift */; };
+		F43AB02C2270BE4F00610974 /* RemoteGatekeeperListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */; };
+		F43AB02F2270BF0200610974 /* validGatekeeperList.json in Resources */ = {isa = PBXBuildFile; fileRef = F43AB02D2270BF0200610974 /* validGatekeeperList.json */; };
+		F43AB0302270BF0200610974 /* validGatekeeper.json in Resources */ = {isa = PBXBuildFile; fileRef = F43AB02E2270BF0200610974 /* validGatekeeper.json */; };
+		F43AB0322270BFB000610974 /* SampleRawRemoteGatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0312270BFB000610974 /* SampleRawRemoteGatekeeper.swift */; };
+		F43AB0342270C0B800610974 /* SampleRawRemoteGatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0332270C0B800610974 /* SampleRawRemoteGatekeeperList.swift */; };
+		F43AB03A2270CDD500610974 /* SampleGatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0392270CDD500610974 /* SampleGatekeeper.swift */; };
+		F43AB03E2270D69400610974 /* GatekeeperServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB03D2270D69400610974 /* GatekeeperServiceTests.swift */; };
+		F43AB0402270D8B600610974 /* GatekeeperStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB03F2270D8B600610974 /* GatekeeperStoreTests.swift */; };
+		F43AB0422270D92500610974 /* GatekeeperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0412270D92500610974 /* GatekeeperStore.swift */; };
+		F43AB0442270E39C00610974 /* GatekeeperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0432270E39C00610974 /* GatekeeperService.swift */; };
+		F43AB04622710E3200610974 /* SampleRemoteGatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */; };
 		F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */; };
 		F447151A2242DBEE0013495F /* URLSessionTaskProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */; };
 		F447151C2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */; };
@@ -93,7 +106,6 @@
 		F447153222440EB60013495F /* FakeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447153122440EB60013495F /* FakeSession.swift */; };
 		F447153422440EE50013495F /* FakeSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447153322440EE50013495F /* FakeSessionDataTask.swift */; };
 		F44847DC2268E36E00527D49 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DB2268E36E00527D49 /* ProfilePictureView.swift */; };
-		F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */; };
 		F44847E82268FD0000527D49 /* ImageSizingConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847E72268FD0000527D49 /* ImageSizingConfigurationTests.swift */; };
 		F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847EB2269195100527D49 /* HumanSilhouetteIcon.swift */; };
 		F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
@@ -136,6 +148,11 @@
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
 		F45E54DD228E0B42008A6011 /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */; };
 		F45E54DF228E0BE6008A6011 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DE228E0BE6008A6011 /* ImageService.swift */; };
+		F45E54F5228F8699008A6011 /* PListURLConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */; };
+		F45E54F7228F87B1008A6011 /* PListURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */; };
+		F45E54FA229319C2008A6011 /* InfoDictionaryProvidingExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */; };
+		F45E54FC229320E1008A6011 /* SampleInfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */; };
+		F45E54FD22935B50008A6011 /* ProfilePictureViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */; };
 		F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */; };
 		F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC222720B5F00EFE037 /* UserDataStore.swift */; };
 		F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */; };
@@ -155,6 +172,7 @@
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
 		F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */; };
+		F47470E42298AC27004FBDB0 /* GatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470E32298AC27004FBDB0 /* GatekeeperList.swift */; };
 		F47853C1222DCF8600A4269C /* CoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47853C0222DCF8600A4269C /* CoreError.swift */; };
 		F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */; };
 		F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D904223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift */; };
@@ -190,7 +208,6 @@
 		F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4BEDA5622414078004F2C7E /* validRemoteErrorConfigurationList.json */; };
 		F4C32D88223D98D400FF1F86 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */; };
 		F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */; };
-		F4C32D8C223D98D400FF1F86 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F4C32D96223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */; };
 		F4C32D97223D990A00FF1F86 /* SampleLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */; };
 		F4C32D98223D990A00FF1F86 /* SampleRawRemoteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */; };
@@ -363,6 +380,19 @@
 		F432E9F722370B32007D3A34 /* GraphRequestConnecting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnecting.swift; sourceTree = "<group>"; };
 		F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		F432E9FB22370C9C007D3A34 /* SessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProvider.swift; sourceTree = "<group>"; };
+		F43AB0272270B55600610974 /* GatekeeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperTests.swift; sourceTree = "<group>"; };
+		F43AB0292270B61600610974 /* Gatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gatekeeper.swift; sourceTree = "<group>"; };
+		F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGatekeeperListTests.swift; sourceTree = "<group>"; };
+		F43AB02D2270BF0200610974 /* validGatekeeperList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validGatekeeperList.json; sourceTree = "<group>"; };
+		F43AB02E2270BF0200610974 /* validGatekeeper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validGatekeeper.json; sourceTree = "<group>"; };
+		F43AB0312270BFB000610974 /* SampleRawRemoteGatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteGatekeeper.swift; sourceTree = "<group>"; };
+		F43AB0332270C0B800610974 /* SampleRawRemoteGatekeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteGatekeeperList.swift; sourceTree = "<group>"; };
+		F43AB0392270CDD500610974 /* SampleGatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleGatekeeper.swift; sourceTree = "<group>"; };
+		F43AB03D2270D69400610974 /* GatekeeperServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperServiceTests.swift; sourceTree = "<group>"; };
+		F43AB03F2270D8B600610974 /* GatekeeperStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperStoreTests.swift; sourceTree = "<group>"; };
+		F43AB0412270D92500610974 /* GatekeeperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperStore.swift; sourceTree = "<group>"; };
+		F43AB0432270E39C00610974 /* GatekeeperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperService.swift; sourceTree = "<group>"; };
+		F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteGatekeeperList.swift; sourceTree = "<group>"; };
 		F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyTests.swift; sourceTree = "<group>"; };
 		F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxy.swift; sourceTree = "<group>"; };
 		F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyConfigurationTests.swift; sourceTree = "<group>"; };
@@ -418,6 +448,10 @@
 		F45734D6222D9535001F806A /* InternalUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtilityTests.swift; sourceTree = "<group>"; };
 		F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceTests.swift; sourceTree = "<group>"; };
 		F45E54DE228E0BE6008A6011 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfigurationTests.swift; sourceTree = "<group>"; };
+		F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfiguration.swift; sourceTree = "<group>"; };
+		F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionaryProvidingExtensionsTests.swift; sourceTree = "<group>"; };
+		F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleInfoDictionary.swift; sourceTree = "<group>"; };
 		F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoreTests.swift; sourceTree = "<group>"; };
 		F46DCFC222720B5F00EFE037 /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUserData.swift; sourceTree = "<group>"; };
@@ -437,6 +471,7 @@
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializationError.swift; sourceTree = "<group>"; };
+		F47470E32298AC27004FBDB0 /* GatekeeperList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatekeeperList.swift; sourceTree = "<group>"; };
 		F47853C0222DCF8600A4269C /* CoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreError.swift; sourceTree = "<group>"; };
 		F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
 		F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameter.swift; sourceTree = "<group>"; };
@@ -642,6 +677,10 @@
 				F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */,
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
+				F43AB0292270B61600610974 /* Gatekeeper.swift */,
+				F47470E32298AC27004FBDB0 /* GatekeeperList.swift */,
+				F43AB0432270E39C00610974 /* GatekeeperService.swift */,
+				F43AB0412270D92500610974 /* GatekeeperStore.swift */,
 				F44F566D224D344300D027FF /* GraphAPIVersion.swift */,
 				F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */,
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
@@ -662,6 +701,7 @@
 				F48A749E2239A3C7007192F6 /* Localizable.swift */,
 				F4317E9E2289B96700EBF926 /* MathUtility.swift */,
 				F4516B8B225FA44A00979DD2 /* MimeType.swift */,
+				F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
 				F4C3C5352277C43E004B487E /* RemoteAppLink.swift */,
 				F4CF03472273891A00807A61 /* RemoteAppLinkDetails.swift */,
@@ -903,6 +943,9 @@
 				F408BEAD223986040068D24A /* ErrorConfigurationEntryTests.swift */,
 				F4225DE2223F4ED700F4DCFE /* ErrorStringsTests.swift */,
 				F4B8832C22305791000971C9 /* FBErrorTests.swift */,
+				F43AB03D2270D69400610974 /* GatekeeperServiceTests.swift */,
+				F43AB03F2270D8B600610974 /* GatekeeperStoreTests.swift */,
+				F43AB0272270B55600610974 /* GatekeeperTests.swift */,
 				F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */,
 				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
@@ -929,6 +972,7 @@
 				F447151D2242FF010013495F /* LoggerTests.swift */,
 				F4B3401622430F9A00912F0F /* LoggingBehaviorTests.swift */,
 				F4317EA22289DC7F00EBF926 /* MathUtilityTests.swift */,
+				F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */,
 				F4144A0F222DAFCD00CB83E0 /* PermissionTests.swift */,
 				F44847DE2268E3F500527D49 /* ProfilePictureViewTests.swift */,
 				F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */,
@@ -937,6 +981,7 @@
 				F4C32D9A223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift */,
 				F4225DE0223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift */,
 				F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */,
+				F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */,
 				F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */,
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
 				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
@@ -970,6 +1015,8 @@
 			isa = PBXGroup;
 			children = (
 				F4C3C52922776208004B487E /* validAppLinkTarget.json */,
+				F43AB02E2270BF0200610974 /* validGatekeeper.json */,
+				F43AB02D2270BF0200610974 /* validGatekeeperList.json */,
 				F4C3C55C227B6F4C004B487E /* validRemoteAppLink.json */,
 				F4C3C53B2278C4D7004B487E /* validRemoteAppLinkDetail.json */,
 				F4BEDA5522414078004F2C7E /* validRemoteErrorConfiguration.json */,
@@ -993,8 +1040,10 @@
 				F4BEDA5422414078004F2C7E /* JSON */,
 				F4C3C558227B68A3004B487E /* SampleAppLinkTarget.swift */,
 				F4484807226F770400527D49 /* SampleError.swift */,
+				F43AB0392270CDD500610974 /* SampleGatekeeper.swift */,
 				F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */,
 				F4516B87225FA3E400979DD2 /* SampleHTTPURLResponse.swift */,
+				F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */,
 				F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */,
 				F44715242243EDB10013495F /* SampleNSError.swift */,
 				F4C3C5332277C3B6004B487E /* SampleRawRemoteAppLink.swift */,
@@ -1002,10 +1051,13 @@
 				F4C3C52B227762A7004B487E /* SampleRawRemoteAppLinkTarget.swift */,
 				F4C32D90223D98F100FF1F86 /* SampleRawRemoteConfiguration.swift */,
 				F4C32D91223D98F100FF1F86 /* SampleRawRemoteErrorConfigurationList.swift */,
+				F43AB0312270BFB000610974 /* SampleRawRemoteGatekeeper.swift */,
+				F43AB0332270C0B800610974 /* SampleRawRemoteGatekeeperList.swift */,
 				F4516B81225F82B000979DD2 /* SampleRawRemoteGraphResponseError.swift */,
 				F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */,
 				F4C3C55A227B68C9004B487E /* SampleRemoteAppLink.swift */,
 				F4C3C5372278C236004B487E /* SampleRemoteAppLinkTarget.swift */,
+				F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
 				F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */,
@@ -1017,6 +1069,7 @@
 		F4C32DA0223DA13E00FF1F86 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */,
 				F4C3C550227B4C6F004B487E /* RemoteAppLink+Extensions.swift */,
 				F4C3C54E227A4CFD004B487E /* RemoteAppLinkTarget+Extensions.swift */,
 				F4C32DA1223DA13E00FF1F86 /* RemoteErrorCodeGroup+Extensions.swift */,
@@ -1225,12 +1278,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BEDA59224141AE004F2C7E /* validRemoteErrorConfiguration.json in Resources */,
+				F43AB02F2270BF0200610974 /* validGatekeeperList.json in Resources */,
 				F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */,
 				F4C3C55D227B6F4C004B487E /* validRemoteAppLink.json in Resources */,
 				F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */,
 				F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */,
 				F4317E9B2288C4BF00EBF926 /* ButtonView.xib in Resources */,
 				F4C3C53C2278C4D7004B487E /* validRemoteAppLinkDetail.json in Resources */,
+				F43AB0302270BF0200610974 /* validGatekeeper.json in Resources */,
 				F4C3C52A22776208004B487E /* validAppLinkTarget.json in Resources */,
 				F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */,
 			);
@@ -1303,6 +1358,7 @@
 				F4E1A9ED22416F2200503354 /* RemoteErrorCodeGroup.swift in Sources */,
 				F44847DC2268E36E00527D49 /* ProfilePictureView.swift in Sources */,
 				F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */,
+				F45E54F7228F87B1008A6011 /* PListURLConfiguration.swift in Sources */,
 				F4225DDF223F210E00F4DCFE /* ErrorConfigurationBuilder.swift in Sources */,
 				F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
@@ -1331,8 +1387,10 @@
 				F4CF03482273891A00807A61 /* RemoteAppLinkDetails.swift in Sources */,
 				F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */,
 				F408BEB62239893F0068D24A /* GraphRequestErrorCategory.swift in Sources */,
+				F47470E42298AC27004FBDB0 /* GatekeeperList.swift in Sources */,
+				F43AB02A2270B61600610974 /* Gatekeeper.swift in Sources */,
 				F47853C1222DCF8600A4269C /* CoreError.swift in Sources */,
-				F4C32D8C223D98D400FF1F86 /* BuildFile in Sources */,
+				F43AB0422270D92500610974 /* GatekeeperStore.swift in Sources */,
 				F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */,
 				F4E1A9EE22416F2200503354 /* RemoteErrorConfigurationEntry.swift in Sources */,
 				F42E3C932268BB9B00287DC4 /* UserProfileStore.swift in Sources */,
@@ -1342,6 +1400,7 @@
 				F4C3C561227BA339004B487E /* AppLinkService.swift in Sources */,
 				F42E3C7B2267E45100287DC4 /* UserProfileService.swift in Sources */,
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
+				F43AB0442270E39C00610974 /* GatekeeperService.swift in Sources */,
 				F4C3C5362277C43E004B487E /* RemoteAppLink.swift in Sources */,
 				F42E3C782267E45100287DC4 /* UserProfile.swift in Sources */,
 				F432E9FC22370C9C007D3A34 /* SessionProvider.swift in Sources */,
@@ -1433,6 +1492,8 @@
 				F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */,
 				F42E3C812267E5E800287DC4 /* UserProfileServiceTests.swift in Sources */,
 				F4C32D9B223D999600FF1F86 /* RemoteErrorConfigurationDecodingErrorTests.swift in Sources */,
+				F43AB0322270BFB000610974 /* SampleRawRemoteGatekeeper.swift in Sources */,
+				F45E54F5228F8699008A6011 /* PListURLConfigurationTests.swift in Sources */,
 				F480D90722347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift in Sources */,
 				F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */,
 				F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */,
@@ -1448,6 +1509,7 @@
 				F44715232243E3FF0013495F /* DeveloperErrorStringsTests.swift in Sources */,
 				F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */,
 				F408BEB4223988BD0068D24A /* ErrorCategoryTests.swift in Sources */,
+				F45E54FC229320E1008A6011 /* SampleInfoDictionary.swift in Sources */,
 				F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,
@@ -1463,19 +1525,21 @@
 				523CAE4D225ED58900D196C3 /* StringExtensionTests.swift in Sources */,
 				F44847FB226E2F5200527D49 /* FakeUserProfileProvider.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
+				F43AB0282270B55600610974 /* GatekeeperTests.swift in Sources */,
 				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F4C3C5322277BF51004B487E /* RemoteAppLinkTests.swift in Sources */,
 				F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */,
 				F42E3C862267E5FD00287DC4 /* SampleUserProfile.swift in Sources */,
 				F4484808226F770400527D49 /* SampleError.swift in Sources */,
+				F45E54FA229319C2008A6011 /* InfoDictionaryProvidingExtensionsTests.swift in Sources */,
 				F4C3C54B227A3E43004B487E /* AppLinkBuilderTests.swift in Sources */,
 				F4B340012240779D00912F0F /* JSONLoader.swift in Sources */,
 				F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */,
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
+				F43AB03A2270CDD500610974 /* SampleGatekeeper.swift in Sources */,
 				F42687C62230774F00A62C2E /* GraphRequestTests.swift in Sources */,
 				F409967522299BE200F23464 /* AccessTokenWalletTests.swift in Sources */,
 				F46DDCBC228B49BB00BA7359 /* CGSizeExtensionTests.swift in Sources */,
-				F44847DF2268E3F500527D49 /* ProfilePictureViewTests.swift in Sources */,
 				F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */,
 				F44715152242D8440013495F /* URLSessionTaskProxyTests.swift in Sources */,
 				F480D90D2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift in Sources */,
@@ -1489,7 +1553,10 @@
 				F44DB6982229AE4C0083506E /* FakeCookieUtility.swift in Sources */,
 				F4225DE3223F4ED700F4DCFE /* ErrorStringsTests.swift in Sources */,
 				F4B3401722430F9A00912F0F /* LoggingBehaviorTests.swift in Sources */,
+				F43AB02C2270BE4F00610974 /* RemoteGatekeeperListTests.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
+				F43AB04622710E3200610974 /* SampleRemoteGatekeeperList.swift in Sources */,
+				F43AB0342270C0B800610974 /* SampleRawRemoteGatekeeperList.swift in Sources */,
 				F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
 				F447153022440E860013495F /* SampleURL.swift in Sources */,
@@ -1503,11 +1570,13 @@
 				F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */,
 				F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */,
 				F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */,
+				F43AB0402270D8B600610974 /* GatekeeperStoreTests.swift in Sources */,
 				F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */,
 				F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */,
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */,
+				F45E54FD22935B50008A6011 /* ProfilePictureViewTests.swift in Sources */,
 				F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */,
 				F44715252243EDB10013495F /* SampleNSError.swift in Sources */,
 				F4DC470122836F6B00C0A309 /* AudioResourceLoaderTests.swift in Sources */,
@@ -1521,6 +1590,7 @@
 				F4317EA32289DC7F00EBF926 /* MathUtilityTests.swift in Sources */,
 				F4C32D96223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift in Sources */,
 				F447153222440EB60013495F /* FakeSession.swift in Sources */,
+				F43AB03E2270D69400610974 /* GatekeeperServiceTests.swift in Sources */,
 				F4C3C5342277C3B6004B487E /* SampleRawRemoteAppLink.swift in Sources */,
 				F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */,
 				F4C3C551227B4C6F004B487E /* RemoteAppLink+Extensions.swift in Sources */,
