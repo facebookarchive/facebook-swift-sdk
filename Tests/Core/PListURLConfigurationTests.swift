@@ -17,28 +17,27 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import XCTest
 
-import Foundation
+class PListURLConfigurationTests: XCTestCase {
+  func testDecodingURLSchemesFromPList() {
+    guard let url = Bundle(for: PListURLConfigurationTests.self).url(forResource: "Info", withExtension: "plist") else {
+      return XCTFail("There should be a plist in the test bundle")
+    }
 
-class FakeBundle: InfoDictionaryProviding {
-  var infoDictionary: [String: Any]?
+    let decoder = PropertyListDecoder()
+    do {
+      let config = try decoder.decode(PListURLConfiguration.self, from: Data(contentsOf: url))
+      guard let firstScheme = config.types.first else {
+        return XCTFail("Should have a url scheme nested under the first type")
+      }
 
-  private(set) var lastCapturedKey: String?
-  private(set) var capturedKeys = [String]()
-
-  init(infoDictionary: [String: Any] = [:]) {
-    self.infoDictionary = infoDictionary
-  }
-
-  func object(forInfoDictionaryKey key: String) -> Any? {
-    // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
-    lastCapturedKey = key
-    capturedKeys.append(key)
-    return infoDictionary?[key] as Any?
-  }
-
-  func reset() {
-    lastCapturedKey = nil
-    infoDictionary = [:]
+      XCTAssertEqual(firstScheme.urlSchemes.count, 1,
+                     "Should have expected number of entries")
+      XCTAssertEqual(firstScheme.urlSchemes.first, "example.com",
+                     "Should have expected scheme")
+    } catch {
+      XCTFail("Should extract a plist url configuration")
+    }
   }
 }

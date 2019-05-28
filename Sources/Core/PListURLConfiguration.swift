@@ -16,29 +16,20 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
-
 import Foundation
 
-class FakeBundle: InfoDictionaryProviding {
-  var infoDictionary: [String: Any]?
+struct PListURLConfiguration: Decodable {
+  let types: [PListURLScheme]
 
-  private(set) var lastCapturedKey: String?
-  private(set) var capturedKeys = [String]()
-
-  init(infoDictionary: [String: Any] = [:]) {
-    self.infoDictionary = infoDictionary
+  enum CodingKeys: String, CodingKey {
+    case types = "CFBundleURLTypes"
   }
+}
 
-  func object(forInfoDictionaryKey key: String) -> Any? {
-    // TODO: Rename to lastCapturedKey and keep track of all the asked for keys
-    lastCapturedKey = key
-    capturedKeys.append(key)
-    return infoDictionary?[key] as Any?
-  }
+struct PListURLScheme: Decodable {
+  let urlSchemes: [String]
 
-  func reset() {
-    lastCapturedKey = nil
-    infoDictionary = [:]
+  enum CodingKeys: String, CodingKey {
+    case urlSchemes = "CFBundleURLSchemes"
   }
 }

@@ -20,7 +20,7 @@ import Foundation
 
 /**
  Stores a hashed representation of `UserData` to a persistent data store
-  (defaults to `UserDefaults`)
+ (defaults to `UserDefaults`)
  */
 struct UserDataStore {
   let store: DataPersisting
@@ -30,7 +30,7 @@ struct UserDataStore {
   var cachedUserData: UserData? {
     guard let json = store.string(forKey: retrievalKey),
       let data = json.data(using: .utf8) else {
-      return nil
+        return nil
     }
 
     return try? JSONDecoder().decode(UserData.self, from: data)
@@ -48,7 +48,7 @@ struct UserDataStore {
 
   static func encoded(_ userData: UserData) -> String {
     guard let data = try? JSONEncoder().encode(userData),
-     let encoded = String(data: data, encoding: .utf8)
+      let encoded = String(data: data, encoding: .utf8)
       else {
         return "{}"
     }
