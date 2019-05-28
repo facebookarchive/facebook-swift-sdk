@@ -155,6 +155,32 @@ class BridgeAPIRequestTests: XCTestCase {
     }
   }
 
+  func testRequestURLWithSuffix() {
+    fakeSettings.appIdentifier = "abc123"
+    fakeSettings.urlSchemeSuffix = "Foo"
+    fakeBundle.infoDictionary = SampleInfoDictionary.validURLSchemes(schemes: ["fbabc123Foo"])
+
+    let expectedQueryItem = URLQueryItem(name: "scheme_suffix", value: fakeSettings.urlSchemeSuffix)
+
+    do {
+      let url = try request.requestURL()
+
+      guard let components = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        ),
+        let queryItems = components.queryItems
+        else {
+          return XCTFail("Should be able to get query items from url")
+      }
+
+      XCTAssertTrue(queryItems.contains(expectedQueryItem),
+                    "Should include a scheme suffix if available")
+    } catch {
+      XCTFail("Should create a request url")
+    }
+  }
+
   func testRequestProvidesURLUsingURLFromBridgeAPINetworker() {
     fakeSettings.appIdentifier = "abc123"
     fakeBundle.infoDictionary = SampleInfoDictionary.validURLSchemes(schemes: ["fbabc123"])
