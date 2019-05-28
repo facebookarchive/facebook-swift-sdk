@@ -164,7 +164,7 @@ public class ProfilePictureView: UIView {
     DispatchQueue.main.async { [weak self] in
       guard let self = self,
         !self.bounds.isEmpty else {
-        return
+          return
       }
 
       switch !self.placeholderImageIsValid && !self.hasProfileImage {

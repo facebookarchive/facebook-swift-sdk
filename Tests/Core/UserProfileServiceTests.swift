@@ -377,8 +377,8 @@ class UserProfileServiceTests: XCTestCase {
   func testImageURLDefaultProfileIdentifier() {
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
-
-    guard let url = service.imageURL(sizingConfiguration: sizingConfiguration) else {
+    let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
+    guard let url = URLBuilder().buildURL(for: request) else {
       return XCTFail("Should be able to create an image url")
     }
 
@@ -390,10 +390,13 @@ class UserProfileServiceTests: XCTestCase {
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
 
-    guard let url = service.imageURL(
+    let request = service.imageRequest(
       for: "user123",
-      sizingConfiguration: sizingConfiguration) else {
-      return XCTFail("Should be able to create an image url")
+      sizingConfiguration: sizingConfiguration
+    )
+
+    guard let url = URLBuilder().buildURL(for: request) else {
+        return XCTFail("Should be able to create an image url")
     }
 
     XCTAssertEqual(url.path, "/v3.2/user123/picture",
@@ -411,8 +414,9 @@ class UserProfileServiceTests: XCTestCase {
       URLQueryItem(name: "width", value: String(describing: expectedWidth)),
       URLQueryItem(name: "height", value: String(describing: expectedHeight))
     ]
+    let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
 
-    guard let url = service.imageURL(sizingConfiguration: sizingConfiguration),
+    guard let url = URLBuilder().buildURL(for: request),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false
@@ -447,7 +451,9 @@ class UserProfileServiceTests: XCTestCase {
       URLQueryItem(name: "height", value: String(describing: 20))
     ]
 
-    guard let url = service.imageURL(sizingConfiguration: sizingConfiguration),
+    let request = service.imageRequest(sizingConfiguration: sizingConfiguration)
+
+    guard let url = URLBuilder().buildURL(for: request),
       let queryItems = URLComponents(
         url: url,
         resolvingAgainstBaseURL: false

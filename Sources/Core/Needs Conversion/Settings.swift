@@ -30,6 +30,7 @@ protocol SettingsManaging {
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
+  var urlSchemeSuffix: String? { get set }
   var sdkVersion: String { get }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
@@ -40,11 +41,6 @@ protocol AppIdentifierProviding {
 }
 
 class Settings: SettingsManaging, AppIdentifierProviding {
-  private enum PListKeys {
-    static let domainPrefix: String = "FacebookDomainPrefix"
-    static let loggingBehaviors: String = "FacebookLoggingBehavior"
-  }
-
   var accessTokenCache: AccessTokenCaching?
 
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
@@ -295,6 +291,13 @@ class Settings: SettingsManaging, AppIdentifierProviding {
 
   private func cache(_ value: Any, forProperty property: PropertyStorageKey) {
     store.set(value, forKey: property.rawValue)
+  }
+
+  enum PListKeys {
+    static let domainPrefix: String = "FacebookDomainPrefix"
+    static let loggingBehaviors: String = "FacebookLoggingBehavior"
+    static let cfBundleURLTypes: String = "CFBundleURLTypes"
+    static let cfBundleURLSchemes: String = "CFBundleURLSchemes"
   }
 
   enum PropertyStorageKey: String {

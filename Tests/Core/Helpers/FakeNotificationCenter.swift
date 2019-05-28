@@ -69,7 +69,7 @@ class FakeNotificationCenter: NotificationPosting, NotificationObserving {
     let userInfo = capturedPostedUserInfo ?? [:]
     return userInfo[
       UserProfileService.NotificationKeys.FBSDKProfileChangeOldKey
-    ] as? UserProfile
+      ] as? UserProfile
   }
 
   var capturedPostedUserProfile: UserProfile? {

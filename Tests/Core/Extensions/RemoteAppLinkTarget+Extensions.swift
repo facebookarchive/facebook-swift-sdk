@@ -27,7 +27,7 @@ extension RemoteAppLinkTarget {
     url: URL?,
     appIdentifier: String?,
     appName: String?,
-  // swiftlint:disable:next discouraged_optional_boolean
+    // swiftlint:disable:next discouraged_optional_boolean
     shouldFallback: Bool?
     ) {
     self.url = url
