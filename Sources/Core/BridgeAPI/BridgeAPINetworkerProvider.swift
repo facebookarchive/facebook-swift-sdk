@@ -61,12 +61,14 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
     }
   }
 
-  /// The `URL` scheme to use in determining App installation status.
-  /// Uses the `canOpenURL:` method which checks `LSApplicationQueriesSchemes` in
-  /// the `Info.plist`
-  /// This is effectively a sanity check to tell if an app is installed or not
-  /// There is a secondary mapping that happens to associate this general scheme to
-  /// a more specific scheme to open the app with
+  /**
+   The `URL` scheme to use in determining App installation status.
+   Uses the `canOpenURL:` method which checks `LSApplicationQueriesSchemes` in
+   the `Info.plist`
+   This is effectively a sanity check to tell if an app is installed or not
+   There is a secondary mapping that happens to associate this general scheme to
+   a more specific scheme to open the app with
+   */
   var applicationQueryScheme: String {
     switch self {
     case let .native(scheme):
@@ -103,8 +105,7 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
     }
   }
 
-  /// Abstraction for the type of Application to use when checking if a
-  /// `URL` scheme can be opened
+  /// Abstraction for the type of Application to use when checking if a `URL` scheme can be opened
   enum ApplicationQueryScheme {
     case facebook
     case messenger
