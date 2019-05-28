@@ -168,6 +168,7 @@
 		F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */; };
 		F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDD00228C8BB700BA7359 /* DeviceButton.swift */; };
 		F46DDD03228C8C1400BA7359 /* DeviceButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */; };
+		F46DDD22228CBB6300BA7359 /* CloseIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DDD21228CBB6300BA7359 /* CloseIcon.swift */; };
 		F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056D82232CEEF00BE526B /* FakeLogger.swift */; };
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
@@ -467,6 +468,7 @@
 		F46DDCBF228B4B9400BA7359 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		F46DDD00228C8BB700BA7359 /* DeviceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceButton.swift; sourceTree = "<group>"; };
 		F46DDD02228C8C1400BA7359 /* DeviceButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceButtonTests.swift; sourceTree = "<group>"; };
+		F46DDD21228CBB6300BA7359 /* CloseIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseIcon.swift; sourceTree = "<group>"; };
 		F47056D82232CEEF00BE526B /* FakeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLogger.swift; sourceTree = "<group>"; };
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -818,6 +820,7 @@
 			isa = PBXGroup;
 			children = (
 				F4317E5A2286288200EBF926 /* Button.swift */,
+				F46DDD21228CBB6300BA7359 /* CloseIcon.swift */,
 				F4317E5E22862B8000EBF926 /* Color.swift */,
 				F46DDD00228C8BB700BA7359 /* DeviceButton.swift */,
 				F406F86522823703006B0D4E /* Drawable.swift */,
@@ -1360,6 +1363,7 @@
 				F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */,
 				F45E54F7228F87B1008A6011 /* PListURLConfiguration.swift in Sources */,
 				F4225DDF223F210E00F4DCFE /* ErrorConfigurationBuilder.swift in Sources */,
+				F46DDD22228CBB6300BA7359 /* CloseIcon.swift in Sources */,
 				F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */,
 				F47056DB2232DF1D00BE526B /* Logging.swift in Sources */,
 				F4932E0B22808DB50020C282 /* TokenString.swift in Sources */,
