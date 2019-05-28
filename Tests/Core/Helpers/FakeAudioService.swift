@@ -16,30 +16,32 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable sorted_imports
+
 @testable import FacebookCore
+import AudioToolbox
+import XCTest
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class FakeAudioService: AudioServicing {
+  var setSystemSoundIdentifierCallback: ((URL, UnsafeMutablePointer<SystemSoundID>) -> Void)?
+  var stubbedOSStatus: Int32 = 0
+  var capturedPlaySystemSoundIdentifier: SystemSoundID?
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+  func setSystemSoundIdentifier(
+    with fileURL: URL,
+    soundIdentifierPointer: UnsafeMutablePointer<SystemSoundID>
+    ) -> OSStatus {
+    setSystemSoundIdentifierCallback?(fileURL, soundIdentifierPointer)
 
-  init(
-    appIdentifier: String = "foo",
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
-    ) {
-    self.appIdentifier = appIdentifier
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
+    return stubbedOSStatus
+  }
+
+  func playSystemSound(with identifier: SystemSoundID) {
+    capturedPlaySystemSoundIdentifier = identifier
+  }
+
+  func reset() {
+    setSystemSoundIdentifierCallback = nil
+    stubbedOSStatus = 0
   }
 }

@@ -16,30 +16,37 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable force_try
+
 @testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+enum SampleRawRemoteGatekeeper {
+  static let validEnabled = [
+    "key": "foo",
+    "value": true
+  ] as [String: Any]
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+  static let validDisabled = [
+    "key": "foo",
+    "value": false
+  ] as [String: Any]
 
-  init(
-    appIdentifier: String = "foo",
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
-    ) {
-    self.appIdentifier = appIdentifier
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
+  static let missingKey = [
+    "value": false
+  ]
+
+  static let missingValue = [
+    "key": "foo"
+  ]
+
+  enum SerializedData {
+    static let validEnabled: Data = {
+      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validEnabled, options: [])
+    }()
+
+    static let validDisabled: Data = {
+      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validDisabled, options: [])
+    }()
   }
 }

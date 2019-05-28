@@ -31,6 +31,8 @@ class GraphPathTests: XCTestCase {
       switch path {
       case .me: break
 
+      case .gatekeepers: break
+
       case .picture: break
 
       case .other: break

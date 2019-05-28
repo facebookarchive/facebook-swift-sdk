@@ -16,30 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+protocol FileManaging {
+  func url(
+    for directory: FileManager.SearchPathDirectory,
+    in domain: FileManager.SearchPathDomainMask,
+    appropriateFor url: URL?,
+    create shouldCreate: Bool
+    ) throws -> URL
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+  func createDirectory(
+    at url: URL,
+    withIntermediateDirectories createIntermediates: Bool,
+    // swiftlint:disable:next discouraged_optional_collection
+    attributes: [FileAttributeKey: Any]?
+    ) throws
 
-  init(
-    appIdentifier: String = "foo",
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
-    ) {
-    self.appIdentifier = appIdentifier
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
-  }
+  func fileExists(atPath path: String) -> Bool
 }
+
+extension FileManager: FileManaging {}

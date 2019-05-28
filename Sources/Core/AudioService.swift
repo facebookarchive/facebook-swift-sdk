@@ -16,30 +16,35 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import AudioToolbox
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+protocol AudioResource {
+  static var name: String { get }
+  static var version: UInt { get }
+  static var data: Data { get }
+}
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+protocol AudioServicing {
+  func setSystemSoundIdentifier(
+    with fileURL: URL,
+    soundIdentifierPointer: UnsafeMutablePointer<SystemSoundID>
+    ) -> OSStatus
 
-  init(
-    appIdentifier: String = "foo",
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
-    ) {
-    self.appIdentifier = appIdentifier
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
+  func playSystemSound(with identifier: SystemSoundID)
+}
+
+/**
+ Lightweight wrapper to make it easier to use the freestanding functions in `AudioToolbox`
+ */
+struct AudioService: AudioServicing {
+  func setSystemSoundIdentifier(
+    with fileURL: URL,
+    soundIdentifierPointer: UnsafeMutablePointer<SystemSoundID>
+    ) -> OSStatus {
+    return AudioServicesCreateSystemSoundID(fileURL as CFURL, soundIdentifierPointer)
+  }
+
+  func playSystemSound(with identifier: SystemSoundID) {
+    AudioServicesPlaySystemSound(identifier)
   }
 }

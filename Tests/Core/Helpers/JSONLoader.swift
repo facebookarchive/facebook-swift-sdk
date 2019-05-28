@@ -44,8 +44,10 @@ class JSONLoader {
  Assumes that the raw value will match the name of a .json file in the test target
  */
 enum JSONFileName: String {
+  case validGatekeeper
   case validAppLinkTarget
   case validRemoteAppLink
+  case validGatekeeperList
   case validRemoteAppLinkDetail
   case validRemoteErrorConfiguration
   case validRemoteErrorConfigurationList
