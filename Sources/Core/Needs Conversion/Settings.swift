@@ -266,7 +266,7 @@ class Settings: SettingsManaging, AppIdentifierProviding {
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
-    guard let rawValues = bundle.object(forInfoDictionaryKey: Settings.PListKeys.loggingBehaviors)
+    guard let rawValues = bundle.object(forInfoDictionaryKey: PListKeys.loggingBehaviors)
       as? [String] else {
         return
     }
