@@ -16,30 +16,44 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+struct GatekeeperStore {
+  private(set) var appIdentifierProvider: AppIdentifierProviding
+  let store: DataPersisting
+  var retrievalKey: String {
+    let domain = "com.facebook.sdk:gateKeeper"
+    guard let identifier = appIdentifierProvider.appIdentifier else {
+      return domain
+    }
+    return "\(domain)\(identifier)"
+  }
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+  var hasDataForCurrentAppIdentifier: Bool {
+    return store.data(forKey: retrievalKey) != nil
+  }
+
+  var cachedGatekeepers: [Gatekeeper] {
+    guard let data = store.data(forKey: retrievalKey),
+      let gatekeepers = try? JSONDecoder().decode([Gatekeeper].self, from: data)
+      else {
+        return []
+    }
+
+    return gatekeepers
+  }
 
   init(
-    appIdentifier: String = "foo",
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
+    store: DataPersisting = UserDefaults.standard,
+    appIdentifierProvider: AppIdentifierProviding = Settings.shared
     ) {
-    self.appIdentifier = appIdentifier
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
+    self.appIdentifierProvider = appIdentifierProvider
+    self.store = store
+  }
+
+  func cache(_ gatekeepers: [Gatekeeper]) {
+    let data = try? JSONEncoder().encode(gatekeepers)
+
+    store.set(data, forKey: retrievalKey)
   }
 }
