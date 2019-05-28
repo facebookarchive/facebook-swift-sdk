@@ -40,9 +40,9 @@ struct BridgeAPIRequest {
     bundle: InfoDictionaryProviding = Bundle.main,
     urlOpener: URLOpening = UIApplication.shared
     ) {
-    if case .native = networkerProvider.urlCategory {
+    if case let .native = networkerProvider.urlCategory {
       var components = URLComponents()
-      components.scheme = networkerProvider.urlScheme
+      components.scheme = networkerProvider.applicationQueryScheme
       components.path = "/"
 
       guard let url = components.url,
@@ -51,7 +51,7 @@ struct BridgeAPIRequest {
       }
     }
 
-    self.scheme = networkerProvider.urlScheme
+    self.scheme = networkerProvider.applicationQueryScheme
     self.actionID = actionID
     self.methodName = methodName
     self.methodVersion = methodVersion

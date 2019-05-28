@@ -19,6 +19,8 @@
 import Foundation
 
 struct BridgeAPINative: BridgeAPIURLProviding {
+  let appScheme: String
+
   func requestURL(
     actionID: String,
     methodName: String,

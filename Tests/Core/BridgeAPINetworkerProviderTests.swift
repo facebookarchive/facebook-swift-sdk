@@ -28,10 +28,8 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     }
     XCTAssertTrue(provider.urlProvider is BridgeAPIWebV1,
                   "Should resolve the correct concrete url provider instance")
-    XCTAssertEqual(provider.urlScheme, "https",
+    XCTAssertEqual(provider.applicationQueryScheme, "https",
                    "Should have the expected url scheme.")
-    XCTAssertEqual(provider.queryScheme, "https",
-                   "Should have the expected query scheme")
   }
 
   func testWebProviderNonHttps() {
@@ -42,9 +40,7 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     }
     XCTAssertTrue(provider.urlProvider is BridgeAPIWebV2,
                   "Should resolve the correct concrete url provider instance")
-    XCTAssertEqual(provider.urlScheme, "web",
-                   "Should have the expected url scheme.")
-    XCTAssertEqual(provider.queryScheme, "web",
+    XCTAssertEqual(provider.applicationQueryScheme, "web",
                    "Should have the expected query scheme")
   }
 
@@ -54,11 +50,12 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .native = provider.urlCategory else {
       return XCTFail("Should be considered native")
     }
-    XCTAssertTrue(provider.urlProvider is BridgeAPINative,
-                  "Should resolve the correct concrete url provider instance")
-    XCTAssertEqual(provider.urlScheme, "fbapi20130214",
-                   "Should have the expected url scheme.")
-    XCTAssertEqual(provider.queryScheme, "fbauth2",
+    guard let nativeProvider = provider.urlProvider as? BridgeAPINative else {
+      return XCTFail("Should resolve the correct concrete url provider instance")
+    }
+    XCTAssertEqual(nativeProvider.appScheme, "fbapi20130214",
+                   "Should resolve the correct concrete url provider with the correct app scheme")
+    XCTAssertEqual(provider.applicationQueryScheme, "fbauth2",
                    "Should have the expected query scheme")
   }
 
@@ -68,11 +65,12 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .native = provider.urlCategory else {
       return XCTFail("Should not be considered native")
     }
-    XCTAssertTrue(provider.urlProvider is BridgeAPINative,
-                  "Should resolve the correct concrete url provider instance")
-    XCTAssertEqual(provider.urlScheme, "fb-messenger-share-api",
-                   "Should have the expected url scheme.")
-    XCTAssertEqual(provider.queryScheme, "fb-messenger-share-api",
+    guard let nativeProvider = provider.urlProvider as? BridgeAPINative else {
+      return XCTFail("Should resolve the correct concrete url provider instance")
+    }
+    XCTAssertEqual(nativeProvider.appScheme, "fb-messenger-share-api",
+                   "Should resolve the correct concrete url provider with the correct app scheme")
+    XCTAssertEqual(provider.applicationQueryScheme, "fb-messenger-share-api",
                    "Should have the expected query scheme")
   }
 
@@ -82,11 +80,12 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .native = provider.urlCategory else {
       return XCTFail("Should not be considered native")
     }
-    XCTAssertTrue(provider.urlProvider is BridgeAPINative,
-                  "Should resolve the correct concrete url provider instance")
-    XCTAssertEqual(provider.urlScheme, "msqrdplayer-api20170208",
-                   "Should have the expected url scheme.")
-    XCTAssertEqual(provider.queryScheme, "msqrdplayer",
+    guard let nativeProvider = provider.urlProvider as? BridgeAPINative else {
+      return XCTFail("Should resolve the correct concrete url provider instance")
+    }
+    XCTAssertEqual(nativeProvider.appScheme, "msqrdplayer-api20170208",
+                   "Should resolve the correct concrete url provider with the correct app scheme")
+    XCTAssertEqual(provider.applicationQueryScheme, "msqrdplayer",
                    "Should have the expected query scheme")
   }
 }

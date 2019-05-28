@@ -20,11 +20,17 @@ import Foundation
 
 protocol BridgeAPINetworkerProviding {
   var urlProvider: BridgeAPIURLProviding { get }
-  var urlScheme: String { get }
+  var applicationQueryScheme: String { get }
   var urlCategory: BridgeAPIURLCategory { get }
 }
 
-/// An abstraction used to resolve a concrete instance of a `BridgeAPIURLProviding` in a declarative way
+/**
+ An abstraction used to resolve a concrete instance of a `BridgeAPIURLProviding` in a declarative way
+ This type performs `URL` scheme refining.
+ It uses well-known schemes listed by the third party application to check
+ for the installation of an application and then maps the well-known
+ scheme to a more specific scheme used for generating a `URL` that can open said application
+ */
 enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
   case native(ApplicationQueryScheme)
   case web(WebQueryScheme)
@@ -34,10 +40,14 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
     switch self {
     case let .native(scheme):
       switch scheme {
-      case .facebook,
-           .messenger,
-           .msqrdPlayer:
-        return BridgeAPINative()
+      case .facebook:
+        return BridgeAPINative(appScheme: "fbapi20130214")
+
+      case .messenger:
+        return BridgeAPINative(appScheme: "fb-messenger-share-api")
+
+      case .msqrdPlayer:
+        return BridgeAPINative(appScheme: "msqrdplayer-api20170208")
       }
 
     case let .web(scheme):
@@ -51,36 +61,13 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
     }
   }
 
-  /// The `URL` scheme to use in opening an application
-  var urlScheme: String {
-    switch self {
-    case let .native(scheme):
-      switch scheme {
-      case .facebook:
-        return "fbapi20130214"
-
-      case .messenger:
-        return "fb-messenger-share-api"
-
-      case .msqrdPlayer:
-        return "msqrdplayer-api20170208"
-      }
-
-    case let .web(scheme):
-      switch scheme {
-      case .https:
-        return "https"
-
-      case .jsDialogue:
-        return "web"
-      }
-    }
-  }
-
-  /// Used for validating `LSApplicationQueriesSchemes`
-  /// These are listed in the plist under that key and are used to check if an app can be launched
-  /// Specifies the URL schemes the app is able to test using the canOpenURL: method.
-  var queryScheme: String {
+  /// The `URL` scheme to use in determining App installation status.
+  /// Uses the `canOpenURL:` method which checks `LSApplicationQueriesSchemes` in
+  /// the `Info.plist`
+  /// This is effectively a sanity check to tell if an app is installed or not
+  /// There is a secondary mapping that happens to associate this general scheme to
+  /// a more specific scheme to open the app with
+  var applicationQueryScheme: String {
     switch self {
     case let .native(scheme):
       switch scheme {

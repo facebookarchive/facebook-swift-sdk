@@ -33,7 +33,7 @@ class BridgeAPIRequestTests: XCTestCase {
 
     fakeNetworkerProvider = FakeNetworkerProvider(
       urlProvider: fakeBridgeAPIURLProvider,
-      urlScheme: "https",
+      applicationQueryScheme: "https",
       urlCategory: .web
     )
 
@@ -193,7 +193,7 @@ class BridgeAPIRequestTests: XCTestCase {
   func testRequestWithValidNativeNetworker() {
     fakeNetworkerProvider = FakeNetworkerProvider(
       urlProvider: fakeBridgeAPIURLProvider,
-      urlScheme: "foo",
+      applicationQueryScheme: "foo",
       urlCategory: .native
     )
     let request = BridgeAPIRequest(
@@ -211,7 +211,7 @@ class BridgeAPIRequestTests: XCTestCase {
   func testRequestWithInvalidNativeNetworker() {
     fakeNetworkerProvider = FakeNetworkerProvider(
       urlProvider: fakeBridgeAPIURLProvider,
-      urlScheme: "foo",
+      applicationQueryScheme: "foo",
       urlCategory: .native
     )
     let request = BridgeAPIRequest(
@@ -229,7 +229,7 @@ class BridgeAPIRequestTests: XCTestCase {
   func testRequestWithValidWebNetworker() {
     fakeNetworkerProvider = FakeNetworkerProvider(
       urlProvider: fakeBridgeAPIURLProvider,
-      urlScheme: "foo",
+      applicationQueryScheme: "foo",
       urlCategory: .web
     )
     let request = BridgeAPIRequest(
@@ -247,7 +247,7 @@ class BridgeAPIRequestTests: XCTestCase {
   func testRequestWithInvalidWebNetworker() {
     fakeNetworkerProvider = FakeNetworkerProvider(
       urlProvider: fakeBridgeAPIURLProvider,
-      urlScheme: "foo",
+      applicationQueryScheme: "foo",
       urlCategory: .web
     )
     let request = BridgeAPIRequest(

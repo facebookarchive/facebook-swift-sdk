@@ -21,6 +21,6 @@ import Foundation
 
 struct FakeNetworkerProvider: BridgeAPINetworkerProviding {
   let urlProvider: BridgeAPIURLProviding
-  let urlScheme: String
+  let applicationQueryScheme: String
   let urlCategory: BridgeAPIURLCategory
 }
