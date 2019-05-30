@@ -218,6 +218,114 @@ class URLBuilderTests: XCTestCase {
     )
   }
 
+  // MARK: - App URL
+
+  func testBuildingAppURLWithoutAppIDWithoutSuffix() {
+    let expectedScheme = "fb"
+
+    let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: nil)
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+      return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "Bar"
+    )
+  }
+
+  func testBuildingAppURLWithoutAppIDWithSuffix() {
+    let expectedScheme = "fbFoo"
+    let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: "Foo")
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+      return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "Bar"
+    )
+  }
+
+  func testBuildingAppURLWithAppIDWithoutSuffix() {
+    let expectedScheme = "fbFoo"
+    let fakeSettings = FakeSettings(appIdentifier: "Foo", urlSchemeSuffix: nil)
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+        return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "Bar"
+    )
+  }
+
+  func testBuildingAppURLWithAppIDWithSuffix() {
+    let expectedScheme = "fbFooBar"
+    let fakeSettings = FakeSettings(appIdentifier: "Foo", urlSchemeSuffix: "Bar")
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+        return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "Bar"
+    )
+  }
+
+  private func validateAppUrl(
+    _ url: URL?,
+    scheme: String,
+    hostName: String,
+    path: String? = nil,
+    inFile file: StaticString = #file,
+    atLine line: UInt = #line
+    ) {
+    guard let url = url else {
+      return XCTFail(
+        "Should build a valid url from valid inputs",
+        file: file,
+        line: line
+      )
+    }
+    XCTAssertEqual(
+      url.scheme,
+      scheme,
+      "URL should use the scheme: \(scheme)",
+      file: file,
+      line: line
+    )
+    XCTAssertEqual(
+      url.host,
+      hostName,
+      "URL should use host name: \(hostName)",
+      file: file,
+      line: line
+    )
+    XCTAssertNil(
+      url.port,
+      "URL should not override the default port",
+      file: file,
+      line: line
+    )
+  }
+
   private func validateBaseUrl(
     _ url: URL?,
     scheme: String = URLBuilder.defaultScheme,
