@@ -16,30 +16,35 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import AudioToolbox
 
-extension Notification.Name {
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
+protocol AudioResource {
+  static var name: String { get }
+  static var version: UInt { get }
+  static var data: Data { get }
+}
 
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
+protocol AudioServicing {
+  func setSystemSoundIdentifier(
+    with fileURL: URL,
+    soundIdentifierPointer: UnsafeMutablePointer<SystemSoundID>
+    ) -> OSStatus
 
-  /**
-   Notification indicating that the `currentProfile` has changed.
+  func playSystemSound(with identifier: SystemSoundID)
+}
 
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
+/**
+ Lightweight wrapper to make it easier to use the freestanding functions in `AudioToolbox`
+ */
+struct AudioService: AudioServicing {
+  func setSystemSoundIdentifier(
+    with fileURL: URL,
+    soundIdentifierPointer: UnsafeMutablePointer<SystemSoundID>
+    ) -> OSStatus {
+    return AudioServicesCreateSystemSoundID(fileURL as CFURL, soundIdentifierPointer)
+  }
 
-  // swiftlint:disable:next identifier_name
-  static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
-    = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+  func playSystemSound(with identifier: SystemSoundID) {
+    AudioServicesPlaySystemSound(identifier)
+  }
 }

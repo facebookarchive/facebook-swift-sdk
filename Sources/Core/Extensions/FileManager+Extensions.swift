@@ -18,28 +18,22 @@
 
 import Foundation
 
-extension Notification.Name {
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
+protocol FileManaging {
+  func url(
+    for directory: FileManager.SearchPathDirectory,
+    in domain: FileManager.SearchPathDomainMask,
+    appropriateFor url: URL?,
+    create shouldCreate: Bool
+    ) throws -> URL
 
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
+  func createDirectory(
+    at url: URL,
+    withIntermediateDirectories createIntermediates: Bool,
+    // swiftlint:disable:next discouraged_optional_collection
+    attributes: [FileAttributeKey: Any]?
+    ) throws
 
-  /**
-   Notification indicating that the `currentProfile` has changed.
-
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
-
-  // swiftlint:disable:next identifier_name
-  static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
-    = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+  func fileExists(atPath path: String) -> Bool
 }
+
+extension FileManager: FileManaging {}

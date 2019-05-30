@@ -16,30 +16,37 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable force_try
+
+@testable import FacebookCore
 import Foundation
 
-extension Notification.Name {
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
+enum SampleRawRemoteGatekeeper {
+  static let validEnabled = [
+    "key": "foo",
+    "value": true
+  ] as [String: Any]
 
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
+  static let validDisabled = [
+    "key": "foo",
+    "value": false
+  ] as [String: Any]
 
-  /**
-   Notification indicating that the `currentProfile` has changed.
+  static let missingKey = [
+    "value": false
+  ]
 
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
+  static let missingValue = [
+    "key": "foo"
+  ]
 
-  // swiftlint:disable:next identifier_name
-  static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
-    = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+  enum SerializedData {
+    static let validEnabled: Data = {
+      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validEnabled, options: [])
+    }()
+
+    static let validDisabled: Data = {
+      try! JSONSerialization.data(withJSONObject: SampleRawRemoteGatekeeper.validDisabled, options: [])
+    }()
+  }
 }

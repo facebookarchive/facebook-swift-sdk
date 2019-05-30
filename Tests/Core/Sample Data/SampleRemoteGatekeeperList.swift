@@ -16,30 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-extension Notification.Name {
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
-
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
-
-  /**
-   Notification indicating that the `currentProfile` has changed.
-
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
-
-  // swiftlint:disable:next identifier_name
-  static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
-    = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+enum SampleRemoteGatekeeperList {
+  static func valid(with gatekeepers: [Gatekeeper]) -> RemoteGatekeeperList {
+    return RemoteGatekeeperList(
+      data: [
+        [
+          "gatekeepers": gatekeepers
+        ]
+      ]
+    )
+  }
 }

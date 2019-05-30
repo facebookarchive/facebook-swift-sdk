@@ -17,29 +17,46 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class FakeFileManager: FileManaging {
+  var urlForDirectoryCallback: ((FileManager.SearchPathDirectory, FileManager.SearchPathDomainMask, Bool) -> Void)?
+  var createDirectoryAtURLCallback: ((URL, Bool) -> Void)?
+  var capturedFileExistsAtPath: String?
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+  let tempDirectoryURL: URL
 
-  init(
-    appIdentifier: String = "foo",
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
-    ) {
-    self.appIdentifier = appIdentifier
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
+  init(tempDirectoryURL: URL) {
+    self.tempDirectoryURL = tempDirectoryURL
+  }
+
+  func url(
+    for directory: FileManager.SearchPathDirectory,
+    in domain: FileManager.SearchPathDomainMask,
+    appropriateFor url: URL?,
+    create shouldCreate: Bool
+    ) throws -> URL {
+    urlForDirectoryCallback?(directory, domain, shouldCreate)
+
+    return tempDirectoryURL
+  }
+
+  func createDirectory(
+    at url: URL,
+    withIntermediateDirectories createIntermediates: Bool,
+    attributes: [FileAttributeKey: Any]?
+    ) throws {
+    createDirectoryAtURLCallback?(url, createIntermediates)
+  }
+
+  func fileExists(atPath path: String) -> Bool {
+    capturedFileExistsAtPath = path
+    return true
+  }
+
+  func reset() {
+    urlForDirectoryCallback = nil
+    createDirectoryAtURLCallback = nil
+    capturedFileExistsAtPath = nil
   }
 }

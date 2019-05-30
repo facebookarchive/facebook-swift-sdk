@@ -18,28 +18,12 @@
 
 import Foundation
 
-extension Notification.Name {
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
+public struct Gatekeeper: Codable {
+  public let name: String
+  public let isEnabled: Bool
 
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
-
-  /**
-   Notification indicating that the `currentProfile` has changed.
-
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
-
-  // swiftlint:disable:next identifier_name
-  static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
-    = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+  enum CodingKeys: String, CodingKey {
+    case name = "key"
+    case isEnabled = "value"
+  }
 }

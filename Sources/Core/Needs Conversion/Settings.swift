@@ -23,6 +23,7 @@ import UIKit
 
 // TODO: Make sure this protocol makes sense in terms of the reworked class
 protocol SettingsManaging {
+  var appIdentifier: String? { get set }
   var accessTokenCache: AccessTokenCaching? { get set }
   var clientToken: String? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
@@ -30,12 +31,16 @@ protocol SettingsManaging {
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
   var urlSchemeSuffix: String? { get set }
-  var appIdentifier: String? { get set }
+  var sdkVersion: String { get }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
 }
 
-class Settings: SettingsManaging {
+protocol AppIdentifierProviding {
+  var appIdentifier: String? { get set }
+}
+
+class Settings: SettingsManaging, AppIdentifierProviding {
   var accessTokenCache: AccessTokenCaching?
 
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
@@ -230,6 +235,8 @@ class Settings: SettingsManaging {
    */
   var loggingBehaviors: Set<LoggingBehavior>
 
+  var sdkVersion: String = "1.0"
+
   init(
     bundle: InfoDictionaryProviding = Bundle.main,
     store: DataPersisting = UserDefaults.standard
@@ -259,7 +266,7 @@ class Settings: SettingsManaging {
   }
 
   private func setBehaviors(from bundle: InfoDictionaryProviding) {
-    guard let rawValues = bundle.object(forInfoDictionaryKey: Settings.PListKeys.loggingBehaviors)
+    guard let rawValues = bundle.object(forInfoDictionaryKey: PListKeys.loggingBehaviors)
       as? [String] else {
         return
     }
@@ -287,6 +294,7 @@ class Settings: SettingsManaging {
   }
 
   enum PListKeys {
+    static let domainPrefix: String = "FacebookDomainPrefix"
     static let loggingBehaviors: String = "FacebookLoggingBehavior"
     static let cfBundleURLTypes: String = "CFBundleURLTypes"
     static let cfBundleURLSchemes: String = "CFBundleURLSchemes"

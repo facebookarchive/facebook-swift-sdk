@@ -18,28 +18,42 @@
 
 import Foundation
 
-extension Notification.Name {
-  /**
-   Notification indicating that the `currentAccessToken` has changed.
+struct GatekeeperStore {
+  private(set) var appIdentifierProvider: AppIdentifierProviding
+  let store: DataPersisting
+  var retrievalKey: String {
+    let domain = "com.facebook.sdk:gateKeeper"
+    guard let identifier = appIdentifierProvider.appIdentifier else {
+      return domain
+    }
+    return "\(domain)\(identifier)"
+  }
 
-   The userInfo dictionary of the notification will contain keys
-   `FBSDKAccessTokenChangeOldKey` and
-   `FBSDKAccessTokenChangeNewKey`.
-   */
-  static let FBSDKAccessTokenDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKAccessTokenDidChangeNotification")
+  var hasDataForCurrentAppIdentifier: Bool {
+    return store.data(forKey: retrievalKey) != nil
+  }
 
-  /**
-   Notification indicating that the `currentProfile` has changed.
+  var cachedGatekeepers: [Gatekeeper] {
+    guard let data = store.data(forKey: retrievalKey),
+      let gatekeepers = try? JSONDecoder().decode([Gatekeeper].self, from: data)
+      else {
+        return []
+    }
 
-   the userInfo dictionary of the notification will contain keys
-   `FBSDKProfileChangeOldKey` and
-   `FBSDKProfileChangeNewKey`.
-   */
-  static let FBSDKProfileDidChangeNotification: Notification.Name
-    = Notification.Name("FBSDKProfileDidChangeNotification")
+    return gatekeepers
+  }
 
-  // swiftlint:disable:next identifier_name
-  static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
-    = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+  init(
+    store: DataPersisting = UserDefaults.standard,
+    appIdentifierProvider: AppIdentifierProviding = Settings.shared
+    ) {
+    self.appIdentifierProvider = appIdentifierProvider
+    self.store = store
+  }
+
+  func cache(_ gatekeepers: [Gatekeeper]) {
+    let data = try? JSONEncoder().encode(gatekeepers)
+
+    store.set(data, forKey: retrievalKey)
+  }
 }

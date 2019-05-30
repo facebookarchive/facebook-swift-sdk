@@ -40,4 +40,18 @@ enum SampleHTTPURLResponse {
     expectedContentLength: 0,
     textEncodingName: nil
   )
+
+  static let invalidStatusCode = HTTPURLResponse(
+    url: SampleURL.valid,
+    statusCode: 500,
+    httpVersion: nil,
+    headerFields: nil
+  )
+
+  static let validStatusCode = HTTPURLResponse(
+    url: SampleURL.valid,
+    statusCode: 200,
+    httpVersion: nil,
+    headerFields: nil
+  )
 }
