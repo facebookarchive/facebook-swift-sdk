@@ -88,7 +88,7 @@ struct URLBuilder {
    */
   func buildAppURL(
     hostName: String,
-    path: String,
+    path: String = "/",
     queryItems: [URLQueryItem] = []
     ) -> URL? {
     return buildURL(

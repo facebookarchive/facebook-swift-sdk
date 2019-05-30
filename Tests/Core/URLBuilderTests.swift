@@ -220,7 +220,7 @@ class URLBuilderTests: XCTestCase {
 
   // MARK: - App URL
 
-  func testBuildingAppURLWithoutAppIDWithoutSuffix() {
+  func testBuildingAppUrlWithoutAppIDWithoutSuffix() {
     let expectedScheme = "fb"
 
     let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: nil)
@@ -234,11 +234,11 @@ class URLBuilderTests: XCTestCase {
       url,
       scheme: expectedScheme,
       hostName: "Foo",
-      path: "Bar"
+      path: "/Bar"
     )
   }
 
-  func testBuildingAppURLWithoutAppIDWithSuffix() {
+  func testBuildingAppUrlWithoutAppIDWithSuffix() {
     let expectedScheme = "fbFoo"
     let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: "Foo")
 
@@ -251,11 +251,11 @@ class URLBuilderTests: XCTestCase {
       url,
       scheme: expectedScheme,
       hostName: "Foo",
-      path: "Bar"
+      path: "/Bar"
     )
   }
 
-  func testBuildingAppURLWithAppIDWithoutSuffix() {
+  func testBuildingAppUrlWithAppIDWithoutSuffix() {
     let expectedScheme = "fbFoo"
     let fakeSettings = FakeSettings(appIdentifier: "Foo", urlSchemeSuffix: nil)
 
@@ -268,11 +268,11 @@ class URLBuilderTests: XCTestCase {
       url,
       scheme: expectedScheme,
       hostName: "Foo",
-      path: "Bar"
+      path: "/Bar"
     )
   }
 
-  func testBuildingAppURLWithAppIDWithSuffix() {
+  func testBuildingAppUrlWithAppIDWithSuffix() {
     let expectedScheme = "fbFooBar"
     let fakeSettings = FakeSettings(appIdentifier: "Foo", urlSchemeSuffix: "Bar")
 
@@ -285,7 +285,24 @@ class URLBuilderTests: XCTestCase {
       url,
       scheme: expectedScheme,
       hostName: "Foo",
-      path: "Bar"
+      path: "/Bar"
+    )
+  }
+
+  func testBuildingAppUrlWithDefaultPath() {
+    let expectedScheme = "fb"
+    let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: nil)
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo") else {
+        return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "/"
     )
   }
 
@@ -321,6 +338,13 @@ class URLBuilderTests: XCTestCase {
     XCTAssertNil(
       url.port,
       "URL should not override the default port",
+      file: file,
+      line: line
+    )
+    XCTAssertEqual(
+      url.path,
+      path,
+      "URL path should be: \(path)",
       file: file,
       line: line
     )
