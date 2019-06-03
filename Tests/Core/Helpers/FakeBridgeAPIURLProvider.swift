@@ -22,7 +22,6 @@ import Foundation
 class FakeBridgeAPIURLProvider: BridgeAPIURLProviding {
   var capturedActionID: String?
   var capturedMethodName: String?
-  var capturedMethodVersion: String?
   var capturedParameters: [String: AnyHashable] = [:]
 
   var stubbedURL: URL = SampleURL.valid
@@ -30,12 +29,10 @@ class FakeBridgeAPIURLProvider: BridgeAPIURLProviding {
   func requestURL(
     actionID: String,
     methodName: String,
-    methodVersion: String,
     parameters: [String: AnyHashable]
     ) throws -> URL {
     capturedActionID = actionID
     capturedMethodName = methodName
-    capturedMethodVersion = methodVersion
     capturedParameters = parameters
 
     return stubbedURL

@@ -66,7 +66,6 @@ struct BridgeAPIRequest {
     let url = try urlProvider.requestURL(
       actionID: actionID,
       methodName: methodName,
-      methodVersion: methodVersion,
       parameters: parameters
     )
 

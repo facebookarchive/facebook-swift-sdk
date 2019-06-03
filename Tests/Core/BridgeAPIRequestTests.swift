@@ -119,8 +119,6 @@ class BridgeAPIRequestTests: XCTestCase {
                      "Requesting a url should forward the action identifier to the bridge api")
       XCTAssertEqual(fakeBridgeAPIURLProvider.capturedMethodName, request.methodName,
                      "Requesting a url should forward the method name to the bridge api")
-      XCTAssertEqual(fakeBridgeAPIURLProvider.capturedMethodVersion, request.methodVersion,
-                     "Requesting a url should forward the method version to the bridge api")
       XCTAssertEqual(fakeBridgeAPIURLProvider.capturedParameters, request.parameters,
                      "Requesting a url should forward the parameters to the bridge api")
     } catch {
