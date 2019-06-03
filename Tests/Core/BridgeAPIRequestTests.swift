@@ -186,8 +186,7 @@ class BridgeAPIRequestTests: XCTestCase {
     let expectedQueryItems = URLQueryItemBuilder.build(from:
       [
         "bar": "baz",
-        "app_id": fakeSettings.appIdentifier!,
-        "cipher_key": "foo"
+        "app_id": fakeSettings.appIdentifier!
       ]
     )
     fakeBridgeAPIURLProvider.stubbedURL = URLBuilder().buildURL(scheme: "myApp", hostName: "example.com", queryItems: passThroughQueryItem)!
@@ -204,11 +203,11 @@ class BridgeAPIRequestTests: XCTestCase {
           return XCTFail("Should be able to get query items from url")
       }
 
-      XCTAssertEqual(
-        queryItems.sorted { $0.name < $1.name },
-        expectedQueryItems.sorted { $0.name < $1.name },
-        "Request should include query items from the url provided by the bridge api"
-      )
+      XCTAssertTrue(Set(queryItems).isStrictSuperset(of: expectedQueryItems),
+                    "Request should include query items from the url provided by the bridge api")
+
+      XCTAssertTrue(queryItems.contains { $0.name == "cipher_key" },
+                    "Request should include a query item for the cipher key")
     } catch {
       XCTAssertNil(error, "Should provide a request url given a valid scheme")
     }

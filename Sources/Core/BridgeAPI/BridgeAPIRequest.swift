@@ -80,21 +80,21 @@ struct BridgeAPIRequest {
     }
 
     var queryItems = components.queryItems ?? []
-    var additionalQueryItems = [
-      // TODO: Integrate the cipher key from the Cryptography utility so that responses may
-      // be encrypted
-      URLQueryItem(name: "cipher_key", value: "foo"),
-      URLQueryItem(name: "app_id", value: appIdentifier)
-    ]
+
+    if let key = try? Cryptography.rsaPublicKeyAsBase64() {
+      queryItems.append(URLQueryItem(name: "cipher_key", value: key))
+    } else {
+      try Cryptography.generateRSAKeyPair()
+      let key = try Cryptography.rsaPublicKeyAsBase64()
+      queryItems.append(URLQueryItem(name: "cipher_key", value: key))
+    }
+
+    queryItems.append(URLQueryItem(name: "app_id", value: appIdentifier))
 
     if let suffix = settings.urlSchemeSuffix,
       !suffix.isEmpty {
-      additionalQueryItems.append(
-        URLQueryItem(name: "scheme_suffix", value: settings.urlSchemeSuffix)
-      )
+      queryItems.append(URLQueryItem(name: "scheme_suffix", value: settings.urlSchemeSuffix))
     }
-
-    queryItems.append(contentsOf: additionalQueryItems)
 
     guard let updatedURL = URLBuilder().buildURL(
       scheme: scheme,
