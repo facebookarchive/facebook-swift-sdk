@@ -26,3 +26,7 @@ protocol BridgeAPIURLProviding {
     parameters: [String: AnyHashable]
     ) throws -> URL
 }
+
+enum BridgeURLProvidingError: FBError {
+  case invalidURL
+}

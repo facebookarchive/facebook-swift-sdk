@@ -1012,7 +1012,6 @@
 			children = (
 				F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */,
 			);
-			name = "Recovered References";
 			path = "Recovered References";
 			sourceTree = "<group>";
 		};
