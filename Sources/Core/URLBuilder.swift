@@ -49,7 +49,7 @@ struct URLBuilder {
   func buildURL(
     scheme: String = URLBuilder.defaultScheme,
     hostPrefix: String = "",
-    hostName: String,
+    hostName: String = URLBuilder.defaultHostname,
     path: String = "/",
     queryItems: [URLQueryItem] = []
     ) -> URL? {
