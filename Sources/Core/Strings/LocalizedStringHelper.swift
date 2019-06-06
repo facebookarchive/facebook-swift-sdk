@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,4 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
+
+enum LocalizedStringHelper {
+  static var localizedStringsBundle: Bundle = {
+    guard let path = Bundle(for: FacebookCoreApplicationDelegate.self).path(
+      forResource: "FacebookSDKStrings",
+      ofType: "bundle"
+      ) else {
+        return Bundle.main
+    }
+
+    return Bundle(path: path) ?? Bundle.main
+  }()
+}
