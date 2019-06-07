@@ -54,5 +54,7 @@ enum JSONFileName: String {
   case validRemoteDialogFlowList
   case validRemoteErrorConfiguration
   case validRemoteErrorConfigurationList
+  case validRemoteRestrictiveRule
+  case validRemoteRestrictiveRuleList
   case validUserProfile
 }
