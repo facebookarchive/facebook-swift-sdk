@@ -257,7 +257,10 @@
 		F4C57D2722AADE6200D0BEFE /* validRemoteDialogConfigurationList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C57D2622AADE6200D0BEFE /* validRemoteDialogConfigurationList.json */; };
 		F4C57D2922AAE7A300D0BEFE /* validRemoteDialogConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C57D2822AAE7A200D0BEFE /* validRemoteDialogConfiguration.json */; };
 		F4C57D2B22AAE96500D0BEFE /* DialogConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D2A22AAE96500D0BEFE /* DialogConfigurationTests.swift */; };
+		F4C57D2D22AAEA4800D0BEFE /* SampleRemoteDialogConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D2C22AAEA4800D0BEFE /* SampleRemoteDialogConfiguration.swift */; };
 		F4C57D2F22AAEAF600D0BEFE /* DialogConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D2E22AAEAF600D0BEFE /* DialogConfiguration.swift */; };
+		F4C57D3122AAFC0900D0BEFE /* SampleRemoteErrorConfigurationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D3022AAFC0900D0BEFE /* SampleRemoteErrorConfigurationList.swift */; };
+		F4C57D3322AB0A5000D0BEFE /* SampleRemoteDialogConfigurationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D3222AB0A5000D0BEFE /* SampleRemoteDialogConfigurationList.swift */; };
 		F4CF0342227387A900807A61 /* AppLinkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */; };
 		F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */; };
 		F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */; };
@@ -578,6 +581,8 @@
 		F4C57D2A22AAE96500D0BEFE /* DialogConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogConfigurationTests.swift; sourceTree = "<group>"; };
 		F4C57D2C22AAEA4800D0BEFE /* SampleRemoteDialogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteDialogConfiguration.swift; sourceTree = "<group>"; };
 		F4C57D2E22AAEAF600D0BEFE /* DialogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogConfiguration.swift; sourceTree = "<group>"; };
+		F4C57D3022AAFC0900D0BEFE /* SampleRemoteErrorConfigurationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteErrorConfigurationList.swift; sourceTree = "<group>"; };
+		F4C57D3222AB0A5000D0BEFE /* SampleRemoteDialogConfigurationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteDialogConfigurationList.swift; sourceTree = "<group>"; };
 		F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkServiceTests.swift; sourceTree = "<group>"; };
 		F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAppLinkDetailsTests.swift; sourceTree = "<group>"; };
 		F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteAppLinkDetail.swift; sourceTree = "<group>"; };
@@ -1108,7 +1113,9 @@
 				F4C3C55A227B68C9004B487E /* SampleRemoteAppLink.swift */,
 				F4C3C5372278C236004B487E /* SampleRemoteAppLinkTarget.swift */,
 				F4C57D2C22AAEA4800D0BEFE /* SampleRemoteDialogConfiguration.swift */,
+				F4C57D3222AB0A5000D0BEFE /* SampleRemoteDialogConfigurationList.swift */,
 				F4C57D1822AACE2B00D0BEFE /* SampleRemoteDialogFlowList.swift */,
+				F4C57D3022AAFC0900D0BEFE /* SampleRemoteErrorConfigurationList.swift */,
 				F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
@@ -1572,6 +1579,7 @@
 				F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */,
 				F447152E22440CD30013495F /* FakeProcessInfo.swift in Sources */,
 				F429ACD32280DDF2000916BF /* AppLinkServiceConfigurationTests.swift in Sources */,
+				F4C57D3122AAFC0900D0BEFE /* SampleRemoteErrorConfigurationList.swift in Sources */,
 				52CDB7CD2265525400E6EF78 /* FakeSecureStore.swift in Sources */,
 				F44715232243E3FF0013495F /* DeveloperErrorStringsTests.swift in Sources */,
 				F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */,
@@ -1579,6 +1587,7 @@
 				F408BEB4223988BD0068D24A /* ErrorCategoryTests.swift in Sources */,
 				F45E54FC229320E1008A6011 /* SampleInfoDictionary.swift in Sources */,
 				F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */,
+				F4C57D2D22AAEA4800D0BEFE /* SampleRemoteDialogConfiguration.swift in Sources */,
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,
 				F406F8672282376C006B0D4E /* DrawableTests.swift in Sources */,
@@ -1670,6 +1679,7 @@
 				F4144A10222DAFCD00CB83E0 /* PermissionTests.swift in Sources */,
 				F422F0852284A40000AFD0DF /* FakeFileManager.swift in Sources */,
 				520D344D2265325900CEE2ED /* KeychainStoreTests.swift in Sources */,
+				F4C57D3322AB0A5000D0BEFE /* SampleRemoteDialogConfigurationList.swift in Sources */,
 				F4C57D0F22AAA6D300D0BEFE /* RemoteDialogFlowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

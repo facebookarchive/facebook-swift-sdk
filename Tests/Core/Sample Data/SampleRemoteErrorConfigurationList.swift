@@ -19,11 +19,30 @@
 @testable import FacebookCore
 import Foundation
 
-enum SampleRemoteDialogFlowList {
-  static let valid = RemoteDialogFlowList(
-    dialogs: [
-      RemoteDialogFlow(name: "default", shouldUseNativeFlow: 1, shouldUseSafariVC: 1),
-      RemoteDialogFlow(name: "message", shouldUseNativeFlow: 1, shouldUseSafariVC: nil)
+enum SampleRemoteErrorConfigurationList {
+  static let valid = RemoteErrorConfigurationEntryList(
+    configurations: [
+      RemoteErrorConfigurationEntry(
+        name: nil,
+        items: [
+          RemoteErrorCodeGroup(code: 102),
+          RemoteErrorCodeGroup(code: 190)
+        ],
+        recoveryMessage: "Please log into this app again to reconnect your Facebook account.",
+        recoveryOptions: ["OK", "Cancel"]
+      ),
+      RemoteErrorConfigurationEntry(
+        name: .transient,
+        items: [
+          RemoteErrorCodeGroup(code: 341),
+          RemoteErrorCodeGroup(code: 9),
+          RemoteErrorCodeGroup(code: 2),
+          RemoteErrorCodeGroup(code: 4),
+          RemoteErrorCodeGroup(code: 17)
+        ],
+        recoveryMessage: "The server is temporarily busy, please try again.",
+        recoveryOptions: ["OK"]
+      )
     ]
   )
 }
