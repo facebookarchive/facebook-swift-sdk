@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "name": "foo",
+      "url": "www.example.com",
+      "versions": [1, 2, 3]
+    },
+    {
+      "name": "bar",
+      "url": "www.example.com/bar",
+      "versions": [4, 5, 6]
+    }
+  ]
+}
