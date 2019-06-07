@@ -49,6 +49,7 @@ enum JSONFileName: String {
   case validRemoteAppLink
   case validGatekeeperList
   case validRemoteAppLinkDetail
+  case validRemoteDialogFlowList
   case validRemoteErrorConfiguration
   case validRemoteErrorConfigurationList
   case validUserProfile
