@@ -94,7 +94,7 @@ class GatekeeperTests: XCTestCase {
   }
 
   func testCreatingFromJSON() {
-    guard let data = JSONLoader.loadData(for: .validGatekeeper) else {
+    guard let data = JSONLoader.loadData(for: .validRemoteGatekeeper) else {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(Gatekeeper.self, from: data),
