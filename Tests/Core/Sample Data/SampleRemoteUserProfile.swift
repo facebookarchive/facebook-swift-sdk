@@ -16,30 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+@testable import FacebookCore
+import Foundation
 
-protocol GraphRequestConnecting {
-  func start()
-  func add(
-    request: GraphRequest,
-    batchEntryName: String,
-    batchParameters: [String: AnyHashable],
-    completion: @escaping GraphRequestBlock
-    ) throws
+enum SampleRemoteUserProfile {
+  static let valid = RemoteUserProfile(
+    identifier: "abc",
+    name: "Bob",
+    firstName: "Bob",
+    middleName: "C",
+    lastName: "Martin",
+    linkURL: SampleURL.valid.absoluteString
+  )
 
-  func getObject<RemoteType: Decodable>(
-    for graphRequest: GraphRequest,
-    completion: @escaping (Result<RemoteType, Error>) -> Void
-    ) -> URLSessionTaskProxy?
-}
-
-extension GraphRequestConnecting {
-  func add(
-    request: GraphRequest,
-    completion: @escaping GraphRequestBlock
-    ) throws {
-    // TODO: this feels a little hacky, would like to introduce a NonEmptyString type and use
-    // an existence check over an emptiness check on a String.
-    try add(request: request, batchEntryName: "", batchParameters: [:], completion: completion)
-  }
+  static let invalid = RemoteUserProfile(
+    identifier: "",
+    name: nil,
+    firstName: nil,
+    middleName: nil,
+    lastName: nil,
+    linkURL: nil
+  )
 }
