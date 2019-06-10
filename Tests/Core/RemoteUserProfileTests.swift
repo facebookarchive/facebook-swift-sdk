@@ -133,7 +133,7 @@ class RemoteUserProfileTests: XCTestCase {
   }
 
   func testCreatingFromJSON() {
-    guard let data = JSONLoader.loadData(for: .validUserProfile) else {
+    guard let data = JSONLoader.loadData(for: .validRemoteUserProfile) else {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(RemoteUserProfile.self, from: data),

@@ -106,7 +106,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
   }
 
   func testDecodingFromJSON() {
-    guard let data = JSONLoader.loadData(for: .validAppLinkTarget) else {
+    guard let data = JSONLoader.loadData(for: .validRemoteAppLinkTarget) else {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(RemoteAppLinkTarget.self, from: data),
