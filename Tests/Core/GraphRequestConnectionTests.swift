@@ -106,7 +106,7 @@ class GraphRequestConnectionTests: XCTestCase {
           XCTAssertEqual(error, .requestAddition,
                          "Attempting to add a request while the connection is in the state: \(state) should throw a request addition error")
         } catch {
-          XCTFail("Caught unexpected error: \(error)")
+          XCTAssertNil(error, "Caught unexpected error: \(error)")
         }
     }
   }

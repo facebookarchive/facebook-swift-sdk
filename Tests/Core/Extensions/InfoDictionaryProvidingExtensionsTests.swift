@@ -65,7 +65,7 @@ class InfoDictionaryProvidingExtensionsTests: XCTestCase {
                      "Missing an application identifier. Please add it to your Info.plist under the key: FacebookAppID",
                      "Error should provide hints on how to fix the issue")
     } catch {
-      XCTFail("Should only throw known errors")
+      XCTAssertNil(error, "Should only throw known errors")
     }
   }
 
@@ -84,7 +84,7 @@ class InfoDictionaryProvidingExtensionsTests: XCTestCase {
                      "fbabc123 is not registered as a URL scheme. Please add it to your Info.plist",
                      "Error should provide hints on how to fix the issue")
     } catch {
-      XCTFail("Should only throw known errors")
+      XCTAssertNil(error, "Should only throw known errors")
     }
   }
 
@@ -103,7 +103,7 @@ class InfoDictionaryProvidingExtensionsTests: XCTestCase {
                      "fbabc123 is not registered as a URL scheme. Please add it to your Info.plist",
                      "Error should provide hints on how to fix the issue")
     } catch {
-      XCTFail("Should only throw known errors")
+      XCTAssertNil(error, "Should only throw known errors")
     }
   }
 }

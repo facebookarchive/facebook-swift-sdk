@@ -95,8 +95,8 @@ class ImageServiceTests: XCTestCase {
         XCTAssertEqual(error, .missingData,
                        "Should provide the expected error when completing a task with missing data")
 
-      case .failure:
-        XCTFail("Should only return expected errors")
+      case .failure(let error):
+        XCTAssertNil(error, "Should only return expected errors")
       }
       expectation.fulfill()
     }
@@ -143,8 +143,8 @@ class ImageServiceTests: XCTestCase {
         XCTAssertEqual(error, .missingData,
                        "Should provide the expected error when completing a task with missing data")
 
-      case .failure:
-        XCTFail("Should only return expected errors")
+      case let .failure(error):
+        XCTAssertNil(error, "Should only return expected errors")
       }
       expectation.fulfill()
     }
