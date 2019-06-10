@@ -444,8 +444,8 @@ class ImageServiceTests: XCTestCase {
       for: request
     )
 
-    _ = service.image(for: url) { response in
-      guard case let .success(image) = response else {
+    _ = service.image(for: url) { result in
+      guard let image = try? result.get() else {
         return XCTFail("Should call the fetch completion with an image created from cached image data")
       }
       XCTAssertEqual(image.pngData(), self.imageData,
