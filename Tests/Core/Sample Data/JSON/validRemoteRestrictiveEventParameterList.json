@@ -1,0 +1,21 @@
+{
+  "background_event": {
+    "is_deprecated_event": true },
+    "manual_initiated_checkout": {
+      "restrictive_param": {
+        "first name": 6,
+        "last_name": 7
+      }
+    },
+    "fb_mobile_catalog_update": {
+      "restrictive_param": {
+        "last_name": 7,
+        "first_name":6,
+        "first name": 6
+      }
+    },
+    "abc": {
+      "is_deprecated_event": true
+    }
+}
+
