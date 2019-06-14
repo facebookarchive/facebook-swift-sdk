@@ -396,7 +396,7 @@ class UserProfileServiceTests: XCTestCase {
     )
 
     guard let url = URLBuilder().buildURL(for: request) else {
-        return XCTFail("Should be able to create an image url")
+      return XCTFail("Should be able to create an image url")
     }
 
     XCTAssertEqual(url.path, "/v3.2/user123/picture",

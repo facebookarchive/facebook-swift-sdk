@@ -40,7 +40,7 @@ class AudioResourceLoaderTests: XCTestCase {
       .appendingPathComponent("\(FakeAudioResource.version)/")
 
     expectedAudioResourceURL = expectedAudioResourceDirectoryURL
-        .appendingPathComponent(FakeAudioResource.name)
+      .appendingPathComponent(FakeAudioResource.name)
 
     fakeFileManager = FakeFileManager(tempDirectoryURL: tempDirectoryURL)
     fakeAudioService = FakeAudioService()

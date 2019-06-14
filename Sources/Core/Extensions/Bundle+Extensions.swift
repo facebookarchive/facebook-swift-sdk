@@ -58,7 +58,7 @@ extension InfoDictionaryProviding {
   func validateFacebookURLScheme(settings: SettingsManaging = Settings.shared) throws {
     guard let appID = settings.appIdentifier,
       !appID.isEmpty else {
-      throw InfoDictionaryProvidingError.invalidAppIdentifier
+        throw InfoDictionaryProvidingError.invalidAppIdentifier
     }
 
     let scheme = "fb\(appID)\(settings.urlSchemeSuffix ?? "")"
