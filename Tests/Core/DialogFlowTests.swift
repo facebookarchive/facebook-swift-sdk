@@ -37,42 +37,28 @@ class DialogFlowTests: XCTestCase {
   func testBuildingFromRemoteWithFalseFields() {
     let remoteFlow = RemoteDialogFlow(
       name: "foo",
-      shouldUseNativeFlow: 0,
-      shouldUseSafariVC: 0
+      shouldUseNativeFlow: false,
+      shouldUseSafariVC: false
     )
     let flow = DialogFlow(remote: remoteFlow)
 
     XCTAssertFalse(flow.shouldUseNativeFlow,
-                   "Should interpret a zero as false for using native flow")
+                   "Should determine using native flow based on the remote")
     XCTAssertFalse(flow.shouldUseSafariVC,
-                   "Should interpret a zero as false for using a safari vc")
+                   "Should determine using a safari vc based on the remote")
   }
 
   func testBuildingFromRemoteWithTrueFields() {
     let remoteFlow = RemoteDialogFlow(
       name: "foo",
-      shouldUseNativeFlow: 1,
-      shouldUseSafariVC: 1
+      shouldUseNativeFlow: true,
+      shouldUseSafariVC: true
     )
     let flow = DialogFlow(remote: remoteFlow)
 
     XCTAssertTrue(flow.shouldUseNativeFlow,
-                  "Should interpret a one as true for using native flow")
+                  "Should determine using native flow based on the remote")
     XCTAssertTrue(flow.shouldUseSafariVC,
-                  "Should interpret a one as true for using a safari vc")
-  }
-
-  func testBuildingFromRemoteWithInvalidFields() {
-    let remoteFlow = RemoteDialogFlow(
-      name: "foo",
-      shouldUseNativeFlow: 98765,
-      shouldUseSafariVC: 43210
-    )
-    let flow = DialogFlow(remote: remoteFlow)
-
-    XCTAssertFalse(flow.shouldUseNativeFlow,
-                   "Should interpret a non-one value as false for using native flow")
-    XCTAssertFalse(flow.shouldUseSafariVC,
-                   "Should interpret a non-one value as false for using a safari vc")
+                  "Should determine using a safari vc based on the remote")
   }
 }

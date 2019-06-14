@@ -16,17 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable discouraged_optional_boolean
+
 import Foundation
 
 struct RemoteDialogFlow: Equatable {
   let name: String
-  let shouldUseNativeFlow: Int?
-  let shouldUseSafariVC: Int?
+  let shouldUseNativeFlow: Bool?
+  let shouldUseSafariVC: Bool?
 
   init(
     name: String,
-    shouldUseNativeFlow: Int?,
-    shouldUseSafariVC: Int?
+    shouldUseNativeFlow: Bool?,
+    shouldUseSafariVC: Bool?
     ) {
     self.name = name
     self.shouldUseNativeFlow = shouldUseNativeFlow

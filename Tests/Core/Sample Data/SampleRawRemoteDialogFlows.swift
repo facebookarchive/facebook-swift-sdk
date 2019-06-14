@@ -23,11 +23,11 @@ enum SampleRawRemoteDialogFlows {
   static var valid: [String: Any] = {
     [
       "default": [
-        "use_native_flow": 1,
-        "use_safari_vc": 1
+        "use_native_flow": true,
+        "use_safari_vc": true
       ],
       "message": [
-        "use_native_flow": 1
+        "use_native_flow": true
       ]
     ]
   }()

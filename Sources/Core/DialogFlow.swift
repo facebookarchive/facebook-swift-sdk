@@ -25,11 +25,7 @@ struct DialogFlow {
 
   init(remote: RemoteDialogFlow) {
     name = remote.name
-
-    let shouldUseNativeFlow = remote.shouldUseNativeFlow == 1
-    let shouldUseSafariVC = remote.shouldUseSafariVC == 1
-
-    self.shouldUseNativeFlow = shouldUseNativeFlow
-    self.shouldUseSafariVC = shouldUseSafariVC
+    shouldUseNativeFlow = remote.shouldUseNativeFlow ?? false
+    shouldUseSafariVC = remote.shouldUseSafariVC ?? false
   }
 }

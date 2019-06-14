@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable discouraged_optional_boolean
+
 import Foundation
 
 struct RemoteDialogFlowList: Decodable {
@@ -28,7 +30,7 @@ struct RemoteDialogFlowList: Decodable {
 
     container.allKeys.forEach { key in
       let name = key.stringValue
-      let details = try? container.decode(Details.self, forKey: key)
+      let details = try? container.decode(RemoteDialogFlowDetails.self, forKey: key)
 
       dialogs.append(
         RemoteDialogFlow(
@@ -41,9 +43,9 @@ struct RemoteDialogFlowList: Decodable {
     self.dialogs = dialogs
   }
 
-  struct Details: Decodable {
-    let shouldUseNativeFlow: Int?
-    let shouldUseSafariVC: Int?
+  struct RemoteDialogFlowDetails: Decodable {
+    let shouldUseNativeFlow: Bool?
+    let shouldUseSafariVC: Bool?
 
     // swiftlint:disable:next nesting
     enum CodingKeys: String, CodingKey {
