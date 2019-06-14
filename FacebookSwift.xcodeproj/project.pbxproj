@@ -254,6 +254,7 @@
 		F4C3C55B227B68C9004B487E /* SampleRemoteAppLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C55A227B68C9004B487E /* SampleRemoteAppLink.swift */; };
 		F4C3C55D227B6F4C004B487E /* validRemoteAppLink.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C3C55C227B6F4C004B487E /* validRemoteAppLink.json */; };
 		F4C3C561227BA339004B487E /* AppLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C560227BA339004B487E /* AppLinkService.swift */; };
+		F4C57D0B22A98C5100D0BEFE /* GraphRequestTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D0A22A98C5100D0BEFE /* GraphRequestTestHelper.swift */; };
 		F4C57D0F22AAA6D300D0BEFE /* RemoteDialogFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D0E22AAA6D300D0BEFE /* RemoteDialogFlowTests.swift */; };
 		F4C57D1122AABB4B00D0BEFE /* RemoteDialogFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1022AABB4B00D0BEFE /* RemoteDialogFlow.swift */; };
 		F4C57D1322AABB7800D0BEFE /* RemoteDialogFlowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1222AABB7800D0BEFE /* RemoteDialogFlowList.swift */; };
@@ -596,6 +597,7 @@
 		F4C3C55A227B68C9004B487E /* SampleRemoteAppLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteAppLink.swift; sourceTree = "<group>"; };
 		F4C3C55C227B6F4C004B487E /* validRemoteAppLink.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteAppLink.json; sourceTree = "<group>"; };
 		F4C3C560227BA339004B487E /* AppLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkService.swift; sourceTree = "<group>"; };
+		F4C57D0A22A98C5100D0BEFE /* GraphRequestTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestTestHelper.swift; sourceTree = "<group>"; };
 		F4C57D0E22AAA6D300D0BEFE /* RemoteDialogFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDialogFlowTests.swift; sourceTree = "<group>"; };
 		F4C57D1022AABB4B00D0BEFE /* RemoteDialogFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDialogFlow.swift; sourceTree = "<group>"; };
 		F4C57D1222AABB7800D0BEFE /* RemoteDialogFlowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDialogFlowList.swift; sourceTree = "<group>"; };
@@ -944,6 +946,7 @@
 				F480D9102236E1F7001AB8D3 /* FakeSessionProvider.swift */,
 				F44DB6A22229C6B60083506E /* FakeSettings.swift */,
 				F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */,
+				F4C57D0A22A98C5100D0BEFE /* GraphRequestTestHelper.swift */,
 				F4B340002240779D00912F0F /* JSONLoader.swift */,
 				F48A74A02239B4E0007192F6 /* LocalizedStringValidation.swift */,
 				F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */,
@@ -1749,6 +1752,7 @@
 				F447153222440EB60013495F /* FakeSession.swift in Sources */,
 				F43AB03E2270D69400610974 /* GatekeeperServiceTests.swift in Sources */,
 				F4C3C5342277C3B6004B487E /* SampleRawRemoteAppLink.swift in Sources */,
+				F4C57D0B22A98C5100D0BEFE /* GraphRequestTestHelper.swift in Sources */,
 				F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */,
 				F4C3C551227B4C6F004B487E /* RemoteAppLink+Extensions.swift in Sources */,
 				F4D5DAE422492BCD0014C14D /* FakeBundle.swift in Sources */,
