@@ -52,4 +52,38 @@ enum SampleRemoteRestrictiveRule {
     valueRegex: valueRegex,
     valueNegativeRegex: ""
   )
+
+  static let validPhone = RemoteRestrictiveRule(
+    keyRegex: "^phone$|phone number|cell phone|mobile phone|^mobile$",
+    type: 2,
+    valueRegex: "^[0-9][0-9]",
+    valueNegativeRegex: "required|true|false|yes|y|n|off|on"
+  )
+
+  static let validSSN = RemoteRestrictiveRule(
+    keyRegex: "^ssn$|social security number|social security",
+    type: 4,
+    valueNegativeRegex: "required|true|false|yes"
+  )
+
+  static let validPassword = RemoteRestrictiveRule(
+    keyRegex: "password|passcode|passId",
+    type: 3,
+    valueNegativeRegex: "required|true|false|yes"
+  )
+
+  static let validFirstName = RemoteRestrictiveRule(
+    keyRegex: "firstname|first_name|first name",
+    type: 6
+  )
+
+  static let validLastName = RemoteRestrictiveRule(
+    keyRegex: "lastname|last_name|last name",
+    type: 7
+  )
+
+  static let validDateOfBirth = RemoteRestrictiveRule(
+    keyRegex: "date_of_birth|\\\\\\u003Cdob\\\\>|dob\\\\>|birthdate|userbirthday|dateofbirth|date of birth|\\\\\\u003Cdob_|dobd|dobm|doby",
+    type: 8
+  )
 }
