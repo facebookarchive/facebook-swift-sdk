@@ -146,6 +146,7 @@
 		F45734D3222D941D001F806A /* GraphRequestConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */; };
 		F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */; };
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
+		F458069B22B2B8D8007B9D2C /* EquatabilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458069A22B2B8D8007B9D2C /* EquatabilityExtensions.swift */; };
 		F45E54DD228E0B42008A6011 /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */; };
 		F45E54DF228E0BE6008A6011 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DE228E0BE6008A6011 /* ImageService.swift */; };
 		F45E54F5228F8699008A6011 /* PListURLConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */; };
@@ -474,6 +475,7 @@
 		F45734D2222D941D001F806A /* GraphRequestConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionTests.swift; sourceTree = "<group>"; };
 		F45734D4222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestPiggybackManagerTests.swift; sourceTree = "<group>"; };
 		F45734D6222D9535001F806A /* InternalUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtilityTests.swift; sourceTree = "<group>"; };
+		F458069A22B2B8D8007B9D2C /* EquatabilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatabilityExtensions.swift; sourceTree = "<group>"; };
 		F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceTests.swift; sourceTree = "<group>"; };
 		F45E54DE228E0BE6008A6011 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfigurationTests.swift; sourceTree = "<group>"; };
@@ -1152,6 +1154,7 @@
 		F4C32DA0223DA13E00FF1F86 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F458069A22B2B8D8007B9D2C /* EquatabilityExtensions.swift */,
 				F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */,
 				F4C3C550227B4C6F004B487E /* RemoteAppLink+Extensions.swift */,
 				F4C3C54E227A4CFD004B487E /* RemoteAppLinkTarget+Extensions.swift */,
@@ -1706,6 +1709,7 @@
 				F4C3C551227B4C6F004B487E /* RemoteAppLink+Extensions.swift in Sources */,
 				F4D5DAE422492BCD0014C14D /* FakeBundle.swift in Sources */,
 				F44DB6A12229C50E0083506E /* FakeAccessTokenCache.swift in Sources */,
+				F458069B22B2B8D8007B9D2C /* EquatabilityExtensions.swift in Sources */,
 				F4C3C54F227A4CFD004B487E /* RemoteAppLinkTarget+Extensions.swift in Sources */,
 				F408BEAE223986040068D24A /* ErrorConfigurationEntryTests.swift in Sources */,
 				F4144A10222DAFCD00CB83E0 /* PermissionTests.swift in Sources */,
