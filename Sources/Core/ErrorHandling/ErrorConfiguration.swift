@@ -31,8 +31,8 @@ struct ErrorConfiguration {
     let minorCode: Int?
   }
 
-  let majorRecoverableCodes: [Int] = [102, 190]
-  let majorTransientCodes: [Int] = [1, 2, 4, 9, 17, 341]
+  private let defaultMajorRecoverableCodes: [Int] = [102, 190]
+  private let defaultMajorTransientCodes: [Int] = [1, 2, 4, 9, 17, 341]
   private var configurationDictionary: ConfigurationDictionary = [:]
 
   init(configurationDictionary: [Key: ErrorConfigurationEntry]) {
@@ -74,10 +74,10 @@ struct ErrorConfiguration {
       category: .transient
     )
 
-    majorRecoverableCodes.forEach { key in
+    defaultMajorRecoverableCodes.forEach { key in
       dictionary.updateValue(recoverableEntry, forKey: Key(majorCode: key, minorCode: nil))
     }
-    majorTransientCodes.forEach { key in
+    defaultMajorTransientCodes.forEach { key in
       dictionary.updateValue(transientEntry, forKey: Key(majorCode: key, minorCode: nil))
     }
     return dictionary
