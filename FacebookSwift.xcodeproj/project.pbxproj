@@ -282,6 +282,7 @@
 		F4C57D4022AB1ECD00D0BEFE /* validRemoteRestrictiveRule.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C57D3E22AB1ECC00D0BEFE /* validRemoteRestrictiveRule.json */; };
 		F4C57D4122AB1ECD00D0BEFE /* validRemoteRestrictiveRuleList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C57D3F22AB1ECD00D0BEFE /* validRemoteRestrictiveRuleList.json */; };
 		F4C57D4322AB24C600D0BEFE /* RemoteRestrictiveRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D4222AB24C600D0BEFE /* RemoteRestrictiveRule.swift */; };
+		F4C57D4522AFEB9000D0BEFE /* RemoteRestrictiveRule+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D4422AFEB9000D0BEFE /* RemoteRestrictiveRule+Extensions.swift */; };
 		F4CF0342227387A900807A61 /* AppLinkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */; };
 		F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */; };
 		F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */; };
@@ -625,6 +626,7 @@
 		F4C57D3E22AB1ECC00D0BEFE /* validRemoteRestrictiveRule.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteRestrictiveRule.json; sourceTree = "<group>"; };
 		F4C57D3F22AB1ECD00D0BEFE /* validRemoteRestrictiveRuleList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteRestrictiveRuleList.json; sourceTree = "<group>"; };
 		F4C57D4222AB24C600D0BEFE /* RemoteRestrictiveRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRestrictiveRule.swift; sourceTree = "<group>"; };
+		F4C57D4422AFEB9000D0BEFE /* RemoteRestrictiveRule+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteRestrictiveRule+Extensions.swift"; sourceTree = "<group>"; };
 		F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkServiceTests.swift; sourceTree = "<group>"; };
 		F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAppLinkDetailsTests.swift; sourceTree = "<group>"; };
 		F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteAppLinkDetail.swift; sourceTree = "<group>"; };
@@ -1197,6 +1199,7 @@
 				F4C32DA1223DA13E00FF1F86 /* RemoteErrorCodeGroup+Extensions.swift */,
 				F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */,
 				F4C32DA2223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift */,
+				F4C57D4422AFEB9000D0BEFE /* RemoteRestrictiveRule.swift */,
 				F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */,
 				F4B3CA3F22B4109D0098ADF5 /* RemoteRestrictiveEventParameterList+Extensions.swift */,
 			);
@@ -1733,6 +1736,7 @@
 				F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */,
 				F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */,
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
+				F4C57D4522AFEB9000D0BEFE /* RemoteRestrictiveRule+Extensions.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */,
 				F45E54FD22935B50008A6011 /* ProfilePictureViewTests.swift in Sources */,
