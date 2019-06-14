@@ -20,7 +20,7 @@
 import Foundation
 
 enum SampleRemoteErrorConfigurationList {
-  static let valid = RemoteErrorConfigurationEntryList(
+  static let validDefault = RemoteErrorConfigurationEntryList(
     configurations: [
       RemoteErrorConfigurationEntry(
         name: nil,
@@ -39,6 +39,28 @@ enum SampleRemoteErrorConfigurationList {
           RemoteErrorCodeGroup(code: 2),
           RemoteErrorCodeGroup(code: 4),
           RemoteErrorCodeGroup(code: 17)
+        ],
+        recoveryMessage: "The server is temporarily busy, please try again.",
+        recoveryOptions: ["OK"]
+      )
+    ]
+  )
+
+  static let validNonDefault = RemoteErrorConfigurationEntryList(
+    configurations: [
+      RemoteErrorConfigurationEntry(
+        name: nil,
+        items: [
+          RemoteErrorCodeGroup(code: 123)
+        ],
+        recoveryMessage: "Please log into this app again to reconnect your Facebook account.",
+        recoveryOptions: ["OK", "Cancel"]
+      ),
+      RemoteErrorConfigurationEntry(
+        name: .transient,
+        items: [
+          RemoteErrorCodeGroup(code: 123),
+          RemoteErrorCodeGroup(code: 321)
         ],
         recoveryMessage: "The server is temporarily busy, please try again.",
         recoveryOptions: ["OK"]
