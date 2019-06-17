@@ -16,25 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_try
+// swiftlint:disable force_try force_unwrapping
 
 @testable import FacebookCore
 import XCTest
 
-class GatekeeperStoreTests: XCTestCase {
-  private var store: GatekeeperStore!
+class ServerConfigurationStoreTests: XCTestCase {
+  private var store: ServerConfigurationStore!
   private var fakeSettings = FakeSettings()
-  private let gatekeepers: [Gatekeeper] = [
-    SampleGatekeeper.validEnabled,
-    SampleGatekeeper.validDisabled
-  ]
+  private let serverConfiguration = ServerConfiguration(
+    remote: SampleRemoteServerConfiguration.minimal
+  )!
   private var userDefaultsSpy: UserDefaultsSpy!
 
   override func setUp() {
     super.setUp()
 
     userDefaultsSpy = UserDefaultsSpy(name: name)
-    store = GatekeeperStore(
+    store = ServerConfigurationStore(
       store: userDefaultsSpy,
       appIdentifierProvider: fakeSettings
     )
@@ -43,17 +42,17 @@ class GatekeeperStoreTests: XCTestCase {
   // MARK: - Configuration
 
   func testPersistenceDependency() {
-    let store = GatekeeperStore()
+    let store = ServerConfigurationStore()
 
     XCTAssertTrue(store.store is UserDefaults,
-                  "A gatekeeper store should use the correct concrete implementation for its data persistence dependency")
+                  "A server configuration store should use the correct concrete implementation for its data persistence dependency")
   }
 
   func testAppIdentifierDependency() {
-    let store = GatekeeperStore()
+    let store = ServerConfigurationStore()
 
     XCTAssertTrue(store.appIdentifierProvider is Settings,
-                  "A gatekeeper store should use the correct concrete implementation for its app identifier providing dependency")
+                  "A server configuration store should use the correct concrete implementation for its app identifier providing dependency")
   }
 
   // MARK: - Caching
@@ -64,30 +63,30 @@ class GatekeeperStoreTests: XCTestCase {
   }
 
   func testDataForCurrentAppIdentifierAfterFetching() {
-    store.cache(gatekeepers)
+    store.cache(serverConfiguration)
 
     XCTAssertTrue(store.hasDataForCurrentAppIdentifier,
-                  "A store should be considered to have data if gatekeepers have been stored for the current app identifier")
+                  "A store should be considered to have data if serverConfigurations have been stored for the current app identifier")
 
     fakeSettings.appIdentifier = "name"
 
     XCTAssertFalse(store.hasDataForCurrentAppIdentifier,
-                   "A store should be considered to have data for an app identifier if nothing have been cached for it")
+                   "A store should not be considered to have data for an app identifier if nothing has been cached for it")
   }
 
   func testRetrievalKey() {
     fakeSettings.appIdentifier = "foo"
-    XCTAssertEqual(store.retrievalKey, "com.facebook.sdk:gateKeeperfoo",
+    XCTAssertEqual(store.retrievalKey, "com.facebook.sdk:serverConfigurationfoo",
                    "Retrieval key should be based on the current app identifier")
 
     fakeSettings.appIdentifier = "bar"
-    XCTAssertEqual(store.retrievalKey, "com.facebook.sdk:gateKeeperbar",
+    XCTAssertEqual(store.retrievalKey, "com.facebook.sdk:serverConfigurationbar",
                    "Retrieval key should be based on the current app identifier")
   }
 
-  func testCachingGatekeepers() {
-    let expectedData = try! JSONEncoder().encode(gatekeepers)
-    store.cache(gatekeepers)
+  func testCachingServerConfigurations() {
+    let expectedData = try! JSONEncoder().encode(serverConfiguration)
+    store.cache(serverConfiguration)
 
     let capturedSetValue = userDefaultsSpy.capturedValues[store.retrievalKey]
     XCTAssertEqual(capturedSetValue as? Data, expectedData,
@@ -95,31 +94,32 @@ class GatekeeperStoreTests: XCTestCase {
   }
 
   func testCachingNewValueOverridesPreviousValue() {
-    let newGatekeepers = [SampleGatekeeper.validEnabled]
-    let expectedData = try! JSONEncoder().encode(newGatekeepers)
+    let newServerConfiguration = ServerConfiguration(
+      remote: SampleRemoteServerConfiguration.includingAppName
+    )!
+    let expectedData = try! JSONEncoder().encode(newServerConfiguration)
 
-    store.cache(gatekeepers)
-    store.cache(newGatekeepers)
+    store.cache(serverConfiguration)
+    store.cache(newServerConfiguration)
 
     let capturedSetValue = userDefaultsSpy.capturedValues[store.retrievalKey]
     XCTAssertEqual(capturedSetValue as? Data, expectedData,
                    "Caching a list of gatekeepers should attempt to set a serialized version of the gatekeepers in a data persistence store regardless of previous entries")
   }
 
-  func testRetrievingGatekeepersFromEmptyCache() {
+  func testRetrievingServerConfigurationFromEmptyCache() {
     _ = store.cachedValue
 
     XCTAssertEqual(userDefaultsSpy.capturedDataRetrievalKey, store.retrievalKey,
-                   "Store should attempt to retrieve cached gatekeepers from its data persistence store using a known key")
+                   "Store should attempt to retrieve a cached server configuration from its data persistence store using a known key")
   }
 
-  func testRetrievingCachedGatekeepers() {
-    store.cache(gatekeepers)
-    let retrievedGatekeepers = store.cachedValue
+  func testRetrievingCachedServerConfiguration() {
+    store.cache(serverConfiguration)
+    let retrievedServerConfiguration = store.cachedValue
 
     XCTAssertEqual(userDefaultsSpy.capturedDataRetrievalKey, store.retrievalKey,
-                   "Store should attempt to retrieve cached gatekeepers from its data persistence store using a known key")
-    XCTAssertEqual(retrievedGatekeepers, gatekeepers,
-                   "Store should provide the gatekeepers that were saved into it on request")
+                   "Store should attempt to retrieve a cached server configuration from its data persistence store using a known key")
+    ServerConfigurationTestHelper.assertEqual(retrievedServerConfiguration, serverConfiguration)
   }
 }

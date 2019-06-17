@@ -18,11 +18,11 @@
 
 import Foundation
 
-struct GatekeeperStore: Store {
-  typealias CachedValueType = [Gatekeeper]
+struct ServerConfigurationStore: Store {
+  typealias CachedValueType = ServerConfiguration
 
   private(set) var appIdentifierProvider: AppIdentifierProviding
-  let domain: String = "com.facebook.sdk:gateKeeper"
+  let domain: String = "com.facebook.sdk:serverConfiguration"
   let store: DataPersisting
 
   init(

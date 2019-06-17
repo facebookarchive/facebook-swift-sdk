@@ -18,18 +18,45 @@
 
 import Foundation
 
-struct GatekeeperStore: Store {
-  typealias CachedValueType = [Gatekeeper]
+/**
+ A lightweight wrapper for persisting a `Codable` object
+ Leaves it to the concrete implementation to provide a domain,
+an object that provides an application identifier and a store.
+ */
+protocol Store {
+  associatedtype CachedValueType: Codable
 
-  private(set) var appIdentifierProvider: AppIdentifierProviding
-  let domain: String = "com.facebook.sdk:gateKeeper"
-  let store: DataPersisting
+  var appIdentifierProvider: AppIdentifierProviding { get }
+  var domain: String { get }
+  var retrievalKey: String { get }
+  var store: DataPersisting { get }
+}
 
-  init(
-    store: DataPersisting = UserDefaults.standard,
-    appIdentifierProvider: AppIdentifierProviding = Settings.shared
-    ) {
-    self.appIdentifierProvider = appIdentifierProvider
-    self.store = store
+extension Store {
+  var retrievalKey: String {
+    guard let identifier = appIdentifierProvider.appIdentifier else {
+      return domain
+    }
+    return "\(domain)\(identifier)"
+  }
+
+  var hasDataForCurrentAppIdentifier: Bool {
+    return store.data(forKey: retrievalKey) != nil
+  }
+
+  var cachedValue: CachedValueType? {
+    guard let data = store.data(forKey: retrievalKey),
+      let value = try? JSONDecoder().decode(CachedValueType.self, from: data)
+      else {
+        return nil
+    }
+
+    return value
+  }
+
+  func cache(_ value: CachedValueType) {
+    let data = try? JSONEncoder().encode(value)
+
+    store.set(data, forKey: retrievalKey)
   }
 }

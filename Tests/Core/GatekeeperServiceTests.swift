@@ -319,7 +319,7 @@ class GatekeeperServiceTests: XCTestCase {
     )
     service.loadGatekeepers()
 
-    XCTAssertEqual(store.cachedGatekeepers, expectedGatekeepers,
+    XCTAssertEqual(store.cachedValue, expectedGatekeepers,
                    "Should store fetched values to the cache")
   }
 

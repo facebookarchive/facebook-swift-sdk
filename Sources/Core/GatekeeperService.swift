@@ -151,7 +151,7 @@ public class GatekeeperService {
         return
     }
 
-    self.gatekeepers[appIdentifier] = store.cachedGatekeepers
+    self.gatekeepers[appIdentifier] = store.cachedValue ?? []
 
     // Ensure it's valid for the current app identifier or that the store has data for the current app identifier
     guard !isGatekeeperValid || !store.hasDataForCurrentAppIdentifier,
