@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct ErrorStrings {
+struct ErrorStrings: Codable {
   let message: String
   let options: [String]
 
