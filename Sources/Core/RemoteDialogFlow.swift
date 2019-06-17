@@ -20,18 +20,20 @@
 
 import Foundation
 
-struct RemoteDialogFlow: Equatable {
-  let name: String
-  let shouldUseNativeFlow: Bool?
-  let shouldUseSafariVC: Bool?
+extension RemoteServerConfiguration {
+  struct DialogFlow {
+    let name: String
+    let shouldUseNativeFlow: Bool?
+    let shouldUseSafariVC: Bool?
 
-  init(
-    name: String,
-    shouldUseNativeFlow: Bool?,
-    shouldUseSafariVC: Bool?
-    ) {
-    self.name = name
-    self.shouldUseNativeFlow = shouldUseNativeFlow
-    self.shouldUseSafariVC = shouldUseSafariVC
+    init(
+      name: String,
+      shouldUseNativeFlow: Bool?,
+      shouldUseSafariVC: Bool?
+      ) {
+      self.name = name
+      self.shouldUseNativeFlow = shouldUseNativeFlow
+      self.shouldUseSafariVC = shouldUseSafariVC
+    }
   }
 }

@@ -18,14 +18,16 @@
 
 import Foundation
 
-struct DialogFlow {
-  let name: String
-  let shouldUseNativeFlow: Bool
-  let shouldUseSafariVC: Bool
-
-  init(remote: RemoteDialogFlow) {
-    name = remote.name
-    shouldUseNativeFlow = remote.shouldUseNativeFlow ?? false
-    shouldUseSafariVC = remote.shouldUseSafariVC ?? false
+extension ServerConfiguration {
+  struct DialogFlow {
+    let name: String
+    let shouldUseNativeFlow: Bool
+    let shouldUseSafariVC: Bool
+    
+    init(remote: RemoteServerConfiguration.DialogFlow) {
+      name = remote.name
+      shouldUseNativeFlow = remote.shouldUseNativeFlow ?? false
+      shouldUseSafariVC = remote.shouldUseSafariVC ?? false
+    }
   }
 }

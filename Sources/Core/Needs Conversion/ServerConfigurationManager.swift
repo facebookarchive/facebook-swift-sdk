@@ -27,6 +27,6 @@ class ServerConfigurationManager: ServerConfigurationManaging {
   static var shared = ServerConfigurationManager()
 
   var cachedServerConfiguration: ServerConfigurationProviding? {
-    return ServerConfiguration()
+    return nil
   }
 }

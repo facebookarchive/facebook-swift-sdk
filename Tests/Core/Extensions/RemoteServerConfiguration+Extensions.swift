@@ -34,7 +34,7 @@ extension RemoteServerConfiguration {
     isSystemAuthenticationEnabled: Bool? = nil,
     isNativeAuthFlowEnabled: Bool? = nil,
     dialogConfigurations: RemoteDialogConfigurationList? = nil,
-    dialogFlows: RemoteDialogFlowList? = nil,
+    dialogFlows: DialogFlowList? = nil,
     errorConfiguration: RemoteErrorConfigurationEntryList? = nil,
     sessionTimeoutInterval: TimeInterval? = nil,
     loggingToken: String? = nil,

@@ -186,7 +186,7 @@ enum SampleRemoteServerConfiguration {
     )
   )
 
-  static func withRemoteDialogFlows(_ list: RemoteDialogFlowList) -> RemoteServerConfiguration {
+  static func withRemoteDialogFlows(_ list: RemoteServerConfiguration.DialogFlowList) -> RemoteServerConfiguration {
     return RemoteServerConfiguration(
       appID: "abc123",
       dialogFlows: list

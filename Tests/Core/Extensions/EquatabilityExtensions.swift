@@ -53,8 +53,11 @@ extension RemoteDialogConfigurationList: Equatable {
   }
 }
 
-extension RemoteDialogFlowList: Equatable {
-  public static func == (lhs: RemoteDialogFlowList, rhs: RemoteDialogFlowList) -> Bool {
+extension RemoteServerConfiguration.DialogFlowList: Equatable {
+  public static func == (
+    lhs: RemoteServerConfiguration.DialogFlowList,
+    rhs: RemoteServerConfiguration.DialogFlowList
+    ) -> Bool {
     return lhs.dialogs.sorted { $0.name < $1.name } == rhs.dialogs.sorted { $0.name < $1.name }
   }
 }
@@ -114,8 +117,11 @@ extension DialogConfiguration: Equatable {
   }
 }
 
-extension DialogFlow: Equatable {
-  public static func == (lhs: DialogFlow, rhs: DialogFlow) -> Bool {
+extension ServerConfiguration.DialogFlow: Equatable {
+  public static func == (
+    lhs: ServerConfiguration.DialogFlow,
+    rhs: ServerConfiguration.DialogFlow
+    ) -> Bool {
     return lhs.name == rhs.name &&
       lhs.shouldUseNativeFlow == rhs.shouldUseNativeFlow &&
       lhs.shouldUseSafariVC == rhs.shouldUseSafariVC
@@ -142,5 +148,16 @@ extension RestrictiveEventParameter: Equatable {
 extension RemoteRestrictiveEventParameterList: Equatable {
   public static func == (lhs: RemoteRestrictiveEventParameterList, rhs: RemoteRestrictiveEventParameterList) -> Bool {
     return lhs.parameters == rhs.parameters
+  }
+}
+
+extension RemoteServerConfiguration.DialogFlow: Equatable {
+  public static func == (
+    lhs: RemoteServerConfiguration.DialogFlow,
+    rhs: RemoteServerConfiguration.DialogFlow
+    ) -> Bool {
+    return lhs.name == rhs.name &&
+      lhs.shouldUseNativeFlow == rhs.shouldUseNativeFlow &&
+      lhs.shouldUseSafariVC == rhs.shouldUseSafariVC
   }
 }

@@ -21,12 +21,12 @@ import XCTest
 
 class DialogFlowTests: XCTestCase {
   func testBuildingFromRemoteWithoutFields() {
-    let remoteFlow = RemoteDialogFlow(
+    let remoteFlow = RemoteServerConfiguration.DialogFlow(
       name: "foo",
       shouldUseNativeFlow: nil,
       shouldUseSafariVC: nil
     )
-    let flow = DialogFlow(remote: remoteFlow)
+    let flow = ServerConfiguration.DialogFlow(remote: remoteFlow)
 
     XCTAssertFalse(flow.shouldUseNativeFlow,
                    "Should interpret a missing response as false for using native flow")
@@ -35,12 +35,12 @@ class DialogFlowTests: XCTestCase {
   }
 
   func testBuildingFromRemoteWithFalseFields() {
-    let remoteFlow = RemoteDialogFlow(
+    let remoteFlow = RemoteServerConfiguration.DialogFlow(
       name: "foo",
       shouldUseNativeFlow: false,
       shouldUseSafariVC: false
     )
-    let flow = DialogFlow(remote: remoteFlow)
+    let flow = ServerConfiguration.DialogFlow(remote: remoteFlow)
 
     XCTAssertFalse(flow.shouldUseNativeFlow,
                    "Should determine using native flow based on the remote")
@@ -49,12 +49,12 @@ class DialogFlowTests: XCTestCase {
   }
 
   func testBuildingFromRemoteWithTrueFields() {
-    let remoteFlow = RemoteDialogFlow(
+    let remoteFlow = RemoteServerConfiguration.DialogFlow(
       name: "foo",
       shouldUseNativeFlow: true,
       shouldUseSafariVC: true
     )
-    let flow = DialogFlow(remote: remoteFlow)
+    let flow = ServerConfiguration.DialogFlow(remote: remoteFlow)
 
     XCTAssertTrue(flow.shouldUseNativeFlow,
                   "Should determine using native flow based on the remote")

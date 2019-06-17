@@ -63,12 +63,12 @@ struct ServerConfiguration: ServerConfigurationProviding {
       OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)
     )
     let remotes = [
-      RemoteDialogFlow(
+      RemoteServerConfiguration.DialogFlow(
         name: "default",
         shouldUseNativeFlow: shouldUseNativeFlow,
         shouldUseSafariVC: true
       ),
-      RemoteDialogFlow(
+      RemoteServerConfiguration.DialogFlow(
         name: "message",
         shouldUseNativeFlow: true,
         shouldUseSafariVC: nil

@@ -38,7 +38,7 @@ struct RemoteServerConfiguration: Decodable {
   let isSystemAuthenticationEnabled: Bool?
   let isNativeAuthFlowEnabled: Bool?
   let dialogConfigurations: RemoteDialogConfigurationList?
-  let dialogFlows: RemoteDialogFlowList?
+  let dialogFlows: DialogFlowList?
   let errorConfiguration: RemoteErrorConfigurationEntryList?
   let sessionTimeoutInterval: TimeInterval?
   let loggingToken: String?
@@ -63,7 +63,7 @@ struct RemoteServerConfiguration: Decodable {
     self.isSystemAuthenticationEnabled = try? container.decode(Bool.self, forKey: .systemAuthenticationEnabled)
     self.isNativeAuthFlowEnabled = try? container.decode(Bool.self, forKey: .nativeProxyFlowEnabled)
     self.dialogConfigurations = try? container.decode(RemoteDialogConfigurationList.self, forKey: .dialogConfigurations)
-    self.dialogFlows = try? container.decode(RemoteDialogFlowList.self, forKey: .dialogFlows)
+    self.dialogFlows = try? container.decode(DialogFlowList.self, forKey: .dialogFlows)
     self.errorConfiguration = try? container.decode(RemoteErrorConfigurationEntryList.self, forKey: .errorConfiguration)
     self.sessionTimeoutInterval = try? container.decode(TimeInterval.self, forKey: .sessionTimeout)
     self.loggingToken = try? container.decode(String.self, forKey: .loggingToken)

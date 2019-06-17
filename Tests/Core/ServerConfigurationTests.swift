@@ -517,12 +517,12 @@ class ServerConfigurationTests: XCTestCase {
 
   func testCreatingWithDialogFlows() {
     let remoteDialogFlows = [
-      RemoteDialogFlow(name: "foo", shouldUseNativeFlow: false, shouldUseSafariVC: false),
-      RemoteDialogFlow(name: "bar", shouldUseNativeFlow: true, shouldUseSafariVC: true)
+      RemoteServerConfiguration.DialogFlow(name: "foo", shouldUseNativeFlow: false, shouldUseSafariVC: false),
+      RemoteServerConfiguration.DialogFlow(name: "bar", shouldUseNativeFlow: true, shouldUseSafariVC: true)
     ]
-    let expectedDialogFlows = remoteDialogFlows.compactMap { DialogFlow(remote: $0) }
+    let expectedDialogFlows = remoteDialogFlows.compactMap { ServerConfiguration.DialogFlow(remote: $0) }
 
-    let list = RemoteDialogFlowList(dialogs: remoteDialogFlows)
+    let list = RemoteServerConfiguration.DialogFlowList(dialogs: remoteDialogFlows)
 
     guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
       return XCTFail("Should build a server configuration from a remote configuration with an app identifier")

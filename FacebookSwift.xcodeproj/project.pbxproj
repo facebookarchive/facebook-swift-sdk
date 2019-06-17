@@ -258,7 +258,7 @@
 		F4C57D0D22A9A4BE00D0BEFE /* SampleRawRemoteServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D0C22A9A4BE00D0BEFE /* SampleRawRemoteServerConfiguration.swift */; };
 		F4C57D0F22AAA6D300D0BEFE /* RemoteDialogFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D0E22AAA6D300D0BEFE /* RemoteDialogFlowTests.swift */; };
 		F4C57D1122AABB4B00D0BEFE /* RemoteDialogFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1022AABB4B00D0BEFE /* RemoteDialogFlow.swift */; };
-		F4C57D1322AABB7800D0BEFE /* RemoteDialogFlowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1222AABB7800D0BEFE /* RemoteDialogFlowList.swift */; };
+		F4C57D1322AABB7800D0BEFE /* DialogFlowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1222AABB7800D0BEFE /* DialogFlowList.swift */; };
 		F4C57D1522AACA7E00D0BEFE /* RemoteDialogConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1422AACA7E00D0BEFE /* RemoteDialogConfiguration.swift */; };
 		F4C57D1722AACCDA00D0BEFE /* SampleRawRemoteDialogFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1622AACCDA00D0BEFE /* SampleRawRemoteDialogFlows.swift */; };
 		F4C57D1922AACE2B00D0BEFE /* SampleRemoteDialogFlowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D1822AACE2B00D0BEFE /* SampleRemoteDialogFlowList.swift */; };
@@ -290,7 +290,6 @@
 		F4C57D4D22B001F900D0BEFE /* RemoteServerConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D4C22B001F900D0BEFE /* RemoteServerConfiguration+Extensions.swift */; };
 		F4C57D5022B0024F00D0BEFE /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D4F22B0024F00D0BEFE /* ServerConfiguration.swift */; };
 		F4CCC14222A974840057E33D /* RemoteServerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CCC14122A974840057E33D /* RemoteServerConfigurationTests.swift */; };
-		F4CCC14422A988970057E33D /* ServerConfigurationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CCC14322A988970057E33D /* ServerConfigurationServiceTests.swift */; };
 		F4CF0342227387A900807A61 /* AppLinkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */; };
 		F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */; };
 		F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */; };
@@ -610,7 +609,7 @@
 		F4C57D0C22A9A4BE00D0BEFE /* SampleRawRemoteServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteServerConfiguration.swift; sourceTree = "<group>"; };
 		F4C57D0E22AAA6D300D0BEFE /* RemoteDialogFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDialogFlowTests.swift; sourceTree = "<group>"; };
 		F4C57D1022AABB4B00D0BEFE /* RemoteDialogFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDialogFlow.swift; sourceTree = "<group>"; };
-		F4C57D1222AABB7800D0BEFE /* RemoteDialogFlowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDialogFlowList.swift; sourceTree = "<group>"; };
+		F4C57D1222AABB7800D0BEFE /* DialogFlowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogFlowList.swift; sourceTree = "<group>"; };
 		F4C57D1422AACA7E00D0BEFE /* RemoteDialogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDialogConfiguration.swift; sourceTree = "<group>"; };
 		F4C57D1622AACCDA00D0BEFE /* SampleRawRemoteDialogFlows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteDialogFlows.swift; sourceTree = "<group>"; };
 		F4C57D1822AACE2B00D0BEFE /* SampleRemoteDialogFlowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteDialogFlowList.swift; sourceTree = "<group>"; };
@@ -642,7 +641,6 @@
 		F4C57D4C22B001F900D0BEFE /* RemoteServerConfiguration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteServerConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		F4C57D4F22B0024F00D0BEFE /* ServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfiguration.swift; sourceTree = "<group>"; };
 		F4CCC14122A974840057E33D /* RemoteServerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteServerConfigurationTests.swift; sourceTree = "<group>"; };
-		F4CCC14322A988970057E33D /* ServerConfigurationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationServiceTests.swift; sourceTree = "<group>"; };
 		F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkServiceTests.swift; sourceTree = "<group>"; };
 		F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAppLinkDetailsTests.swift; sourceTree = "<group>"; };
 		F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteAppLinkDetail.swift; sourceTree = "<group>"; };
@@ -778,6 +776,7 @@
 				F47853C0222DCF8600A4269C /* CoreError.swift */,
 				F4C57D2E22AAEAF600D0BEFE /* DialogConfiguration.swift */,
 				F4C57D1E22AAD54400D0BEFE /* DialogFlow.swift */,
+				F4C57D1222AABB7800D0BEFE /* DialogFlowList.swift */,
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
 				F43AB0292270B61600610974 /* Gatekeeper.swift */,
 				F47470E32298AC27004FBDB0 /* GatekeeperList.swift */,
@@ -810,7 +809,6 @@
 				F46DCFDC22734E7800EFE037 /* RemoteAppLinkTarget.swift */,
 				F4C57D1422AACA7E00D0BEFE /* RemoteDialogConfiguration.swift */,
 				F4C57D1022AABB4B00D0BEFE /* RemoteDialogFlow.swift */,
-				F4C57D1222AABB7800D0BEFE /* RemoteDialogFlowList.swift */,
 				F4516B83225F82EF00979DD2 /* RemoteGraphResponseError.swift */,
 				F458069F22B2BC8D007B9D2C /* RemoteRestrictiveEventParameter.swift */,
 				F45806A122B2BCB4007B9D2C /* RemoteRestrictiveEventParameterList.swift */,
@@ -1533,7 +1531,7 @@
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
 				F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */,
-				F4C57D1322AABB7800D0BEFE /* RemoteDialogFlowList.swift in Sources */,
+				F4C57D1322AABB7800D0BEFE /* DialogFlowList.swift in Sources */,
 				F422F0832284A37D00AFD0DF /* FileManager+Extensions.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
