@@ -20,7 +20,7 @@ import Foundation
 
 typealias RestrictiveRuleType = String
 
-struct RestrictiveRule {
+struct RestrictiveRule: Codable {
   let keyRegex: String
   let type: RestrictiveRuleType
   let valueRegex: String?
