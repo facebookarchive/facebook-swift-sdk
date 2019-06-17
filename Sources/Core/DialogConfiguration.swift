@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct DialogConfiguration {
+struct DialogConfiguration: Codable {
   let name: String
   let url: URL
   let versions: [Int]

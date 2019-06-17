@@ -16,10 +16,12 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable nesting
+
 import Foundation
 
 extension ServerConfiguration {
-  struct DialogFlow {
+  struct DialogFlow: Codable {
     let name: FlowName
     let shouldUseNativeFlow: Bool
     let shouldUseSafariVC: Bool
@@ -30,7 +32,43 @@ extension ServerConfiguration {
       shouldUseSafariVC = remote.shouldUseSafariVC ?? false
     }
 
-    enum FlowName: CustomStringConvertible, Equatable {
+    enum FlowName: CustomStringConvertible, Equatable, Codable {
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        let key: CodingKeys
+
+        switch self {
+        case .default:
+          key = .default
+
+        case .login:
+          key = .login
+
+        case .sharing:
+          key = .sharing
+
+        case .other:
+          key = .other
+        }
+
+        try container.encode(description, forKey: key)
+      }
+
+      init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        if try container.decodeIfPresent(String.self, forKey: .default) != nil {
+          self = .default
+        } else if try container.decodeIfPresent(String.self, forKey: .login) != nil {
+          self = .login
+        } else if try container.decodeIfPresent(String.self, forKey: .sharing) != nil {
+          self = .sharing
+        } else {
+          let value = try container.decode(String.self, forKey: .other)
+          self = .other(value)
+        }
+      }
+
       case `default`
       case login
       case sharing
@@ -66,6 +104,13 @@ extension ServerConfiguration {
         default:
           self = .other(value)
         }
+      }
+
+      enum CodingKeys: String, CodingKey {
+        case `default`
+        case login
+        case sharing
+        case other
       }
     }
   }
