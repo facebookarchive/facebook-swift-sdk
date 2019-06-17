@@ -19,11 +19,20 @@
 @testable import FacebookCore
 import Foundation
 
-enum SampleRemoteDialogFlowList {
-  static let valid = RemoteServerConfiguration.DialogFlowList(
-    dialogs: [
-      SampleRemoteDialogFlow.validTrue(name: .default),
-      RemoteServerConfiguration.DialogFlow(name: "message", shouldUseNativeFlow: true, shouldUseSafariVC: nil)
-    ]
-  )
+enum SampleRemoteDialogFlow {
+  static func validTrue(name: ServerConfiguration.DialogFlow.FlowName) -> RemoteServerConfiguration.DialogFlow {
+      return RemoteServerConfiguration.DialogFlow(
+        name: name.description,
+        shouldUseNativeFlow: true,
+        shouldUseSafariVC: true
+    )
+  }
+
+  static func validFalse(name: ServerConfiguration.DialogFlow.FlowName) -> RemoteServerConfiguration.DialogFlow {
+    return RemoteServerConfiguration.DialogFlow(
+      name: name.description,
+      shouldUseNativeFlow: false,
+      shouldUseSafariVC: false
+    )
+  }
 }

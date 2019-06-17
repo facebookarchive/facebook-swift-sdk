@@ -122,7 +122,7 @@ extension ServerConfiguration.DialogFlow: Equatable {
     lhs: ServerConfiguration.DialogFlow,
     rhs: ServerConfiguration.DialogFlow
     ) -> Bool {
-    return lhs.name == rhs.name &&
+    return lhs.name.description == rhs.name.description &&
       lhs.shouldUseNativeFlow == rhs.shouldUseNativeFlow &&
       lhs.shouldUseSafariVC == rhs.shouldUseSafariVC
   }

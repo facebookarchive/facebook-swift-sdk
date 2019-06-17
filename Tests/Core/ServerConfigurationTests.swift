@@ -585,4 +585,128 @@ class ServerConfigurationTests: XCTestCase {
     XCTAssertEqual(config.restrictiveParams, expectedParameters,
                    "Dialog flows should be set based on the remote values")
   }
+
+  // MARK: - Methods
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // 'login'       / false     / true        / false        / false
+  func testFeatureCheckForMissingLoginFlowWithSharingWithoutDefaultValue() {
+    let list = RemoteServerConfiguration.DialogFlowList(
+      dialogs: [SampleRemoteDialogFlow.validTrue(name: .sharing)]
+    )
+
+    guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertFalse(config.shouldUseNativeDialog(for: .login),
+                   "Should default to false when no queried value or default value is present")
+  }
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // 'login'       / false     / false       / false        / false
+  func testFeatureCheckForMissingLoginFlowWithoutSharingWithoutDefaultValue() {
+    let list = RemoteServerConfiguration.DialogFlowList(
+      dialogs: [SampleRemoteDialogFlow.validFalse(name: .sharing)]
+    )
+
+    guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertFalse(config.shouldUseNativeDialog(for: .login),
+                   "Should default to false when no queried value or default value is present")
+  }
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // login         /  true     / n/a         / true         / value
+  // login         /  true     / n/a         / false        / value
+  func testFeatureCheckForLoginFlowWithDefaultValue() {
+    let list = RemoteServerConfiguration.DialogFlowList(
+      dialogs: [SampleRemoteDialogFlow.validTrue(name: .login)]
+    )
+
+    guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertTrue(config.shouldUseNativeDialog(for: .login),
+                  "Should use the value from the provided login flow")
+  }
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // login         / false     / n/a         / true         / default
+  func testFeatureCheckForMissingLoginFlowWithDefaultValue() {
+    // Presumes the default config is true for should use native dialog
+    guard let config = ServerConfiguration(remote: Fixtures.minimal) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertTrue(config.shouldUseNativeDialog(for: .login),
+                  "Should use the 'default' if available when the queried flow is not available")
+  }
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // foo           /  true     / n/a         / n/a          / value
+  func testFeatureCheckForNonLoginFlow() {
+    let list = RemoteServerConfiguration.DialogFlowList(
+      dialogs: [SampleRemoteDialogFlow.validTrue(name: .other("foo"))]
+    )
+
+    guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertTrue(config.shouldUseNativeDialog(for: .other("foo")),
+                  "Should use the value from the provided flow")
+  }
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // foo           /  false     / true       / n/a          / sharing
+  func testFeatureCheckWithMissingNonLoginFlowAndExistingShareFlow() {
+    let list = RemoteServerConfiguration.DialogFlowList(
+      dialogs: [SampleRemoteDialogFlow.validTrue(name: .sharing)]
+    )
+
+    guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertTrue(config.shouldUseNativeDialog(for: .other("foo")),
+                  "Should use the default for 'sharing' if available when the queried flow is not available and is not 'login'")
+  }
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // foo           /  false    / false       / true         / default
+  func testFeatureCheckWithMissingNonLoginFlowAndMissingShareFlow() {
+    // Presumes the default config is true for should use native dialog
+    guard let config = ServerConfiguration(remote: Fixtures.minimal) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertTrue(config.shouldUseNativeDialog(for: .other("foo")),
+                  "Should use the 'default' if available when the queried flow is not 'login' and there is no 'sharing' flow available")
+  }
+
+  // searching for / hasValue  / has sharing / has default  / uses
+  // foo           /  false    / false       / false        / false
+  func testFeatureCheckDefaultsToDefaultFlowForDialogWithNameLogin() {
+    let list = RemoteServerConfiguration.DialogFlowList(dialogs: [])
+
+    guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertFalse(config.shouldUseNativeDialog(for: .other("foo")),
+                   "Should default to false when the queried flow is missing and no 'sharing' or 'default' flows are available")
+  }
+
+  func testFeatureCheckForSafariVC() {
+    guard let config = ServerConfiguration(remote: Fixtures.minimal) else {
+      return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
+    }
+
+    XCTAssertTrue(config.shouldUseSafariVC(for: .default),
+                  "Should return the expected default value for using a safari view controller")
+  }
 }

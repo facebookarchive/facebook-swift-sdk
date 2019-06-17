@@ -20,14 +20,53 @@ import Foundation
 
 extension ServerConfiguration {
   struct DialogFlow {
-    let name: String
+    let name: FlowName
     let shouldUseNativeFlow: Bool
     let shouldUseSafariVC: Bool
-    
+
     init(remote: RemoteServerConfiguration.DialogFlow) {
-      name = remote.name
+      name = FlowName(value: remote.name)
       shouldUseNativeFlow = remote.shouldUseNativeFlow ?? false
       shouldUseSafariVC = remote.shouldUseSafariVC ?? false
+    }
+
+    enum FlowName: CustomStringConvertible, Equatable {
+      case `default`
+      case login
+      case sharing
+      case other(String)
+
+      var description: String {
+        switch self {
+        case .default:
+          return "default"
+
+        case .login:
+          return "login"
+
+        case .sharing:
+          return "sharing"
+
+        case .other(let value):
+          return value
+        }
+      }
+
+      init(value: String) {
+        switch value {
+        case "default":
+          self = .default
+
+        case "login":
+          self = .login
+
+        case "sharing":
+          self = .sharing
+
+        default:
+          self = .other(value)
+        }
+      }
     }
   }
 }

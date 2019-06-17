@@ -122,6 +122,32 @@ struct ServerConfiguration: ServerConfigurationProviding {
     } ?? []
   }
 
+  private func value(
+    for keyPath: KeyPath<DialogFlow, Bool>,
+    flowName: DialogFlow.FlowName
+    ) -> Bool {
+    let existingValue = dialogFlows.first { $0.name == flowName }?[keyPath: keyPath]
+    let defaultValue = dialogFlows.first { $0.name == .default }?[keyPath: keyPath]
+
+    switch flowName {
+    case .login:
+      return existingValue ?? defaultValue ?? false
+
+    default:
+      let shareValue = dialogFlows.first { $0.name == .sharing }?.shouldUseNativeFlow
+
+      return existingValue ?? shareValue ?? defaultValue ?? false
+    }
+  }
+
+  func shouldUseNativeDialog(for name: DialogFlow.FlowName) -> Bool {
+    return value(for: \DialogFlow.shouldUseNativeFlow, flowName: name)
+  }
+
+  func shouldUseSafariVC(for name: DialogFlow.FlowName) -> Bool {
+    return value(for: \DialogFlow.shouldUseSafariVC, flowName: name)
+  }
+
   private static func extractSmartLoginMenuIconUrl(
     from remote: RemoteServerConfiguration
     ) -> URL? {
