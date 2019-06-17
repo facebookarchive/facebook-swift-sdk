@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length file_length
+// swiftlint:disable type_body_length file_length function_body_length
 
 @testable import FacebookCore
 import XCTest
@@ -708,5 +708,69 @@ class ServerConfigurationTests: XCTestCase {
 
     XCTAssertTrue(config.shouldUseSafariVC(for: .default),
                   "Should return the expected default value for using a safari view controller")
+  }
+
+  // MARK: - Encoding & Decoding
+
+  func testEncodingAndDecodingAllValues() {
+    let config = ServerConfiguration(
+      remote: RemoteServerConfiguration(
+        appID: "abc123",
+        appName: "foo",
+        isLoginTooltipEnabled: true,
+        loginTooltipText: "tooltip",
+        defaultShareMode: "sharing",
+        appEventsFeaturesRawValue: 1,
+        isImplicitLoggingEnabled: true,
+        isSystemAuthenticationEnabled: true,
+        isNativeAuthFlowEnabled: true,
+        dialogConfigurations: SampleRemoteDialogConfigurationList.valid,
+        dialogFlows: SampleRemoteDialogFlowList.valid,
+        errorConfiguration: SampleRemoteErrorConfigurationList.validDefault,
+        sessionTimeoutInterval: 100,
+        loggingToken: "Log",
+        smartLoginOptionsRawValue: 2,
+        smartLoginBookmarkIconUrlString: SampleURL.valid(withPath: "bookmark").absoluteString,
+        smartLoginMenuIconUrlString: SampleURL.valid(withPath: "menu").absoluteString,
+        updateMessage: "update now",
+        eventBindings: ["foo"],
+        restrictiveRules: [SampleRemoteRestrictiveRule.valid],
+        restrictiveEventParameterList: RemoteRestrictiveEventParameterList(
+          parameters: [SampleRemoteRestrictiveEventParameter.deprecated]
+        )
+      )
+    )
+
+    do {
+      let encoded = try JSONEncoder().encode(config)
+      let decoded = try JSONDecoder().decode(ServerConfiguration.self, from: encoded)
+
+        XCTAssertEqual(config?.appName, decoded.appName )
+        XCTAssertEqual(config?.appID, decoded.appID )
+        XCTAssertEqual(config?.defaultShareMode, decoded.defaultShareMode )
+        XCTAssertEqual(config?.dialogConfigurations, decoded.dialogConfigurations )
+        XCTAssertEqual(config?.dialogFlows, decoded.dialogFlows )
+        XCTAssertEqual(config?.eventBindings, decoded.eventBindings )
+        XCTAssertEqual(config?.isAdvertisingIDEnabled, decoded.isAdvertisingIDEnabled )
+        XCTAssertEqual(config?.isCodelessEventsEnabled, decoded.isCodelessEventsEnabled )
+        XCTAssertEqual(config?.isImplicitLoggingEnabled, decoded.isImplicitLoggingEnabled )
+        XCTAssertEqual(config?.isLoginTooltipEnabled, decoded.isLoginTooltipEnabled )
+        XCTAssertEqual(config?.isImplicitPurchaseLoggingEnabled, decoded.isImplicitPurchaseLoggingEnabled )
+        XCTAssertEqual(config?.isNativeAuthFlowEnabled, decoded.isNativeAuthFlowEnabled )
+        XCTAssertEqual(config?.isSystemAuthenticationEnabled, decoded.isSystemAuthenticationEnabled )
+        XCTAssertEqual(config?.isUninstallTrackingEnabled, decoded.isUninstallTrackingEnabled )
+        XCTAssertEqual(config?.loggingToken, decoded.loggingToken )
+        XCTAssertEqual(config?.loginTooltipText, decoded.loginTooltipText )
+        XCTAssertEqual(config?.restrictiveParams, decoded.restrictiveParams )
+        XCTAssertEqual(config?.restrictiveRules, decoded.restrictiveRules )
+        XCTAssertEqual(config?.sessionTimoutInterval, decoded.sessionTimoutInterval )
+        XCTAssertEqual(config?.smartLoginBookmarkIconURL, decoded.smartLoginBookmarkIconURL )
+        XCTAssertEqual(config?.smartLoginMenuIconURL, decoded.smartLoginMenuIconURL )
+        XCTAssertEqual(config?.smartLoginOptions, decoded.smartLoginOptions )
+        XCTAssertEqual(config?.timestamp, decoded.timestamp )
+        XCTAssertEqual(config?.updateMessage, decoded.updateMessage)
+    } catch {
+      XCTFail("Should be able to encode and decode a server configuration")
+    }
   }
 }

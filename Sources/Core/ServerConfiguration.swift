@@ -25,10 +25,10 @@ protocol ServerConfigurationProviding {
   var errorConfiguration: ErrorConfiguration { get }
 }
 
-struct ServerConfiguration: ServerConfigurationProviding {
+struct ServerConfiguration: ServerConfigurationProviding, Codable {
   // Increase this value when adding new fields and previous cached configurations should be
   // treated as stale.
-  static let version: Int = 2
+  private let version: Int = 2
   static let defaultSessionTimeout: TimeInterval = 60
 
   let appID: String
@@ -55,8 +55,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
   let dialogConfigurations: [DialogConfiguration]
   let dialogFlows: [DialogFlow]
   let restrictiveRules: [RestrictiveRule]
-
-  private(set) var restrictiveParams: [RestrictiveEventParameter] = []
+  let restrictiveParams: [RestrictiveEventParameter]
 
   static var defaultDialogFlows: [DialogFlow] {
     let shouldUseNativeFlow = ProcessInfo.processInfo.isOperatingSystemAtLeast(
@@ -177,7 +176,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
     }
   }
 
-  struct SmartLoginOptions: OptionSet {
+  struct SmartLoginOptions: OptionSet, Codable {
     let rawValue: Int
 
     static let unknown = SmartLoginOptions(rawValue: 0)
@@ -185,7 +184,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
     static let shouldRequireConfirmation = SmartLoginOptions(rawValue: 1 << 1)
   }
 
-  struct AppEventsFeatures: OptionSet {
+  struct AppEventsFeatures: OptionSet, Codable {
     let rawValue: Int
 
     static let none = AppEventsFeatures(rawValue: 0)
@@ -193,5 +192,67 @@ struct ServerConfiguration: ServerConfigurationProviding {
     static let isImplicitPurchaseLoggingEnabled = AppEventsFeatures(rawValue: 1 << 1)
     static let isCodelessEventsTriggerEnabled = AppEventsFeatures(rawValue: 1 << 5)
     static let isUninstallTrackingEnabled = AppEventsFeatures(rawValue: 1 << 7)
+  }
+
+  // MARK: - Codable
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    try container.encode(appID, forKey: .appID)
+    try container.encode(version, forKey: .version)
+    try container.encode(isAdvertisingIDEnabled, forKey: .isAdvertisingIDEnabled)
+    try container.encodeIfPresent(appName, forKey: .appName)
+    try container.encodeIfPresent(defaultShareMode, forKey: .defaultShareMode)
+    try container.encodeIfPresent(errorConfiguration, forKey: .errorConfiguration)
+    try container.encodeIfPresent(isImplicitPurchaseLoggingEnabled, forKey: .isImplicitPurchaseLoggingEnabled)
+    try container.encodeIfPresent(isCodelessEventsEnabled, forKey: .isCodelessEventsEnabled)
+    try container.encodeIfPresent(isLoginTooltipEnabled, forKey: .isLoginTooltipEnabled)
+    try container.encodeIfPresent(isUninstallTrackingEnabled, forKey: .isUninstallTrackingEnabled)
+    try container.encodeIfPresent(isImplicitLoggingEnabled, forKey: .isImplicitLoggingEnabled)
+    try container.encodeIfPresent(isNativeAuthFlowEnabled, forKey: .isNativeAuthFlowEnabled)
+    try container.encodeIfPresent(isSystemAuthenticationEnabled, forKey: .isSystemAuthenticationEnabled)
+    try container.encodeIfPresent(loginTooltipText, forKey: .loginTooltipText)
+    try container.encodeIfPresent(timestamp, forKey: .timestamp)
+    try container.encodeIfPresent(sessionTimoutInterval, forKey: .sessionTimoutInterval)
+    try container.encodeIfPresent(loggingToken, forKey: .loggingToken)
+    try container.encodeIfPresent(smartLoginOptions, forKey: .smartLoginOptions)
+    try container.encodeIfPresent(smartLoginBookmarkIconURL, forKey: .smartLoginBookmarkIconURL)
+    try container.encodeIfPresent(smartLoginMenuIconURL, forKey: .smartLoginMenuIconURL)
+    try container.encodeIfPresent(updateMessage, forKey: .updateMessage)
+    try container.encodeIfPresent(eventBindings, forKey: .eventBindings)
+    try container.encodeIfPresent(dialogConfigurations, forKey: .dialogConfigurations)
+    try container.encodeIfPresent(dialogFlows, forKey: .dialogFlows)
+    try container.encodeIfPresent(restrictiveRules, forKey: .restrictiveRules)
+    try container.encodeIfPresent(restrictiveParams, forKey: .restrictiveParams)
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case version
+    case appID
+    case isAdvertisingIDEnabled
+    case appName
+    case defaultShareMode
+    case errorConfiguration
+    case isImplicitPurchaseLoggingEnabled
+    case isCodelessEventsEnabled
+    case isLoginTooltipEnabled
+    case isUninstallTrackingEnabled
+    case isImplicitLoggingEnabled
+    case isNativeAuthFlowEnabled
+    case isSystemAuthenticationEnabled
+    case loginTooltipText
+    case timestamp
+    case sessionTimoutInterval
+    case loggingToken
+    case smartLoginOptions
+    case smartLoginBookmarkIconURL
+    case smartLoginMenuIconURL
+    case updateMessage
+    case eventBindings
+    case dialogConfigurations
+    case dialogFlows
+    case restrictiveRules
+    case restrictiveParams
   }
 }
