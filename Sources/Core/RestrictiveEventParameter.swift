@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct RestrictiveEventParameter {
+struct RestrictiveEventParameter: Codable {
   let name: String
   let isDeprecated: Bool
   let restrictedParameters: [String: Int]
