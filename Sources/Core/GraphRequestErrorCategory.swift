@@ -18,7 +18,7 @@
 
 import Foundation
 
-enum GraphRequestErrorCategory {
+enum GraphRequestErrorCategory: String, Codable {
   /**
    Indicates the error can be recovered (such as requiring a login).
    A recoveryAttempter will be provided with the error instance that can take UI action.

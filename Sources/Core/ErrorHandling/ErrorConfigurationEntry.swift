@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct ErrorConfigurationEntry {
+struct ErrorConfigurationEntry: Codable {
   let strings: ErrorStrings
   let category: GraphRequestErrorCategory
 

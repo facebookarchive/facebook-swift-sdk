@@ -20,13 +20,13 @@ import Foundation
 
 /// A way of storing errors received from the server so that they are retrievable by
 /// error codes
-struct ErrorConfiguration {
+struct ErrorConfiguration: Codable {
   typealias ConfigurationDictionary = [Key: ErrorConfigurationEntry]
   /**
    A way to retrieve configurations that are keyed under a major code representing the error
    domain, and a minor code that (if present) represents specificity within that domain.
    */
-  struct Key: Hashable {
+  struct Key: Hashable, Codable {
     let majorCode: Int
     let minorCode: Int?
   }
