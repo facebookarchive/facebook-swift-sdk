@@ -148,6 +148,8 @@
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
 		F45E54DD228E0B42008A6011 /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */; };
 		F45E54DF228E0BE6008A6011 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DE228E0BE6008A6011 /* ImageService.swift */; };
+		F45E54EF228F5D97008A6011 /* BridgeAPIRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54EE228F5D97008A6011 /* BridgeAPIRequestTests.swift */; };
+		F45E54F1228F5EFF008A6011 /* BridgeAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F0228F5EFF008A6011 /* BridgeAPIRequest.swift */; };
 		F45E54F5228F8699008A6011 /* PListURLConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */; };
 		F45E54F7228F87B1008A6011 /* PListURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */; };
 		F45E54FA229319C2008A6011 /* InfoDictionaryProvidingExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */; };
@@ -174,7 +176,20 @@
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
 		F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */; };
 		F47470E42298AC27004FBDB0 /* GatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470E32298AC27004FBDB0 /* GatekeeperList.swift */; };
+		F47470E9229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470E8229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift */; };
+		F47470EB229DB2DE004FBDB0 /* BridgeAPINativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470EA229DB2DE004FBDB0 /* BridgeAPINativeTests.swift */; };
+		F47470ED229DB3C1004FBDB0 /* BridgeAPIWebV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470EC229DB3C1004FBDB0 /* BridgeAPIWebV1Tests.swift */; };
+		F47470EF229DB405004FBDB0 /* BridgeAPIWebV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470EE229DB405004FBDB0 /* BridgeAPIWebV2Tests.swift */; };
+		F47470F1229DB55C004FBDB0 /* FakeNetworkerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F0229DB55C004FBDB0 /* FakeNetworkerProvider.swift */; };
+		F47470F3229DB583004FBDB0 /* FakeURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F2229DB583004FBDB0 /* FakeURLOpener.swift */; };
 		F47853C1222DCF8600A4269C /* CoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47853C0222DCF8600A4269C /* CoreError.swift */; };
+		F479098B229853E500F9C0A2 /* BridgeAPIWebV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479098A229853E500F9C0A2 /* BridgeAPIWebV1.swift */; };
+		F479098D2298542800F9C0A2 /* BridgeAPIWebV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479098C2298542800F9C0A2 /* BridgeAPIWebV2.swift */; };
+		F479098F2298546500F9C0A2 /* BridgeAPINative.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479098E2298546500F9C0A2 /* BridgeAPINative.swift */; };
+		F47909912298582D00F9C0A2 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47909902298582D00F9C0A2 /* UIApplication+Extensions.swift */; };
+		F479099322985BC200F9C0A2 /* FakeBridgeAPIURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479099222985BC200F9C0A2 /* FakeBridgeAPIURLProvider.swift */; };
+		F479099622985C7F00F9C0A2 /* BridgeAPIURLProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479099522985C7F00F9C0A2 /* BridgeAPIURLProviding.swift */; };
+		F479099822985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479099722985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift */; };
 		F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */; };
 		F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D904223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift */; };
 		F480D90722347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D90622347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift */; };
@@ -450,6 +465,8 @@
 		F45734D6222D9535001F806A /* InternalUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUtilityTests.swift; sourceTree = "<group>"; };
 		F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceTests.swift; sourceTree = "<group>"; };
 		F45E54DE228E0BE6008A6011 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		F45E54EE228F5D97008A6011 /* BridgeAPIRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIRequestTests.swift; sourceTree = "<group>"; };
+		F45E54F0228F5EFF008A6011 /* BridgeAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIRequest.swift; sourceTree = "<group>"; };
 		F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfigurationTests.swift; sourceTree = "<group>"; };
 		F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfiguration.swift; sourceTree = "<group>"; };
 		F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionaryProvidingExtensionsTests.swift; sourceTree = "<group>"; };
@@ -475,7 +492,20 @@
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializationError.swift; sourceTree = "<group>"; };
 		F47470E32298AC27004FBDB0 /* GatekeeperList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatekeeperList.swift; sourceTree = "<group>"; };
+		F47470E8229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINetworkerProviderTests.swift; sourceTree = "<group>"; };
+		F47470EA229DB2DE004FBDB0 /* BridgeAPINativeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINativeTests.swift; sourceTree = "<group>"; };
+		F47470EC229DB3C1004FBDB0 /* BridgeAPIWebV1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIWebV1Tests.swift; sourceTree = "<group>"; };
+		F47470EE229DB405004FBDB0 /* BridgeAPIWebV2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIWebV2Tests.swift; sourceTree = "<group>"; };
+		F47470F0229DB55C004FBDB0 /* FakeNetworkerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkerProvider.swift; sourceTree = "<group>"; };
+		F47470F2229DB583004FBDB0 /* FakeURLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeURLOpener.swift; sourceTree = "<group>"; };
 		F47853C0222DCF8600A4269C /* CoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreError.swift; sourceTree = "<group>"; };
+		F479098A229853E500F9C0A2 /* BridgeAPIWebV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIWebV1.swift; sourceTree = "<group>"; };
+		F479098C2298542800F9C0A2 /* BridgeAPIWebV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIWebV2.swift; sourceTree = "<group>"; };
+		F479098E2298546500F9C0A2 /* BridgeAPINative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINative.swift; sourceTree = "<group>"; };
+		F47909902298582D00F9C0A2 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		F479099222985BC200F9C0A2 /* FakeBridgeAPIURLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBridgeAPIURLProvider.swift; sourceTree = "<group>"; };
+		F479099522985C7F00F9C0A2 /* BridgeAPIURLProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIURLProviding.swift; sourceTree = "<group>"; };
+		F479099722985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINetworkerProvider.swift; sourceTree = "<group>"; };
 		F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
 		F47AB340222F4F0B004A854F /* GraphApiDebugParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameter.swift; sourceTree = "<group>"; };
 		F480D904223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestConnectionDelegate.swift; sourceTree = "<group>"; };
@@ -657,6 +687,7 @@
 		811C5E5E1CFFD52B00E4A925 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F479099422985C6A00F9C0A2 /* BridgeAPI */,
 				F49FA49F222896310008CAD6 /* Configurations */,
 				F4C32D81223D98D300FF1F86 /* Configurations */,
 				F4C32DA9223FFA8800FF1F86 /* ErrorHandling */,
@@ -839,6 +870,7 @@
 			children = (
 				F44DB6A02229C50E0083506E /* FakeAccessTokenCache.swift */,
 				F422F0862284A44600AFD0DF /* FakeAudioService.swift */,
+				F479099222985BC200F9C0A2 /* FakeBridgeAPIURLProvider.swift */,
 				F4D5DAE322492BCD0014C14D /* FakeBundle.swift */,
 				F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */,
 				F432E9F52236FFA6007D3A34 /* FakeError.swift */,
@@ -848,6 +880,7 @@
 				F480D90C2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift */,
 				F44DB6C2222B136F0083506E /* FakeGraphRequestPiggybackManager.swift */,
 				F47056D82232CEEF00BE526B /* FakeLogger.swift */,
+				F47470F0229DB55C004FBDB0 /* FakeNetworkerProvider.swift */,
 				F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */,
 				F447152C22440CA70013495F /* FakeProcessInfo.swift */,
 				52CDB7CB2265524C00E6EF78 /* FakeSecureStore.swift */,
@@ -857,6 +890,7 @@
 				F447153322440EE50013495F /* FakeSessionDataTask.swift */,
 				F480D9102236E1F7001AB8D3 /* FakeSessionProvider.swift */,
 				F44DB6A22229C6B60083506E /* FakeSettings.swift */,
+				F47470F2229DB583004FBDB0 /* FakeURLOpener.swift */,
 				F44847FA226E2F5200527D49 /* FakeUserProfileProvider.swift */,
 				F4B340002240779D00912F0F /* JSONLoader.swift */,
 				F48A74A02239B4E0007192F6 /* LocalizedStringValidation.swift */,
@@ -868,6 +902,9 @@
 		F44DB6992229B36D0083506E /* Needs Conversion */ = {
 			isa = PBXGroup;
 			children = (
+				F479098E2298546500F9C0A2 /* BridgeAPINative.swift */,
+				F479098A229853E500F9C0A2 /* BridgeAPIWebV1.swift */,
+				F479098C2298542800F9C0A2 /* BridgeAPIWebV2.swift */,
 				F44DB6BC222B0DD20083506E /* GraphRequestPiggybackManager.swift */,
 				F44DB6932229AB460083506E /* InternalUtility.swift */,
 				F404971F22444F43005EE2EE /* ServerConfiguration.swift */,
@@ -898,6 +935,7 @@
 				F447152A22440B610013495F /* ProcessInfo+Extensions.swift */,
 				F429ACD02280DD31000916BF /* Settings+Extensions.swift */,
 				523CAE4A225EC94C00D196C3 /* String+Extensions.swift */,
+				F47909902298582D00F9C0A2 /* UIApplication+Extensions.swift */,
 				F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */,
 				F42E3C942268BBB900287DC4 /* UserDefaults+Extensions.swift */,
 			);
@@ -910,6 +948,16 @@
 				F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */,
 			);
 			path = Internal;
+			sourceTree = "<group>";
+		};
+		F479099422985C6A00F9C0A2 /* BridgeAPI */ = {
+			isa = PBXGroup;
+			children = (
+				F479099722985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift */,
+				F45E54F0228F5EFF008A6011 /* BridgeAPIRequest.swift */,
+				F479099522985C7F00F9C0A2 /* BridgeAPIURLProviding.swift */,
+			);
+			path = BridgeAPI;
 			sourceTree = "<group>";
 		};
 		F49FA47A222880FE0008CAD6 /* Core */ = {
@@ -932,6 +980,11 @@
 				F46DCFDE22735DC000EFE037 /* AppLinkTests.swift */,
 				F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */,
 				F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */,
+				F47470EA229DB2DE004FBDB0 /* BridgeAPINativeTests.swift */,
+				F47470E8229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift */,
+				F45E54EE228F5D97008A6011 /* BridgeAPIRequestTests.swift */,
+				F47470EC229DB3C1004FBDB0 /* BridgeAPIWebV1Tests.swift */,
+				F47470EE229DB405004FBDB0 /* BridgeAPIWebV2Tests.swift */,
 				F4317E582286239300EBF926 /* ButtonTests.swift */,
 				F4317E9A2288C4BF00EBF926 /* ButtonView.xib */,
 				F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */,
@@ -1373,12 +1426,14 @@
 				F4317E9D2289B81300EBF926 /* CGFloat+Extensions.swift in Sources */,
 				F44DB6942229AB460083506E /* InternalUtility.swift in Sources */,
 				F46DCFD7227267F000EFE037 /* UserData.swift in Sources */,
+				F479098D2298542800F9C0A2 /* BridgeAPIWebV2.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
 				F4E1A9EC22416F2200503354 /* FBError.swift in Sources */,
 				F42E3C792267E45100287DC4 /* UserProfileBuilder.swift in Sources */,
 				F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */,
 				F4C32D9D223DA0F600FF1F86 /* ErrorConfiguration.swift in Sources */,
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
+				F47909912298582D00F9C0A2 /* UIApplication+Extensions.swift in Sources */,
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
 				F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */,
@@ -1422,6 +1477,7 @@
 				F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */,
 				F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */,
 				F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */,
+				F479099622985C7F00F9C0A2 /* BridgeAPIURLProviding.swift in Sources */,
 				F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */,
 				F4C3C54D227A443E004B487E /* AppLinkTargetBuilder.swift in Sources */,
 				F4317E9F2289B96700EBF926 /* MathUtility.swift in Sources */,
@@ -1436,6 +1492,7 @@
 				F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */,
 				F408BE9F223981950068D24A /* GraphRequestSerializer.swift in Sources */,
 				524A49B7225EA2ED00786C11 /* KeychainStore.swift in Sources */,
+				F45E54F1228F5EFF008A6011 /* BridgeAPIRequest.swift in Sources */,
 				F45E54DF228E0BE6008A6011 /* ImageService.swift in Sources */,
 				F404972022444F43005EE2EE /* ServerConfiguration.swift in Sources */,
 				F4E1A9EA22416F2200503354 /* DefaultErrorStrings.swift in Sources */,
@@ -1446,9 +1503,12 @@
 				F4C3C557227B6686004B487E /* AppLinkTarget.swift in Sources */,
 				F406F8692282378E006B0D4E /* Logo.swift in Sources */,
 				F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */,
+				F479098F2298546500F9C0A2 /* BridgeAPINative.swift in Sources */,
 				F4E1A9EB22416F2200503354 /* ErrorConfigurationEntry.swift in Sources */,
 				F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */,
 				F406F86622823703006B0D4E /* Drawable.swift in Sources */,
+				F479099822985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift in Sources */,
+				F479098B229853E500F9C0A2 /* BridgeAPIWebV1.swift in Sources */,
 				F40739412231E4EB0018505A /* URLQueryItemBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1476,6 +1536,8 @@
 				F447151C2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift in Sources */,
 				F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */,
 				F48A749822399C97007192F6 /* LocalizationsTests.swift in Sources */,
+				F479099322985BC200F9C0A2 /* FakeBridgeAPIURLProvider.swift in Sources */,
+				F47470E9229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift in Sources */,
 				F4225DDD223F1FB700F4DCFE /* ErrorConfigurationEntryBuilderTests.swift in Sources */,
 				F45734D1222D9343001F806A /* AccessTokenCacheTests.swift in Sources */,
 				F4D694912273B1FD00A0B1CD /* UserProfileServiceConfigurationTests.swift in Sources */,
@@ -1486,6 +1548,7 @@
 				F44DB6C1222B11620083506E /* FakeGraphRequestConnection.swift in Sources */,
 				F4516B88225FA3E400979DD2 /* SampleHTTPURLResponse.swift in Sources */,
 				F4C32D99223D990A00FF1F86 /* SampleRawRemoteErrorConfigurationList.swift in Sources */,
+				F47470F3229DB583004FBDB0 /* FakeURLOpener.swift in Sources */,
 				F4C32DA4223DA13E00FF1F86 /* RemoteErrorCodeGroup+Extensions.swift in Sources */,
 				F4C3C553227B5B3E004B487E /* AppLinkTargetBuilderTests.swift in Sources */,
 				F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */,
@@ -1512,9 +1575,11 @@
 				F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */,
 				F447152E22440CD30013495F /* FakeProcessInfo.swift in Sources */,
 				F429ACD32280DDF2000916BF /* AppLinkServiceConfigurationTests.swift in Sources */,
+				F47470EF229DB405004FBDB0 /* BridgeAPIWebV2Tests.swift in Sources */,
 				52CDB7CD2265525400E6EF78 /* FakeSecureStore.swift in Sources */,
 				F44715232243E3FF0013495F /* DeveloperErrorStringsTests.swift in Sources */,
 				F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */,
+				F47470ED229DB3C1004FBDB0 /* BridgeAPIWebV1Tests.swift in Sources */,
 				F408BEB4223988BD0068D24A /* ErrorCategoryTests.swift in Sources */,
 				F45E54FC229320E1008A6011 /* SampleInfoDictionary.swift in Sources */,
 				F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */,
@@ -1536,6 +1601,7 @@
 				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F4C3C5322277BF51004B487E /* RemoteAppLinkTests.swift in Sources */,
 				F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */,
+				F47470F1229DB55C004FBDB0 /* FakeNetworkerProvider.swift in Sources */,
 				F42E3C862267E5FD00287DC4 /* SampleUserProfile.swift in Sources */,
 				F4484808226F770400527D49 /* SampleError.swift in Sources */,
 				F45E54FA229319C2008A6011 /* InfoDictionaryProvidingExtensionsTests.swift in Sources */,
@@ -1584,6 +1650,7 @@
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */,
+				F45E54EF228F5D97008A6011 /* BridgeAPIRequestTests.swift in Sources */,
 				F45E54FD22935B50008A6011 /* ProfilePictureViewTests.swift in Sources */,
 				F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */,
 				F44715252243EDB10013495F /* SampleNSError.swift in Sources */,
@@ -1595,6 +1662,7 @@
 				F4C3C559227B68A3004B487E /* SampleAppLinkTarget.swift in Sources */,
 				F4C3C52C227762A7004B487E /* SampleRawRemoteAppLinkTarget.swift in Sources */,
 				F4C3C5382278C236004B487E /* SampleRemoteAppLinkTarget.swift in Sources */,
+				F47470EB229DB2DE004FBDB0 /* BridgeAPINativeTests.swift in Sources */,
 				F4317EA32289DC7F00EBF926 /* MathUtilityTests.swift in Sources */,
 				F4C32D96223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift in Sources */,
 				F447153222440EB60013495F /* FakeSession.swift in Sources */,
