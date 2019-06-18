@@ -16,14 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-protocol DeviceDialogViewDelegate {
+protocol DeviceDialogViewDelegate: AnyObject {
   func didCancel(dialogView: DeviceDialogView)
 }
 
+// swiftlint:disable:next type_body_length
 class DeviceDialogView: UIView {
   private let logoColor = UIColor(red: 66, green: 103, blue: 178)
 
-  var delegate: DeviceDialogViewDelegate?
+  weak var delegate: DeviceDialogViewDelegate?
 
   var confirmationCode: String? {
     didSet {
@@ -68,7 +69,6 @@ class DeviceDialogView: UIView {
   private lazy var dialogHeaderView: UIView = {
     let dialogHeaderView = UIView()
     dialogHeaderView.translatesAutoresizingMaskIntoConstraints = false
-    // swiftlint:disable:next object_literal
     dialogHeaderView.backgroundColor = UIColor(red: UInt8(226), green: 231, blue: 235, alpha: 0.85)
 
     return dialogHeaderView
@@ -102,6 +102,7 @@ class DeviceDialogView: UIView {
     return label
   }()
 
+  // swiftlint:disable:next closure_body_length
   private lazy var instructionLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -191,108 +192,130 @@ class DeviceDialogView: UIView {
 
   // MARK: - Layout & Configuration
 
+  // swiftlint:disable:next function_body_length
   func buildView() {
     addSubview(dialogView)
-    NSLayoutConstraint.activate([
-      dialogView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      dialogView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      dialogView.widthAnchor.constraint(equalToConstant: LayoutConstants.width),
-      dialogView.heightAnchor.constraint(equalToConstant: LayoutConstants.height)
-    ])
+    NSLayoutConstraint.activate(
+      [
+        dialogView.centerXAnchor.constraint(equalTo: centerXAnchor),
+        dialogView.centerYAnchor.constraint(equalTo: centerYAnchor),
+        dialogView.widthAnchor.constraint(equalToConstant: LayoutConstants.width),
+        dialogView.heightAnchor.constraint(equalToConstant: LayoutConstants.height)
+      ]
+    )
 
     dialogView.addSubview(dialogHeaderView)
-    NSLayoutConstraint.activate([
-      dialogHeaderView.leadingAnchor.constraint(equalTo: dialogView.leadingAnchor),
-      dialogHeaderView.trailingAnchor.constraint(equalTo: dialogView.trailingAnchor),
-      dialogHeaderView.heightAnchor.constraint(equalToConstant: LayoutConstants.dialogHeaderViewHeight),
-      dialogHeaderView.topAnchor.constraint(equalTo: dialogView.topAnchor)
-    ])
+    NSLayoutConstraint.activate(
+      [
+        dialogHeaderView.leadingAnchor.constraint(equalTo: dialogView.leadingAnchor),
+        dialogHeaderView.trailingAnchor.constraint(equalTo: dialogView.trailingAnchor),
+        dialogHeaderView.heightAnchor.constraint(equalToConstant: LayoutConstants.dialogHeaderViewHeight),
+        dialogHeaderView.topAnchor.constraint(equalTo: dialogView.topAnchor)
+      ]
+    )
 
     dialogHeaderView.addSubview(imageView)
-    NSLayoutConstraint.activate([
-      imageView.widthAnchor.constraint(equalToConstant: LayoutConstants.logoSize),
-      imageView.heightAnchor.constraint(equalToConstant: LayoutConstants.logoSize),
-      imageView.topAnchor.constraint(equalTo: dialogHeaderView.topAnchor, constant: LayoutConstants.logoMargin),
-      imageView.leadingAnchor.constraint(equalTo: dialogHeaderView.leadingAnchor, constant: LayoutConstants.logoMargin)
-    ])
+    NSLayoutConstraint.activate(
+      [
+        imageView.widthAnchor.constraint(equalToConstant: LayoutConstants.logoSize),
+        imageView.heightAnchor.constraint(equalToConstant: LayoutConstants.logoSize),
+        imageView.topAnchor.constraint(equalTo: dialogHeaderView.topAnchor, constant: LayoutConstants.logoMargin),
+        imageView.leadingAnchor.constraint(
+          equalTo: dialogHeaderView.leadingAnchor,
+          constant: LayoutConstants.logoMargin
+        )
+      ]
+    )
 
     dialogHeaderView.addSubview(activityIndicatorView)
-    NSLayoutConstraint.activate([
-      activityIndicatorView.centerXAnchor.constraint(equalTo: dialogHeaderView.centerXAnchor),
-      activityIndicatorView.centerYAnchor.constraint(equalTo: dialogHeaderView.centerYAnchor),
-      activityIndicatorView.widthAnchor.constraint(equalToConstant: LayoutConstants.confirmationCodeFontSize),
-      activityIndicatorView.heightAnchor.constraint(equalToConstant: LayoutConstants.confirmationCodeFontSize)
-    ])
+    NSLayoutConstraint.activate(
+      [
+        activityIndicatorView.centerXAnchor.constraint(equalTo: dialogHeaderView.centerXAnchor),
+        activityIndicatorView.centerYAnchor.constraint(equalTo: dialogHeaderView.centerYAnchor),
+        activityIndicatorView.widthAnchor.constraint(equalToConstant: LayoutConstants.confirmationCodeFontSize),
+        activityIndicatorView.heightAnchor.constraint(equalToConstant: LayoutConstants.confirmationCodeFontSize)
+      ]
+    )
     activityIndicatorView.startAnimating()
 
     dialogHeaderView.addSubview(confirmationCodeLabel)
-    NSLayoutConstraint.activate([
-      confirmationCodeLabel.centerXAnchor.constraint(equalTo: dialogHeaderView.centerXAnchor),
-      confirmationCodeLabel.centerYAnchor.constraint(equalTo: dialogHeaderView.centerYAnchor)
-    ])
+    NSLayoutConstraint.activate(
+      [
+        confirmationCodeLabel.centerXAnchor.constraint(equalTo: dialogHeaderView.centerXAnchor),
+        confirmationCodeLabel.centerYAnchor.constraint(equalTo: dialogHeaderView.centerYAnchor)
+      ]
+    )
 
     confirmationCodeLabel.isHidden = true
 
     dialogView.addSubview(qrImageView)
 
-    NSLayoutConstraint.activate([
-      qrImageView.topAnchor.constraint(
-        equalTo: dialogHeaderView.bottomAnchor,
-        constant: LayoutConstants.qrCodeMargin
-      ),
-      qrImageView.bottomAnchor.constraint(
-        equalTo: qrImageView.topAnchor,
-        constant: LayoutConstants.qrCodeSize
-      ),
-      qrImageView.leadingAnchor.constraint(equalTo: dialogView.leadingAnchor, constant: LayoutConstants.qrCodeMargin),
-      qrImageView.trailingAnchor.constraint(equalTo: qrImageView.leadingAnchor, constant: LayoutConstants.qrCodeSize)
-    ])
+    NSLayoutConstraint.activate(
+      [
+        qrImageView.topAnchor.constraint(
+          equalTo: dialogHeaderView.bottomAnchor,
+          constant: LayoutConstants.qrCodeMargin
+        ),
+        qrImageView.bottomAnchor.constraint(
+          equalTo: qrImageView.topAnchor,
+          constant: LayoutConstants.qrCodeSize
+        ),
+        qrImageView.leadingAnchor.constraint(equalTo: dialogView.leadingAnchor, constant: LayoutConstants.qrCodeMargin),
+        qrImageView.trailingAnchor.constraint(equalTo: qrImageView.leadingAnchor, constant: LayoutConstants.qrCodeSize)
+      ]
+    )
 
     dialogView.addSubview(instructionLabel)
-    NSLayoutConstraint.activate([
-      instructionLabel.topAnchor.constraint(
-        equalTo: dialogHeaderView.bottomAnchor,
-        constant: LayoutConstants.verticalSpaceBetweenHeaderViewAndInstructionLabel
-      ),
-      instructionLabel.leadingAnchor.constraint(
-        equalTo: qrImageView.trailingAnchor,
-        constant: LayoutConstants.qrCodeMargin
-      ),
-      dialogView.trailingAnchor.constraint(
-        equalTo: instructionLabel.trailingAnchor,
-        constant: LayoutConstants.instructionTextHorizontalMargin
-      )
-    ])
+    NSLayoutConstraint.activate(
+      [
+        instructionLabel.topAnchor.constraint(
+          equalTo: dialogHeaderView.bottomAnchor,
+          constant: LayoutConstants.verticalSpaceBetweenHeaderViewAndInstructionLabel
+        ),
+        instructionLabel.leadingAnchor.constraint(
+          equalTo: qrImageView.trailingAnchor,
+          constant: LayoutConstants.qrCodeMargin
+        ),
+        dialogView.trailingAnchor.constraint(
+          equalTo: instructionLabel.trailingAnchor,
+          constant: LayoutConstants.instructionTextHorizontalMargin
+        )
+      ]
+    )
 
     dialogView.addSubview(buttonContainerView)
-    NSLayoutConstraint.activate([
-      buttonContainerView.centerXAnchor.constraint(
-        equalTo: dialogView.centerXAnchor
-      ),
-      buttonContainerView.heightAnchor.constraint(
-        equalToConstant: LayoutConstants.buttonContainerHeight
-      ),
-      buttonContainerView.leadingAnchor.constraint(
-        equalTo: dialogView.leadingAnchor,
-        constant: LayoutConstants.buttonContainerMargin
-      ),
-      dialogView.trailingAnchor.constraint(
-        equalTo: buttonContainerView.trailingAnchor,
-        constant: LayoutConstants.buttonContainerMargin
-      ),
-      dialogView.bottomAnchor.constraint(
-        equalTo: buttonContainerView.bottomAnchor,
-        constant: LayoutConstants.verticalSpaceBetweenCancelButtonAndButtomAnchor
-      )
-    ])
+    NSLayoutConstraint.activate(
+      [
+        buttonContainerView.centerXAnchor.constraint(
+          equalTo: dialogView.centerXAnchor
+        ),
+        buttonContainerView.heightAnchor.constraint(
+          equalToConstant: LayoutConstants.buttonContainerHeight
+        ),
+        buttonContainerView.leadingAnchor.constraint(
+          equalTo: dialogView.leadingAnchor,
+          constant: LayoutConstants.buttonContainerMargin
+        ),
+        dialogView.trailingAnchor.constraint(
+          equalTo: buttonContainerView.trailingAnchor,
+          constant: LayoutConstants.buttonContainerMargin
+        ),
+        dialogView.bottomAnchor.constraint(
+          equalTo: buttonContainerView.bottomAnchor,
+          constant: LayoutConstants.verticalSpaceBetweenCancelButtonAndButtomAnchor
+        )
+      ]
+    )
 
     buttonContainerView.addSubview(cancelButton)
-    NSLayoutConstraint.activate([
-      cancelButton.leadingAnchor.constraint(equalTo: buttonContainerView.leadingAnchor),
-      cancelButton.trailingAnchor.constraint(equalTo: buttonContainerView.trailingAnchor),
-      cancelButton.topAnchor.constraint(equalTo: buttonContainerView.topAnchor),
-      cancelButton.bottomAnchor.constraint(equalTo: buttonContainerView.bottomAnchor)
-    ])
+    NSLayoutConstraint.activate(
+      [
+        cancelButton.leadingAnchor.constraint(equalTo: buttonContainerView.leadingAnchor),
+        cancelButton.trailingAnchor.constraint(equalTo: buttonContainerView.trailingAnchor),
+        cancelButton.topAnchor.constraint(equalTo: buttonContainerView.topAnchor),
+        cancelButton.bottomAnchor.constraint(equalTo: buttonContainerView.bottomAnchor)
+      ]
+    )
   }
 
   private func buildQRCode(withAuthorizationCode authorizationCode: String?) -> UIImage {
@@ -328,8 +351,10 @@ class DeviceDialogView: UIView {
     static let buttonContainerMargin: CGFloat = 400
     static let width: CGFloat = 1080
     static let height: CGFloat = 820
+    // swiftlint:disable identifier_name
     static let verticalSpaceBetweenHeaderViewAndInstructionLabel: CGFloat = 102
     static let verticalSpaceBetweenCancelButtonAndButtomAnchor: CGFloat = 117
+    // swiftlint:enable identifier_name
     static let dialogHeaderViewHeight: CGFloat = 309
     static let logoSize: CGFloat = 44
     static let logoMargin: CGFloat = 30

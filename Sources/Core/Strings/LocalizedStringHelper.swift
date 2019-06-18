@@ -20,13 +20,13 @@ import Foundation
 
 enum LocalizedStringHelper {
   static var localizedStringsBundle: Bundle = {
-    guard let path = Bundle(for: FacebookCoreApplicationDelegate.self).path(
-      forResource: "FacebookSDKStrings",
-      ofType: "bundle"
-      ) else {
+    guard let path = Bundle(for: FacebookCoreApplicationDelegate.self)
+      .path(forResource: "FacebookSDKStrings", ofType: "bundle"),
+      let bundle = Bundle(path: path)
+      else {
         return Bundle.main
     }
 
-    return Bundle(path: path) ?? Bundle.main
+    return bundle
   }()
 }
