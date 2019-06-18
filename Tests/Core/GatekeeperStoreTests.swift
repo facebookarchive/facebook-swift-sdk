@@ -122,4 +122,13 @@ class GatekeeperStoreTests: XCTestCase {
     XCTAssertEqual(retrievedGatekeepers, gatekeepers,
                    "Store should provide the gatekeepers that were saved into it on request")
   }
+
+  func testResettingCache() {
+    store.cache(gatekeepers)
+
+    store.resetCache()
+
+    XCTAssertNil(store.cachedValue,
+                 "Should remove the cached value on request")
+  }
 }

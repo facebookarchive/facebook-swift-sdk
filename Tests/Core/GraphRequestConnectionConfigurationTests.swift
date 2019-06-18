@@ -37,8 +37,8 @@ class GraphRequestConnectionConfigurationTests: XCTestCase {
                   "Connection should have the expected concrete implementation for its graph request piggyback manager")
   }
 
-  func testServerConfigurationManagerDependency() {
-    XCTAssertTrue(connection.serverConfigurationManager is ServerConfigurationManager,
-                  "Connection should have the expected concrete implementation for its server configuration manager")
+  func testServerConfigurationServiceDependency() {
+    XCTAssertTrue(connection.serverConfigurationService is ServerConfigurationService,
+                  "Connection should have the expected concrete implementation for its server configuration service")
   }
 }

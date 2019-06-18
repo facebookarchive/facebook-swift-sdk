@@ -25,7 +25,9 @@ class GraphRequestConnectionTests: XCTestCase {
   let fakeSession = FakeSession()
   var fakeSessionProvider: FakeSessionProvider!
   let fakeLogger = FakeLogger()
-  let fakeServerConfigurationManager = FakeServerConfigurationManager()
+  let fakeServerConfigurationService = FakeServerConfigurationService(
+    cachedServerConfiguration: ServerConfiguration(appID: "abc123")
+  )
   let fakePiggybackManager = FakeGraphRequestPiggybackManager.self
   let graphRequest = GraphRequest(graphPath: .me)
   var connection: GraphRequestConnection!
@@ -38,7 +40,7 @@ class GraphRequestConnectionTests: XCTestCase {
       sessionProvider: fakeSessionProvider,
       logger: fakeLogger,
       piggybackManager: fakePiggybackManager,
-      serverConfigurationManager: fakeServerConfigurationManager
+      serverConfigurationService: fakeServerConfigurationService
     )
   }
 
@@ -50,16 +52,14 @@ class GraphRequestConnectionTests: XCTestCase {
   }
 
   func testDefaultConnectionTimeout() {
-    let connection = GraphRequestConnection()
-
-    XCTAssertEqual(connection.defaultConnectionTimeout, 60.0,
+    XCTAssertEqual(GraphRequestConnection.defaultConnectionTimeout, 60.0,
                    "A connection should have a default timeout of sixty seconds")
   }
 
   func testTimeoutInterval() {
     let connection = GraphRequestConnection()
 
-    XCTAssertEqual(connection.timeout, 0,
+    XCTAssertEqual(connection.timeout, 60,
                    "A connection should have a timeout of zero seconds.")
   }
 
@@ -176,30 +176,19 @@ class GraphRequestConnectionTests: XCTestCase {
 
   // MARK: Fetching Data
 
-  func testFetchingDataChecksForUpdatedErrorConfigurationWithoutCache() {
-    let fakeServerConfigurationManager = FakeServerConfigurationManager()
-    fakeServerConfigurationManager.clearCache()
+  func testFetchingDataUsesCachedServerConfiguration() {
+    let fakeServerConfigurationService = FakeServerConfigurationService(
+      cachedServerConfiguration: ServerConfiguration(appID: "foo")
+    )
 
-    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
+    let connection = GraphRequestConnection(
+      serverConfigurationService: fakeServerConfigurationService
+    )
 
     _ = connection.fetchData(for: graphRequest) { _ in }
 
-    XCTAssertTrue(fakeServerConfigurationManager.cachedConfigurationWasRequested,
+    XCTAssertTrue(fakeServerConfigurationService.cachedConfigurationWasRequested,
                   "A connection should check for a cached configuration when fetching data")
-  }
-
-  func testFetchingDataChecksForUpdatedErrorConfigurationWithCache() {
-    let fakeServerConfigurationProvider = FakeServerConfigurationProvider()
-    let fakeServerConfigurationManager = FakeServerConfigurationManager(cachedServerConfiguration: fakeServerConfigurationProvider)
-    let connection = GraphRequestConnection(serverConfigurationManager: fakeServerConfigurationManager)
-
-    _ = connection.fetchData(for: graphRequest) { _ in }
-
-    guard let cache = fakeServerConfigurationManager.cachedServerConfiguration as? FakeServerConfigurationProvider else {
-      return XCTFail("A connection should check for an updated configuration when fetching data")
-    }
-    XCTAssertTrue(cache.errorConfigurationWasRequested,
-                  "A connection should check for an updated error configuration when fetching data")
   }
 
   func testFetchingDataWithoutSession() {

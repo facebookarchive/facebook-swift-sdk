@@ -59,4 +59,8 @@ extension Store {
 
     store.set(data, forKey: retrievalKey)
   }
+
+  func resetCache() {
+    store.set(nil, forKey: retrievalKey)
+  }
 }

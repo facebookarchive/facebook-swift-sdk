@@ -27,10 +27,13 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
   var capturedBatchParameters: [String: AnyHashable]?
   var capturedAddRequestHandler: GraphRequestBlock?
 
+  var capturedTimeout: TimeInterval?
   var getObjectWasCalled = false
   var capturedGetObjectRemoteType: Any?
   var capturedGetObjectGraphRequest: GraphRequest?
   var stubGetObjectCompletionResult: Result<Decodable, Error>?
+
+  var timeout: TimeInterval = GraphRequestConnection.defaultConnectionTimeout
 
   func start() {
     startCalled = true

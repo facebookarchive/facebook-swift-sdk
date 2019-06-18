@@ -197,4 +197,40 @@ enum ServerConfigurationTestHelper {
       line: line
     )
   }
+
+  static func assertNotEqual(
+    _ lhs: ServerConfiguration?,
+    _ rhs: ServerConfiguration?,
+    _ file: StaticString = #file,
+    _ line: UInt = #line
+    ) {
+    XCTAssertTrue(
+      lhs?.appName != rhs?.appName ||
+        lhs?.appID != rhs?.appID ||
+        lhs?.defaultShareMode != rhs?.defaultShareMode ||
+        lhs?.dialogConfigurations != rhs?.dialogConfigurations ||
+        lhs?.dialogFlows != rhs?.dialogFlows ||
+        lhs?.eventBindings != rhs?.eventBindings ||
+        lhs?.isAdvertisingIDEnabled != rhs?.isAdvertisingIDEnabled ||
+        lhs?.isCodelessEventsEnabled != rhs?.isCodelessEventsEnabled ||
+        lhs?.isImplicitLoggingEnabled != rhs?.isImplicitLoggingEnabled ||
+        lhs?.isLoginTooltipEnabled != rhs?.isLoginTooltipEnabled ||
+        lhs?.isImplicitPurchaseLoggingEnabled != rhs?.isImplicitPurchaseLoggingEnabled ||
+        lhs?.isNativeAuthFlowEnabled != rhs?.isNativeAuthFlowEnabled ||
+        lhs?.isSystemAuthenticationEnabled != rhs?.isSystemAuthenticationEnabled ||
+        lhs?.isUninstallTrackingEnabled != rhs?.isUninstallTrackingEnabled ||
+        lhs?.loggingToken != rhs?.loggingToken ||
+        lhs?.loginTooltipText != rhs?.loginTooltipText ||
+        lhs?.restrictiveParams != rhs?.restrictiveParams ||
+        lhs?.restrictiveRules != rhs?.restrictiveRules ||
+        lhs?.sessionTimoutInterval != rhs?.sessionTimoutInterval ||
+        lhs?.smartLoginBookmarkIconURL != rhs?.smartLoginBookmarkIconURL ||
+        lhs?.smartLoginMenuIconURL != rhs?.smartLoginMenuIconURL ||
+        lhs?.smartLoginOptions != rhs?.smartLoginOptions ||
+        lhs?.timestamp != rhs?.timestamp ||
+        lhs?.updateMessage != rhs?.updateMessage,
+      file: file,
+      line: line
+    )
+  }
 }

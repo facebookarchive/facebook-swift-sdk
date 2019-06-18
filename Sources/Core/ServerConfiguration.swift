@@ -16,19 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable type_body_length
+
 import Foundation
 
 // TODO: Extract a meaningful type for event bindings
 typealias EventBinding = String
 
 protocol ServerConfigurationProviding {
+  var appID: String { get }
   var errorConfiguration: ErrorConfiguration { get }
 }
 
 struct ServerConfiguration: ServerConfigurationProviding, Codable {
   // Increase this value when adding new fields and previous cached configurations should be
   // treated as stale.
-  private let version: Int = 2
+  static let configurationVersion: Int = 2
   static let defaultSessionTimeout: TimeInterval = 60
 
   let appID: String
@@ -56,6 +59,7 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
   let dialogFlows: [DialogFlow]
   let restrictiveRules: [RestrictiveRule]
   let restrictiveParams: [RestrictiveEventParameter]
+  let version: Int
 
   static var defaultDialogFlows: [DialogFlow] {
     let shouldUseNativeFlow = ProcessInfo.processInfo.isOperatingSystemAtLeast(
@@ -74,6 +78,69 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
       )
     ]
     return remotes.compactMap { DialogFlow(remote: $0) }
+  }
+
+  // TODO: Revisit the need for a default since all it really provides
+  // are dialog flows which are already available as a static property
+  /**
+ This initializer should only use this for providing a default while
+   an up-to-date version is being fetched from the server
+   */
+  init(
+    appID: String,
+    isAdvertisingIDEnabled: Bool = false,
+    appName: String? = nil,
+    defaultShareMode: String? = nil,
+    errorConfiguration: ErrorConfiguration = ErrorConfiguration(configurationDictionary: [:]),
+    isImplicitPurchaseLoggingEnabled: Bool = false,
+    isCodelessEventsEnabled: Bool = false,
+    isLoginTooltipEnabled: Bool = false,
+    isUninstallTrackingEnabled: Bool = false,
+    isImplicitLoggingEnabled: Bool = false,
+    isNativeAuthFlowEnabled: Bool = false,
+    isSystemAuthenticationEnabled: Bool = false,
+    loginTooltipText: String? = nil,
+    // Using distance past so that a default will not be confused with a newer/fetched version
+    timestamp: Date = Date.distantPast,
+    sessionTimoutInterval: TimeInterval = ServerConfiguration.defaultSessionTimeout,
+    loggingToken: String? = nil,
+    smartLoginOptions: SmartLoginOptions = .unknown,
+    smartLoginBookmarkIconURL: URL? = nil,
+    smartLoginMenuIconURL: URL? = nil,
+    updateMessage: String? = nil,
+    eventBindings: [EventBinding] = [],
+    dialogConfigurations: [DialogConfiguration] = [],
+    dialogFlows: [DialogFlow] = ServerConfiguration.defaultDialogFlows,
+    restrictiveRules: [RestrictiveRule] = [],
+    restrictiveParams: [RestrictiveEventParameter] = [],
+    version: Int = ServerConfiguration.configurationVersion
+    ) {
+    self.version = version
+    self.appID = appID
+    self.isAdvertisingIDEnabled = isAdvertisingIDEnabled
+    self.appName = appName
+    self.defaultShareMode = defaultShareMode
+    self.errorConfiguration = errorConfiguration
+    self.isImplicitPurchaseLoggingEnabled = isImplicitPurchaseLoggingEnabled
+    self.isCodelessEventsEnabled = isCodelessEventsEnabled
+    self.isLoginTooltipEnabled = isLoginTooltipEnabled
+    self.isUninstallTrackingEnabled = isUninstallTrackingEnabled
+    self.isImplicitLoggingEnabled = isImplicitLoggingEnabled
+    self.isNativeAuthFlowEnabled = isNativeAuthFlowEnabled
+    self.isSystemAuthenticationEnabled = isSystemAuthenticationEnabled
+    self.loginTooltipText = loginTooltipText
+    self.timestamp = timestamp
+    self.sessionTimoutInterval = sessionTimoutInterval
+    self.loggingToken = loggingToken
+    self.smartLoginOptions = smartLoginOptions
+    self.smartLoginBookmarkIconURL = smartLoginBookmarkIconURL
+    self.smartLoginMenuIconURL = smartLoginMenuIconURL
+    self.updateMessage = updateMessage
+    self.eventBindings = eventBindings
+    self.dialogConfigurations = dialogConfigurations
+    self.dialogFlows = dialogFlows
+    self.restrictiveRules = restrictiveRules
+    self.restrictiveParams = restrictiveParams
   }
 
   init?(remote: RemoteServerConfiguration) {
@@ -119,6 +186,7 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
     self.restrictiveParams = remote.restrictiveEventParameterList?.parameters.compactMap {
       RestrictiveEventParameter(remote: $0)
     } ?? []
+    self.version = ServerConfiguration.configurationVersion
   }
 
   private func value(
@@ -228,7 +296,6 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
   }
 
   enum CodingKeys: String, CodingKey {
-    case version
     case appID
     case isAdvertisingIDEnabled
     case appName
@@ -254,5 +321,6 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
     case dialogFlows
     case restrictiveRules
     case restrictiveParams
+    case version
   }
 }

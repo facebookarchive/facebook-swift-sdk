@@ -122,4 +122,13 @@ class ServerConfigurationStoreTests: XCTestCase {
                    "Store should attempt to retrieve a cached server configuration from its data persistence store using a known key")
     ServerConfigurationTestHelper.assertEqual(retrievedServerConfiguration, serverConfiguration)
   }
+
+  func testResettingCache() {
+    store.cache(serverConfiguration)
+
+    store.resetCache()
+
+    XCTAssertNil(store.cachedValue,
+                 "Should remove the cached value on request")
+  }
 }

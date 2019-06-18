@@ -16,17 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-protocol ServerConfigurationManaging {
-  var cachedServerConfiguration: ServerConfigurationProviding? { get }
-}
+class FakeServerConfigurationService: ServerConfigurationServicing {
+  private var cachedConfiguration: ServerConfiguration
 
-// TODO: Implement FBSDKServerConfigurationManager
-class ServerConfigurationManager: ServerConfigurationManaging {
-  static var shared = ServerConfigurationManager()
+  var cachedConfigurationWasRequested: Bool = false
 
-  var cachedServerConfiguration: ServerConfigurationProviding? {
-    return nil
+  var cachedServerConfiguration: ServerConfiguration {
+    get {
+      cachedConfigurationWasRequested = true
+      return cachedConfiguration
+    }
+    set {
+      cachedConfiguration = newValue
+    }
+  }
+
+  init(cachedServerConfiguration: ServerConfiguration) {
+    self.cachedConfiguration = cachedServerConfiguration
   }
 }

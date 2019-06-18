@@ -19,6 +19,8 @@
 import UIKit
 
 protocol GraphRequestConnecting {
+  var timeout: TimeInterval { get set }
+
   func start()
   func add(
     request: GraphRequest,
