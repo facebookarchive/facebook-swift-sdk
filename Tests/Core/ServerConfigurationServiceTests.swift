@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable line_length force_unwrapping type_body_length
+// swiftlint:disable line_length force_unwrapping
 
 @testable import FacebookCore
 import XCTest
