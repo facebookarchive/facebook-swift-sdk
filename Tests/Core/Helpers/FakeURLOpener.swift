@@ -16,58 +16,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-extension ServerConfiguration {
-  struct DialogFlow {
-    let name: FlowName
-    let shouldUseNativeFlow: Bool
-    let shouldUseSafariVC: Bool
+struct FakeURLOpener: URLOpening {
+  let canOpenURL: Bool
 
-    init(remote: RemoteServerConfiguration.DialogFlow) {
-      name = FlowName(value: remote.name)
-      shouldUseNativeFlow = remote.shouldUseNativeFlow ?? false
-      shouldUseSafariVC = remote.shouldUseSafariVC ?? false
-    }
-
-    // swiftlint:disable:next nesting
-    enum FlowName: CustomStringConvertible, Equatable {
-      case `default`
-      case login
-      case sharing
-      case other(String)
-
-      var description: String {
-        switch self {
-        case .default:
-          return "default"
-
-        case .login:
-          return "login"
-
-        case .sharing:
-          return "sharing"
-
-        case .other(let value):
-          return value
-        }
-      }
-
-      init(value: String) {
-        switch value {
-        case "default":
-          self = .default
-
-        case "login":
-          self = .login
-
-        case "sharing":
-          self = .sharing
-
-        default:
-          self = .other(value)
-        }
-      }
-    }
+  func canOpenURL(_ url: URL) -> Bool {
+    return canOpenURL
   }
 }

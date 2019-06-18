@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,5 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import FBSDKCoreKit
-import Foundation
+@testable import FacebookCore
+import XCTest
+
+// TODO: Implement FBSDKBridgeAPIProtocolNative
+class BridgeAPINativeTests: XCTestCase {
+  func testURLRequest() {
+    do {
+      _ = try BridgeAPINative(appScheme: "Foo").requestURL(actionID: "Foo", methodName: "Bar", methodVersion: "Baz", parameters: [:])
+      XCTFail("Should not provide a request url for an unimplemented url provider")
+    } catch {
+      XCTAssertNotNil(error)
+    }
+  }
+}
