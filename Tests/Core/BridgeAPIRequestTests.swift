@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping
+// swiftlint:disable force_unwrapping force_try
 
 @testable import FacebookCore
 import XCTest
@@ -186,7 +186,8 @@ class BridgeAPIRequestTests: XCTestCase {
     let expectedQueryItems = URLQueryItemBuilder.build(from:
       [
         "bar": "baz",
-        "app_id": fakeSettings.appIdentifier!
+        "app_id": fakeSettings.appIdentifier!,
+        "cipher_key": try! Cryptography.rsaPublicKeyAsBase64()
       ]
     )
     fakeBridgeAPIURLProvider.stubbedURL = URLBuilder().buildURL(scheme: "myApp", hostName: "example.com", queryItems: passThroughQueryItem)!
@@ -203,11 +204,11 @@ class BridgeAPIRequestTests: XCTestCase {
           return XCTFail("Should be able to get query items from url")
       }
 
-      XCTAssertTrue(Set(queryItems).isStrictSuperset(of: expectedQueryItems),
-                    "Request should include query items from the url provided by the bridge api")
-
-      XCTAssertTrue(queryItems.contains { $0.name == "cipher_key" },
-                    "Request should include a query item for the cipher key")
+      XCTAssertEqual(
+        queryItems.sorted { $0.name < $1.name },
+        expectedQueryItems.sorted { $0.name < $1.name },
+        "Request should include query items from the url provided by the bridge api"
+      )
     } catch {
       XCTAssertNil(error, "Should provide a request url given a valid scheme")
     }
