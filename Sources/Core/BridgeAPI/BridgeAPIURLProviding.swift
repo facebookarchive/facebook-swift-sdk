@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -18,3 +17,13 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+
+/// A BridgeAPINetworker provides a request url
+protocol BridgeAPIURLProviding {
+  func requestURL(
+    actionID: String,
+    methodName: String,
+    methodVersion: String,
+    parameters: [String: AnyHashable]
+    ) throws -> URL
+}
