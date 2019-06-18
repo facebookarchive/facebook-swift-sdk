@@ -22,7 +22,7 @@ typealias ServerConfigurationResult = Result<ServerConfiguration, Error>
 typealias ServerConfigurationCompletion = (ServerConfigurationResult) -> Void
 
 protocol ServerConfigurationServicing {
-  var cachedServerConfiguration: ServerConfiguration { get }
+  var serverConfiguration: ServerConfiguration { get }
 }
 
 class ServerConfigurationService: ServerConfigurationServicing {
@@ -36,12 +36,13 @@ class ServerConfigurationService: ServerConfigurationServicing {
   private(set) var store: ServerConfigurationStore
   private(set) var logger: Logging
 
-  // TODO: Keep track of whether the current server configuration is build from default values
-  //  let isDefaults: Bool = true
+  private var appIdentifier: String {
+    return settings.appIdentifier ?? "Missing app identifier. Please add one in Settings."
+  }
 
-  var cachedServerConfiguration: ServerConfiguration {
+  var serverConfiguration: ServerConfiguration {
     didSet {
-      store.cache(cachedServerConfiguration)
+      store.cache(serverConfiguration)
     }
   }
 
@@ -51,13 +52,7 @@ class ServerConfigurationService: ServerConfigurationServicing {
    with instructions to add an identifier
    */
   var defaultServerConfiguration: ServerConfiguration {
-    guard let appIdentifier = settings.appIdentifier else {
-      return ServerConfiguration(
-        appID: "Missing app identifier. Please add one in Settings."
-      )
-    }
-
-    return ServerConfiguration(appID: appIdentifier)
+      return ServerConfiguration(appID: appIdentifier)
   }
 
   var isRequeryFinishedForAppStart: Bool = false
@@ -90,14 +85,14 @@ class ServerConfigurationService: ServerConfigurationServicing {
       logger.log(.developerErrors, "Missing app identifier. Please add one in Settings.")
 
       // TODO: Might make more sense to either make this throwing or raise an exception here
-      cachedServerConfiguration = ServerConfiguration(
+      serverConfiguration = ServerConfiguration(
         appID: "Missing app identifier. Please add one in Settings."
       )
       return
     }
 
     // Sets an initial default configuration value
-    cachedServerConfiguration = ServerConfiguration(appID: appIdentifier)
+    serverConfiguration = ServerConfiguration(appID: appIdentifier)
   }
 
   func request(for appIdentifier: String) -> GraphRequest {
@@ -149,18 +144,17 @@ class ServerConfigurationService: ServerConfigurationServicing {
   func loadServerConfiguration(completion: @escaping ServerConfigurationCompletion) {
     guard let appIdentifier = settings.appIdentifier else {
       logger.log(.developerErrors, "Missing app identifier. Please add one in Settings.")
-      cachedServerConfiguration = defaultServerConfiguration
+      serverConfiguration = defaultServerConfiguration
       return
     }
 
-    // Attempt to retrieve a fresh configuration from the cache
     if let cached = store.cachedValue,
       cached.appID == appIdentifier {
-      cachedServerConfiguration = cached
+      serverConfiguration = cached
     }
 
-    if cachedServerConfiguration.appID != appIdentifier {
-      cachedServerConfiguration = ServerConfiguration(appID: appIdentifier)
+    if serverConfiguration.appID != appIdentifier {
+      serverConfiguration = ServerConfiguration(appID: appIdentifier)
     }
 
     guard isCurrentConfigurationValid else {
@@ -176,35 +170,33 @@ class ServerConfigurationService: ServerConfigurationServicing {
             ServerConfiguration.self,
             for: request(for: appIdentifier)
           ) { [weak self] result in
-            switch result {
-            case let .success(configuration):
-              self?.cachedServerConfiguration = configuration
-
-            case .failure:
-              // Sets to a new instance of the default configuration on failure
-              self?.cachedServerConfiguration = ServerConfiguration(appID: appIdentifier)
+            guard let self = self else {
+              return
             }
 
-            self?.isLoading = false
-            self?.isRequeryFinishedForAppStart = true
+            switch result {
+            case let .success(configuration):
+              self.serverConfiguration = configuration
+
+            case .failure:
+              self.serverConfiguration = self.defaultServerConfiguration
+            }
+
+            self.isLoading = false
+            self.isRequeryFinishedForAppStart = true
             completion(result)
         }
         return
     }
 
-    completion(.success(cachedServerConfiguration))
+    completion(.success(serverConfiguration))
   }
 
   private var isCurrentConfigurationValid: Bool {
-    guard let appIdentifier = settings.appIdentifier else {
-      logger.log(.developerErrors, "Missing app identifier. Please add one in Settings.")
-      return false
-    }
-
-    guard cachedServerConfiguration.appID == appIdentifier,
-      Date().timeIntervalSince(cachedServerConfiguration.timestamp) < oneHourInSeconds,
+    guard serverConfiguration.appID == appIdentifier,
+      Date().timeIntervalSince(serverConfiguration.timestamp) < oneHourInSeconds,
       isRequeryFinishedForAppStart,
-      cachedServerConfiguration.version >= ServerConfiguration.configurationVersion
+      serverConfiguration.version >= ServerConfiguration.configurationVersion
       else {
         return false
     }

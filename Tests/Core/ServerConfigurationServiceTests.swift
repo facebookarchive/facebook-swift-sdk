@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable line_length force_unwrapping
+// swiftlint:disable line_length force_unwrapping type_body_length
 
 @testable import FacebookCore
 import XCTest
@@ -136,7 +136,7 @@ class ServerConfigurationServiceTests: XCTestCase {
   func testDefaultServerConfiguration() {
     // Should provide the default server configuration if one has not been fetched from the server or retrieved from the cache
     ServerConfigurationTestHelper.assertEqual(
-      service?.cachedServerConfiguration,
+      service?.serverConfiguration,
       defaultConfiguration
     )
   }
@@ -151,7 +151,7 @@ class ServerConfigurationServiceTests: XCTestCase {
 
     // Should not store a value if one is not retrieved from the cache
     ServerConfigurationTestHelper.assertEqual(
-      service?.cachedServerConfiguration,
+      service?.serverConfiguration,
       defaultConfiguration
     )
   }
@@ -164,7 +164,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Should set the current local to the value retrieved from the cache
     ServerConfigurationTestHelper.assertEqual(
       configuration,
-      service?.cachedServerConfiguration
+      service?.serverConfiguration
     )
   }
 
@@ -178,7 +178,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Should not load cached configuration if the app identifier is different from the one it was saved under
     ServerConfigurationTestHelper.assertNotEqual(
       configuration,
-      service?.cachedServerConfiguration
+      service?.serverConfiguration
     )
   }
 
@@ -190,7 +190,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Should not load any configuration with a missing app identifier, should use the default
     ServerConfigurationTestHelper.assertEqual(
       ServerConfiguration(appID: "Missing app identifier. Please add one in Settings."),
-      service?.cachedServerConfiguration
+      service?.serverConfiguration
     )
   }
 
@@ -271,7 +271,7 @@ class ServerConfigurationServiceTests: XCTestCase {
   }
 
   func testLoadingWithExistingServerConfigurationAndInvalidAppID() {
-    service.cachedServerConfiguration = configuration
+    service.serverConfiguration = configuration
 
     fakeSettings.appIdentifier = name
 
@@ -280,7 +280,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Loading a configuration when the app identifier is different from the currently stored one should replace the stored configuration with a default
     ServerConfigurationTestHelper.assertEqual(
       ServerConfiguration(appID: name),
-      service?.cachedServerConfiguration
+      service?.serverConfiguration
     )
 
     XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is ServerConfiguration.Type,
@@ -321,7 +321,7 @@ class ServerConfigurationServiceTests: XCTestCase {
 
     // Clear fixtures and invalidate cache
     fakeConnection.reset()
-    service.cachedServerConfiguration = defaultConfiguration
+    service.serverConfiguration = defaultConfiguration
     service.store.resetCache()
 
     service.loadServerConfiguration { _ in }
@@ -336,7 +336,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     service.loadServerConfiguration { _ in }
 
     ServerConfigurationTestHelper.assertEqual(
-      service?.cachedServerConfiguration,
+      service?.serverConfiguration,
       configuration
     )
   }
@@ -362,6 +362,4 @@ class ServerConfigurationServiceTests: XCTestCase {
       defaultConfiguration
     )
   }
-
-  //  // As a side effect load the gatekeepers at this point.
 }

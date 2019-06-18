@@ -24,7 +24,7 @@ class FakeServerConfigurationService: ServerConfigurationServicing {
 
   var cachedConfigurationWasRequested: Bool = false
 
-  var cachedServerConfiguration: ServerConfiguration {
+  var serverConfiguration: ServerConfiguration {
     get {
       cachedConfigurationWasRequested = true
       return cachedConfiguration

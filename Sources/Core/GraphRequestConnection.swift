@@ -75,7 +75,7 @@ class GraphRequestConnection: GraphRequestConnecting {
   }
 
   func start() {
-    errorConfiguration = serverConfigurationService.cachedServerConfiguration.errorConfiguration
+    errorConfiguration = serverConfigurationService.serverConfiguration.errorConfiguration
 
     switch state {
     case .started, .cancelled, .completed:
@@ -237,7 +237,7 @@ class GraphRequestConnection: GraphRequestConnecting {
     for graphRequest: GraphRequest,
     completion: @escaping DataFetchCompletion
     ) -> URLSessionTaskProxy? {
-    errorConfiguration = serverConfigurationService.cachedServerConfiguration.errorConfiguration
+    errorConfiguration = serverConfigurationService.serverConfiguration.errorConfiguration
 
     piggybackManager.addPiggybackRequests(for: self)
 
