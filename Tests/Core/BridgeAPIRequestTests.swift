@@ -180,6 +180,7 @@ class BridgeAPIRequestTests: XCTestCase {
   }
 
   func testRequestProvidesURLUsingURLFromBridgeAPINetworker() {
+    try! Cryptography.generateRSAKeyPair()
     fakeSettings.appIdentifier = "abc123"
     fakeBundle.infoDictionary = SampleInfoDictionary.validURLSchemes(schemes: ["fbabc123"])
     let passThroughQueryItem = URLQueryItemBuilder.build(from: ["bar": "baz"])
