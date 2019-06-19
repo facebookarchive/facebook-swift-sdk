@@ -18,100 +18,102 @@
 
 import Foundation
 
-struct RemoteAppLink: Decodable {
-  let sourceURLString: String
-  let details: [RemoteAppLinkDetail]
-  let webURL: URL?
-
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: VariantCodingKey.self)
-
-    guard let sourceURLKey = container.allKeys.first else {
-      throw DecodingError.missingIdentifier
-    }
-
-    sourceURLString = sourceURLKey.stringValue
-
-    var details = [RemoteAppLinkDetail]()
-
-    // This is a big strange. We care about two things, the top-level 'container' key and the 'id' key
-    // inside the container, both of which are identifying. (they are typically the same value)
-    //
-    // While we do not actively use the value keyed under 'id',
-    // if it is missing we can assume that something went wrong and should throw an error
-
-    guard let detailsContainer = try? container.nestedContainer(
-      keyedBy: DetailsContainerKey.self,
-      forKey: sourceURLKey
-      ),
-      try detailsContainer.decodeIfPresent(String.self, forKey: .identifier) != nil
-      else {
-        throw DecodingError.missingIdentifier
-    }
-
-    switch try? detailsContainer.nestedUnkeyedContainer(forKey: .appLinks) {
-    case nil:
-      break
-
-    case var appLinksContainer?:
-      while !appLinksContainer.isAtEnd {
-        switch try? appLinksContainer.decode(RemoteAppLinkDetail.self) {
-        case let appLinkDetails?:
-          details.append(appLinkDetails)
-
-        case nil:
-          _ = try? appLinksContainer.decode(EmptyDecodable.self)
-        }
-      }
-    }
-
-    self.details = details
-    self.webURL = RemoteAppLink.extractWebURL(
-      from: details,
-      using: URL(string: sourceURLKey.stringValue)
-    )
-  }
-
-  private static func extractWebURL(
-    from details: [RemoteAppLinkDetail],
-    using sourceURL: URL?
-    ) -> URL? {
+extension Remote {
+  struct AppLink: Decodable {
+    let sourceURLString: String
+    let details: [AppLinkDetail]
     let webURL: URL?
 
-    switch details.first(where: { $0.idiom == .web }) {
-    case nil:
-      webURL = sourceURL
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: VariantCodingKey.self)
 
-    case let webDetails?:
-      switch webDetails.targets.first(where: { $0.shouldFallback != nil }) {
+      guard let sourceURLKey = container.allKeys.first else {
+        throw DecodingError.missingIdentifier
+      }
+
+      sourceURLString = sourceURLKey.stringValue
+
+      var details = [AppLinkDetail]()
+
+      // This is a big strange. We care about two things, the top-level 'container' key and the 'id' key
+      // inside the container, both of which are identifying. (they are typically the same value)
+      //
+      // While we do not actively use the value keyed under 'id',
+      // if it is missing we can assume that something went wrong and should throw an error
+
+      guard let detailsContainer = try? container.nestedContainer(
+        keyedBy: DetailsContainerKey.self,
+        forKey: sourceURLKey
+        ),
+        try detailsContainer.decodeIfPresent(String.self, forKey: .identifier) != nil
+        else {
+          throw DecodingError.missingIdentifier
+      }
+
+      switch try? detailsContainer.nestedUnkeyedContainer(forKey: .appLinks) {
       case nil:
-        webURL = sourceURL
+        break
 
-      case let firstFallbackTarget?:
-        switch firstFallbackTarget.shouldFallback {
-        case nil:
-          webURL = sourceURL
+      case var appLinksContainer?:
+        while !appLinksContainer.isAtEnd {
+          switch try? appLinksContainer.decode(Remote.AppLinkDetail.self) {
+          case let appLinkDetails?:
+            details.append(appLinkDetails)
 
-        case let shouldFallback?:
-          switch shouldFallback {
-          case true:
-            webURL = firstFallbackTarget.url ?? sourceURL
-
-          case false:
-            webURL = nil
+          case nil:
+            _ = try? appLinksContainer.decode(EmptyDecodable.self)
           }
         }
       }
+
+      self.details = details
+      self.webURL = AppLink.extractWebURL(
+        from: details,
+        using: URL(string: sourceURLKey.stringValue)
+      )
     }
-    return webURL
-  }
 
-  enum DecodingError: Error {
-    case missingIdentifier
-  }
+    private static func extractWebURL(
+      from details: [AppLinkDetail],
+      using sourceURL: URL?
+      ) -> URL? {
+      let webURL: URL?
 
-  enum DetailsContainerKey: String, CodingKey {
-    case appLinks = "app_links"
-    case identifier = "id"
+      switch details.first(where: { $0.idiom == .web }) {
+      case nil:
+        webURL = sourceURL
+
+      case let webDetails?:
+        switch webDetails.targets.first(where: { $0.shouldFallback != nil }) {
+        case nil:
+          webURL = sourceURL
+
+        case let firstFallbackTarget?:
+          switch firstFallbackTarget.shouldFallback {
+          case nil:
+            webURL = sourceURL
+
+          case let shouldFallback?:
+            switch shouldFallback {
+            case true:
+              webURL = firstFallbackTarget.url ?? sourceURL
+
+            case false:
+              webURL = nil
+            }
+          }
+        }
+      }
+      return webURL
+    }
+
+    enum DecodingError: Error {
+      case missingIdentifier
+    }
+
+    enum DetailsContainerKey: String, CodingKey {
+      case appLinks = "app_links"
+      case identifier = "id"
+    }
   }
 }

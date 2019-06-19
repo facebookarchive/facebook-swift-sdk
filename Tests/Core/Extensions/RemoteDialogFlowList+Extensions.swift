@@ -19,8 +19,8 @@
 @testable import FacebookCore
 import Foundation
 
-extension RemoteServerConfiguration.DialogFlowList {
-  init(dialogs: [RemoteServerConfiguration.DialogFlow]) {
+extension Remote.ServerConfiguration.DialogFlowList {
+  init(dialogs: [Remote.ServerConfiguration.DialogFlow]) {
     self.dialogs = dialogs
   }
 }

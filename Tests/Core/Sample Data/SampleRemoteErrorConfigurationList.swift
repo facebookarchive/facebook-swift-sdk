@@ -20,25 +20,25 @@
 import Foundation
 
 enum SampleRemoteErrorConfigurationList {
-  static let validDefault = RemoteErrorConfigurationEntryList(
+  static let validDefault = Remote.ErrorConfigurationEntryList(
     configurations: [
-      RemoteErrorConfigurationEntry(
+      Remote.ErrorConfigurationEntry(
         name: nil,
         items: [
-          RemoteErrorCodeGroup(code: 102),
-          RemoteErrorCodeGroup(code: 190)
+          Remote.ErrorCodeGroup(code: 102),
+          Remote.ErrorCodeGroup(code: 190)
         ],
         recoveryMessage: "Please log into this app again to reconnect your Facebook account.",
         recoveryOptions: ["OK", "Cancel"]
       ),
-      RemoteErrorConfigurationEntry(
+      Remote.ErrorConfigurationEntry(
         name: .transient,
         items: [
-          RemoteErrorCodeGroup(code: 341),
-          RemoteErrorCodeGroup(code: 9),
-          RemoteErrorCodeGroup(code: 2),
-          RemoteErrorCodeGroup(code: 4),
-          RemoteErrorCodeGroup(code: 17)
+          Remote.ErrorCodeGroup(code: 341),
+          Remote.ErrorCodeGroup(code: 9),
+          Remote.ErrorCodeGroup(code: 2),
+          Remote.ErrorCodeGroup(code: 4),
+          Remote.ErrorCodeGroup(code: 17)
         ],
         recoveryMessage: "The server is temporarily busy, please try again.",
         recoveryOptions: ["OK"]
@@ -46,21 +46,21 @@ enum SampleRemoteErrorConfigurationList {
     ]
   )
 
-  static let validNonDefault = RemoteErrorConfigurationEntryList(
+  static let validNonDefault = Remote.ErrorConfigurationEntryList(
     configurations: [
-      RemoteErrorConfigurationEntry(
+      Remote.ErrorConfigurationEntry(
         name: nil,
         items: [
-          RemoteErrorCodeGroup(code: 123)
+          Remote.ErrorCodeGroup(code: 123)
         ],
         recoveryMessage: "Please log into this app again to reconnect your Facebook account.",
         recoveryOptions: ["OK", "Cancel"]
       ),
-      RemoteErrorConfigurationEntry(
+      Remote.ErrorConfigurationEntry(
         name: .transient,
         items: [
-          RemoteErrorCodeGroup(code: 123),
-          RemoteErrorCodeGroup(code: 321)
+          Remote.ErrorCodeGroup(code: 123),
+          Remote.ErrorCodeGroup(code: 321)
         ],
         recoveryMessage: "The server is temporarily busy, please try again.",
         recoveryOptions: ["OK"]

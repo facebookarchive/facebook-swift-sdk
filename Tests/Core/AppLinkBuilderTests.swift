@@ -43,14 +43,14 @@ class AppLinkBuilderTests: XCTestCase {
   }
 
   func testExtractingTargetsFromDetails() {
-    let remoteTargets: Set<RemoteAppLinkTarget> = [
+    let remoteTargets: Set<Remote.AppLinkTarget> = [
       SampleRemoteAppLinkTarget.valid(appIdentifier: "1"),
       SampleRemoteAppLinkTarget.valid(appIdentifier: "2")
     ]
     let expectedTargets: Set<AppLinkTarget> = Set(remoteTargets.compactMap(AppLinkTargetBuilder.build))
 
     let details = [
-      RemoteAppLinkDetail(idiom: .iOS, targets: remoteTargets)
+      Remote.AppLinkDetail(idiom: .iOS, targets: remoteTargets)
     ]
 
     guard let appLink = AppLinkBuilder.build(from: SampleRemoteAppLink.valid(details: details)) else {
@@ -62,7 +62,7 @@ class AppLinkBuilderTests: XCTestCase {
   }
 
   func testExtractingIdenticalTargetsAcrossDetails() {
-    let remoteTargets: Set<RemoteAppLinkTarget> = [
+    let remoteTargets: Set<Remote.AppLinkTarget> = [
       SampleRemoteAppLinkTarget.valid(appIdentifier: "1"),
       SampleRemoteAppLinkTarget.valid(appIdentifier: "2")
     ]
@@ -70,8 +70,8 @@ class AppLinkBuilderTests: XCTestCase {
 
     // Multiple details with identical targets
     let details = [
-      RemoteAppLinkDetail(idiom: .iOS, targets: remoteTargets),
-      RemoteAppLinkDetail(idiom: .iPad, targets: remoteTargets)
+      Remote.AppLinkDetail(idiom: .iOS, targets: remoteTargets),
+      Remote.AppLinkDetail(idiom: .iPad, targets: remoteTargets)
     ]
 
     guard let appLink = AppLinkBuilder.build(from: SampleRemoteAppLink.valid(details: details)) else {
@@ -83,11 +83,11 @@ class AppLinkBuilderTests: XCTestCase {
   }
 
   func testExtractingUniqueTargetsAcrossDetails() {
-    let remoteTargets1: Set<RemoteAppLinkTarget> = [
+    let remoteTargets1: Set<Remote.AppLinkTarget> = [
       SampleRemoteAppLinkTarget.valid(appIdentifier: "1"),
       SampleRemoteAppLinkTarget.valid(appIdentifier: "2")
     ]
-    let remoteTargets2: Set<RemoteAppLinkTarget> = [
+    let remoteTargets2: Set<Remote.AppLinkTarget> = [
       SampleRemoteAppLinkTarget.valid(appIdentifier: "3"),
       SampleRemoteAppLinkTarget.valid(appIdentifier: "4")
     ]
@@ -96,8 +96,8 @@ class AppLinkBuilderTests: XCTestCase {
 
     // Multiple details with identical targets
     let details = [
-      RemoteAppLinkDetail(idiom: .iOS, targets: remoteTargets1),
-      RemoteAppLinkDetail(idiom: .iPad, targets: remoteTargets2)
+      Remote.AppLinkDetail(idiom: .iOS, targets: remoteTargets1),
+      Remote.AppLinkDetail(idiom: .iPad, targets: remoteTargets2)
     ]
 
     guard let appLink = AppLinkBuilder.build(from: SampleRemoteAppLink.valid(details: details)) else {

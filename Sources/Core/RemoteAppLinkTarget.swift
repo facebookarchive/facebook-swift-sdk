@@ -18,52 +18,54 @@
 
 import Foundation
 
-struct RemoteAppLinkTarget: Hashable, Decodable {
-  let url: URL?
-  let appIdentifier: String?
-  let appName: String?
-  // swiftlint:disable:next discouraged_optional_boolean
-  let shouldFallback: Bool?
+extension Remote {
+  struct AppLinkTarget: Hashable, Decodable {
+    let url: URL?
+    let appIdentifier: String?
+    let appName: String?
+    // swiftlint:disable:next discouraged_optional_boolean
+    let shouldFallback: Bool?
 
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
 
-    switch try? container.decode(String.self, forKey: .url) {
-    case nil:
-      url = nil
+      switch try? container.decode(String.self, forKey: .url) {
+      case nil:
+        url = nil
 
-    case let urlString?:
-      url = URL(string: urlString)
+      case let urlString?:
+        url = URL(string: urlString)
+      }
+
+      switch try? container.decode(Bool.self, forKey: .shouldFallback) {
+      case nil:
+        shouldFallback = nil
+
+      case let shouldFallback?:
+        self.shouldFallback = shouldFallback
+      }
+
+      self.appIdentifier = try? container.decode(String.self, forKey: .appIdentifier)
+      self.appName = try? container.decode(String.self, forKey: .appName)
+
+      guard self.appIdentifier != nil ||
+        self.appName != nil ||
+        self.shouldFallback != nil ||
+        self.url != nil
+        else {
+          throw DecodingError.emptyTarget
+      }
     }
 
-    switch try? container.decode(Bool.self, forKey: .shouldFallback) {
-    case nil:
-      shouldFallback = nil
-
-    case let shouldFallback?:
-      self.shouldFallback = shouldFallback
+    enum DecodingError: Error {
+      case emptyTarget
     }
 
-    self.appIdentifier = try? container.decode(String.self, forKey: .appIdentifier)
-    self.appName = try? container.decode(String.self, forKey: .appName)
-
-    guard self.appIdentifier != nil ||
-      self.appName != nil ||
-      self.shouldFallback != nil ||
-      self.url != nil
-      else {
-        throw DecodingError.emptyTarget
+    enum CodingKeys: String, CodingKey {
+      case appIdentifier = "app_store_id"
+      case appName = "app_name"
+      case shouldFallback = "should_fallback"
+      case url
     }
-  }
-
-  enum DecodingError: Error {
-    case emptyTarget
-  }
-
-  enum CodingKeys: String, CodingKey {
-    case appIdentifier = "app_store_id"
-    case appName = "app_name"
-    case shouldFallback = "should_fallback"
-    case url
   }
 }

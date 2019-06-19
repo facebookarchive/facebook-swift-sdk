@@ -19,7 +19,7 @@
 import Foundation
 
 enum UserProfileBuilder {
-  static func build(from remote: RemoteUserProfile) -> UserProfile? {
+  static func build(from remote: Remote.UserProfile) -> UserProfile? {
     guard let name = remote.name,
       !name.isEmpty
       else {

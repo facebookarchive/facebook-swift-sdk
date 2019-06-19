@@ -20,8 +20,11 @@
 
 // Note: These should be split into their own files if this becomes unwieldy
 
-extension RemoteRestrictiveEventParameter: Equatable {
-  public static func == (lhs: RemoteRestrictiveEventParameter, rhs: RemoteRestrictiveEventParameter) -> Bool {
+extension Remote.RestrictiveEventParameter: Equatable {
+  public static func == (
+    lhs: Remote.RestrictiveEventParameter,
+    rhs: Remote.RestrictiveEventParameter
+    ) -> Bool {
     return lhs.name == rhs.name &&
       lhs.isDeprecated == rhs.isDeprecated &&
       lhs.restrictiveEventParameters == rhs.restrictiveEventParameters
@@ -35,8 +38,8 @@ extension Gatekeeper: Equatable {
   }
 }
 
-extension RemoteDialogConfiguration: Equatable {
-  public static func == (lhs: RemoteDialogConfiguration, rhs: RemoteDialogConfiguration) -> Bool {
+extension Remote.DialogConfiguration: Equatable {
+  public static func == (lhs: Remote.DialogConfiguration, rhs: Remote.DialogConfiguration) -> Bool {
     guard lhs.name == rhs.name,
       lhs.urlString == rhs.urlString,
       lhs.versions == rhs.versions
@@ -47,23 +50,26 @@ extension RemoteDialogConfiguration: Equatable {
   }
 }
 
-extension RemoteDialogConfigurationList: Equatable {
-  public static func == (lhs: RemoteDialogConfigurationList, rhs: RemoteDialogConfigurationList) -> Bool {
+extension Remote.DialogConfigurationList: Equatable {
+  public static func == (lhs: Remote.DialogConfigurationList, rhs: Remote.DialogConfigurationList) -> Bool {
     return lhs.configurations == rhs.configurations
   }
 }
 
-extension RemoteServerConfiguration.DialogFlowList: Equatable {
+extension Remote.ServerConfiguration.DialogFlowList: Equatable {
   public static func == (
-    lhs: RemoteServerConfiguration.DialogFlowList,
-    rhs: RemoteServerConfiguration.DialogFlowList
+    lhs: Remote.ServerConfiguration.DialogFlowList,
+    rhs: Remote.ServerConfiguration.DialogFlowList
     ) -> Bool {
     return lhs.dialogs.sorted { $0.name < $1.name } == rhs.dialogs.sorted { $0.name < $1.name }
   }
 }
 
-extension RemoteErrorConfigurationEntry: Equatable {
-  public static func == (lhs: RemoteErrorConfigurationEntry, rhs: RemoteErrorConfigurationEntry) -> Bool {
+extension Remote.ErrorConfigurationEntry: Equatable {
+  public static func == (
+    lhs: Remote.ErrorConfigurationEntry,
+    rhs: Remote.ErrorConfigurationEntry
+    ) -> Bool {
     guard lhs.name == rhs.name,
       lhs.recoveryMessage == rhs.recoveryMessage,
       lhs.items == rhs.items,
@@ -75,14 +81,20 @@ extension RemoteErrorConfigurationEntry: Equatable {
   }
 }
 
-extension RemoteErrorConfigurationEntryList: Equatable {
-  public static func == (lhs: RemoteErrorConfigurationEntryList, rhs: RemoteErrorConfigurationEntryList) -> Bool {
+extension Remote.ErrorConfigurationEntryList: Equatable {
+  public static func == (
+    lhs: Remote.ErrorConfigurationEntryList,
+    rhs: Remote.ErrorConfigurationEntryList
+    ) -> Bool {
     return lhs.configurations == rhs.configurations
   }
 }
 
-extension RemoteRestrictiveRule: Equatable {
-  public static func == (lhs: RemoteRestrictiveRule, rhs: RemoteRestrictiveRule) -> Bool {
+extension Remote.RestrictiveRule: Equatable {
+  public static func == (
+    lhs: Remote.RestrictiveRule,
+    rhs: Remote.RestrictiveRule
+    ) -> Bool {
     guard lhs.keyRegex == rhs.keyRegex,
       lhs.valueRegex == rhs.valueRegex,
       lhs.valueNegativeRegex == rhs.valueNegativeRegex,
@@ -145,16 +157,19 @@ extension RestrictiveEventParameter: Equatable {
   }
 }
 
-extension RemoteRestrictiveEventParameterList: Equatable {
-  public static func == (lhs: RemoteRestrictiveEventParameterList, rhs: RemoteRestrictiveEventParameterList) -> Bool {
+extension Remote.RestrictiveEventParameterList: Equatable {
+  public static func == (
+    lhs: Remote.RestrictiveEventParameterList,
+    rhs: Remote.RestrictiveEventParameterList
+    ) -> Bool {
     return lhs.parameters == rhs.parameters
   }
 }
 
-extension RemoteServerConfiguration.DialogFlow: Equatable {
+extension Remote.ServerConfiguration.DialogFlow: Equatable {
   public static func == (
-    lhs: RemoteServerConfiguration.DialogFlow,
-    rhs: RemoteServerConfiguration.DialogFlow
+    lhs: Remote.ServerConfiguration.DialogFlow,
+    rhs: Remote.ServerConfiguration.DialogFlow
     ) -> Bool {
     return lhs.name == rhs.name &&
       lhs.shouldUseNativeFlow == rhs.shouldUseNativeFlow &&

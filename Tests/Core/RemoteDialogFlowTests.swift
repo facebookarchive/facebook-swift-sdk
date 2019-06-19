@@ -29,13 +29,13 @@ class RemoteDialogFlowTests: XCTestCase {
   func testDecodingRemoteDialogFlowList() {
     let data = try! JSONSerialization.data(withJSONObject: Fixtures.valid, options: [])
 
-    let expected: [RemoteServerConfiguration.DialogFlow] = [
-      RemoteServerConfiguration.DialogFlow(
+    let expected: [Remote.ServerConfiguration.DialogFlow] = [
+      Remote.ServerConfiguration.DialogFlow(
         name: "default",
         shouldUseNativeFlow: true,
         shouldUseSafariVC: true
       ),
-      RemoteServerConfiguration.DialogFlow(
+      Remote.ServerConfiguration.DialogFlow(
         name: "message",
         shouldUseNativeFlow: true,
         shouldUseSafariVC: nil
@@ -43,7 +43,7 @@ class RemoteDialogFlowTests: XCTestCase {
     ]
 
     do {
-      let decoded = try decoder.decode(RemoteServerConfiguration.DialogFlowList.self, from: data)
+      let decoded = try decoder.decode(Remote.ServerConfiguration.DialogFlowList.self, from: data)
       XCTAssertEqual(
         decoded.dialogs.sorted { $0.name < $1.name },
         expected,
@@ -58,7 +58,7 @@ class RemoteDialogFlowTests: XCTestCase {
     let data = try! JSONSerialization.data(withJSONObject: Fixtures.missingValues, options: [])
 
     do {
-      let decoded = try decoder.decode(RemoteServerConfiguration.DialogFlowList.self, from: data)
+      let decoded = try decoder.decode(Remote.ServerConfiguration.DialogFlowList.self, from: data)
       guard let first = decoded.dialogs.first else {
         return XCTFail("Should decode a dialog flow from a valid list of remote dialog flows")
       }
@@ -78,7 +78,7 @@ class RemoteDialogFlowTests: XCTestCase {
     }
 
     do {
-      let list = try decoder.decode(RemoteServerConfiguration.DialogFlowList.self, from: data)
+      let list = try decoder.decode(Remote.ServerConfiguration.DialogFlowList.self, from: data)
       XCTAssertFalse(list.dialogs.isEmpty, "Should decode a list of dialogs")
     } catch {
       XCTAssertNil(error, "Should be able to decode a remote dialog flow list from valid json")

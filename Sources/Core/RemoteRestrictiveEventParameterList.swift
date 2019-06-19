@@ -20,36 +20,38 @@
 
 import Foundation
 
-struct RemoteRestrictiveEventParameterList: Decodable {
-  var parameters: [RemoteRestrictiveEventParameter] = []
+extension Remote {
+  struct RestrictiveEventParameterList: Decodable {
+    var parameters: [RestrictiveEventParameter] = []
 
-  init(from decoder: Decoder) throws {
-    var parameters: [RemoteRestrictiveEventParameter] = []
-    let container = try decoder.container(keyedBy: VariantCodingKey.self)
+    init(from decoder: Decoder) throws {
+      var parameters: [RestrictiveEventParameter] = []
+      let container = try decoder.container(keyedBy: VariantCodingKey.self)
 
-    container.allKeys.forEach { key in
-      let name = key.stringValue
-      let details = try? container.decode(Details.self, forKey: key)
+      container.allKeys.forEach { key in
+        let name = key.stringValue
+        let details = try? container.decode(Details.self, forKey: key)
 
-      parameters.append(
-        RemoteRestrictiveEventParameter(
-          name: name,
-          isDeprecated: details?.isDeprecated,
-          restrictiveEventParameters: details?.restrictiveParameters
+        parameters.append(
+          RestrictiveEventParameter(
+            name: name,
+            isDeprecated: details?.isDeprecated,
+            restrictiveEventParameters: details?.restrictiveParameters
+          )
         )
-      )
+      }
+      self.parameters = parameters
     }
-    self.parameters = parameters
-  }
 
-  struct Details: Decodable {
-    let isDeprecated: Bool?
-    let restrictiveParameters: [String: Int]?
+    struct Details: Decodable {
+      let isDeprecated: Bool?
+      let restrictiveParameters: [String: Int]?
 
-    // swiftlint:disable:next nesting
-    enum CodingKeys: String, CodingKey {
-      case isDeprecated = "is_deprecated_event"
-      case restrictiveParameters = "restrictive_param"
+      // swiftlint:disable:next nesting
+      enum CodingKeys: String, CodingKey {
+        case isDeprecated = "is_deprecated_event"
+        case restrictiveParameters = "restrictive_param"
+      }
     }
   }
 }

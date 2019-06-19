@@ -18,40 +18,42 @@
 
 import Foundation
 
-/// An idiom-targets pairing used for constructing AppLinks
-struct RemoteAppLinkDetail: Decodable {
-  let idiom: AppLinkIdiom
-  let targets: Set<RemoteAppLinkTarget>
+extension Remote {
+  /// An idiom-targets pairing used for constructing AppLinks
+  struct AppLinkDetail: Decodable {
+    let idiom: AppLinkIdiom
+    let targets: Set<AppLinkTarget>
 
-  init(
-    idiom: AppLinkIdiom,
-    targets: Set<RemoteAppLinkTarget>
-    ) {
-    self.idiom = idiom
-    self.targets = targets
-  }
-
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: AppLinkIdiom.self)
-
-    guard let idiomRawValue = container.allKeys.first?.rawValue,
-      let idiom = AppLinkIdiom(rawValue: idiomRawValue)
-      else {
-        throw DecodingError.missingIdiom
-    }
-
-    self.idiom = idiom
-
-    switch try? container.decode(Set<RemoteAppLinkTarget>.self, forKey: idiom) {
-    case nil:
-      self.targets = []
-
-    case let .some(targets):
+    init(
+      idiom: AppLinkIdiom,
+      targets: Set<AppLinkTarget>
+      ) {
+      self.idiom = idiom
       self.targets = targets
     }
-  }
 
-  enum DecodingError: Error {
-    case missingIdiom
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: AppLinkIdiom.self)
+
+      guard let idiomRawValue = container.allKeys.first?.rawValue,
+        let idiom = AppLinkIdiom(rawValue: idiomRawValue)
+        else {
+          throw DecodingError.missingIdiom
+      }
+
+      self.idiom = idiom
+
+      switch try? container.decode(Set<AppLinkTarget>.self, forKey: idiom) {
+      case nil:
+        self.targets = []
+
+      case let .some(targets):
+        self.targets = targets
+      }
+    }
+
+    enum DecodingError: Error {
+      case missingIdiom
+    }
   }
 }

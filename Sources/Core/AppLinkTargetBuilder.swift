@@ -19,7 +19,7 @@
 import Foundation
 
 enum AppLinkTargetBuilder {
-  static func build(from remote: RemoteAppLinkTarget) -> AppLinkTarget? {
+  static func build(from remote: Remote.AppLinkTarget) -> AppLinkTarget? {
     guard let url = remote.url else {
       return nil
     }

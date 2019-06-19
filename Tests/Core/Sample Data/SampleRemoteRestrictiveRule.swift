@@ -25,64 +25,64 @@ enum SampleRemoteRestrictiveRule {
   private static let valueNegativeRegex = "^.*"
   private static let type = 1
 
-  static let valid = RemoteRestrictiveRule(
+  static let valid = Remote.RestrictiveRule(
     keyRegex: keyRegex,
     type: type,
     valueRegex: valueRegex,
     valueNegativeRegex: valueNegativeRegex
   )
 
-  static let emptyKeyRegex = RemoteRestrictiveRule(
+  static let emptyKeyRegex = Remote.RestrictiveRule(
     keyRegex: "",
     type: type,
     valueRegex: valueRegex,
     valueNegativeRegex: valueNegativeRegex
   )
 
-  static let emptyValueRegex = RemoteRestrictiveRule(
+  static let emptyValueRegex = Remote.RestrictiveRule(
     keyRegex: keyRegex,
     type: type,
     valueRegex: "",
     valueNegativeRegex: valueNegativeRegex
   )
 
-  static let emptyValueNegativeRegex = RemoteRestrictiveRule(
+  static let emptyValueNegativeRegex = Remote.RestrictiveRule(
     keyRegex: keyRegex,
     type: type,
     valueRegex: valueRegex,
     valueNegativeRegex: ""
   )
 
-  static let validPhone = RemoteRestrictiveRule(
+  static let validPhone = Remote.RestrictiveRule(
     keyRegex: "^phone$|phone number|cell phone|mobile phone|^mobile$",
     type: 2,
     valueRegex: "^[0-9][0-9]",
     valueNegativeRegex: "required|true|false|yes|y|n|off|on"
   )
 
-  static let validSSN = RemoteRestrictiveRule(
+  static let validSSN = Remote.RestrictiveRule(
     keyRegex: "^ssn$|social security number|social security",
     type: 4,
     valueNegativeRegex: "required|true|false|yes"
   )
 
-  static let validPassword = RemoteRestrictiveRule(
+  static let validPassword = Remote.RestrictiveRule(
     keyRegex: "password|passcode|passId",
     type: 3,
     valueNegativeRegex: "required|true|false|yes"
   )
 
-  static let validFirstName = RemoteRestrictiveRule(
+  static let validFirstName = Remote.RestrictiveRule(
     keyRegex: "firstname|first_name|first name",
     type: 6
   )
 
-  static let validLastName = RemoteRestrictiveRule(
+  static let validLastName = Remote.RestrictiveRule(
     keyRegex: "lastname|last_name|last name",
     type: 7
   )
 
-  static let validDateOfBirth = RemoteRestrictiveRule(
+  static let validDateOfBirth = Remote.RestrictiveRule(
     keyRegex: "date_of_birth|\\\\\\u003Cdob\\\\>|dob\\\\>|birthdate|userbirthday|dateofbirth|date of birth|\\\\\\u003Cdob_|dobd|dobm|doby",
     type: 8
   )

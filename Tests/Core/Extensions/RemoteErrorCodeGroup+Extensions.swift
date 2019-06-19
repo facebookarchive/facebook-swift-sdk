@@ -21,7 +21,7 @@
 // TODO: Consider adding initializer to internal. Really do not want to do this but may
 // be the only way to silence this error.
 // See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
-extension RemoteErrorCodeGroup {
+extension Remote.ErrorCodeGroup {
   init(code: Int, subcodes: [Int] = []) {
     self.code = code
     self.subcodes = subcodes

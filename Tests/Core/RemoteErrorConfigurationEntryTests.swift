@@ -21,37 +21,38 @@
 @testable import FacebookCore
 import XCTest
 
-private typealias SampleData = SampleRawRemoteConfiguration.SerializedData
-
 class RemoteErrorConfigurationEntryTests: XCTestCase {
+  private typealias SampleData = SampleRawRemoteConfiguration.SerializedData
+  private typealias RemoteEntry = Remote.ErrorConfigurationEntry
+
   private let decoder = JSONDecoder()
 
   func testCreatingWithEmptyDictionary() {
     do {
       let empty = try JSONSerialization.data(withJSONObject: [:], options: [])
-      _ = try decoder.decode(RemoteErrorConfigurationEntry.self, from: empty)
+      _ = try decoder.decode(RemoteEntry.self, from: empty)
       XCTFail("Should not create a remote error configuration from an empty dictionary")
     } catch let error {
-      XCTAssertNotNil(error as? RemoteErrorConfigurationEntry.DecodingError,
+      XCTAssertNotNil(error as? RemoteEntry.DecodingError,
                       "Should throw a custom decoding error when trying to create a remote error configuration from an empty dictionary")
     }
   }
 
   func testCreatingWithMissingName() {
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.missing("name")),
+    XCTAssertNotNil(try decoder.decode(RemoteEntry.self, from: SampleData.missing("name")),
                     "Should be able to create a remote error configuration for an entry with a missing name")
   }
 
   func testCreatingWithEmptyName() {
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.emptyName),
+    XCTAssertNotNil(try decoder.decode(RemoteEntry.self, from: SampleData.emptyName),
                     "Should be able to create a remote error configuration for an entry with an empty name")
   }
 
   func testCreatingWithMissingItems() {
     do {
-      _ = try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.missing("items"))
+      _ = try decoder.decode(RemoteEntry.self, from: SampleData.missing("items"))
       XCTFail("Should not create a remote error configuration with missing items")
-    } catch let error as RemoteErrorConfigurationEntry.DecodingError {
+    } catch let error as RemoteEntry.DecodingError {
       XCTAssertEqual(error, .invalidContainer,
                      "Should throw an invalid container error when trying to decode with a missing items key to build a container from")
     } catch {
@@ -60,17 +61,17 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
   }
 
   func testCreatingWithEmptyItems() {
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.emptyItems),
+    XCTAssertNotNil(try decoder.decode(RemoteEntry.self, from: SampleData.emptyItems),
                     "Should be able to create a remote error configuration with empty items")
   }
 
   func testCreatingWithInvalidItems() {
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.invalidItems),
+    XCTAssertNotNil(try decoder.decode(RemoteEntry.self, from: SampleData.invalidItems),
                     "Should be able to create a remote error configuration with invalid items")
   }
 
   func testCreatingWithSomeValidItems() {
-    guard let config = try? decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.someValidItems) else {
+    guard let config = try? decoder.decode(RemoteEntry.self, from: SampleData.someValidItems) else {
       return XCTFail("Should create a valid remote error configuration if some but not all codes are valid")
     }
 
@@ -79,12 +80,12 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
   }
 
   func testCreatingWithNoSubcodes() {
-    XCTAssertNotNil(try? decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.validNoSubcodes),
+    XCTAssertNotNil(try? decoder.decode(RemoteEntry.self, from: SampleData.validNoSubcodes),
                     "Should create a valid remote error configuration from an entry that has no items with subcodes")
   }
 
   func testCreatingWithSomeValidSubcodes() {
-    guard let config = try? decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.someValidSubcodes),
+    guard let config = try? decoder.decode(RemoteEntry.self, from: SampleData.someValidSubcodes),
       let item = config.items.first
       else {
         return XCTFail("Should create a valid remote error configuration with an error code item")
@@ -95,7 +96,7 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
   }
 
   func testCreatingWithSubcodes() {
-    guard let config = try? decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.valid),
+    guard let config = try? decoder.decode(RemoteEntry.self, from: SampleData.valid),
       let item = config.items.first
       else {
         return XCTFail("Should create a valid remote error configuration with an error code item")
@@ -107,9 +108,9 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
 
   func testCreatingWithMissingRecoveryMessage() {
     do {
-      _ = try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.missing("recovery_message"))
+      _ = try decoder.decode(RemoteEntry.self, from: SampleData.missing("recovery_message"))
       XCTFail("Should not create a remote error configuration with a missing recovery message")
-    } catch let error as RemoteErrorConfigurationEntry.DecodingError {
+    } catch let error as RemoteEntry.DecodingError {
       XCTAssertEqual(error, .missingRecoveryMessage,
                      "Should throw a missing message error when trying to decode with a missing recovery message")
     } catch {
@@ -118,15 +119,15 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
   }
 
   func testCreatingWithEmptyRecoveryMessage() {
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.emptyRecoveryMessage),
+    XCTAssertNotNil(try decoder.decode(RemoteEntry.self, from: SampleData.emptyRecoveryMessage),
                     "Should be able to create a remote error configuration with an empty recovery message")
   }
 
   func testCreatingWithMissingRecoveryOptions() {
     do {
-      _ = try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.missing("recovery_options"))
+      _ = try decoder.decode(RemoteEntry.self, from: SampleData.missing("recovery_options"))
       XCTFail("Should not create a remote error configuration with missing recovery options")
-    } catch let error as RemoteErrorConfigurationEntry.DecodingError {
+    } catch let error as RemoteEntry.DecodingError {
       XCTAssertEqual(error, .missingRecoveryOptions,
                      "Should throw a missing recovery options error when trying to decode with missing recovery options")
     } catch {
@@ -135,19 +136,19 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
   }
 
   func testCreatingWithEmptyRecoveryOptions() {
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.emptyRecoveryOptions),
+    XCTAssertNotNil(try decoder.decode(RemoteEntry.self, from: SampleData.emptyRecoveryOptions),
                     "Should be able to create a remote error configuration with empty recovery options")
   }
 
   func testCreatingWithValidInputs() {
     guard let expectedItemData = try? JSONSerialization.data(withJSONObject: SampleRawRemoteConfiguration.items, options: []),
-      let items = try? decoder.decode(Array<RemoteErrorCodeGroup>.self, from: expectedItemData),
-      let config = try? decoder.decode(RemoteErrorConfigurationEntry.self, from: SampleData.valid)
+      let items = try? decoder.decode(Array<FacebookCore.Remote.ErrorCodeGroup>.self, from: expectedItemData),
+      let config = try? decoder.decode(RemoteEntry.self, from: SampleData.valid)
       else {
         return XCTFail("Should create a valid remote error configuration")
     }
 
-    XCTAssertEqual(config.name, RemoteErrorConfigurationEntry.Name(rawValue: SampleRawRemoteConfiguration.name),
+    XCTAssertEqual(config.name, RemoteEntry.Name(rawValue: SampleRawRemoteConfiguration.name),
                    "A remote error configuration should store the name it was created with")
     XCTAssertEqual(config.items, items,
                    "A remote error configuration should store the exact items it was created with")
@@ -161,7 +162,7 @@ class RemoteErrorConfigurationEntryTests: XCTestCase {
     guard let data = JSONLoader.loadData(for: .validRemoteErrorConfiguration) else {
       return XCTFail("Failed to load json")
     }
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntry.self, from: data),
+    XCTAssertNotNil(try decoder.decode(RemoteEntry.self, from: data),
                     "Should be able to decode a remote error configuration entry from valid json")
   }
 }

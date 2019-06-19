@@ -26,7 +26,7 @@ extension ServerConfiguration {
     let shouldUseNativeFlow: Bool
     let shouldUseSafariVC: Bool
 
-    init(remote: RemoteServerConfiguration.DialogFlow) {
+    init(remote: Remote.ServerConfiguration.DialogFlow) {
       name = FlowName(value: remote.name)
       shouldUseNativeFlow = remote.shouldUseNativeFlow ?? false
       shouldUseSafariVC = remote.shouldUseSafariVC ?? false

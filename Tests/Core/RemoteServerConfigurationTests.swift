@@ -29,7 +29,7 @@ class RemoteServerConfigurationTests: XCTestCase {
     let data = SampleData.valid
 
     do {
-      let config = try JSONDecoder().decode(RemoteServerConfiguration.self, from: data)
+      let config = try JSONDecoder().decode(Remote.ServerConfiguration.self, from: data)
       XCTAssertEqual(config.appID, Fixtures.appID,
                      "Should decode the correct app identifier")
       XCTAssertEqual(config.appName, Fixtures.appName,
@@ -89,7 +89,7 @@ class RemoteServerConfigurationTests: XCTestCase {
     let data = SampleData.valid
 
     do {
-      let config = try JSONDecoder().decode(RemoteServerConfiguration.self, from: data)
+      let config = try JSONDecoder().decode(Remote.ServerConfiguration.self, from: data)
 
       let expectedParameters = [
         SampleRemoteRestrictiveEventParameter.deprecated,
@@ -113,7 +113,7 @@ class RemoteServerConfigurationTests: XCTestCase {
     }
 
     do {
-      _ = try JSONDecoder().decode(RemoteServerConfiguration.self, from: data)
+      _ = try JSONDecoder().decode(Remote.ServerConfiguration.self, from: data)
     } catch {
       XCTAssertNil(error, "Should be able to decode a remote server configuration from valid json")
     }

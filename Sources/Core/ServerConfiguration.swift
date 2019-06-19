@@ -66,12 +66,12 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
       OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)
     )
     let remotes = [
-      RemoteServerConfiguration.DialogFlow(
+      Remote.ServerConfiguration.DialogFlow(
         name: "default",
         shouldUseNativeFlow: shouldUseNativeFlow,
         shouldUseSafariVC: true
       ),
-      RemoteServerConfiguration.DialogFlow(
+      Remote.ServerConfiguration.DialogFlow(
         name: "message",
         shouldUseNativeFlow: true,
         shouldUseSafariVC: nil
@@ -143,7 +143,7 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
     self.restrictiveParams = restrictiveParams
   }
 
-  init?(remote: RemoteServerConfiguration) {
+  init?(remote: Remote.ServerConfiguration) {
     guard let appID = remote.appID,
       !appID.isEmpty
       else {
@@ -216,7 +216,7 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
   }
 
   private static func extractSmartLoginMenuIconUrl(
-    from remote: RemoteServerConfiguration
+    from remote: Remote.ServerConfiguration
     ) -> URL? {
     guard let urlString = remote.smartLoginMenuIconUrlString else {
       return nil
@@ -226,7 +226,7 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
   }
 
   private static func extractSmartLoginBookmarkIconUrl(
-    from remote: RemoteServerConfiguration
+    from remote: Remote.ServerConfiguration
     ) -> URL? {
     guard let urlString = remote.smartLoginBookmarkIconUrlString else {
       return nil
@@ -235,7 +235,7 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
     return URL(string: urlString)
   }
 
-  private static func extractErrorConfiguration(from remote: RemoteServerConfiguration) -> ErrorConfiguration {
+  private static func extractErrorConfiguration(from remote: Remote.ServerConfiguration) -> ErrorConfiguration {
     if let remoteErrorConfiguration = remote.errorConfiguration,
       let configuration = ErrorConfigurationBuilder.build(from: remoteErrorConfiguration) {
       return configuration
