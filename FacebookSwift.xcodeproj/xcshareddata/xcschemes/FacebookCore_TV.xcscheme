@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-               BuildableName = "FacebookCore.framework"
-               BlueprintName = "FacebookCore"
+               BlueprintIdentifier = "F43DE27522B9C44B00527B71"
+               BuildableName = "FacebookCore_TV.framework"
+               BlueprintName = "FacebookCore_TV"
                ReferencedContainer = "container:FacebookSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,39 +26,9 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F49FA478222880FE0008CAD6"
-               BuildableName = "FacebookCoreTests.xctest"
-               BlueprintName = "FacebookCoreTests"
-               ReferencedContainer = "container:FacebookSwift.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F46740462297097B00D3F7AF"
-               BuildableName = "FacebookCoreHostRequiredTests.xctest"
-               BlueprintName = "FacebookCoreHostRequiredTests"
-               ReferencedContainer = "container:FacebookSwift.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-            BuildableName = "FacebookCore.framework"
-            BlueprintName = "FacebookCore"
-            ReferencedContainer = "container:FacebookSwift.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -75,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-            BuildableName = "FacebookCore.framework"
-            BlueprintName = "FacebookCore"
+            BlueprintIdentifier = "F43DE27522B9C44B00527B71"
+            BuildableName = "FacebookCore_TV.framework"
+            BlueprintName = "FacebookCore_TV"
             ReferencedContainer = "container:FacebookSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -93,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
-            BuildableName = "FacebookCore.framework"
-            BlueprintName = "FacebookCore"
+            BlueprintIdentifier = "F43DE27522B9C44B00527B71"
+            BuildableName = "FacebookCore_TV.framework"
+            BlueprintName = "FacebookCore_TV"
             ReferencedContainer = "container:FacebookSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
