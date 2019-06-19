@@ -10,3 +10,4 @@ disabled_rules:
   - swiftlint_escaping
   - multiline_arguments
   - multiline_arguments_brackets
+  - type_name
