@@ -175,7 +175,6 @@
 		F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */; };
 		F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC222720B5F00EFE037 /* UserDataStore.swift */; };
 		F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */; };
-		F46DCFD32272140700EFE037 /* FacebookSwift-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */; };
 		F46DCFD52272317200EFE037 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD42272317200EFE037 /* UserDataTests.swift */; };
 		F46DCFD7227267F000EFE037 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD6227267F000EFE037 /* UserData.swift */; };
 		F46DCFDB22734C5F00EFE037 /* AppLinkTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */; };
@@ -463,10 +462,6 @@
 		F43AB0412270D92500610974 /* GatekeeperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperStore.swift; sourceTree = "<group>"; };
 		F43AB0432270E39C00610974 /* GatekeeperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperService.swift; sourceTree = "<group>"; };
 		F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteGatekeeperList.swift; sourceTree = "<group>"; };
-		F43DE1F522B989FA00527B71 /* SecureStoreKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecureStoreKeys.swift; path = ../SecureStoreKeys.swift; sourceTree = "<group>"; };
-		F43DE1F622B989FA00527B71 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecureStore.swift; path = ../SecureStore.swift; sourceTree = "<group>"; };
-		F43DE1F722B989FA00527B71 /* Cryptography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cryptography.swift; path = ../Cryptography.swift; sourceTree = "<group>"; };
-		F43DE1F822B989FA00527B71 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainStore.swift; path = ../KeychainStore.swift; sourceTree = "<group>"; };
 		F43DE26722B9C40400527B71 /* DeveloperErrorStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperErrorStrings.swift; sourceTree = "<group>"; };
 		F43DE26822B9C40400527B71 /* ErrorRecoveryStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorRecoveryStrings.swift; sourceTree = "<group>"; };
 		F43DE26922B9C40400527B71 /* LocalizedStringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringHelper.swift; sourceTree = "<group>"; };
@@ -478,7 +473,6 @@
 		F43DE27E22B9C44C00527B71 /* FacebookCore_TVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCore_TVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43DE28322B9C44C00527B71 /* FacebookCore_TVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCore_TVTests.swift; sourceTree = "<group>"; };
 		F43DE28522B9C44C00527B71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F43DE29322B9C6DE00527B71 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecureStore.swift; path = ../SecureStore.swift; sourceTree = "<group>"; };
 		F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyTests.swift; sourceTree = "<group>"; };
 		F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxy.swift; sourceTree = "<group>"; };
 		F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyConfigurationTests.swift; sourceTree = "<group>"; };
@@ -540,7 +534,6 @@
 		F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfiguration.swift; sourceTree = "<group>"; };
 		F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionaryProvidingExtensionsTests.swift; sourceTree = "<group>"; };
 		F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleInfoDictionary.swift; sourceTree = "<group>"; };
-		F45E54FE229450A0008A6011 /* Cryptography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Cryptography.swift; path = ../Cryptography.swift; sourceTree = "<group>"; };
 		F45E550022946B3A008A6011 /* CryptographyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptographyTests.swift; sourceTree = "<group>"; };
 		F467401B2294762000D3F7AF /* TestHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F467401D2294762000D3F7AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -549,16 +542,13 @@
 		F46740272294762000D3F7AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F46740292294762000D3F7AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F467402F2294797C00D3F7AF /* TestHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestHost.entitlements; sourceTree = "<group>"; };
-		F467403E229702E700D3F7AF /* SecureStoreKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecureStoreKeys.swift; path = ../SecureStoreKeys.swift; sourceTree = "<group>"; };
 		F4674041229705A100D3F7AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F46740472297097B00D3F7AF /* FacebookCoreHostRequiredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreHostRequiredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F467404B2297097B00D3F7AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F467405D2297187600D3F7AF /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainStore.swift; path = ../KeychainStore.swift; sourceTree = "<group>"; };
 		F467BD3622A0AA07001090B4 /* URLQueryItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLQueryItemExtensionsTests.swift; sourceTree = "<group>"; };
 		F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoreTests.swift; sourceTree = "<group>"; };
 		F46DCFC222720B5F00EFE037 /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUserData.swift; sourceTree = "<group>"; };
-		F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FacebookSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		F46DCFD42272317200EFE037 /* UserDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTests.swift; sourceTree = "<group>"; };
 		F46DCFD6227267F000EFE037 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkTargetTests.swift; sourceTree = "<group>"; };
@@ -767,7 +757,6 @@
 				F43DE27722B9C44B00527B71 /* FacebookCore_TV */,
 				F43DE28222B9C44C00527B71 /* FacebookCore_TVTests */,
 				8115C0D91CFE540D001FF33B /* Products */,
-				F458843E22A01FD40046144A /* Recovered References */,
 				8115C0E31CFE543A001FF33B /* Resources */,
 				811C5E5D1CFFD52B00E4A925 /* Sources */,
 				F467401C2294762000D3F7AF /* TestHost */,
@@ -1100,20 +1089,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		F458843E22A01FD40046144A /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				F43DE1F722B989FA00527B71 /* Cryptography.swift */,
-				F45E54FE229450A0008A6011 /* Cryptography.swift */,
-				F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */,
-				F467405D2297187600D3F7AF /* KeychainStore.swift */,
-				F43DE29322B9C6DE00527B71 /* SecureStore.swift */,
-				F43DE1F522B989FA00527B71 /* SecureStoreKeys.swift */,
-				F467403E229702E700D3F7AF /* SecureStoreKeys.swift */,
-			);
-			path = "Recovered References";
-			sourceTree = "<group>";
-		};
 		F467401C2294762000D3F7AF /* TestHost */ = {
 			isa = PBXGroup;
 			children = (
@@ -1350,7 +1325,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46DCFD32272140700EFE037 /* FacebookSwift-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
