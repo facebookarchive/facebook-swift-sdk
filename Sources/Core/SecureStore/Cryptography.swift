@@ -99,9 +99,11 @@ enum Cryptography {
       throw CryptographyError.publicKeyInvalidType
     }
 
-    // This is really Hinky but there is no ideal way to unwrap an optional `AnyObject`
-    // aka an optional `CFRefType`. It's force unwrapped in the apple documentation for
-    // how to use SecKeys for encryption. 😭😭😭
+    // To explain the force-downcast:
+    // Currently it is impossible to conditionally downcast to a CoreFoundation type
+    // In this case, an optional `CFRefType`.
+    // Further defense of the situation is that it's also force unwrapped in the
+    // apple documentation for how to use SecKeys for encryption. 😭😭😭
     // swiftlint:disable:next line_length
     // https://developer.apple.com/documentation/security/certificate_key_and_trust_services/keys/storing_keys_in_the_keychain
     // https://bugs.swift.org/browse/SR-7015
@@ -155,9 +157,11 @@ enum Cryptography {
       throw CryptographyError.privateKeyInvalidType
     }
 
-    // This is really Hinky but there is no ideal way to unwrap an optional `AnyObject`
-    // aka an optional `CFRefType`. It's force unwrapped in the apple documentation for
-    // how to use SecKeys for encryption. 😭😭😭
+    // To explain the force-downcast:
+    // Currently it is impossible to conditionally downcast to a CoreFoundation type
+    // In this case, an optional `CFRefType`.
+    // Further defense of the situation is that it's also force unwrapped in the
+    // apple documentation for how to use SecKeys for encryption. 😭😭😭
     // swiftlint:disable:next line_length
     // https://developer.apple.com/documentation/security/certificate_key_and_trust_services/keys/storing_keys_in_the_keychain
     // https://bugs.swift.org/browse/SR-7015
