@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F4F4375622A8386F0090D0C9"
+               BlueprintIdentifier = "F43DE27522B9C44B00527B71"
                BuildableName = "FacebookCore_TV.framework"
                BlueprintName = "FacebookCore_TV"
                ReferencedContainer = "container:FacebookSwift.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F4F4375622A8386F0090D0C9"
+            BlueprintIdentifier = "F43DE27522B9C44B00527B71"
             BuildableName = "FacebookCore_TV.framework"
             BlueprintName = "FacebookCore_TV"
             ReferencedContainer = "container:FacebookSwift.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F4F4375622A8386F0090D0C9"
+            BlueprintIdentifier = "F43DE27522B9C44B00527B71"
             BuildableName = "FacebookCore_TV.framework"
             BlueprintName = "FacebookCore_TV"
             ReferencedContainer = "container:FacebookSwift.xcodeproj">
