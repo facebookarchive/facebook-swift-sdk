@@ -4,10 +4,16 @@ disabled_rules:
   - discouraged_optional_boolean
   - discouraged_optional_collection
   - explicit_type_interface
+  - file_length
+  - force_try
+  - force_unwrapping
+  - function_body_length
   - implicitly_unwrapped_optional
   - line_length
-  - todo
-  - swiftlint_escaping
+  - literal_expression_end_indentation
   - multiline_arguments
   - multiline_arguments_brackets
+  - todo
+  - swiftlint_escaping
   - type_name
+  - type_body_length
