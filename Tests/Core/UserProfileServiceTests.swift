@@ -389,7 +389,6 @@ class UserProfileServiceTests: XCTestCase {
   func testImageURLDefaultProfileAlternateIdentifier() {
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
-
     let request = service.imageRequest(
       for: "user123",
       sizingConfiguration: sizingConfiguration
