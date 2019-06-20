@@ -23,7 +23,7 @@ import XCTest
 class BridgeAPIWebV2Tests: XCTestCase {
   func testURLRequest() {
     do {
-      _ = try BridgeAPIWebV2().requestURL(actionID: "Foo", methodName: "Bar", methodVersion: "Baz", parameters: [:])
+      _ = try BridgeAPIWebV2().requestURL(actionID: "Foo", methodName: "Bar", parameters: [:])
       XCTFail("Should not provide a request url for an unimplemented url provider")
     } catch {
       XCTAssertNotNil(error)
