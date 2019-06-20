@@ -32,14 +32,16 @@ class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProvidi
   var urlSchemeSuffix: String?
 
   init(
-    appIdentifier: String = "foo",
+    appIdentifier: String? = "foo",
     graphApiDebugParameter: GraphApiDebugParameter = .none,
     loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0"
+    sdkVersion: String = "1.0",
+    urlSchemeSuffix: String? = nil
     ) {
     self.appIdentifier = appIdentifier
     self.graphApiDebugParameter = graphApiDebugParameter
     self.loggingBehaviors = loggingBehaviors
     self.sdkVersion = sdkVersion
+    self.urlSchemeSuffix = urlSchemeSuffix
   }
 }

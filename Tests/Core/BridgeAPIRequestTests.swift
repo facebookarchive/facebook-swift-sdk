@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping
+// swiftlint:disable force_unwrapping force_try
 
 @testable import FacebookCore
 import XCTest
@@ -119,8 +119,6 @@ class BridgeAPIRequestTests: XCTestCase {
                      "Requesting a url should forward the action identifier to the bridge api")
       XCTAssertEqual(fakeBridgeAPIURLProvider.capturedMethodName, request.methodName,
                      "Requesting a url should forward the method name to the bridge api")
-      XCTAssertEqual(fakeBridgeAPIURLProvider.capturedMethodVersion, request.methodVersion,
-                     "Requesting a url should forward the method version to the bridge api")
       XCTAssertEqual(fakeBridgeAPIURLProvider.capturedParameters, request.parameters,
                      "Requesting a url should forward the parameters to the bridge api")
     } catch {
@@ -182,6 +180,7 @@ class BridgeAPIRequestTests: XCTestCase {
   }
 
   func testRequestProvidesURLUsingURLFromBridgeAPINetworker() {
+    try! Cryptography.generateRSAKeyPair()
     fakeSettings.appIdentifier = "abc123"
     fakeBundle.infoDictionary = SampleInfoDictionary.validURLSchemes(schemes: ["fbabc123"])
     let passThroughQueryItem = URLQueryItemBuilder.build(from: ["bar": "baz"])
@@ -189,7 +188,7 @@ class BridgeAPIRequestTests: XCTestCase {
       [
         "bar": "baz",
         "app_id": fakeSettings.appIdentifier!,
-        "cipher_key": "foo"
+        "cipher_key": try! Cryptography.rsaPublicKeyAsBase64()
       ]
     )
     fakeBridgeAPIURLProvider.stubbedURL = URLBuilder().buildURL(scheme: "myApp", hostName: "example.com", queryItems: passThroughQueryItem)!
