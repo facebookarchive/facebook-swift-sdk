@@ -23,7 +23,7 @@ import XCTest
 class BridgeAPINativeTests: XCTestCase {
   func testURLRequest() {
     do {
-      _ = try BridgeAPINative(appScheme: "Foo").requestURL(actionID: "Foo", methodName: "Bar", methodVersion: "Baz", parameters: [:])
+      _ = try BridgeAPINative(appScheme: "Foo").requestURL(actionID: "Foo", methodName: "Bar", parameters: [:])
       XCTFail("Should not provide a request url for an unimplemented url provider")
     } catch {
       XCTAssertNotNil(error)

@@ -294,7 +294,6 @@ class Settings: SettingsManaging, AppIdentifierProviding {
   }
 
   enum PListKeys {
-    static let domainPrefix: String = "FacebookDomainPrefix"
     static let loggingBehaviors: String = "FacebookLoggingBehavior"
     static let cfBundleURLTypes: String = "CFBundleURLTypes"
     static let cfBundleURLSchemes: String = "CFBundleURLSchemes"
