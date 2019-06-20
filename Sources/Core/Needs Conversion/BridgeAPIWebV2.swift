@@ -23,7 +23,6 @@ struct BridgeAPIWebV2: BridgeAPIURLProviding {
   func requestURL(
     actionID: String,
     methodName: String,
-    methodVersion: String,
     parameters: [String: AnyHashable]
     ) throws -> URL {
     throw CoreError.unknown

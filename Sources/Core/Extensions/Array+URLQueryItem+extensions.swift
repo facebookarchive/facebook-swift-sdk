@@ -16,25 +16,35 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
 import Foundation
 
-class FakeBridgeAPIURLProvider: BridgeAPIURLProviding {
-  var capturedActionID: String?
-  var capturedMethodName: String?
-  var capturedParameters: [String: AnyHashable] = [:]
+extension Array where Element == URLQueryItem {
+  /// Helper method for extracting the value of a `URLQueryItem` for a specified name
+  func value(forName name: String) -> String? {
+    return first { $0.name == name }?.value
+  }
 
-  var stubbedURL: URL = SampleURL.valid
+  /**
+   Helper method for extracting a `Decodable` type from a list of `URL` query parameters
 
-  func requestURL(
-    actionID: String,
-    methodName: String,
-    parameters: [String: AnyHashable]
-    ) throws -> URL {
-    capturedActionID = actionID
-    capturedMethodName = methodName
-    capturedParameters = parameters
+   - Parameter name: The name of the key value pair to try and decode an item from
+   - Parameter type: The type to attempt to decode from a `URL`'s query string
 
-    return stubbedURL
+   - Returns: An optional `Decodable` type.
+
+   - Important: This will not handle duplicate items. It will take the first matching item
+   and attempt to decode based on that alone
+   */
+  func decodeFromItem<T: Decodable>(
+    withName name: String,
+    _ type: T.Type
+    ) -> T? {
+    guard let data = value(forName: name)?
+      .data(using: .utf8)
+      else {
+        return nil
+    }
+
+    return try? JSONDecoder().decode(type, from: data)
   }
 }

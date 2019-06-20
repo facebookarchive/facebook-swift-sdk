@@ -111,6 +111,26 @@ enum Cryptography {
     return (itemReference as! SecKey)
   }
 
+  static func rsaPublicKeyAsBase64() throws -> String {
+    var dataPointer: CFTypeRef?
+    let query: SecureStoreQuery = [
+      SecureStoreKeys.class: SecureStoreKeys.cryptographyKey,
+      SecureStoreKeys.attrApplicationTag: service,
+      SecureStoreKeys.attrKeyType: SecureStoreKeys.attrKeyTypeRSA,
+      SecureStoreKeys.attrKeyClass: SecureStoreKeys.attrKeyClassPublic,
+      SecureStoreKeys.returnData: true
+    ]
+    let status = SecItemCopyMatching(query as CFDictionary, &dataPointer)
+
+    guard status == noErr || status == errSecSuccess,
+      case let .some(data) = dataPointer
+      else {
+        throw CryptographyError.publicKeyRetrievalFailure
+    }
+
+    return data.base64EncodedString(options: [])
+  }
+
   static func rsaPrivateKey() throws -> SecKey {
     let query: SecureStoreQuery = [
       SecureStoreKeys.class: SecureStoreKeys.cryptographyKey,

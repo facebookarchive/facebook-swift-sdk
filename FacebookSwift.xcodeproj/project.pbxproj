@@ -89,10 +89,6 @@
 		F43AB0422270D92500610974 /* GatekeeperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0412270D92500610974 /* GatekeeperStore.swift */; };
 		F43AB0442270E39C00610974 /* GatekeeperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0432270E39C00610974 /* GatekeeperService.swift */; };
 		F43AB04622710E3200610974 /* SampleRemoteGatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */; };
-		F43DE1F922B989FA00527B71 /* SecureStoreKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE1F522B989FA00527B71 /* SecureStoreKeys.swift */; };
-		F43DE1FA22B989FA00527B71 /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE1F622B989FA00527B71 /* SecureStore.swift */; };
-		F43DE1FB22B989FA00527B71 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE1F722B989FA00527B71 /* Cryptography.swift */; };
-		F43DE1FC22B989FA00527B71 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE1F822B989FA00527B71 /* KeychainStore.swift */; };
 		F43DE26A22B9C40400527B71 /* DeveloperErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE26722B9C40400527B71 /* DeveloperErrorStrings.swift */; };
 		F43DE26B22B9C40400527B71 /* ErrorRecoveryStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE26822B9C40400527B71 /* ErrorRecoveryStrings.swift */; };
 		F43DE26C22B9C40400527B71 /* LocalizedStringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE26922B9C40400527B71 /* LocalizedStringHelper.swift */; };
@@ -160,7 +156,6 @@
 		F45734D7222D9535001F806A /* InternalUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45734D6222D9535001F806A /* InternalUtilityTests.swift */; };
 		F45E54DD228E0B42008A6011 /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DC228E0B42008A6011 /* ImageServiceTests.swift */; };
 		F45E54DF228E0BE6008A6011 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54DE228E0BE6008A6011 /* ImageService.swift */; };
-		F45E54EF228F5D97008A6011 /* BridgeAPIRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54EE228F5D97008A6011 /* BridgeAPIRequestTests.swift */; };
 		F45E54F1228F5EFF008A6011 /* BridgeAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F0228F5EFF008A6011 /* BridgeAPIRequest.swift */; };
 		F45E54F5228F8699008A6011 /* PListURLConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F4228F8699008A6011 /* PListURLConfigurationTests.swift */; };
 		F45E54F7228F87B1008A6011 /* PListURLConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */; };
@@ -176,10 +171,10 @@
 		F467405422970A3700D3F7AF /* CryptographyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E550022946B3A008A6011 /* CryptographyTests.swift */; };
 		F467405522970A4100D3F7AF /* KeychainStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D344C2265325900CEE2ED /* KeychainStoreTests.swift */; };
 		F467405622970AA300D3F7AF /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
+		F467BD3722A0AA07001090B4 /* URLQueryItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467BD3622A0AA07001090B4 /* URLQueryItemExtensionsTests.swift */; };
 		F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */; };
 		F46DCFC322720B5F00EFE037 /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFC222720B5F00EFE037 /* UserDataStore.swift */; };
 		F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */; };
-		F46DCFD32272140700EFE037 /* FacebookSwift-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */; };
 		F46DCFD52272317200EFE037 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD42272317200EFE037 /* UserDataTests.swift */; };
 		F46DCFD7227267F000EFE037 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFD6227267F000EFE037 /* UserData.swift */; };
 		F46DCFDB22734C5F00EFE037 /* AppLinkTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */; };
@@ -233,6 +228,10 @@
 		F4932E0B22808DB50020C282 /* TokenString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0A22808DB50020C282 /* TokenString.swift */; };
 		F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */; };
 		F4932E0F2280A1CA0020C282 /* BoundedCGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */; };
+		F49BC64122BA89570055DCB4 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63D22BA89570055DCB4 /* Cryptography.swift */; };
+		F49BC64222BA89570055DCB4 /* SecureStoreKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63E22BA89570055DCB4 /* SecureStoreKeys.swift */; };
+		F49BC64322BA89570055DCB4 /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63F22BA89570055DCB4 /* SecureStore.swift */; };
+		F49BC64422BA89570055DCB4 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC64022BA89570055DCB4 /* KeychainStore.swift */; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
 		F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE42712245846A00E3B99C /* GraphPathTests.swift */; };
@@ -295,6 +294,15 @@
 		F4E1A9EC22416F2200503354 /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E622416F2200503354 /* FBError.swift */; };
 		F4E1A9ED22416F2200503354 /* RemoteErrorCodeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E722416F2200503354 /* RemoteErrorCodeGroup.swift */; };
 		F4E1A9EE22416F2200503354 /* RemoteErrorConfigurationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E822416F2200503354 /* RemoteErrorConfigurationEntry.swift */; };
+		F4F4373522A59B4E0090D0C9 /* Array+URLQueryItem+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4373422A59B4E0090D0C9 /* Array+URLQueryItem+extensions.swift */; };
+		F4F4373622A5CD310090D0C9 /* BridgeAPIRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54EE228F5D97008A6011 /* BridgeAPIRequestTests.swift */; };
+		F4F4373722A5CD560090D0C9 /* SampleInfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */; };
+		F4F4373822A5CD640090D0C9 /* FakeNetworkerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F0229DB55C004FBDB0 /* FakeNetworkerProvider.swift */; };
+		F4F4373922A5CD6F0090D0C9 /* FakeURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F2229DB583004FBDB0 /* FakeURLOpener.swift */; };
+		F4F4373A22A5CD7E0090D0C9 /* FakeBridgeAPIURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479099222985BC200F9C0A2 /* FakeBridgeAPIURLProvider.swift */; };
+		F4F4373B22A5CD890090D0C9 /* FakeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A22229C6B60083506E /* FakeSettings.swift */; };
+		F4F4373C22A5CD8D0090D0C9 /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
+		F4F4373D22A5CD9C0090D0C9 /* SampleURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447152F22440E860013495F /* SampleURL.swift */; };
 		F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */; };
 		F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC87B0222ED532003A8F29 /* GraphRequest.swift */; };
 		F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */; };
@@ -454,10 +462,6 @@
 		F43AB0412270D92500610974 /* GatekeeperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperStore.swift; sourceTree = "<group>"; };
 		F43AB0432270E39C00610974 /* GatekeeperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperService.swift; sourceTree = "<group>"; };
 		F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteGatekeeperList.swift; sourceTree = "<group>"; };
-		F43DE1F522B989FA00527B71 /* SecureStoreKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStoreKeys.swift; sourceTree = "<group>"; };
-		F43DE1F622B989FA00527B71 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
-		F43DE1F722B989FA00527B71 /* Cryptography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
-		F43DE1F822B989FA00527B71 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		F43DE26722B9C40400527B71 /* DeveloperErrorStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperErrorStrings.swift; sourceTree = "<group>"; };
 		F43DE26822B9C40400527B71 /* ErrorRecoveryStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorRecoveryStrings.swift; sourceTree = "<group>"; };
 		F43DE26922B9C40400527B71 /* LocalizedStringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringHelper.swift; sourceTree = "<group>"; };
@@ -541,10 +545,10 @@
 		F4674041229705A100D3F7AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F46740472297097B00D3F7AF /* FacebookCoreHostRequiredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreHostRequiredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F467404B2297097B00D3F7AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F467BD3622A0AA07001090B4 /* URLQueryItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLQueryItemExtensionsTests.swift; sourceTree = "<group>"; };
 		F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoreTests.swift; sourceTree = "<group>"; };
 		F46DCFC222720B5F00EFE037 /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUserData.swift; sourceTree = "<group>"; };
-		F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FacebookSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		F46DCFD42272317200EFE037 /* UserDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTests.swift; sourceTree = "<group>"; };
 		F46DCFD6227267F000EFE037 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F46DCFDA22734C5F00EFE037 /* AppLinkTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkTargetTests.swift; sourceTree = "<group>"; };
@@ -598,6 +602,10 @@
 		F4932E0A22808DB50020C282 /* TokenString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenString.swift; sourceTree = "<group>"; };
 		F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloatTests.swift; sourceTree = "<group>"; };
 		F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloat.swift; sourceTree = "<group>"; };
+		F49BC63D22BA89570055DCB4 /* Cryptography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
+		F49BC63E22BA89570055DCB4 /* SecureStoreKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStoreKeys.swift; sourceTree = "<group>"; };
+		F49BC63F22BA89570055DCB4 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
+		F49BC64022BA89570055DCB4 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		F49FA479222880FE0008CAD6 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
@@ -662,6 +670,7 @@
 		F4E1A9E622416F2200503354 /* FBError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
 		F4E1A9E722416F2200503354 /* RemoteErrorCodeGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorCodeGroup.swift; sourceTree = "<group>"; };
 		F4E1A9E822416F2200503354 /* RemoteErrorConfigurationEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationEntry.swift; sourceTree = "<group>"; };
+		F4F4373422A59B4E0090D0C9 /* Array+URLQueryItem+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+URLQueryItem+extensions.swift"; sourceTree = "<group>"; };
 		F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerConfigurationTests.swift; sourceTree = "<group>"; };
 		F4FC87B0222ED532003A8F29 /* GraphRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequest.swift; sourceTree = "<group>"; };
 		F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtility.swift; sourceTree = "<group>"; };
@@ -799,7 +808,6 @@
 				F4C32D81223D98D300FF1F86 /* Configurations */,
 				F4C32DA9223FFA8800FF1F86 /* ErrorHandling */,
 				F44DB6B2222B01B60083506E /* Extensions */,
-				F46DCFD12272140700EFE037 /* Internal */,
 				F417F9172249822D00E771F1 /* Logging */,
 				F44DB6992229B36D0083506E /* Needs Conversion */,
 				F43DE1F422B989FA00527B71 /* SecureStore */,
@@ -949,10 +957,10 @@
 		F43DE1F422B989FA00527B71 /* SecureStore */ = {
 			isa = PBXGroup;
 			children = (
-				F43DE1F722B989FA00527B71 /* Cryptography.swift */,
-				F43DE1F822B989FA00527B71 /* KeychainStore.swift */,
-				F43DE1F622B989FA00527B71 /* SecureStore.swift */,
-				F43DE1F522B989FA00527B71 /* SecureStoreKeys.swift */,
+				F49BC63D22BA89570055DCB4 /* Cryptography.swift */,
+				F49BC64022BA89570055DCB4 /* KeychainStore.swift */,
+				F49BC63F22BA89570055DCB4 /* SecureStore.swift */,
+				F49BC63E22BA89570055DCB4 /* SecureStoreKeys.swift */,
 			);
 			path = SecureStore;
 			sourceTree = "<group>";
@@ -1064,6 +1072,7 @@
 			isa = PBXGroup;
 			children = (
 				F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */,
+				F4F4373422A59B4E0090D0C9 /* Array+URLQueryItem+extensions.swift */,
 				F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */,
 				F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */,
 				F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */,
@@ -1100,14 +1109,6 @@
 				F467404B2297097B00D3F7AF /* Info.plist */,
 			);
 			path = FacebookCoreHostRequiredTests;
-			sourceTree = "<group>";
-		};
-		F46DCFD12272140700EFE037 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				F46DCFD22272140700EFE037 /* FacebookSwift-Bridging-Header.h */,
-			);
-			path = Internal;
 			sourceTree = "<group>";
 		};
 		F479099422985C6A00F9C0A2 /* BridgeAPI */ = {
@@ -1295,6 +1296,7 @@
 				F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */,
 				F4C32DA2223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift */,
 				F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */,
+				F467BD3622A0AA07001090B4 /* URLQueryItemExtensionsTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1323,7 +1325,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46DCFD32272140700EFE037 /* FacebookSwift-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1706,6 +1707,7 @@
 				F4317E5F22862B8000EBF926 /* Color.swift in Sources */,
 				F44DB6BD222B0DD20083506E /* GraphRequestPiggybackManager.swift in Sources */,
 				F48A749F2239A3C7007192F6 /* Localizable.swift in Sources */,
+				F49BC64122BA89570055DCB4 /* Cryptography.swift in Sources */,
 				F4020CF92283631E00710558 /* VariantCodingKey.swift in Sources */,
 				F4C3C5252273CABC004B487E /* ImageSizingConfiguration.swift in Sources */,
 				F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */,
@@ -1714,7 +1716,6 @@
 				F422F0812284A29E00AFD0DF /* AudioService.swift in Sources */,
 				F47AB341222F4F0B004A854F /* GraphApiDebugParameter.swift in Sources */,
 				F4E1A9ED22416F2200503354 /* RemoteErrorCodeGroup.swift in Sources */,
-				F43DE1F922B989FA00527B71 /* SecureStoreKeys.swift in Sources */,
 				F44847DC2268E36E00527D49 /* ProfilePictureView.swift in Sources */,
 				F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */,
 				F45E54F7228F87B1008A6011 /* PListURLConfiguration.swift in Sources */,
@@ -1729,15 +1730,16 @@
 				F479098D2298542800F9C0A2 /* BridgeAPIWebV2.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
 				F4E1A9EC22416F2200503354 /* FBError.swift in Sources */,
+				F49BC64422BA89570055DCB4 /* KeychainStore.swift in Sources */,
 				F42E3C792267E45100287DC4 /* UserProfileBuilder.swift in Sources */,
 				F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */,
 				F4C32D9D223DA0F600FF1F86 /* ErrorConfiguration.swift in Sources */,
-				F43DE1FC22B989FA00527B71 /* KeychainStore.swift in Sources */,
 				F44DB6B5222B024A0083506E /* NotificationCenter+Extensions.swift in Sources */,
 				F43DE26B22B9C40400527B71 /* ErrorRecoveryStrings.swift in Sources */,
 				F47909912298582D00F9C0A2 /* UIApplication+Extensions.swift in Sources */,
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
+				F49BC64322BA89570055DCB4 /* SecureStore.swift in Sources */,
 				F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */,
 				F422F0832284A37D00AFD0DF /* FileManager+Extensions.swift in Sources */,
 				F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */,
@@ -1748,11 +1750,11 @@
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
 				F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */,
 				F432E9FA22370C07007D3A34 /* URLSession+Extensions.swift in Sources */,
-				F43DE1FA22B989FA00527B71 /* SecureStore.swift in Sources */,
 				F4CF03482273891A00807A61 /* RemoteAppLinkDetails.swift in Sources */,
 				F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */,
 				F408BEB62239893F0068D24A /* GraphRequestErrorCategory.swift in Sources */,
 				F47470E42298AC27004FBDB0 /* GatekeeperList.swift in Sources */,
+				F49BC64222BA89570055DCB4 /* SecureStoreKeys.swift in Sources */,
 				F43AB02A2270B61600610974 /* Gatekeeper.swift in Sources */,
 				F47853C1222DCF8600A4269C /* CoreError.swift in Sources */,
 				F43AB0422270D92500610974 /* GatekeeperStore.swift in Sources */,
@@ -1769,8 +1771,8 @@
 				F42E3C782267E45100287DC4 /* UserProfile.swift in Sources */,
 				F432E9FC22370C9C007D3A34 /* SessionProvider.swift in Sources */,
 				F43DE26E22B9C40E00527B71 /* FacebookCoreApplicationDelegate.swift in Sources */,
-				F43DE1FB22B989FA00527B71 /* Cryptography.swift in Sources */,
 				F44DB6B1222B01A30083506E /* NotificationName+Extensions.swift in Sources */,
+				F4F4373522A59B4E0090D0C9 /* Array+URLQueryItem+extensions.swift in Sources */,
 				F4144A12222DB16C00CB83E0 /* Permission.swift in Sources */,
 				F42E3C972268C57300287DC4 /* AccessTokenWallet+Extensions.swift in Sources */,
 				F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */,
@@ -1865,7 +1867,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F4373622A5CD310090D0C9 /* BridgeAPIRequestTests.swift in Sources */,
+				F4F4373822A5CD640090D0C9 /* FakeNetworkerProvider.swift in Sources */,
+				F4F4373C22A5CD8D0090D0C9 /* FakeBundle.swift in Sources */,
+				F4F4373722A5CD560090D0C9 /* SampleInfoDictionary.swift in Sources */,
+				F4F4373922A5CD6F0090D0C9 /* FakeURLOpener.swift in Sources */,
+				F4F4373D22A5CD9C0090D0C9 /* SampleURL.swift in Sources */,
 				F467405422970A3700D3F7AF /* CryptographyTests.swift in Sources */,
+				F4F4373B22A5CD890090D0C9 /* FakeSettings.swift in Sources */,
+				F4F4373A22A5CD7E0090D0C9 /* FakeBridgeAPIURLProvider.swift in Sources */,
 				F467405522970A4100D3F7AF /* KeychainStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1972,6 +1982,7 @@
 				F43AB02C2270BE4F00610974 /* RemoteGatekeeperListTests.swift in Sources */,
 				F42687C32230770100A62C2E /* GraphRequestSerializerTests.swift in Sources */,
 				F43AB04622710E3200610974 /* SampleRemoteGatekeeperList.swift in Sources */,
+				F467BD3722A0AA07001090B4 /* URLQueryItemExtensionsTests.swift in Sources */,
 				F43AB0342270C0B800610974 /* SampleRawRemoteGatekeeperList.swift in Sources */,
 				F46DCFC122720A7B00EFE037 /* UserDataStoreTests.swift in Sources */,
 				F44DB6A52229CFFC0083506E /* FakeNotificationCenter.swift in Sources */,
@@ -1992,7 +2003,6 @@
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
 				F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */,
 				F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */,
-				F45E54EF228F5D97008A6011 /* BridgeAPIRequestTests.swift in Sources */,
 				F45E54FD22935B50008A6011 /* ProfilePictureViewTests.swift in Sources */,
 				F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */,
 				F44715252243EDB10013495F /* SampleNSError.swift in Sources */,
