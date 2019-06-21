@@ -19,7 +19,7 @@
 import Foundation
 
 /**
- Used for validating if a `BridgeAPIRequest` is valid for a goven source application
+ Used for validating if a `BridgeAPIRequest` is valid for a given source application
  */
 enum BridgeAPIValidator {
   static func isValid(
