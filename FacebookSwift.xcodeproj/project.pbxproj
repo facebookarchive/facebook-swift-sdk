@@ -243,6 +243,10 @@
 		F4934B4122BD861A0049067D /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC64022BA89570055DCB4 /* KeychainStore.swift */; };
 		F4934B4222BD861D0049067D /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63D22BA89570055DCB4 /* Cryptography.swift */; };
 		F4934B4322BD870C0049067D /* GatekeeperDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470E32298AC27004FBDB0 /* GatekeeperDictionary.swift */; };
+		F4934B4422BD88DC0049067D /* BridgeAPIWebV1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470EC229DB3C1004FBDB0 /* BridgeAPIWebV1Tests.swift */; };
+		F4934B4522BD88E30049067D /* BridgeAPIWebV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470EE229DB405004FBDB0 /* BridgeAPIWebV2Tests.swift */; };
+		F4934B4622BD88F20049067D /* BridgeAPINetworkerProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470E8229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift */; };
+		F4934B4822BD89210049067D /* UserProfileConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */; };
 		F49BC63522BA80930055DCB4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F49BC63622BA80930055DCB4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F49BC63922BA80AC0055DCB4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
@@ -2086,6 +2090,7 @@
 				F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */,
 				F42E3C8B2267E64500287DC4 /* RemoteUserProfile+Extensions.swift in Sources */,
 				F458069D22B2BBF6007B9D2C /* RestrictiveEventParameterTests.swift in Sources */,
+				F4934B4422BD88DC0049067D /* BridgeAPIWebV1Tests.swift in Sources */,
 				F4C57D1D22AAD2F300D0BEFE /* DialogFlowTests.swift in Sources */,
 				F4C32DA5223DA13E00FF1F86 /* RemoteErrorConfigurationEntryList+Extensions.swift in Sources */,
 				F407393D2231E2340018505A /* GraphRequestQueryItemBuilderTests.swift in Sources */,
@@ -2130,6 +2135,7 @@
 				F45734D5222D94B2001F806A /* GraphRequestPiggybackManagerTests.swift in Sources */,
 				F44DB6C3222B136F0083506E /* FakeGraphRequestPiggybackManager.swift in Sources */,
 				F406F8672282376C006B0D4E /* DrawableTests.swift in Sources */,
+				F4934B4622BD88F20049067D /* BridgeAPINetworkerProviderTests.swift in Sources */,
 				F447153422440EE50013495F /* FakeSessionDataTask.swift in Sources */,
 				F4C32DA6223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift in Sources */,
 				F44DB6BF222B10040083506E /* FakeGraphConnectionProvider.swift in Sources */,
@@ -2193,9 +2199,11 @@
 				F447151E2242FF010013495F /* LoggerTests.swift in Sources */,
 				F47056D92232CEEF00BE526B /* FakeLogger.swift in Sources */,
 				F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */,
+				F4934B4522BD88E30049067D /* BridgeAPIWebV2Tests.swift in Sources */,
 				F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */,
 				F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */,
 				F43AB0402270D8B600610974 /* GatekeeperStoreTests.swift in Sources */,
+				F4934B4822BD89210049067D /* UserProfileConfigurationTests.swift in Sources */,
 				F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */,
 				F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */,
 				F40BCBBE2239742E00D52D10 /* GraphApiDebugParameterTests.swift in Sources */,
