@@ -19,7 +19,7 @@
 @testable import FacebookCore
 import Foundation
 
-class FakeBridgeAPIURLProvider: BridgeAPIURLProviding {
+class FakeBridgeAPINetworker: BridgeAPINetworking {
   var capturedActionID: String?
   var capturedMethodName: String?
   var capturedParameters: [String: AnyHashable] = [:]
@@ -36,5 +36,9 @@ class FakeBridgeAPIURLProvider: BridgeAPIURLProviding {
     capturedParameters = parameters
 
     return stubbedURL
+  }
+
+  func responseParameters(actionID: String, queryItems: [URLQueryItem]) -> QueryItemsResult {
+    fatalError("Implement me")
   }
 }

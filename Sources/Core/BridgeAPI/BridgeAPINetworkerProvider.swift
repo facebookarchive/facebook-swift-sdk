@@ -19,13 +19,13 @@
 import Foundation
 
 protocol BridgeAPINetworkerProviding {
-  var urlProvider: BridgeAPIURLProviding { get }
+  var networker: BridgeAPINetworking { get }
   var applicationQueryScheme: String { get }
   var urlCategory: BridgeAPIURLCategory { get }
 }
 
 /**
- An abstraction used to resolve a concrete instance of a `BridgeAPIURLProviding` in a declarative way
+ An abstraction used to resolve a concrete instance of a `BridgeAPINetworking` in a declarative way
  This type performs `URL` scheme refining.
  It uses well-known schemes listed by the third party application to check
  for the installation of an application and then maps the well-known
@@ -36,7 +36,7 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
   case web(WebQueryScheme)
 
   /// The concrete instance of `BridgeAPIURLProviding`
-  var urlProvider: BridgeAPIURLProviding {
+  var networker: BridgeAPINetworking {
     switch self {
     case let .native(scheme):
       switch scheme {

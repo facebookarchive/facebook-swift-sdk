@@ -16,17 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-/// A BridgeAPINetworker provides a request url
-protocol BridgeAPIURLProviding {
-  func requestURL(
-    actionID: String,
-    methodName: String,
-    parameters: [String: AnyHashable]
-    ) throws -> URL
-}
+class FakeBridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
+  var stubbedURLCategory: BridgeAPIURLCategory
+  var networker: BridgeAPINetworking
+  let applicationQueryScheme: String
+  var urlCategory: BridgeAPIURLCategory {
+    return stubbedURLCategory
+  }
 
-enum BridgeURLProvidingError: FBError {
-  case invalidURL
+  init(
+    stubbedURLCategory: BridgeAPIURLCategory,
+    networker: BridgeAPINetworking,
+    applicationQueryScheme: String
+    ) {
+    self.stubbedURLCategory = stubbedURLCategory
+    self.applicationQueryScheme = applicationQueryScheme
+    self.networker = networker
+  }
 }

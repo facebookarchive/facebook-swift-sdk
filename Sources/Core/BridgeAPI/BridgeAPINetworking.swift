@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,9 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-class FBSDKBridgeAPIRequest {
-    private required init(protocol `protocol`: FBSDKBridgeAPIProtocol?, protocolType: FBSDKBridgeAPIProtocolType, scheme: String?, methodName: String?, methodVersion: String?, parameters: [AnyHashable : Any]?, userInfo: [AnyHashable : Any]?) {
-    }
+import Foundation
 
-    private var `protocol`: FBSDKBridgeAPIProtocol?
+typealias QueryItemsResult = Result<[URLQueryItem], Error>
+
+/// A BridgeAPINetworker provides a request url
+protocol BridgeAPINetworking {
+  func requestURL(
+    actionID: String,
+    methodName: String,
+    parameters: [String: AnyHashable]
+    ) throws -> URL
+
+  func responseParameters(
+    actionID: String,
+    queryItems: [URLQueryItem]
+    ) -> QueryItemsResult
+}
+
+enum BridgeURLProvidingError: FBError {
+  case invalidURL
 }
