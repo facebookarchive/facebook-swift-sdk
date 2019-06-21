@@ -53,6 +53,29 @@ class CryptographyTests: XCTestCase {
     }
   }
 
+  func testRetrievingMissingPublicKeyAsBase64EncodedString() {
+    do {
+      _ = try Cryptography.rsaPublicKeyAsBase64()
+    } catch let error as CryptographyError {
+      XCTAssertEqual(error, .publicKeyRetrievalFailure,
+                     "Should throw the expected error")
+    } catch {
+      XCTFail("Should only throw meaningul errors")
+    }
+  }
+
+  func testRetrievingPublicKeyAsBase64EncodedString() {
+    _ = try? Cryptography.generateRSAKeyPair()
+
+    do {
+      let key = try Cryptography.rsaPublicKeyAsBase64()
+      XCTAssertNotNil(key,
+                      "Should retrieve the public key in base 64 encoded format")
+    } catch {
+      XCTFail("Should retrieve a public key from the keychain in the correct format")
+    }
+  }
+
   func testRetrievingPrivateKey() {
     _ = try? Cryptography.generateRSAKeyPair()
 

@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable type_body_length file_length
+
 @testable import FacebookCore
 import XCTest
 
@@ -215,6 +217,138 @@ class URLBuilderTests: XCTestCase {
       url,
       prefix: "foo",
       path: "/v3.2/me"
+    )
+  }
+
+  // MARK: - App URL
+
+  func testBuildingAppUrlWithoutAppIDWithoutSuffix() {
+    let expectedScheme = "fb"
+
+    let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: nil)
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+      return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "/Bar"
+    )
+  }
+
+  func testBuildingAppUrlWithoutAppIDWithSuffix() {
+    let expectedScheme = "fbFoo"
+    let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: "Foo")
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+      return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "/Bar"
+    )
+  }
+
+  func testBuildingAppUrlWithAppIDWithoutSuffix() {
+    let expectedScheme = "fbFoo"
+    let fakeSettings = FakeSettings(appIdentifier: "Foo", urlSchemeSuffix: nil)
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+        return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "/Bar"
+    )
+  }
+
+  func testBuildingAppUrlWithAppIDWithSuffix() {
+    let expectedScheme = "fbFooBar"
+    let fakeSettings = FakeSettings(appIdentifier: "Foo", urlSchemeSuffix: "Bar")
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo", path: "Bar") else {
+        return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "/Bar"
+    )
+  }
+
+  func testBuildingAppUrlWithDefaultPath() {
+    let expectedScheme = "fb"
+    let fakeSettings = FakeSettings(appIdentifier: nil, urlSchemeSuffix: nil)
+
+    guard let url = URLBuilder(settings: fakeSettings)
+      .buildAppURL(hostName: "Foo") else {
+        return XCTFail("Should build a valid url for interacting with an application")
+    }
+
+    validateAppUrl(
+      url,
+      scheme: expectedScheme,
+      hostName: "Foo",
+      path: "/"
+    )
+  }
+
+  private func validateAppUrl(
+    _ url: URL?,
+    scheme: String,
+    hostName: String,
+    path: String? = nil,
+    inFile file: StaticString = #file,
+    atLine line: UInt = #line
+    ) {
+    guard let url = url else {
+      return XCTFail(
+        "Should build a valid url from valid inputs",
+        file: file,
+        line: line
+      )
+    }
+    XCTAssertEqual(
+      url.scheme,
+      scheme,
+      "URL should use the scheme: \(scheme)",
+      file: file,
+      line: line
+    )
+    XCTAssertEqual(
+      url.host,
+      hostName,
+      "URL should use host name: \(hostName)",
+      file: file,
+      line: line
+    )
+    XCTAssertNil(
+      url.port,
+      "URL should not override the default port",
+      file: file,
+      line: line
+    )
+    XCTAssertEqual(
+      url.path,
+      path,
+      "URL path should be: \(String(describing: path))",
+      file: file,
+      line: line
     )
   }
 

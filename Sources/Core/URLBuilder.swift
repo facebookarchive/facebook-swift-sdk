@@ -24,6 +24,13 @@ struct URLBuilder {
   static let defaultScheme: String = "https"
   let settings: SettingsManaging
 
+  private var appScheme: String {
+    let appID = settings.appIdentifier ?? ""
+    let suffix = settings.urlSchemeSuffix ?? ""
+
+    return "fb\(appID)\(suffix)"
+  }
+
   init(settings: SettingsManaging = Settings.shared) {
     self.settings = settings
   }
@@ -42,7 +49,7 @@ struct URLBuilder {
   func buildURL(
     scheme: String = URLBuilder.defaultScheme,
     hostPrefix: String = "",
-    hostName: String,
+    hostName: String = URLBuilder.defaultHostname,
     path: String = "/",
     queryItems: [URLQueryItem] = []
     ) -> URL? {
@@ -59,7 +66,7 @@ struct URLBuilder {
   }
 
   /**
-   Convenience initializer for building a `URL` from a `GraphRequest`
+   Convenience method for building a `URL` from a `GraphRequest`
    */
   func buildURL(
     for request: GraphRequest,
@@ -71,6 +78,22 @@ struct URLBuilder {
     return self.buildURL(
       hostPrefix: hostPrefix,
       hostName: URLBuilder.defaultHostname,
+      path: path,
+      queryItems: queryItems
+    )
+  }
+
+  /**
+   Convenience method for building a `URL` for interacting with an application
+   */
+  func buildAppURL(
+    hostName: String,
+    path: String = "/",
+    queryItems: [URLQueryItem] = []
+    ) -> URL? {
+    return buildURL(
+      scheme: appScheme,
+      hostName: hostName,
       path: path,
       queryItems: queryItems
     )
