@@ -31,7 +31,7 @@ class GatekeeperTests: XCTestCase {
     } catch _ as DecodingError {
       // This is the expected behavior
     } catch {
-      XCTFail("Should only throw expected errors")
+      XCTAssertNil(error, "Should only throw expected errors")
     }
   }
 
@@ -45,7 +45,7 @@ class GatekeeperTests: XCTestCase {
     } catch _ as DecodingError {
       // This is expected
     } catch {
-      XCTFail("Should only throw expected errors")
+      XCTAssertNil(error, "Should only throw expected errors")
     }
   }
 
@@ -59,7 +59,7 @@ class GatekeeperTests: XCTestCase {
     } catch _ as DecodingError {
       // This is expected
     } catch {
-      XCTFail("Should only throw expected errors")
+      XCTAssertNil(error, "Should only throw expected errors")
     }
   }
 
@@ -73,7 +73,7 @@ class GatekeeperTests: XCTestCase {
       XCTAssertTrue(gatekeeper.isEnabled,
                     "The enabled property on a gatekeeper should be set correctly")
     } catch {
-      XCTFail("Should not fail to create a gatekeeper with valid inputs")
+      XCTAssertNil(error, "Should not fail to create a gatekeeper with valid inputs")
     }
   }
 
@@ -89,12 +89,12 @@ class GatekeeperTests: XCTestCase {
       XCTAssertFalse(gatekeeper.isEnabled,
                      "The enabled property on a gatekeeper should be set correctly")
     } catch {
-      XCTFail("Should not fail to create a gatekeeper with valid inputs")
+      XCTAssertNil(error, "Should not fail to create a gatekeeper with valid inputs")
     }
   }
 
   func testCreatingFromJSON() {
-    guard let data = JSONLoader.loadData(for: .validGatekeeper) else {
+    guard let data = JSONLoader.loadData(for: .validRemoteGatekeeper) else {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(Gatekeeper.self, from: data),

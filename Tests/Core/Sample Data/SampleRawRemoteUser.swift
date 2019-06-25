@@ -61,9 +61,9 @@ enum SampleRawRemoteUser {
   }
 
   enum SerializedData {
-    static let valid: Data = {
-      try! JSONSerialization.data(withJSONObject: validRaw, options: [])
-    }()
+    static let emptyDictionary = try! JSONSerialization.data(withJSONObject: [:], options: [])
+
+    static let valid = try! JSONSerialization.data(withJSONObject: validRaw, options: [])
 
     static func empty(_ key: Key) -> Data {
       var temp = validRaw

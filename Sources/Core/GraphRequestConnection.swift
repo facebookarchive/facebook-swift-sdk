@@ -176,7 +176,6 @@ class GraphRequestConnection: GraphRequestConnecting {
    request
    */
   func getObject<RemoteType: Decodable>(
-    _ remoteType: RemoteType.Type,
     for graphRequest: GraphRequest,
     completion: @escaping (Result<RemoteType, Error>) -> Void
     ) -> URLSessionTaskProxy? {
@@ -186,7 +185,7 @@ class GraphRequestConnection: GraphRequestConnecting {
 
       switch fetchResult {
       case .success(let data):
-        result = self.convertFetchedDataToObjectResult(remoteType, data: data)
+        result = self.convertFetchedDataToObjectResult(RemoteType.self, data: data)
 
       case .failure(let error):
         result = .failure(error)

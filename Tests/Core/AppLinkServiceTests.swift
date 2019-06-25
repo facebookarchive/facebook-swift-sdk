@@ -198,7 +198,7 @@ class AppLinkServiceTests: XCTestCase {
     fakeConnection.stubGetObjectCompletionResult = .success([remoteLinkTwo])
 
     _ = service.appLinks(for: [urlOne, urlTwo]) { result in
-      guard case let .success(linksDictionary) = result else {
+      guard let linksDictionary = try? result.get() else {
         return XCTFail("This is impossible. Cannot have a failure for a call that is stubbed to a valid success value")
       }
       XCTAssertTrue(linksDictionary.keys.contains(urlOne),
@@ -232,7 +232,7 @@ class AppLinkServiceTests: XCTestCase {
     // This would not work with an actual network request.
 
     _ = service.appLinks(for: [SampleURL.valid]) { result in
-      guard case let .success(linksDictionary) = result else {
+      guard let linksDictionary = try? result.get() else {
         return XCTFail("This is impossible. Cannot have a failure for a call that is stubbed to a valid success value")
       }
 
