@@ -29,8 +29,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithEmptyDictionary() {
     do {
-      let data = try JSONSerialization.data(withJSONObject: [:], options: [])
-      _ = try decoder.decode(RemoteAppLinkTarget.self, from: data)
+      _ = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.empty)
       XCTFail("Should not create an app link target from an empty dictionary")
     } catch let error as RemoteAppLinkTarget.DecodingError {
       XCTAssertEqual(error, .emptyTarget,
@@ -42,8 +41,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithMissingURLString() {
     do {
-      let data = SampleData.missingURL
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: data)
+      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.missingURL)
       XCTAssertNil(target.url,
                    "A remote app link target should not have a default value for its url field")
     } catch {
@@ -54,8 +52,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithInvalidURLString() {
     do {
-      let data = SampleData.invalidURL
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: data)
+      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.invalidURL)
       XCTAssertNil(target.url,
                    "A remote app link target should not have a default value for its url field")
     } catch {
@@ -109,7 +106,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
   }
 
   func testDecodingFromJSON() {
-    guard let data = JSONLoader.loadData(for: .validAppLinkTarget) else {
+    guard let data = JSONLoader.loadData(for: .validRemoteAppLinkTarget) else {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(RemoteAppLinkTarget.self, from: data),

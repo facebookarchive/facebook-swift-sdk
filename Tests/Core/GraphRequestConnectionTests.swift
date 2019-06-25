@@ -106,7 +106,7 @@ class GraphRequestConnectionTests: XCTestCase {
           XCTAssertEqual(error, .requestAddition,
                          "Attempting to add a request while the connection is in the state: \(state) should throw a request addition error")
         } catch {
-          XCTFail("Caught unexpected error: \(error)")
+          XCTAssertNil(error, "Caught unexpected error: \(error)")
         }
     }
   }
@@ -607,8 +607,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let response = SampleHTTPURLResponse.valid
 
     let proxy = connection.getObject(
-      DecodablePerson.self,
-      for: graphRequest) { result in
+    for: graphRequest) { (result: Result<DecodablePerson, Error>) -> Void in
         switch result {
         case .success(let object):
           XCTAssertEqual(object, expectedObject,
@@ -629,8 +628,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let expectation = self.expectation(description: name)
 
     let proxy = connection.getObject(
-      DecodablePerson.self,
-      for: graphRequest) { result in
+    for: graphRequest) { (result: Result<DecodablePerson, Error>) -> Void in
         switch result {
         case .success:
           XCTFail("A request that is completed without data or a response should not be considered a success")
