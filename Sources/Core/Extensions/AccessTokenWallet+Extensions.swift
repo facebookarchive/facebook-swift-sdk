@@ -22,4 +22,8 @@ protocol AccessTokenProviding {
   var currentAccessToken: AccessToken? { get }
 }
 
-extension AccessTokenWallet: AccessTokenProviding {}
+protocol AccessTokenSetting {
+  func setCurrent(_ token: AccessToken?)
+}
+
+extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}

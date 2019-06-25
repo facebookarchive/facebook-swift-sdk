@@ -18,33 +18,23 @@
 
 @testable import FacebookCore
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class FakeAppEventsLogger: AppEventsLogging {
+  var activateAppWasCalled = false
+  var capturedEventName: AppEventName?
+  var capturedEventParameters: [String: AnyHashable] = [:]
+  var capturedIsImplicitlyLogged = false
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var isAutoLogAppEventsEnabled: Bool = false
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+  func activateApp() {
+    activateAppWasCalled = true
+  }
 
-  init(
-    appIdentifier: String? = "foo",
-    accessTokenCache: AccessTokenCaching? = nil,
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0",
-    urlSchemeSuffix: String? = nil
+  func logInternalEvent(
+    eventName: AppEventName,
+    parameters: [String: AnyHashable],
+    isImplicitlyLogged: Bool
     ) {
-    self.appIdentifier = appIdentifier
-    self.accessTokenCache = accessTokenCache
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
-    self.urlSchemeSuffix = urlSchemeSuffix
+    capturedEventName = eventName
+    capturedEventParameters = parameters
+    capturedIsImplicitlyLogged = isImplicitlyLogged
   }
 }

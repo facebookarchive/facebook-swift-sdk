@@ -22,14 +22,19 @@ class FakeAccessTokenCache: AccessTokenCaching {
   private(set) var secureStore: SecureStore
 
   var accessToken: AccessToken? {
-    didSet {
+    get {
+      accessTokenWasRetrieved = true
+      return capturedAccessToken
+    }
+    set {
       accessTokenWasSet = true
-      capturedAccessToken = accessToken
+      capturedAccessToken = newValue
     }
   }
 
   var accessTokenWasSet = false
   var capturedAccessToken: AccessToken?
+  var accessTokenWasRetrieved = false
 
   required init(secureStore: SecureStore) {
     self.secureStore = secureStore
