@@ -95,8 +95,8 @@ class ImageServiceTests: XCTestCase {
         XCTAssertEqual(error, .missingData,
                        "Should provide the expected error when completing a task with missing data")
 
-      case .failure:
-        XCTFail("Should only return expected errors")
+      case .failure(let error):
+        XCTAssertNil(error, "Should only return expected errors")
       }
       expectation.fulfill()
     }
@@ -143,8 +143,8 @@ class ImageServiceTests: XCTestCase {
         XCTAssertEqual(error, .missingData,
                        "Should provide the expected error when completing a task with missing data")
 
-      case .failure:
-        XCTFail("Should only return expected errors")
+      case let .failure(error):
+        XCTAssertNil(error, "Should only return expected errors")
       }
       expectation.fulfill()
     }
@@ -444,8 +444,8 @@ class ImageServiceTests: XCTestCase {
       for: request
     )
 
-    _ = service.image(for: url) { response in
-      guard case let .success(image) = response else {
+    _ = service.image(for: url) { result in
+      guard let image = try? result.get() else {
         return XCTFail("Should call the fetch completion with an image created from cached image data")
       }
       XCTAssertEqual(image.pngData(), self.imageData,

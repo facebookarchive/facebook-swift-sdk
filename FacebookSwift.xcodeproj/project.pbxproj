@@ -55,7 +55,7 @@
 		F42E3C822267E5E800287DC4 /* UserProfileBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7E2267E5E800287DC4 /* UserProfileBuilderTests.swift */; };
 		F42E3C862267E5FD00287DC4 /* SampleUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */; };
 		F42E3C872267E5FD00287DC4 /* SampleRawRemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */; };
-		F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */ = {isa = PBXBuildFile; fileRef = F42E3C882267E60900287DC4 /* validUserProfile.json */; };
+		F42E3C892267E60900287DC4 /* validRemoteUserProfile.json in Resources */ = {isa = PBXBuildFile; fileRef = F42E3C882267E60900287DC4 /* validRemoteUserProfile.json */; };
 		F42E3C8B2267E64500287DC4 /* RemoteUserProfile+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */; };
 		F42E3C8D2268BB6E00287DC4 /* UserDefaultsSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */; };
 		F42E3C8F2268BB7B00287DC4 /* UserProfileStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */; };
@@ -79,8 +79,8 @@
 		F43AB0282270B55600610974 /* GatekeeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0272270B55600610974 /* GatekeeperTests.swift */; };
 		F43AB02A2270B61600610974 /* Gatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0292270B61600610974 /* Gatekeeper.swift */; };
 		F43AB02C2270BE4F00610974 /* RemoteGatekeeperListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */; };
-		F43AB02F2270BF0200610974 /* validGatekeeperList.json in Resources */ = {isa = PBXBuildFile; fileRef = F43AB02D2270BF0200610974 /* validGatekeeperList.json */; };
-		F43AB0302270BF0200610974 /* validGatekeeper.json in Resources */ = {isa = PBXBuildFile; fileRef = F43AB02E2270BF0200610974 /* validGatekeeper.json */; };
+		F43AB02F2270BF0200610974 /* validRemoteGatekeeperList.json in Resources */ = {isa = PBXBuildFile; fileRef = F43AB02D2270BF0200610974 /* validRemoteGatekeeperList.json */; };
+		F43AB0302270BF0200610974 /* validRemoteGatekeeper.json in Resources */ = {isa = PBXBuildFile; fileRef = F43AB02E2270BF0200610974 /* validRemoteGatekeeper.json */; };
 		F43AB0322270BFB000610974 /* SampleRawRemoteGatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0312270BFB000610974 /* SampleRawRemoteGatekeeper.swift */; };
 		F43AB0342270C0B800610974 /* SampleRawRemoteGatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0332270C0B800610974 /* SampleRawRemoteGatekeeperList.swift */; };
 		F43AB03A2270CDD500610974 /* SampleGatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0392270CDD500610974 /* SampleGatekeeper.swift */; };
@@ -256,7 +256,7 @@
 		F4C32DA6223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */; };
 		F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */; };
 		F4C3C5252273CABC004B487E /* ImageSizingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C5242273CABC004B487E /* ImageSizingConfiguration.swift */; };
-		F4C3C52A22776208004B487E /* validAppLinkTarget.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C3C52922776208004B487E /* validAppLinkTarget.json */; };
+		F4C3C52A22776208004B487E /* validRemoteAppLinkTarget.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C3C52922776208004B487E /* validRemoteAppLinkTarget.json */; };
 		F4C3C52C227762A7004B487E /* SampleRawRemoteAppLinkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C52B227762A7004B487E /* SampleRawRemoteAppLinkTarget.swift */; };
 		F4C3C52E22779627004B487E /* AppLinkIdiomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C52D22779627004B487E /* AppLinkIdiomTests.swift */; };
 		F4C3C5302277991C004B487E /* AppLinkIdiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3C52F2277991C004B487E /* AppLinkIdiom.swift */; };
@@ -286,6 +286,7 @@
 		F4D5DAE422492BCD0014C14D /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
 		F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */; };
 		F4D694912273B1FD00A0B1CD /* UserProfileServiceConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */; };
+		F4DBAB1E22AD634300E4CF4A /* SampleRemoteUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBAB1D22AD634300E4CF4A /* SampleRemoteUserProfile.swift */; };
 		F4DC46FF2283678F00C0A309 /* AudioResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DC46FE2283678F00C0A309 /* AudioResourceLoader.swift */; };
 		F4DC470122836F6B00C0A309 /* AudioResourceLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */; };
 		F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */; };
@@ -428,7 +429,7 @@
 		F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileConfigurationTests.swift; sourceTree = "<group>"; };
 		F42E3C842267E5FD00287DC4 /* SampleUserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleUserProfile.swift; sourceTree = "<group>"; };
 		F42E3C852267E5FD00287DC4 /* SampleRawRemoteUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteUser.swift; sourceTree = "<group>"; };
-		F42E3C882267E60900287DC4 /* validUserProfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validUserProfile.json; sourceTree = "<group>"; };
+		F42E3C882267E60900287DC4 /* validRemoteUserProfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteUserProfile.json; sourceTree = "<group>"; };
 		F42E3C8A2267E64500287DC4 /* RemoteUserProfile+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteUserProfile+Extensions.swift"; sourceTree = "<group>"; };
 		F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSpy.swift; sourceTree = "<group>"; };
 		F42E3C8E2268BB7B00287DC4 /* UserProfileStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStoreTests.swift; sourceTree = "<group>"; };
@@ -452,8 +453,8 @@
 		F43AB0272270B55600610974 /* GatekeeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperTests.swift; sourceTree = "<group>"; };
 		F43AB0292270B61600610974 /* Gatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gatekeeper.swift; sourceTree = "<group>"; };
 		F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGatekeeperListTests.swift; sourceTree = "<group>"; };
-		F43AB02D2270BF0200610974 /* validGatekeeperList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validGatekeeperList.json; sourceTree = "<group>"; };
-		F43AB02E2270BF0200610974 /* validGatekeeper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validGatekeeper.json; sourceTree = "<group>"; };
+		F43AB02D2270BF0200610974 /* validRemoteGatekeeperList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteGatekeeperList.json; sourceTree = "<group>"; };
+		F43AB02E2270BF0200610974 /* validRemoteGatekeeper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteGatekeeper.json; sourceTree = "<group>"; };
 		F43AB0312270BFB000610974 /* SampleRawRemoteGatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteGatekeeper.swift; sourceTree = "<group>"; };
 		F43AB0332270C0B800610974 /* SampleRawRemoteGatekeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteGatekeeperList.swift; sourceTree = "<group>"; };
 		F43AB0392270CDD500610974 /* SampleGatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleGatekeeper.swift; sourceTree = "<group>"; };
@@ -633,7 +634,7 @@
 		F4C32DA3223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RemoteErrorConfigurationEntry+Extensions.swift"; sourceTree = "<group>"; };
 		F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorConfigurationTests.swift; sourceTree = "<group>"; };
 		F4C3C5242273CABC004B487E /* ImageSizingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSizingConfiguration.swift; sourceTree = "<group>"; };
-		F4C3C52922776208004B487E /* validAppLinkTarget.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validAppLinkTarget.json; sourceTree = "<group>"; };
+		F4C3C52922776208004B487E /* validRemoteAppLinkTarget.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validRemoteAppLinkTarget.json; sourceTree = "<group>"; };
 		F4C3C52B227762A7004B487E /* SampleRawRemoteAppLinkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteAppLinkTarget.swift; sourceTree = "<group>"; };
 		F4C3C52D22779627004B487E /* AppLinkIdiomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkIdiomTests.swift; sourceTree = "<group>"; };
 		F4C3C52F2277991C004B487E /* AppLinkIdiom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkIdiom.swift; sourceTree = "<group>"; };
@@ -662,6 +663,7 @@
 		F4D5DAE322492BCD0014C14D /* FakeBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBundle.swift; sourceTree = "<group>"; };
 		F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileServiceConfigurationTests.swift; sourceTree = "<group>"; };
+		F4DBAB1D22AD634300E4CF4A /* SampleRemoteUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteUserProfile.swift; sourceTree = "<group>"; };
 		F4DC46FE2283678F00C0A309 /* AudioResourceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResourceLoader.swift; sourceTree = "<group>"; };
 		F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResourceLoaderTests.swift; sourceTree = "<group>"; };
 		F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationEntryList.swift; sourceTree = "<group>"; };
@@ -1234,14 +1236,14 @@
 		F4BEDA5422414078004F2C7E /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				F4C3C52922776208004B487E /* validAppLinkTarget.json */,
-				F43AB02E2270BF0200610974 /* validGatekeeper.json */,
-				F43AB02D2270BF0200610974 /* validGatekeeperList.json */,
 				F4C3C55C227B6F4C004B487E /* validRemoteAppLink.json */,
 				F4C3C53B2278C4D7004B487E /* validRemoteAppLinkDetail.json */,
+				F4C3C52922776208004B487E /* validRemoteAppLinkTarget.json */,
 				F4BEDA5522414078004F2C7E /* validRemoteErrorConfiguration.json */,
 				F4BEDA5622414078004F2C7E /* validRemoteErrorConfigurationList.json */,
-				F42E3C882267E60900287DC4 /* validUserProfile.json */,
+				F43AB02E2270BF0200610974 /* validRemoteGatekeeper.json */,
+				F43AB02D2270BF0200610974 /* validRemoteGatekeeperList.json */,
+				F42E3C882267E60900287DC4 /* validRemoteUserProfile.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1278,6 +1280,7 @@
 				F4C3C55A227B68C9004B487E /* SampleRemoteAppLink.swift */,
 				F4C3C5372278C236004B487E /* SampleRemoteAppLinkTarget.swift */,
 				F43AB04522710E3200610974 /* SampleRemoteGatekeeperList.swift */,
+				F4DBAB1D22AD634300E4CF4A /* SampleRemoteUserProfile.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
 				F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */,
@@ -1638,15 +1641,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BEDA59224141AE004F2C7E /* validRemoteErrorConfiguration.json in Resources */,
-				F43AB02F2270BF0200610974 /* validGatekeeperList.json in Resources */,
+				F43AB02F2270BF0200610974 /* validRemoteGatekeeperList.json in Resources */,
 				F44847F9226928E300527D49 /* TestAssets.xcassets in Resources */,
 				F4C3C55D227B6F4C004B487E /* validRemoteAppLink.json in Resources */,
-				F42E3C892267E60900287DC4 /* validUserProfile.json in Resources */,
+				F42E3C892267E60900287DC4 /* validRemoteUserProfile.json in Resources */,
 				F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */,
 				F4317E9B2288C4BF00EBF926 /* ButtonView.xib in Resources */,
 				F4C3C53C2278C4D7004B487E /* validRemoteAppLinkDetail.json in Resources */,
-				F43AB0302270BF0200610974 /* validGatekeeper.json in Resources */,
-				F4C3C52A22776208004B487E /* validAppLinkTarget.json in Resources */,
+				F43AB0302270BF0200610974 /* validRemoteGatekeeper.json in Resources */,
+				F4C3C52A22776208004B487E /* validRemoteAppLinkTarget.json in Resources */,
 				F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1960,6 +1963,7 @@
 				F45E54FA229319C2008A6011 /* InfoDictionaryProvidingExtensionsTests.swift in Sources */,
 				F4C3C54B227A3E43004B487E /* AppLinkBuilderTests.swift in Sources */,
 				F4B340012240779D00912F0F /* JSONLoader.swift in Sources */,
+				F4DBAB1E22AD634300E4CF4A /* SampleRemoteUserProfile.swift in Sources */,
 				F45734CF222D892A001F806A /* GraphConnectionProviderTests.swift in Sources */,
 				F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */,
 				F43AB03A2270CDD500610974 /* SampleGatekeeper.swift in Sources */,
