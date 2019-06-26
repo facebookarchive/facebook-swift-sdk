@@ -283,11 +283,11 @@ class FBApplicationDelegate {
 
     var developerMessage: String {
       return """
-Expected 'sourceApplication' to be non-nil and non-empty.
-Please verify you are passing in 'sourceApplication' from your app delegate and not the UIApplication parameter.
-If your app delegate implements iOS 9's application:openURL:options:, you should pass in
-options[OpenURLOptionsKey.sourceApplication].
-"""
+        Expected 'sourceApplication' to be non-nil and non-empty.
+        Please verify you are passing in 'sourceApplication' from your app delegate and not the UIApplication parameter.
+        If your app delegate implements iOS 9's application:openURL:options:, you should pass in
+        options[OpenURLOptionsKey.sourceApplication].
+        """
     }
   }
 }
