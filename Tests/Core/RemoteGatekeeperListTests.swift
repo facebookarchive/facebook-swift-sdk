@@ -60,7 +60,7 @@ class RemoteGatekeeperListTests: XCTestCase {
   }
 
   func testCreatingFromJSON() {
-    guard let data = JSONLoader.loadData(for: .validGatekeeperList) else {
+    guard let data = JSONLoader.loadData(for: .validRemoteGatekeeperList) else {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(Remote.GatekeeperList.self, from: data),

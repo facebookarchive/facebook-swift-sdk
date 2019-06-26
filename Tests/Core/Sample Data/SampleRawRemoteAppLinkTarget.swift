@@ -48,13 +48,11 @@ enum SampleRawRemoteAppLinkTarget {
   }
 
   enum SerializedData {
-    static let valid: Data = {
-      try! JSONSerialization.data(withJSONObject: validRaw(), options: [])
-    }()
+    static let empty = try! JSONSerialization.data(withJSONObject: [:], options: [])
 
-    static let missingURL: Data = {
-      try! JSONSerialization.data(withJSONObject: validRaw(url: nil), options: [])
-    }()
+    static let valid = try! JSONSerialization.data(withJSONObject: validRaw(), options: [])
+
+    static let missingURL = try! JSONSerialization.data(withJSONObject: validRaw(url: nil), options: [])
 
     static let invalidURL: Data = {
       try! JSONSerialization.data(withJSONObject: validRaw(url: "^not_a_URL"), options: [])
