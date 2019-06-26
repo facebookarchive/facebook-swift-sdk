@@ -139,7 +139,8 @@ class UserProfileService: UserProfileProviding {
    - Parameter completion: The block to be executed once the profile is loaded
 
    If the profile is already loaded, this method will call the completion block synchronously, otherwise it
-   will begin a graph request to update `userProfile` and then call the completion block when finished.
+   will begin a graph request to update `userProfile` and then set the current profile and call the
+   completion block when finished.
    */
   func loadProfile(completion: ((UserProfileResult) -> Void)? = nil) {
     guard let token = accessTokenProvider.currentAccessToken else {
@@ -147,7 +148,16 @@ class UserProfileService: UserProfileProviding {
       return
     }
 
-    loadProfile(withToken: token, completion: completion)
+    loadProfile(withToken: token) { [weak self] result in
+      switch result {
+      case let .success(profile):
+        self?.setCurrent(profile)
+        completion?(.success(profile))
+
+      case let .failure(error):
+        completion?(.failure(error))
+      }
+    }
   }
 
   /**
@@ -157,12 +167,21 @@ class UserProfileService: UserProfileProviding {
    - Parameter completion: The Result closure to be invoked once the profile is loaded
 
    If the profile is already loaded, this method will call the completion synchronously, otherwise it
-   will begin a graph request to update `userProfile` and then call the completion when finished.
+   will begin a graph request to update `userProfile` and then set the current profile
+   and call the completion when finished.
    */
   func loadProfile(
     withToken token: AccessToken,
     completion: ((UserProfileResult) -> Void)? = nil
     ) {
+    if let profile = userProfile,
+      !isCurrentProfileOutdated,
+      profile.identifier == token.userID {
+      completion?(.success(profile))
+      return
+    }
+
+    // Attempt to fetch if the profile is outdated or the current profile does not match the id for the token
     let request = GraphRequest(
       graphPath: GraphPath.me,
       parameters: ["fields": "id,first_name,middle_name,last_name,name,link"],
@@ -171,24 +190,38 @@ class UserProfileService: UserProfileProviding {
         .union(GraphRequest.Flags.disableErrorRecovery)
     )
 
-    // Attempt to fetch if the profile is outdated or the current profile does not match the id for the token
-    if isCurrentProfileOutdated || userProfile?.identifier != token.userID {
-      // TODO: capture the task for cancellation possibilities? Or maybe make it discardable result
-      _ = graphConnectionProvider
-        .graphRequestConnection()
-        .getObject(
-          UserProfile.self,
-          for: request) { [weak self] result in
-            switch result {
-            case let .success(profile):
-              self?.setCurrent(profile)
+    // TODO: capture the task for cancellation possibilities? Or maybe make it discardable result
 
-            case let .failure(error):
-              self?.logger.log(.networkRequests, error.localizedDescription)
-            }
-            completion?(result)
+    loadRemoteProfile(for: request) { [weak self] (result: Result<Remote.UserProfile, Error>) -> Void in
+      let ultimateResult: UserProfileResult
+      defer {
+        completion?(ultimateResult)
+      }
+
+      switch result {
+      case let .success(remoteProfile):
+        if let userProfile = UserProfileBuilder.build(from: remoteProfile) {
+          self?.setCurrent(userProfile)
+          ultimateResult = .success(userProfile)
+        } else {
+          self?.logger.log(.networkRequests, "Invalid remote user profile fetched")
+          ultimateResult = .failure(ProfileFetchError.invalidRemoteProfile)
         }
+
+      case .failure(let error):
+        self?.logger.log(.networkRequests, error.localizedDescription)
+        ultimateResult = .failure(error)
+      }
     }
+  }
+
+  private func loadRemoteProfile(
+    for request: GraphRequest,
+    completion: @escaping (Result<Remote.UserProfile, Error>) -> Void
+    ) {
+    _ = graphConnectionProvider
+      .graphRequestConnection()
+      .getObject(for: request, completion: completion)
   }
 
   /**
@@ -257,19 +290,20 @@ class UserProfileService: UserProfileProviding {
 
     let request = imageRequest(for: identifier, sizingConfiguration: configuration)
 
-    // TODO: this shoudl probably return a task that can be cancelled
-    _ = graphConnectionProvider.graphRequestConnection().getObject(Data.self, for: request) { result in
-      switch result {
-      case let .success(data):
-        guard let image = UIImage(data: data, scale: configuration.scale) else {
-          return completion(.failure(ImageFetchError.invalidImageData))
-        }
-        completion(.success(image))
+    // TODO: this should probably return a task that can be cancelled
+    _ = graphConnectionProvider.graphRequestConnection()
+      .getObject(for: request) { (result: Result<Data, Error>) -> Void in
+        switch result {
+        case let .success(data):
+          guard let image = UIImage(data: data, scale: configuration.scale) else {
+            return completion(.failure(ImageFetchError.invalidImageData))
+          }
+          completion(.success(image))
 
-      case let .failure(error):
-        completion(.failure(error))
+        case let .failure(error):
+          completion(.failure(error))
+        }
       }
-    }
   }
 
   enum NotificationKeys {
@@ -290,5 +324,9 @@ class UserProfileService: UserProfileProviding {
 
   enum ImageFetchError: Error {
     case invalidImageData
+  }
+
+  enum ProfileFetchError: Error {
+    case invalidRemoteProfile
   }
 }

@@ -54,7 +54,7 @@ class ServerConfigurationService: ServerConfigurationServicing {
    with instructions to add an identifier
    */
   var defaultServerConfiguration: ServerConfiguration {
-      return ServerConfiguration(appID: appIdentifier)
+    return ServerConfiguration(appID: appIdentifier)
   }
 
   var isRequeryFinishedForAppStart: Bool = false
@@ -62,14 +62,12 @@ class ServerConfigurationService: ServerConfigurationServicing {
 
   private var dialogFlowsField: String {
     let operatingSystemVersion = ProcessInfo.processInfo.operatingSystemVersion
-    return [
-      FieldKeys.dialogFlows,
-      ".os_version(",
-      "\(operatingSystemVersion.majorVersion)",
-      ".\(operatingSystemVersion.minorVersion)",
-      ".\(operatingSystemVersion.patchVersion)",
-      ")"
-    ].joined()
+    return FieldKeys.dialogFlows
+      + ".os_version("
+      + "\(operatingSystemVersion.majorVersion)"
+      + ".\(operatingSystemVersion.minorVersion)"
+      + ".\(operatingSystemVersion.patchVersion)"
+      + ")"
   }
 
   init(
@@ -98,7 +96,7 @@ class ServerConfigurationService: ServerConfigurationServicing {
   }
 
   func request(for appIdentifier: String) -> GraphRequest {
-    var fields = [
+    var fields: [String] = [
       FieldKeys.appEventsFeatures,
       FieldKeys.appName,
       FieldKeys.defaultShareMode,
@@ -169,9 +167,8 @@ class ServerConfigurationService: ServerConfigurationServicing {
         var connection = graphConnectionProvider.graphRequestConnection()
         connection.timeout = loadTimeout
         _ = connection.getObject(
-            ServerConfiguration.self,
             for: request(for: appIdentifier)
-          ) { [weak self] result in
+        ) { [weak self] (result: ServerConfigurationResult) in
             guard let self = self else {
               return
             }

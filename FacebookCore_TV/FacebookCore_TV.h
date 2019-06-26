@@ -16,32 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+#import <UIKit/UIKit.h>
 
-protocol GraphRequestConnecting {
-  var timeout: TimeInterval { get set }
+//! Project version number for FacebookCore_TV.
+FOUNDATION_EXPORT double FacebookCore_TVVersionNumber;
 
-  func start()
-  func add(
-    request: GraphRequest,
-    batchEntryName: String,
-    batchParameters: [String: AnyHashable],
-    completion: @escaping GraphRequestBlock
-    ) throws
+//! Project version string for FacebookCore_TV.
+FOUNDATION_EXPORT const unsigned char FacebookCore_TVVersionString[];
 
-  func getObject<RemoteType: Decodable>(
-    for graphRequest: GraphRequest,
-    completion: @escaping (Result<RemoteType, Error>) -> Void
-    ) -> URLSessionTaskProxy?
-}
+// In this header, you should import all the public headers of your framework using statements like #import <FacebookCore_TV/PublicHeader.h>
 
-extension GraphRequestConnecting {
-  func add(
-    request: GraphRequest,
-    completion: @escaping GraphRequestBlock
-    ) throws {
-    // TODO: this feels a little hacky, would like to introduce a NonEmptyString type and use
-    // an existence check over an emptiness check on a String.
-    try add(request: request, batchEntryName: "", batchParameters: [:], completion: completion)
-  }
-}
+

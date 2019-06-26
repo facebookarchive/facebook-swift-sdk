@@ -61,12 +61,11 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
   }
 
   func getObject<RemoteType: Decodable>(
-    _ remoteType: RemoteType.Type,
     for graphRequest: GraphRequest,
     completion: @escaping (Result<RemoteType, Error>) -> Void
     ) -> URLSessionTaskProxy? {
     getObjectWasCalled = true
-    capturedGetObjectRemoteType = remoteType
+    capturedGetObjectRemoteType = RemoteType.self
     capturedGetObjectGraphRequest = graphRequest
 
     // Since there is no way (I can figure out) of capturing and storing the completion outside of this scope
@@ -78,7 +77,11 @@ class FakeGraphRequestConnection: GraphRequestConnecting {
     case let .some(result):
       switch result {
       case let .success(object):
-        let object = object as! RemoteType
+        guard let object = object as? RemoteType else {
+          completion(.failure(CoreError.invalidArgument))
+          return nil
+        }
+
         completion(.success(object))
 
       case let .failure(error):

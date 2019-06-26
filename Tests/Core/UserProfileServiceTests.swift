@@ -139,11 +139,12 @@ class UserProfileServiceTests: XCTestCase {
 
   func testFetchingWithAvailableAccessToken() {
     let expectation = self.expectation(description: name)
+    let remoteProfile = SampleRemoteUserProfile.valid
     let profile = SampleUserProfile.valid()
     let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
     wallet.setCurrent(token)
 
-    fakeConnection.stubGetObjectCompletionResult = .success(profile)
+    fakeConnection.stubGetObjectCompletionResult = .success(remoteProfile)
 
     service.loadProfile { result in
       switch result {
@@ -163,10 +164,9 @@ class UserProfileServiceTests: XCTestCase {
   func testSuccessfullyLoadingWithNilProfile() {
     let expectation = self.expectation(description: name)
     let profile = SampleUserProfile.valid()
-
     let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
 
-    fakeConnection.stubGetObjectCompletionResult = .success(profile)
+    fakeConnection.stubGetObjectCompletionResult = .success(SampleRemoteUserProfile.valid)
 
     service.loadProfile(withToken: token) { _ in
       expectation.fulfill()
@@ -182,7 +182,6 @@ class UserProfileServiceTests: XCTestCase {
 
   func testUnsuccessfullyLoadingWithNilProfile() {
     let expectation = self.expectation(description: name)
-
     let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
 
     fakeConnection.stubGetObjectCompletionResult = .failure(SampleNSError.validWithUserInfo)
@@ -199,6 +198,31 @@ class UserProfileServiceTests: XCTestCase {
                  "Should not notify on a failure to fetch a user profile")
     XCTAssertEqual(fakeLogger.capturedMessages, ["The operation couldn’t be completed. (NSURLErrorDomain error 1.)"],
                    "Should log the expected error on a failure to fetch a user profile")
+  }
+
+  func testLoadingWithInvalidRemoteProfile() {
+    let expectation = self.expectation(description: name)
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+
+    fakeConnection.stubGetObjectCompletionResult = .success(SampleRemoteUserProfile.invalid)
+
+    service.loadProfile(withToken: token) { result in
+      switch result {
+      case .success:
+        XCTFail("Should not successfully load a token if the underlying fetched remote token is invalid")
+
+      case let .failure(error):
+        XCTAssertEqual(
+          (error as? UserProfileService.ProfileFetchError),
+          UserProfileService.ProfileFetchError.invalidRemoteProfile,
+          "Should throw a meaningful error on failure to build a canonical user profile from the fetched remote"
+        )
+        XCTAssertEqual(self.fakeLogger.capturedMessages, ["Invalid remote user profile fetched"],
+                       "Should log the expected error on fetching an invalid remote user profile")
+      }
+      expectation.fulfill()
+    }
+    waitForExpectations(timeout: 1, handler: nil)
   }
 
   func testLoadingWithFreshProfileAndMatchingTokenIdentifier() {
@@ -238,7 +262,7 @@ class UserProfileServiceTests: XCTestCase {
     fakeNotificationCenter.reset()
 
     // Stub a fetch result
-    fakeConnection.stubGetObjectCompletionResult = .success(newProfile)
+    fakeConnection.stubGetObjectCompletionResult = .success(SampleRemoteUserProfile.valid)
 
     // Attempt to load the profile
     service.loadProfile(withToken: token) { _ in }
@@ -263,7 +287,7 @@ class UserProfileServiceTests: XCTestCase {
     fakeNotificationCenter.reset()
 
     // Stub a fetch result
-    fakeConnection.stubGetObjectCompletionResult = .success(newProfile)
+    fakeConnection.stubGetObjectCompletionResult = .success(SampleRemoteUserProfile.valid)
 
     // Attempt to load the profile
     service.loadProfile(withToken: token) { _ in
@@ -321,7 +345,7 @@ class UserProfileServiceTests: XCTestCase {
     fakeNotificationCenter.reset()
 
     // Stub a fetch result
-    fakeConnection.stubGetObjectCompletionResult = .success(newProfile)
+    fakeConnection.stubGetObjectCompletionResult = .success(SampleRemoteUserProfile.valid)
 
     // Attempt to load the profile
     service.loadProfile(withToken: token) { _ in }
@@ -722,5 +746,20 @@ class UserProfileServiceTests: XCTestCase {
     // Assert
     XCTAssertTrue(fakeConnection.getObjectWasCalled,
                   "Should attempt to fetch a new profile when a notification is received for a new access token")
+  }
+}
+
+extension UserProfile: Equatable {
+  public static func == (lhs: UserProfile, rhs: UserProfile) -> Bool {
+    guard lhs.name == rhs.name,
+      lhs.firstName == rhs.firstName,
+      lhs.middleName == rhs.middleName,
+      lhs.lastName == rhs.lastName,
+      lhs.url == rhs.url
+      else {
+        return false
+    }
+
+    return true
   }
 }
