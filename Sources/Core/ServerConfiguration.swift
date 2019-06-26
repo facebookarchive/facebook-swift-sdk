@@ -85,11 +85,11 @@ struct ServerConfiguration: ServerConfigurationProviding {
     }
 
     self.appID = appID
-    self.appName = remote.appName?.nonEmpty
-    self.defaultShareMode = remote.defaultShareMode?.nonEmpty
-    self.loginTooltipText = remote.loginTooltipText?.nonEmpty
-    self.loggingToken = remote.loggingToken?.nonEmpty
-    self.updateMessage = remote.updateMessage?.nonEmpty
+    self.appName = remote.appName?.nonempty
+    self.defaultShareMode = remote.defaultShareMode?.nonempty
+    self.loginTooltipText = remote.loginTooltipText?.nonempty
+    self.loggingToken = remote.loggingToken?.nonempty
+    self.updateMessage = remote.updateMessage?.nonempty
     self.errorConfiguration = ServerConfiguration.extractErrorConfiguration(from: remote)
     let appEventsFeaturesOptionSet = AppEventsFeatures(rawValue: remote.appEventsFeaturesRawValue ?? 0)
     self.isAdvertisingIDEnabled = appEventsFeaturesOptionSet.contains(.isAdvertisingIDEnabled)
