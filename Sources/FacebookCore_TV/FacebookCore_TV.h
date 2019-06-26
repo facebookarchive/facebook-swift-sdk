@@ -16,11 +16,14 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
-import Foundation
+#import <UIKit/UIKit.h>
 
-extension Remote.RestrictiveEventParameterList {
-  init(parameters: [Remote.RestrictiveEventParameter]) {
-    self.parameters = parameters
-  }
-}
+//! Project version number for FacebookCore_TV.
+FOUNDATION_EXPORT double FacebookCore_TVVersionNumber;
+
+//! Project version string for FacebookCore_TV.
+FOUNDATION_EXPORT const unsigned char FacebookCore_TVVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <FacebookCore_TV/PublicHeader.h>
+
+

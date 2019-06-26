@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping type_body_length file_length
-
 @testable import FacebookCore
 import XCTest
 
@@ -227,7 +225,7 @@ class GatekeeperServiceTests: XCTestCase {
 
     service.loadGatekeepers()
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is RemoteGatekeeperList.Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is Remote.GatekeeperList.Type,
                   "Should attempt to load a remote list of gatekeepers if no fetch has occured for the current application identifier")
   }
 
@@ -237,7 +235,7 @@ class GatekeeperServiceTests: XCTestCase {
 
     service.loadGatekeepers()
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is RemoteGatekeeperList.Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is Remote.GatekeeperList.Type,
                   "Should attempt to load a remote list of gatekeepers if no fetch has occured for the current application identifier")
   }
 
@@ -262,7 +260,7 @@ class GatekeeperServiceTests: XCTestCase {
 
     service.loadGatekeepers()
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is RemoteGatekeeperList.Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is Remote.GatekeeperList.Type,
                   "Should attempt to load a remote list of gatekeepers if the current gatekeepers are invalid")
   }
 
@@ -293,7 +291,7 @@ class GatekeeperServiceTests: XCTestCase {
     setGatekeeper(toValid: false)
     service.loadGatekeepers()
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is RemoteGatekeeperList.Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is Remote.GatekeeperList.Type,
                   "Should attempt to load a remote list of gatekeepers if the current gatekeepers are invalid and there are no pending tasks")
   }
 

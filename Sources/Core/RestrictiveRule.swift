@@ -26,7 +26,7 @@ struct RestrictiveRule: Codable {
   let valueRegex: String?
   let valueNegativeRegex: String?
 
-  init?(remote: RemoteRestrictiveRule) {
+  init?(remote: Remote.RestrictiveRule) {
     guard !remote.keyRegex.isEmpty else {
       return nil
     }

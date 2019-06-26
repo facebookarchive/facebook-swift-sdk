@@ -18,23 +18,25 @@
 
 import Foundation
 
-struct RemoteDialogConfiguration: Decodable {
-  let name: String?
-  let urlString: String?
-  // swiftlint:disable:next discouraged_optional_collection
-  let versions: [Int]?
+extension Remote {
+  struct DialogConfiguration: Decodable {
+    let name: String?
+    let urlString: String?
+    // swiftlint:disable:next discouraged_optional_collection
+    let versions: [Int]?
 
-  enum CodingKeys: String, CodingKey {
-    case name
-    case urlString = "url"
-    case versions
+    enum CodingKeys: String, CodingKey {
+      case name
+      case urlString = "url"
+      case versions
+    }
   }
-}
 
-struct RemoteDialogConfigurationList: Decodable {
-  let configurations: [RemoteDialogConfiguration]
+  struct DialogConfigurationList: Decodable {
+    let configurations: [DialogConfiguration]
 
-  enum CodingKeys: String, CodingKey {
-    case configurations = "data"
+    enum CodingKeys: String, CodingKey {
+      case configurations = "data"
+    }
   }
 }

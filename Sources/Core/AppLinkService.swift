@@ -109,7 +109,7 @@ class AppLinkService {
       .graphRequestConnection()
       .getObject(
         for: request
-      ) { [weak self] (result: Result<[RemoteAppLink], Error>) -> Void in
+      ) { [weak self] (result: Result<[Remote.AppLink], Error>) -> Void in
         guard let self = self else {
           return
         }

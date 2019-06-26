@@ -20,32 +20,32 @@
 import Foundation
 
 enum SampleRemoteRestrictiveEventParameter {
-  static let deprecated = RemoteRestrictiveEventParameter(
+  static let deprecated = Remote.RestrictiveEventParameter(
     name: "deprecated",
     isDeprecated: true,
     restrictiveEventParameters: ["foo": 1]
   )
-  static let deprecatedNoParameters = RemoteRestrictiveEventParameter(
+  static let deprecatedNoParameters = Remote.RestrictiveEventParameter(
     name: "deprecatedNoParameters",
     isDeprecated: true,
     restrictiveEventParameters: nil
   )
-  static let nonDeprecated = RemoteRestrictiveEventParameter(
+  static let nonDeprecated = Remote.RestrictiveEventParameter(
     name: "nonDeprecated",
     isDeprecated: false,
     restrictiveEventParameters: ["foo": 2]
   )
-  static let nonDeprecatedNoParameters = RemoteRestrictiveEventParameter(
+  static let nonDeprecatedNoParameters = Remote.RestrictiveEventParameter(
     name: "nonDeprecatedNoParameters",
     isDeprecated: false,
     restrictiveEventParameters: nil
   )
-  static let unknownDeprecation = RemoteRestrictiveEventParameter(
+  static let unknownDeprecation = Remote.RestrictiveEventParameter(
     name: "unknownDeprecation",
     isDeprecated: nil,
     restrictiveEventParameters: ["foo": 3]
   )
-  static let unknownParameter = RemoteRestrictiveEventParameter(
+  static let unknownParameter = Remote.RestrictiveEventParameter(
     name: "unknownParameter",
     isDeprecated: true,
     restrictiveEventParameters: nil

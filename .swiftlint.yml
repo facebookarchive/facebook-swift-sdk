@@ -59,6 +59,7 @@ disabled_rules:
   # Re-enable after Release 1.0
   - file_name
   - function_default_parameter_at_end
+  - nesting
   - todo
 
 opt_in_rules:
@@ -143,7 +144,6 @@ opt_in_rules:
   - multiline_parameters
   - multiline_parameters_brackets
   - multiple_closures_with_trailing_closure
-  - nesting
   - nimble_operator
   - no_fallthrough_only
   - no_grouping_extension

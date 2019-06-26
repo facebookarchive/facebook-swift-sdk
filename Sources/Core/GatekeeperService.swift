@@ -23,7 +23,7 @@ import Foundation
  application identifier
  */
 public class GatekeeperService {
-  private(set) var gatekeepers: GatekeeperList = [:]
+  private(set) var gatekeepers: GatekeeperDictionary = [:]
   private(set) var graphConnectionProvider: GraphConnectionProviding
   private(set) var logger: Logging
   private(set) var store: GatekeeperStore
@@ -166,7 +166,7 @@ public class GatekeeperService {
       .graphRequestConnection()
       .getObject(
         for: request
-      ) { [weak self] (result: Result<RemoteGatekeeperList, Error>) -> Void in
+      ) { [weak self] (result: Result<Remote.GatekeeperList, Error>) -> Void in
         guard let self = self else {
           return
         }

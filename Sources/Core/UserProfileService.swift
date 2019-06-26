@@ -190,7 +190,7 @@ class UserProfileService: UserProfileProviding {
 
     // TODO: capture the task for cancellation possibilities? Or maybe make it discardable result
 
-    loadRemoteProfile(for: request) { [weak self] (result: Result<RemoteUserProfile, Error>) -> Void in
+    loadRemoteProfile(for: request) { [weak self] (result: Result<Remote.UserProfile, Error>) -> Void in
       let ultimateResult: UserProfileResult
       defer {
         completion?(ultimateResult)
@@ -215,7 +215,7 @@ class UserProfileService: UserProfileProviding {
 
   private func loadRemoteProfile(
     for request: GraphRequest,
-    completion: @escaping (Result<RemoteUserProfile, Error>) -> Void
+    completion: @escaping (Result<Remote.UserProfile, Error>) -> Void
     ) {
     _ = graphConnectionProvider
       .graphRequestConnection()

@@ -18,15 +18,17 @@
 
 import Foundation
 
-typealias GatekeeperList = [String: [Gatekeeper]]
+typealias GatekeeperDictionary = [String: [Gatekeeper]]
 
-struct RemoteGatekeeperList: Decodable {
-  let data: [GatekeeperList]
+extension Remote {
+  struct GatekeeperList: Decodable {
+    let data: [GatekeeperDictionary]
 
-  var gatekeepers: [Gatekeeper] {
-    guard let list = data.first?["gatekeepers"] else {
-      return []
+    var gatekeepers: [Gatekeeper] {
+      guard let list = data.first?["gatekeepers"] else {
+        return []
+      }
+      return list
     }
-    return list
   }
 }

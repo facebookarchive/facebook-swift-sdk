@@ -26,9 +26,9 @@ class RemoteAppLinkDetailTests: XCTestCase {
   func testCreatingWithMissingIdiom() {
     do {
       let data = try JSONSerialization.data(withJSONObject: [:], options: [])
-      _ = try decoder.decode(RemoteAppLinkDetail.self, from: data)
+      _ = try decoder.decode(Remote.AppLinkDetail.self, from: data)
       XCTFail("Should not create remote app link details from an empty dictionary")
-    } catch let error as RemoteAppLinkDetail.DecodingError {
+    } catch let error as Remote.AppLinkDetail.DecodingError {
       XCTAssertEqual(error, .missingIdiom,
                      "Should throw a descriptive error on a failure to decode")
     } catch {
@@ -39,9 +39,9 @@ class RemoteAppLinkDetailTests: XCTestCase {
   func testCreatingWithUnknownIdiom() {
     let data = SampleData.unknownIdiom
     do {
-      _ = try decoder.decode(RemoteAppLinkDetail.self, from: data)
+      _ = try decoder.decode(Remote.AppLinkDetail.self, from: data)
       XCTFail("Should not create remote app link details if there is no idiom present")
-    } catch let error as RemoteAppLinkDetail.DecodingError {
+    } catch let error as Remote.AppLinkDetail.DecodingError {
       XCTAssertEqual(error, .missingIdiom,
                      "Should throw a descriptive error on a failure to decode")
     } catch {
@@ -51,7 +51,7 @@ class RemoteAppLinkDetailTests: XCTestCase {
 
   func testCreatingWithEmptyTargets() {
     do {
-      let details = try decoder.decode(RemoteAppLinkDetail.self, from: SampleData.emptyTargets(forIdiom: .iOS))
+      let details = try decoder.decode(Remote.AppLinkDetail.self, from: SampleData.emptyTargets(forIdiom: .iOS))
       XCTAssertTrue(details.targets.isEmpty,
                     "Should be able to create remote app link details with missing targets")
     } catch {
@@ -62,7 +62,7 @@ class RemoteAppLinkDetailTests: XCTestCase {
   func testCreatingWithIdiomsWithInvalidTargets() {
     let data = SampleData.invalidTargets(forIdiom: .iOS)
     do {
-      let details = try decoder.decode(RemoteAppLinkDetail.self, from: data)
+      let details = try decoder.decode(Remote.AppLinkDetail.self, from: data)
       XCTAssertFalse(details.targets.isEmpty,
                      "Should be able to create with and store a list of targets that will later be considered invalid")
     } catch {
@@ -79,7 +79,7 @@ class RemoteAppLinkDetailTests: XCTestCase {
       ]
     )
     do {
-      let link = try decoder.decode(RemoteAppLinkDetail.self, from: data)
+      let link = try decoder.decode(Remote.AppLinkDetail.self, from: data)
       XCTAssertEqual(link.targets.count, 1,
                      "Should not store duplicate targets")
     } catch {
@@ -96,7 +96,7 @@ class RemoteAppLinkDetailTests: XCTestCase {
       ]
     )
     do {
-      let link = try decoder.decode(RemoteAppLinkDetail.self, from: data)
+      let link = try decoder.decode(Remote.AppLinkDetail.self, from: data)
       XCTAssertEqual(link.targets.count, 2,
                      "Should not store duplicate targets")
     } catch {
@@ -110,11 +110,11 @@ class RemoteAppLinkDetailTests: XCTestCase {
       targets: [SampleRawRemoteAppLinkTarget.validRaw()]
     )
 
-    let remoteAppLinkDetail: RemoteAppLinkDetail
+    let remoteAppLinkDetail: Remote.AppLinkDetail
 
     do {
       let expected = try JSONSerialization.data(withJSONObject: rawRemoteAppLinkDetail, options: [])
-      remoteAppLinkDetail = try decoder.decode(RemoteAppLinkDetail.self, from: expected)
+      remoteAppLinkDetail = try decoder.decode(Remote.AppLinkDetail.self, from: expected)
     } catch {
       return XCTAssertNil(error, "Should be able to decode remote app link details from valid json")
     }
@@ -131,7 +131,7 @@ class RemoteAppLinkDetailTests: XCTestCase {
     }
 
     do {
-      _ = try decoder.decode(RemoteAppLinkDetail.self, from: data)
+      _ = try decoder.decode(Remote.AppLinkDetail.self, from: data)
     } catch {
       XCTAssertNil(error, "Should be able to decode remote app link details from valid json")
     }

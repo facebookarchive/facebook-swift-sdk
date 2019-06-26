@@ -23,7 +23,7 @@ struct RestrictiveEventParameter: Codable {
   let isDeprecated: Bool
   let restrictedParameters: [String: Int]
 
-  init?(remote: RemoteRestrictiveEventParameter) {
+  init?(remote: Remote.RestrictiveEventParameter) {
     self.name = remote.name
     self.isDeprecated = remote.isDeprecated ?? false
 

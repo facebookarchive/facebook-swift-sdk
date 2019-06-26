@@ -20,7 +20,7 @@
 
 import Foundation
 
-extension RemoteServerConfiguration {
+extension Remote.ServerConfiguration {
   struct DialogFlow {
     let name: String
     let shouldUseNativeFlow: Bool?

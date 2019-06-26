@@ -22,186 +22,186 @@ import Foundation
 enum SampleRemoteServerConfiguration {
   typealias AppEventsFeatures = ServerConfiguration.AppEventsFeatures
 
-  static let missingAppID = RemoteServerConfiguration()
+  static let missingAppID = Remote.ServerConfiguration()
 
-  static let emptyAppID = RemoteServerConfiguration(appID: "")
+  static let emptyAppID = Remote.ServerConfiguration(appID: "")
 
-  static let minimal = RemoteServerConfiguration(appID: "abc123")
+  static let minimal = Remote.ServerConfiguration(appID: "abc123")
 
-  static let advertisingIdEnabled = RemoteServerConfiguration(
+  static let advertisingIdEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     appEventsFeaturesRawValue: AppEventsFeatures.isAdvertisingIDEnabled.rawValue
   )
 
-  static let missingAdvertisingId = RemoteServerConfiguration(
+  static let missingAdvertisingId = Remote.ServerConfiguration(
     appID: "abc123",
     appEventsFeaturesRawValue: AppEventsFeatures.none.rawValue
   )
 
-  static let implicitPurchaseLoggingEnabled = RemoteServerConfiguration(
+  static let implicitPurchaseLoggingEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     appEventsFeaturesRawValue: AppEventsFeatures.isImplicitPurchaseLoggingEnabled.rawValue
   )
 
-  static let codelessEventsEnabled = RemoteServerConfiguration(
+  static let codelessEventsEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     appEventsFeaturesRawValue: AppEventsFeatures.isCodelessEventsTriggerEnabled.rawValue
   )
 
-  static let uninstallTrackingEnabled = RemoteServerConfiguration(
+  static let uninstallTrackingEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     appEventsFeaturesRawValue: AppEventsFeatures.isUninstallTrackingEnabled.rawValue
   )
 
-  static let emptyAppName = RemoteServerConfiguration(
+  static let emptyAppName = Remote.ServerConfiguration(
     appID: "abc123",
     appName: ""
   )
 
-  static let includingAppName = RemoteServerConfiguration(
+  static let includingAppName = Remote.ServerConfiguration(
     appID: "abc123",
     appName: "Foo App"
   )
 
-  static let emptyDefaultShareMode = RemoteServerConfiguration(
+  static let emptyDefaultShareMode = Remote.ServerConfiguration(
     appID: "abc123",
     defaultShareMode: ""
   )
 
-  static let includingDefaultShareMode = RemoteServerConfiguration(
+  static let includingDefaultShareMode = Remote.ServerConfiguration(
     appID: "abc123",
     defaultShareMode: "Foo"
   )
 
-  static var includingErrorConfiguration: RemoteServerConfiguration {
-    let remoteErrorConfig = RemoteErrorConfigurationEntry(
-      items: [RemoteErrorCodeGroup(code: 123, subcodes: [])]
+  static var includingErrorConfiguration: Remote.ServerConfiguration {
+    let remoteErrorConfig = Remote.ErrorConfigurationEntry(
+      items: [Remote.ErrorCodeGroup(code: 123, subcodes: [])]
     )
-    let remoteErrorList = RemoteErrorConfigurationEntryList(configurations: [remoteErrorConfig])
-    return RemoteServerConfiguration(
+    let remoteErrorList = Remote.ErrorConfigurationEntryList(configurations: [remoteErrorConfig])
+    return Remote.ServerConfiguration(
       appID: "abc123",
       errorConfiguration: remoteErrorList
     )
   }
 
-  static let withLoginTooltipEnabled = RemoteServerConfiguration(
+  static let withLoginTooltipEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     isLoginTooltipEnabled: true
   )
 
-  static let withImplicitLoggingEnabled = RemoteServerConfiguration(
+  static let withImplicitLoggingEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     isImplicitLoggingEnabled: true
   )
 
-  static let withNativeAuthFlowEnabled = RemoteServerConfiguration(
+  static let withNativeAuthFlowEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     isNativeAuthFlowEnabled: true
   )
 
-  static let withSystemAuthenticationEnabled = RemoteServerConfiguration(
+  static let withSystemAuthenticationEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     isSystemAuthenticationEnabled: true
   )
 
-  static let emptyLoginTooltipText = RemoteServerConfiguration(
+  static let emptyLoginTooltipText = Remote.ServerConfiguration(
     appID: "abc123",
     loginTooltipText: ""
   )
 
-  static let withLoginTooltipText = RemoteServerConfiguration(
+  static let withLoginTooltipText = Remote.ServerConfiguration(
     appID: "abc123",
     loginTooltipText: "Foo"
   )
 
-  static let withSessionTimeoutInterval = RemoteServerConfiguration(
+  static let withSessionTimeoutInterval = Remote.ServerConfiguration(
     appID: "abc123",
     sessionTimeoutInterval: 100
   )
 
-  static let emptyLoggingToken = RemoteServerConfiguration(
+  static let emptyLoggingToken = Remote.ServerConfiguration(
     appID: "abc123",
     loggingToken: ""
   )
 
-  static let withLoggingToken = RemoteServerConfiguration(
+  static let withLoggingToken = Remote.ServerConfiguration(
     appID: "abc123",
     loggingToken: "Foo"
   )
 
-  static let smartLoginOptionsEnabled = RemoteServerConfiguration(
+  static let smartLoginOptionsEnabled = Remote.ServerConfiguration(
     appID: "abc123",
     smartLoginOptionsRawValue: ServerConfiguration.SmartLoginOptions.isEnabled.rawValue
   )
 
-  static let smartLoginOptionsRequireConfirmation = RemoteServerConfiguration(
+  static let smartLoginOptionsRequireConfirmation = Remote.ServerConfiguration(
     appID: "abc123",
     smartLoginOptionsRawValue: ServerConfiguration.SmartLoginOptions.shouldRequireConfirmation.rawValue
   )
 
-  static let invalidSmartLoginBookmarkIconUrl = RemoteServerConfiguration(
+  static let invalidSmartLoginBookmarkIconUrl = Remote.ServerConfiguration(
     appID: "abc123",
     smartLoginBookmarkIconUrlString: "^"
   )
 
-  static let invalidSmartLoginMenuIconUrl = RemoteServerConfiguration(
+  static let invalidSmartLoginMenuIconUrl = Remote.ServerConfiguration(
     appID: "abc123",
     smartLoginMenuIconUrlString: "^"
   )
 
-  static let validSmartLoginBookmarkIconUrl = RemoteServerConfiguration(
+  static let validSmartLoginBookmarkIconUrl = Remote.ServerConfiguration(
     appID: "abc123",
     smartLoginBookmarkIconUrlString: "www.example.com"
   )
 
-  static let validSmartLoginMenuIconUrl = RemoteServerConfiguration(
+  static let validSmartLoginMenuIconUrl = Remote.ServerConfiguration(
     appID: "abc123",
     smartLoginMenuIconUrlString: "www.example.com"
   )
 
-  static let emptyUpdateMessage = RemoteServerConfiguration(
+  static let emptyUpdateMessage = Remote.ServerConfiguration(
     appID: "abc123",
     updateMessage: ""
   )
 
-  static let withUpdateMessage = RemoteServerConfiguration(
+  static let withUpdateMessage = Remote.ServerConfiguration(
     appID: "abc123",
     updateMessage: "Foo"
   )
 
-  static let emptyEventBindings = RemoteServerConfiguration(
+  static let emptyEventBindings = Remote.ServerConfiguration(
     appID: "abc123",
     eventBindings: []
   )
 
-  static let withEventBindings = RemoteServerConfiguration(
+  static let withEventBindings = Remote.ServerConfiguration(
     appID: "abc123",
     eventBindings: ["Foo", "Bar"]
   )
 
-  static let withDialogConfigurations = RemoteServerConfiguration(
+  static let withDialogConfigurations = Remote.ServerConfiguration(
     appID: "abc123",
-    dialogConfigurations: RemoteDialogConfigurationList(
+    dialogConfigurations: Remote.DialogConfigurationList(
       configurations: [SampleRemoteDialogConfiguration.valid]
     )
   )
 
-  static func withRemoteDialogFlows(_ list: RemoteServerConfiguration.DialogFlowList) -> RemoteServerConfiguration {
-    return RemoteServerConfiguration(
+  static func withRemoteDialogFlows(_ list: Remote.ServerConfiguration.DialogFlowList) -> Remote.ServerConfiguration {
+    return Remote.ServerConfiguration(
       appID: "abc123",
       dialogFlows: list
     )
   }
 
-  static func withRemoteRestrictiveRules(_ rules: [RemoteRestrictiveRule]) -> RemoteServerConfiguration {
-    return RemoteServerConfiguration(
+  static func withRemoteRestrictiveRules(_ rules: [Remote.RestrictiveRule]) -> Remote.ServerConfiguration {
+    return Remote.ServerConfiguration(
       appID: "abc123",
       restrictiveRules: rules
     )
   }
 
-  static func withRemoteRestrictiveParams(_ list: RemoteRestrictiveEventParameterList) -> RemoteServerConfiguration {
-    return RemoteServerConfiguration(
+  static func withRemoteRestrictiveParams(_ list: Remote.RestrictiveEventParameterList) -> Remote.ServerConfiguration {
+    return Remote.ServerConfiguration(
       appID: "abc123",
       restrictiveEventParameterList: list
     )

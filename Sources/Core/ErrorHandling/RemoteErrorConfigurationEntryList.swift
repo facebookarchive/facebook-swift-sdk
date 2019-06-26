@@ -18,33 +18,35 @@
 
 import Foundation
 
-/// A representation of a server side list of errors
-/// Used for creating an `ErrorConfiguration`
-struct RemoteErrorConfigurationEntryList: Decodable {
-  let configurations: [RemoteErrorConfigurationEntry]
+extension Remote {
+  /// A representation of a server side list of errors
+  /// Used for creating an `ErrorConfiguration`
+  struct ErrorConfigurationEntryList: Decodable {
+    let configurations: [ErrorConfigurationEntry]
 
-  init(from decoder: Decoder) throws {
-    var container = try decoder.unkeyedContainer()
-    var configurations: [RemoteErrorConfigurationEntry] = []
+    init(from decoder: Decoder) throws {
+      var container = try decoder.unkeyedContainer()
+      var configurations: [ErrorConfigurationEntry] = []
 
-    while !container.isAtEnd {
-      switch try? container.decode(RemoteErrorConfigurationEntry.self) {
-      case let item?:
-        configurations.append(item)
+      while !container.isAtEnd {
+        switch try? container.decode(ErrorConfigurationEntry.self) {
+        case let item?:
+          configurations.append(item)
 
-      case nil:
-        _ = try? container.decode(EmptyDecodable.self)
+        case nil:
+          _ = try? container.decode(EmptyDecodable.self)
+        }
       }
+
+      guard !configurations.isEmpty else {
+        throw DecodingError.emptyItems
+      }
+
+      self.configurations = configurations
     }
 
-    guard !configurations.isEmpty else {
-      throw DecodingError.emptyItems
+    enum DecodingError: FBError {
+      case emptyItems
     }
-
-    self.configurations = configurations
-  }
-
-  enum DecodingError: FBError {
-    case emptyItems
   }
 }

@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping
-
 @testable import FacebookCore
 import XCTest
 
@@ -29,9 +27,9 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithEmptyDictionary() {
     do {
-      _ = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.empty)
+      _ = try decoder.decode(Remote.AppLinkTarget.self, from: SampleData.empty)
       XCTFail("Should not create an app link target from an empty dictionary")
-    } catch let error as RemoteAppLinkTarget.DecodingError {
+    } catch let error as Remote.AppLinkTarget.DecodingError {
       XCTAssertEqual(error, .emptyTarget,
                      "Should throw meaningful errors when failing to decode an empty dictionary")
     } catch {
@@ -41,7 +39,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithMissingURLString() {
     do {
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.missingURL)
+      let target = try decoder.decode(Remote.AppLinkTarget.self, from: SampleData.missingURL)
       XCTAssertNil(target.url,
                    "A remote app link target should not have a default value for its url field")
     } catch {
@@ -52,7 +50,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithInvalidURLString() {
     do {
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.invalidURL)
+      let target = try decoder.decode(Remote.AppLinkTarget.self, from: SampleData.invalidURL)
       XCTAssertNil(target.url,
                    "A remote app link target should not have a default value for its url field")
     } catch {
@@ -63,7 +61,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithMissingShouldFallback() {
     do {
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.shouldFallback(nil))
+      let target = try decoder.decode(Remote.AppLinkTarget.self, from: SampleData.shouldFallback(nil))
       XCTAssertNil(target.shouldFallback,
                    "Should not set a default value for whether the target's url should be used as a fallback")
     } catch {
@@ -73,7 +71,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWthShouldFallback() {
     do {
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.shouldFallback(true))
+      let target = try decoder.decode(Remote.AppLinkTarget.self, from: SampleData.shouldFallback(true))
       XCTAssertTrue(target.shouldFallback == true,
                     "Should decode and track whether the target's url should be used as a fallback")
     } catch {
@@ -83,7 +81,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWthShouldNotFallback() {
     do {
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.shouldFallback(false))
+      let target = try decoder.decode(Remote.AppLinkTarget.self, from: SampleData.shouldFallback(false))
       XCTAssertTrue(target.shouldFallback == false,
                     "Should decode and track whether the target's url should be used as a fallback")
     } catch {
@@ -93,7 +91,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
 
   func testDecodingWithAllFields() {
     do {
-      let target = try decoder.decode(RemoteAppLinkTarget.self, from: SampleData.valid)
+      let target = try decoder.decode(Remote.AppLinkTarget.self, from: SampleData.valid)
       XCTAssertEqual(target.url, URL(string: SampleRawRemoteAppLinkTarget.urlString)!,
                      "Should decode and create the correct url from a remote app link target")
       XCTAssertEqual(target.appIdentifier, SampleRawRemoteAppLinkTarget.appIdentifier,
@@ -109,7 +107,7 @@ class RemoteAppLinkTargetTests: XCTestCase {
     guard let data = JSONLoader.loadData(for: .validRemoteAppLinkTarget) else {
       return XCTFail("Failed to load json")
     }
-    XCTAssertNotNil(try decoder.decode(RemoteAppLinkTarget.self, from: data),
+    XCTAssertNotNil(try decoder.decode(Remote.AppLinkTarget.self, from: data),
                     "Should be able to decode an app link target from valid json")
   }
 }

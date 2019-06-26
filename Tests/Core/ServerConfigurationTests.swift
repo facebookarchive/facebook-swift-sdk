@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length file_length
-
 @testable import FacebookCore
 import XCTest
 
@@ -517,12 +515,12 @@ class ServerConfigurationTests: XCTestCase {
 
   func testCreatingWithDialogFlows() {
     let remoteDialogFlows = [
-      RemoteServerConfiguration.DialogFlow(name: "foo", shouldUseNativeFlow: false, shouldUseSafariVC: false),
-      RemoteServerConfiguration.DialogFlow(name: "bar", shouldUseNativeFlow: true, shouldUseSafariVC: true)
+      Remote.ServerConfiguration.DialogFlow(name: "foo", shouldUseNativeFlow: false, shouldUseSafariVC: false),
+      Remote.ServerConfiguration.DialogFlow(name: "bar", shouldUseNativeFlow: true, shouldUseSafariVC: true)
     ]
     let expectedDialogFlows = remoteDialogFlows.compactMap { ServerConfiguration.DialogFlow(remote: $0) }
 
-    let list = RemoteServerConfiguration.DialogFlowList(dialogs: remoteDialogFlows)
+    let list = Remote.ServerConfiguration.DialogFlowList(dialogs: remoteDialogFlows)
 
     guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
       return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
@@ -543,8 +541,8 @@ class ServerConfigurationTests: XCTestCase {
 
   func testCreatingWithRestrictiveRules() {
     let rules = [
-      RemoteRestrictiveRule(keyRegex: "foo", type: 0),
-      RemoteRestrictiveRule(keyRegex: "bar", type: 1)
+      Remote.RestrictiveRule(keyRegex: "foo", type: 0),
+      Remote.RestrictiveRule(keyRegex: "bar", type: 1)
     ]
     let expectedRestrictiveRules = rules.compactMap { RestrictiveRule(remote: $0) }
 
@@ -571,7 +569,7 @@ class ServerConfigurationTests: XCTestCase {
       SampleRestrictiveEventParameter.nonDeprecated
     ]
 
-    let remoteParameterList = RemoteRestrictiveEventParameterList(
+    let remoteParameterList = Remote.RestrictiveEventParameterList(
       parameters: [
         SampleRemoteRestrictiveEventParameter.deprecated,
         SampleRemoteRestrictiveEventParameter.nonDeprecated
@@ -591,7 +589,7 @@ class ServerConfigurationTests: XCTestCase {
   // searching for / hasValue  / has sharing / has default  / uses
   // 'login'       / false     / true        / false        / false
   func testFeatureCheckForMissingLoginFlowWithSharingWithoutDefaultValue() {
-    let list = RemoteServerConfiguration.DialogFlowList(
+    let list = Remote.ServerConfiguration.DialogFlowList(
       dialogs: [SampleRemoteDialogFlow.validTrue(name: .sharing)]
     )
 
@@ -606,7 +604,7 @@ class ServerConfigurationTests: XCTestCase {
   // searching for / hasValue  / has sharing / has default  / uses
   // 'login'       / false     / false       / false        / false
   func testFeatureCheckForMissingLoginFlowWithoutSharingWithoutDefaultValue() {
-    let list = RemoteServerConfiguration.DialogFlowList(
+    let list = Remote.ServerConfiguration.DialogFlowList(
       dialogs: [SampleRemoteDialogFlow.validFalse(name: .sharing)]
     )
 
@@ -622,7 +620,7 @@ class ServerConfigurationTests: XCTestCase {
   // login         /  true     / n/a         / true         / value
   // login         /  true     / n/a         / false        / value
   func testFeatureCheckForLoginFlowWithDefaultValue() {
-    let list = RemoteServerConfiguration.DialogFlowList(
+    let list = Remote.ServerConfiguration.DialogFlowList(
       dialogs: [SampleRemoteDialogFlow.validTrue(name: .login)]
     )
 
@@ -649,7 +647,7 @@ class ServerConfigurationTests: XCTestCase {
   // searching for / hasValue  / has sharing / has default  / uses
   // foo           /  true     / n/a         / n/a          / value
   func testFeatureCheckForNonLoginFlow() {
-    let list = RemoteServerConfiguration.DialogFlowList(
+    let list = Remote.ServerConfiguration.DialogFlowList(
       dialogs: [SampleRemoteDialogFlow.validTrue(name: .other("foo"))]
     )
 
@@ -664,7 +662,7 @@ class ServerConfigurationTests: XCTestCase {
   // searching for / hasValue  / has sharing / has default  / uses
   // foo           /  false     / true       / n/a          / sharing
   func testFeatureCheckWithMissingNonLoginFlowAndExistingShareFlow() {
-    let list = RemoteServerConfiguration.DialogFlowList(
+    let list = Remote.ServerConfiguration.DialogFlowList(
       dialogs: [SampleRemoteDialogFlow.validTrue(name: .sharing)]
     )
 
@@ -691,7 +689,7 @@ class ServerConfigurationTests: XCTestCase {
   // searching for / hasValue  / has sharing / has default  / uses
   // foo           /  false    / false       / false        / false
   func testFeatureCheckDefaultsToDefaultFlowForDialogWithNameLogin() {
-    let list = RemoteServerConfiguration.DialogFlowList(dialogs: [])
+    let list = Remote.ServerConfiguration.DialogFlowList(dialogs: [])
 
     guard let config = ServerConfiguration(remote: Fixtures.withRemoteDialogFlows(list)) else {
       return XCTFail("Should build a server configuration from a remote configuration with an app identifier")
@@ -714,7 +712,7 @@ class ServerConfigurationTests: XCTestCase {
 
   func testEncodingAndDecodingAllValues() {
     let config = ServerConfiguration(
-      remote: RemoteServerConfiguration(
+      remote: Remote.ServerConfiguration(
         appID: "abc123",
         appName: "foo",
         isLoginTooltipEnabled: true,
@@ -735,7 +733,7 @@ class ServerConfigurationTests: XCTestCase {
         updateMessage: "update now",
         eventBindings: ["foo"],
         restrictiveRules: [SampleRemoteRestrictiveRule.valid],
-        restrictiveEventParameterList: RemoteRestrictiveEventParameterList(
+        restrictiveEventParameterList: Remote.RestrictiveEventParameterList(
           parameters: [SampleRemoteRestrictiveEventParameter.deprecated]
         )
       )

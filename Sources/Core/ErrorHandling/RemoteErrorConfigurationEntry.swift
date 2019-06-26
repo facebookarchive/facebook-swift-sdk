@@ -18,71 +18,73 @@
 
 import Foundation
 
-/**
- A representation of a server side error
- Used for creating a `RemoteErrorConfigurationEntryList`
- */
-struct RemoteErrorConfigurationEntry: Decodable {
-  typealias ErrorCode = Int
+extension Remote {
+  /**
+   A representation of a server side error
+   Used for creating a `RemoteErrorConfigurationEntryList`
+   */
+  struct ErrorConfigurationEntry: Decodable {
+    typealias ErrorCode = Int
 
-  let name: Name?
-  let items: [RemoteErrorCodeGroup]
-  let recoveryMessage: String
-  let recoveryOptions: [String]
+    let name: Name?
+    let items: [ErrorCodeGroup]
+    let recoveryMessage: String
+    let recoveryOptions: [String]
 
-  init(from decoder: Decoder) throws {
-    guard let container = try? decoder.container(keyedBy: CodingKeys.self),
-      var itemsContainer = try? container.nestedUnkeyedContainer(forKey: .items)
-      else {
-        throw DecodingError.invalidContainer
-    }
-    name = try? container.decode(Name.self, forKey: .name)
-
-    var items = [RemoteErrorCodeGroup]()
-    while !itemsContainer.isAtEnd {
-      switch try? itemsContainer.decode(RemoteErrorCodeGroup.self) {
-      case let item?:
-        items.append(item)
-
-      case nil:
-        _ = try? itemsContainer.decode(EmptyDecodable.self)
+    init(from decoder: Decoder) throws {
+      guard let container = try? decoder.container(keyedBy: CodingKeys.self),
+        var itemsContainer = try? container.nestedUnkeyedContainer(forKey: .items)
+        else {
+          throw DecodingError.invalidContainer
       }
+      name = try? container.decode(Name.self, forKey: .name)
+
+      var items = [ErrorCodeGroup]()
+      while !itemsContainer.isAtEnd {
+        switch try? itemsContainer.decode(ErrorCodeGroup.self) {
+        case let item?:
+          items.append(item)
+
+        case nil:
+          _ = try? itemsContainer.decode(EmptyDecodable.self)
+        }
+      }
+      self.items = items
+
+      guard let message = try? container.decode(String.self, forKey: CodingKeys.recoveryMessage) else {
+        throw DecodingError.missingRecoveryMessage
+      }
+      self.recoveryMessage = message
+
+      guard let options = try? container.decode([String].self, forKey: CodingKeys.recoveryOptions) else {
+        throw DecodingError.missingRecoveryOptions
+      }
+      self.recoveryOptions = options
     }
-    self.items = items
 
-    guard let message = try? container.decode(String.self, forKey: CodingKeys.recoveryMessage) else {
-      throw DecodingError.missingRecoveryMessage
+    private enum CodingKeys: String, CodingKey {
+      case name
+      case items
+      case recoveryMessage = "recovery_message"
+      case recoveryOptions = "recovery_options"
     }
-    self.recoveryMessage = message
 
-    guard let options = try? container.decode([String].self, forKey: CodingKeys.recoveryOptions) else {
-      throw DecodingError.missingRecoveryOptions
+    /// Used for mapping to known `GraphRequestErrorCategory`s
+    enum Name: String, Decodable {
+      case recoverable
+      case transient
+      case other
     }
-    self.recoveryOptions = options
-  }
 
-  private enum CodingKeys: String, CodingKey {
-    case name
-    case items
-    case recoveryMessage = "recovery_message"
-    case recoveryOptions = "recovery_options"
-  }
+    enum DecodingError: FBError, CaseIterable {
+      // Indicates an invalid container
+      case invalidContainer
 
-  /// Used for mapping to known `GraphRequestErrorCategory`s
-  enum Name: String, Decodable {
-    case recoverable
-    case transient
-    case other
-  }
+      // Indicates a missing recovery message key
+      case missingRecoveryMessage
 
-  enum DecodingError: FBError, CaseIterable {
-    // Indicates an invalid container
-    case invalidContainer
-
-    // Indicates a missing recovery message key
-    case missingRecoveryMessage
-
-    // Indicates a missing recovery options key
-    case missingRecoveryOptions
+      // Indicates a missing recovery options key
+      case missingRecoveryOptions
+    }
   }
 }

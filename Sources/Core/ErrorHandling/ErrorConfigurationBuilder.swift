@@ -56,7 +56,7 @@ enum ErrorConfigurationBuilder {
 
    Retrieving a code keyed by (1, 1) will return the code with category Y
    */
-  static func build(from remoteList: RemoteErrorConfigurationEntryList) -> ErrorConfiguration? {
+  static func build(from remoteList: Remote.ErrorConfigurationEntryList) -> ErrorConfiguration? {
     guard !remoteList.configurations.isEmpty else {
       return nil
     }

@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_try
-
 @testable import FacebookCore
 import XCTest
 
@@ -29,7 +27,7 @@ class RemoteRestrictiveEventParameterTests: XCTestCase {
   func testDecodingList() {
     let data = try! JSONSerialization.data(withJSONObject: Fixtures.valid, options: [])
 
-    let expected: [RemoteRestrictiveEventParameter] = [
+    let expected: [Remote.RestrictiveEventParameter] = [
       SampleRemoteRestrictiveEventParameter.deprecated,
       SampleRemoteRestrictiveEventParameter.nonDeprecated,
       SampleRemoteRestrictiveEventParameter.unknownDeprecation,
@@ -37,7 +35,7 @@ class RemoteRestrictiveEventParameterTests: XCTestCase {
     ]
 
     do {
-      let decoded = try decoder.decode(RemoteRestrictiveEventParameterList.self, from: data)
+      let decoded = try decoder.decode(Remote.RestrictiveEventParameterList.self, from: data)
       XCTAssertEqual(
         decoded.parameters.sorted { $0.name < $1.name },
         expected,
@@ -54,7 +52,7 @@ class RemoteRestrictiveEventParameterTests: XCTestCase {
     }
 
     do {
-      _ = try JSONDecoder().decode(RemoteRestrictiveEventParameterList.self, from: data)
+      _ = try JSONDecoder().decode(Remote.RestrictiveEventParameterList.self, from: data)
     } catch {
       XCTAssertNil(error, "Should be able to decode a list of remote event parameters from valid json")
     }

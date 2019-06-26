@@ -21,7 +21,7 @@ import XCTest
 
 class DialogFlowTests: XCTestCase {
   func testBuildingFromRemoteWithoutFields() {
-    let remoteFlow = RemoteServerConfiguration.DialogFlow(
+    let remoteFlow = Remote.ServerConfiguration.DialogFlow(
       name: "foo",
       shouldUseNativeFlow: nil,
       shouldUseSafariVC: nil
@@ -35,7 +35,7 @@ class DialogFlowTests: XCTestCase {
   }
 
   func testBuildingFromRemoteWithFalseFields() {
-    let remoteFlow = RemoteServerConfiguration.DialogFlow(
+    let remoteFlow = Remote.ServerConfiguration.DialogFlow(
       name: "foo",
       shouldUseNativeFlow: false,
       shouldUseSafariVC: false
@@ -49,7 +49,7 @@ class DialogFlowTests: XCTestCase {
   }
 
   func testBuildingFromRemoteWithTrueFields() {
-    let remoteFlow = RemoteServerConfiguration.DialogFlow(
+    let remoteFlow = Remote.ServerConfiguration.DialogFlow(
       name: "foo",
       shouldUseNativeFlow: true,
       shouldUseSafariVC: true

@@ -20,8 +20,8 @@
 import Foundation
 
 enum SampleRemoteGatekeeperList {
-  static func valid(with gatekeepers: [Gatekeeper]) -> RemoteGatekeeperList {
-    return RemoteGatekeeperList(
+  static func valid(with gatekeepers: [Gatekeeper]) -> Remote.GatekeeperList {
+    return Remote.GatekeeperList(
       data: [
         [
           "gatekeepers": gatekeepers

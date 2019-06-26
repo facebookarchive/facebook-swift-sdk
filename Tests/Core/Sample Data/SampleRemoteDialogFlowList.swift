@@ -20,10 +20,10 @@
 import Foundation
 
 enum SampleRemoteDialogFlowList {
-  static let valid = RemoteServerConfiguration.DialogFlowList(
+  static let valid = Remote.ServerConfiguration.DialogFlowList(
     dialogs: [
       SampleRemoteDialogFlow.validTrue(name: .default),
-      RemoteServerConfiguration.DialogFlow(name: "message", shouldUseNativeFlow: true, shouldUseSafariVC: nil)
+      Remote.ServerConfiguration.DialogFlow(name: "message", shouldUseNativeFlow: true, shouldUseSafariVC: nil)
     ]
   )
 }

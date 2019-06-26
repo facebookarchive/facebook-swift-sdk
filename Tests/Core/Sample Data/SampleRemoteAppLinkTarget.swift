@@ -25,8 +25,8 @@ enum SampleRemoteAppLinkTarget {
     appIdentifier: String = "1",
     appName: String = "Foo",
     shouldFallback: Bool? = nil
-    ) -> RemoteAppLinkTarget {
-    return RemoteAppLinkTarget(
+    ) -> Remote.AppLinkTarget {
+    return Remote.AppLinkTarget(
       url: url,
       appIdentifier: appIdentifier,
       appName: appName,
@@ -34,7 +34,7 @@ enum SampleRemoteAppLinkTarget {
     )
   }
 
-  static let missingURL = RemoteAppLinkTarget(
+  static let missingURL = Remote.AppLinkTarget(
     url: nil,
     appIdentifier: "1",
     appName: "Foo",

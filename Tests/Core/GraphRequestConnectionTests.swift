@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_body_length file_length
-
 @testable import FacebookCore
 import XCTest
 
@@ -571,7 +569,7 @@ class GraphRequestConnectionTests: XCTestCase {
     case .success:
       XCTFail("Should not be able to convert valid data to a non-matching decodable type")
 
-    case .failure(let error as RemoteGraphResponseError):
+    case .failure(let error as Remote.GraphResponseError):
       XCTAssertEqual(error.details.type, "invalidArgs",
                      "Parsing a remote graph response with a server error present in the data should result in a failure with that parsed server error")
 
@@ -590,7 +588,7 @@ class GraphRequestConnectionTests: XCTestCase {
     case .success:
       XCTFail("Should not be able to convert valid data to a non-matching decodable type")
 
-    case .failure(let error as RemoteGraphResponseError):
+    case .failure(let error as Remote.GraphResponseError):
       XCTAssertEqual(error.details.type, "invalidArgs",
                      "Parsing a remote graph response with a matching decodable type as well as a server error present in the data should result in a failure with the parsed server error")
 

@@ -20,7 +20,7 @@
 import Foundation
 
 enum SampleRemoteUserProfile {
-  static let valid = RemoteUserProfile(
+  static let valid = Remote.UserProfile(
     identifier: "abc",
     name: "Bob",
     firstName: "Bob",
@@ -29,7 +29,7 @@ enum SampleRemoteUserProfile {
     linkURL: SampleURL.valid.absoluteString
   )
 
-  static let invalid = RemoteUserProfile(
+  static let invalid = Remote.UserProfile(
     identifier: "",
     name: nil,
     firstName: nil,

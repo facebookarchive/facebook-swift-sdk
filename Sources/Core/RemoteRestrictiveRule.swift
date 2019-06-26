@@ -18,16 +18,18 @@
 
 import Foundation
 
-struct RemoteRestrictiveRule: Decodable {
-  let keyRegex: String
-  let type: Int
-  let valueRegex: String?
-  let valueNegativeRegex: String?
+extension Remote {
+  struct RestrictiveRule: Decodable {
+    let keyRegex: String
+    let type: Int
+    let valueRegex: String?
+    let valueNegativeRegex: String?
 
-  enum CodingKeys: String, CodingKey {
-    case keyRegex = "key_regex"
-    case type
-    case valueRegex = "value_regex"
-    case valueNegativeRegex = "value_negative_regex"
+    enum CodingKeys: String, CodingKey {
+      case keyRegex = "key_regex"
+      case type
+      case valueRegex = "value_regex"
+      case valueNegativeRegex = "value_negative_regex"
+    }
   }
 }

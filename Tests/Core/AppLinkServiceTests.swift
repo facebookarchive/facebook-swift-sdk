@@ -112,7 +112,7 @@ class AppLinkServiceTests: XCTestCase {
       expectation.fulfill()
     }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [RemoteAppLink].Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [Remote.AppLink].Type,
                   "Requesting app links with a client token should attempt to fetch an array of app links")
 
     waitForExpectations(timeout: 1, handler: nil)
@@ -129,7 +129,7 @@ class AppLinkServiceTests: XCTestCase {
       expectation.fulfill()
     }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [RemoteAppLink].Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [Remote.AppLink].Type,
                   "Requesting app links with an access token should attempt to fetch an array of app links")
 
     waitForExpectations(timeout: 1, handler: nil)
@@ -149,7 +149,7 @@ class AppLinkServiceTests: XCTestCase {
       expectation.fulfill()
     }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [RemoteAppLink].Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [Remote.AppLink].Type,
                   "Requesting app links with an access token or a client token should attempt to fetch an array of app links")
 
     waitForExpectations(timeout: 1, handler: nil)
@@ -179,7 +179,7 @@ class AppLinkServiceTests: XCTestCase {
   func testFetchingWithEmptyCache() {
     _ = service.appLinks(for: [SampleURL.valid]) { _ in }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [RemoteAppLink].Type,
+    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is [Remote.AppLink].Type,
                   "Requesting app links with an access token or a client token should attempt to fetch an array of app links when the cache is empty")
   }
 
