@@ -26,7 +26,7 @@ import Foundation
 
  A good example is a `User` where we only care about an identifier and a name.
  Our canonical `User` should not know whether the data to populate its fields
- came from Instagram, Facebook, CoreData, Firebase, etc...
+ came from Instagram, Facebook, CoreData, etc...
 
  The old way to solve this was to pass Data in the form of a dictionary to specialized
  initializers. ie. `init(fromInstagramData: [String: Any])`
