@@ -112,7 +112,7 @@ class GraphRequestSerializerTests: XCTestCase {
       XCTAssertEqual(error, .malformedURL,
                      "Trying to serialize a request with a malformed url should not succeed")
     } catch {
-      XCTFail("Trying to serialize a request with a malformed url should throw only expected errors")
+      XCTAssertNil(error, "Trying to serialize a request with a malformed url should throw only expected errors")
     }
   }
 
@@ -147,7 +147,7 @@ class GraphRequestSerializerTests: XCTestCase {
     do {
       _ = try serializer.serialize(with: validURL, graphRequest: request)
     } catch {
-      XCTFail("Trying to serialize a get request without attachments should not fail")
+      XCTAssertNil(error, "Trying to serialize a get request without attachments should not fail")
     }
 
     XCTAssertNil(fakeLogger.capturedMessages.first,
@@ -164,7 +164,7 @@ class GraphRequestSerializerTests: XCTestCase {
       XCTAssertEqual(error, .getWithAttachments,
                      "Trying to serialize a get request with attachments should throw the expected error")
     } catch {
-      XCTFail("Trying to serialize a get request with attachments should throw only expected errors")
+      XCTAssertNil(error, "Trying to serialize a get request with attachments should throw only expected errors")
     }
   }
 

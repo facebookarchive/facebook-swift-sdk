@@ -167,9 +167,8 @@ class ServerConfigurationService: ServerConfigurationServicing {
         var connection = graphConnectionProvider.graphRequestConnection()
         connection.timeout = loadTimeout
         _ = connection.getObject(
-            ServerConfiguration.self,
             for: request(for: appIdentifier)
-          ) { [weak self] result in
+        ) { [weak self] (result: ServerConfigurationResult) in
             guard let self = self else {
               return
             }

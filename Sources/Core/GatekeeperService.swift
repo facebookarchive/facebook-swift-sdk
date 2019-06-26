@@ -165,9 +165,8 @@ public class GatekeeperService {
     _ = graphConnectionProvider
       .graphRequestConnection()
       .getObject(
-        Remote.GatekeeperList.self,
         for: request
-      ) { [weak self] result in
+      ) { [weak self] (result: Result<Remote.GatekeeperList, Error>) -> Void in
         guard let self = self else {
           return
         }

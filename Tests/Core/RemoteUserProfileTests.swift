@@ -25,8 +25,7 @@ class RemoteUserProfileTests: XCTestCase {
 
   func testCreatingWithEmptyDictionary() {
     do {
-      let empty = try JSONSerialization.data(withJSONObject: [:], options: [])
-      _ = try decoder.decode(Remote.UserProfile.self, from: empty)
+      _ = try decoder.decode(Remote.UserProfile.self, from: SampleData.emptyDictionary)
       XCTFail("Should not create a remote user profile from an empty dictionary")
     } catch let error as Remote.UserProfile.DecodingError {
       XCTAssertEqual(error, .missingIdentifier,
@@ -38,7 +37,6 @@ class RemoteUserProfileTests: XCTestCase {
 
   func testCreatingWithMissingUserIdentifier() {
     do {
-      try JSONSerialization.data(withJSONObject: [:], options: [])
       _ = try decoder.decode(Remote.UserProfile.self, from: SampleData.missing(.identifier))
       XCTFail("Should not create a remote user profile from without a user identifier")
     } catch let error as Remote.UserProfile.DecodingError {
@@ -135,7 +133,7 @@ class RemoteUserProfileTests: XCTestCase {
   }
 
   func testCreatingFromJSON() {
-    guard let data = JSONLoader.loadData(for: .validUserProfile) else {
+    guard let data = JSONLoader.loadData(for: .validRemoteUserProfile) else {
       return XCTFail("Failed to load json")
     }
     XCTAssertNotNil(try decoder.decode(Remote.UserProfile.self, from: data),
