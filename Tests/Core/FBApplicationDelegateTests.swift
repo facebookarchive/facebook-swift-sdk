@@ -35,6 +35,7 @@ class FBApplicationDelegateTests: XCTestCase {
   private let fakeGatekeeperService = FakeGatekeeperService()
   private let fakeAppEventsLogger = FakeAppEventsLogger()
   private let fakeTimeSpentDataStore = FakeTimeSpentDataStore()
+  private var userDefaultsSpy: UserDefaultsSpy!
 
   private let sourceApplication = "facebook"
   private let annotation = ["foo": "bar"]
@@ -58,6 +59,7 @@ class FBApplicationDelegateTests: XCTestCase {
   override func setUp() {
     super.setUp()
 
+    userDefaultsSpy = UserDefaultsSpy(name: name)
     fakeAccessTokenCache = FakeAccessTokenCache(secureStore: fakeSecureStore)
     fakeSettings = FakeSettings(accessTokenCache: fakeAccessTokenCache)
     appDelegate = FBApplicationDelegate(
@@ -66,7 +68,8 @@ class FBApplicationDelegateTests: XCTestCase {
       serverConfigurationService: fakeServerConfigurationService,
       gatekeeperService: fakeGatekeeperService,
       appEventsLogger: fakeAppEventsLogger,
-      timeSpentDataStore: fakeTimeSpentDataStore
+      timeSpentDataStore: fakeTimeSpentDataStore,
+      store: userDefaultsSpy
     )
   }
 
@@ -100,6 +103,11 @@ class FBApplicationDelegateTests: XCTestCase {
   func testTimeSpendDataStoreDependency() {
     XCTAssertTrue(FBApplicationDelegate().timeSpendDataStore is TimeSpentDataStore,
                   "Should use the correct concrete implementation for the time spend data store dependency")
+  }
+
+  func testDataPersistingDependency() {
+    XCTAssertTrue(FBApplicationDelegate().store is UserDefaults,
+                  "Should use the correct concrete implementation for the fb app delegate's store")
   }
 
   // MARK: - Properties
@@ -593,7 +601,13 @@ class FBApplicationDelegateTests: XCTestCase {
   }
 
   func testFinishLaunchingWithAutoLogAppEventsEnabled() {
-    let expectedParameters = [String: Bool]()
+    userDefaultsSpy.reset()
+
+    let expectedParameters = [
+      "core_lib_included": true,
+      "login_lib_included": true,
+      "share_lib_included": true
+    ]
 
     fakeSettings.isAutoLogAppEventsEnabled = true
 
@@ -614,6 +628,49 @@ class FBApplicationDelegateTests: XCTestCase {
 
     XCTAssertNil(fakeAppEventsLogger.capturedEventName,
                  "Should not invoke the app events logger with the initialize event on app launch without auto logging enabled")
+  }
+
+  func testFinishLaunchingWithoutPersistedLibrariesBitmask() {
+    userDefaultsSpy.reset()
+
+    let bitmaskKey = "com.facebook.sdk.kits.bitmask"
+    fakeSettings.isAutoLogAppEventsEnabled = true
+
+    finishLaunching()
+
+    XCTAssertEqual(
+      userDefaultsSpy.capturedIntegerRetrievalKey,
+      bitmaskKey,
+      "Should attempt to retrieve the stored kits bitmask before setting a new kits bitmask"
+    )
+    XCTAssertEqual(
+      userDefaultsSpy.capturedValues[bitmaskKey] as? Int,
+      17, // Completely arbitrary number. This may change as the number of sdks available to the test host changes
+      "Should persist the bitmask representing the loaded kits"
+    )
+  }
+
+  func testFinishLaunchingWithPersistedLibrariesBitmask() {
+    userDefaultsSpy.reset()
+
+    let bitmaskKey = "com.facebook.sdk.kits.bitmask"
+    fakeSettings.isAutoLogAppEventsEnabled = true
+
+    finishLaunching()
+
+    // Sets the initial
+    XCTAssertEqual(
+      userDefaultsSpy.capturedValues[bitmaskKey] as? Int,
+      17, // Completely arbitrary number. This will change as the number of sdks available to the test host changes
+      "Should persist the bitmask representing the loaded kits"
+    )
+
+    userDefaultsSpy.capturedValues = [:]
+
+    finishLaunching()
+
+    XCTAssertTrue(userDefaultsSpy.capturedValues.isEmpty,
+                  "Should not attempt to persist an unchanged bitmask")
   }
 
   // MARK: - Helpers

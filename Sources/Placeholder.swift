@@ -16,14 +16,9 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
-
-extension UserDefaults: DataPersisting {}
-
-protocol DataPersisting {
-  func set(_ value: Any?, forKey defaultName: String)
-  func data(forKey defaultName: String) -> Data?
-  func integer(forKey defaultName: String) -> Int
-  func string(forKey defaultName: String) -> String?
-  func object(forKey defaultName: String) -> Any?
-}
+// Note:
+//
+// This placeholder is needed to test importability of the Login and Share Kits to the TestHost Application.
+// This allows us to test that we're collecting metrics about Kit inclusion.
+// This should be removed once the Login and Share Kits are built out.
+//
