@@ -47,7 +47,6 @@ enum BridgeAPIValidator {
   }
 
   private static func isSafariIdentifier(_ bundleIdentifier: String) -> Bool {
-    return bundleIdentifier.hasPrefix("com.apple.mobilesafari") ||
-      bundleIdentifier.hasPrefix("com.apple.SafariViewService")
+    return bundleIdentifier.hasPrefix("com.apple")
   }
 }
