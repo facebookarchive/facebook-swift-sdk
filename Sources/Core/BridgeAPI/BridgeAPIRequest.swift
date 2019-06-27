@@ -23,7 +23,7 @@ struct BridgeAPIRequest {
   let methodName: String
   let methodVersion: String
   let parameters: [String: AnyHashable]
-  let urlProvider: BridgeAPIURLProviding
+  let networkerProvider: BridgeAPINetworkerProviding
   let scheme: String
   let userInfo: [String: AnyHashable]
   let settings: SettingsManaging
@@ -56,14 +56,14 @@ struct BridgeAPIRequest {
     self.methodName = methodName
     self.methodVersion = methodVersion
     self.parameters = parameters
-    self.urlProvider = networkerProvider.urlProvider
+    self.networkerProvider = networkerProvider
     self.userInfo = userInfo
     self.settings = settings
     self.bundle = bundle
   }
 
   func requestURL() throws -> URL {
-    let url = try urlProvider.requestURL(
+    let url = try networkerProvider.networker.requestURL(
       actionID: actionID,
       methodName: methodName,
       parameters: parameters

@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,9 +16,38 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-class FBSDKBridgeAPIRequest {
-    private required init(protocol `protocol`: FBSDKBridgeAPIProtocol?, protocolType: FBSDKBridgeAPIProtocolType, scheme: String?, methodName: String?, methodVersion: String?, parameters: [AnyHashable : Any]?, userInfo: [AnyHashable : Any]?) {
+import Foundation
+
+/**
+ Used for validating if a `BridgeAPIRequest` is valid for a given source application
+ */
+enum BridgeAPIValidator {
+  static func isValid(
+    request: BridgeAPIRequest,
+    sourceApplication: String
+    ) -> Bool {
+    switch request.networkerProvider.urlCategory {
+    case .native:
+      guard isFacebookIdentifier(sourceApplication) else {
+        return false
+      }
+
+    case .web:
+      guard isSafariIdentifier(sourceApplication) else {
+        return false
+      }
     }
 
-    private var `protocol`: FBSDKBridgeAPIProtocol?
+    return true
+  }
+
+  private static func isFacebookIdentifier(_ bundleIdentifier: String) -> Bool {
+    return bundleIdentifier.hasPrefix("com.facebook.") ||
+      bundleIdentifier.hasPrefix(".com.facebook.")
+  }
+
+  private static func isSafariIdentifier(_ bundleIdentifier: String) -> Bool {
+    return bundleIdentifier.hasPrefix("com.apple.mobilesafari") ||
+      bundleIdentifier.hasPrefix("com.apple.SafariViewService")
+  }
 }

@@ -18,13 +18,20 @@
 
 import Foundation
 
+typealias QueryItemsResult = Result<[URLQueryItem], Error>
+
 /// A BridgeAPINetworker provides a request url
-protocol BridgeAPIURLProviding {
+protocol BridgeAPINetworking {
   func requestURL(
     actionID: String,
     methodName: String,
     parameters: [String: AnyHashable]
     ) throws -> URL
+
+  func responseParameters(
+    actionID: String,
+    queryItems: [URLQueryItem]
+    ) -> QueryItemsResult
 }
 
 enum BridgeURLProvidingError: FBError {
