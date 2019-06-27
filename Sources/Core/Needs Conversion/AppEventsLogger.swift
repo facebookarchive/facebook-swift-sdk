@@ -16,35 +16,34 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
+import Foundation
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+// TODO: A more robust type for app event names
+typealias AppEventName = String
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var isAutoLogAppEventsEnabled: Bool = false
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+protocol AppEventsLogging {
+  func activateApp()
 
-  init(
-    appIdentifier: String? = "foo",
-    accessTokenCache: AccessTokenCaching? = nil,
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0",
-    urlSchemeSuffix: String? = nil
+  func logInternalEvent(
+    eventName: AppEventName,
+    parameters: [String: AnyHashable],
+    isImplicitlyLogged: Bool
+  )
+}
+
+// TODO: Convert FBSDKAppEvent
+class AppEventsLogger: AppEventsLogging {
+  static let shared = AppEventsLogger()
+
+  func activateApp() {
+    print("Implement app activation")
+  }
+
+  func logInternalEvent(
+    eventName: AppEventName,
+    parameters: [String: AnyHashable],
+    isImplicitlyLogged: Bool
     ) {
-    self.appIdentifier = appIdentifier
-    self.accessTokenCache = accessTokenCache
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
-    self.urlSchemeSuffix = urlSchemeSuffix
+    print("Implement app events logging")
   }
 }

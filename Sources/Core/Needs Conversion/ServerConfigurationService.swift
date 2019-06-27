@@ -23,6 +23,8 @@ typealias ServerConfigurationCompletion = (ServerConfigurationResult) -> Void
 
 protocol ServerConfigurationServicing {
   var serverConfiguration: ServerConfiguration { get }
+
+  func loadServerConfiguration(completion: @escaping ServerConfigurationCompletion)
 }
 
 class ServerConfigurationService: ServerConfigurationServicing {
