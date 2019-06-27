@@ -230,7 +230,7 @@
 		F48A74B12239B81B007192F6 /* DefaultErrorStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */; };
 		F48A74B52239BE66007192F6 /* LocalizableStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48A74B42239BE66007192F6 /* LocalizableStrings.strings */; };
 		F48BDD8B22470128003CCA5A /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48BDD8A22470128003CCA5A /* SettingsTests.swift */; };
-		F48E7C2A22413BFC00DC9C23 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0822807F510020C282 /* TokenStringTests.swift */; };
 		F4932E0B22808DB50020C282 /* TokenString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0A22808DB50020C282 /* TokenString.swift */; };
 		F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */; };
@@ -1090,8 +1090,8 @@
 		F43DE27722B9C44B00527B71 /* FacebookCore_TV */ = {
 			isa = PBXGroup;
 			children = (
-				F4A943CB22C3ED2500616AD8 /* Info.plist */,
 				F4A943CE22C3ED7900616AD8 /* FacebookCore_TV.h */,
+				F4A943CB22C3ED2500616AD8 /* Info.plist */,
 			);
 			path = FacebookCore_TV;
 			sourceTree = "<group>";
@@ -2082,7 +2082,7 @@
 				F480D90722347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift in Sources */,
 				F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */,
 				F4C57D3D22AB1AE900D0BEFE /* SampleRemoteRestrictiveRule.swift in Sources */,
-				F48E7C2A22413BFC00DC9C23 /* (null) in Sources */,
+				F48E7C2A22413BFC00DC9C23 /* BuildFile in Sources */,
 				F480D90F2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift in Sources */,
 				F46DCFD022720D8A00EFE037 /* SampleUserData.swift in Sources */,
 				F4C57D1B22AACEA200D0BEFE /* RemoteDialogFlowList+Extensions.swift in Sources */,
