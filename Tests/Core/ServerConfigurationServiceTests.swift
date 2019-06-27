@@ -28,6 +28,8 @@ class ServerConfigurationServiceTests: XCTestCase {
   private let configuration = ServerConfiguration(
     remote: SampleRemoteServerConfiguration.minimal
   )!
+  private let minimalRemoteConfig = SampleRemoteServerConfiguration.minimal
+
   private let expiredConfiguration = ServerConfiguration(appID: "abc123", timestamp: Date.distantPast)
   private let outdatedVersion = ServerConfiguration(appID: "abc123", version: 1)
   private var defaultConfiguration: ServerConfiguration {
@@ -134,7 +136,7 @@ class ServerConfigurationServiceTests: XCTestCase {
   func testDefaultServerConfiguration() {
     // Should provide the default server configuration if one has not been fetched from the server or retrieved from the cache
     ServerConfigurationTestHelper.assertEqual(
-      service?.serverConfiguration,
+      service.serverConfiguration,
       defaultConfiguration
     )
   }
@@ -149,7 +151,7 @@ class ServerConfigurationServiceTests: XCTestCase {
 
     // Should not store a value if one is not retrieved from the cache
     ServerConfigurationTestHelper.assertEqual(
-      service?.serverConfiguration,
+      service.serverConfiguration,
       defaultConfiguration
     )
   }
@@ -162,7 +164,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Should set the current local to the value retrieved from the cache
     ServerConfigurationTestHelper.assertEqual(
       configuration,
-      service?.serverConfiguration
+      service.serverConfiguration
     )
   }
 
@@ -176,7 +178,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Should not load cached configuration if the app identifier is different from the one it was saved under
     ServerConfigurationTestHelper.assertNotEqual(
       configuration,
-      service?.serverConfiguration
+      service.serverConfiguration
     )
   }
 
@@ -188,7 +190,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Should not load any configuration with a missing app identifier, should use the default
     ServerConfigurationTestHelper.assertEqual(
       ServerConfiguration(appID: "Missing app identifier. Please add one in Settings."),
-      service?.serverConfiguration
+      service.serverConfiguration
     )
   }
 
@@ -208,8 +210,10 @@ class ServerConfigurationServiceTests: XCTestCase {
 
     service.loadServerConfiguration { _ in }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is ServerConfiguration.Type,
-                  "Should attempt to load a remote server configuration if the configuration retrieved from the cache is expired")
+    XCTAssertTrue(
+      fakeConnection.capturedGetObjectRemoteType is Remote.ServerConfiguration.Type,
+      "Should attempt to load a remote server configuration if the configuration retrieved from the cache is expired"
+    )
   }
 
   func testLoadingWithUnfinishedInitialQuery() {
@@ -220,8 +224,10 @@ class ServerConfigurationServiceTests: XCTestCase {
 
     service.loadServerConfiguration { _ in }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is ServerConfiguration.Type,
-                  "Should attempt to load a remote server configuration if the initial load has not completed")
+    XCTAssertTrue(
+      fakeConnection.capturedGetObjectRemoteType is Remote.ServerConfiguration.Type,
+      "Should attempt to load a remote server configuration if the initial load has not completed"
+    )
   }
 
   func testLoadingWithFinishedInitialQuery() {
@@ -235,11 +241,11 @@ class ServerConfigurationServiceTests: XCTestCase {
   }
 
   func testReloadingWithFinishedInitialQuery() {
-    fakeConnection.stubGetObjectCompletionResult = .success(configuration)
+    fakeConnection.stubGetObjectCompletionResult = .success(minimalRemoteConfig)
 
     service.loadServerConfiguration { _ in }
 
-    // Set a bad one so it will try and fetch (or would were it not for the flag
+    // Set a bad one so it will try and fetch (or would were it not for the flag)
     fakeConnection.reset()
 
     service.loadServerConfiguration { _ in }
@@ -254,8 +260,10 @@ class ServerConfigurationServiceTests: XCTestCase {
 
     service.loadServerConfiguration { _ in }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is ServerConfiguration.Type,
-                  "Should attempt to load a remote server configuration if the initial load has not completed")
+    XCTAssertTrue(
+      fakeConnection.capturedGetObjectRemoteType is Remote.ServerConfiguration.Type,
+      "Should attempt to load a remote server configuration if the initial load has not completed"
+    )
   }
 
   func testLoadingWithUpToDateVersion() {
@@ -278,11 +286,13 @@ class ServerConfigurationServiceTests: XCTestCase {
     // Loading a configuration when the app identifier is different from the currently stored one should replace the stored configuration with a default
     ServerConfigurationTestHelper.assertEqual(
       ServerConfiguration(appID: name),
-      service?.serverConfiguration
+      service.serverConfiguration
     )
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is ServerConfiguration.Type,
-                  "Should attempt to load a remote server configuration when the app identifier is different from the currently stored one")
+    XCTAssertTrue(
+      fakeConnection.capturedGetObjectRemoteType is Remote.ServerConfiguration.Type,
+      "Should attempt to load a remote server configuration when the app identifier is different from the currently stored one"
+    )
   }
 
   // MARK: - Fetching
@@ -314,7 +324,7 @@ class ServerConfigurationServiceTests: XCTestCase {
   }
 
   func testLoadingAfterTaskCompletion() {
-    fakeConnection.stubGetObjectCompletionResult = .success(configuration)
+    fakeConnection.stubGetObjectCompletionResult = .success(minimalRemoteConfig)
     service.loadServerConfiguration { _ in }
 
     // Clear fixtures and invalidate cache
@@ -324,28 +334,30 @@ class ServerConfigurationServiceTests: XCTestCase {
 
     service.loadServerConfiguration { _ in }
 
-    XCTAssertTrue(fakeConnection.capturedGetObjectRemoteType is ServerConfiguration.Type,
-                  "Should attempt to load a configuration if there is no valid configuration and no pending tasks")
+    XCTAssertTrue(
+      fakeConnection.capturedGetObjectRemoteType is Remote.ServerConfiguration.Type,
+      "Should attempt to load a configuration if there is no valid configuration and no pending tasks"
+    )
   }
 
   func testSuccessfulLoadStoresValuesLocally() {
-    fakeConnection.stubGetObjectCompletionResult = .success(configuration)
+    fakeConnection.stubGetObjectCompletionResult = .success(minimalRemoteConfig)
 
     service.loadServerConfiguration { _ in }
 
     ServerConfigurationTestHelper.assertEqual(
-      service?.serverConfiguration,
+      service.serverConfiguration,
       configuration
     )
   }
 
   func testSuccessfulLoadCachesFetchedValues() {
-    fakeConnection.stubGetObjectCompletionResult = .success(configuration)
+    fakeConnection.stubGetObjectCompletionResult = .success(minimalRemoteConfig)
 
     service.loadServerConfiguration { _ in }
 
     ServerConfigurationTestHelper.assertEqual(
-      service?.store.cachedValue,
+      service.store.cachedValue,
       configuration
     )
   }
@@ -356,7 +368,7 @@ class ServerConfigurationServiceTests: XCTestCase {
     service.loadServerConfiguration { _ in }
 
     ServerConfigurationTestHelper.assertEqual(
-      service?.store.cachedValue,
+      service.store.cachedValue,
       defaultConfiguration
     )
   }

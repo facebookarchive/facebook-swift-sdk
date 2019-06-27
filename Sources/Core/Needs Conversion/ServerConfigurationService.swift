@@ -18,6 +18,9 @@
 
 import Foundation
 
+private typealias RemoteServerConfigurationResult = Result<Remote.ServerConfiguration, Error>
+private typealias RemoteServerConfigurationCompletion = (RemoteServerConfigurationResult) -> Void
+
 typealias ServerConfigurationResult = Result<ServerConfiguration, Error>
 typealias ServerConfigurationCompletion = (ServerConfigurationResult) -> Void
 
@@ -168,22 +171,27 @@ class ServerConfigurationService: ServerConfigurationServicing {
         connection.timeout = loadTimeout
         _ = connection.getObject(
             for: request(for: appIdentifier)
-        ) { [weak self] (result: ServerConfigurationResult) in
-            guard let self = self else {
-              return
-            }
+        ) { [weak self] (remoteConfigResult: RemoteServerConfigurationResult) in
+          guard let self = self else {
+            return
+          }
 
-            switch result {
-            case let .success(configuration):
-              self.serverConfiguration = configuration
+          let result: ServerConfigurationResult
 
-            case .failure:
-              self.serverConfiguration = self.defaultServerConfiguration
-            }
+          switch remoteConfigResult {
+          case let .success(remoteConfiguration):
+            self.serverConfiguration = ServerConfiguration(remote: remoteConfiguration)
+              ?? self.defaultServerConfiguration
+            result = .success(self.serverConfiguration)
 
-            self.isLoading = false
-            self.isRequeryFinishedForAppStart = true
-            completion(result)
+          case let .failure(error):
+            self.serverConfiguration = self.defaultServerConfiguration
+            result = .failure(error)
+          }
+
+          self.isLoading = false
+          self.isRequeryFinishedForAppStart = true
+          completion(result)
         }
         return
     }

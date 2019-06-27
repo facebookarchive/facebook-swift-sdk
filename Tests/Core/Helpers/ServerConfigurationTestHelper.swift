@@ -26,170 +26,179 @@ enum ServerConfigurationTestHelper {
     _ file: StaticString = #file,
     _ line: UInt = #line
     ) {
+    guard let lhs = lhs,
+      let rhs = rhs
+      else {
+        return XCTFail(
+          "Must provide two server configurations for comparison",
+          file: file, line: line
+        )
+    }
     XCTAssertEqual(
-      lhs?.appName,
-      rhs?.appName,
+      lhs.appName,
+      rhs.appName,
       "Should have equal app names",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.appID,
-      rhs?.appID,
+      lhs.appID,
+      rhs.appID,
       "Should have equal app ids",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.defaultShareMode,
-      rhs?.defaultShareMode,
+      lhs.defaultShareMode,
+      rhs.defaultShareMode,
       "Should have equal default share modes",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.dialogConfigurations,
-      rhs?.dialogConfigurations,
+      lhs.dialogConfigurations,
+      rhs.dialogConfigurations,
       "Should have equal dialog configs",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.dialogFlows,
-      rhs?.dialogFlows,
+      lhs.dialogFlows,
+      rhs.dialogFlows,
       "Should have equal dialog flows",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.eventBindings,
-      rhs?.eventBindings,
+      lhs.eventBindings,
+      rhs.eventBindings,
       "Should have equal event bindings",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isAdvertisingIDEnabled,
-      rhs?.isAdvertisingIDEnabled,
+      lhs.isAdvertisingIDEnabled,
+      rhs.isAdvertisingIDEnabled,
       "Should have equal isAdvertisingIDEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isCodelessEventsEnabled,
-      rhs?.isCodelessEventsEnabled,
+      lhs.isCodelessEventsEnabled,
+      rhs.isCodelessEventsEnabled,
       "Should have equal isCodelessEventsEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isImplicitLoggingEnabled,
-      rhs?.isImplicitLoggingEnabled,
+      lhs.isImplicitLoggingEnabled,
+      rhs.isImplicitLoggingEnabled,
       "Should have equal isImplicitLoggingEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isLoginTooltipEnabled,
-      rhs?.isLoginTooltipEnabled,
+      lhs.isLoginTooltipEnabled,
+      rhs.isLoginTooltipEnabled,
       "Should have equal isLoginTooltipEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isImplicitPurchaseLoggingEnabled,
-      rhs?.isImplicitPurchaseLoggingEnabled,
+      lhs.isImplicitPurchaseLoggingEnabled,
+      rhs.isImplicitPurchaseLoggingEnabled,
       "Should have equal isImplicitPurchaseLoggingEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isNativeAuthFlowEnabled,
-      rhs?.isNativeAuthFlowEnabled,
+      lhs.isNativeAuthFlowEnabled,
+      rhs.isNativeAuthFlowEnabled,
       "Should have equal isNativeAuthFlowEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isSystemAuthenticationEnabled,
-      rhs?.isSystemAuthenticationEnabled,
+      lhs.isSystemAuthenticationEnabled,
+      rhs.isSystemAuthenticationEnabled,
       "Should have equal isSystemAuthenticationEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.isUninstallTrackingEnabled,
-      rhs?.isUninstallTrackingEnabled,
+      lhs.isUninstallTrackingEnabled,
+      rhs.isUninstallTrackingEnabled,
       "Should have equal isUninstallTrackingEnabled",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.loggingToken,
-      rhs?.loggingToken,
+      lhs.loggingToken,
+      rhs.loggingToken,
       "Should have equal loggingTokens",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.loginTooltipText,
-      rhs?.loginTooltipText,
+      lhs.loginTooltipText,
+      rhs.loginTooltipText,
       "Should have equal loginTooltipText",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.restrictiveParams,
-      rhs?.restrictiveParams,
+      lhs.restrictiveParams,
+      rhs.restrictiveParams,
       "Should have equal restrictiveParams",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.restrictiveRules,
-      rhs?.restrictiveRules,
+      lhs.restrictiveRules,
+      rhs.restrictiveRules,
       "Should have equal restrictiveRules",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.sessionTimoutInterval,
-      rhs?.sessionTimoutInterval,
+      lhs.sessionTimoutInterval,
+      rhs.sessionTimoutInterval,
       "Should have equal sessionTimoutIntervals",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.smartLoginBookmarkIconURL,
-      rhs?.smartLoginBookmarkIconURL,
+      lhs.smartLoginBookmarkIconURL,
+      rhs.smartLoginBookmarkIconURL,
       "Should have equal smartLoginBookmarkIconURLs",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.smartLoginMenuIconURL,
-      rhs?.smartLoginMenuIconURL,
+      lhs.smartLoginMenuIconURL,
+      rhs.smartLoginMenuIconURL,
       "Should have equal smartLoginMenuIconURLs",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.smartLoginOptions,
-      rhs?.smartLoginOptions,
+      lhs.smartLoginOptions,
+      rhs.smartLoginOptions,
       "Should have equal smartLoginOptions",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.timestamp,
-      rhs?.timestamp,
-      "Should have equal timestamps",
+      lhs.timestamp.timeIntervalSince1970,
+      rhs.timestamp.timeIntervalSince1970,
+      accuracy: 100,
+      "Should have approximately equal timestamps",
       file: file,
       line: line
     )
     XCTAssertEqual(
-      lhs?.updateMessage,
-      rhs?.updateMessage,
+      lhs.updateMessage,
+      rhs.updateMessage,
       "Should have equal update messages",
       file: file,
       line: line
