@@ -28,8 +28,12 @@ enum BridgeAPIValidator {
     ) -> Bool {
     switch request.networkerProvider.urlCategory {
     case .native:
-      guard isFacebookIdentifier(sourceApplication) else {
-        return false
+      if #available(iOS 13.0, *) {
+        // As of iOS 13, the source application will only be present for apps under
+        // the same developer account. So checking for facebook is not useful
+        return true
+      } else {
+        return isFacebookIdentifier(sourceApplication)
       }
 
     case .web:
