@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_try
-
 @testable import FacebookCore
 import XCTest
 
@@ -107,7 +105,7 @@ class GatekeeperStoreTests: XCTestCase {
   }
 
   func testRetrievingGatekeepersFromEmptyCache() {
-    _ = store.cachedGatekeepers
+    _ = store.cachedValue
 
     XCTAssertEqual(userDefaultsSpy.capturedDataRetrievalKey, store.retrievalKey,
                    "Store should attempt to retrieve cached gatekeepers from its data persistence store using a known key")
@@ -115,11 +113,20 @@ class GatekeeperStoreTests: XCTestCase {
 
   func testRetrievingCachedGatekeepers() {
     store.cache(gatekeepers)
-    let retrievedGatekeepers = store.cachedGatekeepers
+    let retrievedGatekeepers = store.cachedValue
 
     XCTAssertEqual(userDefaultsSpy.capturedDataRetrievalKey, store.retrievalKey,
                    "Store should attempt to retrieve cached gatekeepers from its data persistence store using a known key")
     XCTAssertEqual(retrievedGatekeepers, gatekeepers,
                    "Store should provide the gatekeepers that were saved into it on request")
+  }
+
+  func testResettingCache() {
+    store.cache(gatekeepers)
+
+    store.resetCache()
+
+    XCTAssertNil(store.cachedValue,
+                 "Should remove the cached value on request")
   }
 }

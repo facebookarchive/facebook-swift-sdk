@@ -20,7 +20,7 @@
 
 import Foundation
 
-extension RemoteServerConfiguration {
+extension Remote.ServerConfiguration {
   struct DialogFlowList: Decodable {
     let dialogs: [DialogFlow]
 

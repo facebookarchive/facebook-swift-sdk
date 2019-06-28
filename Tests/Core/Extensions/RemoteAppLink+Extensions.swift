@@ -22,10 +22,10 @@ import Foundation
 // TODO: Consider adding initializer to internal. Really do not want to do this but may
 // be the only way to silence this error.
 // See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
-extension RemoteAppLink {
+extension Remote.AppLink {
   init(
     sourceURLString: String,
-    details: [RemoteAppLinkDetail],
+    details: [Remote.AppLinkDetail],
     webURL: URL?
     ) {
     self.sourceURLString = sourceURLString

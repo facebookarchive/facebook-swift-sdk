@@ -19,16 +19,17 @@
 @testable import FacebookCore
 import XCTest
 
-private typealias SampleListData = SampleRawRemoteErrorConfigurationList.SerializedData
-
 class RemoteErrorConfigurationEntryListTests: XCTestCase {
+  private typealias SampleListData = SampleRawRemoteErrorConfigurationList.SerializedData
+  private typealias RemoteList = Remote.ErrorConfigurationEntryList
+
   private let decoder = JSONDecoder()
 
   func testCreatingListWithEmptyList() {
     do {
-      _ = try decoder.decode(RemoteErrorConfigurationEntryList.self, from: SampleListData.emptyList)
+      _ = try decoder.decode(RemoteList.self, from: SampleListData.emptyList)
       XCTFail("Should not create a remote error configuration list from an empty list")
-    } catch let error as RemoteErrorConfigurationEntryList.DecodingError {
+    } catch let error as RemoteList.DecodingError {
       XCTAssertEqual(error, .emptyItems,
                      "Should throw an empty items error when trying to create from an empty list")
     } catch {
@@ -38,9 +39,9 @@ class RemoteErrorConfigurationEntryListTests: XCTestCase {
 
   func testCreatingListWithEmptyNestedDictionary() {
     do {
-      _ = try decoder.decode(RemoteErrorConfigurationEntryList.self, from: SampleListData.emptyNestedDictionary)
+      _ = try decoder.decode(RemoteList.self, from: SampleListData.emptyNestedDictionary)
       XCTFail("Should not create a remote error configuration list from an empty nested dictionary")
-    } catch let error as RemoteErrorConfigurationEntryList.DecodingError {
+    } catch let error as RemoteList.DecodingError {
       XCTAssertEqual(error, .emptyItems,
                      "Should throw an empty items error when trying to create from an empty nested dictionary")
     } catch {
@@ -50,9 +51,9 @@ class RemoteErrorConfigurationEntryListTests: XCTestCase {
 
   func testCreatingListWithInvalidConfigurations() {
     do {
-      _ = try decoder.decode(RemoteErrorConfigurationEntryList.self, from: SampleListData.invalidConfigurations)
+      _ = try decoder.decode(RemoteList.self, from: SampleListData.invalidConfigurations)
       XCTFail("Should not create a remote error configuration list from a list of invalid configurations")
-    } catch let error as RemoteErrorConfigurationEntryList.DecodingError {
+    } catch let error as RemoteList.DecodingError {
       XCTAssertEqual(error, .emptyItems,
                      "Should throw an empty items error when trying to create a list from a list of invalid configurations")
     } catch {
@@ -61,7 +62,7 @@ class RemoteErrorConfigurationEntryListTests: XCTestCase {
   }
 
   func testCreatingListWithSomeValidConfigurations() {
-    guard let list = try? decoder.decode(RemoteErrorConfigurationEntryList.self, from: SampleListData.someValidConfigurations) else {
+    guard let list = try? decoder.decode(RemoteList.self, from: SampleListData.someValidConfigurations) else {
       return XCTFail("Should create a valid remote error configuration list if some but not all nested configurations are valid")
     }
 
@@ -73,7 +74,7 @@ class RemoteErrorConfigurationEntryListTests: XCTestCase {
     guard let data = JSONLoader.loadData(for: .validRemoteErrorConfigurationList) else {
       return XCTFail("Failed to load json")
     }
-    XCTAssertNotNil(try decoder.decode(RemoteErrorConfigurationEntryList.self, from: data),
+    XCTAssertNotNil(try decoder.decode(RemoteList.self, from: data),
                     "Should be able to decode a remote error configuration entry list from valid json")
   }
 }

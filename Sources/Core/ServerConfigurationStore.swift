@@ -18,15 +18,18 @@
 
 import Foundation
 
-protocol ServerConfigurationManaging {
-  var cachedServerConfiguration: ServerConfigurationProviding? { get }
-}
+struct ServerConfigurationStore: Store {
+  typealias CachedValueType = ServerConfiguration
 
-// TODO: Implement FBSDKServerConfigurationManager
-class ServerConfigurationManager: ServerConfigurationManaging {
-  static var shared = ServerConfigurationManager()
+  private(set) var appIdentifierProvider: AppIdentifierProviding
+  let domain: String = "com.facebook.sdk:serverConfiguration"
+  let store: DataPersisting
 
-  var cachedServerConfiguration: ServerConfigurationProviding? {
-    return nil
+  init(
+    store: DataPersisting = UserDefaults.standard,
+    appIdentifierProvider: AppIdentifierProviding = Settings.shared
+    ) {
+    self.appIdentifierProvider = appIdentifierProvider
+    self.store = store
   }
 }

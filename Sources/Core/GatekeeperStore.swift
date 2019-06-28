@@ -18,30 +18,12 @@
 
 import Foundation
 
-struct GatekeeperStore {
+struct GatekeeperStore: Store {
+  typealias CachedValueType = [Gatekeeper]
+
   private(set) var appIdentifierProvider: AppIdentifierProviding
+  let domain: String = "com.facebook.sdk:gateKeeper"
   let store: DataPersisting
-  var retrievalKey: String {
-    let domain = "com.facebook.sdk:gateKeeper"
-    guard let identifier = appIdentifierProvider.appIdentifier else {
-      return domain
-    }
-    return "\(domain)\(identifier)"
-  }
-
-  var hasDataForCurrentAppIdentifier: Bool {
-    return store.data(forKey: retrievalKey) != nil
-  }
-
-  var cachedGatekeepers: [Gatekeeper] {
-    guard let data = store.data(forKey: retrievalKey),
-      let gatekeepers = try? JSONDecoder().decode([Gatekeeper].self, from: data)
-      else {
-        return []
-    }
-
-    return gatekeepers
-  }
 
   init(
     store: DataPersisting = UserDefaults.standard,
@@ -49,11 +31,5 @@ struct GatekeeperStore {
     ) {
     self.appIdentifierProvider = appIdentifierProvider
     self.store = store
-  }
-
-  func cache(_ gatekeepers: [Gatekeeper]) {
-    let data = try? JSONEncoder().encode(gatekeepers)
-
-    store.set(data, forKey: retrievalKey)
   }
 }

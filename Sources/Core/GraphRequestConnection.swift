@@ -22,15 +22,14 @@ typealias DataFetchResult = Result<Data, Error>
 typealias DataFetchCompletion = (DataFetchResult) -> Void
 
 class GraphRequestConnection: GraphRequestConnecting {
-  // TODO: - figure out how this is used differently from default connection timeout
+  /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
+  static let defaultConnectionTimeout: Double = 60
+
   /// Gets or sets the timeout interval to wait for a response before giving up.
-  var timeout: TimeInterval = 0.0
+  var timeout: TimeInterval = GraphRequestConnection.defaultConnectionTimeout
 
   /// The state of the connection
   var state: GraphRequestConnectionState
-
-  /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
-  let defaultConnectionTimeout: Double = 60
 
   /// The delegate object that receives updates.
   weak var delegate: GraphRequestConnectionDelegate?
@@ -60,23 +59,23 @@ class GraphRequestConnection: GraphRequestConnecting {
   let sessionProvider: SessionProviding
   let logger: Logging
   let piggybackManager: GraphRequestPiggybackManaging.Type
-  let serverConfigurationManager: ServerConfigurationManaging
+  let serverConfigurationService: ServerConfigurationServicing
 
   init(
     sessionProvider: SessionProviding = SessionProvider(),
     logger: Logging = Logger(),
     piggybackManager: GraphRequestPiggybackManaging.Type = GraphRequestPiggybackManager.self,
-    serverConfigurationManager: ServerConfigurationManaging = ServerConfigurationManager.shared
+    serverConfigurationService: ServerConfigurationServicing = ServerConfigurationService.shared
     ) {
     self.sessionProvider = sessionProvider
     self.logger = logger
     self.piggybackManager = piggybackManager
-    self.serverConfigurationManager = serverConfigurationManager
+    self.serverConfigurationService = serverConfigurationService
     state = .created
   }
 
   func start() {
-    errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
+    errorConfiguration = serverConfigurationService.serverConfiguration.errorConfiguration
 
     switch state {
     case .started, .cancelled, .completed:
@@ -159,7 +158,7 @@ class GraphRequestConnection: GraphRequestConnecting {
       fatalError("Should never fail to build a url from the url builder")
     }
 
-    return URLRequest(url: url)
+    return URLRequest(url: url, timeoutInterval: timeout)
   }
 
   /**
@@ -207,7 +206,7 @@ class GraphRequestConnection: GraphRequestConnecting {
     _ remoteType: RemoteType.Type,
     data: Data
     ) -> Result<RemoteType, Error> {
-    switch try? JSONParser.parse(data: data, for: RemoteGraphResponseError.self) {
+    switch try? JSONParser.parse(data: data, for: Remote.GraphResponseError.self) {
     case let error?:
       return .failure(error)
 
@@ -237,7 +236,7 @@ class GraphRequestConnection: GraphRequestConnecting {
     for graphRequest: GraphRequest,
     completion: @escaping DataFetchCompletion
     ) -> URLSessionTaskProxy? {
-    errorConfiguration = serverConfigurationManager.cachedServerConfiguration?.errorConfiguration ?? errorConfiguration
+    errorConfiguration = serverConfigurationService.serverConfiguration.errorConfiguration
 
     piggybackManager.addPiggybackRequests(for: self)
 

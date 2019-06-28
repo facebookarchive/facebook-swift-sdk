@@ -19,8 +19,8 @@
 @testable import FacebookCore
 import Foundation
 
-extension RemoteRestrictiveEventParameterList {
-  init(parameters: [RemoteRestrictiveEventParameter]) {
+extension Remote.RestrictiveEventParameterList {
+  init(parameters: [Remote.RestrictiveEventParameter]) {
     self.parameters = parameters
   }
 }

@@ -18,36 +18,38 @@
 
 import Foundation
 
-/**
- A representation of the server side codes associated with an error
- Used for creating a `RemoteErrorConfigurationEntry`
- */
-struct RemoteErrorCodeGroup: Codable, Equatable {
-  typealias ErrorCode = Int
+extension Remote {
+  /**
+   A representation of the server side codes associated with an error
+   Used for creating a `RemoteErrorConfigurationEntry`
+   */
+  struct ErrorCodeGroup: Codable, Equatable {
+    typealias ErrorCode = Int
 
-  let code: ErrorCode
-  let subcodes: [ErrorCode]
+    let code: ErrorCode
+    let subcodes: [ErrorCode]
 
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    code = try container.decode(ErrorCode.self, forKey: .code)
+    init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      code = try container.decode(ErrorCode.self, forKey: .code)
 
-    switch try? container.nestedUnkeyedContainer(forKey: .subcodes) {
-    case nil:
-      subcodes = []
+      switch try? container.nestedUnkeyedContainer(forKey: .subcodes) {
+      case nil:
+        subcodes = []
 
-    case var subcodesContainer?:
-      var subcodes: [ErrorCode] = []
-      while !subcodesContainer.isAtEnd {
-        switch try? subcodesContainer.decode(ErrorCode.self) {
-        case let code?:
-          subcodes.append(code)
+      case var subcodesContainer?:
+        var subcodes: [ErrorCode] = []
+        while !subcodesContainer.isAtEnd {
+          switch try? subcodesContainer.decode(ErrorCode.self) {
+          case let code?:
+            subcodes.append(code)
 
-        case nil:
-          _ = try? subcodesContainer.decode(EmptyDecodable.self)
+          case nil:
+            _ = try? subcodesContainer.decode(EmptyDecodable.self)
+          }
         }
+        self.subcodes = subcodes
       }
-      self.subcodes = subcodes
     }
   }
 }

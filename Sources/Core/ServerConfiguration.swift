@@ -16,19 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable type_body_length
+
 import Foundation
 
 // TODO: Extract a meaningful type for event bindings
 typealias EventBinding = String
 
 protocol ServerConfigurationProviding {
+  var appID: String { get }
   var errorConfiguration: ErrorConfiguration { get }
 }
 
-struct ServerConfiguration: ServerConfigurationProviding {
+struct ServerConfiguration: ServerConfigurationProviding, Codable {
   // Increase this value when adding new fields and previous cached configurations should be
   // treated as stale.
-  static let version: Int = 2
+  static let configurationVersion: Int = 2
   static let defaultSessionTimeout: TimeInterval = 60
 
   let appID: String
@@ -55,20 +58,20 @@ struct ServerConfiguration: ServerConfigurationProviding {
   let dialogConfigurations: [DialogConfiguration]
   let dialogFlows: [DialogFlow]
   let restrictiveRules: [RestrictiveRule]
-
-  private(set) var restrictiveParams: [RestrictiveEventParameter] = []
+  let restrictiveParams: [RestrictiveEventParameter]
+  let version: Int
 
   static var defaultDialogFlows: [DialogFlow] {
     let shouldUseNativeFlow = ProcessInfo.processInfo.isOperatingSystemAtLeast(
       OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)
     )
     let remotes = [
-      RemoteServerConfiguration.DialogFlow(
+      Remote.ServerConfiguration.DialogFlow(
         name: "default",
         shouldUseNativeFlow: shouldUseNativeFlow,
         shouldUseSafariVC: true
       ),
-      RemoteServerConfiguration.DialogFlow(
+      Remote.ServerConfiguration.DialogFlow(
         name: "message",
         shouldUseNativeFlow: true,
         shouldUseSafariVC: nil
@@ -77,7 +80,70 @@ struct ServerConfiguration: ServerConfigurationProviding {
     return remotes.compactMap { DialogFlow(remote: $0) }
   }
 
-  init?(remote: RemoteServerConfiguration) {
+  // TODO: Revisit the need for a default since all it really provides
+  // are dialog flows which are already available as a static property
+  /**
+ This initializer should only use this for providing a default while
+   an up-to-date version is being fetched from the server
+   */
+  init(
+    appID: String,
+    isAdvertisingIDEnabled: Bool = false,
+    appName: String? = nil,
+    defaultShareMode: String? = nil,
+    errorConfiguration: ErrorConfiguration = ErrorConfiguration(configurationDictionary: [:]),
+    isImplicitPurchaseLoggingEnabled: Bool = false,
+    isCodelessEventsEnabled: Bool = false,
+    isLoginTooltipEnabled: Bool = false,
+    isUninstallTrackingEnabled: Bool = false,
+    isImplicitLoggingEnabled: Bool = false,
+    isNativeAuthFlowEnabled: Bool = false,
+    isSystemAuthenticationEnabled: Bool = false,
+    loginTooltipText: String? = nil,
+    // Using distance past so that a default will not be confused with a newer/fetched version
+    timestamp: Date = Date.distantPast,
+    sessionTimoutInterval: TimeInterval = ServerConfiguration.defaultSessionTimeout,
+    loggingToken: String? = nil,
+    smartLoginOptions: SmartLoginOptions = .unknown,
+    smartLoginBookmarkIconURL: URL? = nil,
+    smartLoginMenuIconURL: URL? = nil,
+    updateMessage: String? = nil,
+    eventBindings: [EventBinding] = [],
+    dialogConfigurations: [DialogConfiguration] = [],
+    dialogFlows: [DialogFlow] = ServerConfiguration.defaultDialogFlows,
+    restrictiveRules: [RestrictiveRule] = [],
+    restrictiveParams: [RestrictiveEventParameter] = [],
+    version: Int = ServerConfiguration.configurationVersion
+    ) {
+    self.version = version
+    self.appID = appID
+    self.isAdvertisingIDEnabled = isAdvertisingIDEnabled
+    self.appName = appName
+    self.defaultShareMode = defaultShareMode
+    self.errorConfiguration = errorConfiguration
+    self.isImplicitPurchaseLoggingEnabled = isImplicitPurchaseLoggingEnabled
+    self.isCodelessEventsEnabled = isCodelessEventsEnabled
+    self.isLoginTooltipEnabled = isLoginTooltipEnabled
+    self.isUninstallTrackingEnabled = isUninstallTrackingEnabled
+    self.isImplicitLoggingEnabled = isImplicitLoggingEnabled
+    self.isNativeAuthFlowEnabled = isNativeAuthFlowEnabled
+    self.isSystemAuthenticationEnabled = isSystemAuthenticationEnabled
+    self.loginTooltipText = loginTooltipText
+    self.timestamp = timestamp
+    self.sessionTimoutInterval = sessionTimoutInterval
+    self.loggingToken = loggingToken
+    self.smartLoginOptions = smartLoginOptions
+    self.smartLoginBookmarkIconURL = smartLoginBookmarkIconURL
+    self.smartLoginMenuIconURL = smartLoginMenuIconURL
+    self.updateMessage = updateMessage
+    self.eventBindings = eventBindings
+    self.dialogConfigurations = dialogConfigurations
+    self.dialogFlows = dialogFlows
+    self.restrictiveRules = restrictiveRules
+    self.restrictiveParams = restrictiveParams
+  }
+
+  init?(remote: Remote.ServerConfiguration) {
     guard let appID = remote.appID,
       !appID.isEmpty
       else {
@@ -120,6 +186,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
     self.restrictiveParams = remote.restrictiveEventParameterList?.parameters.compactMap {
       RestrictiveEventParameter(remote: $0)
     } ?? []
+    self.version = ServerConfiguration.configurationVersion
   }
 
   private func value(
@@ -149,7 +216,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
   }
 
   private static func extractSmartLoginMenuIconUrl(
-    from remote: RemoteServerConfiguration
+    from remote: Remote.ServerConfiguration
     ) -> URL? {
     guard let urlString = remote.smartLoginMenuIconUrlString else {
       return nil
@@ -159,7 +226,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
   }
 
   private static func extractSmartLoginBookmarkIconUrl(
-    from remote: RemoteServerConfiguration
+    from remote: Remote.ServerConfiguration
     ) -> URL? {
     guard let urlString = remote.smartLoginBookmarkIconUrlString else {
       return nil
@@ -168,7 +235,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
     return URL(string: urlString)
   }
 
-  private static func extractErrorConfiguration(from remote: RemoteServerConfiguration) -> ErrorConfiguration {
+  private static func extractErrorConfiguration(from remote: Remote.ServerConfiguration) -> ErrorConfiguration {
     if let remoteErrorConfiguration = remote.errorConfiguration,
       let configuration = ErrorConfigurationBuilder.build(from: remoteErrorConfiguration) {
       return configuration
@@ -177,7 +244,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
     }
   }
 
-  struct SmartLoginOptions: OptionSet {
+  struct SmartLoginOptions: OptionSet, Codable {
     let rawValue: Int
 
     static let unknown = SmartLoginOptions(rawValue: 0)
@@ -185,7 +252,7 @@ struct ServerConfiguration: ServerConfigurationProviding {
     static let shouldRequireConfirmation = SmartLoginOptions(rawValue: 1 << 1)
   }
 
-  struct AppEventsFeatures: OptionSet {
+  struct AppEventsFeatures: OptionSet, Codable {
     let rawValue: Int
 
     static let none = AppEventsFeatures(rawValue: 0)
@@ -193,5 +260,67 @@ struct ServerConfiguration: ServerConfigurationProviding {
     static let isImplicitPurchaseLoggingEnabled = AppEventsFeatures(rawValue: 1 << 1)
     static let isCodelessEventsTriggerEnabled = AppEventsFeatures(rawValue: 1 << 5)
     static let isUninstallTrackingEnabled = AppEventsFeatures(rawValue: 1 << 7)
+  }
+
+  // MARK: - Codable
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    try container.encode(appID, forKey: .appID)
+    try container.encode(version, forKey: .version)
+    try container.encode(isAdvertisingIDEnabled, forKey: .isAdvertisingIDEnabled)
+    try container.encodeIfPresent(appName, forKey: .appName)
+    try container.encodeIfPresent(defaultShareMode, forKey: .defaultShareMode)
+    try container.encodeIfPresent(errorConfiguration, forKey: .errorConfiguration)
+    try container.encodeIfPresent(isImplicitPurchaseLoggingEnabled, forKey: .isImplicitPurchaseLoggingEnabled)
+    try container.encodeIfPresent(isCodelessEventsEnabled, forKey: .isCodelessEventsEnabled)
+    try container.encodeIfPresent(isLoginTooltipEnabled, forKey: .isLoginTooltipEnabled)
+    try container.encodeIfPresent(isUninstallTrackingEnabled, forKey: .isUninstallTrackingEnabled)
+    try container.encodeIfPresent(isImplicitLoggingEnabled, forKey: .isImplicitLoggingEnabled)
+    try container.encodeIfPresent(isNativeAuthFlowEnabled, forKey: .isNativeAuthFlowEnabled)
+    try container.encodeIfPresent(isSystemAuthenticationEnabled, forKey: .isSystemAuthenticationEnabled)
+    try container.encodeIfPresent(loginTooltipText, forKey: .loginTooltipText)
+    try container.encodeIfPresent(timestamp, forKey: .timestamp)
+    try container.encodeIfPresent(sessionTimoutInterval, forKey: .sessionTimoutInterval)
+    try container.encodeIfPresent(loggingToken, forKey: .loggingToken)
+    try container.encodeIfPresent(smartLoginOptions, forKey: .smartLoginOptions)
+    try container.encodeIfPresent(smartLoginBookmarkIconURL, forKey: .smartLoginBookmarkIconURL)
+    try container.encodeIfPresent(smartLoginMenuIconURL, forKey: .smartLoginMenuIconURL)
+    try container.encodeIfPresent(updateMessage, forKey: .updateMessage)
+    try container.encodeIfPresent(eventBindings, forKey: .eventBindings)
+    try container.encodeIfPresent(dialogConfigurations, forKey: .dialogConfigurations)
+    try container.encodeIfPresent(dialogFlows, forKey: .dialogFlows)
+    try container.encodeIfPresent(restrictiveRules, forKey: .restrictiveRules)
+    try container.encodeIfPresent(restrictiveParams, forKey: .restrictiveParams)
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case appID
+    case isAdvertisingIDEnabled
+    case appName
+    case defaultShareMode
+    case errorConfiguration
+    case isImplicitPurchaseLoggingEnabled
+    case isCodelessEventsEnabled
+    case isLoginTooltipEnabled
+    case isUninstallTrackingEnabled
+    case isImplicitLoggingEnabled
+    case isNativeAuthFlowEnabled
+    case isSystemAuthenticationEnabled
+    case loginTooltipText
+    case timestamp
+    case sessionTimoutInterval
+    case loggingToken
+    case smartLoginOptions
+    case smartLoginBookmarkIconURL
+    case smartLoginMenuIconURL
+    case updateMessage
+    case eventBindings
+    case dialogConfigurations
+    case dialogFlows
+    case restrictiveRules
+    case restrictiveParams
+    case version
   }
 }

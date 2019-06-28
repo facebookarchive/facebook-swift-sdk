@@ -20,16 +20,20 @@
 import Foundation
 
 enum SampleRemoteDialogFlow {
-  static func validTrue(name: ServerConfiguration.DialogFlow.FlowName) -> RemoteServerConfiguration.DialogFlow {
-      return RemoteServerConfiguration.DialogFlow(
+  static func validTrue(
+    name: ServerConfiguration.DialogFlow.FlowName
+    ) -> Remote.ServerConfiguration.DialogFlow {
+      return Remote.ServerConfiguration.DialogFlow(
         name: name.description,
         shouldUseNativeFlow: true,
         shouldUseSafariVC: true
     )
   }
 
-  static func validFalse(name: ServerConfiguration.DialogFlow.FlowName) -> RemoteServerConfiguration.DialogFlow {
-    return RemoteServerConfiguration.DialogFlow(
+  static func validFalse(
+    name: ServerConfiguration.DialogFlow.FlowName
+    ) -> Remote.ServerConfiguration.DialogFlow {
+    return Remote.ServerConfiguration.DialogFlow(
       name: name.description,
       shouldUseNativeFlow: false,
       shouldUseSafariVC: false

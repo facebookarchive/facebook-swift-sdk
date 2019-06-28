@@ -26,7 +26,7 @@ class RemoteGatekeeperListTests: XCTestCase {
 
   func testCreatingListWithEmptyList() {
     do {
-      _ = try decoder.decode(RemoteGatekeeperList.self, from: SampleListData.missingTopLevelKey)
+      _ = try decoder.decode(Remote.GatekeeperList.self, from: SampleListData.missingTopLevelKey)
       XCTFail("Should not create a remote gatekeepers list from an empty list")
     } catch _ as DecodingError {
       // This is expected
@@ -37,7 +37,7 @@ class RemoteGatekeeperListTests: XCTestCase {
 
   func testCreatingListMissingGatekeepersKey() {
     do {
-      _ = try decoder.decode(RemoteGatekeeperList.self, from: SampleListData.missingGatekeepers)
+      _ = try decoder.decode(Remote.GatekeeperList.self, from: SampleListData.missingGatekeepers)
     } catch {
       XCTAssertNil(error, "Should create a remote representation of a gatekeeper list as long as the top level key is valid")
     }
@@ -45,7 +45,7 @@ class RemoteGatekeeperListTests: XCTestCase {
 
   func testCreatingListWithEmptyGatekeepers() {
     do {
-      _ = try decoder.decode(RemoteGatekeeperList.self, from: SampleListData.emptyGatekeepers)
+      _ = try decoder.decode(Remote.GatekeeperList.self, from: SampleListData.emptyGatekeepers)
     } catch {
       XCTFail("Should create a remote representation of a gatekeeper list as long as the top level key is valid")
     }
@@ -53,7 +53,7 @@ class RemoteGatekeeperListTests: XCTestCase {
 
   func testCreatingListOfGatekeepers() {
     do {
-      _ = try decoder.decode(RemoteGatekeeperList.self, from: SampleListData.valid)
+      _ = try decoder.decode(Remote.GatekeeperList.self, from: SampleListData.valid)
     } catch {
       XCTFail("Should create a remote representation of a gatekeeper list from valid data")
     }
@@ -63,7 +63,7 @@ class RemoteGatekeeperListTests: XCTestCase {
     guard let data = JSONLoader.loadData(for: .validRemoteGatekeeperList) else {
       return XCTFail("Failed to load json")
     }
-    XCTAssertNotNil(try decoder.decode(RemoteGatekeeperList.self, from: data),
+    XCTAssertNotNil(try decoder.decode(Remote.GatekeeperList.self, from: data),
                     "Should be able to decode a gatekeeper from valid json")
   }
 }

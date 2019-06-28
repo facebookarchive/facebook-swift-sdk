@@ -24,49 +24,49 @@ enum SampleRemoteDialogConfiguration {
   private static let validUrlString = "www.example.com"
   private static let validVersions = [1, 2, 3]
 
-  static let valid = RemoteDialogConfiguration(
+  static let valid = Remote.DialogConfiguration(
     name: validName,
     urlString: validUrlString,
     versions: validVersions
   )
 
-  static let missingName = RemoteDialogConfiguration(
+  static let missingName = Remote.DialogConfiguration(
     name: nil,
     urlString: validUrlString,
     versions: validVersions
   )
 
-  static let emptyName = RemoteDialogConfiguration(
+  static let emptyName = Remote.DialogConfiguration(
     name: "",
     urlString: validUrlString,
     versions: validVersions
   )
 
-  static let missingURLString = RemoteDialogConfiguration(
+  static let missingURLString = Remote.DialogConfiguration(
     name: validName,
     urlString: nil,
     versions: validVersions
   )
 
-  static let emptyURLString = RemoteDialogConfiguration(
+  static let emptyURLString = Remote.DialogConfiguration(
     name: validName,
     urlString: "",
     versions: validVersions
   )
 
-  static let invalidURLString = RemoteDialogConfiguration(
+  static let invalidURLString = Remote.DialogConfiguration(
     name: validName,
     urlString: "^",
     versions: validVersions
   )
 
-  static let missingVersions = RemoteDialogConfiguration(
+  static let missingVersions = Remote.DialogConfiguration(
     name: validName,
     urlString: validUrlString,
     versions: nil
   )
 
-  static let emptyVersions = RemoteDialogConfiguration(
+  static let emptyVersions = Remote.DialogConfiguration(
     name: validName,
     urlString: validUrlString,
     versions: []

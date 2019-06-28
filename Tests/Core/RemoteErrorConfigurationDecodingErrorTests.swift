@@ -16,19 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable type_name
-
 @testable import FacebookCore
 import XCTest
 
 class RemoteErrorConfigurationDecodingErrorTests: XCTestCase {
   func testKnownValues() {
-    let expectedCases: [RemoteErrorConfigurationEntry.DecodingError] = [
+    let expectedCases: [Remote.ErrorConfigurationEntry.DecodingError] = [
       .invalidContainer,
       .missingRecoveryMessage,
       .missingRecoveryOptions
     ]
-    XCTAssertEqual(RemoteErrorConfigurationEntry.DecodingError.allCases, expectedCases,
+    XCTAssertEqual(Remote.ErrorConfigurationEntry.DecodingError.allCases, expectedCases,
                    "There should be easy access to all the cases of a remote error configuration decoding error")
   }
 }

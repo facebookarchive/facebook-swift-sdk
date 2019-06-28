@@ -18,25 +18,27 @@
 
 import Foundation
 
-struct RemoteGraphResponseError: Codable, FBError {
-  let details: GraphResponseErrorDetails
+extension Remote {
+  struct GraphResponseError: Codable, FBError {
+    let details: Details
 
-  init(from decoder: Decoder) throws {
-    let detailsContainer = try decoder.container(keyedBy: CodingKeys.self)
-    details = try detailsContainer.decode(GraphResponseErrorDetails.self, forKey: .details)
+    init(from decoder: Decoder) throws {
+      let detailsContainer = try decoder.container(keyedBy: CodingKeys.self)
+      details = try detailsContainer.decode(Details.self, forKey: .details)
+    }
+
+    enum CodingKeys: String, CodingKey {
+      case details = "error"
+    }
+
+    var isOAuthError: Bool {
+      return details.type == "OAuthException"
+    }
+
+    struct Details: Codable {
+      let code: Int
+      let message: String
+      let type: String
+    }
   }
-
-  enum CodingKeys: String, CodingKey {
-    case details = "error"
-  }
-
-  var isOAuthError: Bool {
-    return details.type == "OAuthException"
-  }
-}
-
-struct GraphResponseErrorDetails: Codable {
-  let code: Int
-  let message: String
-  let type: String
 }

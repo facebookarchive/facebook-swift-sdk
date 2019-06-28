@@ -16,29 +16,51 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
 import Foundation
 
-class FakeServerConfigurationManager: ServerConfigurationManaging {
-  private var cachedConfiguration: ServerConfigurationProviding?
+/**
+ A lightweight wrapper for persisting a `Codable` object
+ Leaves it to the concrete implementation to provide a domain,
+an object that provides an application identifier and a store.
+ */
+protocol Store {
+  associatedtype CachedValueType: Codable
 
-  var cachedConfigurationWasRequested: Bool = false
+  var appIdentifierProvider: AppIdentifierProviding { get }
+  var domain: String { get }
+  var retrievalKey: String { get }
+  var store: DataPersisting { get }
+}
 
-  var cachedServerConfiguration: ServerConfigurationProviding? {
-    get {
-      cachedConfigurationWasRequested = true
-      return cachedConfiguration
+extension Store {
+  var retrievalKey: String {
+    guard let identifier = appIdentifierProvider.appIdentifier else {
+      return domain
     }
-    set {
-      cachedConfiguration = newValue
-    }
+    return "\(domain)\(identifier)"
   }
 
-  init(cachedServerConfiguration: ServerConfigurationProviding? = nil) {
-    self.cachedServerConfiguration = cachedServerConfiguration
+  var hasDataForCurrentAppIdentifier: Bool {
+    return store.data(forKey: retrievalKey) != nil
   }
 
-  func clearCache() {
-    cachedServerConfiguration = nil
+  var cachedValue: CachedValueType? {
+    guard let data = store.data(forKey: retrievalKey),
+      let value = try? JSONDecoder().decode(CachedValueType.self, from: data)
+      else {
+        return nil
+    }
+
+    return value
+  }
+
+  func cache(_ value: CachedValueType) {
+    let data = try? JSONEncoder().encode(value)
+
+    store.set(data, forKey: retrievalKey)
+  }
+
+  func resetCache() {
+    store.set(nil, forKey: retrievalKey)
   }
 }

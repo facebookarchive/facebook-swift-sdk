@@ -18,12 +18,12 @@
 
 import Foundation
 
-struct DialogConfiguration {
+struct DialogConfiguration: Codable {
   let name: String
   let url: URL
   let versions: [Int]
 
-  init?(remote: RemoteDialogConfiguration) {
+  init?(remote: Remote.DialogConfiguration) {
     guard let name = remote.name,
       !name.isEmpty,
       let urlString = remote.urlString,

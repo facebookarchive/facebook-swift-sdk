@@ -21,7 +21,7 @@ import XCTest
 
 class UserProfileBuilderTests: XCTestCase {
   func testBuildingWithEmptyName() {
-    let remote = RemoteUserProfile(name: "")
+    let remote = Remote.UserProfile(name: "")
     XCTAssertNil(
       UserProfileBuilder.build(from: remote),
       "Should not build a user profile with an empty name"
@@ -29,7 +29,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithEmptyNameFields() {
-    let remote = RemoteUserProfile(
+    let remote = Remote.UserProfile(
       name: "",
       firstName: "",
       middleName: "",
@@ -40,13 +40,13 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithMissingName() {
-    let remote = RemoteUserProfile(name: nil)
+    let remote = Remote.UserProfile(name: nil)
     XCTAssertNil(UserProfileBuilder.build(from: remote),
                  "Should not build a user profile with a missing name")
   }
 
   func testBuildingWithEmptyFirstName() {
-    let remote = RemoteUserProfile(firstName: "")
+    let remote = Remote.UserProfile(firstName: "")
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with an empty first-name")
     }
@@ -56,7 +56,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithMissingFirstName() {
-    let remote = RemoteUserProfile(firstName: nil)
+    let remote = Remote.UserProfile(firstName: nil)
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with a missing first-name")
     }
@@ -66,7 +66,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithEmptyMiddleName() {
-    let remote = RemoteUserProfile(middleName: "")
+    let remote = Remote.UserProfile(middleName: "")
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with an empty middle-name")
     }
@@ -76,7 +76,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithMissingMiddleName() {
-    let remote = RemoteUserProfile(middleName: nil)
+    let remote = Remote.UserProfile(middleName: nil)
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with a missing middle-name")
     }
@@ -86,7 +86,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithEmptyLastName() {
-    let remote = RemoteUserProfile(lastName: "")
+    let remote = Remote.UserProfile(lastName: "")
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with an empty last-name")
     }
@@ -96,7 +96,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithMissingLastName() {
-    let remote = RemoteUserProfile(lastName: nil)
+    let remote = Remote.UserProfile(lastName: nil)
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with a missing last-name")
     }
@@ -106,7 +106,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithEmptyURLString() {
-    let remote = RemoteUserProfile(linkURL: "")
+    let remote = Remote.UserProfile(linkURL: "")
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with an empty url string")
     }
@@ -116,7 +116,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithMissingURLString() {
-    let remote = RemoteUserProfile(linkURL: nil)
+    let remote = Remote.UserProfile(linkURL: nil)
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with a missing url string")
     }
@@ -126,7 +126,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithInvalidURLString() {
-    let remote = RemoteUserProfile(linkURL: "=^^=")
+    let remote = Remote.UserProfile(linkURL: "=^^=")
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with an invalid url string")
     }
@@ -136,7 +136,7 @@ class UserProfileBuilderTests: XCTestCase {
   }
 
   func testBuildingWithValidInputs() {
-    let remote = RemoteUserProfile()
+    let remote = Remote.UserProfile()
     guard let profile = UserProfileBuilder.build(from: remote) else {
       return XCTFail("Should build a user profile with valid inputs")
     }

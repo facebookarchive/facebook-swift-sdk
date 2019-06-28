@@ -18,12 +18,12 @@
 
 import Foundation
 
-struct RestrictiveEventParameter {
+struct RestrictiveEventParameter: Codable {
   let name: String
   let isDeprecated: Bool
   let restrictedParameters: [String: Int]
 
-  init?(remote: RemoteRestrictiveEventParameter) {
+  init?(remote: Remote.RestrictiveEventParameter) {
     self.name = remote.name
     self.isDeprecated = remote.isDeprecated ?? false
 

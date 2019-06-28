@@ -14,7 +14,7 @@
 		811C5E561CFFD4F800E4A925 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F4020CF72283556C00710558 /* VariantCodingKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4020CF62283556C00710558 /* VariantCodingKeyTests.swift */; };
 		F4020CF92283631E00710558 /* VariantCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4020CF82283631E00710558 /* VariantCodingKey.swift */; };
-		F404971A22443D99005EE2EE /* ServerConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971922443D99005EE2EE /* ServerConfigurationManager.swift */; };
+		F404971A22443D99005EE2EE /* ServerConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971922443D99005EE2EE /* ServerConfigurationService.swift */; };
 		F404972022444F43005EE2EE /* RemoteServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971F22444F43005EE2EE /* RemoteServerConfiguration.swift */; };
 		F406F86622823703006B0D4E /* Drawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F406F86522823703006B0D4E /* Drawable.swift */; };
 		F406F8672282376C006B0D4E /* DrawableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44847ED2269219500527D49 /* DrawableTests.swift */; };
@@ -62,6 +62,8 @@
 		F42E3C932268BB9B00287DC4 /* UserProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */; };
 		F42E3C952268BBB900287DC4 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C942268BBB900287DC4 /* UserDefaults+Extensions.swift */; };
 		F42E3C972268C57300287DC4 /* AccessTokenWallet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */; };
+		F42EF2BA22C3C88900218CC1 /* GatekeeperDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42EF2B922C3C88500218CC1 /* GatekeeperDictionary.swift */; };
+		F42EF2BC22C3C8F400218CC1 /* Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42EF2BB22C3C8EF00218CC1 /* Remote.swift */; };
 		F4317E592286239300EBF926 /* ButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E582286239300EBF926 /* ButtonTests.swift */; };
 		F4317E5B2286288200EBF926 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5A2286288200EBF926 /* Button.swift */; };
 		F4317E5F22862B8000EBF926 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5E22862B8000EBF926 /* Color.swift */; };
@@ -77,6 +79,8 @@
 		F432E9FA22370C07007D3A34 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */; };
 		F432E9FC22370C9C007D3A34 /* SessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F432E9FB22370C9C007D3A34 /* SessionProvider.swift */; };
 		F433A83122B7FE1E00261787 /* SampleRemoteDialogFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433A83022B7FE1E00261787 /* SampleRemoteDialogFlow.swift */; };
+		F433A83322B80AFA00261787 /* ServerConfigurationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433A83222B80AFA00261787 /* ServerConfigurationServiceTests.swift */; };
+		F433A83722B81A5C00261787 /* ServerConfigurationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433A83622B81A5C00261787 /* ServerConfigurationStoreTests.swift */; };
 		F43AB0282270B55600610974 /* GatekeeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0272270B55600610974 /* GatekeeperTests.swift */; };
 		F43AB02A2270B61600610974 /* Gatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0292270B61600610974 /* Gatekeeper.swift */; };
 		F43AB02C2270BE4F00610974 /* RemoteGatekeeperListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */; };
@@ -95,8 +99,6 @@
 		F43DE26C22B9C40400527B71 /* LocalizedStringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE26922B9C40400527B71 /* LocalizedStringHelper.swift */; };
 		F43DE26E22B9C40E00527B71 /* FacebookCoreApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE26D22B9C40E00527B71 /* FacebookCoreApplicationDelegate.swift */; };
 		F43DE27F22B9C44C00527B71 /* FacebookCore_TV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F43DE27622B9C44B00527B71 /* FacebookCore_TV.framework */; };
-		F43DE28422B9C44C00527B71 /* FacebookCore_TVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE28322B9C44C00527B71 /* FacebookCore_TVTests.swift */; };
-		F43DE28622B9C44C00527B71 /* FacebookCore_TV.h in Headers */ = {isa = PBXBuildFile; fileRef = F43DE27822B9C44B00527B71 /* FacebookCore_TV.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F43DE28D22B9C4B800527B71 /* DeviceDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DE26F22B9C41600527B71 /* DeviceDialogView.swift */; };
 		F43DE28E22B9C4C100527B71 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4317E5E22862B8000EBF926 /* Color.swift */; };
 		F43DE28F22B9C4CF00527B71 /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F406F8682282378E006B0D4E /* Logo.swift */; };
@@ -200,7 +202,6 @@
 		F47056DB2232DF1D00BE526B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DA2232DF1D00BE526B /* Logging.swift */; };
 		F47056DD2232DF4500BE526B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DC2232DF4500BE526B /* Logger.swift */; };
 		F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */; };
-		F47470E42298AC27004FBDB0 /* GatekeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470E32298AC27004FBDB0 /* GatekeeperList.swift */; };
 		F47470EB229DB2DE004FBDB0 /* BridgeAPINativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470EA229DB2DE004FBDB0 /* BridgeAPINativeTests.swift */; };
 		F47470F1229DB55C004FBDB0 /* FakeNetworkerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F0229DB55C004FBDB0 /* FakeNetworkerProvider.swift */; };
 		F47470F3229DB583004FBDB0 /* FakeURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F2229DB583004FBDB0 /* FakeURLOpener.swift */; };
@@ -234,12 +235,15 @@
 		F4932E0B22808DB50020C282 /* TokenString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0A22808DB50020C282 /* TokenString.swift */; };
 		F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */; };
 		F4932E0F2280A1CA0020C282 /* BoundedCGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */; };
-		F49BC64122BA89570055DCB4 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63D22BA89570055DCB4 /* Cryptography.swift */; };
-		F49BC64222BA89570055DCB4 /* SecureStoreKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63E22BA89570055DCB4 /* SecureStoreKeys.swift */; };
-		F49BC64322BA89570055DCB4 /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63F22BA89570055DCB4 /* SecureStore.swift */; };
-		F49BC64422BA89570055DCB4 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC64022BA89570055DCB4 /* KeychainStore.swift */; };
+		F49BC63422BA80930055DCB4 /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63122BA80930055DCB4 /* SecureStore.swift */; };
+		F49BC63522BA80930055DCB4 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63222BA80930055DCB4 /* Cryptography.swift */; };
+		F49BC63622BA80930055DCB4 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63322BA80930055DCB4 /* KeychainStore.swift */; };
+		F49BC63922BA80AC0055DCB4 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63722BA80AC0055DCB4 /* Store.swift */; };
+		F49BC63A22BA80AC0055DCB4 /* ServerConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63822BA80AC0055DCB4 /* ServerConfigurationStore.swift */; };
+		F49BC63C22BA80C90055DCB4 /* ServerConfigurationTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63B22BA80C90055DCB4 /* ServerConfigurationTestHelper.swift */; };
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
+		F4A943CF22C3ED7900616AD8 /* FacebookCore_TV.h in Headers */ = {isa = PBXBuildFile; fileRef = F4A943CE22C3ED7900616AD8 /* FacebookCore_TV.h */; };
 		F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE42712245846A00E3B99C /* GraphPathTests.swift */; };
 		F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE4273224584F200E3B99C /* GraphPath.swift */; };
 		F4B340012240779D00912F0F /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B340002240779D00912F0F /* JSONLoader.swift */; };
@@ -252,7 +256,6 @@
 		F4B8833022305798000971C9 /* FBErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8832C22305791000971C9 /* FBErrorTests.swift */; };
 		F4BEDA59224141AE004F2C7E /* validRemoteErrorConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F4BEDA5522414078004F2C7E /* validRemoteErrorConfiguration.json */; };
 		F4BEDA5A224141B1004F2C7E /* validRemoteErrorConfigurationList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4BEDA5622414078004F2C7E /* validRemoteErrorConfigurationList.json */; };
-		F4C32D88223D98D400FF1F86 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */; };
 		F4C32D89223D98D400FF1F86 /* EmptyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */; };
 		F4C32D96223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D95223D990400FF1F86 /* RemoteErrorConfigurationEntryTests.swift */; };
 		F4C32D97223D990A00FF1F86 /* SampleLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C32D8F223D98F100FF1F86 /* SampleLocalizedStrings.swift */; };
@@ -322,13 +325,14 @@
 		F4C57D4B22B001B300D0BEFE /* SampleRemoteServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D4A22B001B300D0BEFE /* SampleRemoteServerConfiguration.swift */; };
 		F4C57D4D22B001F900D0BEFE /* RemoteServerConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D4C22B001F900D0BEFE /* RemoteServerConfiguration+Extensions.swift */; };
 		F4C57D5022B0024F00D0BEFE /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57D4F22B0024F00D0BEFE /* ServerConfiguration.swift */; };
+		F4C5A7A422BC399A0060E530 /* SecureStoreKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5A7A322BC399A0060E530 /* SecureStoreKeys.swift */; };
+		F4C5A7A522BC3A6A0060E530 /* FacebookCoreTests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */; };
 		F4CCC14222A974840057E33D /* RemoteServerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CCC14122A974840057E33D /* RemoteServerConfigurationTests.swift */; };
 		F4CF0342227387A900807A61 /* AppLinkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */; };
 		F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */; };
 		F4CF03462273887600807A61 /* SampleRawRemoteAppLinkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */; };
 		F4CF03482273891A00807A61 /* RemoteAppLinkDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF03472273891A00807A61 /* RemoteAppLinkDetails.swift */; };
-		F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404971D22444EDD005EE2EE /* FakeServerConfigurationProvider.swift */; };
-		F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */; };
+		F4D5DAE12245B0D30014C14D /* FakeServerConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE02245B0D30014C14D /* FakeServerConfigurationService.swift */; };
 		F4D5DAE422492BCD0014C14D /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
 		F4D5DAE622492F0E0014C14D /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */; };
 		F4D694912273B1FD00A0B1CD /* UserProfileServiceConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */; };
@@ -384,13 +388,6 @@
 			remoteGlobalIDString = 8115C0D71CFE540D001FF33B;
 			remoteInfo = FacebookCore;
 		};
-		F467405222970A2000D3F7AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8115C0CF1CFE540D001FF33B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F467401A2294762000D3F7AF;
-			remoteInfo = TestHost;
-		};
 		F467405722970F3000D3F7AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8115C0CF1CFE540D001FF33B /* Project object */;
@@ -434,8 +431,7 @@
 		81654DD61D356E9A006401F1 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		F4020CF62283556C00710558 /* VariantCodingKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCodingKeyTests.swift; sourceTree = "<group>"; };
 		F4020CF82283631E00710558 /* VariantCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCodingKey.swift; sourceTree = "<group>"; };
-		F404971922443D99005EE2EE /* ServerConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationManager.swift; sourceTree = "<group>"; };
-		F404971D22444EDD005EE2EE /* FakeServerConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeServerConfigurationProvider.swift; sourceTree = "<group>"; };
+		F404971922443D99005EE2EE /* ServerConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationService.swift; sourceTree = "<group>"; };
 		F404971F22444F43005EE2EE /* RemoteServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteServerConfiguration.swift; sourceTree = "<group>"; };
 		F406F86522823703006B0D4E /* Drawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawable.swift; sourceTree = "<group>"; };
 		F406F8682282378E006B0D4E /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
@@ -482,6 +478,8 @@
 		F42E3C912268BB9B00287DC4 /* UserProfileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStore.swift; sourceTree = "<group>"; };
 		F42E3C942268BBB900287DC4 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		F42E3C962268C57300287DC4 /* AccessTokenWallet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccessTokenWallet+Extensions.swift"; sourceTree = "<group>"; };
+		F42EF2B922C3C88500218CC1 /* GatekeeperDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatekeeperDictionary.swift; sourceTree = "<group>"; };
+		F42EF2BB22C3C8EF00218CC1 /* Remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Remote.swift; sourceTree = "<group>"; };
 		F4317E582286239300EBF926 /* ButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTests.swift; sourceTree = "<group>"; };
 		F4317E5A2286288200EBF926 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F4317E5E22862B8000EBF926 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -497,6 +495,9 @@
 		F432E9F922370C07007D3A34 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		F432E9FB22370C9C007D3A34 /* SessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProvider.swift; sourceTree = "<group>"; };
 		F433A83022B7FE1E00261787 /* SampleRemoteDialogFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteDialogFlow.swift; sourceTree = "<group>"; };
+		F433A83222B80AFA00261787 /* ServerConfigurationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfigurationServiceTests.swift; sourceTree = "<group>"; };
+		F433A83422B80F1D00261787 /* SampleServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleServerConfiguration.swift; sourceTree = "<group>"; };
+		F433A83622B81A5C00261787 /* ServerConfigurationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationStoreTests.swift; sourceTree = "<group>"; };
 		F43AB0272270B55600610974 /* GatekeeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperTests.swift; sourceTree = "<group>"; };
 		F43AB0292270B61600610974 /* Gatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gatekeeper.swift; sourceTree = "<group>"; };
 		F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGatekeeperListTests.swift; sourceTree = "<group>"; };
@@ -516,11 +517,7 @@
 		F43DE26D22B9C40E00527B71 /* FacebookCoreApplicationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCoreApplicationDelegate.swift; sourceTree = "<group>"; };
 		F43DE26F22B9C41600527B71 /* DeviceDialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDialogView.swift; sourceTree = "<group>"; };
 		F43DE27622B9C44B00527B71 /* FacebookCore_TV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FacebookCore_TV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F43DE27822B9C44B00527B71 /* FacebookCore_TV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookCore_TV.h; sourceTree = "<group>"; };
-		F43DE27922B9C44B00527B71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F43DE27E22B9C44C00527B71 /* FacebookCore_TVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCore_TVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F43DE28322B9C44C00527B71 /* FacebookCore_TVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCore_TVTests.swift; sourceTree = "<group>"; };
-		F43DE28522B9C44C00527B71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F44715142242D8440013495F /* URLSessionTaskProxyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyTests.swift; sourceTree = "<group>"; };
 		F44715192242DBEE0013495F /* URLSessionTaskProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxy.swift; sourceTree = "<group>"; };
 		F447151B2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTaskProxyConfigurationTests.swift; sourceTree = "<group>"; };
@@ -600,7 +597,6 @@
 		F467402F2294797C00D3F7AF /* TestHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestHost.entitlements; sourceTree = "<group>"; };
 		F4674041229705A100D3F7AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F46740472297097B00D3F7AF /* FacebookCoreHostRequiredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreHostRequiredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F467404B2297097B00D3F7AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F467BD3622A0AA07001090B4 /* URLQueryItemExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLQueryItemExtensionsTests.swift; sourceTree = "<group>"; };
 		F46DCFC022720A7B00EFE037 /* UserDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoreTests.swift; sourceTree = "<group>"; };
 		F46DCFC222720B5F00EFE037 /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
@@ -621,7 +617,6 @@
 		F47056DA2232DF1D00BE526B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		F47056DC2232DF4500BE526B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F47056DE2232E1D700BE526B /* GraphRequestSerializationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializationError.swift; sourceTree = "<group>"; };
-		F47470E32298AC27004FBDB0 /* GatekeeperList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatekeeperList.swift; sourceTree = "<group>"; };
 		F47470E8229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINetworkerProviderTests.swift; sourceTree = "<group>"; };
 		F47470EA229DB2DE004FBDB0 /* BridgeAPINativeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINativeTests.swift; sourceTree = "<group>"; };
 		F47470EC229DB3C1004FBDB0 /* BridgeAPIWebV1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIWebV1Tests.swift; sourceTree = "<group>"; };
@@ -658,14 +653,19 @@
 		F4932E0A22808DB50020C282 /* TokenString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenString.swift; sourceTree = "<group>"; };
 		F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloatTests.swift; sourceTree = "<group>"; };
 		F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloat.swift; sourceTree = "<group>"; };
-		F49BC63D22BA89570055DCB4 /* Cryptography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
-		F49BC63E22BA89570055DCB4 /* SecureStoreKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStoreKeys.swift; sourceTree = "<group>"; };
-		F49BC63F22BA89570055DCB4 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
-		F49BC64022BA89570055DCB4 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		F49BC63122BA80930055DCB4 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
+		F49BC63222BA80930055DCB4 /* Cryptography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
+		F49BC63322BA80930055DCB4 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		F49BC63722BA80AC0055DCB4 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		F49BC63822BA80AC0055DCB4 /* ServerConfigurationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfigurationStore.swift; sourceTree = "<group>"; };
+		F49BC63B22BA80C90055DCB4 /* ServerConfigurationTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfigurationTestHelper.swift; sourceTree = "<group>"; };
 		F49FA479222880FE0008CAD6 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49FA47D222880FE0008CAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenTests.swift; sourceTree = "<group>"; };
-		F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = FacebookCoreTests.xcconfig; sourceTree = "<group>"; };
+		F4A943C922C3ED0800616AD8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4A943CB22C3ED2500616AD8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4A943CD22C3ED4E00616AD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4A943CE22C3ED7900616AD8 /* FacebookCore_TV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCore_TV.h; sourceTree = "<group>"; };
 		F4AE42712245846A00E3B99C /* GraphPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathTests.swift; sourceTree = "<group>"; };
 		F4AE4273224584F200E3B99C /* GraphPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPath.swift; sourceTree = "<group>"; };
 		F4B340002240779D00912F0F /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
@@ -749,12 +749,13 @@
 		F4C57D4A22B001B300D0BEFE /* SampleRemoteServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteServerConfiguration.swift; sourceTree = "<group>"; };
 		F4C57D4C22B001F900D0BEFE /* RemoteServerConfiguration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteServerConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		F4C57D4F22B0024F00D0BEFE /* ServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfiguration.swift; sourceTree = "<group>"; };
+		F4C5A7A322BC399A0060E530 /* SecureStoreKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStoreKeys.swift; sourceTree = "<group>"; };
 		F4CCC14122A974840057E33D /* RemoteServerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteServerConfigurationTests.swift; sourceTree = "<group>"; };
 		F4CF0341227387A900807A61 /* AppLinkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinkServiceTests.swift; sourceTree = "<group>"; };
 		F4CF03432273880E00807A61 /* RemoteAppLinkDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAppLinkDetailsTests.swift; sourceTree = "<group>"; };
 		F4CF03452273887600807A61 /* SampleRawRemoteAppLinkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRawRemoteAppLinkDetail.swift; sourceTree = "<group>"; };
 		F4CF03472273891A00807A61 /* RemoteAppLinkDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAppLinkDetails.swift; sourceTree = "<group>"; };
-		F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeServerConfigurationManager.swift; sourceTree = "<group>"; };
+		F4D5DAE02245B0D30014C14D /* FakeServerConfigurationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeServerConfigurationService.swift; sourceTree = "<group>"; };
 		F4D5DAE322492BCD0014C14D /* FakeBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBundle.swift; sourceTree = "<group>"; };
 		F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		F4D694902273B1FC00A0B1CD /* UserProfileServiceConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileServiceConfigurationTests.swift; sourceTree = "<group>"; };
@@ -901,8 +902,6 @@
 			isa = PBXGroup;
 			children = (
 				F479099422985C6A00F9C0A2 /* BridgeAPI */,
-				F49FA49F222896310008CAD6 /* Configurations */,
-				F4C32D81223D98D300FF1F86 /* Configurations */,
 				F4C32DA9223FFA8800FF1F86 /* ErrorHandling */,
 				F44DB6B2222B01B60083506E /* Extensions */,
 				F417F9172249822D00E771F1 /* Logging */,
@@ -929,7 +928,7 @@
 				F4C57D1222AABB7800D0BEFE /* DialogFlowList.swift */,
 				F4C32D83223D98D300FF1F86 /* EmptyDecodable.swift */,
 				F43AB0292270B61600610974 /* Gatekeeper.swift */,
-				F47470E32298AC27004FBDB0 /* GatekeeperList.swift */,
+				F42EF2B922C3C88500218CC1 /* GatekeeperDictionary.swift */,
 				F43AB0432270E39C00610974 /* GatekeeperService.swift */,
 				F43AB0412270D92500610974 /* GatekeeperStore.swift */,
 				F44F566D224D344300D027FF /* GraphAPIVersion.swift */,
@@ -953,6 +952,7 @@
 				F4516B8B225FA44A00979DD2 /* MimeType.swift */,
 				F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */,
 				F4144A11222DB16C00CB83E0 /* Permission.swift */,
+				F42EF2BB22C3C8EF00218CC1 /* Remote.swift */,
 				F4C3C5352277C43E004B487E /* RemoteAppLink.swift */,
 				F4CF03472273891A00807A61 /* RemoteAppLinkDetails.swift */,
 				F46DCFDC22734E7800EFE037 /* RemoteAppLinkTarget.swift */,
@@ -967,7 +967,9 @@
 				F45806A322B2BDEA007B9D2C /* RestrictiveEventParameter.swift */,
 				F4C57D3822AB13AB00D0BEFE /* RestrictiveRule.swift */,
 				F4C57D4F22B0024F00D0BEFE /* ServerConfiguration.swift */,
+				F49BC63822BA80AC0055DCB4 /* ServerConfigurationStore.swift */,
 				F432E9FB22370C9C007D3A34 /* SessionProvider.swift */,
+				F49BC63722BA80AC0055DCB4 /* Store.swift */,
 				F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */,
 				F4932E0A22808DB50020C282 /* TokenString.swift */,
 				F4144C53224D0FA7006C8F9C /* URLBuilder.swift */,
@@ -1003,6 +1005,7 @@
 			children = (
 				81654DC71D356E9A006401F1 /* Shared */,
 				81654DC41D356E9A006401F1 /* FacebookCore.xcconfig */,
+				F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */,
 				81654DC51D356E9A006401F1 /* FacebookLogin.xcconfig */,
 				81654DC61D356E9A006401F1 /* FacebookShare.xcconfig */,
 				811AD1B51D35D9C8007689DC /* Version.xcconfig */,
@@ -1066,10 +1069,10 @@
 		F43DE1F422B989FA00527B71 /* SecureStore */ = {
 			isa = PBXGroup;
 			children = (
-				F49BC63D22BA89570055DCB4 /* Cryptography.swift */,
-				F49BC64022BA89570055DCB4 /* KeychainStore.swift */,
-				F49BC63F22BA89570055DCB4 /* SecureStore.swift */,
-				F49BC63E22BA89570055DCB4 /* SecureStoreKeys.swift */,
+				F49BC63222BA80930055DCB4 /* Cryptography.swift */,
+				F49BC63322BA80930055DCB4 /* KeychainStore.swift */,
+				F49BC63122BA80930055DCB4 /* SecureStore.swift */,
+				F4C5A7A322BC399A0060E530 /* SecureStoreKeys.swift */,
 			);
 			path = SecureStore;
 			sourceTree = "<group>";
@@ -1087,8 +1090,8 @@
 		F43DE27722B9C44B00527B71 /* FacebookCore_TV */ = {
 			isa = PBXGroup;
 			children = (
-				F43DE27822B9C44B00527B71 /* FacebookCore_TV.h */,
-				F43DE27922B9C44B00527B71 /* Info.plist */,
+				F4A943CE22C3ED7900616AD8 /* FacebookCore_TV.h */,
+				F4A943CB22C3ED2500616AD8 /* Info.plist */,
 			);
 			path = FacebookCore_TV;
 			sourceTree = "<group>";
@@ -1096,8 +1099,7 @@
 		F43DE28222B9C44C00527B71 /* FacebookCore_TVTests */ = {
 			isa = PBXGroup;
 			children = (
-				F43DE28322B9C44C00527B71 /* FacebookCore_TVTests.swift */,
-				F43DE28522B9C44C00527B71 /* Info.plist */,
+				F4A943CD22C3ED4E00616AD8 /* Info.plist */,
 			);
 			path = FacebookCore_TVTests;
 			sourceTree = "<group>";
@@ -1138,8 +1140,7 @@
 				F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */,
 				F447152C22440CA70013495F /* FakeProcessInfo.swift */,
 				52CDB7CB2265524C00E6EF78 /* FakeSecureStore.swift */,
-				F4D5DAE02245B0D30014C14D /* FakeServerConfigurationManager.swift */,
-				F404971D22444EDD005EE2EE /* FakeServerConfigurationProvider.swift */,
+				F4D5DAE02245B0D30014C14D /* FakeServerConfigurationService.swift */,
 				F447153122440EB60013495F /* FakeSession.swift */,
 				F447153322440EE50013495F /* FakeSessionDataTask.swift */,
 				F480D9102236E1F7001AB8D3 /* FakeSessionProvider.swift */,
@@ -1149,6 +1150,7 @@
 				F4C57D0A22A98C5100D0BEFE /* GraphRequestTestHelper.swift */,
 				F4B340002240779D00912F0F /* JSONLoader.swift */,
 				F48A74A02239B4E0007192F6 /* LocalizedStringValidation.swift */,
+				F49BC63B22BA80C90055DCB4 /* ServerConfigurationTestHelper.swift */,
 				F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */,
 			);
 			path = Helpers;
@@ -1163,7 +1165,7 @@
 				F43DE26D22B9C40E00527B71 /* FacebookCoreApplicationDelegate.swift */,
 				F44DB6BC222B0DD20083506E /* GraphRequestPiggybackManager.swift */,
 				F44DB6932229AB460083506E /* InternalUtility.swift */,
-				F404971922443D99005EE2EE /* ServerConfigurationManager.swift */,
+				F404971922443D99005EE2EE /* ServerConfigurationService.swift */,
 				F44DB69A2229B37F0083506E /* Settings.swift */,
 			);
 			path = "Needs Conversion";
@@ -1215,7 +1217,7 @@
 		F46740482297097B00D3F7AF /* FacebookCoreHostRequiredTests */ = {
 			isa = PBXGroup;
 			children = (
-				F467404B2297097B00D3F7AF /* Info.plist */,
+				F4A943C922C3ED0800616AD8 /* Info.plist */,
 			);
 			path = FacebookCoreHostRequiredTests;
 			sourceTree = "<group>";
@@ -1321,6 +1323,8 @@
 				F42E3C7C2267E5E800287DC4 /* RemoteUserProfileTests.swift */,
 				F458069C22B2BBF6007B9D2C /* RestrictiveEventParameterTests.swift */,
 				F4C57D3A22AB1A5A00D0BEFE /* RestrictiveRuleTests.swift */,
+				F433A83222B80AFA00261787 /* ServerConfigurationServiceTests.swift */,
+				F433A83622B81A5C00261787 /* ServerConfigurationStoreTests.swift */,
 				F4C57D4822AFFFD600D0BEFE /* ServerConfigurationTests.swift */,
 				F48BDD8A22470128003CCA5A /* SettingsTests.swift */,
 				523CAE4C225ED58900D196C3 /* StringExtensionTests.swift */,
@@ -1340,14 +1344,6 @@
 				F4020CF62283556C00710558 /* VariantCodingKeyTests.swift */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		F49FA49F222896310008CAD6 /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */,
-			);
-			path = Configurations;
 			sourceTree = "<group>";
 		};
 		F4BEDA5422414078004F2C7E /* JSON */ = {
@@ -1370,14 +1366,6 @@
 				F42E3C882267E60900287DC4 /* validRemoteUserProfile.json */,
 			);
 			path = JSON;
-			sourceTree = "<group>";
-		};
-		F4C32D81223D98D300FF1F86 /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				F4C32D82223D98D300FF1F86 /* FacebookCoreTests.xcconfig */,
-			);
-			path = Configurations;
 			sourceTree = "<group>";
 		};
 		F4C32D8E223D98F100FF1F86 /* Sample Data */ = {
@@ -1420,6 +1408,7 @@
 				F4C57D4A22B001B300D0BEFE /* SampleRemoteServerConfiguration.swift */,
 				F4DBAB1D22AD634300E4CF4A /* SampleRemoteUserProfile.swift */,
 				F4B3CA4322B417AB0098ADF5 /* SampleRestrictiveEventParameter.swift */,
+				F433A83422B80F1D00261787 /* SampleServerConfiguration.swift */,
 				F447152F22440E860013495F /* SampleURL.swift */,
 				F4516B89225FA3FE00979DD2 /* SampleURLResponse.swift */,
 				F46DCFCF22720D8A00EFE037 /* SampleUserData.swift */,
@@ -1493,7 +1482,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F43DE28622B9C44C00527B71 /* FacebookCore_TV.h in Headers */,
+				F4A943CF22C3ED7900616AD8 /* FacebookCore_TV.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1624,7 +1613,6 @@
 			);
 			dependencies = (
 				F467404E2297097B00D3F7AF /* PBXTargetDependency */,
-				F467405322970A2000D3F7AF /* PBXTargetDependency */,
 			);
 			name = FacebookCoreHostRequiredTests;
 			productName = FacebookCoreHostRequiredTests;
@@ -1729,7 +1717,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4C32D88223D98D400FF1F86 /* FacebookCoreTests.xcconfig in Resources */,
+				F4C5A7A522BC3A6A0060E530 /* FacebookCoreTests.xcconfig in Resources */,
 				F48A749B22399FAB007192F6 /* LocalizableStrings.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1857,11 +1845,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F404971A22443D99005EE2EE /* ServerConfigurationManager.swift in Sources */,
+				F404971A22443D99005EE2EE /* ServerConfigurationService.swift in Sources */,
 				F4317E5F22862B8000EBF926 /* Color.swift in Sources */,
 				F44DB6BD222B0DD20083506E /* GraphRequestPiggybackManager.swift in Sources */,
 				F48A749F2239A3C7007192F6 /* Localizable.swift in Sources */,
-				F49BC64122BA89570055DCB4 /* Cryptography.swift in Sources */,
 				F4020CF92283631E00710558 /* VariantCodingKey.swift in Sources */,
 				F4C3C5252273CABC004B487E /* ImageSizingConfiguration.swift in Sources */,
 				F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */,
@@ -1885,7 +1872,6 @@
 				F479098D2298542800F9C0A2 /* BridgeAPIWebV2.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
 				F4E1A9EC22416F2200503354 /* FBError.swift in Sources */,
-				F49BC64422BA89570055DCB4 /* KeychainStore.swift in Sources */,
 				F42E3C792267E45100287DC4 /* UserProfileBuilder.swift in Sources */,
 				F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */,
 				F4C32D9D223DA0F600FF1F86 /* ErrorConfiguration.swift in Sources */,
@@ -1894,7 +1880,6 @@
 				F47909912298582D00F9C0A2 /* UIApplication+Extensions.swift in Sources */,
 				F480D905223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift in Sources */,
 				F4516B84225F82EF00979DD2 /* RemoteGraphResponseError.swift in Sources */,
-				F49BC64322BA89570055DCB4 /* SecureStore.swift in Sources */,
 				F46DCFE1227364F500EFE037 /* AppLink.swift in Sources */,
 				F4C57D1322AABB7800D0BEFE /* DialogFlowList.swift in Sources */,
 				F422F0832284A37D00AFD0DF /* FileManager+Extensions.swift in Sources */,
@@ -1902,7 +1887,9 @@
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */,
 				F4DC46FF2283678F00C0A309 /* AudioResourceLoader.swift in Sources */,
+				F49BC63522BA80930055DCB4 /* Cryptography.swift in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
+				F4C5A7A422BC399A0060E530 /* SecureStoreKeys.swift in Sources */,
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
 				F4C57D4322AB24C600D0BEFE /* RemoteRestrictiveRule.swift in Sources */,
 				F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */,
@@ -1910,14 +1897,13 @@
 				F4CF03482273891A00807A61 /* RemoteAppLinkDetails.swift in Sources */,
 				F432E9F822370B32007D3A34 /* GraphRequestConnecting.swift in Sources */,
 				F408BEB62239893F0068D24A /* GraphRequestErrorCategory.swift in Sources */,
-				F47470E42298AC27004FBDB0 /* GatekeeperList.swift in Sources */,
 				F4C57D1122AABB4B00D0BEFE /* RemoteDialogFlow.swift in Sources */,
-				F49BC64222BA89570055DCB4 /* SecureStoreKeys.swift in Sources */,
 				F43AB02A2270B61600610974 /* Gatekeeper.swift in Sources */,
 				F47853C1222DCF8600A4269C /* CoreError.swift in Sources */,
 				F4C57D3922AB13AB00D0BEFE /* RestrictiveRule.swift in Sources */,
 				F43AB0422270D92500610974 /* GatekeeperStore.swift in Sources */,
 				F432E9F42236FA53007D3A34 /* GraphRequestMetadata.swift in Sources */,
+				F42EF2BA22C3C88900218CC1 /* GatekeeperDictionary.swift in Sources */,
 				F4E1A9EE22416F2200503354 /* RemoteErrorConfigurationEntry.swift in Sources */,
 				F42E3C932268BB9B00287DC4 /* UserProfileStore.swift in Sources */,
 				F429ACD12280DD31000916BF /* Settings+Extensions.swift in Sources */,
@@ -1926,6 +1912,7 @@
 				F42E3C7B2267E45100287DC4 /* UserProfileService.swift in Sources */,
 				F409967322289D3000F23464 /* AccessToken.swift in Sources */,
 				F43AB0442270E39C00610974 /* GatekeeperService.swift in Sources */,
+				F49BC63922BA80AC0055DCB4 /* Store.swift in Sources */,
 				F4C3C5362277C43E004B487E /* RemoteAppLink.swift in Sources */,
 				F42E3C782267E45100287DC4 /* UserProfile.swift in Sources */,
 				F432E9FC22370C9C007D3A34 /* SessionProvider.swift in Sources */,
@@ -1937,10 +1924,13 @@
 				F4C57D1F22AAD54400D0BEFE /* DialogFlow.swift in Sources */,
 				F42E3C972268C57300287DC4 /* AccessTokenWallet+Extensions.swift in Sources */,
 				F47056DF2232E1D700BE526B /* GraphRequestSerializationError.swift in Sources */,
+				F49BC63622BA80930055DCB4 /* KeychainStore.swift in Sources */,
 				F46DDCBE228B4A2200BA7359 /* CGSize+Extensions.swift in Sources */,
 				F42E3C7A2267E45100287DC4 /* RemoteUserProfile.swift in Sources */,
+				F49BC63A22BA80AC0055DCB4 /* ServerConfigurationStore.swift in Sources */,
 				F45806A022B2BC8D007B9D2C /* RemoteRestrictiveEventParameter.swift in Sources */,
 				F4225DE5223F4F5100F4DCFE /* ErrorStrings.swift in Sources */,
+				F42EF2BC22C3C8F400218CC1 /* Remote.swift in Sources */,
 				523CAE4B225EC94C00D196C3 /* String+Extensions.swift in Sources */,
 				F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */,
 				F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */,
@@ -1974,6 +1964,7 @@
 				F4C3C557227B6686004B487E /* AppLinkTarget.swift in Sources */,
 				F406F8692282378E006B0D4E /* Logo.swift in Sources */,
 				F44DB69F2229B4C50083506E /* AccessTokenCache.swift in Sources */,
+				F49BC63422BA80930055DCB4 /* SecureStore.swift in Sources */,
 				F479098F2298546500F9C0A2 /* BridgeAPINative.swift in Sources */,
 				F4E1A9EB22416F2200503354 /* ErrorConfigurationEntry.swift in Sources */,
 				F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */,
@@ -2015,7 +2006,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F43DE28422B9C44C00527B71 /* FacebookCore_TVTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2053,6 +2043,7 @@
 				F46DDD03228C8C1400BA7359 /* DeviceButtonTests.swift in Sources */,
 				F447151C2242FDD80013495F /* URLSessionTaskProxyConfigurationTests.swift in Sources */,
 				F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */,
+				F49BC63C22BA80C90055DCB4 /* ServerConfigurationTestHelper.swift in Sources */,
 				F48A749822399C97007192F6 /* LocalizationsTests.swift in Sources */,
 				F479099322985BC200F9C0A2 /* FakeBridgeAPIURLProvider.swift in Sources */,
 				F433A83122B7FE1E00261787 /* SampleRemoteDialogFlow.swift in Sources */,
@@ -2099,7 +2090,6 @@
 				F4C32D97223D990A00FF1F86 /* SampleLocalizedStrings.swift in Sources */,
 				F458069722B2AF98007B9D2C /* SampleRawRemoteRestrictiveEventParameterList.swift in Sources */,
 				F422F0872284A44600AFD0DF /* FakeAudioService.swift in Sources */,
-				F4D5DADF2245B0510014C14D /* FakeServerConfigurationProvider.swift in Sources */,
 				F447152E22440CD30013495F /* FakeProcessInfo.swift in Sources */,
 				F429ACD32280DDF2000916BF /* AppLinkServiceConfigurationTests.swift in Sources */,
 				F4C57D3122AAFC0900D0BEFE /* SampleRemoteErrorConfigurationList.swift in Sources */,
@@ -2107,6 +2097,7 @@
 				F4C57D3B22AB1A5A00D0BEFE /* RestrictiveRuleTests.swift in Sources */,
 				F4B3CA4422B417AB0098ADF5 /* SampleRestrictiveEventParameter.swift in Sources */,
 				F44715232243E3FF0013495F /* DeveloperErrorStringsTests.swift in Sources */,
+				F433A83722B81A5C00261787 /* ServerConfigurationStoreTests.swift in Sources */,
 				F4C32DAC2240288800FF1F86 /* DefaultErrorConfigurationTests.swift in Sources */,
 				F4C57D2122AAD87400D0BEFE /* RemoteDialogConfigurationTests.swift in Sources */,
 				F408BEB4223988BD0068D24A /* ErrorCategoryTests.swift in Sources */,
@@ -2122,7 +2113,7 @@
 				F4C32DA6223DA13E00FF1F86 /* RemoteErrorConfigurationEntry+Extensions.swift in Sources */,
 				F44DB6BF222B10040083506E /* FakeGraphConnectionProvider.swift in Sources */,
 				F480D9132236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift in Sources */,
-				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationManager.swift in Sources */,
+				F4D5DAE12245B0D30014C14D /* FakeServerConfigurationService.swift in Sources */,
 				F44847E82268FD0000527D49 /* ImageSizingConfigurationTests.swift in Sources */,
 				F46DCFD52272317200EFE037 /* UserDataTests.swift in Sources */,
 				F44DB6AD222AF53B0083506E /* AccessTokenFixtures.swift in Sources */,
@@ -2156,6 +2147,7 @@
 				F42E3C802267E5E800287DC4 /* RemoteUserProfileTests.swift in Sources */,
 				F48BDD8B22470128003CCA5A /* SettingsTests.swift in Sources */,
 				F4516B8A225FA3FE00979DD2 /* SampleURLResponse.swift in Sources */,
+				F433A83322B80AFA00261787 /* ServerConfigurationServiceTests.swift in Sources */,
 				F4C3C549227A1D49004B487E /* RemoteAppLinkTargetTests.swift in Sources */,
 				F46DCFDB22734C5F00EFE037 /* AppLinkTargetTests.swift in Sources */,
 				F432E9F62236FFA6007D3A34 /* FakeError.swift in Sources */,
@@ -2247,11 +2239,6 @@
 			isa = PBXTargetDependency;
 			target = 8115C0D71CFE540D001FF33B /* FacebookCore */;
 			targetProxy = F467404D2297097B00D3F7AF /* PBXContainerItemProxy */;
-		};
-		F467405322970A2000D3F7AF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F467401A2294762000D3F7AF /* TestHost */;
-			targetProxy = F467405222970A2000D3F7AF /* PBXContainerItemProxy */;
 		};
 		F467405822970F3000D3F7AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2879,7 +2866,6 @@
 		};
 		F49FA482222880FE0008CAD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2943,7 +2929,6 @@
 		};
 		F49FA483222880FE0008CAD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F49FA4A0222896310008CAD6 /* FacebookCoreTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

@@ -20,18 +20,20 @@
 
 import Foundation
 
-struct RemoteRestrictiveEventParameter: Decodable {
-  let name: String
-  let isDeprecated: Bool?
-  let restrictiveEventParameters: [String: Int]?
+extension Remote {
+  struct RestrictiveEventParameter: Decodable {
+    let name: String
+    let isDeprecated: Bool?
+    let restrictiveEventParameters: [String: Int]?
 
-  init(
-    name: String,
-    isDeprecated: Bool?,
-    restrictiveEventParameters: [String: Int]?
-    ) {
-    self.name = name
-    self.isDeprecated = isDeprecated
-    self.restrictiveEventParameters = restrictiveEventParameters
+    init(
+      name: String,
+      isDeprecated: Bool?,
+      restrictiveEventParameters: [String: Int]?
+      ) {
+      self.name = name
+      self.isDeprecated = isDeprecated
+      self.restrictiveEventParameters = restrictiveEventParameters
+    }
   }
 }

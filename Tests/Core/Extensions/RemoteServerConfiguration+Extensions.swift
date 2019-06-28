@@ -22,7 +22,7 @@ import Foundation
 // TODO: Consider adding initializer to internal. Really do not want to do this but may
 // be the only way to silence this error.
 // See: https://github.com/apple/swift-evolution/blob/master/proposals/0189-restrict-cross-module-struct-initializers.md
-extension RemoteServerConfiguration {
+extension Remote.ServerConfiguration {
   init(
     appID: String? = nil,
     appName: String? = nil,
@@ -33,18 +33,18 @@ extension RemoteServerConfiguration {
     isImplicitLoggingEnabled: Bool? = nil,
     isSystemAuthenticationEnabled: Bool? = nil,
     isNativeAuthFlowEnabled: Bool? = nil,
-    dialogConfigurations: RemoteDialogConfigurationList? = nil,
-    dialogFlows: DialogFlowList? = nil,
-    errorConfiguration: RemoteErrorConfigurationEntryList? = nil,
+    dialogConfigurations: Remote.DialogConfigurationList? = nil,
+    dialogFlows: Remote.ServerConfiguration.DialogFlowList? = nil,
+    errorConfiguration: Remote.ErrorConfigurationEntryList? = nil,
     sessionTimeoutInterval: TimeInterval? = nil,
     loggingToken: String? = nil,
     smartLoginOptionsRawValue: Int? = nil,
     smartLoginBookmarkIconUrlString: String? = nil,
     smartLoginMenuIconUrlString: String? = nil,
     updateMessage: String? = nil,
-    eventBindings: RemoteEventBindingList? = nil,
-    restrictiveRules: [RemoteRestrictiveRule] = [],
-    restrictiveEventParameterList: RemoteRestrictiveEventParameterList? = nil
+    eventBindings: Remote.EventBindingList? = nil,
+    restrictiveRules: [Remote.RestrictiveRule] = [],
+    restrictiveEventParameterList: Remote.RestrictiveEventParameterList? = nil
     ) {
     self.appID = appID
     self.appName = appName

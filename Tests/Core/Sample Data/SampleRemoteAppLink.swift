@@ -23,26 +23,26 @@ enum SampleRemoteAppLink {
   static let sourceURL = SampleURL.valid
   static let webURL = SampleURL.valid(withPath: "web")
 
-  static let iOSDetail = RemoteAppLinkDetail(
+  static let iOSDetail = Remote.AppLinkDetail(
     idiom: .iOS,
     targets: [
       SampleRemoteAppLinkTarget.valid()
     ]
   )
 
-  static let emptyDetails = RemoteAppLink(
+  static let emptyDetails = Remote.AppLink(
     sourceURLString: sourceURL.absoluteString,
     details: [],
     webURL: webURL
   )
 
-  static let invalidSourceURLString = RemoteAppLink(
+  static let invalidSourceURLString = Remote.AppLink(
     sourceURLString: "^not_valid",
     details: [iOSDetail],
     webURL: webURL
   )
 
-  static let noValidURLS = RemoteAppLink(
+  static let noValidURLS = Remote.AppLink(
     sourceURLString: "^not_valid",
     details: [iOSDetail],
     webURL: nil
@@ -50,10 +50,10 @@ enum SampleRemoteAppLink {
 
   static func valid(
     sourceURLString: String = sourceURL.absoluteString,
-    details: [RemoteAppLinkDetail] = [],
+    details: [Remote.AppLinkDetail] = [],
     webURL: URL = webURL
-    ) -> RemoteAppLink {
-    return RemoteAppLink(
+    ) -> Remote.AppLink {
+    return Remote.AppLink(
       sourceURLString: sourceURLString,
       details: details,
       webURL: webURL

@@ -26,9 +26,9 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithEmptyDictionary() {
     do {
       let data = try JSONSerialization.data(withJSONObject: [:], options: [])
-      _ = try decoder.decode(RemoteAppLink.self, from: data)
+      _ = try decoder.decode(Remote.AppLink.self, from: data)
       XCTFail("Should not create a remote app link if the object to decode is empty")
-    } catch let error as RemoteAppLink.DecodingError {
+    } catch let error as Remote.AppLink.DecodingError {
       XCTAssertEqual(error, .missingIdentifier,
                      "Should throw a descriptive error on a failure to decode")
     } catch {
@@ -39,9 +39,9 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithMissingIdentifier() {
     do {
       let data = SampleData.missingIdentifier
-      _ = try decoder.decode(RemoteAppLink.self, from: data)
+      _ = try decoder.decode(Remote.AppLink.self, from: data)
       XCTFail("Should not create a remote app link if there is no identifier")
-    } catch let error as RemoteAppLink.DecodingError {
+    } catch let error as Remote.AppLink.DecodingError {
       XCTAssertEqual(error, .missingIdentifier,
                      "Should throw a descriptive error on a failure to decode")
     } catch {
@@ -52,7 +52,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreateWithMissingAppLinkDetails() {
     do {
       let data = SampleData.missingAppLinkDetails
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertTrue(link.details.isEmpty,
                     "Should create an app link with no details when no key is present for details")
     } catch {
@@ -63,7 +63,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithEmptyAppLinkDetails() {
     do {
       let data = SampleData.emptyAppLinkDetails
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertTrue(link.details.isEmpty,
                     "Should create an app link with no details when there are no details available")
     } catch {
@@ -74,7 +74,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithMultipleAppLinkIdiomsMultipleTargets() {
     do {
       let data = SampleData.valid
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 2,
                      "Should decode the correct number of app link details")
       XCTAssertEqual(link.details.first?.targets.count, 2,
@@ -89,7 +89,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithSingleIdiomSingleTarget() {
     do {
       let data = SampleData.singleIdiomSingleTarget
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 1,
                      "Should decode the number of targets based on the number of app link details")
       XCTAssertEqual(link.details.first?.targets.count, 1,
@@ -102,7 +102,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithSingleIdiomMultipleTargets() {
     do {
       let data = SampleData.singleIdiomMultipleTargets
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 1,
                      "Should decode the number of targets based on the number of app link details")
       XCTAssertEqual(link.details.first?.targets.count, 2,
@@ -115,7 +115,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithMultipleIdiomsSingleTarget() {
     do {
       let data = SampleData.multipleIdiomsSingleTarget
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 2,
                      "Should decode the number of targets based on the number of app link details")
       XCTAssertEqual(link.details.first?.targets.count, 1,
@@ -130,7 +130,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithUnknownIdioms() {
     do {
       let data = SampleData.unknownIdiom
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertTrue(link.details.isEmpty,
                     "Should not decode unknown idioms")
     } catch {
@@ -141,7 +141,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithFallbackURLWhenSpecified() {
     do {
       let data = SampleData.webIdiom(shouldFallback: true)
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 1,
                      "Should decode the number of targets based on the number of app link details")
       XCTAssertEqual(link.webURL, SampleRawRemoteAppLink.webURL,
@@ -154,7 +154,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithFallbackURLWhenSpecifiedAndMissingTargetURL() {
     do {
       let data = SampleData.webIdiom(url: nil, shouldFallback: true)
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 1,
                      "Should decode the number of targets based on the number of app link details")
       XCTAssertEqual(link.webURL, SampleRawRemoteAppLink.url,
@@ -167,7 +167,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithFallbackURLWhenSpecifiedFalse() {
     do {
       let data = SampleData.webIdiom(shouldFallback: false)
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 1,
                      "Should decode the number of targets based on the number of app link details")
       XCTAssertNil(link.webURL,
@@ -180,7 +180,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithMissingFallbackURLWhenSpecified() {
     do {
       let data = SampleData.webIdiom(url: nil, shouldFallback: true)
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.details.count, 1,
                      "Should decode the number of targets based on the number of app link details")
       XCTAssertEqual(link.webURL, SampleRawRemoteAppLink.url,
@@ -193,7 +193,7 @@ class RemoteAppLinkTests: XCTestCase {
   func testCreatingWithFallbackURLWhenUnspecified() {
     do {
       let data = SampleData.minimal
-      let link = try decoder.decode(RemoteAppLink.self, from: data)
+      let link = try decoder.decode(Remote.AppLink.self, from: data)
       XCTAssertEqual(link.webURL, SampleRawRemoteAppLink.url,
                      "Should set a web url based on the identifier (url) when there is no web url available")
     } catch {
@@ -207,7 +207,7 @@ class RemoteAppLinkTests: XCTestCase {
     }
 
     do {
-      _ = try decoder.decode(RemoteAppLink.self, from: data)
+      _ = try decoder.decode(Remote.AppLink.self, from: data)
     } catch {
       XCTAssertNil(error, "Should be able to decode a remote app link from valid json")
     }

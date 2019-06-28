@@ -29,7 +29,7 @@ class RemoteRestrictiveRuleTests: XCTestCase {
     let data = SampleData.valid
 
     do {
-      let rule = try JSONDecoder().decode(RemoteRestrictiveRule.self, from: data)
+      let rule = try JSONDecoder().decode(Remote.RestrictiveRule.self, from: data)
       XCTAssertEqual(rule.keyRegex, Fixture.keyRegex,
                      "Should decode the correct value for the key regex")
       XCTAssertEqual(rule.valueRegex, Fixture.valueRegex,
@@ -47,7 +47,7 @@ class RemoteRestrictiveRuleTests: XCTestCase {
     let data = SampleData.minimalFields
 
     do {
-      let rule = try JSONDecoder().decode(RemoteRestrictiveRule.self, from: data)
+      let rule = try JSONDecoder().decode(Remote.RestrictiveRule.self, from: data)
 
       XCTAssertNil(rule.valueRegex,
                    "Should not set a default value for a missing value regex")
@@ -64,7 +64,7 @@ class RemoteRestrictiveRuleTests: XCTestCase {
     }
 
     do {
-      let decoded = try decoder.decode(RemoteRestrictiveRule.self, from: data)
+      let decoded = try decoder.decode(Remote.RestrictiveRule.self, from: data)
       XCTAssertEqual(decoded.keyRegex, "^phone$|phone number|cell phone|mobile phone|^mobile$",
                      "Should decode the correct key regex")
       XCTAssertEqual(decoded.valueRegex, "^[0-9][0-9]",
@@ -84,7 +84,7 @@ class RemoteRestrictiveRuleTests: XCTestCase {
     }
 
     do {
-      let list = try decoder.decode([RemoteRestrictiveRule].self, from: data)
+      let list = try decoder.decode([Remote.RestrictiveRule].self, from: data)
       XCTAssertFalse(list.isEmpty,
                      "Should decode a list of rules from valid json")
     } catch {

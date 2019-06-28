@@ -21,17 +21,17 @@ import XCTest
 
 class ErrorConfigurationEntryBuilderTests: XCTestCase {
   func testBuildingFromRemoteConfiguration() {
-    let remoteRecoverable = RemoteErrorConfigurationEntry(
+    let remoteRecoverable = Remote.ErrorConfigurationEntry(
       name: .recoverable
     )
-    let remoteTransient = RemoteErrorConfigurationEntry(
+    let remoteTransient = Remote.ErrorConfigurationEntry(
       name: .transient
     )
-    let remoteOther = RemoteErrorConfigurationEntry(
+    let remoteOther = Remote.ErrorConfigurationEntry(
       name: .other
     )
-    let remoteUnknown = RemoteErrorConfigurationEntry(
-      name: RemoteErrorConfigurationEntry.Name(rawValue: "Foo")
+    let remoteUnknown = Remote.ErrorConfigurationEntry(
+      name: Remote.ErrorConfigurationEntry.Name(rawValue: "Foo")
     )
 
     let recoverable = ErrorConfigurationEntryBuilder.build(from: remoteRecoverable)
@@ -50,13 +50,13 @@ class ErrorConfigurationEntryBuilderTests: XCTestCase {
   }
 
   func testBuildingWithInvalidMessage() {
-    let remote = RemoteErrorConfigurationEntry(recoveryMessage: "")
+    let remote = Remote.ErrorConfigurationEntry(recoveryMessage: "")
     XCTAssertNil(ErrorConfigurationEntryBuilder.build(from: remote),
                  "Should not build an error configuration entry without a recovery message")
   }
 
   func testBuildingWithInvalidOptions() {
-    let remote = RemoteErrorConfigurationEntry(recoveryOptions: [])
+    let remote = Remote.ErrorConfigurationEntry(recoveryOptions: [])
     XCTAssertNil(ErrorConfigurationEntryBuilder.build(from: remote),
                  "Should not build an error configuration entry without recovery options")
   }

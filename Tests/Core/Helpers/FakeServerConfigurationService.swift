@@ -16,8 +16,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import XCTest
-@testable import FacebookCore_TV
+@testable import FacebookCore
+import Foundation
 
-class FacebookCore_TVTests: XCTestCase {
+class FakeServerConfigurationService: ServerConfigurationServicing {
+  private var cachedConfiguration: ServerConfiguration
+
+  var cachedConfigurationWasRequested: Bool = false
+
+  var serverConfiguration: ServerConfiguration {
+    get {
+      cachedConfigurationWasRequested = true
+      return cachedConfiguration
+    }
+    set {
+      cachedConfiguration = newValue
+    }
+  }
+
+  init(cachedServerConfiguration: ServerConfiguration) {
+    self.cachedConfiguration = cachedServerConfiguration
+  }
 }

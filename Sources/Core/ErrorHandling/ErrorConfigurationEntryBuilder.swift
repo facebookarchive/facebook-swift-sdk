@@ -26,7 +26,7 @@ enum ErrorConfigurationEntryBuilder {
    from the server
    */
   static func build(
-    from remoteConfiguration: RemoteErrorConfigurationEntry
+    from remoteConfiguration: Remote.ErrorConfigurationEntry
     ) -> ErrorConfigurationEntry? {
     let category = convertCategory(from: remoteConfiguration.name)
     guard let errorStrings = ErrorStrings(
@@ -43,7 +43,7 @@ enum ErrorConfigurationEntryBuilder {
   }
 
   private static func convertCategory(
-    from name: RemoteErrorConfigurationEntry.Name?
+    from name: Remote.ErrorConfigurationEntry.Name?
     ) -> GraphRequestErrorCategory {
     switch name {
     case .transient?:

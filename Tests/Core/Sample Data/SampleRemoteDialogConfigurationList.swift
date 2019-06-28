@@ -20,9 +20,9 @@
 import Foundation
 
 enum SampleRemoteDialogConfigurationList {
-  static let valid = RemoteDialogConfigurationList(
+  static let valid = Remote.DialogConfigurationList(
     configurations: [
-      RemoteDialogConfiguration(name: "foo", urlString: "www.example.com", versions: [1, 2, 3])
+      Remote.DialogConfiguration(name: "foo", urlString: "www.example.com", versions: [1, 2, 3])
     ]
   )
 }

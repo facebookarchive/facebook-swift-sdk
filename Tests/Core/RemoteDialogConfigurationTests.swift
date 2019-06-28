@@ -16,8 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_try
-
 @testable import FacebookCore
 import XCTest
 
@@ -30,7 +28,7 @@ class RemoteDialogConfigurationTests: XCTestCase {
     let data = try! JSONSerialization.data(withJSONObject: Fixtures.valid, options: [])
 
     do {
-      let decoded = try decoder.decode(RemoteDialogConfiguration.self, from: data)
+      let decoded = try decoder.decode(Remote.DialogConfiguration.self, from: data)
       XCTAssertEqual(decoded.name, "foo",
                      "Should decode the correct name")
       XCTAssertEqual(decoded.urlString, "www.example.com",
@@ -48,7 +46,7 @@ class RemoteDialogConfigurationTests: XCTestCase {
     }
 
     do {
-      let decoded = try decoder.decode(RemoteDialogConfiguration.self, from: data)
+      let decoded = try decoder.decode(Remote.DialogConfiguration.self, from: data)
       XCTAssertEqual(decoded.name, "foo",
                      "Should decode the correct name")
       XCTAssertEqual(decoded.urlString, "www.example.com",
@@ -66,7 +64,7 @@ class RemoteDialogConfigurationTests: XCTestCase {
     }
 
     do {
-      let list = try decoder.decode(RemoteDialogConfigurationList.self, from: data)
+      let list = try decoder.decode(Remote.DialogConfigurationList.self, from: data)
       XCTAssertFalse(list.configurations.isEmpty,
                      "Should decode a list of configurations from valid json")
     } catch {
