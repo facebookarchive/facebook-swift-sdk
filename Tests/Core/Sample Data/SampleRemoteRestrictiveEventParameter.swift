@@ -16,25 +16,38 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
-
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
-
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+enum SampleRemoteRestrictiveEventParameter {
+  static let deprecated = RemoteRestrictiveEventParameter(
+    name: "deprecated",
+    isDeprecated: true,
+    restrictiveEventParameters: ["foo": 1]
+  )
+  static let deprecatedNoParameters = RemoteRestrictiveEventParameter(
+    name: "deprecatedNoParameters",
+    isDeprecated: true,
+    restrictiveEventParameters: nil
+  )
+  static let nonDeprecated = RemoteRestrictiveEventParameter(
+    name: "nonDeprecated",
+    isDeprecated: false,
+    restrictiveEventParameters: ["foo": 2]
+  )
+  static let nonDeprecatedNoParameters = RemoteRestrictiveEventParameter(
+    name: "nonDeprecatedNoParameters",
+    isDeprecated: false,
+    restrictiveEventParameters: nil
+  )
+  static let unknownDeprecation = RemoteRestrictiveEventParameter(
+    name: "unknownDeprecation",
+    isDeprecated: nil,
+    restrictiveEventParameters: ["foo": 3]
+  )
+  static let unknownParameter = RemoteRestrictiveEventParameter(
+    name: "unknownParameter",
+    isDeprecated: true,
+    restrictiveEventParameters: nil
+  )
 }

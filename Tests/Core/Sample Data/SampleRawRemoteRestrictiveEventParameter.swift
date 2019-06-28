@@ -18,23 +18,25 @@
 
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
-
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
-
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+enum SampleRawRemoteRestrictiveEventParameter {
+  static let deprecated: [String: Any] = [
+    "is_deprecated_event": true,
+    "restrictive_param": ["foo": 1]
+  ]
+  static let deprecatedNoParameters: [String: Any] = [
+    "is_deprecated_event": true
+  ]
+  static let nonDeprecated: [String: Any] = [
+    "is_deprecated_event": false,
+    "restrictive_param": ["foo": 2]
+  ]
+  static let nonDeprecatedNoParameters: [String: Any] = [
+    "is_deprecated_event": false
+  ]
+  static let unknownDeprecation: [String: Any] = [
+    "restrictive_param": ["foo": 3]
+  ]
+  static let unknownParameter: [String: Any] = [
+    "is_deprecated_event": true
+  ]
 }

@@ -16,15 +16,43 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-protocol ServerConfigurationProviding {
-  var errorConfiguration: ErrorConfiguration { get }
-}
+enum GraphRequestTestHelper {
+  static func validate(
+    request: GraphRequest,
+    expectedPath: String? = nil,
+    expectedQueryItems: [URLQueryItem],
+    file: StaticString = #file,
+    line: UInt = #line
+    ) {
+    guard let url = URLBuilder().buildURL(for: request),
+      let queryItems = URLComponents(
+        url: url,
+        resolvingAgainstBaseURL: false
+        )?.queryItems
+      else {
+        return XCTFail("Should be able to build a url from a graph request and get query items from it")
+    }
 
-// TODO: Implement FBSDKServerConfiguration
-class ServerConfiguration: ServerConfigurationProviding {
-  var errorConfiguration: ErrorConfiguration {
-    return ErrorConfiguration(configurationDictionary: [:])
+    var path = "/v3.2"
+    if let expectedPath = expectedPath {
+      path = "\(path)/\(expectedPath)"
+    }
+
+    XCTAssertEqual(
+      url.path, path,
+      "A url created for a graph request should have the correct path",
+      file: file,
+      line: line
+    )
+    XCTAssertEqual(
+      queryItems.sorted { $0.name < $1.name },
+      expectedQueryItems.sorted { $0.name < $1.name },
+      "Creating a url for a graph request should provide the expected query items",
+      file: file,
+      line: line
+    )
   }
 }

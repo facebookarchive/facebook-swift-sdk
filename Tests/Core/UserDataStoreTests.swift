@@ -97,18 +97,3 @@ class UserDataStoreTests: XCTestCase {
                    "Store should provide the hashed user data that was saved into it")
   }
 }
-
-extension UserData: Equatable {
-  public static func == (lhs: UserData, rhs: UserData) -> Bool {
-    return lhs.email == rhs.email &&
-      lhs.firstName == rhs.firstName &&
-      lhs.lastName == rhs.lastName &&
-      lhs.phone == rhs.phone &&
-      lhs.dateOfBirth == rhs.dateOfBirth &&
-      lhs.gender == rhs.gender &&
-      lhs.city == rhs.city &&
-      lhs.state == rhs.state &&
-      lhs.zip == rhs.zip &&
-      lhs.country == rhs.country
-  }
-}

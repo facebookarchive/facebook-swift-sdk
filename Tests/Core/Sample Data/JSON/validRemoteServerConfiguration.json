@@ -1,0 +1,61 @@
+{
+  "app_events_feature_bitmask": 5,
+  "app_events_session_timeout": 60,
+  "gdpv4_nux_enabled": false,
+  "name": "HackBook Internal for iOS",
+  "default_share_mode": "share_sheet",
+  "ios_sdk_dialog_flows": {
+    "default": {
+      "use_native_flow": false,
+      "use_safari_vc": true
+    },
+    "message": {
+      "use_native_flow": true
+    }
+  },
+  "ios_sdk_error_categories": [{
+    "name": "login",
+    "items": [{
+      "code": 102
+    },
+    {
+      "code": 190
+    }
+    ],
+    "recovery_message": "Please log into this app again to reconnect your Facebook account.",
+    "recovery_options": [
+      "OK",
+      "Cancel"
+    ]
+  },
+  {
+    "name": "transient",
+    "items": [{
+      "code": 341
+    },
+    {
+      "code": 9
+    },
+    {
+      "code": 2
+    },
+    {
+      "code": 4
+    },
+    {
+      "code": 17
+    }
+    ],
+    "recovery_message": "The server is temporarily busy, please try again.",
+    "recovery_options": [
+      "OK"
+    ]
+  }
+  ],
+  "supports_implicit_sdk_logging": true,
+  "ios_supports_native_proxy_auth_flow": true,
+  "ios_supports_system_auth": true,
+  "id": "421415891237674",
+  "restrictive_data_filter_params": "{}",
+  "restrictive_data_filter_rules": "[{\"key_regex\":\"^phone$|phone number|cell phone|mobile phone|^mobile$\",\"value_regex\":\"^[0-9][0-9]\",\"value_negative_regex\":\"required|true|false|yes|y|n|off|on\",\"type\":2},{\"key_regex\":\"^ssn$|social security number|social security\",\"value_negative_regex\":\"required|true|false|yes\",\"type\":4},{\"key_regex\":\"password|passcode|passId\",\"value_negative_regex\":\"required|true|false|yes\",\"type\":3},{\"key_regex\":\"firstname|first_name|first name\",\"type\":6},{\"key_regex\":\"lastname|last_name|last name\",\"type\":7},{\"key_regex\":\"date_of_birth|\\\\\\u003Cdob\\\\>|dob\\\\>|birthdate|userbirthday|dateofbirth|date of birth|\\\\\\u003Cdob_|dobd|dobm|doby\",\"type\":8}]"
+}

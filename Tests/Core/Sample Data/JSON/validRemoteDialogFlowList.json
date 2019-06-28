@@ -1,0 +1,9 @@
+{
+  "default": {
+    "use_native_flow": 1,
+    "use_safari_vc": 1
+  },
+  "message": {
+    "use_native_flow": 1
+  }
+}

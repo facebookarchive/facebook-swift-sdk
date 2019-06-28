@@ -18,23 +18,16 @@
 
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+struct RemoteRestrictiveRule: Decodable {
+  let keyRegex: String
+  let type: Int
+  let valueRegex: String?
+  let valueNegativeRegex: String?
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
-
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+  enum CodingKeys: String, CodingKey {
+    case keyRegex = "key_regex"
+    case type
+    case valueRegex = "value_regex"
+    case valueNegativeRegex = "value_negative_regex"
+  }
 }

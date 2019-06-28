@@ -16,25 +16,21 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable type_name
+
+@testable import FacebookCore
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+enum SampleRawRemoteRestrictiveEventParameterList {
+  typealias Remote = SampleRemoteRestrictiveEventParameter
+  typealias RawRemote = SampleRawRemoteRestrictiveEventParameter
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
-
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+  static var valid: [String: Any] = {
+    [
+      Remote.deprecated.name: RawRemote.deprecated,
+      Remote.nonDeprecated.name: RawRemote.nonDeprecated,
+      Remote.unknownDeprecation.name: RawRemote.unknownDeprecation,
+      Remote.unknownParameter.name: RawRemote.unknownParameter
+    ]
+  }()
 }

@@ -79,4 +79,15 @@ extension String {
 
     return MathUtility.ceil(for: size)
   }
+
+  /**
+   Returns nil if the String is empty. Returns the optional String only if it is non-empty.
+   */
+  var nonempty: String? {
+    guard !self.isEmpty else {
+      return nil
+    }
+
+    return self
+  }
 }

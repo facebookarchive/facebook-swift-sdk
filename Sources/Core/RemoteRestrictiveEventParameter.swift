@@ -16,25 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
+
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+struct RemoteRestrictiveEventParameter: Decodable {
+  let name: String
+  let isDeprecated: Bool?
+  let restrictiveEventParameters: [String: Int]?
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
-
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+  init(
+    name: String,
+    isDeprecated: Bool?,
+    restrictiveEventParameters: [String: Int]?
+    ) {
+    self.name = name
+    self.isDeprecated = isDeprecated
+    self.restrictiveEventParameters = restrictiveEventParameters
+  }
 }

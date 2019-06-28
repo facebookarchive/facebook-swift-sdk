@@ -16,25 +16,31 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import XCTest
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+class RestrictiveRuleTests: XCTestCase {
+  typealias Fixtures = SampleRemoteRestrictiveRule
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
+  func testBuildingWithEmptyKeyRegex() {
+    XCTAssertNil(RestrictiveRule(remote: Fixtures.emptyKeyRegex),
+                 "Should not build a rule with an empty key regex")
+  }
 
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+  func testBuildingWithEmptyValueRegex() {
+    XCTAssertNotNil(RestrictiveRule(remote: Fixtures.emptyValueRegex),
+                    "Should build a rule that has a valid key regex and type")
+  }
+
+  func testBuildingWithEmptyValueNegativeRegex() {
+    XCTAssertNotNil(RestrictiveRule(remote: Fixtures.emptyValueNegativeRegex),
+                    "Should build a rule that has a valid key regex and type")
+  }
+
+  func testBuildingWithType() {
+    let rule = RestrictiveRule(remote: Fixtures.valid)
+
+    XCTAssertEqual(rule?.type, "1",
+                   "Should convert the type to a string")
+  }
 }

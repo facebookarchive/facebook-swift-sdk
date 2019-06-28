@@ -16,7 +16,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// swiftlint:disable force_unwrapping type_body_length file_length  
+// swiftlint:disable force_unwrapping type_body_length file_length
 
 @testable import FacebookCore
 import XCTest
@@ -79,10 +79,10 @@ class ImageServiceTests: XCTestCase {
                     "Fetching data should provide a session data task")
   }
 
-   // MARK: Fetch Image Data Task Completion
+  // MARK: Fetch Image Data Task Completion
 
-   // Data | Response | Error
-   // nil  | nil      | nil
+  // Data | Response | Error
+  // nil  | nil      | nil
   func testCompletingTaskWithMissingDataResponseAndError() {
     let expectation = self.expectation(description: name)
 

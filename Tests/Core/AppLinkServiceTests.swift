@@ -323,21 +323,11 @@ class AppLinkServiceTests: XCTestCase {
     file: StaticString = #file,
     line: UInt = #line
     ) {
-    guard let url = URLBuilder().buildURL(for: request),
-      let queryItems = URLComponents(
-        url: url,
-        resolvingAgainstBaseURL: false
-        )?.queryItems
-      else {
-        return XCTFail("Should be able to build a url from a graph request and get query items from it")
-    }
-
-    XCTAssertEqual(url.path, "/v3.2",
-                   "A url created for fetching app links should have the correct path")
-    XCTAssertEqual(
-      queryItems.sorted { $0.name < $1.name },
-      expectedQueryItems.sorted { $0.name < $1.name },
-      "Creating a url for an app links graph request should provide the expected query items"
+    GraphRequestTestHelper.validate(
+      request: request,
+      expectedQueryItems: expectedQueryItems,
+      file: file,
+      line: line
     )
   }
 }

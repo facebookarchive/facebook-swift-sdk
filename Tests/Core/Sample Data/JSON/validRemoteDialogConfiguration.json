@@ -1,0 +1,5 @@
+{
+  "name": "foo",
+  "url": "www.example.com",
+  "versions": [1, 2, 3]
+}

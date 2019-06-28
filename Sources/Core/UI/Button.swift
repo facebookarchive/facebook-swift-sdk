@@ -131,17 +131,17 @@ class Button: UIButton {
 
   override func layoutSubviews() {
     // TODO: Add impression tracking
-//    // automatic impression tracking if the button conforms to FBSDKButtonImpressionTracking
-//    if ([self conformsToProtocol:@protocol(FBSDKButtonImpressionTracking)]) {
-//      NSString *eventName = ((id<FBSDKButtonImpressionTracking>)self).impressionTrackingEventName;
-//      NSString *identifier = ((id<FBSDKButtonImpressionTracking>)self).impressionTrackingIdentifier;
-//      NSDictionary<NSString *, id> *parameters = ((id<FBSDKButtonImpressionTracking>)self).analyticsParameters;
-//      if (eventName && identifier) {
-//        FBSDKViewImpressionTracker *impressionTracker = [FBSDKViewImpressionTracker
-//    impressionTrackerWithEventName:eventName];
-//        [impressionTracker logImpressionWithIdentifier:identifier parameters:parameters];
-//      }
-//    }
+    //    // automatic impression tracking if the button conforms to FBSDKButtonImpressionTracking
+    //    if ([self conformsToProtocol:@protocol(FBSDKButtonImpressionTracking)]) {
+    //      NSString *eventName = ((id<FBSDKButtonImpressionTracking>)self).impressionTrackingEventName;
+    //      NSString *identifier = ((id<FBSDKButtonImpressionTracking>)self).impressionTrackingIdentifier;
+    //      NSDictionary<NSString *, id> *parameters = ((id<FBSDKButtonImpressionTracking>)self).analyticsParameters;
+    //      if (eventName && identifier) {
+    //        FBSDKViewImpressionTracker *impressionTracker = [FBSDKViewImpressionTracker
+    //    impressionTrackerWithEventName:eventName];
+    //        [impressionTracker logImpressionWithIdentifier:identifier parameters:parameters];
+    //      }
+    //    }
     super.layoutSubviews()
   }
 
@@ -149,7 +149,7 @@ class Button: UIButton {
     guard !isHidden,
       !bounds.isEmpty
       else {
-      return .zero
+        return .zero
     }
 
     let imageRect = self.imageRect(forContentRect: contentRect)

@@ -18,23 +18,56 @@
 
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+extension ServerConfiguration {
+  struct DialogFlow {
+    let name: FlowName
+    let shouldUseNativeFlow: Bool
+    let shouldUseSafariVC: Bool
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
+    init(remote: RemoteServerConfiguration.DialogFlow) {
+      name = FlowName(value: remote.name)
+      shouldUseNativeFlow = remote.shouldUseNativeFlow ?? false
+      shouldUseSafariVC = remote.shouldUseSafariVC ?? false
+    }
 
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+    // swiftlint:disable:next nesting
+    enum FlowName: CustomStringConvertible, Equatable {
+      case `default`
+      case login
+      case sharing
+      case other(String)
+
+      var description: String {
+        switch self {
+        case .default:
+          return "default"
+
+        case .login:
+          return "login"
+
+        case .sharing:
+          return "sharing"
+
+        case .other(let value):
+          return value
+        }
+      }
+
+      init(value: String) {
+        switch value {
+        case "default":
+          self = .default
+
+        case "login":
+          self = .login
+
+        case "sharing":
+          self = .sharing
+
+        default:
+          self = .other(value)
+        }
+      }
+    }
+  }
 }

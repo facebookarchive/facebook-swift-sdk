@@ -16,25 +16,33 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+enum SampleRawRemoteDialogConfiguration {
+  static var valid: [String: Any] = {
+    [
+      "name": "foo",
+      "url": "www.example.com",
+      "versions": [1, 2, 3]
+    ]
+  }()
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
+  static var missingName: [String: Any] = {
+    var temp = valid
+    temp.removeValue(forKey: "name")
+    return temp
+  }()
 
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+  static var missingUrl: [String: Any] = {
+    var temp = valid
+    temp.removeValue(forKey: "url")
+    return temp
+  }()
+
+  static var missingAppVersions: [String: Any] = {
+    var temp = valid
+    temp.removeValue(forKey: "appVersions")
+    return temp
+  }()
 }

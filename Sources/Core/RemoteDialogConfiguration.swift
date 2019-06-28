@@ -18,23 +18,23 @@
 
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+struct RemoteDialogConfiguration: Decodable {
+  let name: String?
+  let urlString: String?
+  // swiftlint:disable:next discouraged_optional_collection
+  let versions: [Int]?
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
+  enum CodingKeys: String, CodingKey {
+    case name
+    case urlString = "url"
+    case versions
+  }
+}
 
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+struct RemoteDialogConfigurationList: Decodable {
+  let configurations: [RemoteDialogConfiguration]
+
+  enum CodingKeys: String, CodingKey {
+    case configurations = "data"
+  }
 }

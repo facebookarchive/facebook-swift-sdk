@@ -16,25 +16,39 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable force_try
+
+@testable import FacebookCore
 import Foundation
 
-enum GraphRequestErrorCategory: String, Codable {
-  /**
-   Indicates the error can be recovered (such as requiring a login).
-   A recoveryAttempter will be provided with the error instance that can take UI action.
-   */
-  case recoverable
+enum SampleRawRemoteRestrictiveRule {
+  static let keyRegex = "^phone$|phone number|cell phone|mobile phone|^mobile$"
+  static let valueRegex = "^[0-9][0-9]"
+  static let valueNegativeRegex = "required|true|false|yes|y|n|off|on"
+  static let type = 2
 
-  /**
-   Indicates the error is temporary (such as server throttling).
-   While a recoveryAttempter will be provided with the error instance,
-   the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.
-   */
-  case transient
+  static let validDictionary: [String: Any] = [
+    "key_regex": keyRegex,
+    "value_regex": valueRegex,
+    "value_negative_regex": valueNegativeRegex,
+    "type": type
+  ]
 
-  /**
-   The default error category that is not known to be recoverable.
-   Check `LocalizedErrorDescription` for a user facing message.
-   */
-  case other
+  static let minimalFields: [String: Any] = [
+    "key_regex": keyRegex,
+    "type": type
+  ]
+
+  enum SerializedData {
+    static let valid: Data = {
+      try! JSONSerialization.data(withJSONObject: validDictionary, options: [])
+    }()
+
+    static let minimalFields: Data = {
+      try! JSONSerialization.data(
+        withJSONObject: SampleRawRemoteRestrictiveRule.minimalFields,
+        options: []
+      )
+    }()
+  }
 }
