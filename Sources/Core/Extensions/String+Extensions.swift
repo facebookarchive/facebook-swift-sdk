@@ -81,9 +81,9 @@ extension String {
   }
 
   /**
-   Returns nil is the String is empty. Returns the optional String only if it is non-empty.
+   Returns nil if the String is empty. Returns the optional String only if it is non-empty.
    */
-  var nonEmpty: String? {
+  var nonempty: String? {
     guard !self.isEmpty else {
       return nil
     }
