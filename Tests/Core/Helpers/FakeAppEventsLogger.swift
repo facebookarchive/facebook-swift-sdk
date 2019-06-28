@@ -23,6 +23,7 @@ class FakeAppEventsLogger: AppEventsLogging {
   var capturedEventName: AppEventName?
   var capturedEventParameters: [String: AnyHashable] = [:]
   var capturedIsImplicitlyLogged = false
+  var registerNotificationsWasCalled = false
 
   func activateApp() {
     activateAppWasCalled = true
@@ -36,5 +37,9 @@ class FakeAppEventsLogger: AppEventsLogging {
     capturedEventName = eventName
     capturedEventParameters = parameters
     capturedIsImplicitlyLogged = isImplicitlyLogged
+  }
+
+  func registerNotifications() {
+    registerNotificationsWasCalled = true
   }
 }

@@ -16,40 +16,9 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
-
-// TODO: A more robust type for app event names
-typealias AppEventName = String
-
-protocol AppEventsLogging {
-  func activateApp()
-
-  func logInternalEvent(
-    eventName: AppEventName,
-    parameters: [String: AnyHashable],
-    isImplicitlyLogged: Bool
-  )
-
-  func registerNotifications()
-}
-
-// TODO: Convert FBSDKAppEvent
-class AppEventsLogger: AppEventsLogging {
-  static let shared = AppEventsLogger()
-
-  func activateApp() {
-    print("Implement app activation")
-  }
-
-  func logInternalEvent(
-    eventName: AppEventName,
-    parameters: [String: AnyHashable],
-    isImplicitlyLogged: Bool
-    ) {
-    print("Implement app events logging")
-  }
-
-  func registerNotifications() {
-    print("Implement register notifications")
-  }
-}
+// Note:
+//
+// This placeholder is needed to test importability of the Login and Share Kits to the TestHost Application.
+// This allows us to test that we're collecting metrics about Kit inclusion.
+// This should be removed once the Login and Share Kits are built out.
+//

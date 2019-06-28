@@ -26,8 +26,11 @@ import UIKit
  The methods in this class are designed to mirror those in UIApplicationDelegate, and you
  should call them in the respective methods in your AppDelegate implementation.
  */
-class FBApplicationDelegate {
+public class FBApplicationDelegate {
+  public static let shared = FBApplicationDelegate()
+
   private var didFinishLaunching: Bool = false
+  private let bitmaskStorageKey: String = "com.facebook.sdk.kits.bitmask"
 
   private(set) var observers: [AnyApplicationObserving] = []
   private(set) var state: UIApplication.State = .inactive
@@ -38,6 +41,9 @@ class FBApplicationDelegate {
   let gatekeeperService: GatekeeperServicing
   let appEventsLogger: AppEventsLogging
   let timeSpendDataStore: TimeSpentDataStoring
+  let store: DataPersisting
+  let notificationCenter: NotificationObserving
+  let infoDictionaryProvider: InfoDictionaryProviding
 
   init(
     settings: SettingsManaging = Settings.shared,
@@ -45,7 +51,10 @@ class FBApplicationDelegate {
     serverConfigurationService: ServerConfigurationServicing = ServerConfigurationService.shared,
     gatekeeperService: GatekeeperServicing = GatekeeperService.shared,
     appEventsLogger: AppEventsLogging = AppEventsLogger.shared,
-    timeSpentDataStore: TimeSpentDataStoring = TimeSpentDataStore.shared
+    timeSpentDataStore: TimeSpentDataStoring = TimeSpentDataStore.shared,
+    store: DataPersisting = UserDefaults.standard,
+    notificationCenter: NotificationObserving = NotificationCenter.default,
+    infoDictionaryProvider: InfoDictionaryProviding = Bundle.main
     ) {
     self.settings = settings
     self.accessTokenWallet = accessTokenWallet
@@ -53,6 +62,37 @@ class FBApplicationDelegate {
     self.gatekeeperService = gatekeeperService
     self.appEventsLogger = appEventsLogger
     self.timeSpendDataStore = timeSpentDataStore
+    self.store = store
+    self.notificationCenter = notificationCenter
+    self.infoDictionaryProvider = infoDictionaryProvider
+
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(applicationDidEnterBackground(_:)),
+      name: UIApplication.didEnterBackgroundNotification,
+      object: nil
+    )
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(applicationDidBecomeActive(_:)),
+      name: UIApplication.didBecomeActiveNotification,
+      object: nil
+    )
+
+    appEventsLogger.registerNotifications()
+
+    #if !TARGET_OS_TV
+    // TODO:
+    // Register Listener for App Link measurement events
+//    [FBSDKMeasurementEventListener defaultListener];
+    #endif
+
+    // Register on UIApplicationDidEnterBackgroundNotification events to reset
+    // source application data when app backgrounds.
+    timeSpentDataStore.registerAutoResetSourceApplication()
+
+    // swiftlint:disable:next force_try
+    try! validateFacebookReservedURLSchemes()
   }
 
   func addObserver(_ observer: AnyApplicationObserving) {
@@ -66,6 +106,21 @@ class FBApplicationDelegate {
   func removeObserver(_ observer: AnyApplicationObserving) {
     observers.removeAll { $0 == observer }
   }
+
+  /**
+   Call this method to manually initialize the SDK.
+   As we initialize SDK automatically, this should only be called when auto initialization is disabled,
+   this can be controlled via a 'FacebookAutoInitEnabled' key in the project info plist file.
+
+   - Parameter launchOptions: The launchOptions as passed to
+   `UIApplicationDelegate`'s `application(_: didFinishLaunchingWithOptions:)`
+    Could be empty if you don't call this function from
+   `UIApplicationDelegate`'s `application(_: didFinishLaunchingWithOptions:)`
+   */
+//  convenience init(_ launchOptions: [String: AnyHashable]) {
+    // This is only possible if we figure out a clever way to register a class method
+    // for the didFinishLaunchingNotification instead of just calling it from there directly
+//  }
 
   /**
    Call this method from the `UIApplicationDelegate`'s `application(open:options:)` method
@@ -143,7 +198,6 @@ class FBApplicationDelegate {
     }
 
     logAppEventIfPresent(in: url)
-    // TODO: Implement _logIfAppLinkEvent
 
     return opened
   }
@@ -169,9 +223,14 @@ class FBApplicationDelegate {
     serverConfigurationService.loadServerConfiguration { _ in }
     gatekeeperService.loadGatekeepers()
 
-    // TODO: Log SDKInitializeMethod
     if settings.isAutoLogAppEventsEnabled {
       logSDKInitialization()
+    }
+
+    if let sourceApplication = launchOptions?[UIApplication.LaunchOptionsKey.sourceApplication] as? String,
+      let urlString = launchOptions?[UIApplication.LaunchOptionsKey.url] as? String,
+      let url = URL(string: urlString) {
+      timeSpendDataStore.set(sourceApplication: sourceApplication, url: url)
     }
 
     #if TARGET_OS_TV
@@ -192,7 +251,7 @@ class FBApplicationDelegate {
     return finished
   }
 
-  // gets called from a notification that then passed the object which is the appliction to the observers
+  @objc
   func applicationDidEnterBackground(_ notification: Notification) {
     state = .background
 
@@ -205,6 +264,7 @@ class FBApplicationDelegate {
     }
   }
 
+  @objc
   func applicationDidBecomeActive(_ notification: Notification) {
     state = .active
 
@@ -269,13 +329,71 @@ class FBApplicationDelegate {
   }
 
   private func logSDKInitialization() {
-    // TODO: Implement collecting the actual data
+    var bitmask = 0
+    var bit = 0
+
+    var parameters = [String: AnyHashable]()
+
+    parameters.updateValue(true, forKey: "core_lib_included")
+
+    #if canImport(FacebookLogin)
+    parameters.updateValue(true, forKey: "login_lib_included")
+    update(bitmask: &bitmask, with: bit)
+    #endif
+
+    bit += 1
+
+    #if canImport(MarketingKit)
+    parameters.updateValue(true, forKey: "marketing_lib_included")
+    #endif
+
+    bit += 1
+
+    #if canImport(MessengerShareKit)
+    parameters.updateValue(true, forKey: "messenger_lib_included")
+    #endif
+
+    bit += 1
+
+    #if canImport(PlacesKit)
+    parameters.updateValue(true, forKey: "places_lib_included")
+    update(bitmask: &bitmask, with: bit)
+    #endif
+
+    bit += 1
+
+    #if canImport(FacebookShare)
+    parameters.updateValue(true, forKey: "share_lib_included")
+    update(bitmask: &bitmask, with: bit)
+    #endif
+
+    bit += 1
+
+    #if canImport(TVOSKit)
+    parameters.updateValue(true, forKey: "tv_lib_included")
+    update(bitmask: &bitmask, with: bit)
+    #endif
+
+    let existingBitmask = store.integer(forKey: bitmaskStorageKey)
+    guard existingBitmask != bitmask else {
+      return
+    }
+
+    store.set(bitmask, forKey: bitmaskStorageKey)
 
     appEventsLogger.logInternalEvent(
       eventName: "fb_sdk_initialize",
-      parameters: [:],
+      parameters: parameters,
       isImplicitlyLogged: false
     )
+  }
+
+  private func update(bitmask: inout Int, with bit: Int) {
+    bitmask |= 1 << bit
+  }
+
+  private func validateFacebookReservedURLSchemes() throws {
+    try infoDictionaryProvider.validateFacebookReservedURLSchemes()
   }
 
   enum Errors: FBError {

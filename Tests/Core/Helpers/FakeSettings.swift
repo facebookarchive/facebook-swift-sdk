@@ -25,6 +25,7 @@ class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProvidi
   var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
   var accessTokenCache: AccessTokenCaching?
   let graphApiDebugParameter: GraphApiDebugParameter
+  var isAutoInitializationEnabled: Bool = false
   var isAutoLogAppEventsEnabled: Bool = false
   var loggingBehaviors: Set<LoggingBehavior> = []
   var domainPrefix: String?
