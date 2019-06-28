@@ -27,6 +27,7 @@ protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
   var clientToken: String? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
+  var isAutoInitializationEnabled: Bool { get set }
   var isAutoLogAppEventsEnabled: Bool { get set }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }

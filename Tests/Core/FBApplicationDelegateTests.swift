@@ -36,6 +36,7 @@ class FBApplicationDelegateTests: XCTestCase {
   private let fakeAppEventsLogger = FakeAppEventsLogger()
   private let fakeTimeSpentDataStore = FakeTimeSpentDataStore()
   private var userDefaultsSpy: UserDefaultsSpy!
+  private let fakeNotificationCenter = FakeNotificationCenter()
 
   private let sourceApplication = "facebook"
   private let annotation = ["foo": "bar"]
@@ -69,8 +70,16 @@ class FBApplicationDelegateTests: XCTestCase {
       gatekeeperService: fakeGatekeeperService,
       appEventsLogger: fakeAppEventsLogger,
       timeSpentDataStore: fakeTimeSpentDataStore,
-      store: userDefaultsSpy
+      store: userDefaultsSpy,
+      notificationCenter: fakeNotificationCenter
     )
+  }
+
+  override func tearDown() {
+    super.tearDown()
+
+    fakeNotificationCenter.reset()
+    userDefaultsSpy.reset()
   }
 
   // MARK: - Dependencies
@@ -108,6 +117,16 @@ class FBApplicationDelegateTests: XCTestCase {
   func testDataPersistingDependency() {
     XCTAssertTrue(FBApplicationDelegate().store is UserDefaults,
                   "Should use the correct concrete implementation for the fb app delegate's store")
+  }
+
+  func testNotificationCenterDependency() {
+    XCTAssertTrue(FBApplicationDelegate().notificationCenter is NotificationCenter,
+                  "Should use the correct concrete implementation for the notification center dependency")
+  }
+
+  func testInfoDictionaryDependency() {
+    XCTAssertTrue(FBApplicationDelegate().infoDictionaryProvider is Bundle,
+                  "Should use the correct concrete implementation for the info dictionary providing dependency")
   }
 
   // MARK: - Properties
@@ -148,6 +167,36 @@ class FBApplicationDelegateTests: XCTestCase {
 
     XCTAssertTrue(appDelegate.observers.isEmpty,
                   "Should remove observers on request")
+  }
+
+  func testRegistersEventsForNotifications() {
+    XCTAssertTrue(fakeAppEventsLogger.registerNotificationsWasCalled,
+                  "Should register events logger for notifications")
+  }
+
+  func testRegisterAutoResetOnTimeSpentDataStore() {
+    XCTAssertTrue(fakeTimeSpentDataStore.registerAutoResetSourceApplicationWasCalled,
+                  "Should register auto resetting the source application on the time spend data store")
+  }
+
+  // MARK: - Notifications
+
+  func testListensForBackgrounding() {
+    XCTAssertTrue(
+      fakeNotificationCenter.capturedAddObserverNotificationNames.contains(
+        UIApplication.didEnterBackgroundNotification
+      ),
+      "Should add an observer for backgrounding"
+    )
+  }
+
+  func testListensForActivation() {
+    XCTAssertTrue(
+      fakeNotificationCenter.capturedAddObserverNotificationNames.contains(
+        UIApplication.didBecomeActiveNotification
+      ),
+      "Should add an observer for becoming active"
+    )
   }
 
   // MARK: - URL Opening

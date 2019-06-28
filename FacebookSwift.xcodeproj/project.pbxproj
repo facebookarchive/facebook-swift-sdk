@@ -275,6 +275,7 @@
 		F4A9440422C5244300616AD8 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A9440022C5243100616AD8 /* Placeholder.swift */; };
 		F4A9440622C524E300616AD8 /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811C5E0A1CFFD36D00E4A925 /* FacebookShare.framework */; };
 		F4A9440722C527C400616AD8 /* UserDefaultsSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C8C2268BB6E00287DC4 /* UserDefaultsSpy.swift */; };
+		F4A9446022C66EF600616AD8 /* FakeNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */; };
 		F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE42712245846A00E3B99C /* GraphPathTests.swift */; };
 		F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE4273224584F200E3B99C /* GraphPath.swift */; };
 		F4B340012240779D00912F0F /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B340002240779D00912F0F /* JSONLoader.swift */; };
@@ -2110,6 +2111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F4373622A5CD310090D0C9 /* BridgeAPIRequestTests.swift in Sources */,
+				F4A9446022C66EF600616AD8 /* FakeNotificationCenter.swift in Sources */,
 				F4911FC122C166BC00FAFC63 /* FakeAppEventsLogger.swift in Sources */,
 				F4F4373822A5CD640090D0C9 /* FakeBridgeAPINetworkerProvider.swift in Sources */,
 				F421AF8E22BBF51A00856CAD /* BridgeAPIValidatorTests.swift in Sources */,

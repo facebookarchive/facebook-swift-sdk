@@ -29,6 +29,8 @@ protocol AppEventsLogging {
     parameters: [String: AnyHashable],
     isImplicitlyLogged: Bool
   )
+
+  func registerNotifications()
 }
 
 // TODO: Convert FBSDKAppEvent
@@ -45,5 +47,9 @@ class AppEventsLogger: AppEventsLogging {
     isImplicitlyLogged: Bool
     ) {
     print("Implement app events logging")
+  }
+
+  func registerNotifications() {
+    print("Implement register notifications")
   }
 }

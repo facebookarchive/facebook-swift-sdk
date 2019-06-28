@@ -64,9 +64,10 @@ class UserProfileServiceTests: XCTestCase {
   func testObservingAccessTokenChanges() {
     service.shouldUpdateOnAccessTokenChange = true
 
-    XCTAssertEqual(
-      fakeNotificationCenter.capturedAddObserverNotificationName,
-      .FBSDKAccessTokenDidChangeNotification,
+    XCTAssertTrue(
+      fakeNotificationCenter.capturedAddObserverNotificationNames.contains(
+        .FBSDKAccessTokenDidChangeNotification
+      ),
       "Should add an observer for access token changes on request"
     )
   }

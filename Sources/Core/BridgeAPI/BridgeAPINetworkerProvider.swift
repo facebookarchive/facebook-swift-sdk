@@ -44,7 +44,7 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
         return BridgeAPINative(appScheme: "fbapi20130214")
 
       case .messenger:
-        return BridgeAPINative(appScheme: "fb-messenger-share-api")
+        return BridgeAPINative(appScheme: FacebookURLSchemes.messenger)
 
       case .msqrdPlayer:
         return BridgeAPINative(appScheme: "msqrdplayer-api20170208")
@@ -74,13 +74,13 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
     case let .native(scheme):
       switch scheme {
       case .facebook:
-        return "fbauth2"
+        return FacebookURLSchemes.facebook
 
       case .messenger:
-        return "fb-messenger-share-api"
+        return FacebookURLSchemes.messenger
 
       case .msqrdPlayer:
-        return "msqrdplayer"
+        return FacebookURLSchemes.msqrdPlayer
       }
 
     case let .web(scheme):

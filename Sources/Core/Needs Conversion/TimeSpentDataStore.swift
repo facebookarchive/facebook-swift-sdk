@@ -20,6 +20,7 @@ import Foundation
 
 protocol TimeSpentDataStoring {
   func set(sourceApplication: String, url: URL)
+  func registerAutoResetSourceApplication()
 }
 
 // TODO: Implement FBSDKTimeSpentData
@@ -28,5 +29,9 @@ struct TimeSpentDataStore: TimeSpentDataStoring {
 
   func set(sourceApplication: String, url: URL) {
     print("Implement FBSDKTimeSpentData")
+  }
+
+  func registerAutoResetSourceApplication() {
+    print("Implement auto reset source application")
   }
 }

@@ -22,9 +22,14 @@ import Foundation
 class FakeTimeSpentDataStore: TimeSpentDataStoring {
   var capturedSourceApplication: String?
   var capturedURL: URL?
+  var registerAutoResetSourceApplicationWasCalled = false
 
   func set(sourceApplication: String, url: URL) {
     capturedSourceApplication = sourceApplication
     capturedURL = url
+  }
+
+  func registerAutoResetSourceApplication() {
+    registerAutoResetSourceApplicationWasCalled = true
   }
 }
