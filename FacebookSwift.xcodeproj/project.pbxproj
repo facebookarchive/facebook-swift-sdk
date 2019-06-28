@@ -384,7 +384,7 @@
 		F4F4373722A5CD560090D0C9 /* SampleInfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */; };
 		F4F4373822A5CD640090D0C9 /* FakeBridgeAPINetworkerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F0229DB55C004FBDB0 /* FakeBridgeAPINetworkerProvider.swift */; };
 		F4F4373922A5CD6F0090D0C9 /* FakeURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470F2229DB583004FBDB0 /* FakeURLOpener.swift */; };
-		F4F4373A22A5CD7E0090D0C9 /* FakeBridgeApiUrlProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479099222985BC200F9C0A2 /* FakeBridgeApiUrlProvider.swift */; };
+		F4F4373A22A5CD7E0090D0C9 /* FakeBridgeApiNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479099222985BC200F9C0A2 /* FakeBridgeApiNetworker.swift */; };
 		F4F4373B22A5CD890090D0C9 /* FakeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A22229C6B60083506E /* FakeSettings.swift */; };
 		F4F4373C22A5CD8D0090D0C9 /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
 		F4F4373D22A5CD9C0090D0C9 /* SampleURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447152F22440E860013495F /* SampleURL.swift */; };
@@ -664,7 +664,7 @@
 		F479098C2298542800F9C0A2 /* BridgeAPIWebV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPIWebV2.swift; sourceTree = "<group>"; };
 		F479098E2298546500F9C0A2 /* BridgeAPINative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINative.swift; sourceTree = "<group>"; };
 		F47909902298582D00F9C0A2 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
-		F479099222985BC200F9C0A2 /* FakeBridgeApiUrlProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBridgeApiUrlProvider.swift; sourceTree = "<group>"; };
+		F479099222985BC200F9C0A2 /* FakeBridgeApiNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBridgeApiNetworker.swift; sourceTree = "<group>"; };
 		F479099522985C7F00F9C0A2 /* BridgeAPINetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINetworking.swift; sourceTree = "<group>"; };
 		F479099722985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeAPINetworkerProvider.swift; sourceTree = "<group>"; };
 		F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApiDebugParameterTests.swift; sourceTree = "<group>"; };
@@ -1177,7 +1177,7 @@
 				F4911FAC22C1314300FAFC63 /* FakeApplicationObserver.swift */,
 				F422F0862284A44600AFD0DF /* FakeAudioService.swift */,
 				F47470F0229DB55C004FBDB0 /* FakeBridgeAPINetworkerProvider.swift */,
-				F479099222985BC200F9C0A2 /* FakeBridgeApiUrlProvider.swift */,
+				F479099222985BC200F9C0A2 /* FakeBridgeApiNetworker.swift */,
 				F4D5DAE322492BCD0014C14D /* FakeBundle.swift */,
 				F44DB6952229ADFB0083506E /* FakeCookieUtility.swift */,
 				F432E9F52236FFA6007D3A34 /* FakeError.swift */,
@@ -2129,7 +2129,7 @@
 				F467405422970A3700D3F7AF /* CryptographyTests.swift in Sources */,
 				F4F4373B22A5CD890090D0C9 /* FakeSettings.swift in Sources */,
 				F4911FBC22C1580C00FAFC63 /* FakeGatekeepersService.swift in Sources */,
-				F4F4373A22A5CD7E0090D0C9 /* FakeBridgeApiUrlProvider.swift in Sources */,
+				F4F4373A22A5CD7E0090D0C9 /* FakeBridgeApiNetworker.swift in Sources */,
 				F4911FB022C137E300FAFC63 /* FBApplicationDelegateTests.swift in Sources */,
 				F4911FB122C137EC00FAFC63 /* FakeApplicationObserver.swift in Sources */,
 				F467405522970A4100D3F7AF /* KeychainStoreTests.swift in Sources */,
