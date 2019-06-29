@@ -592,7 +592,7 @@ class UserProfileServiceTests: XCTestCase {
     XCTAssertEqual(
       fakeImageService.capturedURL?.path,
       "/\(Settings.shared.graphAPIVersion)/me/picture",
-      "Should call the image service with the expecte path"
+      "Should call the image service with the expected path"
     )
   }
 
@@ -726,7 +726,7 @@ class UserProfileServiceTests: XCTestCase {
 
     // Assert
     XCTAssertNotNil(service.userProfile,
-                    "Should set the fetch user profile onto the service")
+                    "Should set the fetched user profile onto the service")
   }
 }
 

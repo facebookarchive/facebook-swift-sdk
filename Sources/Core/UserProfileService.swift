@@ -43,7 +43,7 @@ protocol UserProfileProviding {
 
  You can use this class to build your own `ProfilePictureView` or in place of typical requests to "/me".
  */
-public class UserProfileService: UserProfileProviding {
+public final class UserProfileService: UserProfileProviding {
   public static let shared = UserProfileService()
 
   private let oneDayInSeconds = TimeInterval(60 * 60 * 24)
