@@ -49,6 +49,7 @@ class AppLinkServiceTests: XCTestCase {
 
   func testRequestForMultipleURLs() {
     let expectedQueryItems = [
+      URLQueryItem(name: "access_token", value: wallet.currentAccessToken!.tokenString),
       URLQueryItem(name: "fields", value: "app_links.fields(ios)"),
       URLQueryItem(name: "ids", value: "\(SampleURL.valid.absoluteString),\(SampleURL.valid(withPath: "1").absoluteString)")
     ]
@@ -60,6 +61,7 @@ class AppLinkServiceTests: XCTestCase {
 
   func testRequestForMultipleURLsWithSpecifiedIdiom() {
     let expectedQueryItems = [
+      URLQueryItem(name: "access_token", value: wallet.currentAccessToken!.tokenString),
       URLQueryItem(name: "fields", value: "app_links.fields(ios,iphone)"),
       URLQueryItem(name: "ids", value: "\(SampleURL.valid.absoluteString),\(SampleURL.valid(withPath: "1").absoluteString)")
     ]
