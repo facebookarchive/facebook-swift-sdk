@@ -41,4 +41,9 @@ class UserProfileServiceConfigurationTests: XCTestCase {
     XCTAssertTrue(profileService.accessTokenProvider is AccessTokenWallet,
                   "A profile service should have the expected concrete implementation for its access token providing dependency")
   }
+
+  func testImageFetchingDependency() {
+    XCTAssertTrue(profileService.imageService is ImageFetching,
+                  "A profile service should have the expected concrete implementation for its image fetching dependency")
+  }
 }

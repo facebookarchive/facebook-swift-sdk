@@ -244,6 +244,7 @@
 		F49FA47E222880FE0008CAD6 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
 		F49FA4902228819E0008CAD6 /* AccessTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */; };
 		F4A943CF22C3ED7900616AD8 /* FacebookCore_TV.h in Headers */ = {isa = PBXBuildFile; fileRef = F4A943CE22C3ED7900616AD8 /* FacebookCore_TV.h */; };
+		F4A9447022C6C33700616AD8 /* FakeImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A9446F22C6C33700616AD8 /* FakeImageService.swift */; };
 		F4AE42722245846A00E3B99C /* GraphPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE42712245846A00E3B99C /* GraphPathTests.swift */; };
 		F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE4273224584F200E3B99C /* GraphPath.swift */; };
 		F4B340012240779D00912F0F /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B340002240779D00912F0F /* JSONLoader.swift */; };
@@ -666,6 +667,7 @@
 		F4A943CB22C3ED2500616AD8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4A943CD22C3ED4E00616AD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4A943CE22C3ED7900616AD8 /* FacebookCore_TV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCore_TV.h; sourceTree = "<group>"; };
+		F4A9446F22C6C33700616AD8 /* FakeImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeImageService.swift; sourceTree = "<group>"; };
 		F4AE42712245846A00E3B99C /* GraphPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPathTests.swift; sourceTree = "<group>"; };
 		F4AE4273224584F200E3B99C /* GraphPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPath.swift; sourceTree = "<group>"; };
 		F4B340002240779D00912F0F /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
@@ -1135,6 +1137,7 @@
 				F44DB6C0222B11620083506E /* FakeGraphRequestConnection.swift */,
 				F480D90C2236B12C001AB8D3 /* FakeGraphRequestConnectionDelegate.swift */,
 				F44DB6C2222B136F0083506E /* FakeGraphRequestPiggybackManager.swift */,
+				F4A9446F22C6C33700616AD8 /* FakeImageService.swift */,
 				F47056D82232CEEF00BE526B /* FakeLogger.swift */,
 				F47470F0229DB55C004FBDB0 /* FakeNetworkerProvider.swift */,
 				F44DB6A42229CFFC0083506E /* FakeNotificationCenter.swift */,
@@ -2072,6 +2075,7 @@
 				F4CF0342227387A900807A61 /* AppLinkServiceTests.swift in Sources */,
 				F4C57D0D22A9A4BE00D0BEFE /* SampleRawRemoteServerConfiguration.swift in Sources */,
 				F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */,
+				F4A9447022C6C33700616AD8 /* FakeImageService.swift in Sources */,
 				F45E54DD228E0B42008A6011 /* ImageServiceTests.swift in Sources */,
 				F4C57D1922AACE2B00D0BEFE /* SampleRemoteDialogFlowList.swift in Sources */,
 				F4CF03442273880E00807A61 /* RemoteAppLinkDetailsTests.swift in Sources */,

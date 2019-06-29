@@ -48,8 +48,12 @@ class UserProfileService: UserProfileProviding {
   private(set) var notificationCenter: NotificationObserving & NotificationPosting
   private(set) var store: UserProfileStore
   private(set) var accessTokenProvider: AccessTokenProviding
+  private(set) var imageService: ImageFetching
 
   private(set) var userProfile: UserProfile?
+
+  var currentImageFetchTask: URLSessionTaskProxy?
+  var currentLoadProfileTask: URLSessionTaskProxy?
 
   /**
    Indicates if `userProfile` will automatically observe `FBSDKAccessTokenDidChangeNotification` notifications
@@ -92,13 +96,15 @@ class UserProfileService: UserProfileProviding {
     logger: Logging = Logger(),
     notificationCenter: NotificationObserving & NotificationPosting = NotificationCenter.default,
     store: UserProfileStore = UserProfileStore(),
-    accessTokenProvider: AccessTokenProviding = AccessTokenWallet.shared
+    accessTokenProvider: AccessTokenProviding = AccessTokenWallet.shared,
+    imageService: ImageFetching = ImageService.shared
     ) {
     self.graphConnectionProvider = graphConnectionProvider
     self.logger = logger
     self.notificationCenter = notificationCenter
     self.store = store
     self.accessTokenProvider = accessTokenProvider
+    self.imageService = imageService
   }
 
   @objc
@@ -188,9 +194,9 @@ class UserProfileService: UserProfileProviding {
         .union(GraphRequest.Flags.disableErrorRecovery)
     )
 
-    // TODO: capture the task for cancellation possibilities? Or maybe make it discardable result
-
-    loadRemoteProfile(for: request) { [weak self] (result: Result<Remote.UserProfile, Error>) -> Void in
+    currentLoadProfileTask = loadRemoteProfile(
+      for: request
+    ) { [weak self] (result: Result<Remote.UserProfile, Error>) -> Void in
       let ultimateResult: UserProfileResult
       defer {
         completion?(ultimateResult)
@@ -216,8 +222,8 @@ class UserProfileService: UserProfileProviding {
   private func loadRemoteProfile(
     for request: GraphRequest,
     completion: @escaping (Result<Remote.UserProfile, Error>) -> Void
-    ) {
-    _ = graphConnectionProvider
+    ) -> URLSessionTaskProxy? {
+    return graphConnectionProvider
       .graphRequestConnection()
       .getObject(for: request, completion: completion)
   }
@@ -288,20 +294,12 @@ class UserProfileService: UserProfileProviding {
 
     let request = imageRequest(for: identifier, sizingConfiguration: configuration)
 
-    // TODO: this should probably return a task that can be cancelled
-    _ = graphConnectionProvider.graphRequestConnection()
-      .getObject(for: request) { (result: Result<Data, Error>) -> Void in
-        switch result {
-        case let .success(data):
-          guard let image = UIImage(data: data, scale: configuration.scale) else {
-            return completion(.failure(ImageFetchError.invalidImageData))
-          }
-          completion(.success(image))
+    guard let url = URLBuilder().buildURL(for: request) else {
+      completion(.failure(ImageFetchError.invalidImageURL))
+      return
+    }
 
-        case let .failure(error):
-          completion(.failure(error))
-        }
-      }
+    currentImageFetchTask = imageService.image(for: url, completion: completion)
   }
 
   enum NotificationKeys {
@@ -321,7 +319,7 @@ class UserProfileService: UserProfileProviding {
   }
 
   enum ImageFetchError: Error {
-    case invalidImageData
+    case invalidImageURL
   }
 
   enum ProfileFetchError: Error {
