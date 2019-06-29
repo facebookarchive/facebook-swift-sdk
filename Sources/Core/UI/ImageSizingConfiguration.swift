@@ -22,13 +22,13 @@ import UIKit
  A configuration object for determining the size of an image based on a sizing
  format, a content mode, a size, and a scale.
  */
-struct ImageSizingConfiguration: Equatable {
+public struct ImageSizingConfiguration: Equatable {
   let format: ImageSizingFormat
   let size: CGSize
   let scale: CGFloat
   let imageShouldFit: Bool
 
-  init(
+  public init(
     format: ImageSizingFormat,
     contentMode: UIView.ContentMode,
     size: CGSize,

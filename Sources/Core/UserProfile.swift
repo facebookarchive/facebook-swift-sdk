@@ -18,7 +18,10 @@
 
 import Foundation
 
-struct UserProfile: Codable {
+/**
+ Provides available information about a Facebook user
+ */
+public struct UserProfile: Codable {
   /// The user id
   let identifier: String
 
@@ -34,12 +37,7 @@ struct UserProfile: Codable {
   /// The user's last name
   let lastName: String?
 
-  /**
-   A URL to the user's profile.
-
-   Consider using the `AppLinkResolver` utility to resolve this
-   to an app link to link directly to the user's profile in the Facebook app.
-   */
+  /// A URL to the user's profile.
   let url: URL?
 
   /// The last time the profile data was fetched.

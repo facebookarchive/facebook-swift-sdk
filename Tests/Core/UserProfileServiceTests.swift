@@ -679,7 +679,7 @@ class UserProfileServiceTests: XCTestCase {
 
   // MARK: - Refreshing
 
-  func testRefreshingStaleProfileOnAccessTokenChange() {
+  func testRefreshingStaleProfileOnAccessTokenChangeFailure() {
     service = UserProfileService(
       graphConnectionProvider: fakeGraphConnectionProvider
     )
@@ -701,6 +701,32 @@ class UserProfileServiceTests: XCTestCase {
     // Assert
     XCTAssertTrue(fakeConnection.getObjectWasCalled,
                   "Should attempt to fetch a new profile when a notification is received for a new access token")
+    XCTAssertNil(service.userProfile,
+                 "Should not set a user profile on a failed refresh")
+  }
+
+  func testRefreshingStaleProfileOnAccessTokenChangeSuccess() {
+    service = UserProfileService(
+      graphConnectionProvider: fakeGraphConnectionProvider
+    )
+    service.shouldUpdateOnAccessTokenChange = true
+    let token = AccessTokenFixtures.validToken
+
+    // Stub a fetch result
+    fakeConnection.stubGetObjectCompletionResult = .success(SampleRemoteUserProfile.valid)
+
+    // Attempt to load the profile via a notification
+    NotificationCenter.default.post(
+      name: .FBSDKAccessTokenDidChangeNotification,
+      object: self,
+      userInfo: [
+        AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeNewKey: token
+      ]
+    )
+
+    // Assert
+    XCTAssertNotNil(service.userProfile,
+                    "Should set the fetch user profile onto the service")
   }
 }
 
