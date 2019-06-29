@@ -331,6 +331,13 @@ public class FBApplicationDelegate {
   }
 
   private func logSDKInitialization() {
+    let loginFrameworkPath = "/Library/Frameworks/FacebookLogin.framework/FacebookLogin"
+    let marketingFrameworkPath = "/Library/Frameworks/FacebookMarketing.framework/FacebookMarketing"
+    let messengerFrameworkPath = "/Library/Frameworks/FacebookMessenger.framework/FacebookMessenger"
+    let placesFrameworkPath = "/Library/Frameworks/FacebookPlaces.framework/FacebookPlaces"
+    let shareFrameworkPath = "/Library/Frameworks/FacebookShare.framework/FacebookShare"
+    let tvFrameworkPath = "/Library/Frameworks/FacebookCore_TV.framework/FacebookCore_TV"
+
     var bitmask = 0
     var bit = 0
 
@@ -338,43 +345,43 @@ public class FBApplicationDelegate {
 
     parameters.updateValue(true, forKey: "core_lib_included")
 
-    #if canImport(FacebookLogin)
-    parameters.updateValue(true, forKey: "login_lib_included")
-    update(bitmask: &bitmask, with: bit)
-    #endif
+    if dlopen(loginFrameworkPath, RTLD_LOCAL) != nil {
+      parameters.updateValue(true, forKey: "login_lib_included")
+      update(bitmask: &bitmask, with: bit)
+    }
 
     bit += 1
 
-    #if canImport(MarketingKit)
-    parameters.updateValue(true, forKey: "marketing_lib_included")
-    #endif
+    if dlopen(marketingFrameworkPath, RTLD_LOCAL) != nil {
+      parameters.updateValue(true, forKey: "marketing_lib_included")
+    }
 
     bit += 1
 
-    #if canImport(MessengerShareKit)
-    parameters.updateValue(true, forKey: "messenger_lib_included")
-    #endif
+    if dlopen(messengerFrameworkPath, RTLD_LOCAL) != nil {
+      parameters.updateValue(true, forKey: "messenger_lib_included")
+    }
 
     bit += 1
 
-    #if canImport(PlacesKit)
-    parameters.updateValue(true, forKey: "places_lib_included")
-    update(bitmask: &bitmask, with: bit)
-    #endif
+    if dlopen(placesFrameworkPath, RTLD_LOCAL) != nil {
+      parameters.updateValue(true, forKey: "places_lib_included")
+      update(bitmask: &bitmask, with: bit)
+    }
 
     bit += 1
 
-    #if canImport(FacebookShare)
-    parameters.updateValue(true, forKey: "share_lib_included")
-    update(bitmask: &bitmask, with: bit)
-    #endif
+    if dlopen(shareFrameworkPath, RTLD_LOCAL) != nil {
+      parameters.updateValue(true, forKey: "share_lib_included")
+      update(bitmask: &bitmask, with: bit)
+    }
 
     bit += 1
 
-    #if canImport(TVOSKit)
-    parameters.updateValue(true, forKey: "tv_lib_included")
-    update(bitmask: &bitmask, with: bit)
-    #endif
+    if dlopen(tvFrameworkPath, RTLD_LOCAL) != nil {
+      parameters.updateValue(true, forKey: "tv_lib_included")
+      update(bitmask: &bitmask, with: bit)
+    }
 
     let existingBitmask = store.integer(forKey: bitmaskStorageKey)
     guard existingBitmask != bitmask else {
