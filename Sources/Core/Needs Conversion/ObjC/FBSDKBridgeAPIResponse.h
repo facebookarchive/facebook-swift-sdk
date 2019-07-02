@@ -16,10 +16,28 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+#import <Foundation/Foundation.h>
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
-}
+#import "FBSDKCopying.h"
 
-extension UIApplication: URLOpenabilityQuerying {}
+#import <FacebookCore/FacebookCore-Swift.h>
+
+NS_SWIFT_NAME(BridgeAPIResponse)
+@interface FBSDKBridgeAPIResponse : NSObject <FBSDKCopying>
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
++ (instancetype)bridgeAPIResponseWithRequest:(BridgeAPIRequest_ObjC *)request error:(NSError *)error;
++ (instancetype)bridgeAPIResponseWithRequest:(BridgeAPIRequest_ObjC *)request
+                                 responseURL:(NSURL *)responseURL
+                           sourceApplication:(NSString *)sourceApplication
+                                       error:(NSError *__autoreleasing *)errorRef;
++ (instancetype)bridgeAPIResponseCancelledWithRequest:(BridgeAPIRequest_ObjC *)request;
+
+@property (nonatomic, assign, readonly, getter=isCancelled) BOOL cancelled;
+@property (nonatomic, copy, readonly) NSError *error;
+@property (nonatomic, copy, readonly) BridgeAPIRequest_ObjC *request;
+@property (nonatomic, copy, readonly) NSDictionary *responseParameters;
+
+@end

@@ -19,6 +19,8 @@
 import Foundation
 
 struct Logger: Logging {
+  static let shared = Logger()
+
   private var startingSerialNumber: UInt = 1111
   let settings: SettingsManaging
 

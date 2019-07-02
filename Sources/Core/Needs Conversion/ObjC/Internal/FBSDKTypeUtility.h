@@ -16,10 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+#import <Foundation/Foundation.h>
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
-}
+NS_SWIFT_NAME(TypeUtility)
+@interface FBSDKTypeUtility : NSObject
 
-extension UIApplication: URLOpenabilityQuerying {}
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
++ (NSArray *)arrayValue:(id)object;
++ (BOOL)boolValue:(id)object;
++ (NSDictionary *)dictionaryValue:(id)object;
++ (NSInteger)integerValue:(id)object;
++ (id)objectValue:(id)object;
++ (NSString *)stringValue:(id)object;
++ (NSTimeInterval)timeIntervalValue:(id)object;
++ (NSUInteger)unsignedIntegerValue:(id)object;
++ (NSURL *)URLValue:(id)object;
+
+@end

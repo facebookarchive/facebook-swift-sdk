@@ -18,10 +18,6 @@
 
 import UIKit
 
-// This will eventually be replaced by the rewrite of FBSDKSettings
-// for now it is needed as a dependency of AccessTokenWallet and GraphRequest
-
-// TODO: Make sure this protocol makes sense in terms of the reworked class
 protocol SettingsManaging {
   var appIdentifier: String? { get set }
   var accessTokenCache: AccessTokenCaching? { get set }
@@ -43,6 +39,8 @@ protocol AppIdentifierProviding {
 }
 
 class Settings: SettingsManaging, AppIdentifierProviding {
+  static let shared = Settings()
+
   var accessTokenCache: AccessTokenCaching?
 
   // TODO: Figure out where this was coming from. Pretty sure it's tied to logging
@@ -55,9 +53,6 @@ class Settings: SettingsManaging, AppIdentifierProviding {
 
   // TODO: probably should not be settable from everywhere but should come from some sort of config
   static var isGraphErrorRecoveryEnabled: Bool = false
-
-  // TODO: There is a very good chance this will be needed when we start injecting settings various places
-  static let shared = Settings()
 
   private let bundle: InfoDictionaryProviding
   let store: DataPersisting

@@ -16,10 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+#import <Foundation/Foundation.h>
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
-}
+NS_ASSUME_NONNULL_BEGIN
 
-extension UIApplication: URLOpenabilityQuerying {}
+/**
+  Extension protocol for NSCopying that adds the copy method, which is implemented on NSObject.
+
+ NSObject<NSCopying> implicitly conforms to this protocol.
+ */
+NS_SWIFT_NAME(Copying)
+@protocol FBSDKCopying <NSCopying, NSObject>
+
+/**
+  Implemented by NSObject as a convenience to copyWithZone:.
+ @return A copy of the receiver.
+ */
+- (id)copy;
+
+@end
+
+NS_ASSUME_NONNULL_END

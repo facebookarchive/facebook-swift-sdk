@@ -28,6 +28,7 @@ struct BridgeAPIRequest {
   let userInfo: [String: AnyHashable]
   let settings: SettingsManaging
   let bundle: InfoDictionaryProviding
+  let category: BridgeAPIURLCategory
 
   init?(
     actionID: String = UUID().uuidString,
@@ -38,7 +39,7 @@ struct BridgeAPIRequest {
     userInfo: [String: AnyHashable] = [:],
     settings: SettingsManaging = Settings.shared,
     bundle: InfoDictionaryProviding = Bundle.main,
-    urlOpener: URLOpening = UIApplication.shared
+    urlOpener: URLOpenabilityQuerying = UIApplication.shared
     ) {
     if case .native = networkerProvider.urlCategory {
       var components = URLComponents()
@@ -60,6 +61,7 @@ struct BridgeAPIRequest {
     self.userInfo = userInfo
     self.settings = settings
     self.bundle = bundle
+    self.category = networkerProvider.urlCategory
   }
 
   func requestURL() throws -> URL {

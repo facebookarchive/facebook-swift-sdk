@@ -18,8 +18,31 @@
 
 import UIKit
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
-}
+@objc
+protocol URLOpening_ObjC {
+  // Implementations should make sure they can handle nil parameters
+  // which is possible in SafariViewController.
+  // see canOpenURL below.
+  @objc
+  func application(
+    _ application: UIApplication,
+    openUrl url: URL,
+    sourceApplication: String?,
+    annotation: Any
+    ) -> Bool
 
-extension UIApplication: URLOpenabilityQuerying {}
+  // create a different handler to return YES/NO if the receiver can process the above openURL:.
+  // This is separated so that we can process the openURL: in callbacks, while still returning
+  // the result of canOpenURL synchronously in FBSDKApplicationDelegate
+  func canOpenURL(
+    _ url: URL,
+    forApplication: UIApplication,
+    sourceApplication: String?,
+    annotation: [String: AnyHashable]
+    ) -> Bool
+
+  func applicationDidBecomeActive(_ application: UIApplication)
+
+  @objc
+  func isAuthenticationURL(_ url: URL) -> Bool
+}

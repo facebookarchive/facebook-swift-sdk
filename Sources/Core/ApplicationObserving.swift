@@ -39,6 +39,7 @@ extension ApplicationObserving where Self: Equatable {
   }
 }
 
+@objc
 protocol ApplicationObserving {
   func isEqualTo(_ application: ApplicationObserving) -> Bool
 

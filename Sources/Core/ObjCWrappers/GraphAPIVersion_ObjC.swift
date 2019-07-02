@@ -16,10 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
+@objc
+class GraphAPIVersion_ObjC: NSObject {
+  let graphAPIVersion: GraphAPIVersion
+
+  @objc override var description: String {
+    return graphAPIVersion.description
+  }
+
+  init(graphAPIVersion: GraphAPIVersion) {
+    self.graphAPIVersion = graphAPIVersion
+  }
 }
-
-extension UIApplication: URLOpenabilityQuerying {}

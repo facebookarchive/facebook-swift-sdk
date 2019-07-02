@@ -16,10 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
+@objc
+class AnyApplicationObserving_ObjC: NSObject {
+  let anyApplicationObserving: AnyApplicationObserving
+
+  @objc
+  init(applicationObserving: ApplicationObserving) {
+    self.anyApplicationObserving = AnyApplicationObserving(
+      applicationObserving: applicationObserving
+    )
+
+    super.init()
+  }
 }
-
-extension UIApplication: URLOpenabilityQuerying {}

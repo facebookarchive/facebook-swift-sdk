@@ -16,10 +16,18 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+#import "LoggingBehaviorConstants.h"
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
-}
+/// typedef for FBSDKAppEventName
+typedef NSString *const FBSDKLoggingBehavior NS_TYPED_EXTENSIBLE_ENUM NS_SWIFT_NAME(LoggingBehavior);
 
-extension UIApplication: URLOpenabilityQuerying {}
+FBSDKLoggingBehavior FBSDKLoggingBehaviorAccessTokens = @"include_access_tokens";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorPerformanceCharacteristics = @"perf_characteristics";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorAppEvents = @"app_events";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorInformational = @"informational";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorCacheErrors = @"cache_errors";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorUIControlErrors = @"ui_control_errors";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorDeveloperErrors = @"developer_errors";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorGraphAPIDebugWarning = @"graph_api_debug_warning";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorGraphAPIDebugInfo = @"graph_api_debug_info";
+FBSDKLoggingBehavior FBSDKLoggingBehaviorNetworkRequests = @"network_requests";

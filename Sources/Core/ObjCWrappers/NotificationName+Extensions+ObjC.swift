@@ -16,10 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
+@objc
+class NotificationNameConstants: NSObject {
+  @objc static let didBecomeActiveNotification: Notification.Name =
+    Notification.Name.FBSDKApplicationDidBecomeActiveNotification
 }
-
-extension UIApplication: URLOpenabilityQuerying {}

@@ -16,10 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
+@objc
+class BridgeAPINetworkingResponseParametersResult_ObjC: NSObject {
+  @objc var queryItems: [NSURLQueryItem]
+  @objc var error: NSError?
+
+  init(queryItems: [NSURLQueryItem], error: NSError?) {
+    self.queryItems = queryItems
+    self.error = error
+  }
 }
 
-extension UIApplication: URLOpenabilityQuerying {}
+@objc
+protocol BridgeAPINetworking_ObjC {
+  @objc
+  func responseParameters(
+    actionID: String,
+    queryItems: [NSURLQueryItem]
+    ) -> BridgeAPINetworkingResponseParametersResult_ObjC
+}

@@ -16,10 +16,30 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
+@objc
+class Logger_ObjC: NSObject {
+  @objc static let shared = Logger_ObjC(logger: Logger.shared)
+
+  let logger: Logger
+
+  init(logger: Logger) {
+    self.logger = logger
+  }
+
+  func behavior(for rawValue: String) -> LoggingBehavior {
+    return LoggingBehavior(rawValue: rawValue) ?? .developerErrors
+  }
+
+  @objc
+  func log(_ behaviorRawValue: String, message: String) {
+    let behavior = self.behavior(for: behaviorRawValue)
+
+    guard logger.shouldLog(behavior) else {
+      return
+    }
+
+    NSLog(message)
+  }
 }
-
-extension UIApplication: URLOpenabilityQuerying {}

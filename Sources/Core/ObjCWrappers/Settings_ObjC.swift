@@ -18,8 +18,61 @@
 
 import UIKit
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
-}
+@objc
+class Settings_ObjC: NSObject {
+  let settings: Settings
 
-extension UIApplication: URLOpenabilityQuerying {}
+  @objc
+  static let shared = Settings_ObjC(settings: Settings.shared)
+
+  init(settings: Settings) {
+    self.settings = settings
+  }
+
+  @objc
+  var graphAPIVersion_ObjC: GraphAPIVersion_ObjC {
+    return GraphAPIVersion_ObjC(
+      graphAPIVersion: settings.graphAPIVersion
+    )
+  }
+
+  @objc
+  var appIdentifier: String? {
+    get {
+      return settings.appIdentifier
+    }
+    set {
+      settings.appIdentifier = newValue
+    }
+  }
+
+  @objc
+  var domainPrefix: String? {
+    get {
+      return settings.domainPrefix
+    }
+    set {
+      settings.domainPrefix = newValue
+    }
+  }
+
+  @objc
+  var clientToken: String? {
+    get {
+      return settings.clientToken
+    }
+    set {
+      settings.clientToken = newValue
+    }
+  }
+
+  @objc
+  var urlSchemeSuffix: String? {
+    get {
+      return settings.urlSchemeSuffix
+    }
+    set {
+      settings.urlSchemeSuffix = newValue
+    }
+  }
+}

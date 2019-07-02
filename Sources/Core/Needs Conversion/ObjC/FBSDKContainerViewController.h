@@ -16,10 +16,26 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+#import <UIKit/UIKit.h>
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
-}
+NS_ASSUME_NONNULL_BEGIN
 
-extension UIApplication: URLOpenabilityQuerying {}
+@class FBSDKContainerViewController;
+
+NS_SWIFT_NAME(ContainerViewControllerDelegate)
+@protocol FBSDKContainerViewControllerDelegate <NSObject>
+
+- (void)viewControllerDidDisappear:(FBSDKContainerViewController *)viewController animated:(BOOL)animated;
+
+@end
+
+NS_SWIFT_NAME(FBContainerViewController)
+@interface FBSDKContainerViewController : UIViewController
+
+@property (nonatomic, weak, nullable) id<FBSDKContainerViewControllerDelegate> delegate;
+
+- (void)displayChildController:(UIViewController *)childController;
+
+@end
+
+NS_ASSUME_NONNULL_END

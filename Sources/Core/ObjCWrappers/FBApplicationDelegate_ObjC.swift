@@ -16,10 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-protocol URLOpenabilityQuerying {
-  func canOpenURL(_ url: URL) -> Bool
+@objc
+class FBApplicationDelegate_ObjC: NSObject {
+  @objc static let shared = FBApplicationDelegate_ObjC(
+    fbApplicationDelegate: FBApplicationDelegate.shared
+  )
+
+  let fbApplicationDelegate: FBApplicationDelegate
+
+  init(fbApplicationDelegate: FBApplicationDelegate) {
+    self.fbApplicationDelegate = fbApplicationDelegate
+  }
+
+  @objc
+  func addObserver(_ observer: AnyApplicationObserving_ObjC) {
+    self.fbApplicationDelegate.addObserver(
+      observer.anyApplicationObserving
+    )
+  }
 }
-
-extension UIApplication: URLOpenabilityQuerying {}

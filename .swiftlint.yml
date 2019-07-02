@@ -56,6 +56,8 @@ disabled_rules:
   - no_extension_access_modifier
   - number_separator
   - prefixed_toplevel_constant
+  - type_name
+  - identifier_name
   # Re-enable after Release 1.0
   - file_name
   - function_default_parameter_at_end
