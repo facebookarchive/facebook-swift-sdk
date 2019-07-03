@@ -65,7 +65,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testCreatingWithHttpMethod() {
-    let request = GraphRequest(
+    let request = GraphRequest.testableRequest(
       graphPath: path,
       httpMethod: .post
     )
@@ -87,7 +87,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testCreatingWithNilToken() {
-    let request = GraphRequest(
+    let request = GraphRequest.testableRequest(
       graphPath: path,
       accessToken: nil
     )
@@ -97,7 +97,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testCreatingWithToken() {
-    let request = GraphRequest(
+    let request = GraphRequest.testableRequest(
       graphPath: path,
       accessToken: token
     )
@@ -118,7 +118,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testCreatingWithVersion() {
-    let request = GraphRequest(
+    let request = GraphRequest.testableRequest(
       graphPath: path,
       version: version
     )
@@ -136,7 +136,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testCreatingWithGraphErrorRecoveryDisabled() {
-    let request = GraphRequest(
+    let request = GraphRequest.testableRequest(
       graphPath: path,
       enableGraphRecovery: false
     )
@@ -146,7 +146,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testCreatingWithGraphErrorRecoveryEnabled () {
-    let request = GraphRequest(
+    let request = GraphRequest.testableRequest(
       graphPath: path,
       enableGraphRecovery: true
     )
@@ -156,7 +156,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testIsGraphRecoveryDisabled() {
-    var request = GraphRequest(
+    var request = GraphRequest.testableRequest(
       graphPath: path,
       enableGraphRecovery: false
     )
@@ -164,7 +164,7 @@ class GraphRequestTests: XCTestCase {
     XCTAssertFalse(request.isGraphErrorRecoveryEnabled,
                    "A graph request should know whether or not graph recovery is enabled")
 
-    request = GraphRequest(
+    request = GraphRequest.testableRequest(
       graphPath: path,
       enableGraphRecovery: true
     )
@@ -174,7 +174,7 @@ class GraphRequestTests: XCTestCase {
   }
 
   func testTogglingGraphRecovery() {
-    var request = GraphRequest(
+    var request = GraphRequest.testableRequest(
       graphPath: path,
       enableGraphRecovery: true
     )
