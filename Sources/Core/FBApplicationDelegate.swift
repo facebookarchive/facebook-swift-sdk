@@ -207,6 +207,11 @@ public class FBApplicationDelegate {
 
   // MARK: - Lifecycle Events
 
+  /**
+   A passthrough for an `AppDelegate`'s `didFinishLaunchingWithOptions:` method
+
+   Invokes the same passthrough for any observers held by this class
+   */
   public func application(
     _ application: UIApplication,
     // swiftlint:disable:next discouraged_optional_collection

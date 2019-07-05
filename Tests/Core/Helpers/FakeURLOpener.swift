@@ -19,7 +19,7 @@
 @testable import FacebookCore
 import Foundation
 
-struct FakeURLOpener: URLOpening {
+struct FakeURLOpener: URLOpenabilityQuerying {
   let canOpenURL: Bool
 
   func canOpenURL(_ url: URL) -> Bool {

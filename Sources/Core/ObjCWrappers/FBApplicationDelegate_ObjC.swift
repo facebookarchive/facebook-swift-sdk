@@ -24,6 +24,7 @@ class FBApplicationDelegate_ObjC: NSObject {
     fbApplicationDelegate: FBApplicationDelegate.shared
   )
 
+  // swiftlint:disable:next weak_delegate
   let fbApplicationDelegate: FBApplicationDelegate
 
   init(fbApplicationDelegate: FBApplicationDelegate) {
