@@ -645,6 +645,34 @@ class SettingsTests: XCTestCase {
                   "Should attempt to access the plist for non-cachable properties")
   }
 
+  // MARK: User Agent Suffix
+
+  func testUserAgentSuffix() {
+    XCTAssertNil(settings.userAgentSuffix,
+                 "User agent suffix should be nil by default")
+  }
+
+  func testSettingUserAgentSuffix() {
+    settings.userAgentSuffix = "foo"
+
+    XCTAssertEqual(settings.userAgentSuffix, "foo",
+                   "Settings should return the explicitly set user agent suffix")
+  }
+
+  func testSettingEmptyUserAgentSuffix() {
+    settings.userAgentSuffix = ""
+
+    XCTAssertNil(settings.userAgentSuffix,
+                 "Should not store an empty user agent suffix")
+  }
+
+  func testSettingWhitespaceOnlyUserAgentSuffix() {
+    settings.userAgentSuffix = "   "
+
+    XCTAssertNil(settings.userAgentSuffix,
+                 "Should not store a whitespace only user agent suffix")
+  }
+
   // MARK: - Helpers
 
   func assertBooleanPropertyEnabledFromPlist(
