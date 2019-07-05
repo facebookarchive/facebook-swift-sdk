@@ -21,7 +21,7 @@ import Foundation
 typealias DataFetchResult = Result<Data, Error>
 typealias DataFetchCompletion = (DataFetchResult) -> Void
 
-class GraphRequestConnection: GraphRequestConnecting {
+public final class GraphRequestConnection: GraphRequestConnecting {
   /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
   static let defaultConnectionTimeout: Double = 60
 
@@ -75,6 +75,16 @@ class GraphRequestConnection: GraphRequestConnecting {
   let piggybackManager: GraphRequestPiggybackManaging.Type
   let serverConfigurationService: ServerConfigurationServicing
   let settings: SettingsManaging
+
+  public convenience init() {
+    self.init(
+      sessionProvider: SessionProvider(),
+      logger: Logger(),
+      piggybackManager: GraphRequestPiggybackManager.self,
+      serverConfigurationService: ServerConfigurationService.shared,
+      settings: Settings.shared
+    )
+  }
 
   init(
     sessionProvider: SessionProviding = SessionProvider(),
@@ -206,7 +216,7 @@ class GraphRequestConnection: GraphRequestConnecting {
    URLSessionTaskProxy - a wrapper for a url session task that allows you to cancel an in-flight
    request
    */
-  func getObject<RemoteType: Decodable>(
+  public func getObject<RemoteType: Decodable>(
     for graphRequest: GraphRequest,
     completion: @escaping (Result<RemoteType, Error>) -> Void
     ) -> URLSessionTaskProxy? {
@@ -247,6 +257,15 @@ class GraphRequestConnection: GraphRequestConnecting {
         let object = try JSONParser.parse(data: data, for: remoteType)
         return .success(object)
       } catch {
+        if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
+          logger.log(
+            .developerErrors,
+            """
+            Failed to create a \(remoteType) from JSON:
+            \(json)
+            """
+          )
+        }
         return .failure(error)
       }
     }

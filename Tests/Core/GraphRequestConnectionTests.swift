@@ -254,7 +254,7 @@ class GraphRequestConnectionTests: XCTestCase {
       cachedServerConfiguration: ServerConfiguration(appID: "foo")
     )
 
-    let connection = GraphRequestConnection(
+    let connection = GraphRequestConnection.testableConnection(
       serverConfigurationService: fakeServerConfigurationService
     )
 
@@ -281,7 +281,9 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testFetchingDataInvokesPiggybackManager() {
     defer { FakeGraphRequestPiggybackManager.reset() }
-    let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
+    let connection = GraphRequestConnection.testableConnection(
+      piggybackManager: FakeGraphRequestPiggybackManager.self
+    )
 
     _ = connection.fetchData(for: graphRequest) { _ in }
     XCTAssertFalse(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,
