@@ -22,4 +22,10 @@ import Foundation
 class NotificationNameConstants: NSObject {
   @objc static let didBecomeActiveNotification: Notification.Name =
     Notification.Name.FBSDKApplicationDidBecomeActiveNotification
+
+  @objc static let FBSDKAccessTokenDidChangeNotification: Notification.Name =
+    Notification.Name.FBSDKAccessTokenDidChangeNotification
+
+  @objc static let FBSDKProfileDidChangeNotification: Notification.Name =
+    Notification.Name.FBSDKProfileDidChangeNotification
 }

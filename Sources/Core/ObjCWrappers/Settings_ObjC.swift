@@ -22,22 +22,19 @@ import UIKit
 class Settings_ObjC: NSObject {
   let settings: Settings
 
-  @objc
-  static let shared = Settings_ObjC(settings: Settings.shared)
+  @objc static let shared = Settings_ObjC(settings: Settings.shared)
 
   init(settings: Settings) {
     self.settings = settings
   }
 
-  @objc
-  var graphAPIVersion_ObjC: GraphAPIVersion_ObjC {
+  @objc var graphAPIVersion_ObjC: GraphAPIVersion_ObjC {
     return GraphAPIVersion_ObjC(
       graphAPIVersion: settings.graphAPIVersion
     )
   }
 
-  @objc
-  var appIdentifier: String? {
+  @objc var appIdentifier: String? {
     get {
       return settings.appIdentifier
     }
@@ -46,8 +43,7 @@ class Settings_ObjC: NSObject {
     }
   }
 
-  @objc
-  var domainPrefix: String? {
+  @objc var domainPrefix: String? {
     get {
       return settings.domainPrefix
     }
@@ -56,8 +52,7 @@ class Settings_ObjC: NSObject {
     }
   }
 
-  @objc
-  var clientToken: String? {
+  @objc var clientToken: String? {
     get {
       return settings.clientToken
     }
@@ -66,13 +61,21 @@ class Settings_ObjC: NSObject {
     }
   }
 
-  @objc
-  var urlSchemeSuffix: String? {
+  @objc var urlSchemeSuffix: String? {
     get {
       return settings.urlSchemeSuffix
     }
     set {
       settings.urlSchemeSuffix = newValue
+    }
+  }
+
+  @objc var userAgentSuffix: String? {
+    get {
+      return settings.userAgentSuffix
+    }
+    set {
+      settings.userAgentSuffix = newValue
     }
   }
 }

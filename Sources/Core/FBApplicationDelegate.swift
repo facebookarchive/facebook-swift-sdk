@@ -29,6 +29,7 @@ import UIKit
  should call them in the respective methods in your AppDelegate implementation.
  */
 public class FBApplicationDelegate {
+  /// The shared instance of FBApplicationDelegate
   public static let shared = FBApplicationDelegate()
 
   private var didFinishLaunching: Bool = false
@@ -206,7 +207,7 @@ public class FBApplicationDelegate {
 
   // MARK: - Lifecycle Events
 
-  func application(
+  public func application(
     _ application: UIApplication,
     // swiftlint:disable:next discouraged_optional_collection
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
