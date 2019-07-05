@@ -31,6 +31,7 @@ protocol SettingsManaging {
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
   var urlSchemeSuffix: String? { get set }
+  var userAgentSuffix: String? { get set }
   var sdkVersion: String { get }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
@@ -234,6 +235,18 @@ class Settings: SettingsManaging, AppIdentifierProviding {
    The default is a set consisting of one value: `LoggingBehavior.developerErrors`
    */
   var loggingBehaviors: Set<LoggingBehavior>
+
+  /**
+   The user agent suffix to use for GraphRequests
+   */
+  var userAgentSuffix: String? {
+    didSet {
+      guard TokenString(value: userAgentSuffix) != nil else {
+        userAgentSuffix = oldValue
+        return
+      }
+    }
+  }
 
   var sdkVersion: String = "1.0"
 
