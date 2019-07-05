@@ -25,7 +25,7 @@ protocol GraphRequestConnecting {
   func add(
     request: GraphRequest,
     batchEntryName: String,
-    batchParameters: [String: AnyHashable],
+    batchParameters: [URLQueryItem],
     completion: @escaping GraphRequestBlock
     ) throws
 
@@ -42,6 +42,6 @@ extension GraphRequestConnecting {
     ) throws {
     // TODO: this feels a little hacky, would like to introduce a NonEmptyString type and use
     // an existence check over an emptiness check on a String.
-    try add(request: request, batchEntryName: "", batchParameters: [:], completion: completion)
+    try add(request: request, batchEntryName: "", batchParameters: [], completion: completion)
   }
 }

@@ -144,7 +144,7 @@ public final class GraphRequestConnection: GraphRequestConnecting {
   func add(
     request: GraphRequest,
     batchEntryName: String = "",
-    batchParameters: [String: AnyHashable] = [:],
+    batchParameters: [URLQueryItem] = [],
     completion: @escaping GraphRequestBlock
     ) throws {
     guard state == .created else {
@@ -154,7 +154,9 @@ public final class GraphRequestConnection: GraphRequestConnecting {
     var parameters = batchParameters
 
     if !batchEntryName.isEmpty {
-      parameters.updateValue(batchEntryName, forKey: BatchEntryKeys.name.rawValue)
+      parameters.append(
+        URLQueryItem(name: BatchEntryKeys.name.rawValue, value: batchEntryName)
+      )
     }
 
     let metadata = GraphRequestMetadata(
@@ -181,6 +183,9 @@ public final class GraphRequestConnection: GraphRequestConnecting {
     return URLRequest(url: url)
   }
 
+  /**
+   Convenience method for building a `URLRequest` from a `GraphRequest` object
+   */
   func urlRequest(with graphRequest: GraphRequest) -> URLRequest {
     guard let url = URLBuilder().buildURL(for: graphRequest) else {
       fatalError("Should never fail to build a url from the url builder")

@@ -127,18 +127,18 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testAddingRequestStoresBatchParameters() {
     let request = GraphRequest(graphPath: "Foo")
-    let parameters = ["Foo": "Bar"]
+    let parameters = [
+      URLQueryItem(name: "Foo", value: "Bar")
+    ]
 
     let connection = GraphRequestConnection()
     try? connection.add(request: request, batchParameters: parameters) { _, _, _ in }
 
-    guard let metadata = connection.requests.first,
-      let batchParameters = metadata.batchParameters as? [String: String]
-      else {
-        return XCTFail("A connection should store an added request as graph request metadata along with any additional batch parameters")
+    guard let metadata = connection.requests.first else {
+      return XCTFail("A connection should store an added request as graph request metadata along with any additional batch parameters")
     }
 
-    XCTAssertEqual(batchParameters, parameters,
+    XCTAssertEqual(metadata.batchParameters, parameters,
                    "A connection should not alter batch parameters when adding them to request metadata")
   }
 
@@ -160,17 +160,17 @@ class GraphRequestConnectionTests: XCTestCase {
     let request = GraphRequest(graphPath: "Foo")
     let connection = GraphRequestConnection()
     let batchName = name
-    let expectedParameters = ["name": name]
+    let expectedParameters = [
+      URLQueryItem(name: "name", value: name)
+    ]
 
     try? connection.add(request: request, batchEntryName: batchName) { _, _, _ in }
 
-    guard let metadata = connection.requests.first,
-      let batchParameters = metadata.batchParameters as? [String: String]
-      else {
-        return XCTFail("A connection should store an added request as graph request metadata along with an additional batch parameter for name of the entry")
+    guard let metadata = connection.requests.first else {
+      return XCTFail("A connection should store an added request as graph request metadata along with an additional batch parameter for name of the entry")
     }
 
-    XCTAssertEqual(batchParameters, expectedParameters,
+    XCTAssertEqual(metadata.batchParameters, expectedParameters,
                    "A connection should create a batch parameter for the added request when a batch entry name is provided")
   }
 
