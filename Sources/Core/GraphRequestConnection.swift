@@ -201,7 +201,7 @@ public final class GraphRequestConnection: GraphRequestConnecting {
     request.httpShouldHandleCookies = false
     request.setValue(userAgent, forHTTPHeaderField: Headers.Keys.userAgent.rawValue)
     request.setValue(
-      Headers.Values.applicationJSON.rawValue,
+      MimeType.applicationJSON.description,
       forHTTPHeaderField: Headers.Keys.contentType.rawValue
     )
 

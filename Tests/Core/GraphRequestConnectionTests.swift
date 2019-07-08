@@ -242,7 +242,7 @@ class GraphRequestConnectionTests: XCTestCase {
 
     XCTAssertEqual(
       headers[GraphRequestConnection.Headers.Keys.contentType.rawValue],
-      GraphRequestConnection.Headers.Values.applicationJSON.rawValue,
+      MimeType.applicationJSON.description,
       "Should use a known value for the application/json content type header"
     )
   }
