@@ -151,11 +151,11 @@ struct ServerConfiguration: ServerConfigurationProviding, Codable {
     }
 
     self.appID = appID
-    self.appName = remote.appName?.nonempty
-    self.defaultShareMode = remote.defaultShareMode?.nonempty
-    self.loginTooltipText = remote.loginTooltipText?.nonempty
-    self.loggingToken = remote.loggingToken?.nonempty
-    self.updateMessage = remote.updateMessage?.nonempty
+    self.appName = remote.appName?.tokenized
+    self.defaultShareMode = remote.defaultShareMode?.tokenized
+    self.loginTooltipText = remote.loginTooltipText?.tokenized
+    self.loggingToken = remote.loggingToken?.tokenized
+    self.updateMessage = remote.updateMessage?.tokenized
     self.errorConfiguration = ServerConfiguration.extractErrorConfiguration(from: remote)
     let appEventsFeaturesOptionSet = AppEventsFeatures(rawValue: remote.appEventsFeaturesRawValue ?? 0)
     self.isAdvertisingIDEnabled = appEventsFeaturesOptionSet.contains(.isAdvertisingIDEnabled)

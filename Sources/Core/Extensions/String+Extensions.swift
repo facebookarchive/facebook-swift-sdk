@@ -81,13 +81,16 @@ extension String {
   }
 
   /**
-   Returns nil if the String is empty. Returns the optional String only if it is non-empty.
+   Returns nil if the String cannot be represented as a `TokenString`.
+   This may happen if is empty or is only comprised of whitespaces and/or newlines.
+
+   Returns the optional String only if it can be represented as a `TokenString`.
    */
-  var nonempty: String? {
-    guard !self.isEmpty else {
+  var tokenized: String? {
+    guard let token = TokenString(value: self) else {
       return nil
     }
 
-    return self
+    return token.value
   }
 }
