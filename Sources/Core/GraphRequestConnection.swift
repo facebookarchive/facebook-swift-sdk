@@ -340,6 +340,12 @@ public final class GraphRequestConnection: GraphRequestConnecting {
     return task
   }
 
+  // TODO: Post Requests
+  // Call AppendAttachments with the parameters passed in.
+  // They may need to be String: AnyHashable just to be flexible enough.
+  // Then attach it to a request body, build a url the normal way, and fire.
+  // if there's compressed data it has to have the gzip header
+
   // MARK: URLRequest Header Constants
   enum Headers {
     enum Keys: String {

@@ -146,6 +146,7 @@
 		F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */; };
 		F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F566D224D344300D027FF /* GraphAPIVersion.swift */; };
 		F44F727122D3BDCE00B4193B /* GraphRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F727022D3BDCE00B4193B /* GraphRequestBody.swift */; };
+		F44F727E22D4FABF00B4193B /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F727D22D4FABF00B4193B /* Data+Extensions.swift */; };
 		F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */; };
 		F4516B7E225F7ED900979DD2 /* SampleGraphResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */; };
 		F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7F225F7F9200979DD2 /* JSONParser.swift */; };
@@ -564,6 +565,7 @@
 		F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAPIVersionTests.swift; sourceTree = "<group>"; };
 		F44F566D224D344300D027FF /* GraphAPIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAPIVersion.swift; sourceTree = "<group>"; };
 		F44F727022D3BDCE00B4193B /* GraphRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestBody.swift; sourceTree = "<group>"; };
+		F44F727D22D4FABF00B4193B /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserTests.swift; sourceTree = "<group>"; };
 		F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleGraphResponse.swift; sourceTree = "<group>"; };
 		F4516B7F225F7F9200979DD2 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
@@ -1196,6 +1198,7 @@
 				F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */,
 				F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */,
 				F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */,
+				F44F727D22D4FABF00B4193B /* Data+Extensions.swift */,
 				F422F0822284A37D00AFD0DF /* FileManager+Extensions.swift */,
 				F44DB6B3222B022E0083506E /* NotificationCenter+Extensions.swift */,
 				F44DB6AF222B019D0083506E /* NotificationName+Extensions.swift */,
@@ -1983,6 +1986,7 @@
 				F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */,
 				F406F86622823703006B0D4E /* Drawable.swift in Sources */,
 				F479099822985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift in Sources */,
+				F44F727E22D4FABF00B4193B /* Data+Extensions.swift in Sources */,
 				F479098B229853E500F9C0A2 /* BridgeAPIWebV1.swift in Sources */,
 				F40739412231E4EB0018505A /* URLQueryItemBuilder.swift in Sources */,
 			);

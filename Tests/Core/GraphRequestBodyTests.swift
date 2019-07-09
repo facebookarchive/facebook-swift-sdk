@@ -265,4 +265,35 @@ class GraphRequestBodyTests: XCTestCase {
       """
     )
   }
+
+  func testCompressingEmptyData() {
+    XCTAssertNil(generator.compressedUploadData,
+                 "Should not be able to compress empty data")
+  }
+
+  func testCompressingDataWithJSON() {
+    generator = GraphRequestBody(data: Data(count: 5), json: ["foo": "bar"])
+
+    XCTAssertNil(generator.compressedUploadData,
+                 "Should not be able to compress data if json values are present")
+  }
+
+  func testCompressingDataWithNoJSON() {
+    let data = """
+    Lorem ipsum dolor sit amet consectetur adipiscing elit mi
+    nibh ornare proin blandit diam ridiculus, faucibus mus
+    dui eu vehicula nam donec dictumst sed vivamus bibendum
+    aliquet efficitur. Felis imperdiet sodales dictum morbi
+    vivamus augue dis duis aliquet velit ullamcorper porttitor,
+    lobortis dapibus hac purus aliquam natoque iaculis blandit
+    montes nunc pretium.
+    """.data(using: .utf8)!
+
+    generator = GraphRequestBody(data: data)
+
+    let compressed = generator.compressedUploadData
+
+    XCTAssertEqual(compressed?.count, 240,
+                   "The compressed data should be a specific number of bytes as it conforms to a specific compression protocol")
+  }
 }

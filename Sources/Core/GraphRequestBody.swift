@@ -72,6 +72,22 @@ public struct GraphRequestBody {
   }
 
   /**
+   A compressed form of the stored data. The compression format is gzip.
+   Documented at [https://www.ietf.org/rfc/rfc1952.txt](https://www.ietf.org/rfc/rfc1952.txt)
+
+   - Note: This will only return compressed multipart form data.
+   It will not compress serialized JSON
+   */
+  public var compressedUploadData: Data? {
+    guard !data.isEmpty,
+      mimeType != .applicationJSON
+      else {
+        return nil
+    }
+    return data.gzipped
+  }
+
+  /**
    Appends a UTF8 encoded string to existing data
 
    - Parameter string: the `String` to encode and append to the data
