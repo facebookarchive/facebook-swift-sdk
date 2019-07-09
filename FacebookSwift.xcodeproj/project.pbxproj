@@ -179,7 +179,6 @@
 		F46740282294762000D3F7AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46740262294762000D3F7AF /* LaunchScreen.storyboard */; };
 		F4674042229705A100D3F7AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4674040229705A100D3F7AF /* Main.storyboard */; };
 		F467404C2297097B00D3F7AF /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
-		F467405422970A3700D3F7AF /* CryptographyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E550022946B3A008A6011 /* CryptographyTests.swift */; };
 		F467405522970A4100D3F7AF /* KeychainStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D344C2265325900CEE2ED /* KeychainStoreTests.swift */; };
 		F467405622970AA300D3F7AF /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
 		F467BD3722A0AA07001090B4 /* URLQueryItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467BD3622A0AA07001090B4 /* URLQueryItemExtensionsTests.swift */; };
@@ -236,7 +235,6 @@
 		F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */; };
 		F4932E0F2280A1CA0020C282 /* BoundedCGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */; };
 		F49BC63422BA80930055DCB4 /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63122BA80930055DCB4 /* SecureStore.swift */; };
-		F49BC63522BA80930055DCB4 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63222BA80930055DCB4 /* Cryptography.swift */; };
 		F49BC63622BA80930055DCB4 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63322BA80930055DCB4 /* KeychainStore.swift */; };
 		F49BC63922BA80AC0055DCB4 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63722BA80AC0055DCB4 /* Store.swift */; };
 		F49BC63A22BA80AC0055DCB4 /* ServerConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63822BA80AC0055DCB4 /* ServerConfigurationStore.swift */; };
@@ -587,7 +585,6 @@
 		F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfiguration.swift; sourceTree = "<group>"; };
 		F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionaryProvidingExtensionsTests.swift; sourceTree = "<group>"; };
 		F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleInfoDictionary.swift; sourceTree = "<group>"; };
-		F45E550022946B3A008A6011 /* CryptographyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptographyTests.swift; sourceTree = "<group>"; };
 		F467401B2294762000D3F7AF /* TestHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F467401D2294762000D3F7AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F467401F2294762000D3F7AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -654,7 +651,6 @@
 		F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloatTests.swift; sourceTree = "<group>"; };
 		F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloat.swift; sourceTree = "<group>"; };
 		F49BC63122BA80930055DCB4 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
-		F49BC63222BA80930055DCB4 /* Cryptography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
 		F49BC63322BA80930055DCB4 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		F49BC63722BA80AC0055DCB4 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		F49BC63822BA80AC0055DCB4 /* ServerConfigurationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfigurationStore.swift; sourceTree = "<group>"; };
@@ -1069,7 +1065,6 @@
 		F43DE1F422B989FA00527B71 /* SecureStore */ = {
 			isa = PBXGroup;
 			children = (
-				F49BC63222BA80930055DCB4 /* Cryptography.swift */,
 				F49BC63322BA80930055DCB4 /* KeychainStore.swift */,
 				F49BC63122BA80930055DCB4 /* SecureStore.swift */,
 				F4C5A7A322BC399A0060E530 /* SecureStoreKeys.swift */,
@@ -1262,7 +1257,6 @@
 				F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */,
 				F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
-				F45E550022946B3A008A6011 /* CryptographyTests.swift */,
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
 				F44715222243E3FF0013495F /* DeveloperErrorStringsTests.swift */,
@@ -1887,7 +1881,6 @@
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */,
 				F4DC46FF2283678F00C0A309 /* AudioResourceLoader.swift in Sources */,
-				F49BC63522BA80930055DCB4 /* Cryptography.swift in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
 				F4C5A7A422BC399A0060E530 /* SecureStoreKeys.swift in Sources */,
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
@@ -2028,7 +2021,6 @@
 				F4F4373722A5CD560090D0C9 /* SampleInfoDictionary.swift in Sources */,
 				F4F4373922A5CD6F0090D0C9 /* FakeURLOpener.swift in Sources */,
 				F4F4373D22A5CD9C0090D0C9 /* SampleURL.swift in Sources */,
-				F467405422970A3700D3F7AF /* CryptographyTests.swift in Sources */,
 				F4F4373B22A5CD890090D0C9 /* FakeSettings.swift in Sources */,
 				F4F4373A22A5CD7E0090D0C9 /* FakeBridgeAPIURLProvider.swift in Sources */,
 				F467405522970A4100D3F7AF /* KeychainStoreTests.swift in Sources */,
