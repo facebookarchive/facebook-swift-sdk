@@ -19,8 +19,21 @@
 @testable import FacebookCore
 import Foundation
 
-struct FakeNetworkerProvider: BridgeAPINetworkerProviding {
-  let urlProvider: BridgeAPIURLProviding
+class FakeBridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
+  var stubbedURLCategory: BridgeAPIURLCategory
+  var networker: BridgeAPINetworking
   let applicationQueryScheme: String
-  let urlCategory: BridgeAPIURLCategory
+  var urlCategory: BridgeAPIURLCategory {
+    return stubbedURLCategory
+  }
+
+  init(
+    stubbedURLCategory: BridgeAPIURLCategory,
+    networker: BridgeAPINetworking,
+    applicationQueryScheme: String
+    ) {
+    self.stubbedURLCategory = stubbedURLCategory
+    self.applicationQueryScheme = applicationQueryScheme
+    self.networker = networker
+  }
 }

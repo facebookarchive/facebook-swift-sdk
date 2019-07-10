@@ -22,7 +22,7 @@ import Foundation
 class FakeNotificationCenter: NotificationPosting, NotificationObserving {
   var capturedPostedNotificationName: Notification.Name?
   var capturedPostedUserInfo: [AnyHashable: Any]?
-  var capturedAddObserverNotificationName: NSNotification.Name?
+  var capturedAddObserverNotificationNames = [NSNotification.Name]()
   var capturedAddObserverSelector: Selector?
   var capturedAddedObserver: Any?
   var capturedAddObserverObject: Any?
@@ -39,7 +39,7 @@ class FakeNotificationCenter: NotificationPosting, NotificationObserving {
     name aName: NSNotification.Name?,
     object anObject: Any?
     ) {
-    capturedAddObserverNotificationName = aName
+    capturedAddObserverNotificationNames.append(aName!)
     capturedAddedObserver = observer
     capturedAddObserverSelector = aSelector
     capturedAddObserverObject = anObject
@@ -83,7 +83,7 @@ class FakeNotificationCenter: NotificationPosting, NotificationObserving {
   func reset() {
     capturedPostedNotificationName = nil
     capturedPostedUserInfo = nil
-    capturedAddObserverNotificationName = nil
+    capturedAddObserverNotificationNames = []
     capturedAddObserverSelector = nil
     capturedAddedObserver = nil
     capturedAddObserverObject = nil

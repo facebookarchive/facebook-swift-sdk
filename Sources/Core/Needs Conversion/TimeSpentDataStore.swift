@@ -18,15 +18,20 @@
 
 import Foundation
 
-/// A BridgeAPINetworker provides a request url
-protocol BridgeAPIURLProviding {
-  func requestURL(
-    actionID: String,
-    methodName: String,
-    parameters: [String: AnyHashable]
-    ) throws -> URL
+protocol TimeSpentDataStoring {
+  func set(sourceApplication: String, url: URL)
+  func registerAutoResetSourceApplication()
 }
 
-enum BridgeURLProvidingError: FBError {
-  case invalidURL
+// TODO: Implement FBSDKTimeSpentData
+struct TimeSpentDataStore: TimeSpentDataStoring {
+  static let shared = TimeSpentDataStore()
+
+  func set(sourceApplication: String, url: URL) {
+    print("Implement FBSDKTimeSpentData")
+  }
+
+  func registerAutoResetSourceApplication() {
+    print("Implement auto reset source application")
+  }
 }

@@ -18,12 +18,22 @@
 
 import Foundation
 
-protocol AccessTokenProviding {
-  var currentAccessToken: AccessToken? { get }
+typealias QueryItemsResult = Result<[URLQueryItem], Error>
+
+/// A BridgeAPINetworker provides a request url
+protocol BridgeAPINetworking {
+  func requestURL(
+    actionID: String,
+    methodName: String,
+    parameters: [String: AnyHashable]
+    ) throws -> URL
+
+  func responseParameters(
+    actionID: String,
+    queryItems: [URLQueryItem]
+    ) -> QueryItemsResult
 }
 
-protocol AccessTokenSetting {
-  func setCurrent(_ token: AccessToken?)
+enum BridgeURLProvidingError: FBError {
+  case invalidURL
 }
-
-extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}

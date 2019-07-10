@@ -16,14 +16,9 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
-
-protocol AccessTokenProviding {
-  var currentAccessToken: AccessToken? { get }
-}
-
-protocol AccessTokenSetting {
-  func setCurrent(_ token: AccessToken?)
-}
-
-extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}
+// Note:
+//
+// This placeholder is needed to test importability of the Login and Share Kits to the TestHost Application.
+// This allows us to test that we're collecting metrics about Kit inclusion.
+// This should be removed once the Login and Share Kits are built out.
+//

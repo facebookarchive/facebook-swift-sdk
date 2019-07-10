@@ -27,6 +27,7 @@ protocol InfoDictionaryProviding {
   func decodeFromInfoPlist<T: Decodable>(type: T.Type) throws -> T
   func isRegisteredURLScheme(_ urlScheme: String) -> Bool
   func validateFacebookURLScheme(settings: SettingsManaging) throws
+  func validateFacebookReservedURLSchemes() throws
 }
 
 extension InfoDictionaryProviding {
@@ -67,14 +68,33 @@ extension InfoDictionaryProviding {
       throw InfoDictionaryProvidingError.urlSchemeNotRegistered(scheme)
     }
   }
+
+  func validateFacebookReservedURLSchemes() throws {
+    try [
+      FacebookURLSchemes.facebook,
+      FacebookURLSchemes.facebookAPI,
+      FacebookURLSchemes.messenger,
+      FacebookURLSchemes.msqrdPlayer,
+      FacebookURLSchemes.shareExtension
+    ].forEach { scheme in
+      guard !isRegisteredURLScheme(scheme) else {
+        throw InfoDictionaryProvidingError.incorrectlyRegisteredScheme(scheme)
+      }
+    }
+  }
 }
 
 enum InfoDictionaryProvidingError: FBError {
+  case incorrectlyRegisteredScheme(String)
   case invalidAppIdentifier
   case urlSchemeNotRegistered(String)
 
   var developerMessage: String {
     switch self {
+    case let .incorrectlyRegisteredScheme(scheme):
+      // swiftlint:disable:next line_length
+      return "\(scheme) is registered as a URL scheme. Please move the entry from CFBundleURLSchemes in your Info.plist to LSApplicationQueriesSchemes. If you are trying to resolve \"canOpenURL: failed\" warnings, those only indicate that the Facebook app is not installed on your device or simulator and can be ignored."
+
     case .invalidAppIdentifier:
       return "Missing an application identifier. Please add it to your Info.plist under the key: FacebookAppID"
 
@@ -82,6 +102,14 @@ enum InfoDictionaryProvidingError: FBError {
       return "\(scheme) is not registered as a URL scheme. Please add it to your Info.plist"
     }
   }
+}
+
+enum FacebookURLSchemes {
+  static let facebook: String = "fbauth2"
+  static let facebookAPI: String = "fbapi"
+  static let messenger: String = "fb-messenger-share-api"
+  static let msqrdPlayer: String = "msqrdplayer"
+  static let shareExtension: String = "fbshareextension"
 }
 
 extension Bundle: InfoDictionaryProviding {}
