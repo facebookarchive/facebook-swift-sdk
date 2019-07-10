@@ -21,16 +21,17 @@ import Foundation
 
 class UserDefaultsSpy: UserDefaults {
   private let suiteName: String
-  let userDefaults: UserDefaults?
+  let userDefaults: UserDefaults
 
   var capturedValues = [String: Any]()
   var capturedDataRetrievalKey: String?
+  var capturedIntegerRetrievalKey: String?
   var capturedStringRetrievalKey: String?
   var capturedObjectRetrievalKey: String?
 
   init(name: String) {
     self.suiteName = name
-    self.userDefaults = UserDefaults(suiteName: name)
+    self.userDefaults = UserDefaults(suiteName: name)!
 
     super.init(suiteName: name)!
   }
@@ -39,22 +40,27 @@ class UserDefaultsSpy: UserDefaults {
     if let value = value {
       capturedValues.updateValue(value, forKey: defaultName)
     }
-    userDefaults?.set(value, forKey: defaultName)
+    userDefaults.set(value, forKey: defaultName)
   }
 
   override func data(forKey defaultName: String) -> Data? {
     capturedDataRetrievalKey = defaultName
-    return userDefaults?.data(forKey: defaultName)
+    return userDefaults.data(forKey: defaultName)
   }
 
   override func string(forKey defaultName: String) -> String? {
     capturedStringRetrievalKey = defaultName
-    return userDefaults?.string(forKey: defaultName)
+    return userDefaults.string(forKey: defaultName)
   }
 
   override func object(forKey defaultName: String) -> Any? {
     capturedObjectRetrievalKey = defaultName
-    return userDefaults?.object(forKey: defaultName)
+    return userDefaults.object(forKey: defaultName)
+  }
+
+  override func integer(forKey defaultName: String) -> Int {
+    capturedIntegerRetrievalKey = defaultName
+    return userDefaults.integer(forKey: defaultName)
   }
 
   func reset() {
@@ -62,6 +68,7 @@ class UserDefaultsSpy: UserDefaults {
     removePersistentDomain(forName: suiteName)
     capturedValues = [String: Any]()
     capturedDataRetrievalKey = nil
+    capturedIntegerRetrievalKey = nil
     capturedStringRetrievalKey = nil
     capturedObjectRetrievalKey = nil
   }

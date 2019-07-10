@@ -22,7 +22,8 @@ import Foundation
 class FakeServerConfigurationService: ServerConfigurationServicing {
   private var cachedConfiguration: ServerConfiguration
 
-  var cachedConfigurationWasRequested: Bool = false
+  var cachedConfigurationWasRequested = false
+  var loadServerConfigurationWasCalled = false
 
   var serverConfiguration: ServerConfiguration {
     get {
@@ -36,5 +37,9 @@ class FakeServerConfigurationService: ServerConfigurationServicing {
 
   init(cachedServerConfiguration: ServerConfiguration) {
     self.cachedConfiguration = cachedServerConfiguration
+  }
+
+  func loadServerConfiguration(completion: @escaping ServerConfigurationCompletion) {
+    loadServerConfigurationWasCalled = true
   }
 }

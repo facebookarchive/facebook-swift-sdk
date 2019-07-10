@@ -16,14 +16,30 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
 
-protocol AccessTokenProviding {
-  var currentAccessToken: AccessToken? { get }
+class FakeAppEventsLogger: AppEventsLogging {
+  var activateAppWasCalled = false
+  var capturedEventName: AppEventName?
+  var capturedEventParameters: [String: AnyHashable] = [:]
+  var capturedIsImplicitlyLogged = false
+  var registerNotificationsWasCalled = false
+
+  func activateApp() {
+    activateAppWasCalled = true
+  }
+
+  func logInternalEvent(
+    eventName: AppEventName,
+    parameters: [String: AnyHashable],
+    isImplicitlyLogged: Bool
+    ) {
+    capturedEventName = eventName
+    capturedEventParameters = parameters
+    capturedIsImplicitlyLogged = isImplicitlyLogged
+  }
+
+  func registerNotifications() {
+    registerNotificationsWasCalled = true
+  }
 }
-
-protocol AccessTokenSetting {
-  func setCurrent(_ token: AccessToken?)
-}
-
-extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}

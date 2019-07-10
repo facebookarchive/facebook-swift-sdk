@@ -378,9 +378,10 @@ class ProfilePictureViewTests: XCTestCase {
   // MARK: - Responding to notifications
 
   func testObservesAccessTokenChanges() {
-    XCTAssertEqual(
-      fakeNotificationCenter.capturedAddObserverNotificationName,
-      .FBSDKAccessTokenDidChangeNotification,
+    XCTAssertTrue(
+      fakeNotificationCenter.capturedAddObserverNotificationNames.contains(
+        .FBSDKAccessTokenDidChangeNotification
+      ),
       "Should add an observer for access token changes by default"
     )
   }

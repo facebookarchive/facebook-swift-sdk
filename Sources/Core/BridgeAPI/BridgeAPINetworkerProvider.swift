@@ -19,13 +19,13 @@
 import Foundation
 
 protocol BridgeAPINetworkerProviding {
-  var urlProvider: BridgeAPIURLProviding { get }
+  var networker: BridgeAPINetworking { get }
   var applicationQueryScheme: String { get }
   var urlCategory: BridgeAPIURLCategory { get }
 }
 
 /**
- An abstraction used to resolve a concrete instance of a `BridgeAPIURLProviding` in a declarative way
+ An abstraction used to resolve a concrete instance of a `BridgeAPINetworking` in a declarative way
  This type performs `URL` scheme refining.
  It uses well-known schemes listed by the third party application to check
  for the installation of an application and then maps the well-known
@@ -36,7 +36,7 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
   case web(WebQueryScheme)
 
   /// The concrete instance of `BridgeAPIURLProviding`
-  var urlProvider: BridgeAPIURLProviding {
+  var networker: BridgeAPINetworking {
     switch self {
     case let .native(scheme):
       switch scheme {
@@ -44,7 +44,7 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
         return BridgeAPINative(appScheme: "fbapi20130214")
 
       case .messenger:
-        return BridgeAPINative(appScheme: "fb-messenger-share-api")
+        return BridgeAPINative(appScheme: FacebookURLSchemes.messenger)
 
       case .msqrdPlayer:
         return BridgeAPINative(appScheme: "msqrdplayer-api20170208")
@@ -74,13 +74,13 @@ enum BridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
     case let .native(scheme):
       switch scheme {
       case .facebook:
-        return "fbauth2"
+        return FacebookURLSchemes.facebook
 
       case .messenger:
-        return "fb-messenger-share-api"
+        return FacebookURLSchemes.messenger
 
       case .msqrdPlayer:
-        return "msqrdplayer"
+        return FacebookURLSchemes.msqrdPlayer
       }
 
     case let .web(scheme):

@@ -19,12 +19,19 @@
 import Foundation
 
 // TODO: Implement FBSDKBridgeAPIProtocolWebV2
-struct BridgeAPIWebV2: BridgeAPIURLProviding {
+struct BridgeAPIWebV2: BridgeAPINetworking {
   func requestURL(
     actionID: String,
     methodName: String,
     parameters: [String: AnyHashable]
     ) throws -> URL {
     throw CoreError.unknown
+  }
+
+  func responseParameters(
+    actionID: String,
+    queryItems: [URLQueryItem]
+    ) -> QueryItemsResult {
+    return .failure(CoreError.unknown)
   }
 }
