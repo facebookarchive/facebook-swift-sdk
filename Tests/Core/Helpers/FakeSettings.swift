@@ -32,6 +32,7 @@ class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProvidi
   var sdkVersion: String
   var clientToken: String?
   var urlSchemeSuffix: String?
+  var userAgentSuffix: String?
 
   init(
     appIdentifier: String? = "foo",
@@ -39,7 +40,8 @@ class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProvidi
     graphApiDebugParameter: GraphApiDebugParameter = .none,
     loggingBehaviors: Set<LoggingBehavior> = [],
     sdkVersion: String = "1.0",
-    urlSchemeSuffix: String? = nil
+    urlSchemeSuffix: String? = nil,
+    userAgentSuffix: String? = nil
     ) {
     self.appIdentifier = appIdentifier
     self.accessTokenCache = accessTokenCache
@@ -47,5 +49,6 @@ class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProvidi
     self.loggingBehaviors = loggingBehaviors
     self.sdkVersion = sdkVersion
     self.urlSchemeSuffix = urlSchemeSuffix
+    self.userAgentSuffix = userAgentSuffix
   }
 }

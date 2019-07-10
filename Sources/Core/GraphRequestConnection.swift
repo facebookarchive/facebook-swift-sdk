@@ -21,7 +21,7 @@ import Foundation
 typealias DataFetchResult = Result<Data, Error>
 typealias DataFetchCompletion = (DataFetchResult) -> Void
 
-class GraphRequestConnection: GraphRequestConnecting {
+public final class GraphRequestConnection: GraphRequestConnecting {
   /// The default timeout on all FBSDKGraphRequestConnection instances. Defaults to 60 seconds.
   static let defaultConnectionTimeout: Double = 60
 
@@ -56,21 +56,49 @@ class GraphRequestConnection: GraphRequestConnecting {
   }()
   private var requestStartTime: Double = 0
 
+  private var userAgent: String {
+    #if TARGET_OS_TV
+    let base = "FBtvOSSDK"
+    #else
+    let base = "FBiOSSDK"
+    #endif
+
+    var agent = "\(base).\(settings.sdkVersion)"
+    if let suffix = settings.userAgentSuffix {
+      agent = agent.appending("/\(suffix)")
+    }
+    return agent
+  }
+
   let sessionProvider: SessionProviding
   let logger: Logging
   let piggybackManager: GraphRequestPiggybackManaging.Type
   let serverConfigurationService: ServerConfigurationServicing
+  let settings: SettingsManaging
+
+  public convenience init() {
+    self.init(
+      sessionProvider: SessionProvider(),
+      logger: Logger(),
+      piggybackManager: GraphRequestPiggybackManager.self,
+      serverConfigurationService: ServerConfigurationService.shared,
+      settings: Settings.shared
+    )
+  }
 
   init(
     sessionProvider: SessionProviding = SessionProvider(),
     logger: Logging = Logger(),
     piggybackManager: GraphRequestPiggybackManaging.Type = GraphRequestPiggybackManager.self,
-    serverConfigurationService: ServerConfigurationServicing = ServerConfigurationService.shared
+    serverConfigurationService: ServerConfigurationServicing = ServerConfigurationService.shared,
+    settings: SettingsManaging = Settings.shared
     ) {
     self.sessionProvider = sessionProvider
     self.logger = logger
     self.piggybackManager = piggybackManager
     self.serverConfigurationService = serverConfigurationService
+    self.settings = settings
+
     state = .created
   }
 
@@ -153,12 +181,26 @@ class GraphRequestConnection: GraphRequestConnecting {
     return URLRequest(url: url)
   }
 
-  private func urlRequest(with graphRequest: GraphRequest) -> URLRequest {
+  func urlRequest(with graphRequest: GraphRequest) -> URLRequest {
     guard let url = URLBuilder().buildURL(for: graphRequest) else {
       fatalError("Should never fail to build a url from the url builder")
     }
 
-    return URLRequest(url: url, timeoutInterval: timeout)
+    var request = URLRequest(
+      url: url,
+      cachePolicy: .useProtocolCachePolicy,
+      timeoutInterval: timeout
+    )
+
+    request.httpMethod = graphRequest.httpMethod.rawValue
+    request.httpShouldHandleCookies = false
+    request.setValue(userAgent, forHTTPHeaderField: Headers.Keys.userAgent.rawValue)
+    request.setValue(
+      Headers.Values.applicationJSON.rawValue,
+      forHTTPHeaderField: Headers.Keys.contentType.rawValue
+    )
+
+    return request
   }
 
   /**
@@ -174,7 +216,7 @@ class GraphRequestConnection: GraphRequestConnecting {
    URLSessionTaskProxy - a wrapper for a url session task that allows you to cancel an in-flight
    request
    */
-  func getObject<RemoteType: Decodable>(
+  public func getObject<RemoteType: Decodable>(
     for graphRequest: GraphRequest,
     completion: @escaping (Result<RemoteType, Error>) -> Void
     ) -> URLSessionTaskProxy? {
@@ -215,6 +257,15 @@ class GraphRequestConnection: GraphRequestConnecting {
         let object = try JSONParser.parse(data: data, for: remoteType)
         return .success(object)
       } catch {
+        if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
+          logger.log(
+            .developerErrors,
+            """
+            Failed to create a \(remoteType) from JSON:
+            \(json)
+            """
+          )
+        }
         return .failure(error)
       }
     }
@@ -282,5 +333,18 @@ class GraphRequestConnection: GraphRequestConnecting {
     task.start()
 
     return task
+  }
+
+  // MARK: URLRequest Header Constants
+  enum Headers {
+    enum Keys: String {
+      case contentEncoding = "Content-Encoding"
+      case contentType = "Content-Type"
+      case userAgent = "User-Agent"
+    }
+
+    enum Values: String {
+      case applicationJSON = "application/json"
+    }
   }
 }

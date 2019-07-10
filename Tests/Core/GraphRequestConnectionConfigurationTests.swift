@@ -41,4 +41,9 @@ class GraphRequestConnectionConfigurationTests: XCTestCase {
     XCTAssertTrue(connection.serverConfigurationService is ServerConfigurationService,
                   "Connection should have the expected concrete implementation for its server configuration service")
   }
+
+  func testSettingsDependency() {
+    XCTAssertTrue(connection.settings is Settings,
+                  "Connection should have the expected concrete implementation for its settings dependency")
+  }
 }
