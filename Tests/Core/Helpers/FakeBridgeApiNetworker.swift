@@ -1,4 +1,3 @@
-//  Converted to Swift 4 by Swiftify v4.2.38216 - https://objectivec2swift.com/
 // Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -17,9 +16,29 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-class FBSDKBridgeAPIRequest {
-    private required init(protocol `protocol`: FBSDKBridgeAPIProtocol?, protocolType: FBSDKBridgeAPIProtocolType, scheme: String?, methodName: String?, methodVersion: String?, parameters: [AnyHashable : Any]?, userInfo: [AnyHashable : Any]?) {
-    }
+@testable import FacebookCore
+import Foundation
 
-    private var `protocol`: FBSDKBridgeAPIProtocol?
+class FakeBridgeAPINetworker: BridgeAPINetworking {
+  var capturedActionID: String?
+  var capturedMethodName: String?
+  var capturedParameters: [String: AnyHashable] = [:]
+
+  var stubbedURL: URL = SampleURL.valid
+
+  func requestURL(
+    actionID: String,
+    methodName: String,
+    parameters: [String: AnyHashable]
+    ) throws -> URL {
+    capturedActionID = actionID
+    capturedMethodName = methodName
+    capturedParameters = parameters
+
+    return stubbedURL
+  }
+
+  func responseParameters(actionID: String, queryItems: [URLQueryItem]) -> QueryItemsResult {
+    fatalError("Implement me")
+  }
 }

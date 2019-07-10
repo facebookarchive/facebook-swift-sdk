@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct BridgeAPINative: BridgeAPIURLProviding {
+struct BridgeAPINative: BridgeAPINetworking {
   let appScheme: String
 
   func requestURL(
@@ -27,5 +27,12 @@ struct BridgeAPINative: BridgeAPIURLProviding {
     parameters: [String: AnyHashable]
     ) throws -> URL {
     throw CoreError.unknown
+  }
+
+  func responseParameters(
+    actionID: String,
+    queryItems: [URLQueryItem]
+    ) -> QueryItemsResult {
+    return .failure(CoreError.unknown)
   }
 }
