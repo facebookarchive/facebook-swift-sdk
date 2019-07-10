@@ -27,6 +27,7 @@ class GraphRequestConnectionTests: XCTestCase {
     cachedServerConfiguration: ServerConfiguration(appID: "abc123")
   )
   let fakePiggybackManager = FakeGraphRequestPiggybackManager.self
+  let fakeSettings = FakeSettings()
   let graphRequest = GraphRequest(graphPath: .me)
   var connection: GraphRequestConnection!
 
@@ -38,7 +39,8 @@ class GraphRequestConnectionTests: XCTestCase {
       sessionProvider: fakeSessionProvider,
       logger: fakeLogger,
       piggybackManager: fakePiggybackManager,
-      serverConfigurationService: fakeServerConfigurationService
+      serverConfigurationService: fakeServerConfigurationService,
+      settings: fakeSettings
     )
   }
 
@@ -172,6 +174,79 @@ class GraphRequestConnectionTests: XCTestCase {
                    "A connection should create a batch parameter for the added request when a batch entry name is provided")
   }
 
+  // MARK: URLRequest from GraphRequest
+
+  func testCreatingURLRequestFromGraphRequest() {
+    let request = connection.urlRequest(with: graphRequest)
+
+    XCTAssertEqual(request.url, URLBuilder().buildURL(for: graphRequest),
+                   "Should use a builder to provide a url")
+    XCTAssertEqual(request.timeoutInterval, connection.timeout,
+                   "Should pass the timeout from the connection to the request")
+    XCTAssertEqual(request.cachePolicy, .useProtocolCachePolicy,
+                   "Should use the expected caching policy for requests")
+    XCTAssertFalse(request.httpShouldHandleCookies,
+                   "Should not handle http cookies by default")
+  }
+
+  func testCreatingURLRequestFromGraphRequestGet() {
+    let request = connection.urlRequest(with: graphRequest)
+
+    XCTAssertEqual(request.httpMethod, GraphRequest.HTTPMethod.get.rawValue,
+                   "Should use a get method by default")
+  }
+
+  func testCreatingURLRequestFromGraphRequestPost() {
+    let graphRequest = GraphRequest(graphPath: .me, httpMethod: .post)
+    let request = connection.urlRequest(with: graphRequest)
+
+    XCTAssertEqual(request.httpMethod, GraphRequest.HTTPMethod.post.rawValue,
+                   "Should use a post method when specified")
+  }
+
+  func testCreatingURLRequestFromGraphRequestUserAgentNoSuffix() {
+    let request = connection.urlRequest(with: graphRequest)
+
+    guard let headers = request.allHTTPHeaderFields,
+      let userAgentHeader = headers[GraphRequestConnection.Headers.Keys.userAgent.rawValue]
+      else {
+        return XCTFail("Should set a user agent header")
+    }
+
+    XCTAssertEqual(userAgentHeader, "FBiOSSDK.\(fakeSettings.sdkVersion)")
+  }
+
+  func testCreatingURLRequestFromGraphRequestUserAgentWithSuffix() {
+    fakeSettings.userAgentSuffix = "Foo"
+    let request = connection.urlRequest(with: graphRequest)
+
+    guard let headers = request.allHTTPHeaderFields,
+      let userAgentHeader = headers[GraphRequestConnection.Headers.Keys.userAgent.rawValue]
+      else {
+        return XCTFail("Should set a user agent header")
+    }
+
+    XCTAssertEqual(
+      userAgentHeader,
+      "FBiOSSDK.\(fakeSettings.sdkVersion)/\(fakeSettings.userAgentSuffix!)",
+      "Should set a user agent header that contains the version and user agent suffix"
+    )
+  }
+
+  func testCreatingURLRequestFromGraphRequestContentHeader() {
+    let request = connection.urlRequest(with: graphRequest)
+
+    guard let headers = request.allHTTPHeaderFields else {
+      return XCTFail("Should have headers on the request")
+    }
+
+    XCTAssertEqual(
+      headers[GraphRequestConnection.Headers.Keys.contentType.rawValue],
+      GraphRequestConnection.Headers.Values.applicationJSON.rawValue,
+      "Should use a known value for the application/json content type header"
+    )
+  }
+
   // MARK: Fetching Data
 
   func testFetchingDataUsesCachedServerConfiguration() {
@@ -179,7 +254,7 @@ class GraphRequestConnectionTests: XCTestCase {
       cachedServerConfiguration: ServerConfiguration(appID: "foo")
     )
 
-    let connection = GraphRequestConnection(
+    let connection = GraphRequestConnection.testableConnection(
       serverConfigurationService: fakeServerConfigurationService
     )
 
@@ -206,7 +281,9 @@ class GraphRequestConnectionTests: XCTestCase {
 
   func testFetchingDataInvokesPiggybackManager() {
     defer { FakeGraphRequestPiggybackManager.reset() }
-    let connection = GraphRequestConnection(piggybackManager: FakeGraphRequestPiggybackManager.self)
+    let connection = GraphRequestConnection.testableConnection(
+      piggybackManager: FakeGraphRequestPiggybackManager.self
+    )
 
     _ = connection.fetchData(for: graphRequest) { _ in }
     XCTAssertFalse(FakeGraphRequestPiggybackManager.addedConnections.isEmpty,

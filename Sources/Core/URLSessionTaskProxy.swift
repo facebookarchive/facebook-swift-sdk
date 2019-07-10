@@ -20,7 +20,11 @@ import Foundation
 
 typealias SessionTaskCompletion = (Data?, URLResponse?, Error?) -> Void
 
-class URLSessionTaskProxy {
+/**
+ A proxy layer for providing additional logging information about a
+ `URLSessionDataTask`
+ */
+public final class URLSessionTaskProxy {
   private(set) var logger: Logging
   let processInfo: ProcessInfoProviding
   let requestStartTime: Double
@@ -100,7 +104,8 @@ class URLSessionTaskProxy {
     task.resume()
   }
 
-  func cancel() {
+  /// Cancels an ongoing task. The completion handler will not be invoked.
+  public func cancel() {
     task.cancel()
     handler = nil
   }
