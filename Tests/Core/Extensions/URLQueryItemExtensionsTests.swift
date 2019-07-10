@@ -29,19 +29,16 @@ class URLQueryItemExtensionsTests: XCTestCase {
 
   func testDecodingFromQueryParametersWithInvalidJson() {
     let queryItems = [
-      URLQueryItem(name: "bar", value: "baz"),
-      URLQueryItem(name: "baz", value: "%7B%22%22%7D")
+      URLQueryItem(name: "bar", value: "baz")
     ]
 
     XCTAssertNil(queryItems.decodeFromItem(withName: "bar", EmptyDecodable.self),
-                 "Should not decode objects from invalid JSON")
-    XCTAssertNil(queryItems.decodeFromItem(withName: "baz", EmptyDecodable.self),
                  "Should not decode objects from invalid JSON")
   }
 
   func testDecodingNonMatchingTypeFromQueryParametersWithValidJson() {
     let queryItems = [
-      URLQueryItem(name: "bar", value: "%7B%22Foo%22%3A%22Bar%22%7D")
+      URLQueryItem(name: "bar", value: "{ \"Foo\": \"Bar\" }")
     ]
 
     XCTAssertNil(queryItems.decodeFromItem(withName: "bar", AccessToken.self),

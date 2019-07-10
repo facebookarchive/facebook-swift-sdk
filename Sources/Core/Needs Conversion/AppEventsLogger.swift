@@ -16,25 +16,40 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import FacebookCore
 import Foundation
 
-class FakeBridgeAPIURLProvider: BridgeAPIURLProviding {
-  var capturedActionID: String?
-  var capturedMethodName: String?
-  var capturedParameters: [String: AnyHashable] = [:]
+// TODO: A more robust type for app event names
+typealias AppEventName = String
 
-  var stubbedURL: URL = SampleURL.valid
+protocol AppEventsLogging {
+  func activateApp()
 
-  func requestURL(
-    actionID: String,
-    methodName: String,
-    parameters: [String: AnyHashable]
-    ) throws -> URL {
-    capturedActionID = actionID
-    capturedMethodName = methodName
-    capturedParameters = parameters
+  func logInternalEvent(
+    eventName: AppEventName,
+    parameters: [String: AnyHashable],
+    isImplicitlyLogged: Bool
+  )
 
-    return stubbedURL
+  func registerNotifications()
+}
+
+// TODO: Convert FBSDKAppEvent
+class AppEventsLogger: AppEventsLogging {
+  static let shared = AppEventsLogger()
+
+  func activateApp() {
+    print("Implement app activation")
+  }
+
+  func logInternalEvent(
+    eventName: AppEventName,
+    parameters: [String: AnyHashable],
+    isImplicitlyLogged: Bool
+    ) {
+    print("Implement app events logging")
+  }
+
+  func registerNotifications() {
+    print("Implement register notifications")
   }
 }

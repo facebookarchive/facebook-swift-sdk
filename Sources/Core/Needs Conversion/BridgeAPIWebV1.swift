@@ -18,10 +18,8 @@
 
 import Foundation
 
-typealias QueryItemsResult = Result<[URLQueryItem], Error>
-
 // TODO: Implement FBSDKBridgeAPIProtocolWebV1
-struct BridgeAPIWebV1: BridgeAPIURLProviding {
+struct BridgeAPIWebV1: BridgeAPINetworking {
   private enum Keys {
     static let actionID: String = "action_id"
     static let bridge: String = "bridge"

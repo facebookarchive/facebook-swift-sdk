@@ -18,11 +18,17 @@
 
 import Foundation
 
+protocol GatekeeperServicing {
+  func loadGatekeepers()
+}
+
 /**
  A service used to fetch and store `Gatekeeper`'s associated with a particular
  application identifier
  */
-public class GatekeeperService {
+public class GatekeeperService: GatekeeperServicing {
+  static let shared = GatekeeperService()
+
   private(set) var gatekeepers: GatekeeperDictionary = [:]
   private(set) var graphConnectionProvider: GraphConnectionProviding
   private(set) var logger: Logging

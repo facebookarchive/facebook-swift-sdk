@@ -27,7 +27,38 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8115C0D71CFE540D001FF33B"
+            BuildableName = "FacebookCore.framework"
+            BlueprintName = "FacebookCore"
+            ReferencedContainer = "container:FacebookSwift.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F43DE27522B9C44B00527B71"
+            BuildableName = "FacebookCore_TV.framework"
+            BlueprintName = "FacebookCore_TV"
+            ReferencedContainer = "container:FacebookSwift.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "811C5DF21CFFD36600E4A925"
+            BuildableName = "FacebookLogin.framework"
+            BlueprintName = "FacebookLogin"
+            ReferencedContainer = "container:FacebookSwift.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "811C5DFF1CFFD36D00E4A925"
+            BuildableName = "FacebookShare.framework"
+            BlueprintName = "FacebookShare"
+            ReferencedContainer = "container:FacebookSwift.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">

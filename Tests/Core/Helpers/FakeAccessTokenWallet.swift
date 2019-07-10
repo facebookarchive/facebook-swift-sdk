@@ -18,34 +18,13 @@
 
 @testable import FacebookCore
 
-class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProviding {
-  static var isGraphErrorRecoveryEnabled: Bool = false
+class FakeAccessTokenWallet: AccessTokenProviding & AccessTokenSetting {
+  var currentAccessToken: AccessToken?
 
-  var appIdentifier: String?
-  var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
-  var accessTokenCache: AccessTokenCaching?
-  let graphApiDebugParameter: GraphApiDebugParameter
-  var isAutoInitializationEnabled: Bool = false
-  var isAutoLogAppEventsEnabled: Bool = false
-  var loggingBehaviors: Set<LoggingBehavior> = []
-  var domainPrefix: String?
-  var sdkVersion: String
-  var clientToken: String?
-  var urlSchemeSuffix: String?
+  var setCurrentTokenWasCalled = false
 
-  init(
-    appIdentifier: String? = "foo",
-    accessTokenCache: AccessTokenCaching? = nil,
-    graphApiDebugParameter: GraphApiDebugParameter = .none,
-    loggingBehaviors: Set<LoggingBehavior> = [],
-    sdkVersion: String = "1.0",
-    urlSchemeSuffix: String? = nil
-    ) {
-    self.appIdentifier = appIdentifier
-    self.accessTokenCache = accessTokenCache
-    self.graphApiDebugParameter = graphApiDebugParameter
-    self.loggingBehaviors = loggingBehaviors
-    self.sdkVersion = sdkVersion
-    self.urlSchemeSuffix = urlSchemeSuffix
+  func setCurrent(_ token: AccessToken?) {
+    setCurrentTokenWasCalled = true
+    currentAccessToken = token
   }
 }
