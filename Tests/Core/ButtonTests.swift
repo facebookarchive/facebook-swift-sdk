@@ -350,9 +350,10 @@ class ButtonTests: XCTestCase {
   }
 
   func testObservesApplicationDidBecomeActive() {
-    XCTAssertEqual(
-      fakeNotificationCenter.capturedAddObserverNotificationName,
-      .FBSDKApplicationDidBecomeActiveNotification,
+    XCTAssertTrue(
+      fakeNotificationCenter.capturedAddObserverNotificationNames.contains(
+        .FBSDKApplicationDidBecomeActiveNotification
+      ),
       "Should add an observer for access token changes by default"
     )
   }

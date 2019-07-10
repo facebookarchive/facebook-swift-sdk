@@ -26,7 +26,7 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .web = provider.urlCategory else {
       return XCTFail("Should not be considered web")
     }
-    XCTAssertTrue(provider.urlProvider is BridgeAPIWebV1,
+    XCTAssertTrue(provider.networker is BridgeAPIWebV1,
                   "Should resolve the correct concrete url provider instance")
     XCTAssertEqual(provider.applicationQueryScheme, "https",
                    "Should have the expected url scheme.")
@@ -38,7 +38,7 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .web = provider.urlCategory else {
       return XCTFail("Should not be considered web")
     }
-    XCTAssertTrue(provider.urlProvider is BridgeAPIWebV2,
+    XCTAssertTrue(provider.networker is BridgeAPIWebV2,
                   "Should resolve the correct concrete url provider instance")
     XCTAssertEqual(provider.applicationQueryScheme, "web",
                    "Should have the expected query scheme")
@@ -50,7 +50,7 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .native = provider.urlCategory else {
       return XCTFail("Should be considered native")
     }
-    guard let nativeProvider = provider.urlProvider as? BridgeAPINative else {
+    guard let nativeProvider = provider.networker as? BridgeAPINative else {
       return XCTFail("Should resolve the correct concrete url provider instance")
     }
     XCTAssertEqual(nativeProvider.appScheme, "fbapi20130214",
@@ -65,7 +65,7 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .native = provider.urlCategory else {
       return XCTFail("Should not be considered native")
     }
-    guard let nativeProvider = provider.urlProvider as? BridgeAPINative else {
+    guard let nativeProvider = provider.networker as? BridgeAPINative else {
       return XCTFail("Should resolve the correct concrete url provider instance")
     }
     XCTAssertEqual(nativeProvider.appScheme, "fb-messenger-share-api",
@@ -80,7 +80,7 @@ class BridgeAPINetworkerProviderTests: XCTestCase {
     guard case .native = provider.urlCategory else {
       return XCTFail("Should not be considered native")
     }
-    guard let nativeProvider = provider.urlProvider as? BridgeAPINative else {
+    guard let nativeProvider = provider.networker as? BridgeAPINative else {
       return XCTFail("Should resolve the correct concrete url provider instance")
     }
     XCTAssertEqual(nativeProvider.appScheme, "msqrdplayer-api20170208",
