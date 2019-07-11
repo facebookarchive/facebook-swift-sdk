@@ -390,6 +390,8 @@
 		F4F4373C22A5CD8D0090D0C9 /* FakeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE322492BCD0014C14D /* FakeBundle.swift */; };
 		F4F4373D22A5CD9C0090D0C9 /* SampleURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F447152F22440E860013495F /* SampleURL.swift */; };
 		F4FB307B2232EF0A004A6361 /* GraphRequestSerializerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */; };
+		F4FB48A322CA561A00EA89D4 /* GraphRequestConnection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB48A122CA561300EA89D4 /* GraphRequestConnection+Extensions.swift */; };
+		F4FB48A422CA561A00EA89D4 /* GraphRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB48A222CA561A00EA89D4 /* GraphRequest+Extensions.swift */; };
 		F4FC87B1222ED532003A8F29 /* GraphRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC87B0222ED532003A8F29 /* GraphRequest.swift */; };
 		F4FE00CE2242C2DA00AB21BF /* TimeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */; };
 /* End PBXBuildFile section */
@@ -820,6 +822,8 @@
 		F4EB272122C10F0600A43DCC /* ApplicationObserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationObserving.swift; sourceTree = "<group>"; };
 		F4F4373422A59B4E0090D0C9 /* Array+URLQueryItem+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+URLQueryItem+extensions.swift"; sourceTree = "<group>"; };
 		F4FB30792232EEEB004A6361 /* GraphRequestSerializerConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphRequestSerializerConfigurationTests.swift; sourceTree = "<group>"; };
+		F4FB48A122CA561300EA89D4 /* GraphRequestConnection+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphRequestConnection+Extensions.swift"; sourceTree = "<group>"; };
+		F4FB48A222CA561A00EA89D4 /* GraphRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphRequest+Extensions.swift"; sourceTree = "<group>"; };
 		F4FC87B0222ED532003A8F29 /* GraphRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequest.swift; sourceTree = "<group>"; };
 		F4FE00CD2242C2DA00AB21BF /* TimeUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1497,6 +1501,8 @@
 			isa = PBXGroup;
 			children = (
 				F458069A22B2B8D8007B9D2C /* EquatabilityExtensions.swift */,
+				F4FB48A222CA561A00EA89D4 /* GraphRequest+Extensions.swift */,
+				F4FB48A122CA561300EA89D4 /* GraphRequestConnection+Extensions.swift */,
 				F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */,
 				F4C3C550227B4C6F004B487E /* RemoteAppLink+Extensions.swift */,
 				F4C3C54E227A4CFD004B487E /* RemoteAppLinkTarget+Extensions.swift */,
@@ -2229,6 +2235,7 @@
 				523CAE4D225ED58900D196C3 /* StringExtensionTests.swift in Sources */,
 				F44847FB226E2F5200527D49 /* FakeUserProfileProvider.swift in Sources */,
 				F4144C52224D0F6D006C8F9C /* URLBuilderTests.swift in Sources */,
+				F4FB48A422CA561A00EA89D4 /* GraphRequest+Extensions.swift in Sources */,
 				F43AB0282270B55600610974 /* GatekeeperTests.swift in Sources */,
 				F4516B8D225FBDD000979DD2 /* SampleRawRemoteGraphResponseError.swift in Sources */,
 				F4C3C5322277BF51004B487E /* RemoteAppLinkTests.swift in Sources */,
@@ -2302,6 +2309,7 @@
 				F480D9092235CF83001AB8D3 /* GraphRequestConnectionStateTests.swift in Sources */,
 				F4C3C55B227B68C9004B487E /* SampleRemoteAppLink.swift in Sources */,
 				F4C3C559227B68A3004B487E /* SampleAppLinkTarget.swift in Sources */,
+				F4FB48A322CA561A00EA89D4 /* GraphRequestConnection+Extensions.swift in Sources */,
 				F4C3C52C227762A7004B487E /* SampleRawRemoteAppLinkTarget.swift in Sources */,
 				F4C3C5382278C236004B487E /* SampleRemoteAppLinkTarget.swift in Sources */,
 				F458069522B2A8C3007B9D2C /* RemoteRestrictiveEventParameterTests.swift in Sources */,
