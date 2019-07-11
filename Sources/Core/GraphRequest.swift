@@ -18,8 +18,14 @@
 
 import UIKit
 
-// TODO: Resolve this
-typealias GraphRequestDataAttachment = Data
+/**
+ Lightweight struct to represent a data attachment
+ */
+struct GraphRequestDataAttachment: Hashable {
+  let data: Data
+  let filename: String? = nil
+  let contentType: MimeType? = .contentUnknown
+}
 
 /**
  Represents a request to the Graph API.

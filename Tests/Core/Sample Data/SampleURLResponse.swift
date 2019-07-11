@@ -22,7 +22,7 @@ import Foundation
 enum SampleURLResponse {
   static let valid = URLResponse(
     url: SampleURL.valid,
-    mimeType: MimeType.textJavascript.rawValue,
+    mimeType: MimeType.textJavascript.description,
     expectedContentLength: 0,
     textEncodingName: nil
   )

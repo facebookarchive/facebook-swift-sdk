@@ -183,7 +183,7 @@ class URLSessionTaskProxyTests: XCTestCase {
   func testHandlingSuccessForMimetypeJavascriptWithData() {
     let response = URLResponse(
       url: SampleURL.valid,
-      mimeType: MimeType.textJavascript.rawValue,
+      mimeType: MimeType.textJavascript.description,
       expectedContentLength: 0,
       textEncodingName: nil
     )
@@ -201,7 +201,7 @@ class URLSessionTaskProxyTests: XCTestCase {
     let expectedMessageSubstrings = [
       "URLSessionTaskProxy \(fakeLogger.serialNumber)",
       "Response Size: \(data.count / 1024) kB",
-      "MIME type: \(MimeType.textJavascript.rawValue)",
+      "MIME type: \(MimeType.textJavascript.description)",
       "Response:\n"
     ]
     guard let message = fakeLogger.capturedMessages.first else {
@@ -217,7 +217,7 @@ class URLSessionTaskProxyTests: XCTestCase {
   func testHandlingSuccessForMimetypeJavascriptWithoutData() {
     let response = URLResponse(
       url: SampleURL.valid,
-      mimeType: MimeType.textJavascript.rawValue,
+      mimeType: MimeType.textJavascript.description,
       expectedContentLength: 0,
       textEncodingName: nil
     )
@@ -233,7 +233,7 @@ class URLSessionTaskProxyTests: XCTestCase {
     let expectedMessageSubstrings = [
       "URLSessionTaskProxy \(fakeLogger.serialNumber)",
       "Response Size: 0 kB",
-      "MIME type: \(MimeType.textJavascript.rawValue)"
+      "MIME type: \(MimeType.textJavascript.description)"
     ]
     guard let message = fakeLogger.capturedMessages.first else {
       return XCTFail("There should be a log entry for a handled response")
@@ -267,7 +267,8 @@ class URLSessionTaskProxyTests: XCTestCase {
     )
     let expectedMessageSubstrings = [
       "URLSessionTaskProxy \(fakeLogger.serialNumber)",
-      "Response Size: 0 kB"
+      "Response Size: 0 kB",
+      "Response:\nData"
     ]
     guard let message = fakeLogger.capturedMessages.first else {
       return XCTFail("There should be a log entry for a handled response")
@@ -275,10 +276,8 @@ class URLSessionTaskProxyTests: XCTestCase {
 
     expectedMessageSubstrings.forEach { substring in
       XCTAssertTrue(message.contains(substring),
-                    "A log message: \"\(message)\" for a response with a mimetype of text/javascript and data should include the info: \(substring)")
+                    "A log message: \"\(message)\" for a response with a default URLResponse mimetype of application/octet-stream and data should include the info: \(substring)")
     }
-    XCTAssertFalse(message.contains("Response:\n"),
-                   "A log message: \"\(message)\" for a response with a mimetype of text/javascript and no data should not try and log the response data")
   }
 
   func testHandlingSuccessForMimetypeUndefinedWithoutData() {

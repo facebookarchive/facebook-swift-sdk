@@ -24,14 +24,14 @@ class GraphRequestMetadataTests: XCTestCase {
     let request = GraphRequest(graphPath: GraphPath(stringLiteral: name))
     let metadata = GraphRequestMetadata(
       request: request,
-      batchParameters: [String: AnyHashable]()
+      batchParameters: []
     ) { _, _, _ in }
 
     // Using a unique value for graph path here to be reasonably sure that it stored the correct
     // request
     XCTAssertEqual(metadata.request.graphPath.description, name,
                    "A request metadata object should store the exact request it was created with")
-    XCTAssertEqual(metadata.batchParameters, [:],
+    XCTAssertEqual(metadata.batchParameters, [],
                    "A request metadata object should store the exact batch parameters it was created with")
   }
 
@@ -43,7 +43,7 @@ class GraphRequestMetadataTests: XCTestCase {
 
     let metadata = GraphRequestMetadata(
       request: request,
-      batchParameters: [String: AnyHashable]()
+      batchParameters: []
     ) { potentialConnection, potentialResults, potentialError in
       expectation.fulfill()
       XCTAssertNotNil(potentialConnection,

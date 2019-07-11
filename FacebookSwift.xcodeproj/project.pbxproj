@@ -82,6 +82,7 @@
 		F433A83122B7FE1E00261787 /* SampleRemoteDialogFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433A83022B7FE1E00261787 /* SampleRemoteDialogFlow.swift */; };
 		F433A83322B80AFA00261787 /* ServerConfigurationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433A83222B80AFA00261787 /* ServerConfigurationServiceTests.swift */; };
 		F433A83722B81A5C00261787 /* ServerConfigurationStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433A83622B81A5C00261787 /* ServerConfigurationStoreTests.swift */; };
+		F4388F5922D2D83E00BAFD58 /* GraphRequestBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4388F5822D2D83E00BAFD58 /* GraphRequestBodyTests.swift */; };
 		F43AB0282270B55600610974 /* GatekeeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0272270B55600610974 /* GatekeeperTests.swift */; };
 		F43AB02A2270B61600610974 /* Gatekeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB0292270B61600610974 /* Gatekeeper.swift */; };
 		F43AB02C2270BE4F00610974 /* RemoteGatekeeperListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */; };
@@ -145,6 +146,8 @@
 		F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3401822430FC100912F0F /* LoggingBehavior.swift */; };
 		F44F566C224D325800D027FF /* GraphAPIVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */; };
 		F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F566D224D344300D027FF /* GraphAPIVersion.swift */; };
+		F44F727122D3BDCE00B4193B /* GraphRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F727022D3BDCE00B4193B /* GraphRequestBody.swift */; };
+		F44F727E22D4FABF00B4193B /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F727D22D4FABF00B4193B /* Data+Extensions.swift */; };
 		F4516B7B225F7E6700979DD2 /* JSONParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */; };
 		F4516B7E225F7ED900979DD2 /* SampleGraphResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */; };
 		F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4516B7F225F7F9200979DD2 /* JSONParser.swift */; };
@@ -536,6 +539,7 @@
 		F433A83222B80AFA00261787 /* ServerConfigurationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfigurationServiceTests.swift; sourceTree = "<group>"; };
 		F433A83422B80F1D00261787 /* SampleServerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleServerConfiguration.swift; sourceTree = "<group>"; };
 		F433A83622B81A5C00261787 /* ServerConfigurationStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfigurationStoreTests.swift; sourceTree = "<group>"; };
+		F4388F5822D2D83E00BAFD58 /* GraphRequestBodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestBodyTests.swift; sourceTree = "<group>"; };
 		F43AB0272270B55600610974 /* GatekeeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatekeeperTests.swift; sourceTree = "<group>"; };
 		F43AB0292270B61600610974 /* Gatekeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gatekeeper.swift; sourceTree = "<group>"; };
 		F43AB02B2270BE4F00610974 /* RemoteGatekeeperListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGatekeeperListTests.swift; sourceTree = "<group>"; };
@@ -596,6 +600,8 @@
 		F44DB6C2222B136F0083506E /* FakeGraphRequestPiggybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeGraphRequestPiggybackManager.swift; sourceTree = "<group>"; };
 		F44F566B224D325800D027FF /* GraphAPIVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAPIVersionTests.swift; sourceTree = "<group>"; };
 		F44F566D224D344300D027FF /* GraphAPIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAPIVersion.swift; sourceTree = "<group>"; };
+		F44F727022D3BDCE00B4193B /* GraphRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRequestBody.swift; sourceTree = "<group>"; };
+		F44F727D22D4FABF00B4193B /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		F4516B7A225F7E6700979DD2 /* JSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserTests.swift; sourceTree = "<group>"; };
 		F4516B7C225F7ED200979DD2 /* SampleGraphResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleGraphResponse.swift; sourceTree = "<group>"; };
 		F4516B7F225F7F9200979DD2 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
@@ -995,6 +1001,7 @@
 				F44DB6B8222B07740083506E /* GraphConnectionProvider.swift */,
 				F4AE4273224584F200E3B99C /* GraphPath.swift */,
 				F4FC87B0222ED532003A8F29 /* GraphRequest.swift */,
+				F44F727022D3BDCE00B4193B /* GraphRequestBody.swift */,
 				F432E9F722370B32007D3A34 /* GraphRequestConnecting.swift */,
 				F44DB6B6222B07050083506E /* GraphRequestConnection.swift */,
 				F480D904223479AF001AB8D3 /* GraphRequestConnectionDelegate.swift */,
@@ -1245,6 +1252,7 @@
 				F4D5DAE522492F0E0014C14D /* Bundle+Extensions.swift */,
 				F4317E9C2289B81300EBF926 /* CGFloat+Extensions.swift */,
 				F46DDCBD228B4A2200BA7359 /* CGSize+Extensions.swift */,
+				F44F727D22D4FABF00B4193B /* Data+Extensions.swift */,
 				F422F0822284A37D00AFD0DF /* FileManager+Extensions.swift */,
 				F44DB6B3222B022E0083506E /* NotificationCenter+Extensions.swift */,
 				F44DB6AF222B019D0083506E /* NotificationName+Extensions.swift */,
@@ -1336,6 +1344,7 @@
 				F47AB33E222F4394004A854F /* GraphApiDebugParameterTests.swift */,
 				F45734CE222D892A001F806A /* GraphConnectionProviderTests.swift */,
 				F4AE42712245846A00E3B99C /* GraphPathTests.swift */,
+				F4388F5822D2D83E00BAFD58 /* GraphRequestBodyTests.swift */,
 				F480D90E2236DD79001AB8D3 /* GraphRequestConnectionConfigurationTests.swift */,
 				F480D90622347F89001AB8D3 /* GraphRequestConnectionDelegateTests.swift */,
 				F480D9122236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift */,
@@ -2023,6 +2032,7 @@
 				F44F566E224D344300D027FF /* GraphAPIVersion.swift in Sources */,
 				F4AE4274224584F200E3B99C /* GraphPath.swift in Sources */,
 				F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */,
+				F44F727122D3BDCE00B4193B /* GraphRequestBody.swift in Sources */,
 				F479099622985C7F00F9C0A2 /* BridgeAPINetworking.swift in Sources */,
 				F4516B80225F7F9200979DD2 /* JSONParser.swift in Sources */,
 				F4C3C54D227A443E004B487E /* AppLinkTargetBuilder.swift in Sources */,
@@ -2060,6 +2070,7 @@
 				F46DDD01228C8BB700BA7359 /* DeviceButton.swift in Sources */,
 				F406F86622823703006B0D4E /* Drawable.swift in Sources */,
 				F479099822985D4000F9C0A2 /* BridgeAPINetworkerProvider.swift in Sources */,
+				F44F727E22D4FABF00B4193B /* Data+Extensions.swift in Sources */,
 				F479098B229853E500F9C0A2 /* BridgeAPIWebV1.swift in Sources */,
 				F4EB272222C10F0600A43DCC /* ApplicationObserving.swift in Sources */,
 				F40739412231E4EB0018505A /* URLQueryItemBuilder.swift in Sources */,
@@ -2203,6 +2214,7 @@
 				F4C57D3122AAFC0900D0BEFE /* SampleRemoteErrorConfigurationList.swift in Sources */,
 				52CDB7CD2265525400E6EF78 /* FakeSecureStore.swift in Sources */,
 				F4C57D3B22AB1A5A00D0BEFE /* RestrictiveRuleTests.swift in Sources */,
+				F4388F5922D2D83E00BAFD58 /* GraphRequestBodyTests.swift in Sources */,
 				F4B3CA4422B417AB0098ADF5 /* SampleRestrictiveEventParameter.swift in Sources */,
 				F4911FC522C1773700FAFC63 /* FakeTimeSpentDataStore.swift in Sources */,
 				F44715232243E3FF0013495F /* DeveloperErrorStringsTests.swift in Sources */,
@@ -2436,6 +2448,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "--PRODUCT-BUNDLE-IDENTIFIER-";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Sources/Core/Internal/FacebookSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2449,7 +2462,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "--PRODUCT-BUNDLE-IDENTIFIER-";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Sources/Core/Internal/FacebookSwift-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
