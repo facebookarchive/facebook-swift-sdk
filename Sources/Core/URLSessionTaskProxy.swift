@@ -79,9 +79,8 @@ public final class URLSessionTaskProxy {
       "Response Size: \((data?.count ?? 0) / 1024) kB"
     ]
 
-    if let rawMimetype = response.mimeType,
-      let mimeType = MimeType(rawValue: rawMimetype) {
-      substrings.append("MIME type: \(mimeType.rawValue)")
+    if let rawMimetype = response.mimeType {
+      substrings.append("MIME type: \(rawMimetype)")
 
       if let responseData = data,
         let displayableData = String(data: responseData, encoding: .utf8) {

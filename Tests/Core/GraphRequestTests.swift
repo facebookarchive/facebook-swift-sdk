@@ -265,7 +265,7 @@ class GraphRequestTests: XCTestCase {
       return XCTFail("Should be able to convert a string to a utf8 encoded data")
     }
     let parameters: [String: AnyHashable] = [
-      "Foo": data as GraphRequestDataAttachment
+      "Foo": GraphRequestDataAttachment(data: data)
     ]
     let request = GraphRequest(
       graphPath: path,

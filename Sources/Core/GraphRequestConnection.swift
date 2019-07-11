@@ -144,7 +144,7 @@ public final class GraphRequestConnection: GraphRequestConnecting {
   func add(
     request: GraphRequest,
     batchEntryName: String = "",
-    batchParameters: [String: AnyHashable] = [:],
+    batchParameters: [URLQueryItem] = [],
     completion: @escaping GraphRequestBlock
     ) throws {
     guard state == .created else {
@@ -154,7 +154,9 @@ public final class GraphRequestConnection: GraphRequestConnecting {
     var parameters = batchParameters
 
     if !batchEntryName.isEmpty {
-      parameters.updateValue(batchEntryName, forKey: BatchEntryKeys.name.rawValue)
+      parameters.append(
+        URLQueryItem(name: BatchEntryKeys.name.rawValue, value: batchEntryName)
+      )
     }
 
     let metadata = GraphRequestMetadata(
@@ -181,6 +183,9 @@ public final class GraphRequestConnection: GraphRequestConnecting {
     return URLRequest(url: url)
   }
 
+  /**
+   Convenience method for building a `URLRequest` from a `GraphRequest` object
+   */
   func urlRequest(with graphRequest: GraphRequest) -> URLRequest {
     guard let url = URLBuilder().buildURL(for: graphRequest) else {
       fatalError("Should never fail to build a url from the url builder")
@@ -196,7 +201,7 @@ public final class GraphRequestConnection: GraphRequestConnecting {
     request.httpShouldHandleCookies = false
     request.setValue(userAgent, forHTTPHeaderField: Headers.Keys.userAgent.rawValue)
     request.setValue(
-      Headers.Values.applicationJSON.rawValue,
+      MimeType.applicationJSON.description,
       forHTTPHeaderField: Headers.Keys.contentType.rawValue
     )
 
@@ -334,6 +339,12 @@ public final class GraphRequestConnection: GraphRequestConnecting {
 
     return task
   }
+
+  // TODO: Post Requests
+  // Call AppendAttachments with the parameters passed in.
+  // They may need to be String: AnyHashable just to be flexible enough.
+  // Then attach it to a request body, build a url the normal way, and fire.
+  // if there's compressed data it has to have the gzip header
 
   // MARK: URLRequest Header Constants
   enum Headers {

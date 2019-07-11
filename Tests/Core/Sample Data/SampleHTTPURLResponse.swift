@@ -22,7 +22,7 @@ import Foundation
 enum SampleHTTPURLResponse {
   static let valid = HTTPURLResponse(
     url: SampleURL.valid,
-    mimeType: MimeType.textJavascript.rawValue,
+    mimeType: MimeType.textJavascript.description,
     expectedContentLength: 0,
     textEncodingName: nil
   )
@@ -36,7 +36,7 @@ enum SampleHTTPURLResponse {
 
   static let pngMimeType = HTTPURLResponse(
     url: SampleURL.valid,
-    mimeType: MimeType.png.rawValue,
+    mimeType: MimeType.png.description,
     expectedContentLength: 0,
     textEncodingName: nil
   )

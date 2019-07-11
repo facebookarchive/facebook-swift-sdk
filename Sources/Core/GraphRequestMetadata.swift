@@ -23,7 +23,7 @@ import Foundation
 // data for batching and retry processing.
 struct GraphRequestMetadata {
   let request: GraphRequest
-  let batchParameters: [String: AnyHashable]
+  let batchParameters: [URLQueryItem]
   let completion: GraphRequestBlock
 
   func invokeCompletionHandler(
