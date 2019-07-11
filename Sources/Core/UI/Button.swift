@@ -401,7 +401,7 @@ class Button: UIButton {
 }
 
 private enum DefaultColors {
-  static let normal = UIColor(red: 65, green: 93, blue: 174)
+  static let normal = UIColor(red: 24, green: 119, blue: 242)
   static let highlighted = UIColor(red: 47, green: 71, blue: 122)
   static let disabled = UIColor(red: 189, green: 193, blue: 201)
   static let selected = UIColor(red: 124, green: 143, blue: 200)
