@@ -53,8 +53,9 @@ class GraphRequestBodyTests: XCTestCase {
   }
 
   func testMimeContentTypeWithFormData() {
+    generator.append(dataValue: Data(count: 100))
     XCTAssertEqual(generator.mimeType, .multipartFormData(boundary: generator.boundary),
-                   "A generator with no form content should be of the mimetype application/json")
+                   "A generator with no form content should be of the multipart form data format")
   }
 
   func testContentDispositionWithoutKeyWithoutFilename() {
@@ -158,8 +159,8 @@ class GraphRequestBodyTests: XCTestCase {
       "Should append image data plus metadata to the generators stored data"
     )
 
-    XCTAssertTrue(generator.json.isEmpty,
-                  "Appending image data should clear the existing json pairs")
+    XCTAssertTrue(generator.requiresMultipartDataFormat,
+                  "Should track when multipart upload format is required")
   }
 
   func testAppendingArbitraryDataChunk() {
@@ -174,8 +175,8 @@ class GraphRequestBodyTests: XCTestCase {
       "Should append the data plus metadata to the generators stored data"
     )
 
-    XCTAssertTrue(generator.json.isEmpty,
-                  "Appending data should clear the existing json pairs")
+    XCTAssertTrue(generator.requiresMultipartDataFormat,
+                  "Should track when multipart upload format is required")
   }
 
   func testAppendingDataAttachmentWithoutFilename() {
@@ -190,8 +191,8 @@ class GraphRequestBodyTests: XCTestCase {
       "Should append the attachment data plus metadata to the generators stored data"
     )
 
-    XCTAssertTrue(generator.json.isEmpty,
-                  "Appending data should clear the existing json pairs")
+    XCTAssertTrue(generator.requiresMultipartDataFormat,
+                  "Should track when multipart upload format is required")
   }
 
   func testUploadDataWithExistingJSONAndData() {
@@ -212,7 +213,7 @@ class GraphRequestBodyTests: XCTestCase {
   }
 
   func testUploadDataWithEmptyJSONAndData() {
-    generator = GraphRequestBody(data: Data(count: 100))
+    generator.append(dataValue: Data(count: 100))
 
     XCTAssertEqual(
       generator.uploadData,
@@ -223,7 +224,7 @@ class GraphRequestBodyTests: XCTestCase {
 
   func testUploadDataWithExistingJSONAndEmptyData() {
     let object = ["Foo": "Bar"]
-    generator = GraphRequestBody(json: object)
+    generator.append(key: "Foo", formValue: "Bar")
 
     let serialized = generator.uploadData
     let deserialized = try? JSONSerialization.jsonObject(with: serialized, options: []) as? [String: String]
@@ -236,10 +237,11 @@ class GraphRequestBodyTests: XCTestCase {
   }
 
   func testUploadDataWithEmptyJSONAndEmptyData() {
+    let expected = try? JSONSerialization.data(withJSONObject: generator.json, options: [])
     XCTAssertEqual(
       generator.uploadData,
-      generator.data,
-      "Should return the existing empty data when there are no JSON fields and no multipart form data"
+      expected,
+      "Should return the serialized empty data when there are no JSON fields and no multipart form data"
     )
   }
 
@@ -279,21 +281,13 @@ class GraphRequestBodyTests: XCTestCase {
   }
 
   func testCompressingDataWithNoJSON() {
-    let data = """
-    Lorem ipsum dolor sit amet consectetur adipiscing elit mi
-    nibh ornare proin blandit diam ridiculus, faucibus mus
-    dui eu vehicula nam donec dictumst sed vivamus bibendum
-    aliquet efficitur. Felis imperdiet sodales dictum morbi
-    vivamus augue dis duis aliquet velit ullamcorper porttitor,
-    lobortis dapibus hac purus aliquam natoque iaculis blandit
-    montes nunc pretium.
-    """.data(using: .utf8)!
+    let data = "foo".data(using: .utf8)!
 
-    generator = GraphRequestBody(data: data)
+    generator.append(dataValue: data)
 
     let compressed = generator.compressedUploadData
 
-    XCTAssertEqual(compressed?.count, 240,
+    XCTAssertEqual(compressed?.count, 121,
                    "The compressed data should be a specific number of bytes as it conforms to a specific compression protocol")
   }
 }

@@ -30,6 +30,7 @@ public struct GraphRequestBody {
 
   private(set) var json = [String: AnyHashable]()
   private(set) var data = Data()
+  private(set) var requiresMultipartDataFormat: Bool = false
 
   let boundary: String = generateBoundary()
 
@@ -46,7 +47,7 @@ public struct GraphRequestBody {
   }
 
   var mimeType: MimeType {
-    guard json.isEmpty else {
+    guard requiresMultipartDataFormat else {
       return .applicationJSON
     }
 
@@ -60,7 +61,7 @@ public struct GraphRequestBody {
    the use of multipart form data for uploading.
    */
   public var uploadData: Data {
-    guard !json.isEmpty else {
+    guard !requiresMultipartDataFormat else {
       return data
     }
 
@@ -106,13 +107,11 @@ public struct GraphRequestBody {
 
   /**
    Appends a multiform data chunk to the stored multiform data.
-   If a key and a form value are provided it will consider the input to be JSON
-   and store the key value pair. Appending data in other ways will potentially clear
-   this stored JSON. For instance, appending image data will clear this value since
-   images need to uploaded as multipart form data.
+   In addition to appending the chunk, if a key and a form value are provided
+   it will consider the input to be JSON and store the key value pair.
 
-   - Parameter key: the key of the field being appended
-   - Parameter formValue: the value of the field being appended
+   - Parameter key: the optional key of the field being appended
+   - Parameter formValue: the optional value of the field being appended
 
    - Returns: The chunk of data that was appended to the stored multiform data
    Returns empty data on a failure to encode the fields or build the chunk
@@ -142,7 +141,7 @@ public struct GraphRequestBody {
   /**
    Appends an image in the form of jpeg data to the stored multiform data
 
-   - Parameter key: the key for the image being appended
+   - Parameter key: the optional key for the image being appended
    - Parameter image: a `UIImage` to compress and add to the stored multiform data
 
    - Returns: The chunk of data that was appended to the stored multiform data
@@ -150,7 +149,7 @@ public struct GraphRequestBody {
    */
   @discardableResult
   mutating func append(
-    key: String,
+    key: String? = nil,
     image: UIImage
     ) -> Data {
     guard let imageData = image.jpegData(compressionQuality: Settings.shared.jpegCompressionQuality) else {
@@ -162,7 +161,7 @@ public struct GraphRequestBody {
     }
     data.append(chunk)
 
-    json = [:]
+    requiresMultipartDataFormat = true
 
     return chunk
   }
@@ -170,14 +169,14 @@ public struct GraphRequestBody {
   /**
    Appends arbitrary `Data` to the stored multiform data
 
-   - Parameter key: the key for the data being appended
+   - Parameter key: the optional key for the data being appended
    - Parameter dataValue: a `Data` value to add to the stored multiform data
 
    - Returns: The chunk of data that was appended to the stored multiform data
    */
   @discardableResult
   mutating func append(
-    key: String,
+    key: String? = nil,
     dataValue: Data
     ) -> Data {
     let chunk = buildChunk(key: key, filename: key, contentType: .contentUnknown) {
@@ -185,7 +184,7 @@ public struct GraphRequestBody {
     }
     data.append(chunk)
 
-    json = [:]
+    requiresMultipartDataFormat = true
 
     return chunk
   }
@@ -193,14 +192,14 @@ public struct GraphRequestBody {
   /**
    Appends a `GraphRequestDataAttachment` to the stored multiform data
 
-   - Parameter key: the key for the attachment being appended
+   - Parameter key: the optional key for the attachment being appended
    - Parameter dataAttachment: a `GraphRequestDataAttachment` to add to the stored multiform data
 
    - Returns: The chunk of data that was appended to the stored multiform data
    */
   @discardableResult
   mutating func append(
-    key: String,
+    key: String? = nil,
     dataAttachment: GraphRequestDataAttachment
     ) -> Data {
     let chunk = buildChunk(
@@ -211,7 +210,7 @@ public struct GraphRequestBody {
     }
     data.append(chunk)
 
-    json = [:]
+    requiresMultipartDataFormat = true
 
     return chunk
   }
@@ -219,7 +218,7 @@ public struct GraphRequestBody {
   /**
    Builds a chunk of multiform data for use in an upload request
 
-   - Parameter key: the key of the field the chunk is built for
+   - Parameter key: the optional key of the field the chunk is built for
    - Parameter filename: an optional filename for use in building
    the multiform data chunk's "Content-Disposition" argument
    - Parameter contentType: an optional `MimeType` for use in building
