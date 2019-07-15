@@ -25,23 +25,30 @@ class FakeSettings: SettingsManaging, AppIdentifierProviding, ClientTokenProvidi
   var graphAPIVersion = GraphAPIVersion(major: 0, minor: 1)
   var accessTokenCache: AccessTokenCaching?
   let graphApiDebugParameter: GraphApiDebugParameter
+  var isAutoInitializationEnabled: Bool = false
+  var isAutoLogAppEventsEnabled: Bool = false
   var loggingBehaviors: Set<LoggingBehavior> = []
   var domainPrefix: String?
   var sdkVersion: String
   var clientToken: String?
   var urlSchemeSuffix: String?
+  var userAgentSuffix: String?
 
   init(
     appIdentifier: String? = "foo",
+    accessTokenCache: AccessTokenCaching? = nil,
     graphApiDebugParameter: GraphApiDebugParameter = .none,
     loggingBehaviors: Set<LoggingBehavior> = [],
     sdkVersion: String = "1.0",
-    urlSchemeSuffix: String? = nil
+    urlSchemeSuffix: String? = nil,
+    userAgentSuffix: String? = nil
     ) {
     self.appIdentifier = appIdentifier
+    self.accessTokenCache = accessTokenCache
     self.graphApiDebugParameter = graphApiDebugParameter
     self.loggingBehaviors = loggingBehaviors
     self.sdkVersion = sdkVersion
     self.urlSchemeSuffix = urlSchemeSuffix
+    self.userAgentSuffix = userAgentSuffix
   }
 }

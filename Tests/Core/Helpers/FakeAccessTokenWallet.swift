@@ -16,14 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
 
-protocol AccessTokenProviding {
-  var currentAccessToken: AccessToken? { get }
+class FakeAccessTokenWallet: AccessTokenProviding & AccessTokenSetting {
+  var currentAccessToken: AccessToken?
+
+  var setCurrentTokenWasCalled = false
+
+  func setCurrent(_ token: AccessToken?) {
+    setCurrentTokenWasCalled = true
+    currentAccessToken = token
+  }
 }
-
-protocol AccessTokenSetting {
-  func setCurrent(_ token: AccessToken?)
-}
-
-extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}

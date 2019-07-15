@@ -19,8 +19,24 @@
 @testable import FacebookCore
 import Foundation
 
-struct FakeNetworkerProvider: BridgeAPINetworkerProviding {
-  let urlProvider: BridgeAPIURLProviding
-  let applicationQueryScheme: String
-  let urlCategory: BridgeAPIURLCategory
+extension GraphRequest {
+  static func testableRequest(
+    graphPath: GraphPath,
+    parameters: [String: AnyHashable] = [:],
+    accessToken: AccessToken? = AccessTokenWallet.shared.currentAccessToken,
+    version: GraphAPIVersion = Settings.shared.graphAPIVersion,
+    httpMethod: HTTPMethod = .get,
+    flags: Flags = .none,
+    enableGraphRecovery: Bool = Settings.isGraphErrorRecoveryEnabled
+  ) -> GraphRequest {
+    return GraphRequest(
+      graphPath: graphPath,
+      parameters: parameters,
+      accessToken: accessToken,
+      version: version,
+      httpMethod: httpMethod,
+      flags: flags,
+      enableGraphRecovery: enableGraphRecovery
+    )
+  }
 }

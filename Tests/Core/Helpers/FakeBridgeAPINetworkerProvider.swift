@@ -16,14 +16,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+@testable import FacebookCore
 import Foundation
 
-protocol AccessTokenProviding {
-  var currentAccessToken: AccessToken? { get }
-}
+class FakeBridgeAPINetworkerProvider: BridgeAPINetworkerProviding {
+  var stubbedURLCategory: BridgeAPIURLCategory
+  var networker: BridgeAPINetworking
+  let applicationQueryScheme: String
+  var urlCategory: BridgeAPIURLCategory {
+    return stubbedURLCategory
+  }
 
-protocol AccessTokenSetting {
-  func setCurrent(_ token: AccessToken?)
+  init(
+    stubbedURLCategory: BridgeAPIURLCategory,
+    networker: BridgeAPINetworking,
+    applicationQueryScheme: String
+    ) {
+    self.stubbedURLCategory = stubbedURLCategory
+    self.applicationQueryScheme = applicationQueryScheme
+    self.networker = networker
+  }
 }
-
-extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}

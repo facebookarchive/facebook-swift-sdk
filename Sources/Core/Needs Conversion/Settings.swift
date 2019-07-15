@@ -27,10 +27,13 @@ protocol SettingsManaging {
   var accessTokenCache: AccessTokenCaching? { get set }
   var clientToken: String? { get set }
   var graphApiDebugParameter: GraphApiDebugParameter { get }
+  var isAutoInitializationEnabled: Bool { get set }
+  var isAutoLogAppEventsEnabled: Bool { get set }
   var loggingBehaviors: Set<LoggingBehavior> { get set }
   var domainPrefix: String? { get set }
   var graphAPIVersion: GraphAPIVersion { get set }
   var urlSchemeSuffix: String? { get set }
+  var userAgentSuffix: String? { get set }
   var sdkVersion: String { get }
 
   static var isGraphErrorRecoveryEnabled: Bool { get set }
@@ -67,7 +70,7 @@ class Settings: SettingsManaging, AppIdentifierProviding {
    */
   var appIdentifier: String? {
     didSet {
-      guard TokenString(value: appIdentifier) != nil else {
+      guard appIdentifier?.tokenized != nil else {
         appIdentifier = oldValue
         return
       }
@@ -86,7 +89,7 @@ class Settings: SettingsManaging, AppIdentifierProviding {
    */
   var clientToken: String? {
     didSet {
-      guard TokenString(value: clientToken) != nil else {
+      guard clientToken?.tokenized != nil else {
         clientToken = oldValue
         return
       }
@@ -103,7 +106,7 @@ class Settings: SettingsManaging, AppIdentifierProviding {
    */
   var displayName: String? {
     didSet {
-      guard TokenString(value: displayName) != nil else {
+      guard displayName?.tokenized != nil else {
         displayName = oldValue
         return
       }
@@ -119,7 +122,7 @@ class Settings: SettingsManaging, AppIdentifierProviding {
    */
   var domainPrefix: String? {
     didSet {
-      guard TokenString(value: domainPrefix) != nil else {
+      guard domainPrefix?.tokenized != nil else {
         domainPrefix = oldValue
         return
       }
@@ -157,7 +160,7 @@ class Settings: SettingsManaging, AppIdentifierProviding {
    */
   var urlSchemeSuffix: String? {
     didSet {
-      guard TokenString(value: urlSchemeSuffix) != nil else {
+      guard urlSchemeSuffix?.tokenized != nil else {
         urlSchemeSuffix = oldValue
         return
       }
@@ -235,6 +238,18 @@ class Settings: SettingsManaging, AppIdentifierProviding {
    */
   var loggingBehaviors: Set<LoggingBehavior>
 
+  /**
+   The user agent suffix to use for GraphRequests
+   */
+  var userAgentSuffix: String? {
+    didSet {
+      guard TokenString(value: userAgentSuffix) != nil else {
+        userAgentSuffix = oldValue
+        return
+      }
+    }
+  }
+
   var sdkVersion: String = "1.0"
 
   init(
@@ -250,11 +265,11 @@ class Settings: SettingsManaging, AppIdentifierProviding {
     setBehaviors(from: bundle)
 
     // Non-persisted fields have values that are drawn from the plist
-    appIdentifier = TokenString(value: value(for: .appIdentifier))?.value
-    clientToken = TokenString(value: value(for: .clientToken))?.value
-    displayName = TokenString(value: value(for: .displayName))?.value
-    domainPrefix = TokenString(value: value(for: .domainPrefix))?.value
-    urlSchemeSuffix = TokenString(value: value(for: .urlSchemeSuffix))?.value
+    appIdentifier = stringValue(for: .appIdentifier)?.tokenized
+    clientToken = stringValue(for: .clientToken)?.tokenized
+    displayName = stringValue(for: .displayName)?.tokenized
+    domainPrefix = stringValue(for: .domainPrefix)?.tokenized
+    urlSchemeSuffix = stringValue(for: .urlSchemeSuffix)?.tokenized
 
     if let jpegCompressionQuality = BoundedCGFloat(
       value: value(for: .jpegCompressionQuality),
@@ -287,6 +302,10 @@ class Settings: SettingsManaging, AppIdentifierProviding {
 
   private func valueFromPlist<T>(for property: PropertyStorageKey) -> T? {
     return bundle.object(forInfoDictionaryKey: property.rawValue) as? T
+  }
+
+  private func stringValue(for property: PropertyStorageKey) -> String? {
+    return value(for: property)
   }
 
   private func cache(_ value: Any, forProperty property: PropertyStorageKey) {

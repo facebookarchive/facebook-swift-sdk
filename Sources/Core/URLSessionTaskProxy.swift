@@ -20,7 +20,11 @@ import Foundation
 
 typealias SessionTaskCompletion = (Data?, URLResponse?, Error?) -> Void
 
-class URLSessionTaskProxy {
+/**
+ A proxy layer for providing additional logging information about a
+ `URLSessionDataTask`
+ */
+public final class URLSessionTaskProxy {
   private(set) var logger: Logging
   let processInfo: ProcessInfoProviding
   let requestStartTime: Double
@@ -75,9 +79,8 @@ class URLSessionTaskProxy {
       "Response Size: \((data?.count ?? 0) / 1024) kB"
     ]
 
-    if let rawMimetype = response.mimeType,
-      let mimeType = MimeType(rawValue: rawMimetype) {
-      substrings.append("MIME type: \(mimeType.rawValue)")
+    if let rawMimetype = response.mimeType {
+      substrings.append("MIME type: \(rawMimetype)")
 
       if let responseData = data,
         let displayableData = String(data: responseData, encoding: .utf8) {
@@ -100,7 +103,8 @@ class URLSessionTaskProxy {
     task.resume()
   }
 
-  func cancel() {
+  /// Cancels an ongoing task. The completion handler will not be invoked.
+  public func cancel() {
     task.cancel()
     handler = nil
   }

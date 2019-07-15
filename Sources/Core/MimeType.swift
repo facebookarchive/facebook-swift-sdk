@@ -18,7 +18,33 @@
 
 import Foundation
 
-enum MimeType: String {
-  case textJavascript = "text/javascript"
-  case png = "image/png"
+enum MimeType: Hashable {
+  case applicationJSON
+  case contentUnknown
+  case jpeg
+  case multipartFormData(boundary: String)
+  case png
+  case textJavascript
+
+  var description: String {
+    switch self {
+    case .applicationJSON:
+      return "application/json"
+
+    case .contentUnknown:
+      return "content/unknown"
+
+    case .jpeg:
+      return "image/jpeg"
+
+    case let .multipartFormData(boundary):
+      return "multipart/form-data; boundary=\(boundary)"
+
+    case .png:
+      return "image/png"
+
+    case .textJavascript:
+      return "text/javascript"
+    }
+  }
 }

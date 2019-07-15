@@ -42,6 +42,8 @@ protocol UserProfileProviding {
  You can use this class to build your own `ProfilePictureView` or in place of typical requests to "/me".
  */
 class UserProfileService: UserProfileProviding {
+  static let shared = UserProfileService()
+
   private let oneDayInSeconds = TimeInterval(60 * 60 * 24)
   private(set) var graphConnectionProvider: GraphConnectionProviding
   private(set) var logger: Logging

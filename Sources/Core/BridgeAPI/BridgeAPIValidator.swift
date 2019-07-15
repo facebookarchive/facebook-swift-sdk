@@ -18,12 +18,39 @@
 
 import Foundation
 
-protocol AccessTokenProviding {
-  var currentAccessToken: AccessToken? { get }
-}
+/**
+ Used for validating if a `BridgeAPIRequest` is valid for a given source application
+ */
+enum BridgeAPIValidator {
+  static func isValid(
+    request: BridgeAPIRequest,
+    sourceApplication: String
+    ) -> Bool {
+    switch request.networkerProvider.urlCategory {
+    case .native:
+      if #available(iOS 13.0, *) {
+        // As of iOS 13, the source application will only be present for apps under
+        // the same developer account. So checking for facebook is not useful
+        return true
+      } else {
+        return isFacebookIdentifier(sourceApplication)
+      }
 
-protocol AccessTokenSetting {
-  func setCurrent(_ token: AccessToken?)
-}
+    case .web:
+      guard isSafariIdentifier(sourceApplication) else {
+        return false
+      }
+    }
 
-extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}
+    return true
+  }
+
+  private static func isFacebookIdentifier(_ bundleIdentifier: String) -> Bool {
+    return bundleIdentifier.hasPrefix("com.facebook.") ||
+      bundleIdentifier.hasPrefix(".com.facebook.")
+  }
+
+  private static func isSafariIdentifier(_ bundleIdentifier: String) -> Bool {
+    return bundleIdentifier.hasPrefix("com.apple")
+  }
+}

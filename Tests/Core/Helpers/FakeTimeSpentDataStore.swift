@@ -16,14 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable identifier_name
+
+@testable import FacebookCore
 import Foundation
 
-protocol AccessTokenProviding {
-  var currentAccessToken: AccessToken? { get }
-}
+class FakeTimeSpentDataStore: TimeSpentDataStoring {
+  var capturedSourceApplication: String?
+  var capturedURL: URL?
+  var registerAutoResetSourceApplicationWasCalled = false
 
-protocol AccessTokenSetting {
-  func setCurrent(_ token: AccessToken?)
-}
+  func set(sourceApplication: String, url: URL) {
+    capturedSourceApplication = sourceApplication
+    capturedURL = url
+  }
 
-extension AccessTokenWallet: AccessTokenProviding & AccessTokenSetting {}
+  func registerAutoResetSourceApplication() {
+    registerAutoResetSourceApplicationWasCalled = true
+  }
+}

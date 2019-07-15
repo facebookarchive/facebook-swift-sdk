@@ -18,10 +18,40 @@
 
 import UIKit
 
-// TODO: Resolve this
-typealias GraphRequestDataAttachment = Data
+/**
+ Lightweight struct to represent a data attachment
+ */
+struct GraphRequestDataAttachment: Hashable {
+  let data: Data
+  let filename: String? = nil
+  let contentType: MimeType? = .contentUnknown
+}
 
-struct GraphRequest {
+/**
+ Represents a request to the Graph API.
+
+ Can be used simply with just a path
+
+ ex:
+
+ ```
+ let meRequest = GraphRequest(graphPath: .me)
+ ```
+
+ or with more complex queries to that path
+ passed through the parameters
+
+ ex:
+
+ ```
+ let aboutMeAndMyFriendsRequest = GraphRequest(
+     graphPath: .me,
+     parameters: ["fields": "about,friends{about}"]
+ )
+ ```
+
+ */
+public struct GraphRequest {
   /// The HTTPMethod to use for a graph request
   enum HTTPMethod: String {
     case get = "GET"
@@ -66,6 +96,27 @@ struct GraphRequest {
   let version: GraphAPIVersion
 
   var flags: Flags
+
+  /**
+   Initializes a new instance of a graph request.
+   
+   - Parameter graphPath: the graph path (e.g., "me")
+   - Parameter fields: the optional fields dictionary
+   */
+  public init(
+    graphPath: GraphPath,
+    parameters: [String: AnyHashable] = [:]
+    ) {
+    self.init(
+      graphPath: graphPath,
+      parameters: parameters,
+      accessToken: AccessTokenWallet.shared.currentAccessToken,
+      version: Settings.shared.graphAPIVersion,
+      httpMethod: .get,
+      flags: .none,
+      enableGraphRecovery: Settings.isGraphErrorRecoveryEnabled
+    )
+  }
 
   /**
    Initializes a new instance of a graph request.
