@@ -83,6 +83,8 @@ class ButtonTests: XCTestCase {
   }
 
   func testDefaultTitles() {
+    let highlightedContentColor = UIColor(red: 218, green: 221, blue: 226)
+
     XCTAssertNil(button.title(for: .normal),
                  "Should not have a normal title by default")
     XCTAssertEqual(button.titleColor(for: .normal), .white,
@@ -90,17 +92,17 @@ class ButtonTests: XCTestCase {
 
     XCTAssertNil(button.title(for: .selected),
                  "Should not have a selected title by default")
-    XCTAssertEqual(button.titleColor(for: .selected), .white,
+    XCTAssertEqual(button.titleColor(for: .selected), highlightedContentColor,
                    "Should have the expected title color for a selected state")
 
     XCTAssertNil(button.title(for: .highlighted),
                  "Should not have a highlighted title by default")
-    XCTAssertEqual(button.titleColor(for: .highlighted), .white,
+    XCTAssertEqual(button.titleColor(for: .highlighted), highlightedContentColor,
                    "Should have the expected title color for a highlighted state")
 
     XCTAssertNil(button.title(for: [.highlighted, .selected]),
                  "Should not have a selected highlighted title by default")
-    XCTAssertEqual(button.titleColor(for: [.highlighted, .selected]), .white,
+    XCTAssertEqual(button.titleColor(for: [.highlighted, .selected]), highlightedContentColor,
                    "Should have the expected title color for a selected highlighted state")
   }
 

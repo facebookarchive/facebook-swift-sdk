@@ -322,6 +322,12 @@ class Button: UIButton {
     setTitle(selectedTitle, for: .selected)
     setTitle(selectedTitle, for: State.selected.union(.highlighted))
 
+    setTitleColor(.white, for: .normal)
+
+    setTitleColor(DefaultColors.highlightedContentColor, for: .highlighted)
+    setTitleColor(DefaultColors.highlightedContentColor, for: .selected)
+    setTitleColor(DefaultColors.highlightedContentColor, for: State.selected.union(.highlighted))
+
     #if TARGET_OS_TV
     setTitle(title, for: .focused)
     #endif
@@ -402,7 +408,8 @@ class Button: UIButton {
 
 private enum DefaultColors {
   static let normal = UIColor(red: 24, green: 119, blue: 242)
-  static let highlighted = UIColor(red: 47, green: 71, blue: 122)
+  static let highlighted = UIColor(red: 21, green: 105, blue: 214)
+  static let highlightedContentColor = UIColor(red: 218, green: 221, blue: 226)
   static let disabled = UIColor(red: 189, green: 193, blue: 201)
   static let selected = UIColor(red: 124, green: 143, blue: 200)
 }
