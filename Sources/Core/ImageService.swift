@@ -18,6 +18,13 @@
 
 import UIKit
 
+protocol ImageFetching {
+  func image(
+    for url: URL,
+    completion: @escaping (Result<UIImage, Error>) -> Void
+    ) -> URLSessionTaskProxy?
+}
+
 typealias ImageResult = Result<UIImage, Error>
 
 /**
@@ -26,7 +33,9 @@ typealias ImageResult = Result<UIImage, Error>
  Note: Timeout for the cache is one day.
  Note: This service is not smart enough to de-duplicate identical requests in flight.
  */
-class ImageService {
+class ImageService: ImageFetching {
+  static let shared = ImageService()
+
   private let oneDayInSeconds: TimeInterval = 60 * 60 * 24
   private let cacheStorageCapacity: Int = 1024 * 1024 * 8
   private let cacheDiskPath: String = "fbsdkimages"
