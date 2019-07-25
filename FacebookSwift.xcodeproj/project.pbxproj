@@ -183,7 +183,6 @@
 		F46740282294762000D3F7AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46740262294762000D3F7AF /* LaunchScreen.storyboard */; };
 		F4674042229705A100D3F7AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4674040229705A100D3F7AF /* Main.storyboard */; };
 		F467404C2297097B00D3F7AF /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
-		F467405422970A3700D3F7AF /* CryptographyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E550022946B3A008A6011 /* CryptographyTests.swift */; };
 		F467405522970A4100D3F7AF /* KeychainStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D344C2265325900CEE2ED /* KeychainStoreTests.swift */; };
 		F467405622970AA300D3F7AF /* TestAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44847F8226928E300527D49 /* TestAssets.xcassets */; };
 		F467BD3722A0AA07001090B4 /* URLQueryItemExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467BD3622A0AA07001090B4 /* URLQueryItemExtensionsTests.swift */; };
@@ -226,6 +225,9 @@
 		F480D9112236E1F7001AB8D3 /* FakeSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D9102236E1F7001AB8D3 /* FakeSessionProvider.swift */; };
 		F480D9132236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D9122236ED35001AB8D3 /* GraphRequestConnectionErrorTests.swift */; };
 		F480D9152236EE4F001AB8D3 /* GraphRequestConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F480D9142236EE4F001AB8D3 /* GraphRequestConnectionError.swift */; };
+		F487826B22DCBE3A000215F6 /* FakeAccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FB422C14D0100FAFC63 /* FakeAccessTokenWallet.swift */; };
+		F487826C22DCBE51000215F6 /* FakeAccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FB422C14D0100FAFC63 /* FakeAccessTokenWallet.swift */; };
+		F487826D22DCBE5A000215F6 /* FakeTimeSpentDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FC422C1773700FAFC63 /* FakeTimeSpentDataStore.swift */; };
 		F48A749822399C97007192F6 /* LocalizationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A749722399C97007192F6 /* LocalizationsTests.swift */; };
 		F48A749B22399FAB007192F6 /* LocalizableStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48A749D22399FAB007192F6 /* LocalizableStrings.strings */; };
 		F48A749F2239A3C7007192F6 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A749E2239A3C7007192F6 /* Localizable.swift */; };
@@ -238,7 +240,6 @@
 		F4911FB122C137EC00FAFC63 /* FakeApplicationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FAC22C1314300FAFC63 /* FakeApplicationObserver.swift */; };
 		F4911FB222C1498700FAFC63 /* FakeSecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CDB7CB2265524C00E6EF78 /* FakeSecureStore.swift */; };
 		F4911FB322C14B4F00FAFC63 /* FakeAccessTokenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6A02229C50E0083506E /* FakeAccessTokenCache.swift */; };
-		F4911FB522C14D0100FAFC63 /* FakeAccessTokenWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FB422C14D0100FAFC63 /* FakeAccessTokenWallet.swift */; };
 		F4911FB822C1508000FAFC63 /* AccessTokenFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44DB6AC222AF53B0083506E /* AccessTokenFixtures.swift */; };
 		F4911FB922C1550600FAFC63 /* FakeServerConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5DAE02245B0D30014C14D /* FakeServerConfigurationService.swift */; };
 		F4911FBB22C1580C00FAFC63 /* FakeGatekeepersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FBA22C1580C00FAFC63 /* FakeGatekeepersService.swift */; };
@@ -248,7 +249,6 @@
 		F4911FC122C166BC00FAFC63 /* FakeAppEventsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FBF22C166BC00FAFC63 /* FakeAppEventsLogger.swift */; };
 		F4911FC322C1716A00FAFC63 /* TimeSpentDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FC222C1716A00FAFC63 /* TimeSpentDataStore.swift */; };
 		F4911FC522C1773700FAFC63 /* FakeTimeSpentDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FC422C1773700FAFC63 /* FakeTimeSpentDataStore.swift */; };
-		F4911FC622C1773700FAFC63 /* FakeTimeSpentDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4911FC422C1773700FAFC63 /* FakeTimeSpentDataStore.swift */; };
 		F4932E0922807F510020C282 /* TokenStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0822807F510020C282 /* TokenStringTests.swift */; };
 		F4932E0B22808DB50020C282 /* TokenString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0A22808DB50020C282 /* TokenString.swift */; };
 		F4932E0D22809D5A0020C282 /* BoundedCGFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */; };
@@ -258,7 +258,6 @@
 		F4934B4622BD88F20049067D /* BridgeAPINetworkerProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47470E8229D9A80004FBDB0 /* BridgeAPINetworkerProviderTests.swift */; };
 		F4934B4822BD89210049067D /* UserProfileConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3C7F2267E5E800287DC4 /* UserProfileConfigurationTests.swift */; };
 		F49BC63422BA80930055DCB4 /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63122BA80930055DCB4 /* SecureStore.swift */; };
-		F49BC63522BA80930055DCB4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F49BC63622BA80930055DCB4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F49BC63922BA80AC0055DCB4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F49BC63A22BA80AC0055DCB4 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
@@ -268,7 +267,7 @@
 		F4A943CF22C3ED7900616AD8 /* FacebookCore_TV.h in Headers */ = {isa = PBXBuildFile; fileRef = F4A943CE22C3ED7900616AD8 /* FacebookCore_TV.h */; };
 		F4A943D522C3EF2500616AD8 /* FacebookCore_TVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A943D122C3EF1D00616AD8 /* FacebookCore_TVTests.swift */; };
 		F4A943D622C3EF6B00616AD8 /* ServerConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63822BA80AC0055DCB4 /* ServerConfigurationStore.swift */; };
-		F4A943D722C3EF7B00616AD8 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63222BA80930055DCB4 /* Cryptography.swift */; };
+		F4A943D722C3EF7B00616AD8 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F4A943D822C3EF7B00616AD8 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63322BA80930055DCB4 /* KeychainStore.swift */; };
 		F4A943D922C3EF9500616AD8 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49BC63722BA80AC0055DCB4 /* Store.swift */; };
 		F4A943F522C4247200616AD8 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
@@ -631,7 +630,6 @@
 		F45E54F6228F87B1008A6011 /* PListURLConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListURLConfiguration.swift; sourceTree = "<group>"; };
 		F45E54F8229319A6008A6011 /* InfoDictionaryProvidingExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionaryProvidingExtensionsTests.swift; sourceTree = "<group>"; };
 		F45E54FB229320E1008A6011 /* SampleInfoDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleInfoDictionary.swift; sourceTree = "<group>"; };
-		F45E550022946B3A008A6011 /* CryptographyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptographyTests.swift; sourceTree = "<group>"; };
 		F467401B2294762000D3F7AF /* TestHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F467401D2294762000D3F7AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F467401F2294762000D3F7AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -705,7 +703,6 @@
 		F4932E0C22809D5A0020C282 /* BoundedCGFloatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloatTests.swift; sourceTree = "<group>"; };
 		F4932E0E2280A1CA0020C282 /* BoundedCGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedCGFloat.swift; sourceTree = "<group>"; };
 		F49BC63122BA80930055DCB4 /* SecureStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
-		F49BC63222BA80930055DCB4 /* Cryptography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
 		F49BC63322BA80930055DCB4 /* KeychainStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		F49BC63722BA80AC0055DCB4 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		F49BC63822BA80AC0055DCB4 /* ServerConfigurationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfigurationStore.swift; sourceTree = "<group>"; };
@@ -1135,7 +1132,6 @@
 		F43DE1F422B989FA00527B71 /* SecureStore */ = {
 			isa = PBXGroup;
 			children = (
-				F49BC63222BA80930055DCB4 /* Cryptography.swift */,
 				F49BC63322BA80930055DCB4 /* KeychainStore.swift */,
 				F49BC63122BA80930055DCB4 /* SecureStore.swift */,
 				F4C5A7A322BC399A0060E530 /* SecureStoreKeys.swift */,
@@ -1322,7 +1318,6 @@
 				F4317EA02289C03B00EBF926 /* CGFloatExtensionsTests.swift */,
 				F46DDCBB228B49BB00BA7359 /* CGSizeExtensionTests.swift */,
 				F4B8832B22305791000971C9 /* CoreErrorTests.swift */,
-				F45E550022946B3A008A6011 /* CryptographyTests.swift */,
 				F4C32DAB2240288800FF1F86 /* DefaultErrorConfigurationTests.swift */,
 				F48A74B02239B81B007192F6 /* DefaultErrorStringTests.swift */,
 				F44715222243E3FF0013495F /* DeveloperErrorStringsTests.swift */,
@@ -1962,7 +1957,7 @@
 				F479098D2298542800F9C0A2 /* BridgeAPIWebV2.swift in Sources */,
 				F4144C54224D0FA7006C8F9C /* URLBuilder.swift in Sources */,
 				F4E1A9EC22416F2200503354 /* FBError.swift in Sources */,
-				F4A943D722C3EF7B00616AD8 /* Cryptography.swift in Sources */,
+				F4A943D722C3EF7B00616AD8 /* BuildFile in Sources */,
 				F42E3C792267E45100287DC4 /* UserProfileBuilder.swift in Sources */,
 				F480D90B2235CFC2001AB8D3 /* GraphRequestConnectionState.swift in Sources */,
 				F4A943D922C3EF9500616AD8 /* Store.swift in Sources */,
@@ -1981,7 +1976,6 @@
 				F44DB69222299FA10083506E /* AccessTokenWallet.swift in Sources */,
 				F44847EC2269195100527D49 /* HumanSilhouetteIcon.swift in Sources */,
 				F4DC46FF2283678F00C0A309 /* AudioResourceLoader.swift in Sources */,
-				F49BC63522BA80930055DCB4 /* BuildFile in Sources */,
 				F44DB6B9222B07740083506E /* GraphConnectionProvider.swift in Sources */,
 				F4C5A7A422BC399A0060E530 /* SecureStoreKeys.swift in Sources */,
 				F44DB69D2229B4420083506E /* AccessTokenCaching.swift in Sources */,
@@ -2127,6 +2121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F487826D22DCBE5A000215F6 /* FakeTimeSpentDataStore.swift in Sources */,
 				F4F4373622A5CD310090D0C9 /* BridgeAPIRequestTests.swift in Sources */,
 				F4A9446022C66EF600616AD8 /* FakeNotificationCenter.swift in Sources */,
 				F4911FC122C166BC00FAFC63 /* FakeAppEventsLogger.swift in Sources */,
@@ -2141,9 +2136,7 @@
 				F4F4373922A5CD6F0090D0C9 /* FakeURLOpener.swift in Sources */,
 				F4A9440722C527C400616AD8 /* UserDefaultsSpy.swift in Sources */,
 				F4F4373D22A5CD9C0090D0C9 /* SampleURL.swift in Sources */,
-				F4911FB522C14D0100FAFC63 /* FakeAccessTokenWallet.swift in Sources */,
-				F4911FC622C1773700FAFC63 /* FakeTimeSpentDataStore.swift in Sources */,
-				F467405422970A3700D3F7AF /* CryptographyTests.swift in Sources */,
+				F487826C22DCBE51000215F6 /* FakeAccessTokenWallet.swift in Sources */,
 				F4F4373B22A5CD890090D0C9 /* FakeSettings.swift in Sources */,
 				F4911FBC22C1580C00FAFC63 /* FakeGatekeepersService.swift in Sources */,
 				F4F4373A22A5CD7E0090D0C9 /* FakeBridgeApiNetworker.swift in Sources */,
@@ -2328,6 +2321,7 @@
 				F447153222440EB60013495F /* FakeSession.swift in Sources */,
 				F43AB03E2270D69400610974 /* GatekeeperServiceTests.swift in Sources */,
 				F4C3C5342277C3B6004B487E /* SampleRawRemoteAppLink.swift in Sources */,
+				F487826B22DCBE3A000215F6 /* FakeAccessTokenWallet.swift in Sources */,
 				F4C57D0B22A98C5100D0BEFE /* GraphRequestTestHelper.swift in Sources */,
 				F44DB6A32229C6B60083506E /* FakeSettings.swift in Sources */,
 				F4C3C551227B4C6F004B487E /* RemoteAppLink+Extensions.swift in Sources */,
