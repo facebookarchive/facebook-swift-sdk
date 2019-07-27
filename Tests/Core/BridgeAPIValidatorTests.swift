@@ -56,8 +56,14 @@ class BridgeAPIValidatorTests: XCTestCase {
       request: request,
       sourceApplication: "com.wrong"
     )
-    XCTAssertFalse(isValid,
-                   "Should not consider a native application request valid for a source application that does not have a facebook domain")
+
+    if #available(iOS 13.0, *) {
+      XCTAssertTrue(isValid,
+                    "Should consider all native requests valid when os is >= iOS 13")
+    } else {
+      XCTAssertFalse(isValid,
+                     "Should not consider a native application request valid for a source application that does not have a facebook domain")
+    }
   }
 
   func testCreatingWithWebRequestInvalidBundleID() {
