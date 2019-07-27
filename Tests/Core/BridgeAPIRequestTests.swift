@@ -178,15 +178,13 @@ class BridgeAPIRequestTests: XCTestCase {
   }
 
   func testRequestProvidesURLUsingURLFromBridgeAPINetworker() {
-    try! Cryptography.generateRSAKeyPair()
     fakeSettings.appIdentifier = "abc123"
     fakeBundle.infoDictionary = SampleInfoDictionary.validURLSchemes(schemes: ["fbabc123"])
     let passThroughQueryItem = URLQueryItemBuilder.build(from: ["bar": "baz"])
     let expectedQueryItems = URLQueryItemBuilder.build(from:
       [
         "bar": "baz",
-        "app_id": fakeSettings.appIdentifier!,
-        "cipher_key": try! Cryptography.rsaPublicKeyAsBase64()
+        "app_id": fakeSettings.appIdentifier!
       ]
     )
     fakeBridgeAPIURLProvider.stubbedURL = URLBuilder().buildURL(scheme: "myApp", hostName: "example.com", queryItems: passThroughQueryItem)!

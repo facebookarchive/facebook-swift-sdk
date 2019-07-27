@@ -25,6 +25,7 @@ class UserProfileServiceTests: XCTestCase {
   private var fakeLogger: FakeLogger!
   private var fakeGraphConnectionProvider: FakeGraphConnectionProvider!
   private let fakeNotificationCenter = FakeNotificationCenter()
+  private let fakeImageService = FakeImageService()
   private var service: UserProfileService!
   private var userDefaultsSpy: UserDefaultsSpy!
   private var store: UserProfileStore!
@@ -52,7 +53,8 @@ class UserProfileServiceTests: XCTestCase {
       logger: fakeLogger,
       notificationCenter: fakeNotificationCenter,
       store: store,
-      accessTokenProvider: wallet
+      accessTokenProvider: wallet,
+      imageService: fakeImageService
     )
   }
 
@@ -559,21 +561,27 @@ class UserProfileServiceTests: XCTestCase {
   }
 
   func testFetchingImageWithMissingAccessTokenAndCustomIdentifier() {
+    let expectation = self.expectation(description: name)
+
     service.fetchProfileImage(
       for: "abc123",
       sizingConfiguration: sizingConfiguration
     ) { result in
       switch result {
       case .success:
-        break
+        expectation.fulfill()
 
       case .failure:
         XCTFail("Should not immediately fail to fetch the profile image for a given user id since this is public information")
       }
     }
+
+    fakeImageService.capturedCompletion?(.success(UIImage()))
+
+    waitForExpectations(timeout: 1, handler: nil)
   }
 
-  func testFetchingProfileImageForDefaultIdentifier() {
+  func testFetchingImageForDefaultIdentifier() {
     // Setup access token
     let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
     wallet.setCurrent(token)
@@ -582,10 +590,14 @@ class UserProfileServiceTests: XCTestCase {
     _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { _ in }
 
     // Assert
-    XCTAssertEqual(fakeConnection.capturedGetObjectGraphRequest?.graphPath.description, "me/picture")
+    XCTAssertEqual(
+      fakeImageService.capturedURL?.path,
+      "/\(Settings.shared.graphAPIVersion)/me/picture",
+      "Should call the image service with the expected path"
+    )
   }
 
-  func testFetchingProfileImageWithCustomIdentifier() {
+  func testFetchingImageWithCustomIdentifier() {
     // Setup access token
     let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
     wallet.setCurrent(token)
@@ -597,18 +609,19 @@ class UserProfileServiceTests: XCTestCase {
     ) { _ in }
 
     // Assert
-    XCTAssertEqual(fakeConnection.capturedGetObjectGraphRequest?.graphPath.description, "user123/picture")
+    XCTAssertEqual(
+      fakeImageService.capturedURL?.path,
+      "/\(Settings.shared.graphAPIVersion)/user123/picture",
+      "Should call the image service with the expecte path"
+    )
   }
 
-  func testFetchingProfileFailure() {
+  func testFetchingImageFailure() {
     let expectation = self.expectation(description: name)
 
     // Setup access token
     let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
     wallet.setCurrent(token)
-
-    // Stub a fetch result
-    fakeConnection.stubGetObjectCompletionResult = .failure(GraphRequestConnectionError.missingData)
 
     // Request image
     _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
@@ -626,93 +639,32 @@ class UserProfileServiceTests: XCTestCase {
       expectation.fulfill()
     }
 
-    waitForExpectations(timeout: 1, handler: nil)
-  }
-
-  func testFetchingProfileImageEmptyData() {
-    let expectation = self.expectation(description: name)
-    let data = Data()
-
-    // Setup access token
-    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
-    wallet.setCurrent(token)
-
-    // Stub a fetch result
-    fakeConnection.stubGetObjectCompletionResult = .success(data)
-
-    // Request image
-    _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
-      switch result {
-      case .success:
-        XCTFail("Should fail to convert empty data into an image")
-
-      case let .failure(error as UserProfileService.ImageFetchError):
-        XCTAssertEqual(error, .invalidImageData,
-                       "Should return the correct error for failing to fetch an image")
-
-      case .failure:
-        XCTFail("Should return known errors on failure")
-      }
-      expectation.fulfill()
-    }
+    // Call the captured completion handler
+    fakeImageService.capturedCompletion?(.failure(GraphRequestConnectionError.missingData))
 
     waitForExpectations(timeout: 1, handler: nil)
   }
 
-  func testFetchingProfileImageBadData() {
-    let expectation = self.expectation(description: name)
-    let data = "Not an image".data(using: .utf8)
-
-    // Setup access token
-    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
-    wallet.setCurrent(token)
-
-    // Stub a fetch result
-    fakeConnection.stubGetObjectCompletionResult = .success(data)
-
-    // Request image
-    _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
-      switch result {
-      case .success:
-        XCTFail("Should fail to convert empty data into an image")
-
-      case let .failure(error as UserProfileService.ImageFetchError):
-        XCTAssertEqual(error, .invalidImageData,
-                       "Should return the correct error for failing to fetch an image")
-
-      case .failure:
-        XCTFail("Should return known errors on failure")
-      }
-      expectation.fulfill()
-    }
-
-    waitForExpectations(timeout: 1, handler: nil)
-  }
-
-  func testSuccessfullyFetchingProfileImage() {
+  func testSuccessfullyFetchingImageSuccess() {
     let expectation = self.expectation(description: name)
     let profile = SampleUserProfile.valid()
     service.setCurrent(profile)
 
-    // Setup access token
-    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
-    wallet.setCurrent(token)
-
-    // Stub a fetch result
     let image = HumanSilhouetteIcon().image(
       size: sizingConfiguration.size,
       color: .red
     )
 
-    let imageData = image.pngData()
-    fakeConnection.stubGetObjectCompletionResult = .success(imageData)
+    // Setup access token
+    let token = AccessToken(tokenString: "abc", appID: "123", userID: "1")
+    wallet.setCurrent(token)
 
     // Request image
     _ = service.fetchProfileImage(sizingConfiguration: sizingConfiguration) { result in
       switch result {
       case let .success(fetchedImage):
         XCTAssertEqual(image.pngData(), fetchedImage.pngData(),
-                       "Should convert the fetched image data into an image to return")
+                       "Should return the image fetched by the image service")
 
       case .failure:
         XCTFail("Should not fail to convert valid image data into a result")
@@ -720,12 +672,15 @@ class UserProfileServiceTests: XCTestCase {
       expectation.fulfill()
     }
 
+    // Call captured completion handler
+    fakeImageService.capturedCompletion?(.success(image))
+
     waitForExpectations(timeout: 1, handler: nil)
   }
 
   // MARK: - Refreshing
 
-  func testRefreshingStaleProfileOnAccessTokenChange() {
+  func testRefreshingStaleProfileOnAccessTokenChangeFailure() {
     service = UserProfileService(
       graphConnectionProvider: fakeGraphConnectionProvider
     )
@@ -747,6 +702,32 @@ class UserProfileServiceTests: XCTestCase {
     // Assert
     XCTAssertTrue(fakeConnection.getObjectWasCalled,
                   "Should attempt to fetch a new profile when a notification is received for a new access token")
+    XCTAssertNil(service.userProfile,
+                 "Should not set a user profile on a failed refresh")
+  }
+
+  func testRefreshingStaleProfileOnAccessTokenChangeSuccess() {
+    service = UserProfileService(
+      graphConnectionProvider: fakeGraphConnectionProvider
+    )
+    service.shouldUpdateOnAccessTokenChange = true
+    let token = AccessTokenFixtures.validToken
+
+    // Stub a fetch result
+    fakeConnection.stubGetObjectCompletionResult = .success(SampleRemoteUserProfile.valid)
+
+    // Attempt to load the profile via a notification
+    NotificationCenter.default.post(
+      name: .FBSDKAccessTokenDidChangeNotification,
+      object: self,
+      userInfo: [
+        AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeNewKey: token
+      ]
+    )
+
+    // Assert
+    XCTAssertNotNil(service.userProfile,
+                    "Should set the fetched user profile onto the service")
   }
 }
 

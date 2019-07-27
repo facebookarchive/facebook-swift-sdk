@@ -16,30 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+@testable import FacebookCore
+import UIKit
 
-/**
- Provides available information about a Facebook user
- */
-public struct UserProfile: Codable {
-  /// The user id
-  let identifier: String
+class FakeImageService: ImageFetching {
+  var capturedURL: URL?
+  var capturedCompletion: ((Result<UIImage, Error>) -> Void)?
 
-  /// The user's complete name
-  let name: String
+  func image(for url: URL, completion: @escaping (Result<UIImage, Error>) -> Void) -> URLSessionTaskProxy? {
+    capturedURL = url
+    capturedCompletion = completion
 
-  /// The user's first name
-  let firstName: String?
-
-  /// The user's middle name
-  let middleName: String?
-
-  /// The user's last name
-  let lastName: String?
-
-  /// A URL to the user's profile.
-  let url: URL?
-
-  /// The last time the profile data was fetched.
-  let fetchedDate: Date
+    return nil
+  }
 }

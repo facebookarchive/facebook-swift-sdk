@@ -703,7 +703,8 @@ class GraphRequestConnectionTests: XCTestCase {
     let expectation = self.expectation(description: name)
 
     let proxy = connection.getObject(
-    for: graphRequest) { (result: Result<DecodablePerson, Error>) -> Void in
+      for: graphRequest
+    ) { (result: Result<DecodablePerson, Error>) -> Void in
         switch result {
         case .success:
           XCTFail("A request that is completed without data or a response should not be considered a success")

@@ -72,7 +72,12 @@ struct URLBuilder {
     for request: GraphRequest,
     hostPrefix: String = URLBuilder.graphAPIHostPrefix
     ) -> URL? {
-    let queryItems = URLQueryItemBuilder.build(from: request.parameters)
+    var queryItems = URLQueryItemBuilder.build(from: request.parameters)
+
+    if let token = request.accessToken {
+      queryItems.append(URLQueryItem(name: "access_token", value: token.tokenString))
+    }
+
     let path = buildGraphAPIPath(from: request.graphPath.description)
 
     return self.buildURL(

@@ -81,14 +81,6 @@ struct BridgeAPIRequest {
 
     var queryItems = components.queryItems ?? []
 
-    if let key = try? Cryptography.rsaPublicKeyAsBase64() {
-      queryItems.append(URLQueryItem(name: "cipher_key", value: key))
-    } else {
-      try Cryptography.generateRSAKeyPair()
-      let key = try Cryptography.rsaPublicKeyAsBase64()
-      queryItems.append(URLQueryItem(name: "cipher_key", value: key))
-    }
-
     queryItems.append(URLQueryItem(name: "app_id", value: appIdentifier))
 
     if let suffix = settings.urlSchemeSuffix,

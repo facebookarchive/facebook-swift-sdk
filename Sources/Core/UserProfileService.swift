@@ -18,8 +18,10 @@
 
 import UIKit
 
-typealias UserProfileResult = Result<UserProfile, Error>
-typealias UserProfileImageResult = Result<UIImage, Error>
+/// A Result type for fetching a `UserProfile`
+public typealias UserProfileResult = Result<UserProfile, Error>
+/// A Result type for fetching a `UIImage`
+public typealias UserProfileImageResult = Result<UIImage, Error>
 
 protocol UserProfileProviding {
   func fetchProfileImage(
@@ -41,8 +43,8 @@ protocol UserProfileProviding {
 
  You can use this class to build your own `ProfilePictureView` or in place of typical requests to "/me".
  */
-class UserProfileService: UserProfileProviding {
-  static let shared = UserProfileService()
+public final class UserProfileService: UserProfileProviding {
+  public static let shared = UserProfileService()
 
   private let oneDayInSeconds = TimeInterval(60 * 60 * 24)
   private(set) var graphConnectionProvider: GraphConnectionProviding
@@ -50,12 +52,15 @@ class UserProfileService: UserProfileProviding {
   private(set) var notificationCenter: NotificationObserving & NotificationPosting
   private(set) var store: UserProfileStore
   private(set) var accessTokenProvider: AccessTokenProviding
+  private(set) var imageService: ImageFetching
 
   private(set) var userProfile: UserProfile?
 
+  private var currentImageFetchTask: URLSessionTaskProxy?
+  private var currentLoadProfileTask: URLSessionTaskProxy?
+
   /**
    Indicates if `userProfile` will automatically observe `FBSDKAccessTokenDidChangeNotification` notifications
-   @param enable YES is observing
 
    If observing, this class will issue a graph request for public profile data when the current token's userID
    differs from the current profile.
@@ -64,7 +69,7 @@ class UserProfileService: UserProfileProviding {
    Note that if `AccessTokenWallet.shared.currentAccessToken` is unset, the `currentProfile` instance remains.
    It's also possible for `currentProfile` to return nil until the data is fetched.
    */
-  var shouldUpdateOnAccessTokenChange: Bool = false {
+  public var shouldUpdateOnAccessTokenChange: Bool = false {
     didSet {
       switch shouldUpdateOnAccessTokenChange {
       case true:
@@ -94,13 +99,15 @@ class UserProfileService: UserProfileProviding {
     logger: Logging = Logger(),
     notificationCenter: NotificationObserving & NotificationPosting = NotificationCenter.default,
     store: UserProfileStore = UserProfileStore(),
-    accessTokenProvider: AccessTokenProviding = AccessTokenWallet.shared
+    accessTokenProvider: AccessTokenProviding = AccessTokenWallet.shared,
+    imageService: ImageFetching = ImageService.shared
     ) {
     self.graphConnectionProvider = graphConnectionProvider
     self.logger = logger
     self.notificationCenter = notificationCenter
     self.store = store
     self.accessTokenProvider = accessTokenProvider
+    self.imageService = imageService
   }
 
   @objc
@@ -108,7 +115,13 @@ class UserProfileService: UserProfileProviding {
     if let newToken = notification.userInfo?[
       AccessTokenWallet.NotificationKeys.FBSDKAccessTokenChangeNewKey
       ] as? AccessToken {
-      loadProfile(withToken: newToken)
+      loadProfile(withToken: newToken) { [weak self] result in
+        guard let newProfile = try? result.get() else {
+          return
+        }
+
+        self?.userProfile = newProfile
+      }
     }
   }
 
@@ -142,9 +155,9 @@ class UserProfileService: UserProfileProviding {
    will begin a graph request to update `userProfile` and then set the current profile and call the
    completion block when finished.
    */
-  func loadProfile(completion: ((UserProfileResult) -> Void)? = nil) {
+  public func loadProfile(completion: @escaping (UserProfileResult) -> Void) {
     guard let token = accessTokenProvider.currentAccessToken else {
-      completion?(.failure(CoreError.accessTokenRequired))
+      completion(.failure(CoreError.accessTokenRequired))
       return
     }
 
@@ -152,10 +165,10 @@ class UserProfileService: UserProfileProviding {
       switch result {
       case let .success(profile):
         self?.setCurrent(profile)
-        completion?(.success(profile))
+        completion(.success(profile))
 
       case let .failure(error):
-        completion?(.failure(error))
+        completion(.failure(error))
       }
     }
   }
@@ -172,12 +185,12 @@ class UserProfileService: UserProfileProviding {
    */
   func loadProfile(
     withToken token: AccessToken,
-    completion: ((UserProfileResult) -> Void)? = nil
+    completion: @escaping (UserProfileResult) -> Void
     ) {
     if let profile = userProfile,
       !isCurrentProfileOutdated,
       profile.identifier == token.userID {
-      completion?(.success(profile))
+      completion(.success(profile))
       return
     }
 
@@ -190,12 +203,12 @@ class UserProfileService: UserProfileProviding {
         .union(GraphRequest.Flags.disableErrorRecovery)
     )
 
-    // TODO: capture the task for cancellation possibilities? Or maybe make it discardable result
-
-    loadRemoteProfile(for: request) { [weak self] (result: Result<Remote.UserProfile, Error>) -> Void in
+    currentLoadProfileTask = loadRemoteProfile(
+      for: request
+    ) { [weak self] (result: Result<Remote.UserProfile, Error>) -> Void in
       let ultimateResult: UserProfileResult
       defer {
-        completion?(ultimateResult)
+        completion(ultimateResult)
       }
 
       switch result {
@@ -218,8 +231,8 @@ class UserProfileService: UserProfileProviding {
   private func loadRemoteProfile(
     for request: GraphRequest,
     completion: @escaping (Result<Remote.UserProfile, Error>) -> Void
-    ) {
-    _ = graphConnectionProvider
+    ) -> URLSessionTaskProxy? {
+    return graphConnectionProvider
       .graphRequestConnection()
       .getObject(for: request, completion: completion)
   }
@@ -273,37 +286,30 @@ class UserProfileService: UserProfileProviding {
    dimensions and tracking whether an image should fit for a given `UIView.ContentMode`
    - Parameter completion: A completion that takes a Result Type with a success of UIImage and a failure of Error
    */
-  func fetchProfileImage(
+  public func fetchProfileImage(
     for identifier: String = GraphPath.me.description,
     sizingConfiguration configuration: ImageSizingConfiguration,
     completion: @escaping (UserProfileImageResult) -> Void
     ) {
     // Access token is required to fetch a profile image but only for the 'me' path
-    switch identifier == GraphPath.me.description &&
-      accessTokenProvider.currentAccessToken == nil {
-    case true:
+    guard identifier != GraphPath.me.description
+      || accessTokenProvider.currentAccessToken != nil
+      else {
       completion(.failure(CoreError.accessTokenRequired))
-
-    case false:
-      break
+      return
     }
 
     let request = imageRequest(for: identifier, sizingConfiguration: configuration)
 
-    // TODO: this should probably return a task that can be cancelled
-    _ = graphConnectionProvider.graphRequestConnection()
-      .getObject(for: request) { (result: Result<Data, Error>) -> Void in
-        switch result {
-        case let .success(data):
-          guard let image = UIImage(data: data, scale: configuration.scale) else {
-            return completion(.failure(ImageFetchError.invalidImageData))
-          }
-          completion(.success(image))
+    guard let url = URLBuilder().buildURL(for: request) else {
+      completion(.failure(ImageFetchError.invalidImageURL))
+      return
+    }
 
-        case let .failure(error):
-          completion(.failure(error))
-        }
-      }
+    currentImageFetchTask = imageService.image(for: url) { result in
+      self.currentImageFetchTask = nil
+      completion(result)
+    }
   }
 
   enum NotificationKeys {
@@ -323,7 +329,7 @@ class UserProfileService: UserProfileProviding {
   }
 
   enum ImageFetchError: Error {
-    case invalidImageData
+    case invalidImageURL
   }
 
   enum ProfileFetchError: Error {
