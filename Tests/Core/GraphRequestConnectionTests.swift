@@ -423,13 +423,12 @@ class GraphRequestConnectionTests: XCTestCase {
   // nil | yes | nil
   func testCompletingFetchDataTaskWithDataAndInvalidMimeTypes() {
     let expectation = self.expectation(description: name)
-    let response = SampleHTTPURLResponse.pngMimeType
+    let sampleResponse = SampleHTTPURLResponse.pngMimeType
 
     let proxy = connection.fetchData(for: graphRequest) { result in
       switch result {
-      case .success(let data):
-        XCTFail("Should not successfully complete task that has a png image mimetype in response RESPONSE MIMETYPE: \(String(describing: response.mimeType)) RESPONSE DATA: \(try! JSONSerialization.jsonObject(with: data, options: []))"
-        )
+      case .success:
+        XCTFail("RESPONSE MIMETYPE: \(sampleResponse.mimeType!)")
 
       case .failure(let error as GraphRequestConnectionError):
         XCTAssertEqual(error, .nonTextMimeType,
@@ -442,7 +441,7 @@ class GraphRequestConnectionTests: XCTestCase {
     }
 
     let someData = try! JSONSerialization.data(withJSONObject: ["foo": "bar"], options: [])
-    complete(proxy, with: someData, response, nil)
+    complete(proxy, with: someData, sampleResponse, nil)
 
     waitForExpectations(timeout: 1, handler: nil)
   }
