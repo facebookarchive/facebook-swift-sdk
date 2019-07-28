@@ -22,7 +22,7 @@
 # --------------
 
 set -o pipefail
-xcodebuild test -workspace "$XCODE_WORKSPACE" -sdk iphonesimulator -scheme FacebookCore -configuration Debug -destination "platform=iOS Simulator,name=iPhone Xr" | xcpretty -c
+xcodebuild test -workspace "$XCODE_WORKSPACE" -sdk iphonesimulator -scheme FacebookCore -configuration Debug -destination "platform=iOS Simulator,name=iPhone XR" | xcpretty -c
 # TODO: Uncomment when test targets are set up for Login and Share
 # xcodebuild test -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookLogin -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
 # xcodebuild test -workspace $XCODE_WORKSPACE -sdk iphonesimulator -scheme FacebookShare -configuration Debug -destination "platform=iOS Simulator,name=iPhone 5" -destination "platform=iOS Simulator,name=iPhone 7 Plus" | xcpretty -c
