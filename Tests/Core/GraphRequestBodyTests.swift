@@ -287,7 +287,7 @@ class GraphRequestBodyTests: XCTestCase {
 
     let compressed = generator.compressedUploadData
 
-    XCTAssertEqual(compressed?.count, 120,
+    XCTAssertEqual(compressed?.count, 121,
                    "The compressed data should be a specific number of bytes as it conforms to a specific compression protocol")
   }
 }
