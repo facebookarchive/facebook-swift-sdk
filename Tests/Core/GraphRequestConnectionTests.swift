@@ -428,12 +428,7 @@ class GraphRequestConnectionTests: XCTestCase {
     let proxy = connection.fetchData(for: graphRequest) { result in
       switch result {
       case .success(let data):
-        XCTFail("""
-          Should not successfully complete task that has a png image mimetype in response"
-
-          RESPONSE MIMETYPE: \(String(describing: response.mimeType))
-          RESPONSE DATA: \(try! JSONSerialization.jsonObject(with: data, options: []))
-          """
+        XCTFail("Should not successfully complete task that has a png image mimetype in response RESPONSE MIMETYPE: \(String(describing: response.mimeType)) RESPONSE DATA: \(try! JSONSerialization.jsonObject(with: data, options: []))"
         )
 
       case .failure(let error as GraphRequestConnectionError):
