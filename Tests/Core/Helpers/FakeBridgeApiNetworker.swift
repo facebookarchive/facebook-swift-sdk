@@ -38,6 +38,7 @@ class FakeBridgeAPINetworker: BridgeAPINetworking {
     return stubbedURL
   }
 
+  // swiftlint:disable:next unavailable_function
   func responseParameters(actionID: String, queryItems: [URLQueryItem]) -> QueryItemsResult {
     fatalError("Implement me")
   }

@@ -100,8 +100,8 @@ class StringExtensionsTests: XCTestCase {
         ("foo", systemFont10, CGSize(width: 20, height: 20), .byTruncatingTail, CGSize(width: 15, height: 8)),
         ("foo", systemFont10, CGSize(width: 20, height: 20), .byTruncatingMiddle, CGSize(width: 15, height: 8)),
 
-        ("foo", systemFont15, CGSize(width: 20, height: 20), .byCharWrapping, CGSize(width: 14, height: 18)),
-        ("foo", systemFont15, CGSize(width: 20, height: 20), .byWordWrapping, CGSize(width: 14, height: 18)),
+        ("foo", systemFont15, CGSize(width: 20, height: 20), .byCharWrapping, CGSize(width: 14, height: 36)),
+        ("foo", systemFont15, CGSize(width: 20, height: 20), .byWordWrapping, CGSize(width: 14, height: 36)),
         ("foo", systemFont15, CGSize(width: 20, height: 20), .byClipping, CGSize(width: 22, height: 12)),
         ("foo", systemFont15, CGSize(width: 20, height: 20), .byTruncatingHead, CGSize(width: 19, height: 9)),
         ("foo", systemFont15, CGSize(width: 20, height: 20), .byTruncatingTail, CGSize(width: 16, height: 12)),

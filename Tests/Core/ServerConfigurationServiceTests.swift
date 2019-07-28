@@ -93,6 +93,13 @@ class ServerConfigurationServiceTests: XCTestCase {
   // MARK: - Requests
 
   func testLoadRequest() {
+    let expectedOSVersion = ProcessInfo.processInfo.operatingSystemVersion
+    let formattedOSVersion = [
+      "\(expectedOSVersion.majorVersion)",
+      "\(expectedOSVersion.minorVersion)",
+      "\(expectedOSVersion.patchVersion)"
+      ].joined(separator: ".")
+
     let expectedQueryItems = [
       URLQueryItem(
         name: "fields",
@@ -101,7 +108,7 @@ class ServerConfigurationServiceTests: XCTestCase {
           "name",
           "default_share_mode",
           "ios_dialog_configs",
-          "ios_sdk_dialog_flows.os_version(12.2.0)",
+          "ios_sdk_dialog_flows.os_version(\(formattedOSVersion))",
           "ios_sdk_error_categories",
           "supports_implicit_sdk_logging",
           "gdpv4_nux_enabled",

@@ -43,7 +43,7 @@ class UserProfileServiceConfigurationTests: XCTestCase {
   }
 
   func testImageFetchingDependency() {
-    XCTAssertTrue(profileService.imageService is ImageFetching,
+    XCTAssertTrue(profileService.imageService is ImageService,
                   "A profile service should have the expected concrete implementation for its image fetching dependency")
   }
 }

@@ -75,7 +75,7 @@ struct BridgeAPIRequest {
       throw RequestError.invalidAppID
     }
 
-    guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+    guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
       throw RequestError.invalidSourceURL
     }
 
