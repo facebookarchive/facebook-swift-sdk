@@ -436,6 +436,7 @@ class GraphRequestConnectionTests: XCTestCase {
         //
         // XCTFail("Should not successfully complete task that has a png image mimetype in response")
         print("Uncomment for local development")
+
       case .failure(let error as GraphRequestConnectionError):
         XCTAssertEqual(error, .nonTextMimeType,
                        "Should provide the expected error")
