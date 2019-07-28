@@ -77,6 +77,7 @@ class FakeApplicationObserver: ApplicationObserving {
     return stubbedOpenURL
   }
 
+  // swiftlint:disable:next unavailable_function
   func application(
     _ app: UIApplication,
     open url: URL,

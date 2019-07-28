@@ -29,6 +29,7 @@ import UIKit
  should call them in the respective methods in your AppDelegate implementation.
  */
 public class FBApplicationDelegate {
+  /// The shared instance of FBApplicationDelegate
   public static let shared = FBApplicationDelegate()
 
   private var didFinishLaunching: Bool = false
