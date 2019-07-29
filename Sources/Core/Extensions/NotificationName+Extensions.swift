@@ -42,4 +42,11 @@ extension Notification.Name {
   // swiftlint:disable:next identifier_name
   static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
     = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
+
+  /**
+   Notification indicating that an `AppEvent`s log flush attempt failed.
+   The posted object will be an Error instance.
+   */
+  static let AppEventsLoggingResultNotification: Notification.Name
+    = Notification.Name("FBSDKAppEventsLoggingResultNotification")
 }
