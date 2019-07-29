@@ -16,6 +16,8 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable file_length
+
 import Foundation
 
 /**
@@ -178,7 +180,7 @@ public enum AppEvents {
    Common event names are provided in the `FBAppEventName*` constants.
    */
   enum ParameterName: String {
-    // swiftlint:disable:next line_length
+    // swiftlint:disable line_length
     /**
      Parameter key used to specify data for the one or more pieces of content being logged about.
      Data should be a JSON encoded string.
@@ -188,6 +190,7 @@ public enum AppEvents {
      ```
      */
     case content = "fb_content"
+    // swiftlint:enable line_length
     /**
      Parameter key used to specify an ID for the specific piece of content being logged
      about.

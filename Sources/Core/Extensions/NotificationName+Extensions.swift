@@ -39,7 +39,6 @@ extension Notification.Name {
   static let FBSDKProfileDidChangeNotification: Notification.Name
     = Notification.Name("FBSDKProfileDidChangeNotification")
 
-  // swiftlint:disable:next identifier_name
   static let FBSDKApplicationDidBecomeActiveNotification: Notification.Name
     = Notification.Name("FBSDKApplicationDidBecomeActiveNotification")
 
