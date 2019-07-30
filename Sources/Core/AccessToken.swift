@@ -19,7 +19,7 @@
 import Foundation
 
 /// Represents an immutable access token for using Facebook services.
-struct AccessToken: Equatable, Codable {
+public struct AccessToken: Equatable, Codable {
   /// Returns the opaque token string.
   let tokenString: String
 

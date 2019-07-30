@@ -375,6 +375,8 @@
 		F4DBAB1E22AD634300E4CF4A /* SampleRemoteUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBAB1D22AD634300E4CF4A /* SampleRemoteUserProfile.swift */; };
 		F4DC46FF2283678F00C0A309 /* AudioResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DC46FE2283678F00C0A309 /* AudioResourceLoader.swift */; };
 		F4DC470122836F6B00C0A309 /* AudioResourceLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */; };
+		F4DFDB0522F098DC00CFA1CC /* AppEventsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DFDB0422F098DC00CFA1CC /* AppEventsConstants.swift */; };
+		F4DFDB0722F0999100CFA1CC /* AppEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DFDB0622F0999100CFA1CC /* AppEventsTests.swift */; };
 		F4E1A9E922416F2200503354 /* RemoteErrorConfigurationEntryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */; };
 		F4E1A9EA22416F2200503354 /* DefaultErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E422416F2200503354 /* DefaultErrorStrings.swift */; };
 		F4E1A9EB22416F2200503354 /* ErrorConfigurationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1A9E522416F2200503354 /* ErrorConfigurationEntry.swift */; };
@@ -816,6 +818,8 @@
 		F4DBAB1D22AD634300E4CF4A /* SampleRemoteUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRemoteUserProfile.swift; sourceTree = "<group>"; };
 		F4DC46FE2283678F00C0A309 /* AudioResourceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResourceLoader.swift; sourceTree = "<group>"; };
 		F4DC470022836F6B00C0A309 /* AudioResourceLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioResourceLoaderTests.swift; sourceTree = "<group>"; };
+		F4DFDB0422F098DC00CFA1CC /* AppEventsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEventsConstants.swift; sourceTree = "<group>"; };
+		F4DFDB0622F0999100CFA1CC /* AppEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEventsTests.swift; sourceTree = "<group>"; };
 		F4E1A9E322416F2200503354 /* RemoteErrorConfigurationEntryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteErrorConfigurationEntryList.swift; sourceTree = "<group>"; };
 		F4E1A9E422416F2200503354 /* DefaultErrorStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorStrings.swift; sourceTree = "<group>"; };
 		F4E1A9E522416F2200503354 /* ErrorConfigurationEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorConfigurationEntry.swift; sourceTree = "<group>"; };
@@ -1128,6 +1132,7 @@
 			isa = PBXGroup;
 			children = (
 				F406732122EE6FF8004CD72F /* AppEvents.swift */,
+				F4DFDB0422F098DC00CFA1CC /* AppEventsConstants.swift */,
 			);
 			path = AppEvents;
 			sourceTree = "<group>";
@@ -1312,6 +1317,7 @@
 				F49FA48F2228819E0008CAD6 /* AccessTokenTests.swift */,
 				F44DB6A82229D7BF0083506E /* AccessTokenWalletConfigurationTests.swift */,
 				F409967422299BE200F23464 /* AccessTokenWalletTests.swift */,
+				F4DFDB0622F0999100CFA1CC /* AppEventsTests.swift */,
 				F4C3C54A227A3E43004B487E /* AppLinkBuilderTests.swift */,
 				F4C3C52D22779627004B487E /* AppLinkIdiomTests.swift */,
 				F429ACD22280DDF2000916BF /* AppLinkServiceConfigurationTests.swift */,
@@ -1946,6 +1952,7 @@
 				F4317E5F22862B8000EBF926 /* Color.swift in Sources */,
 				F44DB6BD222B0DD20083506E /* GraphRequestPiggybackManager.swift in Sources */,
 				F48A749F2239A3C7007192F6 /* Localizable.swift in Sources */,
+				F4DFDB0522F098DC00CFA1CC /* AppEventsConstants.swift in Sources */,
 				F4020CF92283631E00710558 /* VariantCodingKey.swift in Sources */,
 				F4C3C5252273CABC004B487E /* ImageSizingConfiguration.swift in Sources */,
 				F44E5744224C162B00E28075 /* LoggingBehavior.swift in Sources */,
@@ -2308,6 +2315,7 @@
 				F4934B4522BD88E30049067D /* BridgeAPIWebV2Tests.swift in Sources */,
 				F46DDCC0228B4B9400BA7359 /* StringExtensionsTests.swift in Sources */,
 				F4225DE1223F2CC800F4DCFE /* RemoteErrorConfigurationEntryListTests.swift in Sources */,
+				F4DFDB0722F0999100CFA1CC /* AppEventsTests.swift in Sources */,
 				F43AB0402270D8B600610974 /* GatekeeperStoreTests.swift in Sources */,
 				F4934B4822BD89210049067D /* UserProfileConfigurationTests.swift in Sources */,
 				F46DCFDF22735DC000EFE037 /* AppLinkTests.swift in Sources */,
