@@ -351,10 +351,8 @@ class DeviceDialogView: UIView {
     static let buttonContainerMargin: CGFloat = 400
     static let width: CGFloat = 1080
     static let height: CGFloat = 820
-    // swiftlint:disable identifier_name
     static let verticalSpaceBetweenHeaderViewAndInstructionLabel: CGFloat = 102
     static let verticalSpaceBetweenCancelButtonAndButtomAnchor: CGFloat = 117
-    // swiftlint:enable identifier_name
     static let dialogHeaderViewHeight: CGFloat = 309
     static let logoSize: CGFloat = 44
     static let logoMargin: CGFloat = 30

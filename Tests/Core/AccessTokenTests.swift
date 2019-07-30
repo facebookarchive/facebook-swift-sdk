@@ -81,7 +81,7 @@ class AccessTokenTests: XCTestCase {
   }
 
   func testRefreshDate() {
-    XCTAssertEqual(AccessTokenFixtures.validToken.refreshDate.timeIntervalSince1970, Date().timeIntervalSince1970, accuracy: 10,
+    XCTAssertEqual(AccessTokenFixtures.validToken.refreshDate.timeIntervalSince1970, Date().timeIntervalSince1970, accuracy: 100,
                    "An access token should have a refresh date that defaults to right about now")
 
     let token = AccessToken(
