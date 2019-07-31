@@ -7,7 +7,7 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/FacebookCore.svg)](https://cocoapods.org/pods/FacebookCore)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Swift-taylored experience to integrate your app with Facebook. Including:
+Swift-tailored experience to integrate your app with Facebook. Including:
 
 - [Facebook Login](https://developers.facebook.com/docs/swift/login) - Authenticate people with their Facebook
   credentials.
