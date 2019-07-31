@@ -172,7 +172,7 @@ extension AppEvents {
    logged through the `logEvent` family of methods on `FBSDKAppEvents`.
    Common event names are provided in the `FBAppEventName*` constants.
    */
-  enum ParameterName: String {
+  public enum ParameterName: String {
     // swiftlint:disable line_length
     /**
      Parameter key used to specify data for the one or more pieces of content being logged about.
@@ -245,6 +245,8 @@ extension AppEvents {
      */
     case success = "fb_success"
   }
+
+  // MARK: Product Parameters
 
   /**
    Predefined event name parameters for common additional information to accompany events
@@ -340,6 +342,8 @@ extension AppEvents {
     case appLinkWindowsPhoneAppName = "fb_product_applink_windows_phone_app_name"
   }
 
+  // MARK: Parameter Values
+
   /**
    Predefined values to assign to event parameters that accompany events logged
    through the `logEvent` family of methods on `AppEvents`.
@@ -366,6 +370,8 @@ extension AppEvents {
      */
     case orderID = "fb_order_id"
   }
+
+  // MARK: User Data Types
 
   /**
    Predefined values to assign to user data store

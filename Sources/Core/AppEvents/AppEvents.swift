@@ -29,6 +29,24 @@ import WebKit
  Facebook App Insights and for use with Facebook Ads conversion tracking and optimization.
  */
 public struct AppEvents {
+  /// The shared instance of AppEvents
+  public static let shared = AppEvents()
+
+  let gatekeeperService: GatekeeperServicing
+  let logger: Logging
+  let serverConfigurationService: ServerConfigurationServicing
+  let gatekeeperKillSwitch: String = "app_events_killswitch"
+
+  init(
+    gatekeeperService: GatekeeperServicing = GatekeeperService.shared,
+    logger: Logging = Logger(),
+    serverConfigurationService: ServerConfigurationServicing = ServerConfigurationService.shared
+  ) {
+    self.gatekeeperService = gatekeeperService
+    self.logger = logger
+    self.serverConfigurationService = serverConfigurationService
+  }
+
   /**
    Optional plist key ("FacebookLoggingOverrideAppID") for setting `loggingOverrideAppID`
    */
@@ -57,13 +75,13 @@ public struct AppEvents {
    Thus, you should set it in your application
    delegate's `application:didFinishLaunchingWithOptions:` delegate.
    */
-  public let loggingOverrideAppID: String
+  public let loggingOverrideAppID: String? = nil
 
   /**
    The custom user ID to associate with all app events.
    The userID is persisted until it is cleared by passing nil.
    */
-  public let userID: String
+  public let userID: String? = nil
 
   // MARK: - Basic Event Logging
 
@@ -86,12 +104,30 @@ public struct AppEvents {
    - Parameter accessToken: The optional access token to log the event as.
    */
   public func logEvent(
-    eventName: AppEvents.Name,
+    eventName: AppEventsInput,
     valueToSum: Double? = nil,
-    parameters: [Name: Any] = [:],
+    parameters: [AppEventsInput: Any] = [:],
     accessToken: AccessToken? = nil
   ) {
-    fatalError("Implement me")
+    guard !gatekeeperService.isGatekeeperEnabled(name: gatekeeperKillSwitch) else {
+      logger.log(.appEvents, "AppEvents: KillSwitch is enabled. Failed to log app event: \(eventName.rawValue)")
+      return
+    }
+
+//    if let implicitlyLogged = parameters[appEventParameterImplicitlyLogged] as? Bool,
+//      implicitlyLogged {
+//      // do something
+//    }
+  }
+
+  public func logEvent(
+      eventName: AppEvents.Name,
+      valueToSum: Double? = nil,
+      parameters: [AppEvents.ParameterName: Any] = [:],
+      isImplicitlyLogged: Bool = true,
+      accessToken: AccessToken? = nil
+  ) {
+
   }
 
   // MARK: - Purchase Logging
@@ -434,3 +470,11 @@ public struct AppEvents {
     let parameters: [String: Any]
   }
 }
+
+/// Allows for any string backed enum to be used as an input for an app event name or parameter name
+public protocol AppEventsInput {
+  var rawValue: String { get }
+}
+
+extension AppEvents.Name: AppEventsInput {}
+extension AppEvents.ParameterName: AppEventsInput {}

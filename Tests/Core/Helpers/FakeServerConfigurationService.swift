@@ -20,7 +20,7 @@
 import Foundation
 
 class FakeServerConfigurationService: ServerConfigurationServicing {
-  private var cachedConfiguration: ServerConfiguration
+  var cachedConfiguration: ServerConfiguration
 
   var cachedConfigurationWasRequested = false
   var loadServerConfigurationWasCalled = false

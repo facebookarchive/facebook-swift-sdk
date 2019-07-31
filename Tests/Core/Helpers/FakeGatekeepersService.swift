@@ -20,9 +20,14 @@
 import Foundation
 
 class FakeGatekeeperService: GatekeeperServicing {
+  var stubbedGatekeepers = [String]()
   var loadGatekeepersWasCalled = false
 
   func loadGatekeepers() {
     loadGatekeepersWasCalled = true
+  }
+
+  func isGatekeeperEnabled(name: String, appIdentifier: String?) -> Bool {
+    return stubbedGatekeepers.contains(name)
   }
 }

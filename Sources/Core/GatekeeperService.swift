@@ -20,6 +20,18 @@ import Foundation
 
 protocol GatekeeperServicing {
   func loadGatekeepers()
+  func isGatekeeperEnabled(
+    name: String,
+    appIdentifier: String?
+  ) -> Bool
+}
+
+extension GatekeeperServicing {
+  func isGatekeeperEnabled(
+      name: String
+  ) -> Bool {
+    isGatekeeperEnabled(name: name, appIdentifier: nil)
+  }
 }
 
 /**
