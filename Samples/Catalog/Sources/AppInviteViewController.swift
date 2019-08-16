@@ -49,7 +49,11 @@ final class AppInviteViewController: UITableViewController {
     //    // Facebook hosted App Link is used here. See https://developers.facebook.com/docs/applinks for details.
     //    guard let appLink = URL(string: "https://fb.me/1539184863038815") else { return }
     //    let previewImageURL = URL(string: "http://catalogapp.parseapp.com/FacebookDeveloper.jpg")
-    //    let appInvite = AppInviteContent(appLink: appLink, deliveryMethod: .facebook, previewImageURL: previewImageURL)
+    //    let appInvite = AppInviteContent(
+    //        appLink: appLink,
+    //        deliveryMethod: .facebook,
+    //        previewImageURL: previewImageURL
+    //    )
     //    showAppInviteDialog(for: appInvite)
   }
 }

@@ -16,28 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import FacebookLogin
+import FBSDKShareKit
 import Foundation
-import UIKit
 
-class LoginButtonViewController: UIViewController, LoginButtonDelegate {
+// Typealiases for FBSDKShareKit types to avoid having to import
+// dependent libraries. At somepoint these will be likely
+// become "wrapper" types that extend and enhance functionality
+// in addition to exposing it. For now it suffices to simply expose
+// them to the correct library aka. FacebookShare
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    let button = FBLoginButton(permissions: [.publicProfile])
-    button.delegate = self
-    button.center = view.center
-    view.addSubview(button)
-  }
-
-  // MARK: LoginButtonDelegate
-
-  func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-    print("Did complete login via LoginButton with result \(String(describing: result)) " +
-      "error\(String(describing: error))")
-  }
-
-  func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-    print("Did logout via LoginButton")
-  }
-}
+public typealias Sharing = FBSDKShareKit.Sharing
+public typealias ShareAPI = FBSDKShareKit.ShareAPI
+public typealias ShareDialog = FBSDKShareKit.ShareDialog
+public typealias SharingContent = FBSDKShareKit.SharingContent
+public typealias SharingDelegate = FBSDKShareKit.SharingDelegate
+public typealias ShareLinkContent = FBSDKShareKit.ShareLinkContent
+public typealias SharePhoto = FBSDKShareKit.SharePhoto
+public typealias SharePhotoContent = FBSDKShareKit.SharePhotoContent
+public typealias ShareVideo = FBSDKShareKit.ShareVideo
+public typealias ShareVideoContent = FBSDKShareKit.ShareVideoContent

@@ -16,28 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import FacebookLogin
+import FBSDKLoginKit
 import Foundation
-import UIKit
 
-class LoginButtonViewController: UIViewController, LoginButtonDelegate {
+// Typealiases for FBSDKLoginKit types to avoid having to import
+// dependent libraries. At somepoint these will be likely
+// become "wrapper" types that extend and enhance functionality
+// in addition to exposing it. For now it suffices to simply expose
+// them to the correct library aka. FacebookLogin
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    let button = FBLoginButton(permissions: [.publicProfile])
-    button.delegate = self
-    button.center = view.center
-    view.addSubview(button)
-  }
-
-  // MARK: LoginButtonDelegate
-
-  func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-    print("Did complete login via LoginButton with result \(String(describing: result)) " +
-      "error\(String(describing: error))")
-  }
-
-  func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-    print("Did logout via LoginButton")
-  }
-}
+public typealias LoginButtonDelegate = FBSDKLoginKit.LoginButtonDelegate
+public typealias FBLoginButton = FBSDKLoginKit.FBLoginButton
+public typealias LoginManagerLoginResult = FBSDKLoginKit.LoginManagerLoginResult
