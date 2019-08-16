@@ -18,7 +18,7 @@ Swift-tailored experience to integrate your app with Facebook. Including:
 - [Graph API](https://developers.facebook.com/docs/swift/graph) - Read and write directly to Facebook social graph.
 
 ## Important
-**NOTE:** This SDK is a wrapper around the [ObjC SDK](https://github.com/facebook/facebook-objc-sdk). It is intended to offer an additional layer of type-safety around the original as well as offer support for modern Swift and iOS paradigms. Please see our [roadmap](./ROADMAP.md) for information about the strategy for modernizing this project.
+**NOTE:** This SDK is a wrapper around the [ObjC SDK](https://github.com/facebook/facebook-objc-sdk). The project uses [Carthage](https://github.com/Carthage/Carthage) internally for managing the dependencies on the "FBSDK"-prefixed libraries. It is intended to offer an additional layer of type-safety around the original as well as offer support for modern Swift and iOS paradigms. Please see our [roadmap](./ROADMAP.md) for information about the strategy for modernizing this project.
 
 ## Installation
 
