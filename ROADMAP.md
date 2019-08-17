@@ -69,7 +69,7 @@ We then wrap the original call like so:
 
 ```
 /// Artificially 'refined'. ie. can be used from Swift prior to using `NS_REFINED_FOR_SWIFT` macro
-- (void)__-(void)setUser:(User *)user {
+- (void)__setUser:(User *)user {
     [self setUser:user];
 }
 ```
