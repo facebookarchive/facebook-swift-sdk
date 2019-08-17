@@ -61,7 +61,7 @@ This is inherently unsafe. Also, in our pretend example we'd like to use a `Vali
 
 First we go into the Objective-C SDK and add the `FB_SWIFT_DEPRECATED` macro.
 
-`-(void)setUser:(User *)user FB_SWIFT_DEPRECATED("This will be replaced by 'setValidatedUser(_:)'");`
+`- (void)setUser:(User *)user FB_SWIFT_DEPRECATED("This will be replaced by 'setValidatedUser(_:)'");`
 
 Now, if you try and use this method from Swift, you will get a warning. Good.
 
