@@ -92,7 +92,7 @@ func setValidated(_ validUser: ValidatedUser) -> Void {
 
 Now this is better but not perfect. We are providing Swift developers with a safer way to set a `User` but we also expose the unsafe way.
 
-We can fix this by going back into the Objective-C project and changing `FB_SWIFT_DEPRECATED` to `NS_REFINED_FOR_SWIFT`. The compiler will force us to delete our underscore-prefixed wrapping method.
+We can fix this by going back into the Objective-C project and changing `FB_SWIFT_DEPRECATED` to `NS_REFINED_FOR_SWIFT`. The compiler will force us to delete our temporary underscore-prefixed wrapping method, since `NS_REFINED_FOR_SWIFT` will automatically expose the original `setUser:` method as `__setUser(_:)` to Swift.
 
 Now Swift developers will only be able to set a `User` if they are able to create a `ValidUser` struct.
 
