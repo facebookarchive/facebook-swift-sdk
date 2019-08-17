@@ -53,7 +53,7 @@ If that all made perfect sense to you then feel free to skip the detailed exampl
 
 ## Detailed Example
 
-Consider, for instance, a function in Objective-C that accepts a  pointer to a user.
+Consider, for instance, a function in Objective-C that accepts a pointer to a user.
 
 `- (void)setUser:(User *)user;` 
 
