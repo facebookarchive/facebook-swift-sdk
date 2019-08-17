@@ -86,7 +86,7 @@ func setValidated(_ validUser: ValidatedUser) -> Void {
    
    // Utilizes the original Objective-C implementation. 
    // The __ is a naming convention associated with NS_REFINED_FOR_SWIFT
-   __setUser(&user) 
+   __setUser(user) 
 }
 ```
 
