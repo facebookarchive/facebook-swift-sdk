@@ -26,7 +26,7 @@ The ultimate goal of the Swift SDK is to provide modernizations that cannot be a
 * Adding type-safety and validation to common types
 * Adding SwiftUI components for `LoginButton` and other UI components
 
-**Note:** Open an issue on Github or a pull request modifying this list if there is something else you'd like to see.
+**Note:** Open an issue on GitHub or a pull request modifying this list if there is something else you'd like to see.
 
 
 ## Simplified Example
