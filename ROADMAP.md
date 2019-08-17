@@ -55,7 +55,7 @@ If that all made perfect sense to you then feel free to skip the detailed exampl
 
 Consider, for instance, a function in Objective-C that accepts a  pointer to a user.
 
-`-(void)setUser:(User *)user;` 
+`- (void)setUser:(User *)user;` 
 
 This is inherently unsafe. Also, in our pretend example we'd like to use a `ValidatedUser` struct. How can we update our API to encourage developers to use a `ValidatedUser` instead of a pointer?
 
