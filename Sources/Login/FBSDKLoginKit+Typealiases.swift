@@ -25,6 +25,27 @@ import Foundation
 // in addition to exposing it. For now it suffices to simply expose
 // them to the correct library aka. FacebookLogin
 
-public typealias LoginButtonDelegate = FBSDKLoginKit.LoginButtonDelegate
+public typealias AccessToken = FBSDKLoginKit.AccessToken
+public typealias DefaultAudience = FBSDKLoginKit.DefaultAudience
+public typealias DeviceLoginCodeInfo = FBSDKLoginKit.DeviceLoginCodeInfo
+public typealias DeviceLoginError = FBSDKLoginKit.DeviceLoginError
+public typealias DeviceLoginManager = FBSDKLoginKit.DeviceLoginManager
+public typealias DeviceLoginManagerResult = FBSDKLoginKit.DeviceLoginManagerResult
+public typealias FBButton = FBSDKLoginKit.FBButton
 public typealias FBLoginButton = FBSDKLoginKit.FBLoginButton
+public typealias FBLoginTooltipView = FBSDKLoginKit.FBLoginTooltipView
+public typealias FBTooltipView = FBSDKLoginKit.FBTooltipView
+public typealias GraphRequestConnection = FBSDKLoginKit.GraphRequestConnection
+public typealias LoginAuthType = FBSDKLoginKit.LoginAuthType
+public typealias LoginBehavior = FBSDKLoginKit.LoginBehavior
+public typealias LoginError = FBSDKLoginKit.LoginError
+public typealias LoginManager = FBSDKLoginKit.LoginManager
 public typealias LoginManagerLoginResult = FBSDKLoginKit.LoginManagerLoginResult
+public typealias LoginManagerLoginResultBlock = FBSDKLoginKit.LoginManagerLoginResultBlock
+
+// Protocols
+public typealias Copying = FBSDKLoginKit.Copying
+public typealias DeviceLoginManagerDelegate = FBSDKLoginKit.DeviceLoginManagerDelegate
+public typealias GraphRequestConnectionDelegate = FBSDKLoginKit.GraphRequestConnectionDelegate
+public typealias LoginButtonDelegate = FBSDKLoginKit.LoginButtonDelegate
+public typealias LoginTooltipViewDelegate = FBSDKLoginKit.LoginTooltipViewDelegate
