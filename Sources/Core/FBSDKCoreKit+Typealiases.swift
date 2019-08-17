@@ -25,6 +25,38 @@ import Foundation
 // in addition to exposing it. For now it suffices to simply expose
 // them to the correct library aka. FacebookCore
 
-public typealias ApplicationDelegate = FBSDKCoreKit.ApplicationDelegate
+public typealias AccessToken = FBSDKCoreKit.AccessToken
 public typealias AppEvents = FBSDKCoreKit.AppEvents
+public typealias AppLink = FBSDKCoreKit.AppLink
+public typealias AppLinkNavigation = FBSDKCoreKit.AppLinkNavigation
+public typealias AppLinkResolver = FBSDKCoreKit.AppLinkResolver
+public typealias AppLinkReturnToRefererController = FBSDKCoreKit.AppLinkReturnToRefererController
+public typealias AppLinkTarget = FBSDKCoreKit.AppLinkTarget
+public typealias AppLinkURL = FBSDKCoreKit.AppLinkURL
+public typealias AppLinkUtility = FBSDKCoreKit.AppLinkUtility
+public typealias ApplicationDelegate = FBSDKCoreKit.ApplicationDelegate
+public typealias CoreError = FBSDKCoreKit.CoreError
+public typealias FBAppLinkReturnToRefererView = FBSDKCoreKit.FBAppLinkReturnToRefererView
+public typealias FBButton = FBSDKCoreKit.FBButton
+public typealias FBProfilePictureView = FBSDKCoreKit.FBProfilePictureView
 public typealias GraphRequest = FBSDKCoreKit.GraphRequest
+public typealias GraphRequestConnection = FBSDKCoreKit.GraphRequestConnection
+public typealias GraphRequestDataAttachment = FBSDKCoreKit.GraphRequestDataAttachment
+public typealias GraphRequestError = FBSDKCoreKit.GraphRequestError
+public typealias HTTPMethod = FBSDKCoreKit.HTTPMethod
+public typealias LoggingBehavior = FBSDKCoreKit.LoggingBehavior
+public typealias MeasurementEvent = FBSDKCoreKit.MeasurementEvent
+public typealias Profile = FBSDKCoreKit.Profile
+public typealias Settings = FBSDKCoreKit.Settings
+public typealias TestUsersManager = FBSDKCoreKit.TestUsersManager
+public typealias Utility = FBSDKCoreKit.Utility
+public typealias WebViewAppLinkResolver = FBSDKCoreKit.WebViewAppLinkResolver
+
+// Protocols
+public typealias AppLinkResolving = FBSDKCoreKit.AppLinkResolving
+public typealias AppLinkReturnToRefererControllerDelegate = FBSDKCoreKit.AppLinkReturnToRefererControllerDelegate
+public typealias AppLinkReturnToRefererViewDelegate = FBSDKCoreKit.AppLinkReturnToRefererViewDelegate
+public typealias Copying = FBSDKCoreKit.Copying
+public typealias GraphErrorRecoveryProcessorDelegate = FBSDKCoreKit.GraphErrorRecoveryProcessorDelegate
+public typealias GraphRequestConnectionDelegate = FBSDKCoreKit.GraphRequestConnectionDelegate
+public typealias MutableCopying = FBSDKCoreKit.MutableCopying
