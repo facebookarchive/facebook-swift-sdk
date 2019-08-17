@@ -57,11 +57,11 @@ Consider, for instance, a function in Objective-C that accepts a pointer to a us
 
 `- (void)setUser:(User *)user;` 
 
-This is inherently unsafe. Also, in our pretend example we'd like to use a `ValidatedUser` struct. How can we update our API to encourage developers to use a `ValidatedUser` instead of a pointer?
+This is inherently unsafe. Also, in our pretend example we'd like to use a `ValidUser` struct. How can we update our API to encourage developers to use a `ValidUser` instead of a pointer?
 
 First we go into the Objective-C SDK and add the `FB_SWIFT_DEPRECATED` macro.
 
-`- (void)setUser:(User *)user FB_SWIFT_DEPRECATED("This will be replaced by 'setValidatedUser(_:)'");`
+`- (void)setUser:(User *)user FB_SWIFT_DEPRECATED("This will be replaced by 'setValidUser(_:)'");`
 
 Now, if you try and use this method from Swift, you will get a warning. Good.
 
@@ -77,7 +77,7 @@ We then wrap the original call like so:
 With this in place we can move our efforts to the Swift project and wrap the artificially refined version of the method:
 
 ```
-func setValidated(_ validUser: ValidatedUser) -> Void {
+func setValid(_ validUser: ValidUser) -> Void {
 	// Any number of strategies can be employed here to implement a layer of validation 
 	// and type-safety. 
 	// This assumes that we can simply use data from our validated user to construct
