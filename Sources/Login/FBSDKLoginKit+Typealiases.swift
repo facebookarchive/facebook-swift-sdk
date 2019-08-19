@@ -25,27 +25,160 @@ import Foundation
 // in addition to exposing it. For now it suffices to simply expose
 // them to the correct library aka. FacebookLogin
 
+// MARK: - Classes
+
+/**
+ Wrapper for `FBSDKLoginKit.AccessToken`
+
+ - SeeAlso: `FBSDKLoginKit.AccessToken`
+ */
 public typealias AccessToken = FBSDKLoginKit.AccessToken
+
+/**
+ Wrapper for `FBSDKLoginKit.DefaultAudience`
+
+ - SeeAlso: `FBSDKLoginKit.DefaultAudience`
+ */
 public typealias DefaultAudience = FBSDKLoginKit.DefaultAudience
+
+/**
+ Wrapper for `FBSDKLoginKit.DeviceLoginCodeInfo`
+
+ - SeeAlso: `FBSDKLoginKit.DeviceLoginCodeInfo`
+ */
 public typealias DeviceLoginCodeInfo = FBSDKLoginKit.DeviceLoginCodeInfo
+
+/**
+ Wrapper for `FBSDKLoginKit.DeviceLoginError`
+
+ - SeeAlso: `FBSDKLoginKit.DeviceLoginError`
+ */
 public typealias DeviceLoginError = FBSDKLoginKit.DeviceLoginError
+
+/**
+ Wrapper for `FBSDKLoginKit.DeviceLoginManager`
+
+ - SeeAlso: `FBSDKLoginKit.DeviceLoginManager`
+ */
 public typealias DeviceLoginManager = FBSDKLoginKit.DeviceLoginManager
+
+/**
+ Wrapper for `FBSDKLoginKit.DeviceLoginManagerResult`
+
+ - SeeAlso: `FBSDKLoginKit.DeviceLoginManagerResult`
+ */
 public typealias DeviceLoginManagerResult = FBSDKLoginKit.DeviceLoginManagerResult
+
+/**
+ Wrapper for `FBSDKLoginKit.FBButton`
+
+ - SeeAlso: `FBSDKLoginKit.FBButton`
+ */
 public typealias FBButton = FBSDKLoginKit.FBButton
+
+/**
+ Wrapper for `FBSDKLoginKit.FBLoginButton`
+
+ - SeeAlso: `FBSDKLoginKit.FBLoginButton`
+ */
 public typealias FBLoginButton = FBSDKLoginKit.FBLoginButton
+
+/**
+ Wrapper for `FBSDKLoginKit.FBLoginTooltipView`
+
+ - SeeAlso: `FBSDKLoginKit.FBLoginTooltipView`
+ */
 public typealias FBLoginTooltipView = FBSDKLoginKit.FBLoginTooltipView
+
+/**
+ Wrapper for `FBSDKLoginKit.FBTooltipView`
+
+ - SeeAlso: `FBSDKLoginKit.FBTooltipView`
+ */
 public typealias FBTooltipView = FBSDKLoginKit.FBTooltipView
+
+/**
+ Wrapper for `FBSDKLoginKit.GraphRequestConnection`
+
+ - SeeAlso: `FBSDKLoginKit.GraphRequestConnection`
+ */
 public typealias GraphRequestConnection = FBSDKLoginKit.GraphRequestConnection
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginAuthType`
+
+ - SeeAlso: `FBSDKLoginKit.LoginAuthType`
+ */
 public typealias LoginAuthType = FBSDKLoginKit.LoginAuthType
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginBehavior`
+
+ - SeeAlso: `FBSDKLoginKit.LoginBehavior`
+ */
 public typealias LoginBehavior = FBSDKLoginKit.LoginBehavior
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginError`
+
+ - SeeAlso: `FBSDKLoginKit.LoginError`
+ */
 public typealias LoginError = FBSDKLoginKit.LoginError
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginManager`
+
+ - SeeAlso: `FBSDKLoginKit.LoginManager`
+ */
 public typealias LoginManager = FBSDKLoginKit.LoginManager
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginManagerLoginResult`
+
+ - SeeAlso: `FBSDKLoginKit.LoginManagerLoginResult`
+ */
 public typealias LoginManagerLoginResult = FBSDKLoginKit.LoginManagerLoginResult
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginManagerLoginResultBlock`
+
+ - SeeAlso: `FBSDKLoginKit.LoginManagerLoginResultBlock`
+ */
 public typealias LoginManagerLoginResultBlock = FBSDKLoginKit.LoginManagerLoginResultBlock
 
-// Protocols
+// MARK: - Protocols
+
+/**
+ Wrapper for `FBSDKLoginKit.Copying`
+
+ - SeeAlso: `FBSDKLoginKit.Copying`
+ */
 public typealias Copying = FBSDKLoginKit.Copying
+
+/**
+ Wrapper for `FBSDKLoginKit.DeviceLoginManagerDelegate`
+
+ - SeeAlso: `FBSDKLoginKit.DeviceLoginManagerDelegate`
+ */
 public typealias DeviceLoginManagerDelegate = FBSDKLoginKit.DeviceLoginManagerDelegate
+
+/**
+ Wrapper for `FBSDKLoginKit.GraphRequestConnectionDelegate`
+
+ - SeeAlso: `FBSDKLoginKit.GraphRequestConnectionDelegate`
+ */
 public typealias GraphRequestConnectionDelegate = FBSDKLoginKit.GraphRequestConnectionDelegate
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginButtonDelegate`
+
+ - SeeAlso: `FBSDKLoginKit.LoginButtonDelegate`
+ */
 public typealias LoginButtonDelegate = FBSDKLoginKit.LoginButtonDelegate
+
+/**
+ Wrapper for `FBSDKLoginKit.LoginTooltipViewDelegate`
+
+ - SeeAlso: `FBSDKLoginKit.LoginTooltipViewDelegate`
+ */
 public typealias LoginTooltipViewDelegate = FBSDKLoginKit.LoginTooltipViewDelegate
