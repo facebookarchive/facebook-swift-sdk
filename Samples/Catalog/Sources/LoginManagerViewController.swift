@@ -21,7 +21,6 @@ import UIKit
 
 import FacebookCore
 import FacebookLogin
-import FBSDKLoginKit
 
 class LoginManagerViewController: UIViewController {
 

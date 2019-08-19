@@ -19,7 +19,6 @@
 import UIKit
 
 import FacebookShare
-import FBSDKShareKit
 
 final class ShareAPIViewController: UITableViewController, SharingDelegate {
 

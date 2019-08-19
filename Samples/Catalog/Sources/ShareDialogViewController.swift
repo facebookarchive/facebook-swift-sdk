@@ -20,12 +20,11 @@ import MobileCoreServices
 import UIKit
 
 import FacebookShare
-import FBSDKShareKit
 
 final class ShareDialogViewController: UITableViewController,
   UIImagePickerControllerDelegate,
   UINavigationControllerDelegate,
-SharingDelegate {
+  SharingDelegate {
 
   func showShareDialog<C: SharingContent>(_ content: C, mode: ShareDialog.Mode = .automatic) {
     let dialog = ShareDialog(fromViewController: self, content: content, delegate: self)

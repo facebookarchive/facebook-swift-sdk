@@ -20,9 +20,6 @@ import Foundation
 import UIKit
 
 import FacebookCore
-import FBSDKCoreKit
-
-// MARK: -
 
 class GraphAPIReadViewController: UITableViewController {
 

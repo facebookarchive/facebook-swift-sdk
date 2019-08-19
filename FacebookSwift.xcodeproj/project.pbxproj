@@ -24,6 +24,9 @@
 		81D646AF1D2C8D7800690609 /* Enums+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646821D2C8D7800690609 /* Enums+Extensions.swift */; };
 		81FC4B601D064F68003F3A46 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B5F1D064F68003F3A46 /* LoginManager.swift */; };
 		81FC4C981D067448003F3A46 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4C971D067448003F3A46 /* Permission.swift */; };
+		F4E214D823070F5F009656AE /* FBSDKCoreKit+Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E214D723070F5F009656AE /* FBSDKCoreKit+Typealiases.swift */; };
+		F4E214F0230718D4009656AE /* FBSDKLoginKit+Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E214EF230718D4009656AE /* FBSDKLoginKit+Typealiases.swift */; };
+		F4E2150A230719C4009656AE /* FBSDKShareKit+Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E21509230719C4009656AE /* FBSDKShareKit+Typealiases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -245,6 +248,9 @@
 		81D646821D2C8D7800690609 /* Enums+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enums+Extensions.swift"; sourceTree = "<group>"; };
 		81FC4B5F1D064F68003F3A46 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		81FC4C971D067448003F3A46 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		F4E214D723070F5F009656AE /* FBSDKCoreKit+Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FBSDKCoreKit+Typealiases.swift"; sourceTree = "<group>"; };
+		F4E214EF230718D4009656AE /* FBSDKLoginKit+Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FBSDKLoginKit+Typealiases.swift"; sourceTree = "<group>"; };
+		F4E21509230719C4009656AE /* FBSDKShareKit+Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FBSDKShareKit+Typealiases.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,9 +332,10 @@
 				810192AA1D01305400B9E881 /* AccessToken.swift */,
 				811C5E751CFFD5DD00E4A925 /* Dictionary+KeyValueMap.swift */,
 				810192A31D01305400B9E881 /* FBProfilePictureView.swift */,
+				811C5E5F1CFFD52B00E4A925 /* Internal */,
 				81FC4C971D067448003F3A46 /* Permission.swift */,
 				810192AD1D01305400B9E881 /* Settings.swift */,
-				811C5E5F1CFFD52B00E4A925 /* Internal */,
+				F4E214D723070F5F009656AE /* FBSDKCoreKit+Typealiases.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -347,6 +354,7 @@
 			children = (
 				813C9B551D1DB16F00288BFA /* FBLoginButton.swift */,
 				81FC4B5F1D064F68003F3A46 /* LoginManager.swift */,
+				F4E214EF230718D4009656AE /* FBSDKLoginKit+Typealiases.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -355,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				81D646821D2C8D7800690609 /* Enums+Extensions.swift */,
+				F4E21509230719C4009656AE /* FBSDKShareKit+Typealiases.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -833,6 +842,7 @@
 				810192B71D01305400B9E881 /* Settings.swift in Sources */,
 				811C5E771CFFD5DD00E4A925 /* Dictionary+KeyValueMap.swift in Sources */,
 				810192AE1D01305400B9E881 /* FBProfilePictureView.swift in Sources */,
+				F4E214D823070F5F009656AE /* FBSDKCoreKit+Typealiases.swift in Sources */,
 				810192B41D01305400B9E881 /* AccessToken.swift in Sources */,
 				039F241E1F018FAA00489799 /* FBSDKSettingsInitializer.m in Sources */,
 				81FC4C981D067448003F3A46 /* Permission.swift in Sources */,
@@ -844,6 +854,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				813C9B561D1DB16F00288BFA /* FBLoginButton.swift in Sources */,
+				F4E214F0230718D4009656AE /* FBSDKLoginKit+Typealiases.swift in Sources */,
 				81FC4B601D064F68003F3A46 /* LoginManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -852,6 +863,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E2150A230719C4009656AE /* FBSDKShareKit+Typealiases.swift in Sources */,
 				81D646AF1D2C8D7800690609 /* Enums+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
