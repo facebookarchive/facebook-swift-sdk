@@ -17,12 +17,8 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import FacebookCore
-import FBSDKLoginKit
 import Foundation
 import UIKit
-
-/// LoginManager
-public typealias LoginManager = FBSDKLoginKit.LoginManager
 
 /// Login Result Block
 public typealias LoginResultBlock = (LoginResult) -> Void
