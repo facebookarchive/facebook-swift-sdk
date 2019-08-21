@@ -111,6 +111,9 @@ A contrived example but the same strategy will work for implementing more advanc
 #### Q: Can I continue to use the Objective-C SDK if I'm a Swift Developer?
 - Yes but over time you will see warnings and ultimately deprecations of methods called from the Objective-C SDK.
 
+#### Q: I was using the [Swift SDK](https://github.com/facebook/facebook-swift-sdk), but now nothing compiles
+- You might be able to get some guidance on what changes you'll have to make based on [this commit](https://github.com/facebook/facebook-swift-sdk/commit/335ad2c0dd0d277759046a1e4b0d87643ca176e1), which updates the sample apps so they compile. Unfortunately there is no further documentation of the changes at this time.
+
 ### For Objective-C Developers
 
 #### Q: Does this affect me?
