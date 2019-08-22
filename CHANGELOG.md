@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.8.0](https://github.com/facebook/facebook-swift-sdk/tree/v0.8.0) (2019-08-12)
+
+[Full Changelog](https://github.com/facebook/facebook-swift-sdk/compare/v0.7.0...v0.8.0)
+
+## [0.7.0](https://github.com/facebook/facebook-swift-sdk/tree/v0.7.0) (2019-04-30)
+
+[Full Changelog](https://github.com/facebook/facebook-swift-sdk/compare/v0.6.0...v0.7.0)
+
+## [0.6.0](https://github.com/facebook/facebook-swift-sdk/tree/v0.6.0) (2019-04-02)
+
+[Full Changelog](https://github.com/facebook/facebook-swift-sdk/compare/0.5.0...v0.6.0)
+
 ## [0.5.0](https://github.com/facebook/facebook-swift-sdk/tree/0.5.0) (2018-10-17)
 
 [Full Changelog](https://github.com/facebook/facebook-swift-sdk/compare/0.4.0...0.5.0)
