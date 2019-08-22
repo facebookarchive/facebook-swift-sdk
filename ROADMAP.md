@@ -111,6 +111,12 @@ A contrived example but the same strategy will work for implementing more advanc
 #### Q: Can I continue to use the Objective-C SDK if I'm a Swift Developer?
 - Yes but over time you will see warnings and ultimately deprecations of methods called from the Objective-C SDK.
 
+#### Q: In the recent past there have been unexpected breaking changes to this project. Why? 
+
+- Between v0.6.0 and v0.7.0 - see: [comparison](https://github.com/facebook/facebook-swift-sdk/compare/v0.6.0...v0.7.0) - we updated to point to version 5.0 of the ObjC SDK. This was a breaking change and we should have cut a major release to reflect that.
+
+Those changes constituted a major effort to enhance the usability of the Swift interface that's generated from the ObjC SDK but it was not communicated well in terms of this project. The changes are documented reasonably well in this changelog under the [5.0 release](https://github.com/facebook/facebook-objc-sdk/blob/master/CHANGELOG.md#500) of the [Objective-C SDK](https://github.com/facebook/facebook-objc-sdk). There will be no future updates to major versions of the Objective-C SDK without corresponding updates to the Swift SDK. This caused a lot of churn and we'd like to provide a better experience than that.
+
 ### For Objective-C Developers
 
 #### Q: Does this affect me?
