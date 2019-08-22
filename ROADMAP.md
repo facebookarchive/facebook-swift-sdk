@@ -116,7 +116,6 @@ A contrived example but the same strategy will work for implementing more advanc
 - Between v0.6.0 and v0.7.0 - see: [comparison](https://github.com/facebook/facebook-swift-sdk/compare/v0.6.0...v0.7.0) - we updated to point to version 5.0 of the ObjC SDK. This was a breaking change and we should have cut a major release to reflect that.
 
 Those changes constituted a major effort to enhance the usability of the Swift interface that's generated from the ObjC SDK but it was not communicated well in terms of this project. The changes are documented reasonably well in this changelog under the [5.0 release](https://github.com/facebook/facebook-objc-sdk/blob/master/CHANGELOG.md#500) of the [Objective-C SDK](https://github.com/facebook/facebook-objc-sdk). There will be no future updates to major versions of the Objective-C SDK without corresponding updates to the Swift SDK. This caused a lot of churn and we'd like to provide a better experience than that.
-- You might be able to get some guidance on what changes you'll have to make based on [this commit](https://github.com/facebook/facebook-swift-sdk/commit/335ad2c0dd0d277759046a1e4b0d87643ca176e1), which updates the sample apps so they compile. Unfortunately there is no further documentation of the changes at this time.
 
 ### For Objective-C Developers
 
