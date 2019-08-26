@@ -95,6 +95,34 @@ public extension LoginManager {
     self.logIn(permissions: permissions.map { $0.name }, from: viewController, handler: sdkCompletion(completion))
   }
 
+  struct LoginResultData {
+    let granted: Set<Permission>
+    let declined: Set<Permission>
+    let token: AccessToken
+  }
+
+  func logIn(
+    permissions: [Permission] = [.publicProfile],
+    viewController: UIViewController? = nil,
+    completion: ((Result<LoginResultData, Error>) -> Void)? = nil
+    ) {
+    logIn(permissions: permissions.map { $0.name }, from: viewController) { (loginManagerResult, error) in
+      guard let grantedPermissions = loginManagerResult?.grantedPermissions.compactMap({ Permission(stringLiteral: $0) }),
+        let declinedPermissions = loginManagerResult?.declinedPermissions.compactMap({ Permission(stringLiteral: $0) }),
+        let token = loginManagerResult?.token else {
+          completion?(.failure(NSError()))
+          return
+      }
+
+      let data = LoginResultData(
+        granted: Set(grantedPermissions),
+        declined: Set(declinedPermissions),
+        token: token
+      )
+      completion?(.success(data))
+    }
+  }
+
   private func sdkCompletion(_ completion: LoginResultBlock?) -> LoginManagerLoginResultBlock? {
     guard let completion = completion else {
       return nil
