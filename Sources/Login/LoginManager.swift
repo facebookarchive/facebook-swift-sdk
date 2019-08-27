@@ -131,7 +131,7 @@ public struct LoginManager {
    This method will present UI the user.
    You typically should call this if `AccessToken.isDataAccessExpired` returns true.
    */
-  func reauthorizeDataAccess(
+  public func reauthorizeDataAccess(
     from viewController: UIViewController,
     handler: @escaping LoginManagerLoginResultBlock
     ) {
@@ -143,7 +143,7 @@ public struct LoginManager {
 
    This sets the currently stored access token to nil and sets the currently stored user profile to nil.
    */
-  func logOut() {
+  public func logOut() {
     authenticationService.logOut()
   }
 

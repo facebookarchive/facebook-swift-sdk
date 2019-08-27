@@ -25,9 +25,9 @@ import Foundation
  Performs a sanity check on creation to disallow duplicate granted and declined permissions
  */
 public struct LoginInformation {
-  let grantedPermissions: Set<Permission>
-  let declinedPermissions: Set<Permission>
-  let token: AccessToken
+  public let grantedPermissions: Set<Permission>
+  public let declinedPermissions: Set<Permission>
+  public let token: AccessToken
 
   init(
     grantedPermissions: Set<Permission>,
