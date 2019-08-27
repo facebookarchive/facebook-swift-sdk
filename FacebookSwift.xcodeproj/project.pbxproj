@@ -24,7 +24,14 @@
 		81D646AF1D2C8D7800690609 /* Enums+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D646821D2C8D7800690609 /* Enums+Extensions.swift */; };
 		81FC4B601D064F68003F3A46 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B5F1D064F68003F3A46 /* LoginManager.swift */; };
 		81FC4C981D067448003F3A46 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4C971D067448003F3A46 /* Permission.swift */; };
-		F46EC6652314BBAF00C55CA7 /* FacebookLoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EC6642314BBAF00C55CA7 /* FacebookLoginTests.swift */; };
+		F43A7E2C2315666E00591F76 /* LoginManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A7E2B2315666E00591F76 /* LoginManagerTests.swift */; };
+		F43A7E2E2315684600591F76 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A7E2D2315684600591F76 /* AuthenticationService.swift */; };
+		F43A7E3F23156CDA00591F76 /* FakeAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A7E3D23156CCB00591F76 /* FakeAuthenticationService.swift */; };
+		F448850F231592080000BB6C /* SampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448850E231592080000BB6C /* SampleError.swift */; };
+		F4488511231592470000BB6C /* SampleAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4488510231592470000BB6C /* SampleAccessToken.swift */; };
+		F44885132315927B0000BB6C /* SampleLoginManagerLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44885122315927B0000BB6C /* SampleLoginManagerLoginResult.swift */; };
+		F4488517231593580000BB6C /* LoginInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4488516231593580000BB6C /* LoginInformationTests.swift */; };
+		F44885192315958F0000BB6C /* LoginInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44885182315958F0000BB6C /* LoginInformation.swift */; };
 		F46EC6672314BBAF00C55CA7 /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811C5DFD1CFFD36600E4A925 /* FacebookLogin.framework */; };
 		F46EC6742314BBBF00C55CA7 /* FacebookCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EC6732314BBBF00C55CA7 /* FacebookCoreTests.swift */; };
 		F46EC6762314BBBF00C55CA7 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8115C0D81CFE540D001FF33B /* FacebookCore.framework */; };
@@ -275,8 +282,15 @@
 		81D646821D2C8D7800690609 /* Enums+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Enums+Extensions.swift"; sourceTree = "<group>"; };
 		81FC4B5F1D064F68003F3A46 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		81FC4C971D067448003F3A46 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		F43A7E2B2315666E00591F76 /* LoginManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManagerTests.swift; sourceTree = "<group>"; };
+		F43A7E2D2315684600591F76 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		F43A7E3D23156CCB00591F76 /* FakeAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuthenticationService.swift; sourceTree = "<group>"; };
+		F448850E231592080000BB6C /* SampleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleError.swift; sourceTree = "<group>"; };
+		F4488510231592470000BB6C /* SampleAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAccessToken.swift; sourceTree = "<group>"; };
+		F44885122315927B0000BB6C /* SampleLoginManagerLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleLoginManagerLoginResult.swift; sourceTree = "<group>"; };
+		F4488516231593580000BB6C /* LoginInformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInformationTests.swift; sourceTree = "<group>"; };
+		F44885182315958F0000BB6C /* LoginInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInformation.swift; sourceTree = "<group>"; };
 		F46EC6622314BBAE00C55CA7 /* FacebookLoginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookLoginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F46EC6642314BBAF00C55CA7 /* FacebookLoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginTests.swift; sourceTree = "<group>"; };
 		F46EC6662314BBAF00C55CA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46EC6712314BBBF00C55CA7 /* FacebookCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46EC6732314BBBF00C55CA7 /* FacebookCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCoreTests.swift; sourceTree = "<group>"; };
@@ -419,6 +433,8 @@
 				813C9B551D1DB16F00288BFA /* FBLoginButton.swift */,
 				81FC4B5F1D064F68003F3A46 /* LoginManager.swift */,
 				F4E214EF230718D4009656AE /* FBSDKLoginKit+Typealiases.swift */,
+				F43A7E2D2315684600591F76 /* AuthenticationService.swift */,
+				F44885182315958F0000BB6C /* LoginInformation.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -546,6 +562,24 @@
 			name = ObjC;
 			sourceTree = "<group>";
 		};
+		F44885142315929F0000BB6C /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				F448850E231592080000BB6C /* SampleError.swift */,
+				F4488510231592470000BB6C /* SampleAccessToken.swift */,
+				F44885122315927B0000BB6C /* SampleLoginManagerLoginResult.swift */,
+			);
+			path = Samples;
+			sourceTree = "<group>";
+		};
+		F4488515231592BD0000BB6C /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				F43A7E3D23156CCB00591F76 /* FakeAuthenticationService.swift */,
+			);
+			path = Fakes;
+			sourceTree = "<group>";
+		};
 		F46EC65A2314BB5700C55CA7 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,8 +593,11 @@
 		F46EC6632314BBAF00C55CA7 /* FacebookLoginTests */ = {
 			isa = PBXGroup;
 			children = (
-				F46EC6642314BBAF00C55CA7 /* FacebookLoginTests.swift */,
 				F46EC6662314BBAF00C55CA7 /* Info.plist */,
+				F43A7E2B2315666E00591F76 /* LoginManagerTests.swift */,
+				F4488515231592BD0000BB6C /* Fakes */,
+				F44885142315929F0000BB6C /* Samples */,
+				F4488516231593580000BB6C /* LoginInformationTests.swift */,
 			);
 			path = FacebookLoginTests;
 			sourceTree = "<group>";
@@ -1045,9 +1082,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44885192315958F0000BB6C /* LoginInformation.swift in Sources */,
 				813C9B561D1DB16F00288BFA /* FBLoginButton.swift in Sources */,
 				F4E214F0230718D4009656AE /* FBSDKLoginKit+Typealiases.swift in Sources */,
 				81FC4B601D064F68003F3A46 /* LoginManager.swift in Sources */,
+				F43A7E2E2315684600591F76 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,7 +1103,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46EC6652314BBAF00C55CA7 /* FacebookLoginTests.swift in Sources */,
+				F448850F231592080000BB6C /* SampleError.swift in Sources */,
+				F43A7E3F23156CDA00591F76 /* FakeAuthenticationService.swift in Sources */,
+				F4488517231593580000BB6C /* LoginInformationTests.swift in Sources */,
+				F44885132315927B0000BB6C /* SampleLoginManagerLoginResult.swift in Sources */,
+				F43A7E2C2315666E00591F76 /* LoginManagerTests.swift in Sources */,
+				F4488511231592470000BB6C /* SampleAccessToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1255,8 +1299,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FacebookLoginTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_FILE = Tests/FacebookLoginTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1311,8 +1355,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FacebookLoginTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_FILE = Tests/FacebookLoginTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1372,8 +1416,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FacebookCoreTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_FILE = Tests/FacebookCoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1428,8 +1472,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FacebookCoreTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_FILE = Tests/FacebookCoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1489,8 +1533,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FacebookShareTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_FILE = Tests/FacebookShareTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1545,8 +1589,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = FacebookShareTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_FILE = Tests/FacebookShareTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
