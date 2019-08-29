@@ -27,13 +27,33 @@ class LoginManagerViewController: UIViewController {
   func loginManagerDidComplete(_ result: LoginResult) {
     let alertController: UIAlertController
     switch result {
-    case .cancelled:
-      alertController = UIAlertController(title: "Login Cancelled", message: "User cancelled login.")
-    case .failed(let error):
-      alertController = UIAlertController(title: "Login Fail", message: "Login failed with error \(error)")
-    case .success(let grantedPermissions, _, _):
-      alertController = UIAlertController(title: "Login Success",
-                                          message: "Login succeeded with granted permissions: \(grantedPermissions)")
+    case .success(let loginInformation):
+      alertController = UIAlertController(
+        title: "Login Success",
+        message: "Login succeeded with granted permissions: \(loginInformation.grantedPermissions)"
+      )
+
+    case .failure(let error as LoginManager.LoginManagerError):
+      switch error {
+      case .cancelled:
+        alertController = UIAlertController(title: "Login Cancelled", message: "User cancelled login.")
+      case .missingAccessToken:
+        alertController = UIAlertController(
+          title: "Missing Access Token",
+          message: "The response from the server was missing an access token"
+        )
+      case .missingResult:
+        alertController = UIAlertController(
+          title: "Missing Result",
+          message: "The response from the server was missing information"
+        )
+      }
+
+    case .failure(let error):
+      alertController = UIAlertController(
+        title: "Error",
+        message: "Received unexpected error: \(error)"
+      )
     }
     self.present(alertController, animated: true, completion: nil)
   }
