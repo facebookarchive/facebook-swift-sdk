@@ -26,7 +26,7 @@
 		81FC4C981D067448003F3A46 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4C971D067448003F3A46 /* Permission.swift */; };
 		F43A7E2C2315666E00591F76 /* LoginManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A7E2B2315666E00591F76 /* LoginManagerTests.swift */; };
 		F43A7E2E2315684600591F76 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A7E2D2315684600591F76 /* AuthenticationService.swift */; };
-		F43A7E3F23156CDA00591F76 /* FakeAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A7E3D23156CCB00591F76 /* FakeAuthenticationService.swift */; };
+		F43A7E3F23156CDA00591F76 /* AuthenticationServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A7E3D23156CCB00591F76 /* AuthenticationServiceSpy.swift */; };
 		F448850F231592080000BB6C /* SampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448850E231592080000BB6C /* SampleError.swift */; };
 		F4488511231592470000BB6C /* SampleAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4488510231592470000BB6C /* SampleAccessToken.swift */; };
 		F44885132315927B0000BB6C /* SampleLoginManagerLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44885122315927B0000BB6C /* SampleLoginManagerLoginResult.swift */; };
@@ -284,7 +284,7 @@
 		81FC4C971D067448003F3A46 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		F43A7E2B2315666E00591F76 /* LoginManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManagerTests.swift; sourceTree = "<group>"; };
 		F43A7E2D2315684600591F76 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		F43A7E3D23156CCB00591F76 /* FakeAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuthenticationService.swift; sourceTree = "<group>"; };
+		F43A7E3D23156CCB00591F76 /* AuthenticationServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceSpy.swift; sourceTree = "<group>"; };
 		F448850E231592080000BB6C /* SampleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleError.swift; sourceTree = "<group>"; };
 		F4488510231592470000BB6C /* SampleAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAccessToken.swift; sourceTree = "<group>"; };
 		F44885122315927B0000BB6C /* SampleLoginManagerLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleLoginManagerLoginResult.swift; sourceTree = "<group>"; };
@@ -572,12 +572,12 @@
 			path = Samples;
 			sourceTree = "<group>";
 		};
-		F4488515231592BD0000BB6C /* Fakes */ = {
+		F4488515231592BD0000BB6C /* Spies */ = {
 			isa = PBXGroup;
 			children = (
-				F43A7E3D23156CCB00591F76 /* FakeAuthenticationService.swift */,
+				F43A7E3D23156CCB00591F76 /* AuthenticationServiceSpy.swift */,
 			);
-			path = Fakes;
+			path = Spies;
 			sourceTree = "<group>";
 		};
 		F46EC65A2314BB5700C55CA7 /* Tests */ = {
@@ -595,7 +595,7 @@
 			children = (
 				F46EC6662314BBAF00C55CA7 /* Info.plist */,
 				F43A7E2B2315666E00591F76 /* LoginManagerTests.swift */,
-				F4488515231592BD0000BB6C /* Fakes */,
+				F4488515231592BD0000BB6C /* Spies */,
 				F44885142315929F0000BB6C /* Samples */,
 				F4488516231593580000BB6C /* LoginInformationTests.swift */,
 			);
@@ -1104,7 +1104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F448850F231592080000BB6C /* SampleError.swift in Sources */,
-				F43A7E3F23156CDA00591F76 /* FakeAuthenticationService.swift in Sources */,
+				F43A7E3F23156CDA00591F76 /* AuthenticationServiceSpy.swift in Sources */,
 				F4488517231593580000BB6C /* LoginInformationTests.swift in Sources */,
 				F44885132315927B0000BB6C /* SampleLoginManagerLoginResult.swift in Sources */,
 				F43A7E2C2315666E00591F76 /* LoginManagerTests.swift in Sources */,

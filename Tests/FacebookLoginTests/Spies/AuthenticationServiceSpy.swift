@@ -19,7 +19,7 @@
 @testable import FacebookLogin
 import UIKit
 
-class FakeAuthenticationService: AuthenticationServicing {
+class AuthenticationServiceSpy: AuthenticationServicing {
   var authType: LoginAuthType = .rerequest
   var loginBehavior: LoginBehavior = .browser
   var defaultAudience: DefaultAudience = .friends

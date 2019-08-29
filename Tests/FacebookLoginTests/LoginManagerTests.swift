@@ -21,14 +21,14 @@
 import XCTest
 
 class LoginManagerTests: XCTestCase {
-  var fakeAuthenticationService: FakeAuthenticationService!
+  var authenticationServiceSpy: AuthenticationServiceSpy!
   var manager: LoginManager!
 
   override func setUp() {
     super.setUp()
 
-    fakeAuthenticationService = FakeAuthenticationService()
-    manager = LoginManager(authenticationService: fakeAuthenticationService)
+    authenticationServiceSpy = AuthenticationServiceSpy()
+    manager = LoginManager(authenticationService: authenticationServiceSpy)
   }
 
   func testAuthenticationServiceDependency() {
@@ -80,7 +80,7 @@ class LoginManagerTests: XCTestCase {
       expectation.fulfill()
     }
 
-    fakeAuthenticationService.capturedLogInHandler?(nil, SampleError())
+    authenticationServiceSpy.capturedLogInHandler?(nil, SampleError())
     wait(for: [expectation], timeout: 1)
   }
 
@@ -102,7 +102,7 @@ class LoginManagerTests: XCTestCase {
       expectation.fulfill()
     }
 
-    fakeAuthenticationService.capturedLogInHandler?(nil, nil)
+    authenticationServiceSpy.capturedLogInHandler?(nil, nil)
     wait(for: [expectation], timeout: 1)
   }
 
@@ -124,7 +124,7 @@ class LoginManagerTests: XCTestCase {
       expectation.fulfill()
     }
 
-    fakeAuthenticationService.capturedLogInHandler?(
+    authenticationServiceSpy.capturedLogInHandler?(
       SampleLoginManagerLoginResult.cancelled,
       nil
     )
@@ -149,7 +149,7 @@ class LoginManagerTests: XCTestCase {
       expectation.fulfill()
     }
 
-    fakeAuthenticationService.capturedLogInHandler?(
+    authenticationServiceSpy.capturedLogInHandler?(
       SampleLoginManagerLoginResult.missingAccessToken,
       nil
     )
@@ -173,7 +173,7 @@ class LoginManagerTests: XCTestCase {
       expectation.fulfill()
     }
 
-    fakeAuthenticationService.capturedLogInHandler?(
+    authenticationServiceSpy.capturedLogInHandler?(
       SampleLoginManagerLoginResult.missingPermissions,
       nil
     )
@@ -197,7 +197,7 @@ class LoginManagerTests: XCTestCase {
       expectation.fulfill()
     }
 
-    fakeAuthenticationService.capturedLogInHandler?(
+    authenticationServiceSpy.capturedLogInHandler?(
       SampleLoginManagerLoginResult.conflictingPermissions,
       nil
     )
@@ -229,7 +229,7 @@ class LoginManagerTests: XCTestCase {
       expectation.fulfill()
     }
 
-    fakeAuthenticationService.capturedLogInHandler?(
+    authenticationServiceSpy.capturedLogInHandler?(
       serviceResult,
       nil
     )
