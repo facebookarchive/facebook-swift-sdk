@@ -247,6 +247,18 @@ All of Facebook SDK for Swift development happens on GitHub. Contributions make 
 contributors with tremendous joy. We request that you read our [contributing guidelines](./CONTRIBUTING.md) before
 submitting a Pull Request.
 
+### Unit Test Terminology
+
+For unit testing we're choosing to follow the test terms put forth by Martin Fowler. 
+This is to avoid confusion as a lot of these terms are commonly misused. 
+
+> * Dummy objects are passed around but never actually used. Usually they are just used to fill parameter lists.
+> * Fake objects actually have working implementations, but usually take some shortcut which makes them not suitable for production (an in memory database is a good example).
+> * Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test.
+> * Spies are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent.
+> * Mocks are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
+Source: https://martinfowler.com/articles/mocksArentStubs.html
+
 ## License
 
 Facebook SDK in Swift is MIT licensed, as found in the
