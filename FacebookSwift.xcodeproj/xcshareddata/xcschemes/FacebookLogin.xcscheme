@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F46EC6612314BBAE00C55CA7"
-               BuildableName = "FacebookLoginTests.xctest"
-               BlueprintName = "FacebookLoginTests"
-               ReferencedContainer = "container:FacebookSwift.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "811C5DF21CFFD36600E4A925"
-            BuildableName = "FacebookLogin.framework"
-            BlueprintName = "FacebookLogin"
-            ReferencedContainer = "container:FacebookSwift.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
