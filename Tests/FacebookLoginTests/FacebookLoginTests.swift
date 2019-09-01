@@ -16,26 +16,6 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import FacebookCore
-import Foundation
+import XCTest
 
-/**
- Describes a successful response returned from a login call
-
- Performs a sanity check on creation to disallow duplicate granted and declined permissions
- */
-public struct LoginInformation {
-  public let grantedPermissions: Set<Permission>
-  public let declinedPermissions: Set<Permission>
-  public let token: AccessToken
-
-  init(
-    grantedPermissions: Set<Permission>,
-    declinedPermissions: Set<Permission>,
-    token: AccessToken
-    ) {
-    self.grantedPermissions = grantedPermissions.subtracting(declinedPermissions)
-    self.declinedPermissions = declinedPermissions
-    self.token = token
-  }
-}
+class FacebookLoginTests: XCTestCase {}

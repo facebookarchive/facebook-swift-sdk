@@ -129,9 +129,8 @@ public typealias LoginError = FBSDKLoginKit.LoginError
  Wrapper for `FBSDKLoginKit.LoginManager`
 
  - SeeAlso: `FBSDKLoginKit.LoginManager`
- - Tag: FBSDKLoginKit.LoginManager
  */
-typealias FBLoginManager = FBSDKLoginKit.LoginManager
+public typealias LoginManager = FBSDKLoginKit.LoginManager
 
 /**
  Wrapper for `FBSDKLoginKit.LoginManagerLoginResult`
