@@ -35,7 +35,7 @@ If your goal is simply to link with prebuilt dynamic libraries, those can be fou
 
 ### Manual Way
 
-Under the [releases](https://github.com/facebook/facebook-objc-sdk/releases) tab on github you'll find a file named FBSDKCoreKit-Swift.zip (similar naming exists for Login and Share). If you unzip that you'll find FBSDKCoreKit.framework. This is the version of the framework that includes the Swift interface. You can confirm this by inspecting it in Finder. You will see a Modules folder that include FBSDKCoreKit.swiftmodule.
+Under the [releases](https://github.com/facebook/facebook-objc-sdk/releases) tab on GitHub you'll find a file named `FBSDKCoreKit-Swift.zip` (similar naming exists for Login and Share). If you unzip that you'll find `FBSDKCoreKit.framework`. This is the version of the framework that includes the Swift interface. You can confirm this by inspecting it in Finder. You will see a Modules folder that includes `FBSDKCoreKit.swiftmodule`.
 
 Consume this in the way you would consume any other static binary framework.
 
