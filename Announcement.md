@@ -18,3 +18,5 @@ There are a few good reasons to collocate these files.
 
 We plan on archiving this repo on November 1, 2019. This gives users one month to follow the instructions below for migrating to the new source code location. At this time we will also deprecate the CocoaPods `FacebookCore`, `FacebookLogin`, and `FacebookShare`.
 
+## Migration Guide
+See our [Migration Guide](https://github.com/facebook/facebook-swift-sdk/blob/master/MigrationGuide.md) for instructions on how to move to the new code base!
