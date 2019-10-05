@@ -1,14 +1,15 @@
 # Facebook SDK in Swift (Beta)
 
+|️️ ⚠️️ ⚠️️ ⚠️️ **NOTICE:** This repository will be [Archived](https://help.github.com/en/articles/about-archiving-repositories) on November 1st, 2019. ⚠️️ ⚠️️ ⚠️️ <br> Please see our [Announcement](Announcement.md) regarding this decision and our [Migration Guide](MigrationGuide.md) to help transition to the [Facebook iOS SDK](https://github.com/facebook/facebook-ios-sdk). |
+| --- |
+
+
 [![Swift Version](https://img.shields.io/badge/Swift-5.0.x-orange.svg)](https://swift.org)
 [![Platforms](https://img.shields.io/cocoapods/p/FacebookCore.svg)](https://cocoapods.org/pods/FacebookCore)
 [![Build Status](https://travis-ci.org/facebook/facebook-swift-sdk.svg?branch=master)](https://travis-ci.org/facebook/facebook-swift-sdk)
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/FacebookCore.svg)](https://cocoapods.org/pods/FacebookCore)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-
-|️️ ⚠️️ ⚠️️ ⚠️️ **NOTICE:** This repository will be [Archived](https://help.github.com/en/articles/about-archiving-repositories) on November 1st, 2019. Please see our [Announcement](Announcement.md) regarding this decision and our [Migration Guide](MigrationGuide.md) to help transition to the [Facebook iOS SDK](https://github.com/facebook/facebook-ios-sdk). |
-| --- |
 
 Swift-tailored experience to integrate your app with Facebook. Including:
 
