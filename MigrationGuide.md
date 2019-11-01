@@ -16,16 +16,16 @@ Change the entries in the pod file.
 
 ### Using Carthage
 
-We are choosing to not support Carthage for the Swift libraries until we drop support for Xcode 10.2. There are two main reasons for this: 
+We are choosing to not support Carthage for the Swift libraries until we drop support for Xcode 10.2. There are two main reasons for this:
 
 a) After we drop support for Xcode 10.2, we can get rid of the concept of separate libraries and our existing tooling around Carthage will 'just work'
 
 b) Building on (a), we plan on supporting Swift Package Manager in the near future and as a small team, it makes more sense to put our time towards that effort.
 
-Carthage will continue to work against this codebase but you will not receive any updates. 
+Carthage will continue to work against this codebase but you will not receive any updates.
 
 If your goal is simply to link with prebuilt dynamic libraries, those can be found [here](https://github.com/facebook/facebook-ios-sdk/releases) in the file `SwiftDynamic.zip`. You will notice that the library names have changed, and the module names have changed. You can consume these in the same way you were previously consuming the libraries procured by Carthage.
- 
+
 | Old Library / Module Name | New Library / Module Name |
 | :---                      | :---                      |
 | FacebookCore              | FBSDKCoreKit              |
@@ -58,8 +58,9 @@ The old way to import the module:
 | :---                  | :---                  |
 | import FacebookCore | import FBSDKCoreKit |
 
+**IMPORTANT**
 
-
+The exception to this rule is for using Swift Package Manager. In this case the imports will stay the same. Currently SPM is unreleased but is available on the master branch of the iOS repository. Use at your own risk until it is formally released.
 
 ## Q & A
 
